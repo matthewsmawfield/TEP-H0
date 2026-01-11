@@ -15,19 +15,19 @@
 
 ## Abstract
 
-The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements ($H_0 \approx 73$ km/s/Mpc) and early-universe CMB inference ($H_0 = 67.4 \pm 0.5$ km/s/Mpc)—represents a significant challenge in precision cosmology. This study proposes that the tension arises from a systematic, environment-dependent bias in Cepheid-based distances, as predicted by the Temporal Equivalence Principle (TEP).
+The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements (H₀ ≈ 73 km/s/Mpc) and early-universe CMB inference (H₀ = 67.4 ± 0.5 km/s/Mpc)—represents a significant challenge in precision cosmology. This study proposes that the tension arises from a systematic, environment-dependent bias in Cepheid-based distances, as predicted by the Temporal Equivalence Principle (TEP).
 
-TEP posits that proper time accumulation depends on the local gravitational potential. Cepheid variable stars, acting as "standard clocks" via their period-luminosity relation, experience differential time flow governed by their host galaxy environment. Consistent with the anomalous spin-down rates observed in globular cluster pulsars (Paper 11), Cepheids in deep gravitational potentials (high velocity dispersion $\sigma$) experience period contraction relative to calibration environments. When interpreted through a universal P-L relation, this period deficit masquerades as diminished luminosity, causing systematic underestimation of distances to SN Ia host galaxies and consequent overestimation of $H_0$.
+TEP posits that proper time accumulation depends on the local gravitational potential. Cepheid variable stars, acting as "standard clocks" via their period-luminosity relation, experience differential time flow governed by their host galaxy environment. Consistent with the anomalous spin-down rates observed in globular cluster pulsars (Paper 11), Cepheids in deep gravitational potentials (high velocity dispersion σ) experience period contraction relative to calibration environments. When interpreted through a universal P-L relation, this period deficit masquerades as diminished luminosity, causing systematic underestimation of distances to SN Ia host galaxies and consequent overestimation of H₀.
 
-Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.434$, $p = 0.019$; Pearson $r = 0.428$, $p = 0.021$). A median-split stratification at $\sigma_{\rm med} \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$; $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 4.63$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), we treat measurement methodology as a first-class provenance variable and report covariance-aware significance tests using the full SH0ES GLS distance-modulus covariance.
+Analysis of the SH0ES Cepheid sample (N=29), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived H₀ (Spearman ρ = 0.434, p = 0.019; Pearson r = 0.428, p = 0.021). A median-split stratification at σ_med ≈ 90 km/s yields H₀ = 67.82 ± 1.62 km/s/Mpc (low-σ; N=15) versus 72.45 ± 2.32 km/s/Mpc (high-σ; N=14), implying ΔH₀ = 4.63 km/s/Mpc. Because published σ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), we treat measurement methodology as a first-class provenance variable and report covariance-aware significance tests using the full SH0ES GLS distance-modulus covariance.
 
-Application of the TEP conformal correction with an optimized coupling $\alpha = 0.58 \pm 0.16$ and effective calibrator reference $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.66 \pm 1.51$ km/s/Mpc, corresponding to a Planck tension of $0.79\sigma$. Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an "Inner Fainter" signal in HST photometry. This result, initially counter-intuitive, is resolved by the theory's density-dependent screening mechanism: the high-density M31 bulge ($\rho > \rho_{\rm trans}$) is screened (restoring standard physics), while the lower-density SN Ia host disks remain unscreened. The M31 signal thus marks the empirical crossing of the screening threshold.
+Application of the TEP conformal correction with an optimized coupling α = 0.58 ± 0.16 and effective calibrator reference σ_ref = 75.25 km/s yields a unified local Hubble constant of H₀ = 68.66 ± 1.51 km/s/Mpc, corresponding to a Planck tension of 0.79σ. Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an "Inner Fainter" signal in HST photometry. This result, initially counter-intuitive, is resolved by the theory's density-dependent screening mechanism: the high-density M31 bulge (ρ > ρ_trans) is screened (restoring standard physics), while the lower-density SN Ia host disks remain unscreened. The M31 signal thus marks the empirical crossing of the screening threshold.
 
 ## Key Results
 
-- **Potential-Dependent H0:** Significant correlation (Spearman $\rho=0.434$, $p=0.019$) between derived $H_0$ and host velocity dispersion $\sigma$.
+- **Potential-Dependent H₀:** Significant correlation (Spearman ρ = 0.434, p = 0.019) between derived H₀ and host velocity dispersion σ.
 - **Bias Correction:** Application of TEP conformal correction eliminates environmental dependence.
-- **Unified Value:** Corrected local **$H_0 = 68.66 \pm 1.51$ km/s/Mpc**, in agreement with Planck 2018 ($0.8\sigma$ tension).
+- **Unified Value:** Corrected local **H₀ = 68.66 ± 1.51 km/s/Mpc**, in agreement with Planck 2018 (0.8σ tension).
 - **Robustness:** Signal persists after controlling for metallicity, age (period), and dust (color).
 - **Mechanism Check:** Differential analysis of M31 Cepheids (Inner vs Outer) shows "Inner Fainter" signal consistent with TEP screening.
 
@@ -85,7 +85,7 @@ pip install -r requirements.txt
 
 - `results/outputs/tep_corrected_h0.csv` - Final TEP-corrected Hubble Constant values for all hosts.
 - `data/processed/hosts_processed.csv` - Stratified host galaxy data with velocity dispersions.
-- `results/outputs/tep_correction_results.json` - Optimized TEP parameters ($\alpha$, $\sigma_{\rm ref}$) and statistics.
+- `results/outputs/tep_correction_results.json` - Optimized TEP parameters (α, σ_ref) and statistics.
 - `results/outputs/aperture_sensitivity_grid.csv` - Sensitivity analysis data for aperture corrections.
 
 ## Reproduction Steps
@@ -96,8 +96,8 @@ The analysis pipeline is fully automated and reproducible. The master script `sc
 |-------------------|---------------|--------|-------------|
 | **2.1** | Data Ingestion | `step_1_data_ingestion.py` | Downloads SH0ES/Pantheon+ data, reconstructs catalogs, matches hosts. |
 | **2.2** | Aperture Correction | `step_1b_aperture_correction.py` | Fetches RC3 metadata and applies aperture normalization to velocity dispersions. |
-| **3.1** | Stratification | `step_2_stratification.py` | Calculates $H_0$, stratifies by $\sigma$, and detects environmental bias. |
-| **3.3** | TEP Correction | `step_3_tep_correction.py` | Optimizes TEP coupling $\alpha$, applies correction, and unifies $H_0$. |
+| **3.1** | Stratification | `step_2_stratification.py` | Calculates H₀, stratifies by σ, and detects environmental bias. |
+| **3.3** | TEP Correction | `step_3_tep_correction.py` | Optimizes TEP coupling α, applies correction, and unifies H₀. |
 | **3.6** | Robustness | `step_4_robustness_checks.py` | Performs Jackknife, Bootstrap, and Peculiar Velocity Monte Carlo tests. |
 | **4.1** | Sensitivity | `step_4b_aperture_sensitivity.py` | Tests stability against aperture size and correction parameters. |
 | **3.8** | M31 Differential | `step_5_m31_analysis.py` | Analyzes Inner vs Outer Cepheids in M31 (Ground-based). |
@@ -139,7 +139,7 @@ To support careful external scrutiny, this repository includes machine-checkable
 
 ### Interpretation scope
 
-The analysis demonstrates a statistically significant host-level $H_0$–$\sigma$ correlation in the SH0ES host set and shows that a TEP-motivated conformal correction yields a Planck-consistent unified value within uncertainties. The **anchor consistency test** (LMC, NGC 4258, M31) yields $\alpha_{\rm anchor}\approx 0$ and is in tension with the host-level coupling; this **anchors-vs-hosts mismatch is treated as an open question** and is explicitly discussed as such.
+The analysis demonstrates a statistically significant host-level H₀–σ correlation in the SH0ES host set and shows that a TEP-motivated conformal correction yields a Planck-consistent unified value within uncertainties. The **anchor consistency test** (LMC, NGC 4258, M31) yields α_anchor ≈ 0 and is in tension with the host-level coupling; this **anchors-vs-hosts mismatch is treated as an open question** and is explicitly discussed as such.
 
 ## Citation
 
