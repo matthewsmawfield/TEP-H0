@@ -1,0 +1,587 @@
+{
+  "generated_at": "2026-01-11T10:28:58.340492+00:00Z",
+  "top_hosts": [
+    {
+      "galaxy": "NGC 4038",
+      "n_total_refs": 692,
+      "n_keyword_matches": 74,
+      "top_scored": [
+        {
+          "refcode": "2010MNRAS.402.1750G",
+          "authors": "Gieles, M.; Sana, H.; Portegies Zwart, S. F.",
+          "title": "On the velocity dispersion of young star clusters: super-virial or binaries?",
+          "score": 10
+        },
+        {
+          "refcode": "2015MNRAS.451.1307Z",
+          "authors": "Zaragoza-Cardiel, Javier; Beckman, John E.; Font, Joan; Garcia-Lorenzo, Begona; Camps-Farina, Artemi; Fathi, Kambiz; et al.",
+          "title": "Comparative internal kinematics of the H II regions in interacting and isolated galaxies: implications for massive star formation modes",
+          "score": 8
+        },
+        {
+          "refcode": "1999A&A...349..389V",
+          "authors": "VOGES, W., ASCHENBACH, B., BOLLER, T., BRAUNINGER, H., BRIEL, U., BURKERT, W., DENNERL, K., ENGLHAUSER, J., GRUBER, R., HABERL, F., HARTNER, G., et al.",
+          "title": "The ROSAT all-sky survey bright source catalogue",
+          "score": 4
+        },
+        {
+          "refcode": "1999A&AS..136...35S",
+          "authors": "SCHAERER, D., CONTINI, T., PINDAO, M.",
+          "title": "New catalogue of Wolf-Rayet galaxies and high-excitation extra-galactic HII regions",
+          "score": 4
+        },
+        {
+          "refcode": "2000ApJ...543..178G",
+          "authors": "Giuricin, G., Marinoni, C., Ceriani, L., Pisani, A.",
+          "title": "Nearby Optical Galaxies: Selection of the Sample and Identification of Groups",
+          "score": 4
+        },
+        {
+          "refcode": "2001A&A...378...30Z",
+          "authors": "Zimmermann, H., Boller, T., Dobereiner, S., Pietsch, W.",
+          "title": "Galaxy identifications in the ROSAT All-Sky Survey",
+          "score": 4
+        },
+        {
+          "refcode": "2002AJ....123.2976R",
+          "authors": "Ramella, M., Geller, M., Pisani, A., da Costa, L.",
+          "title": "The UZC-SSRS2 Group Catalog",
+          "score": 4
+        },
+        {
+          "refcode": "2002MNRAS.336.1281W",
+          "authors": "Whyte, L., Abraham, R., Merrifield, M., Eskridge, P., Frogel, J., Pogge, R.",
+          "title": "Morphological classification of the OSU Bright Spiral Galaxy Survey",
+          "score": 4
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "2004ApJ...616.1284M",
+          "authors": "McGlynn, T. A.; Suchkov, A. A.; Winter, E. L.; Hanisch, R. J.; White, R. L.; Ochsenbein, F.; Derriere, S.; Voges, W.; Corcoran, et al.",
+          "title": "Automated Classification of ROSAT Sources Using Heterogeneous Multiwavelength Source Catalogs",
+          "score": 4
+        },
+        {
+          "refcode": "2005A&A...430..751P",
+          "authors": "Paturel, G.; Vauglin, I.; Petit, C.; Borsenberger, J.; Epchtein, N.; Fouque, P.; Mamon, G.",
+          "title": "A catalog of LEDA galaxies with DENIS measurements",
+          "score": 4
+        },
+        {
+          "refcode": "2005A&A...434...77L",
+          "authors": "Lauger, S.; Burgarella, D.; Buat, V.",
+          "title": "Spectro-morphology of galaxies: A multi-wavelength (UV-R) classification method",
+          "score": 4
+        },
+        {
+          "refcode": "2005MNRAS.361...34D",
+          "authors": "Doyle, M. T.; Drinkwater, M. J.; Rohde, D. J.; Pimbblet, K. A.; Read, M.; Meyer, M. J.; Zwaan, M. A.; Ryan-Weber, E.; Stevens, J.; et al.",
+          "title": "The HIPASS catalogue - III. Optical counterparts and isolated dark galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "2006MNRAS.372.1856F",
+          "authors": "Firth, P.; Evstigneeva, E. A.; Jones, J. B.; Drinkwater, M. J.; Phillipps, S.; Gregg, M. D.",
+          "title": "Kinematics, substructure and luminosity-weighted dynamics of six nearby galaxy groups",
+          "score": 4
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events",
+          "score": 4
+        }
+      ]
+    },
+    {
+      "galaxy": "NGC 2608",
+      "n_total_refs": 232,
+      "n_keyword_matches": 74,
+      "top_scored": [
+        {
+          "refcode": "1998A&AS..127..117P",
+          "authors": "Prugniel, Ph., Zasov, A., Busarello, G., and Simien, F.",
+          "title": "A catalogue of spatially resolved kinematics of galaxies: Bibliography",
+          "score": 8
+        },
+        {
+          "refcode": "1999A&A...348...77B",
+          "authors": "BOTTEMA, R.",
+          "title": "The kinematics of the bulge and the disc of NGC 7331",
+          "score": 6
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES",
+          "score": 4
+        },
+        {
+          "refcode": "1996A&AS..117..467G",
+          "authors": "Garnier, R., Paturel, G., Petit, C., Marthinet, M. C., and Rousseau, J.",
+          "title": "An image database. II. Catalogue between {delta} = -30^deg^ and {delta} = 70^deg^",
+          "score": 4
+        },
+        {
+          "refcode": "1998Ap.....41....1K",
+          "authors": "Kandalian, R. A.; Kalloghlian, A. T.",
+          "title": "Barred Galaxies. I. A Catalog",
+          "score": 4
+        },
+        {
+          "refcode": "1999PASP..111..438F",
+          "authors": "FALCO, E., KURTZ, M., GELLER, M., HUCHRA, J., PETERS, J., BERLIND, P., MINK, D., TOKARZ, S., ELWELL, B.",
+          "title": "The Updated Zwicky Catalog (UZC)",
+          "score": 4
+        },
+        {
+          "refcode": "2000ApJ...543..178G",
+          "authors": "Giuricin, G., Marinoni, C., Ceriani, L., Pisani, A.",
+          "title": "Nearby Optical Galaxies: Selection of the Sample and Identification of Groups",
+          "score": 4
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "2007A&A...465...71T",
+          "authors": "Theureau, G.; Hanski, M. O.; Coudreau, N.; Hallet, N.; Martin, J.-M.",
+          "title": "Kinematics of the Local Universe. XIII. 21-cm line measurements of 452 galaxies with the Nancay radiotelescope, JHK Tully-Fisher relation,",
+          "score": 4
+        },
+        {
+          "refcode": "2007ApJS..172..599S",
+          "authors": "Springob, Christopher M.; Masters, Karen L.; Haynes, Martha P.; Giovanelli, Riccardo; Marinoni, Christian",
+          "title": "SFI++. II. A New I-Band Tully-Fisher Catalog, Derivation of Peculiar Velocities, and Data Set Properties",
+          "score": 4
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events",
+          "score": 4
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog",
+          "score": 4
+        },
+        {
+          "refcode": "2009ApJS..182..474S",
+          "authors": "Springob, Christopher M.; Masters, Karen L.; Haynes, Martha P.; Giovanelli, Riccardo; Marinoni, Christian",
+          "title": "Erratum: \"SFI++ II: A New I-Band Tully-Fisher Catalog, Derivation of Peculiar Velocities and Data Set Properties\" (2007, ApJS, 172, 599)",
+          "score": 4
+        },
+        {
+          "refcode": "2009MNRAS.398..109W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael",
+          "title": "The Imperial IRAS-FSC Redshift Catalogue",
+          "score": 4
+        },
+        {
+          "refcode": "2010A&A...514A...3P",
+          "authors": "Pollo, A.; Rybka, P.; Takeuchi, T. T.",
+          "title": "Star-galaxy separation by far-infrared color-color diagrams for the AKARI FIS all-sky survey (bright source catalog version beta-1)",
+          "score": 4
+        }
+      ]
+    },
+    {
+      "galaxy": "NGC 5468",
+      "n_total_refs": 213,
+      "n_keyword_matches": 50,
+      "top_scored": [
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag",
+          "score": 4
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9",
+          "score": 4
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES",
+          "score": 4
+        },
+        {
+          "refcode": "1996A&AS..117..467G",
+          "authors": "Garnier, R., Paturel, G., Petit, C., Marthinet, M. C., and Rousseau, J.",
+          "title": "An image database. II. Catalogue between {delta} = -30^deg^ and {delta} = 70^deg^",
+          "score": 4
+        },
+        {
+          "refcode": "1998Ap.....41....1K",
+          "authors": "Kandalian, R. A.; Kalloghlian, A. T.",
+          "title": "Barred Galaxies. I. A Catalog",
+          "score": 4
+        },
+        {
+          "refcode": "2000ApJ...543..178G",
+          "authors": "Giuricin, G., Marinoni, C., Ceriani, L., Pisani, A.",
+          "title": "Nearby Optical Galaxies: Selection of the Sample and Identification of Groups",
+          "score": 4
+        },
+        {
+          "refcode": "2002AJ....123.2976R",
+          "authors": "Ramella, M., Geller, M., Pisani, A., da Costa, L.",
+          "title": "The UZC-SSRS2 Group Catalog",
+          "score": 4
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "2004A&A...422...39S",
+          "authors": "Stickel, M.; Lemke, D.; Klaas, U.; Krause, O.; Egner, S.",
+          "title": "The ISOPHOT 170 microns Serendipity Survey II. The catalog of optically identified galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "2004ApJ...612..652D",
+          "authors": "Daly, Ruth A.; Djorgovski, S. G.",
+          "title": "Direct Determination of the Kinematics of the Universe and Properties of the Dark Energy as Functions of Redshift",
+          "score": 4
+        },
+        {
+          "refcode": "2004MNRAS.350.1195M",
+          "authors": "Meyer, M. J.; Zwaan, M. A.; Webster, R. L.; Staveley-Smith, L.; Ryan-Weber, E.; Drinkwater, M. J.; Barnes, D. G.; Howlett, M.; et al.",
+          "title": "The HIPASS catalogue - I. Data presentation",
+          "score": 4
+        },
+        {
+          "refcode": "2005A&A...430..751P",
+          "authors": "Paturel, G.; Vauglin, I.; Petit, C.; Borsenberger, J.; Epchtein, N.; Fouque, P.; Mamon, G.",
+          "title": "A catalog of LEDA galaxies with DENIS measurements",
+          "score": 4
+        },
+        {
+          "refcode": "2005MNRAS.361...34D",
+          "authors": "Doyle, M. T.; Drinkwater, M. J.; Rohde, D. J.; Pimbblet, K. A.; Read, M.; Meyer, M. J.; Zwaan, M. A.; Ryan-Weber, E.; Stevens, J.; et al.",
+          "title": "The HIPASS catalogue - III. Optical counterparts and isolated dark galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events",
+          "score": 4
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog",
+          "score": 4
+        }
+      ]
+    },
+    {
+      "galaxy": "NGC 5861",
+      "n_total_refs": 193,
+      "n_keyword_matches": 47,
+      "top_scored": [
+        {
+          "refcode": "1998A&AS..127..117P",
+          "authors": "Prugniel, Ph., Zasov, A., Busarello, G., and Simien, F.",
+          "title": "A catalogue of spatially resolved kinematics of galaxies: Bibliography",
+          "score": 8
+        },
+        {
+          "refcode": "1986A&AS...66..255K",
+          "authors": "KRAAN-KORTEWEG R.C.",
+          "title": "A catalog of 2810 nearby galaxies : the effect of the virgocentric flow model on their observed velocities",
+          "score": 4
+        },
+        {
+          "refcode": "1987ApJ...314....3E",
+          "authors": "ELMEGREEN D.M., ELMEGREEN B.G.",
+          "title": "Arm classification for spiral galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "1988NBGC.C....0000T",
+          "authors": "Tully, R. B.",
+          "title": "Nearby Galaxy Catalog",
+          "score": 4
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag",
+          "score": 4
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9",
+          "score": 4
+        },
+        {
+          "refcode": "1996A&AS..117..467G",
+          "authors": "Garnier, R., Paturel, G., Petit, C., Marthinet, M. C., and Rousseau, J.",
+          "title": "An image database. II. Catalogue between {delta} = -30^deg^ and {delta} = 70^deg^",
+          "score": 4
+        },
+        {
+          "refcode": "1997ApJS..109..333W",
+          "authors": "WILLICK, J. A., COURTEAU, S., FABER, S. M., BURNSTEIN, D., DEKEL, A., AND STRAUSS, M. A.",
+          "title": "HOMOGENEOUS VELOCITY-DISTANCE DATA FOR PECULIAR VELOCITY ANALYSIS. III. THE MARK III CATALOG OF GALAXY PECULIAR VELOCITIES",
+          "score": 4
+        },
+        {
+          "refcode": "1998ApJ...509..633B",
+          "authors": "BAAN, W., SALZER, J., LEWINTER, R.",
+          "title": "Optical Classification of Megamaser Galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "1998MNRAS.300..417R",
+          "authors": "RATCLIFFE, A., SHANKS, T., PARKER, Q., BROADBENT, A., WATSON, F., OATES, A., COLLINS, C., FONG, R.",
+          "title": "The Durham/UKST Galaxy Redshift Survey - V. The catalogue",
+          "score": 4
+        },
+        {
+          "refcode": "1999A&A...342..627B",
+          "authors": "BLOCK, D., PUERARI, I.",
+          "title": "Toward a dust penetrated classification  of the evolved stellar Population II disks of galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "2001ApJS..132...37K",
+          "authors": "Kewley, L., Heisler, C., Dopita, M., Lumsden, S.",
+          "title": "Optical Classification of Southern Warm Infrared Galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "2003A&A...405....1P",
+          "authors": "Paturel, G.; Petit, C.; Rousseau, J.; Vauglin, I.",
+          "title": "The provisional DENIS I-band catalog of galaxies revisited",
+          "score": 4
+        },
+        {
+          "refcode": "2003A&A...405....5B",
+          "authors": "Bettoni, D.; Galletta, G.; Garcia-Burillo, S.",
+          "title": "A new catalogue of ISM content of normal galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies",
+          "score": 4
+        }
+      ]
+    },
+    {
+      "galaxy": "NGC 2442",
+      "n_total_refs": 226,
+      "n_keyword_matches": 41,
+      "top_scored": [
+        {
+          "refcode": "1975SoByu..47...43A",
+          "authors": "ARAKELIAN M.A.",
+          "title": "CLASSIFICATION OF THE CENTRAL REGIONS OF 711 GALAXIES",
+          "score": 4
+        },
+        {
+          "refcode": "1979AJ.....84..472S",
+          "authors": "Sandage, A., and Brucato, R.",
+          "title": "THE LAS CAMPANAS SURVEY OF BRIGHT SOUTHERN GALAXIES. II. NEW CLASSIFICATIONS FOR 153 SYSTEMS",
+          "score": 4
+        },
+        {
+          "refcode": "1981RSA...C...0000S",
+          "authors": "SANDAGE, A., AND TAMMANN, G. A.",
+          "title": "REVISED SHAPLEY-AMES CATALOG OF BRIGHT GALAXIES",
+          "score": 4
+        },
+        {
+          "refcode": "1986A&AS...66..255K",
+          "authors": "KRAAN-KORTEWEG R.C.",
+          "title": "A catalog of 2810 nearby galaxies : the effect of the virgocentric flow model on their observed velocities",
+          "score": 4
+        },
+        {
+          "refcode": "1987AMCAT.C...0000A",
+          "authors": "Arp, H. C. and Madore, B. F.",
+          "title": "A Catalogue of Southern Peculiar Galaxies and Associations, 1987, Cambridge: Cambridge University Press",
+          "score": 4
+        },
+        {
+          "refcode": "1987ApJ...314....3E",
+          "authors": "ELMEGREEN D.M., ELMEGREEN B.G.",
+          "title": "Arm classification for spiral galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "1988NBGC.C....0000T",
+          "authors": "Tully, R. B.",
+          "title": "Nearby Galaxy Catalog",
+          "score": 4
+        },
+        {
+          "refcode": "1989ESOLV.C...0000L",
+          "authors": "Lauberts, A. and Valentijn, E. A.",
+          "title": "The Surface Photometry Catalogue of the ESO-Uppsala Galaxies, 1989, Garching bei Munchen: European Southern Observatory",
+          "score": 4
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag",
+          "score": 4
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9",
+          "score": 4
+        },
+        {
+          "refcode": "1994ApJS...90..173G",
+          "authors": "GREGORY, P. C., VAVASOUR, J. D., SCOTT, W. K., AND CONDON, J. J.",
+          "title": "THE PARKES-MIT-NRAO (PMN) MAP CATALOG OF RADIO SOURCES COVERING -88^DEG^ &lt; {DELTA} &lt; -37^DEG^ AT 4.85 GHz",
+          "score": 4
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES",
+          "score": 4
+        },
+        {
+          "refcode": "1998MNRAS.300..417R",
+          "authors": "RATCLIFFE, A., SHANKS, T., PARKER, Q., BROADBENT, A., WATSON, F., OATES, A., COLLINS, C., FONG, R.",
+          "title": "The Durham/UKST Galaxy Redshift Survey - V. The catalogue",
+          "score": 4
+        },
+        {
+          "refcode": "2000ApJ...543..178G",
+          "authors": "Giuricin, G., Marinoni, C., Ceriani, L., Pisani, A.",
+          "title": "Nearby Optical Galaxies: Selection of the Sample and Identification of Groups",
+          "score": 4
+        },
+        {
+          "refcode": "2002AJ....124..690K",
+          "authors": "Kilborn, V., Webster, R., Staveley-Smith, L., Marquarding, M., Banks, G., Barnes, D., Bhathal, R., de Blok, W., Boyce, P., Disney, M., Drinkwater, et al.",
+          "title": "A Catalog of H I-Selected Galaxies from the South Celestial Cap Region of Sky",
+          "score": 4
+        }
+      ]
+    },
+    {
+      "galaxy": "NGC 2525",
+      "n_total_refs": 146,
+      "n_keyword_matches": 38,
+      "top_scored": [
+        {
+          "refcode": "1992ApJS...80..531F",
+          "authors": "FABBIANO, G., KIM, D.-W., AND TRINCHIERI, G.",
+          "title": "A X-RAY CATALOG AND ATLAS OF GALAXIES",
+          "score": 7
+        },
+        {
+          "refcode": "1959PASP...71..394M",
+          "authors": "Morgan, W. W.",
+          "title": "Preliminary Classification of the Forms of Galaxies According to Their Stellar Population. II",
+          "score": 4
+        },
+        {
+          "refcode": "1960ApJ...131..215V",
+          "authors": "van den Bergh, S.",
+          "title": "A Preliminary Luminosity Classification of Late-Type Galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "1968MCG4..C...0000V",
+          "authors": "Vorontsov-Velyaminov, B., Arhipova, V. P.",
+          "title": "\"Morphological Catalogue of Galaxies\", 1968, volume IV, Moscow: Moscow State University",
+          "score": 4
+        },
+        {
+          "refcode": "1974UGCA..C...0000N",
+          "authors": "Nilson, P.",
+          "title": "\"Catalogue of Selected non-UGC Galaxies\", 1974, Uppsala Observatory, Report No. 5",
+          "score": 4
+        },
+        {
+          "refcode": "1975SoByu..47...43A",
+          "authors": "ARAKELIAN M.A.",
+          "title": "CLASSIFICATION OF THE CENTRAL REGIONS OF 711 GALAXIES",
+          "score": 4
+        },
+        {
+          "refcode": "1976ApJ...206..883V",
+          "authors": "VAN DEN BERGH S.",
+          "title": "A new classification system for galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "1981RSA...C...0000S",
+          "authors": "SANDAGE, A., AND TAMMANN, G. A.",
+          "title": "REVISED SHAPLEY-AMES CATALOG OF BRIGHT GALAXIES",
+          "score": 4
+        },
+        {
+          "refcode": "1986A&AS...66..255K",
+          "authors": "KRAAN-KORTEWEG R.C.",
+          "title": "A catalog of 2810 nearby galaxies : the effect of the virgocentric flow model on their observed velocities",
+          "score": 4
+        },
+        {
+          "refcode": "1987ApJ...314....3E",
+          "authors": "ELMEGREEN D.M., ELMEGREEN B.G.",
+          "title": "Arm classification for spiral galaxies",
+          "score": 4
+        },
+        {
+          "refcode": "1988NBGC.C....0000T",
+          "authors": "Tully, R. B.",
+          "title": "Nearby Galaxy Catalog",
+          "score": 4
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag",
+          "score": 4
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9",
+          "score": 4
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES",
+          "score": 4
+        },
+        {
+          "refcode": "1998A&AS..130..333T",
+          "authors": "THEUREAU, G., BOTTINELLI, L., COUDREAU-DURAND, N., GOUGUENHEIM, L., HALLET, N., LOULERGUE, M., PATUREL, G., TEERIKORPI, P.",
+          "title": "Kinematics of the local universe. VII. New 21-cm line measurements of 2112 galaxies",
+          "score": 4
+        }
+      ]
+    }
+  ]
+}

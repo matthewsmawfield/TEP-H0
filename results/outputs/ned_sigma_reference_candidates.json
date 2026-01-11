@@ -1,0 +1,2115 @@
+{
+  "generated_at": "2026-01-11T10:28:58.340492+00:00Z",
+  "n_proxy_hosts": 12,
+  "proxy_hosts": [
+    "NGC 105",
+    "NGC 2442",
+    "NGC 2525",
+    "NGC 2608",
+    "NGC 3447",
+    "NGC 4038",
+    "NGC 4680",
+    "NGC 5468",
+    "NGC 5861",
+    "NGC 5917",
+    "NGC 7250",
+    "NGC 7329"
+  ],
+  "keyword_list": [
+    "velocity dispersion",
+    "dispersion",
+    "kinematic",
+    "kinematics",
+    "stellar kinematics",
+    "bulge",
+    "absorption",
+    "calcium triplet",
+    "CaT",
+    "integral field",
+    "IFU",
+    "SAURON",
+    "ATLAS3D",
+    "MaNGA",
+    "SAMI",
+    "CALIFA",
+    "rotation curve",
+    "line-of-sight",
+    "sigma"
+  ],
+  "hosts": {
+    "NGC 105": {
+      "n_references_total": 89,
+      "n_references_keyword_matched": 14,
+      "matches": [
+        {
+          "refcode": "2018ApJ...861...49H",
+          "authors": "Haynes, Martha P.; Giovanelli, Riccardo; Kent, Brian R.; Adams, Elizabeth A. K.; Balonek, Thomas J.; Craig, David W.; Fertig, et al.",
+          "title": "The Arecibo Legacy Fast ALFA Survey: The ALFALFA Extragalactic H I Source Catalog"
+        },
+        {
+          "refcode": "2016MNRAS.456.2848H",
+          "authors": "Hakobyan, A. A.; Karapetyan, A. G.; Barkhudaryan, L. V.; Mamon, G. A.; Kunth, D.; Petrosian, A. R.; Adibekyan, V.; Aramyan, L. S.; et al.",
+          "title": "Supernovae and their host galaxies - III. The impact of bars and bulges on the radial distribution of supernovae in disc galaxies"
+        },
+        {
+          "refcode": "2014MNRAS.442.2739W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael; Norberg, Peder; Heinis, Sebastien; Han, Jiaxin",
+          "title": "The Revised IRAS-FSC Redshift Catalogue (RIFSCz)"
+        },
+        {
+          "refcode": "2014A&A...572A..38G",
+          "authors": "Galbany, L.; Stanishev, V.; Mourao, A. M.; Rodrigues, M.; Flores, H.; Garcia-Benito, R.; Mast, D.; Mendoza, M. A.; Sanchez, et al.",
+          "title": "Nearby supernova host galaxies from the CALIFA Survey. I. Sample, data analysis, and correlation to star-forming regions"
+        },
+        {
+          "refcode": "2012A&A...545A..58S",
+          "authors": "Stanishev, V.; Rodrigues, M.; Mourao, A.; Flores, H.",
+          "title": "Type Ia supernova host galaxies as seen with IFU spectroscopy"
+        },
+        {
+          "refcode": "2012A&A...538A.120L",
+          "authors": "Lennarz, D.; Altmann, D.; Wiebusch, C.",
+          "title": "A unified supernova catalogue"
+        },
+        {
+          "refcode": "2009MNRAS.398..109W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael",
+          "title": "The Imperial IRAS-FSC Redshift Catalogue"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2005ApJ...624..532R",
+          "authors": "Reindl, B.; Tammann, G. A.; Sandage, A.; Saha, A.",
+          "title": "Reddening, Absorption, and Decline Rate Corrections for a Complete Sample of Type Ia Supernovae Leading to a Fully Corrected Hubble Diagram to v &lt;"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "1996A&AS..117..467G",
+          "authors": "Garnier, R., Paturel, G., Petit, C., Marthinet, M. C., and Rousseau, J.",
+          "title": "An image database. II. Catalogue between {delta} = -30^deg^ and {delta} = 70^deg^"
+        },
+        {
+          "refcode": "1965CGCG5.C...0000Z",
+          "authors": "Zwicky, F., Karpowicz, M., Kowal, C. T.",
+          "title": "\"Catalogue of Galaxies and of Clusters of Galaxies\", 1965, volume V, Pasadena: California Institute of Technology"
+        },
+        {
+          "refcode": "1963MCG3..C...0000V",
+          "authors": "Vorontsov-Velyaminov, B., Arhipova, V. P.",
+          "title": "\"Morphological Catalogue of Galaxies\", 1963, volume III, Moscow: Moscow State University"
+        },
+        {
+          "refcode": "1888MmRAS..49....1D",
+          "authors": "Dreyer, J. L. E.",
+          "title": "A New General Catalogue of Nebulae and Clusters of Stars,being the Catalogue of the late Sir John F.W. Herschel, Bart., revised, corrected,"
+        }
+      ]
+    },
+    "NGC 2442": {
+      "n_references_total": 226,
+      "n_references_keyword_matched": 41,
+      "matches": [
+        {
+          "refcode": "2019ApJ...872..134Z",
+          "authors": "Zaw, Ingyin; Chen, Yan-Ping; Farrar, Glennys R.",
+          "title": "A Uniformly Selected, All-sky, Optical AGN Catalog"
+        },
+        {
+          "refcode": "2018ApJ...864...40P",
+          "authors": "Parkash, Vaishali; Brown, Michael J. I.; Jarrett, T. H.; Bonne, Nicolas J.",
+          "title": "Relationships between HI Gas Mass, Stellar Mass, and the Star Formation Rate of HICAT+WISE (H I-WISE) Galaxies"
+        },
+        {
+          "refcode": "2017MNRAS.467.1098H",
+          "authors": "Holoien, T. W.-S.; Brown, J. S.; Stanek, K. Z.; Kochanek, C. S.; Shappee, B. J.; Prieto, J. L.; Dong, Subo; Brimacombe, J.; Bishop, et al.",
+          "title": "The ASAS-SN bright supernova catalogue - II. 2015"
+        },
+        {
+          "refcode": "2017ATel.9938....1F",
+          "authors": "Fraser, M.; Pastorello, A.; Cartier, R.; Johansson, J.; Kotak, R.; Smith, K. W.; Cikota, A.; Magee, M.; Inserra, C.; Chen, T.-W.; et al.",
+          "title": "PESSTO classification and characterisation of AT 2016jbu / Gaia16cfr"
+        },
+        {
+          "refcode": "2016ApJ...830...10H",
+          "authors": "Hoffmann, Samantha L.; Macri, Lucas M.; Riess, Adam G.; Yuan, Wenlong; Casertano, Stefano; Foley, Ryan J.; Filippenko, Alexei et al.",
+          "title": "Optical Identification of Cepheids in 19 Host Galaxies of Type Ia Supernovae and NGC 4258 with the Hubble Space Telescope"
+        },
+        {
+          "refcode": "2015ApJS..220....6B",
+          "authors": "Bai, Yu; Zou, Hu; Liu, JiFeng; Wang, Song",
+          "title": "An Updated Ultraviolet Catalog of GALEX Nearby Galaxies"
+        },
+        {
+          "refcode": "2015AJ....149..171T",
+          "authors": "Tully, R. Brent",
+          "title": "Galaxy Groups: A 2MASS Catalog"
+        },
+        {
+          "refcode": "2015A&A...583A..75S",
+          "authors": "Souchay, J.; Andrei, A. H.; Barache, C.; Kalewicz, T.; Gattano, C.; Coelho, B.; Taris, F.; Bouquillon, S.; Becker, et al.",
+          "title": "The third release of the Large Quasar Astrometric Catalog (LQAC-3): a compilation of 321 957 objects"
+        },
+        {
+          "refcode": "2014MNRAS.442.2739W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael; Norberg, Peder; Heinis, Sebastien; Han, Jiaxin",
+          "title": "The Revised IRAS-FSC Redshift Catalogue (RIFSCz)"
+        },
+        {
+          "refcode": "2012A&A...538A.120L",
+          "authors": "Lennarz, D.; Altmann, D.; Wiebusch, C.",
+          "title": "A unified supernova catalogue"
+        },
+        {
+          "refcode": "2012A&A...537A..99S",
+          "authors": "Souchay, J.; Andrei, A. H.; Barache, C.; Bouquillon, S.; Suchet, D.; Taris, F.; Peralta, R.",
+          "title": "The second release of the Large Quasar Astrometric Catalog (LQAC-2)"
+        },
+        {
+          "refcode": "2011MNRAS.416.2840L",
+          "authors": "Lavaux, Guilhem; Hudson, Michael J.",
+          "title": "The 2M++ galaxy redshift catalogue"
+        },
+        {
+          "refcode": "2009MNRAS.398..109W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael",
+          "title": "The Imperial IRAS-FSC Redshift Catalogue"
+        },
+        {
+          "refcode": "2009ApJ...696..411W",
+          "authors": "Weinzirl, Tim; Jogee, Shardha; Khochfar, Sadegh; Burkert, Andreas; Kormendy, John",
+          "title": "Bulge n and B/T in High-Mass Galaxies: Constraints on the Origin of Bulges in Hierarchical Models"
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2005MNRAS.361...34D",
+          "authors": "Doyle, M. T.; Drinkwater, M. J.; Rohde, D. J.; Pimbblet, K. A.; Read, M.; Meyer, M. J.; Zwaan, M. A.; Ryan-Weber, E.; Stevens, J.; et al.",
+          "title": "The HIPASS catalogue - III. Optical counterparts and isolated dark galaxies"
+        },
+        {
+          "refcode": "2004MNRAS.350.1195M",
+          "authors": "Meyer, M. J.; Zwaan, M. A.; Webster, R. L.; Staveley-Smith, L.; Ryan-Weber, E.; Drinkwater, M. J.; Barnes, D. G.; Howlett, M.; et al.",
+          "title": "The HIPASS catalogue - I. Data presentation"
+        },
+        {
+          "refcode": "2004A&A...415..941E",
+          "authors": "Erwin, Peter",
+          "title": "Double-barred galaxies. I. A catalog of barred galaxies with stellar secondary bars and inner disks"
+        },
+        {
+          "refcode": "2003MNRAS.342.1117M",
+          "authors": "Mauch, T.; Murphy, T.; Buttery, H. J.; Curran, J.; Hunstead, R. W.; Piestrzynski, B.; Robertson, J. G.; Sadler, E. M.",
+          "title": "SUMSS: a wide-field radio imaging survey of the southern sky - II. The source catalogue"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "2002MNRAS.336.1281W",
+          "authors": "Whyte, L., Abraham, R., Merrifield, M., Eskridge, P., Frogel, J., Pogge, R.",
+          "title": "Morphological classification of the OSU Bright Spiral Galaxy Survey"
+        },
+        {
+          "refcode": "2002AJ....124..690K",
+          "authors": "Kilborn, V., Webster, R., Staveley-Smith, L., Marquarding, M., Banks, G., Barnes, D., Bhathal, R., de Blok, W., Boyce, P., Disney, M., Drinkwater, et al.",
+          "title": "A Catalog of H I-Selected Galaxies from the South Celestial Cap Region of Sky"
+        },
+        {
+          "refcode": "2001A&A...374...92V",
+          "authors": "Veron Cetty, M., Veron, P.",
+          "title": "A catalogue of quasars and active nuclei: 10th edition"
+        },
+        {
+          "refcode": "2000ApJ...543..178G",
+          "authors": "Giuricin, G., Marinoni, C., Ceriani, L., Pisani, A.",
+          "title": "Nearby Optical Galaxies: Selection of the Sample and Identification of Groups"
+        },
+        {
+          "refcode": "1998MNRAS.300..417R",
+          "authors": "RATCLIFFE, A., SHANKS, T., PARKER, Q., BROADBENT, A., WATSON, F., OATES, A., COLLINS, C., FONG, R.",
+          "title": "The Durham/UKST Galaxy Redshift Survey - V. The catalogue"
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES"
+        },
+        {
+          "refcode": "1994ApJS...90..173G",
+          "authors": "GREGORY, P. C., VAVASOUR, J. D., SCOTT, W. K., AND CONDON, J. J.",
+          "title": "THE PARKES-MIT-NRAO (PMN) MAP CATALOG OF RADIO SOURCES COVERING -88^DEG^ &lt; {DELTA} &lt; -37^DEG^ AT 4.85 GHz"
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9"
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag"
+        },
+        {
+          "refcode": "1989ESOLV.C...0000L",
+          "authors": "Lauberts, A. and Valentijn, E. A.",
+          "title": "The Surface Photometry Catalogue of the ESO-Uppsala Galaxies, 1989, Garching bei Munchen: European Southern Observatory"
+        },
+        {
+          "refcode": "1988NBGC.C....0000T",
+          "authors": "Tully, R. B.",
+          "title": "Nearby Galaxy Catalog"
+        },
+        {
+          "refcode": "1987ApJ...314....3E",
+          "authors": "ELMEGREEN D.M., ELMEGREEN B.G.",
+          "title": "Arm classification for spiral galaxies"
+        },
+        {
+          "refcode": "1987AMCAT.C...0000A",
+          "authors": "Arp, H. C. and Madore, B. F.",
+          "title": "A Catalogue of Southern Peculiar Galaxies and Associations, 1987, Cambridge: Cambridge University Press"
+        },
+        {
+          "refcode": "1987A&AS...70..281B",
+          "authors": "BICA E., ALLOIN D.",
+          "title": "Analysis of absorption-line spectra in a sample of 164 galactic nuclei"
+        },
+        {
+          "refcode": "1986ApJ...302..564S",
+          "authors": "SIMIEN F., DE VAUCOULEURS G.",
+          "title": "Systematics of bulge-to-disk ratios"
+        },
+        {
+          "refcode": "1986A&AS...66..255K",
+          "authors": "KRAAN-KORTEWEG R.C.",
+          "title": "A catalog of 2810 nearby galaxies : the effect of the virgocentric flow model on their observed velocities"
+        },
+        {
+          "refcode": "1981RSA...C...0000S",
+          "authors": "SANDAGE, A., AND TAMMANN, G. A.",
+          "title": "REVISED SHAPLEY-AMES CATALOG OF BRIGHT GALAXIES"
+        },
+        {
+          "refcode": "1979AJ.....84..472S",
+          "authors": "Sandage, A., and Brucato, R.",
+          "title": "THE LAS CAMPANAS SURVEY OF BRIGHT SOUTHERN GALAXIES. II. NEW CLASSIFICATIONS FOR 153 SYSTEMS"
+        },
+        {
+          "refcode": "1975SoByu..47...43A",
+          "authors": "ARAKELIAN M.A.",
+          "title": "CLASSIFICATION OF THE CENTRAL REGIONS OF 711 GALAXIES"
+        }
+      ]
+    },
+    "NGC 2525": {
+      "n_references_total": 146,
+      "n_references_keyword_matched": 38,
+      "matches": [
+        {
+          "refcode": "2019ApJ...872..134Z",
+          "authors": "Zaw, Ingyin; Chen, Yan-Ping; Farrar, Glennys R.",
+          "title": "A Uniformly Selected, All-sky, Optical AGN Catalog"
+        },
+        {
+          "refcode": "2018ATel11177....1B",
+          "authors": "Bufano, F.; Berton, M.; Vogl, C.; Floers, A.; Taubenberger, S.; Anderson, J.; Galbany, L.; Schulze, S.; Yaron, O.; Manulis, I.; et al.",
+          "title": "ePESSTO spectroscopic classification of optical transients: SN2018gv a very young SN Ia"
+        },
+        {
+          "refcode": "2018ATel11175....1S",
+          "authors": "Siebert, M. R.; Dimitriadis, G.; Foley, R. J.",
+          "title": "Spectroscopic Classification of SN 2018gv with Keck I/LRIS"
+        },
+        {
+          "refcode": "2018ApJ...864...40P",
+          "authors": "Parkash, Vaishali; Brown, Michael J. I.; Jarrett, T. H.; Bonne, Nicolas J.",
+          "title": "Relationships between HI Gas Mass, Stellar Mass, and the Star Formation Rate of HICAT+WISE (H I-WISE) Galaxies"
+        },
+        {
+          "refcode": "2017ApJS..230...24B",
+          "authors": "Bianchi, Luciana; Shiao, Bernie; Thilker, David",
+          "title": "Revised Catalog of GALEX Ultraviolet Sources. I. The All-Sky Survey: GUVcat_AIS"
+        },
+        {
+          "refcode": "2015AJ....149..171T",
+          "authors": "Tully, R. Brent",
+          "title": "Galaxy Groups: A 2MASS Catalog"
+        },
+        {
+          "refcode": "2014ApJS..210....9B",
+          "authors": "Bilicki, Maciej; Jarrett, Thomas H.; Peacock, John A.; Cluver, Michelle E.; Steward, Louise",
+          "title": "Two Micron All Sky Survey Photometric Redshift Catalog: A Comprehensive Three-dimensional Census of the Whole Sky"
+        },
+        {
+          "refcode": "2011MNRAS.416.2840L",
+          "authors": "Lavaux, Guilhem; Hudson, Michael J.",
+          "title": "The 2M++ galaxy redshift catalogue"
+        },
+        {
+          "refcode": "2010AstBu..65....1K",
+          "authors": "Karachentseva, V. E.; Mitronova, S. N.; Melnyk, O. V.; Karachentsev, I. D.",
+          "title": "Catalog of isolated galaxies selected from the 2MASS survey"
+        },
+        {
+          "refcode": "2010A&A...514A...3P",
+          "authors": "Pollo, A.; Rybka, P.; Takeuchi, T. T.",
+          "title": "Star-galaxy separation by far-infrared color-color diagrams for the AKARI FIS all-sky survey (bright source catalog version beta-1)"
+        },
+        {
+          "refcode": "2009ApJS..182..474S",
+          "authors": "Springob, Christopher M.; Masters, Karen L.; Haynes, Martha P.; Giovanelli, Riccardo; Marinoni, Christian",
+          "title": "Erratum: \"SFI++ II: A New I-Band Tully-Fisher Catalog, Derivation of Peculiar Velocities and Data Set Properties\" (2007, ApJS, 172, 599)"
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2007ApJS..172..599S",
+          "authors": "Springob, Christopher M.; Masters, Karen L.; Haynes, Martha P.; Giovanelli, Riccardo; Marinoni, Christian",
+          "title": "SFI++. II. A New I-Band Tully-Fisher Catalog, Derivation of Peculiar Velocities, and Data Set Properties"
+        },
+        {
+          "refcode": "2007A&A...465...71T",
+          "authors": "Theureau, G.; Hanski, M. O.; Coudreau, N.; Hallet, N.; Martin, J.-M.",
+          "title": "Kinematics of the Local Universe. XIII. 21-cm line measurements of 452 galaxies with the Nancay radiotelescope, JHK Tully-Fisher relation,"
+        },
+        {
+          "refcode": "2005MNRAS.361...34D",
+          "authors": "Doyle, M. T.; Drinkwater, M. J.; Rohde, D. J.; Pimbblet, K. A.; Read, M.; Meyer, M. J.; Zwaan, M. A.; Ryan-Weber, E.; Stevens, J.; et al.",
+          "title": "The HIPASS catalogue - III. Optical counterparts and isolated dark galaxies"
+        },
+        {
+          "refcode": "2004MNRAS.350.1195M",
+          "authors": "Meyer, M. J.; Zwaan, M. A.; Webster, R. L.; Staveley-Smith, L.; Ryan-Weber, E.; Drinkwater, M. J.; Barnes, D. G.; Howlett, M.; et al.",
+          "title": "The HIPASS catalogue - I. Data presentation"
+        },
+        {
+          "refcode": "2004AJ....127.2085A",
+          "authors": "Anderson, Kurt S. J.; Baggett, Sylvia M.; Baggett, Wayne E.",
+          "title": "Inner-truncated Disks in Galaxies"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "2003A&A...405....5B",
+          "authors": "Bettoni, D.; Galletta, G.; Garcia-Burillo, S.",
+          "title": "A new catalogue of ISM content of normal galaxies"
+        },
+        {
+          "refcode": "1998MNRAS.300..417R",
+          "authors": "RATCLIFFE, A., SHANKS, T., PARKER, Q., BROADBENT, A., WATSON, F., OATES, A., COLLINS, C., FONG, R.",
+          "title": "The Durham/UKST Galaxy Redshift Survey - V. The catalogue"
+        },
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles"
+        },
+        {
+          "refcode": "1998A&AS..130..333T",
+          "authors": "THEUREAU, G., BOTTINELLI, L., COUDREAU-DURAND, N., GOUGUENHEIM, L., HALLET, N., LOULERGUE, M., PATUREL, G., TEERIKORPI, P.",
+          "title": "Kinematics of the local universe. VII. New 21-cm line measurements of 2112 galaxies"
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES"
+        },
+        {
+          "refcode": "1992ApJS...80..531F",
+          "authors": "FABBIANO, G., KIM, D.-W., AND TRINCHIERI, G.",
+          "title": "A X-RAY CATALOG AND ATLAS OF GALAXIES"
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9"
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag"
+        },
+        {
+          "refcode": "1988NBGC.C....0000T",
+          "authors": "Tully, R. B.",
+          "title": "Nearby Galaxy Catalog"
+        },
+        {
+          "refcode": "1987ApJ...314....3E",
+          "authors": "ELMEGREEN D.M., ELMEGREEN B.G.",
+          "title": "Arm classification for spiral galaxies"
+        },
+        {
+          "refcode": "1986A&AS...66..255K",
+          "authors": "KRAAN-KORTEWEG R.C.",
+          "title": "A catalog of 2810 nearby galaxies : the effect of the virgocentric flow model on their observed velocities"
+        },
+        {
+          "refcode": "1981RSA...C...0000S",
+          "authors": "SANDAGE, A., AND TAMMANN, G. A.",
+          "title": "REVISED SHAPLEY-AMES CATALOG OF BRIGHT GALAXIES"
+        },
+        {
+          "refcode": "1976ApJ...206..883V",
+          "authors": "VAN DEN BERGH S.",
+          "title": "A new classification system for galaxies"
+        },
+        {
+          "refcode": "1975SoByu..47...43A",
+          "authors": "ARAKELIAN M.A.",
+          "title": "CLASSIFICATION OF THE CENTRAL REGIONS OF 711 GALAXIES"
+        },
+        {
+          "refcode": "1974UGCA..C...0000N",
+          "authors": "Nilson, P.",
+          "title": "\"Catalogue of Selected non-UGC Galaxies\", 1974, Uppsala Observatory, Report No. 5"
+        },
+        {
+          "refcode": "1968MCG4..C...0000V",
+          "authors": "Vorontsov-Velyaminov, B., Arhipova, V. P.",
+          "title": "\"Morphological Catalogue of Galaxies\", 1968, volume IV, Moscow: Moscow State University"
+        },
+        {
+          "refcode": "1960ApJ...131..215V",
+          "authors": "van den Bergh, S.",
+          "title": "A Preliminary Luminosity Classification of Late-Type Galaxies"
+        },
+        {
+          "refcode": "1959PASP...71..394M",
+          "authors": "Morgan, W. W.",
+          "title": "Preliminary Classification of the Forms of Galaxies According to Their Stellar Population. II"
+        },
+        {
+          "refcode": "1888MmRAS..49....1D",
+          "authors": "Dreyer, J. L. E.",
+          "title": "A New General Catalogue of Nebulae and Clusters of Stars,being the Catalogue of the late Sir John F.W. Herschel, Bart., revised, corrected,"
+        }
+      ]
+    },
+    "NGC 2608": {
+      "n_references_total": 232,
+      "n_references_keyword_matched": 74,
+      "matches": [
+        {
+          "refcode": "2019ApJ...872..134Z",
+          "authors": "Zaw, Ingyin; Chen, Yan-Ping; Farrar, Glennys R.",
+          "title": "A Uniformly Selected, All-sky, Optical AGN Catalog"
+        },
+        {
+          "refcode": "2018ApJS..234...18B",
+          "authors": "Bouquin, Alexandre Y. K.; Gil de Paz, Armando; Munoz-Mateos, Juan Carlos; Boissier, Samuel; Sheth, Kartik; Zaritsky, Dennis; et al.",
+          "title": "The GALEX/S^4^G Surface Brightness and Color Profiles Catalog. I. Surface Photometry and Color Gradients of Galaxies"
+        },
+        {
+          "refcode": "2018ApJ...861...49H",
+          "authors": "Haynes, Martha P.; Giovanelli, Riccardo; Kent, Brian R.; Adams, Elizabeth A. K.; Balonek, Thomas J.; Craig, David W.; Fertig, et al.",
+          "title": "The Arecibo Legacy Fast ALFA Survey: The ALFALFA Extragalactic H I Source Catalog"
+        },
+        {
+          "refcode": "2017ApJS..230...24B",
+          "authors": "Bianchi, Luciana; Shiao, Bernie; Thilker, David",
+          "title": "Revised Catalog of GALEX Ultraviolet Sources. I. The All-Sky Survey: GUVcat_AIS"
+        },
+        {
+          "refcode": "2017A&A...602A.100T",
+          "authors": "Tempel, E.; Tuvikene, T.; Kipper, R.; Libeskind, N. I.",
+          "title": "Merging groups and clusters of galaxies from the SDSS data. The catalogue of groups and potentially merging systems"
+        },
+        {
+          "refcode": "2016MNRAS.456.2848H",
+          "authors": "Hakobyan, A. A.; Karapetyan, A. G.; Barkhudaryan, L. V.; Mamon, G. A.; Kunth, D.; Petrosian, A. R.; Adibekyan, V.; Aramyan, L. S.; et al.",
+          "title": "Supernovae and their host galaxies - III. The impact of bars and bulges on the radial distribution of supernovae in disc galaxies"
+        },
+        {
+          "refcode": "2015ApJS..220....6B",
+          "authors": "Bai, Yu; Zou, Hu; Liu, JiFeng; Wang, Song",
+          "title": "An Updated Ultraviolet Catalog of GALEX Nearby Galaxies"
+        },
+        {
+          "refcode": "2015ApJS..217...27A",
+          "authors": "Ann, H. B.; Seo, Mira; Ha, D. K.",
+          "title": "A Catalog of Visually Classified Galaxies in the Local (z ~ 0.01) Universe"
+        },
+        {
+          "refcode": "2015AJ....149..171T",
+          "authors": "Tully, R. Brent",
+          "title": "Galaxy Groups: A 2MASS Catalog"
+        },
+        {
+          "refcode": "2015A&A...582A..86H",
+          "authors": "Herrera-Endoqui, M.; Diaz-Garcia, S.; Laurikainen, E.; Salo, H.",
+          "title": "Catalogue of the morphological features in the Spitzer Survey of Stellar Structure in Galaxies (S^4^G)"
+        },
+        {
+          "refcode": "2014MNRAS.442.2739W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael; Norberg, Peder; Heinis, Sebastien; Han, Jiaxin",
+          "title": "The Revised IRAS-FSC Redshift Catalogue (RIFSCz)"
+        },
+        {
+          "refcode": "2014MNRAS.441.2296M",
+          "authors": "Maragkoudakis, A.; Zezas, A.; Ashby, M. L. N.; Willner, S. P.",
+          "title": "Aperture effects on spectroscopic galaxy activity classification"
+        },
+        {
+          "refcode": "2014ApJS..210....9B",
+          "authors": "Bilicki, Maciej; Jarrett, Thomas H.; Peacock, John A.; Cluver, Michelle E.; Steward, Louise",
+          "title": "Two Micron All Sky Survey Photometric Redshift Catalog: A Comprehensive Three-dimensional Census of the Whole Sky"
+        },
+        {
+          "refcode": "2012A&A...538A.120L",
+          "authors": "Lennarz, D.; Altmann, D.; Wiebusch, C.",
+          "title": "A unified supernova catalogue"
+        },
+        {
+          "refcode": "2011MNRAS.416.2840L",
+          "authors": "Lavaux, Guilhem; Hudson, Michael J.",
+          "title": "The 2M++ galaxy redshift catalogue"
+        },
+        {
+          "refcode": "2011MNRAS.410..166L",
+          "authors": "Lintott, Chris; Schawinski, Kevin; Bamford, Steven; Slosar, Anze; Land, Kate; Thomas, Daniel; Edmondson, Edd; et al.",
+          "title": "Galaxy Zoo 1: data release of morphological classifications for nearly 900 000 galaxies"
+        },
+        {
+          "refcode": "2011A&A...532A..74B",
+          "authors": "Baillard, A.; Bertin, E.; de Lapparent, V.; Fouque, P.; Arnouts, S.; Mellier, Y.; Pello, R.; Leborgne, J.-F.; Prugniel, P.; et al.",
+          "title": "The EFIGI catalogue of 4458 nearby galaxies with detailed morphology"
+        },
+        {
+          "refcode": "2010A&A...514A...3P",
+          "authors": "Pollo, A.; Rybka, P.; Takeuchi, T. T.",
+          "title": "Star-galaxy separation by far-infrared color-color diagrams for the AKARI FIS all-sky survey (bright source catalog version beta-1)"
+        },
+        {
+          "refcode": "2009MNRAS.398..109W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael",
+          "title": "The Imperial IRAS-FSC Redshift Catalogue"
+        },
+        {
+          "refcode": "2009ApJS..182..474S",
+          "authors": "Springob, Christopher M.; Masters, Karen L.; Haynes, Martha P.; Giovanelli, Riccardo; Marinoni, Christian",
+          "title": "Erratum: \"SFI++ II: A New I-Band Tully-Fisher Catalog, Derivation of Peculiar Velocities and Data Set Properties\" (2007, ApJS, 172, 599)"
+        },
+        {
+          "refcode": "2009AJ....138..727M",
+          "authors": "Marion, G. H.; Hoflich, P.; Gerardy, C. L.; Vacca, W. D.; Wheeler, J. C.; Robinson, E. L.",
+          "title": "A Catalog of Near-Infrared Spectra from Type Ia Supernovae"
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog"
+        },
+        {
+          "refcode": "2009A&A...501..207J",
+          "authors": "James, P. A.; Bretherton, C. F.; Knapen, J. H.",
+          "title": "The Halpha galaxy survey. VII. The spatial distribution of star formation within disks and bulges"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2007ApJS..172..599S",
+          "authors": "Springob, Christopher M.; Masters, Karen L.; Haynes, Martha P.; Giovanelli, Riccardo; Marinoni, Christian",
+          "title": "SFI++. II. A New I-Band Tully-Fisher Catalog, Derivation of Peculiar Velocities, and Data Set Properties"
+        },
+        {
+          "refcode": "2007A&A...465...71T",
+          "authors": "Theureau, G.; Hanski, M. O.; Coudreau, N.; Hallet, N.; Martin, J.-M.",
+          "title": "Kinematics of the Local Universe. XIII. 21-cm line measurements of 452 galaxies with the Nancay radiotelescope, JHK Tully-Fisher relation,"
+        },
+        {
+          "refcode": "2005PASP..117..773V",
+          "authors": "van den Bergh, Sidney; Li, Weidong; Filippenko, Alexei V.",
+          "title": "Classifications of the Host Galaxies of Supernovae, Set III"
+        },
+        {
+          "refcode": "2004AJ....127.3273V",
+          "authors": "Vogt, Nicole P.; Haynes, Martha P.; Herter, Terry; Giovanelli, Riccardo",
+          "title": "M/L, H{alpha} Rotation Curves, and H I Measurements for 329 Nearby Cluster and Field Spirals. I. Data"
+        },
+        {
+          "refcode": "2003PASP..115.1280V",
+          "authors": "van den Bergh, Sidney; Li, Weidong; Filippenko, Alexei V.",
+          "title": "Classifications of the Host Galaxies of Supernovae, Set II"
+        },
+        {
+          "refcode": "2003JKAS...36..261A",
+          "authors": "Ann, Hong Bae",
+          "title": "CCD Surface Photometry of Spiral Galaxies: Bulge Morphology"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "2002A&A...393..389M",
+          "authors": "Marquez, I., Masegosa, J., Moles, M., Varela, J., Bettoni, D., Galletta, G.",
+          "title": "Rotation curves and metallicity gradients from HII regions in spiral galaxies"
+        },
+        {
+          "refcode": "2000ApJ...543..178G",
+          "authors": "Giuricin, G., Marinoni, C., Ceriani, L., Pisani, A.",
+          "title": "Nearby Optical Galaxies: Selection of the Sample and Identification of Groups"
+        },
+        {
+          "refcode": "1999PASP..111..438F",
+          "authors": "FALCO, E., KURTZ, M., GELLER, M., HUCHRA, J., PETERS, J., BERLIND, P., MINK, D., TOKARZ, S., ELWELL, B.",
+          "title": "The Updated Zwicky Catalog (UZC)"
+        },
+        {
+          "refcode": "1999A&A...348...77B",
+          "authors": "BOTTEMA, R.",
+          "title": "The kinematics of the bulge and the disc of NGC 7331"
+        },
+        {
+          "refcode": "1998Ap.....41....1K",
+          "authors": "Kandalian, R. A.; Kalloghlian, A. T.",
+          "title": "Barred Galaxies. I. A Catalog"
+        },
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles"
+        },
+        {
+          "refcode": "1998A&AS..127..117P",
+          "authors": "Prugniel, Ph., Zasov, A., Busarello, G., and Simien, F.",
+          "title": "A catalogue of spatially resolved kinematics of galaxies: Bibliography"
+        },
+        {
+          "refcode": "1996A&AS..117..467G",
+          "authors": "Garnier, R., Paturel, G., Petit, C., Marthinet, M. C., and Rousseau, J.",
+          "title": "An image database. II. Catalogue between {delta} = -30^deg^ and {delta} = 70^deg^"
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES"
+        }
+      ]
+    },
+    "NGC 3447": {
+      "n_references_total": 83,
+      "n_references_keyword_matched": 20,
+      "matches": [
+        {
+          "refcode": "2018ApJS..234...18B",
+          "authors": "Bouquin, Alexandre Y. K.; Gil de Paz, Armando; Munoz-Mateos, Juan Carlos; Boissier, Samuel; Sheth, Kartik; Zaritsky, Dennis; et al.",
+          "title": "The GALEX/S^4^G Surface Brightness and Color Profiles Catalog. I. Surface Photometry and Color Gradients of Galaxies"
+        },
+        {
+          "refcode": "2018ApJ...861...49H",
+          "authors": "Haynes, Martha P.; Giovanelli, Riccardo; Kent, Brian R.; Adams, Elizabeth A. K.; Balonek, Thomas J.; Craig, David W.; Fertig, et al.",
+          "title": "The Arecibo Legacy Fast ALFA Survey: The ALFALFA Extragalactic H I Source Catalog"
+        },
+        {
+          "refcode": "2017ApJS..230...24B",
+          "authors": "Bianchi, Luciana; Shiao, Bernie; Thilker, David",
+          "title": "Revised Catalog of GALEX Ultraviolet Sources. I. The All-Sky Survey: GUVcat_AIS"
+        },
+        {
+          "refcode": "2016ApJ...830...10H",
+          "authors": "Hoffmann, Samantha L.; Macri, Lucas M.; Riess, Adam G.; Yuan, Wenlong; Casertano, Stefano; Foley, Ryan J.; Filippenko, Alexei et al.",
+          "title": "Optical Identification of Cepheids in 19 Host Galaxies of Type Ia Supernovae and NGC 4258 with the Hubble Space Telescope"
+        },
+        {
+          "refcode": "2015A&A...582A..86H",
+          "authors": "Herrera-Endoqui, M.; Diaz-Garcia, S.; Laurikainen, E.; Salo, H.",
+          "title": "Catalogue of the morphological features in the Spitzer Survey of Stellar Structure in Galaxies (S^4^G)"
+        },
+        {
+          "refcode": "2014MNRAS.442.2739W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael; Norberg, Peder; Heinis, Sebastien; Han, Jiaxin",
+          "title": "The Revised IRAS-FSC Redshift Catalogue (RIFSCz)"
+        },
+        {
+          "refcode": "2013PASP..125....2K",
+          "authors": "Keel, William C.; Manning, Anna M.; Holwerda, Benne W.; Mezzoprete,Massimo; Lintott, Chris J.; Schawinski, Kevin; Gay, et al.",
+          "title": "Galaxy Zoo: A Catalog of Overlapping Galaxy Pairs for Dust Studies"
+        },
+        {
+          "refcode": "2013MNRAS.428..476M",
+          "authors": "Marino, A.; Plana, H.; Rampazzo, R.; Bianchi, L.; Rosado, M.; Bettoni, D.; Galletta, G.; Mazzei, P.; Buson, L.; Ambrocio-Cruz, et al.",
+          "title": "Galaxy evolution in nearby loose groups - II. Photometric and kinematic characterization of USGC U268 and USGC U376 group members in the Leo cloud"
+        },
+        {
+          "refcode": "2009MNRAS.398..109W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael",
+          "title": "The Imperial IRAS-FSC Redshift Catalogue"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "1998Ap.....41....1K",
+          "authors": "Kandalian, R. A.; Kalloghlian, A. T.",
+          "title": "Barred Galaxies. I. A Catalog"
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag"
+        },
+        {
+          "refcode": "1988NBGC.C....0000T",
+          "authors": "Tully, R. B.",
+          "title": "Nearby Galaxy Catalog"
+        },
+        {
+          "refcode": "1987ApJ...314....3E",
+          "authors": "ELMEGREEN D.M., ELMEGREEN B.G.",
+          "title": "Arm classification for spiral galaxies"
+        },
+        {
+          "refcode": "1985BICDS..29...87K",
+          "authors": "Karachentsev, I., Lebedev, V., & Shcherbanovskij, A.",
+          "title": "CATALOGUE OF ISOLATED PAIRS OF GALAXIES IN THE NORTHERN HEMISPHERE"
+        },
+        {
+          "refcode": "1984A&AS...55...55F",
+          "authors": "FOUQUE P.",
+          "title": "A catalogue of HI diameters for 238 galaxies"
+        },
+        {
+          "refcode": "1963CGCG2.C...0000Z",
+          "authors": "Zwicky, F., Herzog, E.",
+          "title": "\"Catalogue of Galaxies and of Clusters of Galaxies\", 1963, volume II, Pasadena: California Institute of Technology"
+        },
+        {
+          "refcode": "1959VV....C...0000V",
+          "authors": "Vorontsov-Velyaminov, B. A.",
+          "title": "Atlas and Catalog of Interacting Galaxies, 1959, Sternberg Institute, Moscow: Moscow State University"
+        },
+        {
+          "refcode": "1888MmRAS..49....1D",
+          "authors": "Dreyer, J. L. E.",
+          "title": "A New General Catalogue of Nebulae and Clusters of Stars,being the Catalogue of the late Sir John F.W. Herschel, Bart., revised, corrected,"
+        }
+      ]
+    },
+    "NGC 4038": {
+      "n_references_total": 692,
+      "n_references_keyword_matched": 74,
+      "matches": [
+        {
+          "refcode": "2018ApJS..234...18B",
+          "authors": "Bouquin, Alexandre Y. K.; Gil de Paz, Armando; Munoz-Mateos, Juan Carlos; Boissier, Samuel; Sheth, Kartik; Zaritsky, Dennis; et al.",
+          "title": "The GALEX/S^4^G Surface Brightness and Color Profiles Catalog. I. Surface Photometry and Color Gradients of Galaxies"
+        },
+        {
+          "refcode": "2018A&A...613A..35K",
+          "authors": "Kuncarayakti, H.; Anderson, J. P.; Galbany, L.; Maeda, K.; Hamuy, M.; Aldering, G.; Arimoto, N.; Doi, M.; Morokuma, T.; Usuda, et al.",
+          "title": "Constraints on core-collapse supernova progenitors from explosion site integral field spectroscopy"
+        },
+        {
+          "refcode": "2017ApJ...835..223S",
+          "authors": "She, Rui; Ho, Luis C.; Feng, Hua",
+          "title": "Chandra Survey of Nearby Galaxies: The Catalog"
+        },
+        {
+          "refcode": "2016ApJS..224...40W",
+          "authors": "Wang, Song; Liu, Jifeng; Qiu, Yanli; Bai, Yu; Yang, Huiqin; Guo, Jincheng; Zhang, Peng",
+          "title": "CHANDRA ACIS Survey of X-Ray Point Sources: The Source Catalog"
+        },
+        {
+          "refcode": "2016ApJ...830...10H",
+          "authors": "Hoffmann, Samantha L.; Macri, Lucas M.; Riess, Adam G.; Yuan, Wenlong; Casertano, Stefano; Foley, Ryan J.; Filippenko, Alexei et al.",
+          "title": "Optical Identification of Cepheids in 19 Host Galaxies of Type Ia Supernovae and NGC 4258 with the Hubble Space Telescope"
+        },
+        {
+          "refcode": "2016AJ....151..134W",
+          "authors": "Whitmore, Bradley C.; Allam, Sahar S.; Budavari, Tamas; Casertano, Stefano; Downes, Ronald A.; Donaldson, Thomas; Fall, S. Michael; et al.",
+          "title": "Version 1 of the Hubble Source Catalog"
+        },
+        {
+          "refcode": "2015MNRAS.451.1307Z",
+          "authors": "Zaragoza-Cardiel, Javier; Beckman, John E.; Font, Joan; Garcia-Lorenzo, Begona; Camps-Farina, Artemi; Fathi, Kambiz; et al.",
+          "title": "Comparative internal kinematics of the H II regions in interacting and isolated galaxies: implications for massive star formation modes"
+        },
+        {
+          "refcode": "2015ApJS..220....6B",
+          "authors": "Bai, Yu; Zou, Hu; Liu, JiFeng; Wang, Song",
+          "title": "An Updated Ultraviolet Catalog of GALEX Nearby Galaxies"
+        },
+        {
+          "refcode": "2014MNRAS.441.3570G",
+          "authors": "Georgiev, Iskren Y.; Boker, Torsten",
+          "title": "Nuclear star clusters in 228 spiral galaxies in the HST/WFPC2 archive: catalogue and comparison to other stellar systems"
+        },
+        {
+          "refcode": "2013ApJ...779...38P",
+          "authors": "Phillips, M. M.; Simon, Joshua D.; Morrell, Nidia; Burns, Christopher R.; Cox, Nick L. J.; Foley, Ryan J.; Karakas, Amanda et al.",
+          "title": "On the Source of the Dust Extinction in Type Ia Supernovae and the Discovery of Anomalously Strong Na I Absorption"
+        },
+        {
+          "refcode": "2013AJ....146...30K",
+          "authors": "Kuncarayakti, Hanindyo; Doi, Mamoru; Aldering, Greg; Arimoto, Nobuo; Maeda, Keiichi; Morokuma, Tomoki; Pereira, Rui; Usuda, et al.",
+          "title": "Integral Field Spectroscopy of Supernova Explosion Sites: Constraining the Mass and Metallicity of the Progenitors. I. Type Ib and Ic Supernovae"
+        },
+        {
+          "refcode": "2012ApJ...745...65U",
+          "authors": "Ueda, Junko; Iono, Daisuke; Petitpas, Glen; Yun, Min S.; Ho, Paul T. P.; Kawabe, Ryohei; Mao, Rui-Qing; Martin, Sergio; Matsushita, et al.",
+          "title": "Unveiling the Physical Properties and Kinematics of Molecular Gas in the Antennae Galaxies (NGC 4038/9) through High-resolution CO (J = 3-2)"
+        },
+        {
+          "refcode": "2012A&A...547A..65B",
+          "authors": "Bruns, R. C.; Kroupa, P.",
+          "title": "A catalog of extended clusters and ultra-compact dwarf galaxies. An analysis of their parameters in early- and late-type galaxies"
+        },
+        {
+          "refcode": "2012A&A...538A.120L",
+          "authors": "Lennarz, D.; Altmann, D.; Wiebusch, C.",
+          "title": "A unified supernova catalogue"
+        },
+        {
+          "refcode": "2011Sci...333..856S",
+          "authors": "Sternberg, A.; Gal-Yam, A.; Simon, J. D.; Leonard, D. C.; Quimby, R. M.; Phillips, M. M.; Morrell, N.; Thompson, I. B.; Ivans, I.; et al.",
+          "title": "Circumstellar Material in Type Ia Supernovae via Sodium Absorption Features"
+        },
+        {
+          "refcode": "2011ApJS..192...10L",
+          "authors": "Liu, Jifeng",
+          "title": "Chandra ACIS Survey of X-ray Point Sources in 383 Nearby Galaxies. I. The Source Catalog"
+        },
+        {
+          "refcode": "2011AJ....142..197C",
+          "authors": "Chomiuk, Laura; Povich, Matthew S.",
+          "title": "Toward a Unification of Star Formation Rate Determinations in the Milky Way and Other Galaxies"
+        },
+        {
+          "refcode": "2010MNRAS.402.1750G",
+          "authors": "Gieles, M.; Sana, H.; Portegies Zwart, S. F.",
+          "title": "On the velocity dispersion of young star clusters: super-virial or binaries?"
+        },
+        {
+          "refcode": "2009MNRAS.399..264B",
+          "authors": "Bayet, E.; Gerin, M.; Phillips, T. G.; Contursi, A.",
+          "title": "Are ^12^CO lines good indicators of the star formation rate in galaxies?"
+        },
+        {
+          "refcode": "2009ApJS..184..138H",
+          "authors": "Haakonsen, Christian Bernt; Rutledge, Robert E.",
+          "title": "XID II: Statistical Cross-Association of ROSAT Bright Source Catalog X-ray Sources with 2MASS Point Source Catalog Near-Infrared Sources"
+        },
+        {
+          "refcode": "2009ApJ...704..453F",
+          "authors": "Fall, S. Michael; Chandar, Rupali; Whitmore, Bradley C.",
+          "title": "New Tests for Disruption Mechanisms of Star Clusters: Methods and Application to the Antennae Galaxies"
+        },
+        {
+          "refcode": "2009ApJ...696..870D",
+          "authors": "Drake, A. J.; Djorgovski, S. G.; Mahabal, A.; Beshore, E.; Larson, S.; Graham, M. J.; Williams, R.; Christensen, E.; Catelan, M.; et al.",
+          "title": "First Results from the Catalina Real-Time Transient Survey"
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2007AJ....133.1067W",
+          "authors": "Whitmore, Bradley C.; Chandar, Rupali; Fall, S. Michael",
+          "title": "Star Cluster Demographics. I. A General Framework and Application to the Antennae Galaxies"
+        },
+        {
+          "refcode": "2006MNRAS.372.1856F",
+          "authors": "Firth, P.; Evstigneeva, E. A.; Jones, J. B.; Drinkwater, M. J.; Phillipps, S.; Gregg, M. D.",
+          "title": "Kinematics, substructure and luminosity-weighted dynamics of six nearby galaxy groups"
+        },
+        {
+          "refcode": "2006A&A...445..471B",
+          "authors": "Bastian, N.; Emsellem, E.; Kissler-Patig, M.; Maraston, C.",
+          "title": "Young star cluster complexes in NGC 4038/39. Integral field spectroscopy using VIMOS-VLT"
+        },
+        {
+          "refcode": "2005PASP..117..773V",
+          "authors": "van den Bergh, Sidney; Li, Weidong; Filippenko, Alexei V.",
+          "title": "Classifications of the Host Galaxies of Supernovae, Set III"
+        },
+        {
+          "refcode": "2005MNRAS.361...34D",
+          "authors": "Doyle, M. T.; Drinkwater, M. J.; Rohde, D. J.; Pimbblet, K. A.; Read, M.; Meyer, M. J.; Zwaan, M. A.; Ryan-Weber, E.; Stevens, J.; et al.",
+          "title": "The HIPASS catalogue - III. Optical counterparts and isolated dark galaxies"
+        },
+        {
+          "refcode": "2005A&A...434...77L",
+          "authors": "Lauger, S.; Burgarella, D.; Buat, V.",
+          "title": "Spectro-morphology of galaxies: A multi-wavelength (UV-R) classification method"
+        },
+        {
+          "refcode": "2005A&A...430..751P",
+          "authors": "Paturel, G.; Vauglin, I.; Petit, C.; Borsenberger, J.; Epchtein, N.; Fouque, P.; Mamon, G.",
+          "title": "A catalog of LEDA galaxies with DENIS measurements"
+        },
+        {
+          "refcode": "2004ApJ...616.1284M",
+          "authors": "McGlynn, T. A.; Suchkov, A. A.; Winter, E. L.; Hanisch, R. J.; White, R. L.; Ochsenbein, F.; Derriere, S.; Voges, W.; Corcoran, et al.",
+          "title": "Automated Classification of ROSAT Sources Using Heterogeneous Multiwavelength Source Catalogs"
+        },
+        {
+          "refcode": "2003ApJ...599.1049W",
+          "authors": "Wilson, Christine D.; Scoville, Nicholas; Madden, Suzanne C.; Charmandaris, Vassilis",
+          "title": "The Mass Function of Supergiant Molecular Complexes and Implications for Forming Young Massive Star Clusters in the Antennae (NGC 4038/4039)"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "2002MNRAS.336.1281W",
+          "authors": "Whyte, L., Abraham, R., Merrifield, M., Eskridge, P., Frogel, J., Pogge, R.",
+          "title": "Morphological classification of the OSU Bright Spiral Galaxy Survey"
+        },
+        {
+          "refcode": "2002AJ....123.2976R",
+          "authors": "Ramella, M., Geller, M., Pisani, A., da Costa, L.",
+          "title": "The UZC-SSRS2 Group Catalog"
+        },
+        {
+          "refcode": "2001A&A...378...30Z",
+          "authors": "Zimmermann, H., Boller, T., Dobereiner, S., Pietsch, W.",
+          "title": "Galaxy identifications in the ROSAT All-Sky Survey"
+        },
+        {
+          "refcode": "2000ApJ...543..178G",
+          "authors": "Giuricin, G., Marinoni, C., Ceriani, L., Pisani, A.",
+          "title": "Nearby Optical Galaxies: Selection of the Sample and Identification of Groups"
+        },
+        {
+          "refcode": "1999A&AS..136...35S",
+          "authors": "SCHAERER, D., CONTINI, T., PINDAO, M.",
+          "title": "New catalogue of Wolf-Rayet galaxies and high-excitation extra-galactic HII regions"
+        },
+        {
+          "refcode": "1999A&A...349..389V",
+          "authors": "VOGES, W., ASCHENBACH, B., BOLLER, T., BRAUNINGER, H., BRIEL, U., BURKERT, W., DENNERL, K., ENGLHAUSER, J., GRUBER, R., HABERL, F., HARTNER, G., et al.",
+          "title": "The ROSAT all-sky survey bright source catalogue"
+        }
+      ]
+    },
+    "NGC 4680": {
+      "n_references_total": 139,
+      "n_references_keyword_matched": 29,
+      "matches": [
+        {
+          "refcode": "2019ApJ...872..134Z",
+          "authors": "Zaw, Ingyin; Chen, Yan-Ping; Farrar, Glennys R.",
+          "title": "A Uniformly Selected, All-sky, Optical AGN Catalog"
+        },
+        {
+          "refcode": "2018ApJS..234...18B",
+          "authors": "Bouquin, Alexandre Y. K.; Gil de Paz, Armando; Munoz-Mateos, Juan Carlos; Boissier, Samuel; Sheth, Kartik; Zaritsky, Dennis; et al.",
+          "title": "The GALEX/S^4^G Surface Brightness and Color Profiles Catalog. I. Surface Photometry and Color Gradients of Galaxies"
+        },
+        {
+          "refcode": "2017ApJS..230...24B",
+          "authors": "Bianchi, Luciana; Shiao, Bernie; Thilker, David",
+          "title": "Revised Catalog of GALEX Ultraviolet Sources. I. The All-Sky Survey: GUVcat_AIS"
+        },
+        {
+          "refcode": "2017ApJ...835...64G",
+          "authors": "Guillochon, James; Parrent, Jerod; Kelley, Luke Zoltan; Margutti, Raffaella",
+          "title": "An Open Catalog for Supernova Data"
+        },
+        {
+          "refcode": "2016MNRAS.456.2848H",
+          "authors": "Hakobyan, A. A.; Karapetyan, A. G.; Barkhudaryan, L. V.; Mamon, G. A.; Kunth, D.; Petrosian, A. R.; Adibekyan, V.; Aramyan, L. S.; et al.",
+          "title": "Supernovae and their host galaxies - III. The impact of bars and bulges on the radial distribution of supernovae in disc galaxies"
+        },
+        {
+          "refcode": "2015ApJS..220....6B",
+          "authors": "Bai, Yu; Zou, Hu; Liu, JiFeng; Wang, Song",
+          "title": "An Updated Ultraviolet Catalog of GALEX Nearby Galaxies"
+        },
+        {
+          "refcode": "2015ApJS..217...27A",
+          "authors": "Ann, H. B.; Seo, Mira; Ha, D. K.",
+          "title": "A Catalog of Visually Classified Galaxies in the Local (z ~ 0.01) Universe"
+        },
+        {
+          "refcode": "2015AJ....149..171T",
+          "authors": "Tully, R. Brent",
+          "title": "Galaxy Groups: A 2MASS Catalog"
+        },
+        {
+          "refcode": "2015A&A...582A..86H",
+          "authors": "Herrera-Endoqui, M.; Diaz-Garcia, S.; Laurikainen, E.; Salo, H.",
+          "title": "Catalogue of the morphological features in the Spitzer Survey of Stellar Structure in Galaxies (S^4^G)"
+        },
+        {
+          "refcode": "2014MNRAS.442.2739W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael; Norberg, Peder; Heinis, Sebastien; Han, Jiaxin",
+          "title": "The Revised IRAS-FSC Redshift Catalogue (RIFSCz)"
+        },
+        {
+          "refcode": "2012A&A...538A.120L",
+          "authors": "Lennarz, D.; Altmann, D.; Wiebusch, C.",
+          "title": "A unified supernova catalogue"
+        },
+        {
+          "refcode": "2011MNRAS.416.2840L",
+          "authors": "Lavaux, Guilhem; Hudson, Michael J.",
+          "title": "The 2M++ galaxy redshift catalogue"
+        },
+        {
+          "refcode": "2010ApJ...725L.167M",
+          "authors": "Maund, Justyn R.; Hoflich, Peter; Patat, Ferdinando; Wheeler, J. Craig; Zelaya, Paula; Baade, Dietrich; Wang, Lifan; Clocchiatti, et al.",
+          "title": "The Unification of Asymmetry Signatures of Type Ia Supernovae"
+        },
+        {
+          "refcode": "2010A&A...514A...3P",
+          "authors": "Pollo, A.; Rybka, P.; Takeuchi, T. T.",
+          "title": "Star-galaxy separation by far-infrared color-color diagrams for the AKARI FIS all-sky survey (bright source catalog version beta-1)"
+        },
+        {
+          "refcode": "2009MNRAS.398..109W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael",
+          "title": "The Imperial IRAS-FSC Redshift Catalogue"
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2007A&A...466...11G",
+          "authors": "Guy, J.; Astier, P.; Baumont, S.; Hardin, D.; Pain, R.; Regnault, N.; Basa, S.; Carlberg, R. G.; Conley, A.; Fabbro, S.; Fouchez, et al.",
+          "title": "SALT2: using distant supernovae to improve the use of type Ia supernovae as distance indicators"
+        },
+        {
+          "refcode": "2007A&A...465...71T",
+          "authors": "Theureau, G.; Hanski, M. O.; Coudreau, N.; Hallet, N.; Martin, J.-M.",
+          "title": "Kinematics of the Local Universe. XIII. 21-cm line measurements of 452 galaxies with the Nancay radiotelescope, JHK Tully-Fisher relation,"
+        },
+        {
+          "refcode": "2006ApJ...645..488W",
+          "authors": "Wang, Xiaofeng; Wang, Lifan; Pain, Reynald; Zhou, Xu; Li, Zongwei",
+          "title": "Determination of the Hubble Constant, the Intrinsic Scatter of Luminosities of Type Ia Supernovae, and Evidence for Nonstandard Dust in Other Galaxies"
+        },
+        {
+          "refcode": "2005ApJ...624..532R",
+          "authors": "Reindl, B.; Tammann, G. A.; Sandage, A.; Saha, A.",
+          "title": "Reddening, Absorption, and Decline Rate Corrections for a Complete Sample of Type Ia Supernovae Leading to a Fully Corrected Hubble Diagram to v &lt;"
+        },
+        {
+          "refcode": "2005A&A...430..751P",
+          "authors": "Paturel, G.; Vauglin, I.; Petit, C.; Borsenberger, J.; Epchtein, N.; Fouque, P.; Mamon, G.",
+          "title": "A catalog of LEDA galaxies with DENIS measurements"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "2000ApJ...543..178G",
+          "authors": "Giuricin, G., Marinoni, C., Ceriani, L., Pisani, A.",
+          "title": "Nearby Optical Galaxies: Selection of the Sample and Identification of Groups"
+        },
+        {
+          "refcode": "1996A&AS..117..467G",
+          "authors": "Garnier, R., Paturel, G., Petit, C., Marthinet, M. C., and Rousseau, J.",
+          "title": "An image database. II. Catalogue between {delta} = -30^deg^ and {delta} = 70^deg^"
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9"
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag"
+        },
+        {
+          "refcode": "1968MCG4..C...0000V",
+          "authors": "Vorontsov-Velyaminov, B., Arhipova, V. P.",
+          "title": "\"Morphological Catalogue of Galaxies\", 1968, volume IV, Moscow: Moscow State University"
+        },
+        {
+          "refcode": "1888MmRAS..49....1D",
+          "authors": "Dreyer, J. L. E.",
+          "title": "A New General Catalogue of Nebulae and Clusters of Stars,being the Catalogue of the late Sir John F.W. Herschel, Bart., revised, corrected,"
+        }
+      ]
+    },
+    "NGC 5468": {
+      "n_references_total": 213,
+      "n_references_keyword_matched": 50,
+      "matches": [
+        {
+          "refcode": "2019ApJ...872..134Z",
+          "authors": "Zaw, Ingyin; Chen, Yan-Ping; Farrar, Glennys R.",
+          "title": "A Uniformly Selected, All-sky, Optical AGN Catalog"
+        },
+        {
+          "refcode": "2018ATel11839....1A",
+          "authors": "Andrews, Jennifer; Smith, Nathan",
+          "title": "Spectroscopic classification of AT2018dfg as a likely IIn SN"
+        },
+        {
+          "refcode": "2018ApJS..234...18B",
+          "authors": "Bouquin, Alexandre Y. K.; Gil de Paz, Armando; Munoz-Mateos, Juan Carlos; Boissier, Samuel; Sheth, Kartik; Zaritsky, Dennis; et al.",
+          "title": "The GALEX/S^4^G Surface Brightness and Color Profiles Catalog. I. Surface Photometry and Color Gradients of Galaxies"
+        },
+        {
+          "refcode": "2018ApJ...864...40P",
+          "authors": "Parkash, Vaishali; Brown, Michael J. I.; Jarrett, T. H.; Bonne, Nicolas J.",
+          "title": "Relationships between HI Gas Mass, Stellar Mass, and the Star Formation Rate of HICAT+WISE (H I-WISE) Galaxies"
+        },
+        {
+          "refcode": "2017PASP..129e4201S",
+          "authors": "Shivvers, Isaac; Modjaz, Maryam; Zheng, WeiKang; Liu, Yuqian; Filippenko, Alexei V.; Silverman, Jeffrey M.; Matheson, Thomas; et al.",
+          "title": "Revisiting the Lick Observatory Supernova Search Volume-limited Sample: Updated Classifications and Revised Stripped-envelope Supernova Fractions"
+        },
+        {
+          "refcode": "2017ApJS..230...24B",
+          "authors": "Bianchi, Luciana; Shiao, Bernie; Thilker, David",
+          "title": "Revised Catalog of GALEX Ultraviolet Sources. I. The All-Sky Survey: GUVcat_AIS"
+        },
+        {
+          "refcode": "2016ApJ...826..211Z",
+          "authors": "Zhao, Xulin; Maeda, Keiichi; Wang, Xiaofeng; Wang, Lifan; Sai, Hanna; Zhang, Jujia; Zhang, Tianmeng; Huang, Fang; Rui, et al.",
+          "title": "The Oxygen Features in Type Ia Supernovae and Implications for the Nature of Thermonuclear Explosions"
+        },
+        {
+          "refcode": "2015AJ....149..171T",
+          "authors": "Tully, R. Brent",
+          "title": "Galaxy Groups: A 2MASS Catalog"
+        },
+        {
+          "refcode": "2015A&A...582A..86H",
+          "authors": "Herrera-Endoqui, M.; Diaz-Garcia, S.; Laurikainen, E.; Salo, H.",
+          "title": "Catalogue of the morphological features in the Spitzer Survey of Stellar Structure in Galaxies (S^4^G)"
+        },
+        {
+          "refcode": "2014MNRAS.442.2739W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael; Norberg, Peder; Heinis, Sebastien; Han, Jiaxin",
+          "title": "The Revised IRAS-FSC Redshift Catalogue (RIFSCz)"
+        },
+        {
+          "refcode": "2014MNRAS.441.3570G",
+          "authors": "Georgiev, Iskren Y.; Boker, Torsten",
+          "title": "Nuclear star clusters in 228 spiral galaxies in the HST/WFPC2 archive: catalogue and comparison to other stellar systems"
+        },
+        {
+          "refcode": "2014ApJS..210....9B",
+          "authors": "Bilicki, Maciej; Jarrett, Thomas H.; Peacock, John A.; Cluver, Michelle E.; Steward, Louise",
+          "title": "Two Micron All Sky Survey Photometric Redshift Catalog: A Comprehensive Three-dimensional Census of the Whole Sky"
+        },
+        {
+          "refcode": "2013ApJ...779...38P",
+          "authors": "Phillips, M. M.; Simon, Joshua D.; Morrell, Nidia; Burns, Christopher R.; Cox, Nick L. J.; Foley, Ryan J.; Karakas, Amanda et al.",
+          "title": "On the Source of the Dust Extinction in Type Ia Supernovae and the Discovery of Anomalously Strong Na I Absorption"
+        },
+        {
+          "refcode": "2012A&A...538A.120L",
+          "authors": "Lennarz, D.; Altmann, D.; Wiebusch, C.",
+          "title": "A unified supernova catalogue"
+        },
+        {
+          "refcode": "2011MNRAS.416.2840L",
+          "authors": "Lavaux, Guilhem; Hudson, Michael J.",
+          "title": "The 2M++ galaxy redshift catalogue"
+        },
+        {
+          "refcode": "2010A&A...514A...3P",
+          "authors": "Pollo, A.; Rybka, P.; Takeuchi, T. T.",
+          "title": "Star-galaxy separation by far-infrared color-color diagrams for the AKARI FIS all-sky survey (bright source catalog version beta-1)"
+        },
+        {
+          "refcode": "2009MNRAS.398..109W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael",
+          "title": "The Imperial IRAS-FSC Redshift Catalogue"
+        },
+        {
+          "refcode": "2009AJ....138..727M",
+          "authors": "Marion, G. H.; Hoflich, P.; Gerardy, C. L.; Vacca, W. D.; Wheeler, J. C.; Robinson, E. L.",
+          "title": "A Catalog of Near-Infrared Spectra from Type Ia Supernovae"
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2006ApJ...645..488W",
+          "authors": "Wang, Xiaofeng; Wang, Lifan; Pain, Reynald; Zhou, Xu; Li, Zongwei",
+          "title": "Determination of the Hubble Constant, the Intrinsic Scatter of Luminosities of Type Ia Supernovae, and Evidence for Nonstandard Dust in Other Galaxies"
+        },
+        {
+          "refcode": "2005PASP..117..773V",
+          "authors": "van den Bergh, Sidney; Li, Weidong; Filippenko, Alexei V.",
+          "title": "Classifications of the Host Galaxies of Supernovae, Set III"
+        },
+        {
+          "refcode": "2005MNRAS.361...34D",
+          "authors": "Doyle, M. T.; Drinkwater, M. J.; Rohde, D. J.; Pimbblet, K. A.; Read, M.; Meyer, M. J.; Zwaan, M. A.; Ryan-Weber, E.; Stevens, J.; et al.",
+          "title": "The HIPASS catalogue - III. Optical counterparts and isolated dark galaxies"
+        },
+        {
+          "refcode": "2005A&A...430..751P",
+          "authors": "Paturel, G.; Vauglin, I.; Petit, C.; Borsenberger, J.; Epchtein, N.; Fouque, P.; Mamon, G.",
+          "title": "A catalog of LEDA galaxies with DENIS measurements"
+        },
+        {
+          "refcode": "2004MNRAS.350.1195M",
+          "authors": "Meyer, M. J.; Zwaan, M. A.; Webster, R. L.; Staveley-Smith, L.; Ryan-Weber, E.; Drinkwater, M. J.; Barnes, D. G.; Howlett, M.; et al.",
+          "title": "The HIPASS catalogue - I. Data presentation"
+        },
+        {
+          "refcode": "2004ApJ...612..652D",
+          "authors": "Daly, Ruth A.; Djorgovski, S. G.",
+          "title": "Direct Determination of the Kinematics of the Universe and Properties of the Dark Energy as Functions of Redshift"
+        },
+        {
+          "refcode": "2004A&A...422...39S",
+          "authors": "Stickel, M.; Lemke, D.; Klaas, U.; Krause, O.; Egner, S.",
+          "title": "The ISOPHOT 170 microns Serendipity Survey II. The catalog of optically identified galaxies"
+        },
+        {
+          "refcode": "2003PASP..115.1280V",
+          "authors": "van den Bergh, Sidney; Li, Weidong; Filippenko, Alexei V.",
+          "title": "Classifications of the Host Galaxies of Supernovae, Set II"
+        },
+        {
+          "refcode": "2003JKAS...36..261A",
+          "authors": "Ann, Hong Bae",
+          "title": "CCD Surface Photometry of Spiral Galaxies: Bulge Morphology"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "2002PASP..114..820V",
+          "authors": "van den Bergh, S., Li, W., Filippenko, A.",
+          "title": "Classifications of the Host Galaxies of Supernovae"
+        },
+        {
+          "refcode": "2002AJ....123.2976R",
+          "authors": "Ramella, M., Geller, M., Pisani, A., da Costa, L.",
+          "title": "The UZC-SSRS2 Group Catalog"
+        },
+        {
+          "refcode": "2000ApJ...543..178G",
+          "authors": "Giuricin, G., Marinoni, C., Ceriani, L., Pisani, A.",
+          "title": "Nearby Optical Galaxies: Selection of the Sample and Identification of Groups"
+        },
+        {
+          "refcode": "2000ApJ...539..658K",
+          "authors": "Krisciunas, K., Hastings, N., Loomis, K., McMillan, R., Rest, A., Riess, A., Stubbs, C.",
+          "title": "Uniformity of (V-Near-Infrared) Color Evolution of Type Ia Supernovae and Implications for Host Galaxy Extinction Determination"
+        },
+        {
+          "refcode": "1998Ap.....41....1K",
+          "authors": "Kandalian, R. A.; Kalloghlian, A. T.",
+          "title": "Barred Galaxies. I. A Catalog"
+        },
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles"
+        },
+        {
+          "refcode": "1996A&AS..117..467G",
+          "authors": "Garnier, R., Paturel, G., Petit, C., Marthinet, M. C., and Rousseau, J.",
+          "title": "An image database. II. Catalogue between {delta} = -30^deg^ and {delta} = 70^deg^"
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES"
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9"
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag"
+        }
+      ]
+    },
+    "NGC 5861": {
+      "n_references_total": 193,
+      "n_references_keyword_matched": 47,
+      "matches": [
+        {
+          "refcode": "2019ApJ...872..134Z",
+          "authors": "Zaw, Ingyin; Chen, Yan-Ping; Farrar, Glennys R.",
+          "title": "A Uniformly Selected, All-sky, Optical AGN Catalog"
+        },
+        {
+          "refcode": "2018ApJS..234...18B",
+          "authors": "Bouquin, Alexandre Y. K.; Gil de Paz, Armando; Munoz-Mateos, Juan Carlos; Boissier, Samuel; Sheth, Kartik; Zaritsky, Dennis; et al.",
+          "title": "The GALEX/S^4^G Surface Brightness and Color Profiles Catalog. I. Surface Photometry and Color Gradients of Galaxies"
+        },
+        {
+          "refcode": "2017MNRAS.468.2058E",
+          "authors": "Erwin, Peter; Debattista, Victor P.",
+          "title": "The frequency and stellar-mass dependence of boxy/peanut-shaped bulges in barred galaxies"
+        },
+        {
+          "refcode": "2017ATel10490....1J",
+          "authors": "Jha, S. W.; Camacho, Y.; Dettman, K.; Pan, Y.-C.; Foley, R. J.; Rest, A.; Scolnic, D.; Skelton, R.",
+          "title": "SALT spectroscopic classification of SN 2017erp as a type-Ia supernova well before maximum light"
+        },
+        {
+          "refcode": "2017ApJS..230...24B",
+          "authors": "Bianchi, Luciana; Shiao, Bernie; Thilker, David",
+          "title": "Revised Catalog of GALEX Ultraviolet Sources. I. The All-Sky Survey: GUVcat_AIS"
+        },
+        {
+          "refcode": "2015AJ....149..171T",
+          "authors": "Tully, R. Brent",
+          "title": "Galaxy Groups: A 2MASS Catalog"
+        },
+        {
+          "refcode": "2015A&A...582A..86H",
+          "authors": "Herrera-Endoqui, M.; Diaz-Garcia, S.; Laurikainen, E.; Salo, H.",
+          "title": "Catalogue of the morphological features in the Spitzer Survey of Stellar Structure in Galaxies (S^4^G)"
+        },
+        {
+          "refcode": "2014MNRAS.442.2739W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael; Norberg, Peder; Heinis, Sebastien; Han, Jiaxin",
+          "title": "The Revised IRAS-FSC Redshift Catalogue (RIFSCz)"
+        },
+        {
+          "refcode": "2014ApJS..210....9B",
+          "authors": "Bilicki, Maciej; Jarrett, Thomas H.; Peacock, John A.; Cluver, Michelle E.; Steward, Louise",
+          "title": "Two Micron All Sky Survey Photometric Redshift Catalog: A Comprehensive Three-dimensional Census of the Whole Sky"
+        },
+        {
+          "refcode": "2012A&A...538A.120L",
+          "authors": "Lennarz, D.; Altmann, D.; Wiebusch, C.",
+          "title": "A unified supernova catalogue"
+        },
+        {
+          "refcode": "2011MNRAS.416.2840L",
+          "authors": "Lavaux, Guilhem; Hudson, Michael J.",
+          "title": "The 2M++ galaxy redshift catalogue"
+        },
+        {
+          "refcode": "2010ApJ...709..884Y",
+          "authors": "Yuan, T.-T.; Kewley, L. J.; Sanders, D. B.",
+          "title": "The Role of Starburst-Active Galactic Nucleus Composites in Luminous Infrared Galaxy Mergers: Insights from the New Optical Classification"
+        },
+        {
+          "refcode": "2010A&A...514A...3P",
+          "authors": "Pollo, A.; Rybka, P.; Takeuchi, T. T.",
+          "title": "Star-galaxy separation by far-infrared color-color diagrams for the AKARI FIS all-sky survey (bright source catalog version beta-1)"
+        },
+        {
+          "refcode": "2009MNRAS.398..109W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael",
+          "title": "The Imperial IRAS-FSC Redshift Catalogue"
+        },
+        {
+          "refcode": "2009ApJS..182..474S",
+          "authors": "Springob, Christopher M.; Masters, Karen L.; Haynes, Martha P.; Giovanelli, Riccardo; Marinoni, Christian",
+          "title": "Erratum: \"SFI++ II: A New I-Band Tully-Fisher Catalog, Derivation of Peculiar Velocities and Data Set Properties\" (2007, ApJS, 172, 599)"
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2007ApJS..172..599S",
+          "authors": "Springob, Christopher M.; Masters, Karen L.; Haynes, Martha P.; Giovanelli, Riccardo; Marinoni, Christian",
+          "title": "SFI++. II. A New I-Band Tully-Fisher Catalog, Derivation of Peculiar Velocities, and Data Set Properties"
+        },
+        {
+          "refcode": "2007A&A...465...71T",
+          "authors": "Theureau, G.; Hanski, M. O.; Coudreau, N.; Hallet, N.; Martin, J.-M.",
+          "title": "Kinematics of the Local Universe. XIII. 21-cm line measurements of 452 galaxies with the Nancay radiotelescope, JHK Tully-Fisher relation,"
+        },
+        {
+          "refcode": "2005MNRAS.361...34D",
+          "authors": "Doyle, M. T.; Drinkwater, M. J.; Rohde, D. J.; Pimbblet, K. A.; Read, M.; Meyer, M. J.; Zwaan, M. A.; Ryan-Weber, E.; Stevens, J.; et al.",
+          "title": "The HIPASS catalogue - III. Optical counterparts and isolated dark galaxies"
+        },
+        {
+          "refcode": "2005A&A...430..751P",
+          "authors": "Paturel, G.; Vauglin, I.; Petit, C.; Borsenberger, J.; Epchtein, N.; Fouque, P.; Mamon, G.",
+          "title": "A catalog of LEDA galaxies with DENIS measurements"
+        },
+        {
+          "refcode": "2005A&A...430..373T",
+          "authors": "Theureau, G.; Coudreau, N.; Hallet, N.; Hanski, M.; Alsac, L.; Bottinelli, L.; Gouguenheim, L.; Martin, J.-M.; Paturel, et al.",
+          "title": "Kinematics of the local universe . XII. 21-cm line measurements of 586 galaxies with the new Nancay receiver"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "2003A&A...405....5B",
+          "authors": "Bettoni, D.; Galletta, G.; Garcia-Burillo, S.",
+          "title": "A new catalogue of ISM content of normal galaxies"
+        },
+        {
+          "refcode": "2003A&A...405....1P",
+          "authors": "Paturel, G.; Petit, C.; Rousseau, J.; Vauglin, I.",
+          "title": "The provisional DENIS I-band catalog of galaxies revisited"
+        },
+        {
+          "refcode": "2001ApJS..132...37K",
+          "authors": "Kewley, L., Heisler, C., Dopita, M., Lumsden, S.",
+          "title": "Optical Classification of Southern Warm Infrared Galaxies"
+        },
+        {
+          "refcode": "2001A&A...374...92V",
+          "authors": "Veron Cetty, M., Veron, P.",
+          "title": "A catalogue of quasars and active nuclei: 10th edition"
+        },
+        {
+          "refcode": "1999A&A...342..627B",
+          "authors": "BLOCK, D., PUERARI, I.",
+          "title": "Toward a dust penetrated classification  of the evolved stellar Population II disks of galaxies"
+        },
+        {
+          "refcode": "1998MNRAS.300..417R",
+          "authors": "RATCLIFFE, A., SHANKS, T., PARKER, Q., BROADBENT, A., WATSON, F., OATES, A., COLLINS, C., FONG, R.",
+          "title": "The Durham/UKST Galaxy Redshift Survey - V. The catalogue"
+        },
+        {
+          "refcode": "1998ApJ...509..633B",
+          "authors": "BAAN, W., SALZER, J., LEWINTER, R.",
+          "title": "Optical Classification of Megamaser Galaxies"
+        },
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles"
+        },
+        {
+          "refcode": "1998A&AS..127..117P",
+          "authors": "Prugniel, Ph., Zasov, A., Busarello, G., and Simien, F.",
+          "title": "A catalogue of spatially resolved kinematics of galaxies: Bibliography"
+        },
+        {
+          "refcode": "1997ApJS..109..333W",
+          "authors": "WILLICK, J. A., COURTEAU, S., FABER, S. M., BURNSTEIN, D., DEKEL, A., AND STRAUSS, M. A.",
+          "title": "HOMOGENEOUS VELOCITY-DISTANCE DATA FOR PECULIAR VELOCITY ANALYSIS. III. THE MARK III CATALOG OF GALAXY PECULIAR VELOCITIES"
+        },
+        {
+          "refcode": "1996A&AS..117..467G",
+          "authors": "Garnier, R., Paturel, G., Petit, C., Marthinet, M. C., and Rousseau, J.",
+          "title": "An image database. II. Catalogue between {delta} = -30^deg^ and {delta} = 70^deg^"
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9"
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag"
+        },
+        {
+          "refcode": "1989A&AS...81..421B",
+          "authors": "Barbon, R., Cappellaro, E., and Turatto, M.",
+          "title": "The Asiago Supernova Catalogue"
+        },
+        {
+          "refcode": "1988NBGC.C....0000T",
+          "authors": "Tully, R. B.",
+          "title": "Nearby Galaxy Catalog"
+        },
+        {
+          "refcode": "1987ApJ...314....3E",
+          "authors": "ELMEGREEN D.M., ELMEGREEN B.G.",
+          "title": "Arm classification for spiral galaxies"
+        },
+        {
+          "refcode": "1986A&AS...66..255K",
+          "authors": "KRAAN-KORTEWEG R.C.",
+          "title": "A catalog of 2810 nearby galaxies : the effect of the virgocentric flow model on their observed velocities"
+        }
+      ]
+    },
+    "NGC 5917": {
+      "n_references_total": 68,
+      "n_references_keyword_matched": 24,
+      "matches": [
+        {
+          "refcode": "2019ApJ...872..134Z",
+          "authors": "Zaw, Ingyin; Chen, Yan-Ping; Farrar, Glennys R.",
+          "title": "A Uniformly Selected, All-sky, Optical AGN Catalog"
+        },
+        {
+          "refcode": "2018A&A...613A..35K",
+          "authors": "Kuncarayakti, H.; Anderson, J. P.; Galbany, L.; Maeda, K.; Hamuy, M.; Aldering, G.; Arimoto, N.; Doi, M.; Morokuma, T.; Usuda, et al.",
+          "title": "Constraints on core-collapse supernova progenitors from explosion site integral field spectroscopy"
+        },
+        {
+          "refcode": "2017ApJS..230...24B",
+          "authors": "Bianchi, Luciana; Shiao, Bernie; Thilker, David",
+          "title": "Revised Catalog of GALEX Ultraviolet Sources. I. The All-Sky Survey: GUVcat_AIS"
+        },
+        {
+          "refcode": "2017A&A...599A.104T",
+          "authors": "Theureau, G.; Coudreau, N.; Hallet, N.; Hanski, M. O.; Poulain, M.",
+          "title": "Kinematics of the Local Universe. XIV. Measurements from the 21 cm line and the HI mass function from a homogeneous catalog gathered with the"
+        },
+        {
+          "refcode": "2016ApJ...830...10H",
+          "authors": "Hoffmann, Samantha L.; Macri, Lucas M.; Riess, Adam G.; Yuan, Wenlong; Casertano, Stefano; Foley, Ryan J.; Filippenko, Alexei et al.",
+          "title": "Optical Identification of Cepheids in 19 Host Galaxies of Type Ia Supernovae and NGC 4258 with the Hubble Space Telescope"
+        },
+        {
+          "refcode": "2015AJ....149..171T",
+          "authors": "Tully, R. Brent",
+          "title": "Galaxy Groups: A 2MASS Catalog"
+        },
+        {
+          "refcode": "2014MNRAS.442.2739W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael; Norberg, Peder; Heinis, Sebastien; Han, Jiaxin",
+          "title": "The Revised IRAS-FSC Redshift Catalogue (RIFSCz)"
+        },
+        {
+          "refcode": "2014ApJS..210....9B",
+          "authors": "Bilicki, Maciej; Jarrett, Thomas H.; Peacock, John A.; Cluver, Michelle E.; Steward, Louise",
+          "title": "Two Micron All Sky Survey Photometric Redshift Catalog: A Comprehensive Three-dimensional Census of the Whole Sky"
+        },
+        {
+          "refcode": "2012A&A...538A.120L",
+          "authors": "Lennarz, D.; Altmann, D.; Wiebusch, C.",
+          "title": "A unified supernova catalogue"
+        },
+        {
+          "refcode": "2011MNRAS.416.2840L",
+          "authors": "Lavaux, Guilhem; Hudson, Michael J.",
+          "title": "The 2M++ galaxy redshift catalogue"
+        },
+        {
+          "refcode": "2010ApJ...709..884Y",
+          "authors": "Yuan, T.-T.; Kewley, L. J.; Sanders, D. B.",
+          "title": "The Role of Starburst-Active Galactic Nucleus Composites in Luminous Infrared Galaxy Mergers: Insights from the New Optical Classification"
+        },
+        {
+          "refcode": "2010A&A...514A...3P",
+          "authors": "Pollo, A.; Rybka, P.; Takeuchi, T. T.",
+          "title": "Star-galaxy separation by far-infrared color-color diagrams for the AKARI FIS all-sky survey (bright source catalog version beta-1)"
+        },
+        {
+          "refcode": "2009MNRAS.398..109W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael",
+          "title": "The Imperial IRAS-FSC Redshift Catalogue"
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2005MNRAS.361...34D",
+          "authors": "Doyle, M. T.; Drinkwater, M. J.; Rohde, D. J.; Pimbblet, K. A.; Read, M.; Meyer, M. J.; Zwaan, M. A.; Ryan-Weber, E.; Stevens, J.; et al.",
+          "title": "The HIPASS catalogue - III. Optical counterparts and isolated dark galaxies"
+        },
+        {
+          "refcode": "2005A&A...430..751P",
+          "authors": "Paturel, G.; Vauglin, I.; Petit, C.; Borsenberger, J.; Epchtein, N.; Fouque, P.; Mamon, G.",
+          "title": "A catalog of LEDA galaxies with DENIS measurements"
+        },
+        {
+          "refcode": "2004A&A...422...39S",
+          "authors": "Stickel, M.; Lemke, D.; Klaas, U.; Krause, O.; Egner, S.",
+          "title": "The ISOPHOT 170 microns Serendipity Survey II. The catalog of optically identified galaxies"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "2001ApJS..132...37K",
+          "authors": "Kewley, L., Heisler, C., Dopita, M., Lumsden, S.",
+          "title": "Optical Classification of Southern Warm Infrared Galaxies"
+        },
+        {
+          "refcode": "1994ApJS...92..219v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A CATALOG OF RECENT SUPERNOVAE"
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9"
+        },
+        {
+          "refcode": "1968MCG4..C...0000V",
+          "authors": "Vorontsov-Velyaminov, B., Arhipova, V. P.",
+          "title": "\"Morphological Catalogue of Galaxies\", 1968, volume IV, Moscow: Moscow State University"
+        },
+        {
+          "refcode": "1888MmRAS..49....1D",
+          "authors": "Dreyer, J. L. E.",
+          "title": "A New General Catalogue of Nebulae and Clusters of Stars,being the Catalogue of the late Sir John F.W. Herschel, Bart., revised, corrected,"
+        }
+      ]
+    },
+    "NGC 7250": {
+      "n_references_total": 146,
+      "n_references_keyword_matched": 27,
+      "matches": [
+        {
+          "refcode": "2019ApJ...872..134Z",
+          "authors": "Zaw, Ingyin; Chen, Yan-Ping; Farrar, Glennys R.",
+          "title": "A Uniformly Selected, All-sky, Optical AGN Catalog"
+        },
+        {
+          "refcode": "2017ApJS..230...24B",
+          "authors": "Bianchi, Luciana; Shiao, Bernie; Thilker, David",
+          "title": "Revised Catalog of GALEX Ultraviolet Sources. I. The All-Sky Survey: GUVcat_AIS"
+        },
+        {
+          "refcode": "2017ApJ...845L..11H",
+          "authors": "Hosseinzadeh, Griffin; Sand, David J.; Valenti, Stefano; Brown, Peter; Howell, D. Andrew; McCully, Curtis; Kasen, Daniel; Arcavi, et al.",
+          "title": "Early Blue Excess from the Type Ia Supernova 2017cbv and Implications for Its Progenitor"
+        },
+        {
+          "refcode": "2016ApJ...830...10H",
+          "authors": "Hoffmann, Samantha L.; Macri, Lucas M.; Riess, Adam G.; Yuan, Wenlong; Casertano, Stefano; Foley, Ryan J.; Filippenko, Alexei et al.",
+          "title": "Optical Identification of Cepheids in 19 Host Galaxies of Type Ia Supernovae and NGC 4258 with the Hubble Space Telescope"
+        },
+        {
+          "refcode": "2016ApJ...826..211Z",
+          "authors": "Zhao, Xulin; Maeda, Keiichi; Wang, Xiaofeng; Wang, Lifan; Sai, Hanna; Zhang, Jujia; Zhang, Tianmeng; Huang, Fang; Rui, et al.",
+          "title": "The Oxygen Features in Type Ia Supernovae and Implications for the Nature of Thermonuclear Explosions"
+        },
+        {
+          "refcode": "2015ApJS..220....6B",
+          "authors": "Bai, Yu; Zou, Hu; Liu, JiFeng; Wang, Song",
+          "title": "An Updated Ultraviolet Catalog of GALEX Nearby Galaxies"
+        },
+        {
+          "refcode": "2015AJ....149..171T",
+          "authors": "Tully, R. Brent",
+          "title": "Galaxy Groups: A 2MASS Catalog"
+        },
+        {
+          "refcode": "2014MNRAS.443.2887F",
+          "authors": "Foley, Ryan J.; Fox, O. D.; McCully, C.; Phillips, M. M.; Sand, D. J.; Zheng, W.; Challis, P.; Filippenko, A. V.; Folatelli, G.; et al.",
+          "title": "Extensive HST ultraviolet spectra and multiwavelength observations of SN 2014J in M82 indicate reddening and circumstellar scattering by typical"
+        },
+        {
+          "refcode": "2014ApJS..213....3M",
+          "authors": "Massaro, F.; Giroletti, M.; D'Abrusco, R.; Masetti, N.; Paggi, A.; Cowperthwaite, Philip S.; Tosti, G.; Funk, et al.",
+          "title": "The Low-frequency Radio Catalog of Flat-spectrum Sources"
+        },
+        {
+          "refcode": "2014ApJS..210....9B",
+          "authors": "Bilicki, Maciej; Jarrett, Thomas H.; Peacock, John A.; Cluver, Michelle E.; Steward, Louise",
+          "title": "Two Micron All Sky Survey Photometric Redshift Catalog: A Comprehensive Three-dimensional Census of the Whole Sky"
+        },
+        {
+          "refcode": "2013ApJ...778L..15Z",
+          "authors": "Zheng, WeiKang; Silverman, Jeffrey M.; Filippenko, Alexei V.; Kasen, Daniel; Nugent, Peter E.; Graham, Melissa; Wang, Xiaofeng; et al.",
+          "title": "The Very Young Type Ia Supernova 2013dy: Discovery, and Strong Carbon Absorption in Early-time Spectra"
+        },
+        {
+          "refcode": "2011MNRAS.416.2840L",
+          "authors": "Lavaux, Guilhem; Hudson, Michael J.",
+          "title": "The 2M++ galaxy redshift catalogue"
+        },
+        {
+          "refcode": "2010A&A...514A...3P",
+          "authors": "Pollo, A.; Rybka, P.; Takeuchi, T. T.",
+          "title": "Star-galaxy separation by far-infrared color-color diagrams for the AKARI FIS all-sky survey (bright source catalog version beta-1)"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2004A&A...422...39S",
+          "authors": "Stickel, M.; Lemke, D.; Klaas, U.; Krause, O.; Egner, S.",
+          "title": "The ISOPHOT 170 microns Serendipity Survey II. The catalog of optically identified galaxies"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "1999PASP..111..438F",
+          "authors": "FALCO, E., KURTZ, M., GELLER, M., HUCHRA, J., PETERS, J., BERLIND, P., MINK, D., TOKARZ, S., ELWELL, B.",
+          "title": "The Updated Zwicky Catalog (UZC)"
+        },
+        {
+          "refcode": "1999ApJ...521...64M",
+          "authors": "MEURER, G., HECKMAN, T., CALZETTI, D.",
+          "title": "Dust Absorption and the Ultraviolet Luminosity Density at Z~3 as Calibrated by Local Starburst Galaxies"
+        },
+        {
+          "refcode": "1998ApJ...503..646H",
+          "authors": "HECKMAN, T., ROBERT, C., LEITHERER, C., GARNETT, D., VAN DER RYDT, F.",
+          "title": "The Ultraviolet Spectroscopic Properties of Local Starbursts: Implications at High Redshift"
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9"
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag"
+        },
+        {
+          "refcode": "1986ApJS...62..751M",
+          "authors": "MAZZARELLA, J. M., and BALZANO, V. A.",
+          "title": "A CATALOG OF MARKARIAN GALAXIES"
+        },
+        {
+          "refcode": "1986A&AS...66..255K",
+          "authors": "KRAAN-KORTEWEG R.C.",
+          "title": "A catalog of 2810 nearby galaxies : the effect of the virgocentric flow model on their observed velocities"
+        },
+        {
+          "refcode": "1973UGC...C...0000N",
+          "authors": "Nilson, P.",
+          "title": "Uppsala General Catalogue of Galaxies, 1973, Acta Universitatis Upsalienis, Nova Regiae Societatis Upsaliensis, Series V: A Vol. 1"
+        },
+        {
+          "refcode": "1968CGCG6.C...0000Z",
+          "authors": "Zwicky, F., Kowal, C. T.",
+          "title": "\"Catalogue of Galaxies and of Clusters of Galaxies\", 1968, volume VI, Pasadena: California Institute of Technology"
+        },
+        {
+          "refcode": "1964MCG2..C...0000V",
+          "authors": "Vorontsov-Velyaminov, B., Arhipova, V. P.",
+          "title": "\"Morphological Catalogue of Galaxies\", 1964, volume II, Moscow: Moscow State University"
+        },
+        {
+          "refcode": "1888MmRAS..49....1D",
+          "authors": "Dreyer, J. L. E.",
+          "title": "A New General Catalogue of Nebulae and Clusters of Stars,being the Catalogue of the late Sir John F.W. Herschel, Bart., revised, corrected,"
+        }
+      ]
+    },
+    "NGC 7329": {
+      "n_references_total": 131,
+      "n_references_keyword_matched": 36,
+      "matches": [
+        {
+          "refcode": "2019ApJ...872..134Z",
+          "authors": "Zaw, Ingyin; Chen, Yan-Ping; Farrar, Glennys R.",
+          "title": "A Uniformly Selected, All-sky, Optical AGN Catalog"
+        },
+        {
+          "refcode": "2018ApJ...864...40P",
+          "authors": "Parkash, Vaishali; Brown, Michael J. I.; Jarrett, T. H.; Bonne, Nicolas J.",
+          "title": "Relationships between HI Gas Mass, Stellar Mass, and the Star Formation Rate of HICAT+WISE (H I-WISE) Galaxies"
+        },
+        {
+          "refcode": "2017ApJS..230...24B",
+          "authors": "Bianchi, Luciana; Shiao, Bernie; Thilker, David",
+          "title": "Revised Catalog of GALEX Ultraviolet Sources. I. The All-Sky Survey: GUVcat_AIS"
+        },
+        {
+          "refcode": "2017ApJ...845..114G",
+          "authors": "Gao, Hua; Ho, Luis C.",
+          "title": "An Optimal Strategy for Accurate Bulge-to-disk Decomposition of Disk Galaxies"
+        },
+        {
+          "refcode": "2015ApJS..220....6B",
+          "authors": "Bai, Yu; Zou, Hu; Liu, JiFeng; Wang, Song",
+          "title": "An Updated Ultraviolet Catalog of GALEX Nearby Galaxies"
+        },
+        {
+          "refcode": "2015AJ....149..171T",
+          "authors": "Tully, R. Brent",
+          "title": "Galaxy Groups: A 2MASS Catalog"
+        },
+        {
+          "refcode": "2014MNRAS.442.2739W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael; Norberg, Peder; Heinis, Sebastien; Han, Jiaxin",
+          "title": "The Revised IRAS-FSC Redshift Catalogue (RIFSCz)"
+        },
+        {
+          "refcode": "2014ApJS..210....9B",
+          "authors": "Bilicki, Maciej; Jarrett, Thomas H.; Peacock, John A.; Cluver, Michelle E.; Steward, Louise",
+          "title": "Two Micron All Sky Survey Photometric Redshift Catalog: A Comprehensive Three-dimensional Census of the Whole Sky"
+        },
+        {
+          "refcode": "2012A&A...538A.120L",
+          "authors": "Lennarz, D.; Altmann, D.; Wiebusch, C.",
+          "title": "A unified supernova catalogue"
+        },
+        {
+          "refcode": "2011MNRAS.416.2840L",
+          "authors": "Lavaux, Guilhem; Hudson, Michael J.",
+          "title": "The 2M++ galaxy redshift catalogue"
+        },
+        {
+          "refcode": "2009MNRAS.398..109W",
+          "authors": "Wang, Lingyu; Rowan-Robinson, Michael",
+          "title": "The Imperial IRAS-FSC Redshift Catalogue"
+        },
+        {
+          "refcode": "2009AJ....138.1938C",
+          "authors": "Courtois, Helene M.; Tully, R. Brent; Fisher, J. Richard; Bonhomme, Nicolas; Zavodny, Maximilian; Barnes, et al.",
+          "title": "The Extragalactic Distance Database: All Digital H I Profile Catalog"
+        },
+        {
+          "refcode": "2008ApJ...675.1459K",
+          "authors": "Kopparapu, Ravi Kumar; Hanna, Chad; Kalogera, Vicky; O'Shaughnessy, Richard; Gonzalez, Gabriela; Brady, Patrick R.; et al.",
+          "title": "Host Galaxies Catalog Used in LIGO Searches for Compact Binary Coalescence Events"
+        },
+        {
+          "refcode": "2007ApJS..172..599S",
+          "authors": "Springob, Christopher M.; Masters, Karen L.; Haynes, Martha P.; Giovanelli, Riccardo; Marinoni, Christian",
+          "title": "SFI++. II. A New I-Band Tully-Fisher Catalog, Derivation of Peculiar Velocities, and Data Set Properties"
+        },
+        {
+          "refcode": "2007A&A...465...71T",
+          "authors": "Theureau, G.; Hanski, M. O.; Coudreau, N.; Hallet, N.; Martin, J.-M.",
+          "title": "Kinematics of the Local Universe. XIII. 21-cm line measurements of 452 galaxies with the Nancay radiotelescope, JHK Tully-Fisher relation,"
+        },
+        {
+          "refcode": "2005MNRAS.361...34D",
+          "authors": "Doyle, M. T.; Drinkwater, M. J.; Rohde, D. J.; Pimbblet, K. A.; Read, M.; Meyer, M. J.; Zwaan, M. A.; Ryan-Weber, E.; Stevens, J.; et al.",
+          "title": "The HIPASS catalogue - III. Optical counterparts and isolated dark galaxies"
+        },
+        {
+          "refcode": "2005A&A...430..751P",
+          "authors": "Paturel, G.; Vauglin, I.; Petit, C.; Borsenberger, J.; Epchtein, N.; Fouque, P.; Mamon, G.",
+          "title": "A catalog of LEDA galaxies with DENIS measurements"
+        },
+        {
+          "refcode": "2003A&A...412...45P",
+          "authors": "Paturel, G.; Petit, C.; Prugniel, Ph.; Theureau, G.; Rousseau, J.; Brouty, M.; Dubois, P.; Cambresy, L.",
+          "title": "HYPERLEDA. I. Identification and designation of galaxies"
+        },
+        {
+          "refcode": "2002AJ....124..690K",
+          "authors": "Kilborn, V., Webster, R., Staveley-Smith, L., Marquarding, M., Banks, G., Barnes, D., Bhathal, R., de Blok, W., Boyce, P., Disney, M., Drinkwater, et al.",
+          "title": "A Catalog of H I-Selected Galaxies from the South Celestial Cap Region of Sky"
+        },
+        {
+          "refcode": "2000ApJ...543..178G",
+          "authors": "Giuricin, G., Marinoni, C., Ceriani, L., Pisani, A.",
+          "title": "Nearby Optical Galaxies: Selection of the Sample and Identification of Groups"
+        },
+        {
+          "refcode": "1997ApJS..109..333W",
+          "authors": "WILLICK, J. A., COURTEAU, S., FABER, S. M., BURNSTEIN, D., DEKEL, A., AND STRAUSS, M. A.",
+          "title": "HOMOGENEOUS VELOCITY-DISTANCE DATA FOR PECULIAR VELOCITY ANALYSIS. III. THE MARK III CATALOG OF GALAXY PECULIAR VELOCITIES"
+        },
+        {
+          "refcode": "1996MNRAS.278.1025L",
+          "authors": "Loveday, J.",
+          "title": "The APM Bright Galaxy Catalogue"
+        },
+        {
+          "refcode": "1995ApJS...96...39B",
+          "authors": "BUTA, R.",
+          "title": "THE CATALOG OF SOUTHERN RINGED GALAXIES"
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES"
+        },
+        {
+          "refcode": "1991RC3.9.C...0000d",
+          "authors": "DE VAUCOULEURS, G., DE VAUCOULEURS, A., CORWIN JR., H.G., BUTA, R. J. PATUREL, G., AND FOUQUE, P.",
+          "title": "THIRD REFERENCE CATALOGUE OF BRIGHT GALAXIES, VERSION 3.9"
+        },
+        {
+          "refcode": "1991ApJS...75..935d",
+          "authors": "DA COSTA, L. N., AND PELLEGRINI, P. S., DAVIS, M., MEIKSIN, A., SARGENT, W.L.W., and TONRY, J.L.",
+          "title": "SOUTHERN SKY REDSHIFT SURVEY: THE CATALOG"
+        },
+        {
+          "refcode": "1989H&RHI.C...0000H",
+          "authors": "Huchtmeier, W.K. and Richter, O.-G.",
+          "title": "A General Catalog of HI Observations of Galaxies, 1989, New York: Springer-Verlag"
+        },
+        {
+          "refcode": "1989ESOLV.C...0000L",
+          "authors": "Lauberts, A. and Valentijn, E. A.",
+          "title": "The Surface Photometry Catalogue of the ESO-Uppsala Galaxies, 1989, Garching bei Munchen: European Southern Observatory"
+        },
+        {
+          "refcode": "1987AMCAT.C...0000A",
+          "authors": "Arp, H. C. and Madore, B. F.",
+          "title": "A Catalogue of Southern Peculiar Galaxies and Associations, 1987, Cambridge: Cambridge University Press"
+        },
+        {
+          "refcode": "1987A&AS...70..281B",
+          "authors": "BICA E., ALLOIN D.",
+          "title": "Analysis of absorption-line spectra in a sample of 164 galactic nuclei"
+        },
+        {
+          "refcode": "1986A&AS...66..255K",
+          "authors": "KRAAN-KORTEWEG R.C.",
+          "title": "A catalog of 2810 nearby galaxies : the effect of the virgocentric flow model on their observed velocities"
+        },
+        {
+          "refcode": "1983ApJS...51..149B",
+          "authors": "BUTA R., DE VAUCOULEURS G.",
+          "title": "Inner ring structures in galaxies as distance indicators. III. Distances to 453 spiral and lenticular galaxies"
+        },
+        {
+          "refcode": "1981RSA...C...0000S",
+          "authors": "SANDAGE, A., AND TAMMANN, G. A.",
+          "title": "REVISED SHAPLEY-AMES CATALOG OF BRIGHT GALAXIES"
+        },
+        {
+          "refcode": "1979AJ.....84..472S",
+          "authors": "Sandage, A., and Brucato, R.",
+          "title": "THE LAS CAMPANAS SURVEY OF BRIGHT SOUTHERN GALAXIES. II. NEW CLASSIFICATIONS FOR 153 SYSTEMS"
+        },
+        {
+          "refcode": "1975SoByu..47...43A",
+          "authors": "ARAKELIAN M.A.",
+          "title": "CLASSIFICATION OF THE CENTRAL REGIONS OF 711 GALAXIES"
+        },
+        {
+          "refcode": "1888MmRAS..49....1D",
+          "authors": "Dreyer, J. L. E.",
+          "title": "A New General Catalogue of Nebulae and Clusters of Stars,being the Catalogue of the late Sir John F.W. Herschel, Bart., revised, corrected,"
+        }
+      ]
+    }
+  },
+  "ranked_by_keyword_matches": [
+    {
+      "galaxy": "NGC 4038",
+      "n_keyword_matches": 74,
+      "n_total_refs": 692
+    },
+    {
+      "galaxy": "NGC 2608",
+      "n_keyword_matches": 74,
+      "n_total_refs": 232
+    },
+    {
+      "galaxy": "NGC 5468",
+      "n_keyword_matches": 50,
+      "n_total_refs": 213
+    },
+    {
+      "galaxy": "NGC 5861",
+      "n_keyword_matches": 47,
+      "n_total_refs": 193
+    },
+    {
+      "galaxy": "NGC 2442",
+      "n_keyword_matches": 41,
+      "n_total_refs": 226
+    },
+    {
+      "galaxy": "NGC 2525",
+      "n_keyword_matches": 38,
+      "n_total_refs": 146
+    },
+    {
+      "galaxy": "NGC 7329",
+      "n_keyword_matches": 36,
+      "n_total_refs": 131
+    },
+    {
+      "galaxy": "NGC 4680",
+      "n_keyword_matches": 29,
+      "n_total_refs": 139
+    },
+    {
+      "galaxy": "NGC 7250",
+      "n_keyword_matches": 27,
+      "n_total_refs": 146
+    },
+    {
+      "galaxy": "NGC 5917",
+      "n_keyword_matches": 24,
+      "n_total_refs": 68
+    },
+    {
+      "galaxy": "NGC 3447",
+      "n_keyword_matches": 20,
+      "n_total_refs": 83
+    },
+    {
+      "galaxy": "NGC 105",
+      "n_keyword_matches": 14,
+      "n_total_refs": 89
+    }
+  ]
+}

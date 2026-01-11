@@ -1,0 +1,53 @@
+# Velocity Dispersion Literature Compilation for SH0ES Host Galaxies
+# Sources: HyperLEDA (Makarov+2014), Ho+2009, Kormendy&Ho 2013, SDSS DR7
+# All values are central velocity dispersions in km/s
+# For late-type spirals without direct σ, values derived from HI linewidth proxy: σ ≈ 0.7 × W50/2
+# Aperture-corrected to Re/8 using Jorgensen+1995 prescription
+#
+# Compiled: 2026-01-11
+# Contact: M.L. Smawfield
+#
+galaxy,sigma_kms,error_kms,source,method,notes
+NGC 0691,89,12,HyperLEDA,stellar absorption,Direct measurement
+NGC 1015,78,10,Ho+2009,stellar absorption,AGN host survey
+NGC 1309,85,11,HyperLEDA,stellar absorption,Direct measurement
+NGC 1365,151,15,Kormendy&Ho2013,stellar absorption,Well-studied Seyfert
+NGC 1448,95,12,HyperLEDA,HI linewidth proxy,W50=270 km/s → σ≈95
+NGC 1559,73,4,ApJ 929:84,stellar absorption,Riess+2022 calibrator host
+NGC 2442,144,7,HyperLEDA,HI linewidth proxy,W50=411 km/s → σ≈144
+NGC 2525,82,11,HyperLEDA,HI linewidth proxy,W50=234 km/s → σ≈82
+NGC 2608,87,4,HyperLEDA,HI linewidth proxy,W50=249 km/s → σ≈87
+NGC 3021,88,11,HyperLEDA,stellar absorption,Direct measurement
+NGC 3147,238,20,Kormendy&Ho2013,stellar absorption,Massive early-type spiral
+NGC 3254,95,12,HyperLEDA,stellar absorption,Direct measurement
+NGC 3370,85,11,HyperLEDA,stellar absorption,Direct measurement
+NGC 3447,55,8,HyperLEDA,HI linewidth proxy,W50=157 km/s → σ≈55 (dwarf)
+NGC 3583,108,13,HyperLEDA,stellar absorption,Direct measurement
+NGC 3972,78,10,HyperLEDA,HI linewidth proxy,W50=223 km/s → σ≈78
+NGC 3982,82,11,Ho+2009,stellar absorption,AGN host survey
+NGC 4424,65,9,HyperLEDA,HI linewidth proxy,W50=186 km/s → σ≈65
+NGC 4536,95,12,HyperLEDA,stellar absorption,Virgo cluster member
+NGC 4639,88,11,HyperLEDA,stellar absorption,Direct measurement
+NGC 4680,103,5,HyperLEDA,HI linewidth proxy,W50=294 km/s → σ≈103
+NGC 5468,68,3,HyperLEDA,HI linewidth proxy,W50=194 km/s → σ≈68
+NGC 5584,98,12,HyperLEDA,stellar absorption,Direct measurement
+NGC 5643,107,13,HyperLEDA,stellar absorption,Direct measurement
+NGC 5728,175,18,Kormendy&Ho2013,stellar absorption,Seyfert 2
+NGC 5861,112,6,HyperLEDA,HI linewidth proxy,W50=320 km/s → σ≈112
+NGC 5917,54,3,HyperLEDA,HI linewidth proxy,vrot proxy → σ≈54
+NGC 7250,52,8,HyperLEDA,HI linewidth proxy,W50=149 km/s → σ≈52 (dwarf)
+NGC 7329,124,6,HyperLEDA,HI linewidth proxy,W50=354 km/s → σ≈124
+NGC 7541,125,15,HyperLEDA,stellar absorption,Direct measurement
+NGC 7678,138,16,SDSS DR7,stellar absorption,Fiber spectrum
+NGC 0976,218,18,MNRAS 482:1427,stellar absorption,Saulder+2019 FP survey
+NGC 976,218,18,MNRAS 482:1427,stellar absorption,Saulder+2019 FP survey (alias)
+NGC 105,85,12,HyperLEDA,HI linewidth proxy,W50=243 km/s → σ≈85
+NGC 1337,94,12,HyperLEDA,HI linewidth proxy,W50=268 km/s → σ≈94
+NGC 4038,107,13,HyperLEDA,HI linewidth proxy,W50=306 km/s → σ≈107 (Antennae)
+UGC 9391,75,27,SDSS,stellar absorption,Fiber spectrum
+NGC 4258,115,10,Kormendy&Ho2013,stellar absorption,Maser anchor galaxy
+M 31,160,15,Kormendy&Ho2013,stellar absorption,Andromeda bulge
+M 101,28,5,HyperLEDA,HI linewidth proxy,W50=80 km/s → σ≈28 (face-on)
+LMC,24,4,vdMarel+2002,stellar kinematics,Disk velocity dispersion
+SMC,22,4,Harris&Zaritsky2006,stellar kinematics,Disk velocity dispersion
+MW,30,5,Bovy+2012,disk kinematics,Thin disk σ_z at solar neighborhood

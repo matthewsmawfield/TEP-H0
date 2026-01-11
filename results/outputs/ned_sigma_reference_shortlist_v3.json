@@ -1,0 +1,267 @@
+{
+  "generated_at": "2026-01-11T10:28:58.340492+00:00Z",
+  "hosts": {
+    "NGC 105": {
+      "n_total": 89,
+      "n_matched": 14,
+      "top": []
+    },
+    "NGC 2442": {
+      "n_total": 226,
+      "n_matched": 41,
+      "top": [
+        {
+          "refcode": "1987A&AS...70..281B",
+          "authors": "BICA E., ALLOIN D.",
+          "title": "Analysis of absorption-line spectra in a sample of 164 galactic nuclei",
+          "score": 10
+        },
+        {
+          "refcode": "1975SoByu..47...43A",
+          "authors": "ARAKELIAN M.A.",
+          "title": "CLASSIFICATION OF THE CENTRAL REGIONS OF 711 GALAXIES",
+          "score": 6
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES",
+          "score": 6
+        },
+        {
+          "refcode": "1986ApJ...302..564S",
+          "authors": "SIMIEN F., DE VAUCOULEURS G.",
+          "title": "Systematics of bulge-to-disk ratios",
+          "score": 4
+        },
+        {
+          "refcode": "2009ApJ...696..411W",
+          "authors": "Weinzirl, Tim; Jogee, Shardha; Khochfar, Sadegh; Burkert, Andreas; Kormendy, John",
+          "title": "Bulge n and B/T in High-Mass Galaxies: Constraints on the Origin of Bulges in Hierarchical Models",
+          "score": 4
+        }
+      ]
+    },
+    "NGC 2525": {
+      "n_total": 146,
+      "n_matched": 38,
+      "top": [
+        {
+          "refcode": "1975SoByu..47...43A",
+          "authors": "ARAKELIAN M.A.",
+          "title": "CLASSIFICATION OF THE CENTRAL REGIONS OF 711 GALAXIES",
+          "score": 6
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES",
+          "score": 6
+        },
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles",
+          "score": 4
+        }
+      ]
+    },
+    "NGC 2608": {
+      "n_total": 232,
+      "n_matched": 74,
+      "top": [
+        {
+          "refcode": "1999A&A...348...77B",
+          "authors": "BOTTEMA, R.",
+          "title": "The kinematics of the bulge and the disc of NGC 7331",
+          "score": 8
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES",
+          "score": 6
+        },
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles",
+          "score": 4
+        },
+        {
+          "refcode": "2003JKAS...36..261A",
+          "authors": "Ann, Hong Bae",
+          "title": "CCD Surface Photometry of Spiral Galaxies: Bulge Morphology",
+          "score": 4
+        }
+      ]
+    },
+    "NGC 3447": {
+      "n_total": 83,
+      "n_matched": 20,
+      "top": []
+    },
+    "NGC 4038": {
+      "n_total": 692,
+      "n_matched": 74,
+      "top": [
+        {
+          "refcode": "2006MNRAS.372.1856F",
+          "authors": "Firth, P.; Evstigneeva, E. A.; Jones, J. B.; Drinkwater, M. J.; Phillipps, S.; Gregg, M. D.",
+          "title": "Kinematics, substructure and luminosity-weighted dynamics of six nearby galaxy groups",
+          "score": 4
+        }
+      ]
+    },
+    "NGC 4680": {
+      "n_total": 139,
+      "n_matched": 29,
+      "top": []
+    },
+    "NGC 5468": {
+      "n_total": 213,
+      "n_matched": 50,
+      "top": [
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES",
+          "score": 6
+        },
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles",
+          "score": 4
+        },
+        {
+          "refcode": "2003JKAS...36..261A",
+          "authors": "Ann, Hong Bae",
+          "title": "CCD Surface Photometry of Spiral Galaxies: Bulge Morphology",
+          "score": 4
+        },
+        {
+          "refcode": "2004ApJ...612..652D",
+          "authors": "Daly, Ruth A.; Djorgovski, S. G.",
+          "title": "Direct Determination of the Kinematics of the Universe and Properties of the Dark Energy as Functions of Redshift",
+          "score": 4
+        }
+      ]
+    },
+    "NGC 5861": {
+      "n_total": 193,
+      "n_matched": 47,
+      "top": [
+        {
+          "refcode": "2010ApJ...709..884Y",
+          "authors": "Yuan, T.-T.; Kewley, L. J.; Sanders, D. B.",
+          "title": "The Role of Starburst-Active Galactic Nucleus Composites in Luminous Infrared Galaxy Mergers: Insights from the New Optical Classification",
+          "score": 6
+        },
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles",
+          "score": 4
+        }
+      ]
+    },
+    "NGC 5917": {
+      "n_total": 68,
+      "n_matched": 24,
+      "top": [
+        {
+          "refcode": "2010ApJ...709..884Y",
+          "authors": "Yuan, T.-T.; Kewley, L. J.; Sanders, D. B.",
+          "title": "The Role of Starburst-Active Galactic Nucleus Composites in Luminous Infrared Galaxy Mergers: Insights from the New Optical Classification",
+          "score": 6
+        }
+      ]
+    },
+    "NGC 7250": {
+      "n_total": 146,
+      "n_matched": 27,
+      "top": []
+    },
+    "NGC 7329": {
+      "n_total": 131,
+      "n_matched": 36,
+      "top": [
+        {
+          "refcode": "1987A&AS...70..281B",
+          "authors": "BICA E., ALLOIN D.",
+          "title": "Analysis of absorption-line spectra in a sample of 164 galactic nuclei",
+          "score": 10
+        },
+        {
+          "refcode": "1975SoByu..47...43A",
+          "authors": "ARAKELIAN M.A.",
+          "title": "CLASSIFICATION OF THE CENTRAL REGIONS OF 711 GALAXIES",
+          "score": 6
+        },
+        {
+          "refcode": "1995AJ....110..613v",
+          "authors": "VAN DEN BERGH, S.",
+          "title": "A PRELIMINARY CLASSIFICATION SCHEME FOR THE CENTRAL REGIONS OF LATE-TYPE GALAXIES",
+          "score": 6
+        },
+        {
+          "refcode": "2017ApJ...845..114G",
+          "authors": "Gao, Hua; Ho, Luis C.",
+          "title": "An Optimal Strategy for Accurate Bulge-to-disk Decomposition of Disk Galaxies",
+          "score": 4
+        }
+      ]
+    }
+  },
+  "ranked_by_topcount": [
+    {
+      "galaxy": "NGC 2442",
+      "n_top": 5
+    },
+    {
+      "galaxy": "NGC 2608",
+      "n_top": 4
+    },
+    {
+      "galaxy": "NGC 5468",
+      "n_top": 4
+    },
+    {
+      "galaxy": "NGC 7329",
+      "n_top": 4
+    },
+    {
+      "galaxy": "NGC 2525",
+      "n_top": 3
+    },
+    {
+      "galaxy": "NGC 5861",
+      "n_top": 2
+    },
+    {
+      "galaxy": "NGC 4038",
+      "n_top": 1
+    },
+    {
+      "galaxy": "NGC 5917",
+      "n_top": 1
+    },
+    {
+      "galaxy": "NGC 105",
+      "n_top": 0
+    },
+    {
+      "galaxy": "NGC 3447",
+      "n_top": 0
+    },
+    {
+      "galaxy": "NGC 4680",
+      "n_top": 0
+    },
+    {
+      "galaxy": "NGC 7250",
+      "n_top": 0
+    }
+  ]
+}

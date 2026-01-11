@@ -1,0 +1,63 @@
+{
+  "n_hosts_with_raw_and_corrected": 29,
+  "assumed_aperture_radius_arcsec": 1.5,
+  "default_beta": 0.04,
+  "baseline": {
+    "r_raw": 0.43186660573439095,
+    "p_raw": 0.01931378276110198,
+    "r_corrected": 0.4279417434741577,
+    "p_corrected": 0.020567348172728893
+  },
+  "source_stratified": {
+    "sigma_source": [
+      {
+        "sigma_source": "Ho+2009 (J/ApJS/183/1)",
+        "n": 5,
+        "r": 0.7477679793025622,
+        "p": 0.14617693911385293
+      },
+      {
+        "sigma_source": "HyperLEDA (ledacat.cgi)",
+        "n": 6,
+        "r": 0.5307333792142946,
+        "p": 0.27864786829455535
+      },
+      {
+        "sigma_source": "HyperLEDA HI (VII/238/hidat)",
+        "n": 9,
+        "r": 0.4998131580521932,
+        "p": 0.17065613898404924
+      }
+    ],
+    "sigma_method": [
+      {
+        "sigma_method": "HI proxy (calibrated_vmax)",
+        "n": 9,
+        "r": 0.4998131580521932,
+        "p": 0.17065613898404924
+      },
+      {
+        "sigma_method": "stellar absorption",
+        "n": 17,
+        "r": 0.4278629981618437,
+        "p": 0.08666224923189056
+      }
+    ]
+  },
+  "grid_summary": {
+    "beta_min": 0.0,
+    "beta_max": 0.08,
+    "re_scale_min": 0.7,
+    "re_scale_max": 1.3,
+    "r_min": 0.423083842996352,
+    "r_max": 0.43186660573439095,
+    "slope_min": 0.07360393213684219,
+    "slope_max": 0.08283166378186382,
+    "delta_h0_min": 4.628158226115971,
+    "delta_h0_max": 4.628158226115971,
+    "alpha_min": 0.5742187499999994,
+    "alpha_max": 0.5835156249999995,
+    "unified_h0_min": 68.27674850293843,
+    "unified_h0_max": 69.22779004066199
+  }
+}

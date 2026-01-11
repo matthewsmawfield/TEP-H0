@@ -1,0 +1,177 @@
+<h2>5. Conclusion</h2>
+
+<p>This work investigates whether the Hubble Tension—a persistent challenge in precision cosmology—might arise from an environmental systematic in Cepheid-based distances. The key findings are:</p>
+
+<ol>
+    <li>Environmental bias detected: Stratification of the SH0ES Cepheid host galaxies by directly measured velocity dispersion shows a significant correlation (Spearman $\rho = 0.434$, $p = 0.019$) between host potential depth and derived $H_0$. High-$\sigma$ hosts yield systematically inflated $H_0$ values ($72.45 \pm 2.32$ km/s/Mpc) compared to low-$\sigma$ hosts ($67.82 \pm 1.62$ km/s/Mpc).</li>
+    
+    <li>Magnitude contributes to tension: The bias $\Delta H_0 = 4.63$ km/s/Mpc between high and low-density hosts accounts for a substantial fraction of the discrepancy between local and CMB measurements.</li>
+    
+    <li>TEP correction reduces the tension: Application of the TEP conformal correction with optimal coupling $\alpha = 0.58 \pm 0.16$ and effective calibrator $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.66 \pm 1.51$ km/s/Mpc. This result is robust under bootstrap resampling and reduces the tension with Planck to $0.79\sigma$.</li>
+    
+    <li>Internal consistency: Low-$\sigma$ hosts, which have environments similar to the calibrators, independently yield Planck-consistent $H_0$ (within $1\sigma$) without correction, consistent with TEP expectations.</li>
+    
+    <li>Anchor consistency test (“anchor tension”): Independent P-L fits to the extragalactic geometric anchors (LMC, NGC 4258, M31; MW excluded due to its distinct parallax-based methodology) yield $\alpha_{\rm anchor} = 0.029 \pm 0.023$—consistent with zero and in 3.4σ tension with the host-level coupling. This indicates that the anchor zero-points do not exhibit a statistically significant $\sigma$-dependence at the current precision, while the host sample does.</li>
+
+    <li>M31 screening consistency: The "Inner Fainter" signal observed in M31 is consistent with a density-gated screening transition. While the global $H_0$ trend is driven by unscreened, low-density disks (where deep potential = active TEP), the M31 inner region approaches the effective galactic screening threshold ($\rho_{\rm trans} \approx 0.5\,M_\odot/\mathrm{pc}^3$). Quantitatively, the Kodric ground-based sample yields $\bar{\rho}_{\rm in}=0.31\,M_\odot/\mathrm{pc}^3$ with $14/153$ ($\approx 9.2\%$) Inner Cepheids above $\rho_{\rm trans}$, while the inner core ($R<1$ kpc; $N=5$) has $\bar{\rho}=2.16\,M_\odot/\mathrm{pc}^3$ and $5/5$ above threshold. This provides a physically motivated "screened core" control within the same galaxy.</li>
+</ol>
+
+<p>These findings support the hypothesis that the Hubble Tension could reflect an environmental systematic rather than new early-universe physics. The Temporal Equivalence Principle—supported by independent studies of pulsar timing in globular clusters (Paper 11) and by the potential- and density-dependent structure identified here—provides a concrete framework for organizing these correlations and for generating falsifiable predictions.</p>
+
+<p>If confirmed by independent analyses, these results would have significant implications for precision cosmology: future distance-ladder measurements would need to account for the gravitational environments of calibrator and target systems, and part (or all) of the reported local–CMB discrepancy may be attributable to environment-dependent calibration systematics. The findings presented here motivate targeted follow-up tests (homogeneous stellar-dispersion spectroscopy; TRGB stratification by $\sigma$; JWST Cepheid imaging) to more directly validate or falsify the proposed mechanism.</p>
+
+<div id="code-availability">
+    <h3>Code and Data Availability</h3>
+    <p>All analysis code is open-source and designed for easy reproduction. The complete pipeline runs in under 2 minutes and reproduces all results, figures, and statistics reported in this paper.</p>
+    
+    <h4>Quick Start</h4>
+    <p>To reproduce the full analysis:</p>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto;"><code># Clone the repository
+git clone https://github.com/matthewsmawfield/TEP-H0.git
+cd TEP-H0
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the complete analysis pipeline
+python scripts/run_pipeline.py</code></pre>
+    
+    <p>The pipeline automatically downloads all required data from public archives (SH0ES, Pantheon+, HyperLEDA, Vizier) and generates all outputs.</p>
+    
+    <h4>Pipeline Architecture</h4>
+    <p>The analysis is organized into 10 sequential steps, each implemented as a self-contained Python module:</p>
+    
+    <div class="results-table">
+    <table class="data-table data-table-compact">
+        <thead>
+            <tr><th scope="col">Step</th><th scope="col">Script</th><th scope="col">Description</th><th scope="col">Key Outputs</th></tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><strong>1</strong></td>
+            <td><code>step_1_data_ingestion.py</code></td>
+            <td>Downloads SH0ES distance moduli and Pantheon+ redshifts; cross-matches hosts with velocity dispersion catalogs (HyperLEDA, SDSS)</td>
+            <td><code>hosts_processed.csv</code></td>
+        </tr>
+        <tr>
+            <td><strong>1b</strong></td>
+            <td><code>step_1b_aperture_correction.py</code></td>
+            <td>Applies Jorgensen et al. (1995) aperture corrections to normalize $\sigma$ measurements to $R_{\rm eff}/8$</td>
+            <td>Homogenized $\sigma$ values</td>
+        </tr>
+        <tr>
+            <td><strong>2</strong></td>
+            <td><code>step_2_stratification.py</code></td>
+            <td>Calculates per-host $H_0$; stratifies by median $\sigma$; computes correlation statistics</td>
+            <td><code>stratification_results.json</code></td>
+        </tr>
+        <tr>
+            <td><strong>3</strong></td>
+            <td><code>step_3_tep_correction.py</code></td>
+            <td>Optimizes $\alpha$ by minimizing residual $H_0$–$\sigma$ slope; applies TEP correction; bootstrap uncertainty estimation</td>
+            <td><code>tep_correction_results.json</code></td>
+        </tr>
+        <tr>
+            <td><strong>4</strong></td>
+            <td><code>step_4_robustness_checks.py</code></td>
+            <td>Jackknife stability; bivariate analysis (metallicity control); covariance-aware significance; flow/environment controls</td>
+            <td><code>covariance_robustness.json</code></td>
+        </tr>
+        <tr>
+            <td><strong>5</strong></td>
+            <td><code>step_5_m31_analysis.py</code></td>
+            <td>Differential P-L analysis of M31 Cepheids (Inner vs Outer) using the ground-based catalog</td>
+            <td><code>m31_robustness_summary.json</code></td>
+        </tr>
+        <tr>
+            <td><strong>6</strong></td>
+            <td><code>step_6_multivariate_analysis.py</code></td>
+            <td>OLS regression controlling for Age (Period), Dust (Color), and Host Mass</td>
+            <td><code>multivariate_analysis_results.json</code></td>
+        </tr>
+        <tr>
+            <td><strong>7</strong></td>
+            <td><code>step_7_lmc_replication.py</code></td>
+            <td>Control test: LMC differential analysis (shallow potential → null signal expected)</td>
+            <td><code>lmc_robustness_summary.json</code></td>
+        </tr>
+        <tr>
+            <td><strong>8</strong></td>
+            <td><code>step_8_m31_phat_analysis.py</code></td>
+            <td>HST J/H band analysis from Kodric et al. (2018); metallicity control via color matching</td>
+            <td><code>m31_phat_robustness_summary.json</code></td>
+        </tr>
+        <tr>
+            <td><strong>9</strong></td>
+            <td><code>step_9_final_synthesis.py</code></td>
+            <td>Generates synthesis figures and final summary statistics</td>
+            <td>All manuscript figures</td>
+        </tr>
+        <tr>
+            <td><strong>10</strong></td>
+            <td><code>step_10_anchor_stratification.py</code></td>
+            <td>Independent P-L fits to geometric anchors (LMC, NGC 4258, M31); tests for anchor-level TEP bias</td>
+            <td><code>anchor_stratification_test.json</code></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    
+    <h4>Repository Structure</h4>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto; font-size: 0.85em;"><code>TEP-H0/
+├── scripts/
+│   ├── run_pipeline.py          # Master orchestration script
+│   ├── steps/                   # Individual analysis modules
+│   └── utils/                   # Shared utilities (logging, plotting)
+├── data/
+│   ├── raw/                     # Downloaded source data
+│   ├── interim/                 # Intermediate processing
+│   └── processed/               # Final host catalog
+├── results/
+│   ├── outputs/                 # JSON/CSV results (all key statistics)
+│   └── figures/                 # Generated figures (PNG)
+└── site/                        # Manuscript HTML and website</code></pre>
+    
+    <h4>Key Output Files</h4>
+    <ul>
+        <li><code>results/outputs/tep_correction_results.json</code> — Unified $H_0$, optimal $\alpha$, Planck tension</li>
+        <li><code>results/outputs/stratification_results.json</code> — High/low-$\sigma$ stratification statistics</li>
+        <li><code>results/outputs/covariance_robustness.json</code> — Covariance-aware p-values and $N_{\rm eff}$</li>
+        <li><code>results/outputs/out_of_sample_validation.json</code> — Train/test and LOOCV results</li>
+        <li><code>data/processed/hosts_processed.csv</code> — Complete host galaxy catalog with $\sigma$, $H_0$, corrections</li>
+    </ul>
+    
+    <h4>Dependencies</h4>
+    <p>The pipeline requires Python 3.8+ and the following packages (all installable via pip):</p>
+    <ul style="columns: 2; -webkit-columns: 2; -moz-columns: 2;">
+        <li><code>numpy</code></li>
+        <li><code>scipy</code></li>
+        <li><code>pandas</code></li>
+        <li><code>matplotlib</code></li>
+        <li><code>astropy</code></li>
+        <li><code>astroquery</code></li>
+    </ul>
+    
+    <h4>Verification</h4>
+    <p>After running the pipeline, verify reproduction by checking:</p>
+    <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto;"><code># Check key results match manuscript
+cat results/outputs/tep_correction_results.json | grep unified_h0
+# Expected: 68.66 (±0.01)
+
+cat results/outputs/stratification_results.json | grep difference
+# Expected: 4.63 (±0.01)</code></pre>
+    
+    <p style="margin-top: 20px;">
+        <a href="https://github.com/matthewsmawfield/TEP-H0" target="_blank" style="display: inline-flex; align-items: center; text-decoration: none; font-weight: 600; color: #333; font-size: 1.1em;">
+            <svg height="24" width="24" viewBox="0 0 16 16" version="1.1" style="margin-right: 10px; fill: currentColor;" aria-hidden="true">
+                <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            https://github.com/matthewsmawfield/TEP-H0
+        </a>
+    </p>
+    
+    <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+        <strong>DOI:</strong> <a href="https://doi.org/10.5281/zenodo.18209703" target="_blank">10.5281/zenodo.18209703</a> &nbsp;|&nbsp;
+        <strong>License:</strong> CC BY 4.0
+    </p>
+</div>

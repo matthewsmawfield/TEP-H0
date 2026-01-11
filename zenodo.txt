@@ -1,0 +1,15 @@
+The Cepheid Bias: Resolving the Hubble Tension
+
+
+The Hubble tension—the persistent ~5-sigma discrepancy between local distance-ladder measurements (H0 ~ 73 km/s/Mpc) and early-universe CMB inference (H0 = 67.4 +/- 0.5 km/s/Mpc)—may reflect residual systematics in the calibration of Cepheid distances. This study tests an environment-dependent bias motivated by the Temporal Equivalence Principle (TEP): periodic phenomena used as clocks can acquire a host-dependent shift correlated with gravitational potential depth.
+
+Using the SH0ES Cepheid host sample (N=29) and Pantheon+ Hubble-diagram redshifts, we examine the relationship between derived host-level H0 values and host central velocity dispersion sigma (a TEP-independent kinematic proxy for potential depth). We find a statistically significant correlation (Spearman rho = 0.434, p = 0.019; Pearson r = 0.428, p = 0.021). Propagating the full SH0ES GLS distance-modulus covariance into a non-diagonal covariance for the H0 vector, a correlated-null Monte Carlo test yields p_cov = 0.026 (Spearman) and p_cov = 0.039 (Pearson), with an effective sample size N_eff ~ 7.5. A median split at sigma_med ~ 90 km/s gives H0 = 67.82 +/- 1.62 km/s/Mpc (low-sigma; N=15) versus 72.45 +/- 2.32 km/s/Mpc (high-sigma; N=14), implying Delta H0 = 4.63 km/s/Mpc.
+
+We then apply a TEP-motivated conformal correction of the form mu_corr = mu_obs + alpha * log10(sigma/sigma_ref), with sigma_ref = 75.25 km/s defined a priori by the SH0ES anchor weighting. Optimizing alpha to remove the residual H0–sigma slope yields alpha = 0.58 +/- 0.16 and a unified local estimate H0 = 68.66 +/- 1.51 km/s/Mpc, corresponding to a Planck tension of 0.79 sigma. Train/test splits and leave-one-out cross validation show the coupling is stable and that the corrected sample exhibits negligible residual H0–sigma dependence out of sample.
+
+As a complementary, within-galaxy test, an HST differential analysis of Cepheids in M31 yields an "Inner Fainter" offset Delta W = +0.68 +/- 0.19 mag (3.6 sigma), consistent with a density-gated screening transition in the bulge/core relative to the outer disk. An important open issue is the anchor–host mismatch: independent P-L fits to extragalactic geometric anchors yield a near-zero anchor-level coupling (alpha_anchor ~ 0.03), in tension with the host-level coupling. We therefore treat the results as evidence for a strong host-environment dependence in Cepheid-ladder inference, with falsifiable predictions requiring further targeted tests (homogeneous stellar-dispersion spectroscopy; TRGB stratification by sigma; expanded differential samples).
+
+Keywords: Hubble tension - Cepheid variables - distance ladder - velocity dispersion - temporal equivalence principle - gravitational time dilation
+
+Open Science Statement:
+This work is a preprint and is open to community review, ideas, and collaboration. All analysis code, data, and manuscripts are open source and available at https://github.com/matthewsmawfield/TEP-H0. We warmly invite feedback and contributions to further test these results.

@@ -1,0 +1,23 @@
+{
+    "median_sigma": 89.53951311106145,
+    "low_density": {
+        "n": 15,
+        "mean_h0": 67.82424631620049,
+        "std_err": 1.6164433035410595,
+        "cov_err": 0.8990353137055453
+    },
+    "high_density": {
+        "n": 14,
+        "mean_h0": 72.45240454231646,
+        "std_err": 2.319130087431726,
+        "cov_err": 1.0384588218678676
+    },
+    "difference": 4.628158226115971,
+    "correlation_r": 0.42794174347415764,
+    "h0_mean_cov_err": 0.8472139507882559,
+    "difference_cov_err": 0.9405629326109087,
+    "h0_covariance_saved": true,
+    "shoes_density_mean": 0.11322882398572941,
+    "shoes_density_min": 7.84435555279967e-05,
+    "shoes_density_max": 1.7590781179647055
+}

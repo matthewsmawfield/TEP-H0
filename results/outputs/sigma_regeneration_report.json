@@ -1,0 +1,454 @@
+{
+  "counts": {
+    "n_hosts": 41,
+    "n_missing_sigma": 0,
+    "n_with_sigma": 41
+  },
+  "diagnostics": [
+    {
+      "chosen_key": "leda_vrot_proxy",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "LMC",
+      "n_candidates": 1,
+      "pgc": 17223
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 20.099999618530276,
+      "galaxy": "M 101",
+      "n_candidates": 3,
+      "pgc": 50063
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 1337",
+      "n_candidates": 2,
+      "pgc": 12916
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 15.900003051757807,
+      "galaxy": "M 31",
+      "n_candidates": 4,
+      "pgc": 2557
+    },
+    {
+      "chosen_key": "ho2007",
+      "direct_keys": [
+        "leda_vdis"
+      ],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 0691",
+      "n_candidates": 3,
+      "pgc": 6793
+    },
+    {
+      "chosen_key": "leda_vdis",
+      "direct_keys": [
+        "leda_vdis"
+      ],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 1015",
+      "n_candidates": 2,
+      "pgc": 9988
+    },
+    {
+      "chosen_key": "leda_vrot_proxy",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 105",
+      "n_candidates": 1,
+      "pgc": 212515
+    },
+    {
+      "chosen_key": "leda_vdis",
+      "direct_keys": [
+        "leda_vdis"
+      ],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 1309",
+      "n_candidates": 2,
+      "pgc": 12626
+    },
+    {
+      "chosen_key": "ho2007",
+      "direct_keys": [
+        "leda_vdis"
+      ],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 1365",
+      "n_candidates": 3,
+      "pgc": 13179
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 1448",
+      "n_candidates": 2,
+      "pgc": 13727
+    },
+    {
+      "chosen_key": "apj929_84",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 1559",
+      "n_candidates": 3,
+      "pgc": 14814
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 2442",
+      "n_candidates": 2,
+      "pgc": 21373
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 2525",
+      "n_candidates": 2,
+      "pgc": 22721
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 2608",
+      "n_candidates": 2,
+      "pgc": 24111
+    },
+    {
+      "chosen_key": "ho2007",
+      "direct_keys": [
+        "leda_vdis"
+      ],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 3021",
+      "n_candidates": 3,
+      "pgc": 28357
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 4.099996948242193,
+      "galaxy": "NGC 3147",
+      "n_candidates": 4,
+      "pgc": 30019
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 12.099996948242193,
+      "galaxy": "NGC 3254",
+      "n_candidates": 4,
+      "pgc": 30895
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 2.199998474121088,
+      "galaxy": "NGC 3370",
+      "n_candidates": 4,
+      "pgc": 32207
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 3447",
+      "n_candidates": 2,
+      "pgc": 32694
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "sdss",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 10.828796948242186,
+      "galaxy": "NGC 3583",
+      "n_candidates": 5,
+      "pgc": 34232
+    },
+    {
+      "chosen_key": "sdss",
+      "direct_keys": [
+        "sdss"
+      ],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 3972",
+      "n_candidates": 3,
+      "pgc": 37466
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "sdss",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 5.7229600000000005,
+      "galaxy": "NGC 3982",
+      "n_candidates": 5,
+      "pgc": 37520
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 4038",
+      "n_candidates": 2,
+      "pgc": 37967
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 15.199999999999989,
+      "galaxy": "NGC 4258",
+      "n_candidates": 5,
+      "pgc": 39600
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "sdss",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 16.27316923706055,
+      "galaxy": "NGC 4424",
+      "n_candidates": 4,
+      "pgc": 40809
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 26.400000000000006,
+      "galaxy": "NGC 4536",
+      "n_candidates": 4,
+      "pgc": 41823
+    },
+    {
+      "chosen_key": "ho2009",
+      "direct_keys": [
+        "ho2009",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 5.400000000000006,
+      "galaxy": "NGC 4639",
+      "n_candidates": 4,
+      "pgc": 42741
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 4680",
+      "n_candidates": 2,
+      "pgc": 43118
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 5468",
+      "n_candidates": 2,
+      "pgc": 50323
+    },
+    {
+      "chosen_key": "sdss",
+      "direct_keys": [
+        "sdss"
+      ],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 5584",
+      "n_candidates": 3,
+      "pgc": 51344
+    },
+    {
+      "chosen_key": "bassdr2",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 5643",
+      "n_candidates": 3,
+      "pgc": 51969
+    },
+    {
+      "chosen_key": "bassdr2",
+      "direct_keys": [
+        "leda_vdis"
+      ],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 5728",
+      "n_candidates": 4,
+      "pgc": 52521
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 5861",
+      "n_candidates": 2,
+      "pgc": 54097
+    },
+    {
+      "chosen_key": "leda_vrot_proxy",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 5917",
+      "n_candidates": 1,
+      "pgc": 54809
+    },
+    {
+      "chosen_key": "leda_vrot_proxy",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 7250",
+      "n_candidates": 1,
+      "pgc": 214816
+    },
+    {
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 7329",
+      "n_candidates": 2,
+      "pgc": 69453
+    },
+    {
+      "chosen_key": "leda_vdis",
+      "direct_keys": [
+        "leda_vdis"
+      ],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 7541",
+      "n_candidates": 2,
+      "pgc": 70795
+    },
+    {
+      "chosen_key": "sdss",
+      "direct_keys": [
+        "sdss",
+        "leda_vdis"
+      ],
+      "direct_spread_kms": 25.43186,
+      "galaxy": "NGC 7678",
+      "n_candidates": 4,
+      "pgc": 71534
+    },
+    {
+      "chosen_key": "mnras482_1427",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "NGC 976",
+      "n_candidates": 3,
+      "pgc": 9776
+    },
+    {
+      "chosen_key": "leda_vrot_proxy",
+      "direct_keys": [],
+      "direct_spread_kms": null,
+      "galaxy": "SMC",
+      "n_candidates": 1,
+      "pgc": 3085
+    },
+    {
+      "chosen_key": "sdss",
+      "direct_keys": [
+        "sdss"
+      ],
+      "direct_spread_kms": null,
+      "galaxy": "UGC 9391",
+      "n_candidates": 3,
+      "pgc": 52091
+    }
+  ],
+  "inputs": {
+    "hi_proxy_mode": "calibrated_vmax",
+    "hosts_csv": "/Users/matthewsmawfield/www/TEP-H0/data/interim/hosts_coords.csv",
+    "leda_url": "http://atlas.obs-hp.fr/hyperleda/ledacat.cgi",
+    "lit_overrides_csv": null,
+    "n_hosts_deduped": 41,
+    "n_hosts_raw": 42,
+    "sleep_seconds": 0.4,
+    "use_6dfgs": false,
+    "use_apj929": true,
+    "use_bassdr2": true,
+    "use_ho2007": true,
+    "use_ledacat": true,
+    "use_lit_overrides": false,
+    "use_mnras482": true
+  },
+  "notes": {
+    "hi_proxy_definitions": {
+      "calibrated_vmax": "sigma = 0.467 * Vmax + 42.931, with Vmax = 0.5 * 10**log(2Vm)",
+      "kh13_w50": "sigma = 0.35 * W50, with W50 ~ 10**log(2Vm)"
+    },
+    "priority_order": [
+      "Literature override (manual)",
+      "Ho+2009",
+      "SDSS",
+      "MNRAS 482:1427",
+      "ApJ 929:84",
+      "BASS DR2",
+      "Ho 2007",
+      "HyperLEDA vdis",
+      "6dFGSv FP",
+      "HyperLEDA HI log(2Vm)",
+      "HyperLEDA vrot/1.7",
+      "HyperLEDA w50 proxy",
+      "HIPASS W50"
+    ]
+  },
+  "provenance": {
+    "command": "/Users/matthewsmawfield/www/TEP-H0/scripts/utils/build_sigma_catalog.py --verbose --use-ledacat --use-ho2007 --use-bassdr2 --use-apj929 --use-mnras482",
+    "created_utc": "2026-01-11T11:27:50Z",
+    "packages": {
+      "astropy": "7.1.1",
+      "astroquery": "0.4.11",
+      "numpy": "2.3.4",
+      "pandas": "2.3.3",
+      "requests": "2.32.4",
+      "scipy": "1.16.2"
+    },
+    "platform": {
+      "machine": "arm64",
+      "platform": "macOS-15.4.1-arm64-arm-64bit-Mach-O",
+      "processor": "arm"
+    },
+    "python": {
+      "executable": "/Users/matthewsmawfield/opt/miniconda3/bin/python",
+      "version": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 11:23:37) [Clang 14.0.6 ]"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+# TEP-H0: Hubble Tension Analysis
+# Core stack for Cepheid stratification and H0 correction
+
+# Astronomical computing
+astropy>=5.0.0
+astroquery>=0.4.6
+
+# Scientific computing
+numpy>=1.24.0
+scipy>=1.10.0
+pandas>=2.0.0
+
+# Visualization
+matplotlib>=3.7.0

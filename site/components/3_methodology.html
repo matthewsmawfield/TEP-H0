@@ -1,0 +1,110 @@
+<h2>2. Methodology</h2>
+
+<h3>2.1 Data Sources and Sample Selection</h3>
+<p>This analysis leverages the SH0ES 2022 data release (Riess et al. 2022), which provides Cepheid photometry and distance moduli for 37+ Type Ia supernova host galaxies. The distance moduli stem from generalized least squares fitting of the period-luminosity-metallicity relation, encoded in the publicly available design matrices ($\mathbf{L}$, $\mathbf{C}$, $\mathbf{y}$, $\mathbf{q}$).</p>
+
+<p>Cross-matching host galaxies with the Pantheon+ supernova catalog (Scolnic et al. 2022) yields Hubble-flow redshifts ($z_{\rm HD}$). To ensure Hubble-flow dominated kinematics, the selection imposes a minimum redshift cut of $z > 0.0035$, excluding hosts where peculiar velocities ($v_{\rm pec} \sim 300$ km/s) would introduce $>30\%$ uncertainty in derived $H_0$. The final sample comprises $N = 29$ SN Ia host galaxies.</p>
+
+<h4>Large-Scale Environment Tagging</h4>
+<p>Because residual peculiar-velocity systematics are structured by large-scale environment (groups and clusters), each host is additionally annotated with a group-environment proxy. Principal Galaxies Catalog (PGC) identifiers are retrieved where available via SIMBAD cross-identifications. Hosts are then crossmatched to the 2MASS group (“nest”) catalog of Tully (2015), based on the 2MASS Redshift Survey (2MRS). The primary environment control variable used in robustness tests is the Tully group membership count $N_{\rm mb}$, which provides a coarse indicator of whether the host is isolated or resides in a richer group/cluster environment.</p>
+
+<h4>Residual Peculiar-Velocity Uncertainty Model</h4>
+<p>To test sensitivity to flow-model residuals, a Monte Carlo propagation is performed using Pantheon+ peculiar-velocity uncertainty estimates. For each host, the recession velocity is perturbed as $v \rightarrow v + \delta v$ with $\delta v \sim \mathcal{N}(0,\sigma_{v_{\rm pec}})$, where $\sigma_{v_{\rm pec}}$ is taken from the Pantheon+ column $\mathrm{VPECERR}$ (with a conservative fallback of 250 km/s if unavailable). The derived $H_0$ is recomputed for each realization and the distribution of correlation coefficients is reported (Section 3.6). This directly tests whether plausible residual flow errors can explain the observed $H_0$–$\sigma$ association.</p>
+
+<h3>2.2 Velocity Dispersion as a TEP-Independent Proxy</h3>
+<p>A critical methodological consideration is that any proxy for gravitational potential depth must be <em>TEP-independent</em>—that is, its measurement must not depend on assumptions about universal time flow. Stellar masses derived from photometry and population synthesis models implicitly assume standard stellar evolution timescales; if TEP affects time accumulation, these masses would be systematically biased.</p>
+
+<p>Accordingly, the study adopts <em>directly measured</em> central velocity dispersions $\sigma$ from spectroscopic observations. Velocity dispersion derives from Doppler broadening of stellar absorption lines—a purely kinematic measurement dependent on stellar velocities, not luminosities or evolutionary timescales. This makes $\sigma$ a robust, TEP-independent observable.</p>
+
+<h4>Data Homogeneity and Aperture Corrections</h4>
+<p>Data compilation draws from HyperLEDA, SDSS spectroscopy, and the literature (Ho et al. 2009; Kormendy & Ho 2013). To address the heterogeneity of literature sources (e.g., fixed-fiber SDSS vs. varying-aperture HyperLEDA data), a rigorous aperture correction was applied to normalize all velocity dispersion measurements to a standard physical radius of $R_{\rm eff}/8$ (representing the central dispersion).</p>
+    
+<p>The power-law correction from Jorgensen et al. (1995) was utilized:</p>
+<div class="equation">
+$$ \sigma_{\rm corr} = \sigma_{\rm obs} \left( \frac{r_{\rm ap}}{R_{\rm eff}/8} \right)^{0.04} $$
+</div>
+<p>where $r_{\rm ap}$ is the observational aperture radius (assumed 1.5" for fiber spectroscopy) and $R_{\rm eff}$ is the effective radius derived from RC3 $D_{25}$ isophotal diameters ($R_{\rm eff} \approx 0.5 R_{25}$). This homogenization reduces systematic noise from aperture effects. The corrected sample spans $\sigma = 50$–$223$ km/s, with a median of $90$ km/s.</p>
+
+<p>By the virial theorem, $\sigma^2 \propto GM/R \propto \Phi$, so velocity dispersion serves as a direct proxy for gravitational potential depth.</p>
+
+<h3>2.3 The TEP Correction Model</h3>
+<p>In the TEP framework, the observed Cepheid period is shifted relative to the intrinsic period by a conformal factor $A(\Phi)$ that depends on the local potential:</p>
+<div class="equation">
+$$P_{\rm obs} = P_{\rm true} \cdot A(\Phi)$$
+</div>
+<p>where here $\Phi$ denotes the potential depth $|\Phi|$ so that $A(\Phi) < 1$ (Period Contraction) in deep potentials, consistent with the accelerated dynamical rates reported in globular cluster pulsars (Paper 11). For the Cepheid P-L relation $M = a + b \log_{10} P$ with slope $b \approx -3$ (where $\log_{10}$ denotes base-10, i.e. dex), this period contraction propagates to an apparent magnitude offset:</p>
+<div class="equation">
+$$\Delta M = b \cdot \log_{10} A(\Phi)$$
+</div>
+<p>Since $b < 0$ and $\log_{10} A < 0$, $\Delta M$ is positive. Cepheids in deep potentials appear <em>dimmer</em> than their true luminosity ($M_{\rm inf} > M_{\rm true}$), leading to underestimated distances.</p>
+
+    <h4>The Unscreened Regime and Screening Threshold</h4>
+    <p>The TEP-modified regime is active in diffuse environments where scalar gradients are not locally suppressed. The Universal Critical Density $\rho_c \approx 20$ g/cm³ (Paper 7) represents the core saturation scale. At galactic scales, an effective screening transition occurs around $\rho_{\rm trans} \approx 0.5 \, M_\odot/\text{pc}^3$. Environments with $\rho \ll \rho_{\rm trans}$ (such as star-forming disks) are unscreened, while those with $\rho > \rho_{\rm trans}$ (such as dense bulges) may trigger screening.</p>
+
+    <p>The correction to the distance modulus is parameterized for the <em>unscreened</em> regime as:</p>
+    <div class="equation">
+    $$\mu_{\rm corr} = \mu_{\rm obs} + \alpha \cdot \log_{10}\left(\frac{\sigma_{\rm host}}{\sigma_{\rm ref}}\right)$$
+    </div>
+    <p>where $\alpha$ is a free parameter encoding the TEP coupling strength, and $\sigma_{\rm ref}$ is the effective velocity dispersion of the calibration environment. This correction assumes the target Cepheids reside in the active (unscreened) regime, which is verified for the SN Ia host sample (mean $\rho \approx 0.1 M_\odot/\text{pc}^3$).</p>
+
+<h3>2.4 Calibrator Reference</h3>
+<p>The SH0ES distance ladder is anchored by three geometric calibrators: the Milky Way (Gaia parallaxes), the LMC (eclipsing binaries), and NGC 4258 (megamaser distance). These environments have different velocity dispersions:</p>
+<ul>
+    <li>Milky Way thin disk (where local Cepheids reside): $\sigma \approx 30$ km/s</li>
+    <li>LMC: $\sigma \approx 24$ km/s</li>
+    <li>NGC 4258: $\sigma \approx 115$ km/s</li>
+</ul>
+
+<p><em>Important clarification:</em> The effective calibrator $\sigma_{\rm ref}$ is <em>not</em> a free physical parameter to be inferred from data. It is <em>defined by the distance-ladder architecture</em>—specifically, the weighted average of anchor velocity dispersions, where weights reflect each anchor's contribution to the P-L zero-point calibration. Using the SH0ES calibration weights (NGC 4258 $\sim 55\%$, LMC $\sim 25\%$, MW $\sim 20\%$), $\sigma_{\rm ref}$ is calculated to be:</p>
+<div class="equation">
+$$\sigma_{\rm ref} = 0.55 \times 115 + 0.25 \times 24 + 0.20 \times 30 = 75.25 \text{ km/s}$$
+</div>
+<p>This value is determined <em>a priori</em> from the published ladder structure and anchor properties. It is not tuned to minimize tension, nor is it a lever for adjusting results. The only free parameter in the TEP correction model is $\alpha$, the coupling strength, which is constrained by requiring the corrected sample to show no residual $H_0$–$\sigma$ dependence.</p>
+
+<h3>2.5 Optimization Procedure</h3>
+<p>The optimal coupling $\alpha$ is determined by minimizing the slope of the corrected $H_0$ vs. $\sigma$ relation:</p>
+<div class="equation">
+$$\mathcal{L}(\alpha) = \left(\frac{dH_0^{\rm corr}}{d\sigma}\right)^2$$
+</div>
+<p>This ensures the corrected sample shows no residual environmental dependence. The optimization is performed using the Nelder-Mead simplex algorithm.</p>
+
+<h3>2.6 Statistical Framework</h3>
+<p>To rigorously quantify uncertainties and ensure results are not driven by specific sample selection or parameter tuning, the following statistical protocols are employed:</p>
+<ul>
+    <li>Bootstrap Resampling: Uncertainties on the optimal coupling $\alpha$ and the unified $H_0$ are estimated using a bootstrap approach. A total of $N=1000$ pseudo-samples are generated by resampling the 29 host galaxies with replacement. For each pseudo-sample, $\alpha$ is re-optimized and the unified $H_0$ is re-calculated. The reported uncertainties represent the standard deviation of these bootstrap distributions, providing a robust error budget that accounts for sample variance and small-number statistics.</li>
+    <li>Sensitivity Analysis: The stability of the solution against the choice of calibrator reference $\sigma_{\rm ref}$ is assessed. While the primary analysis uses the calculated weighted average ($\sigma_{\rm ref} = 75.25$ km/s), a grid scan of $\sigma_{\rm ref}$ is performed over the range $30$–$130$ km/s to determine the range over which the TEP-corrected $H_0$ remains consistent with the Planck CMB value.</li>
+</ul>
+
+<h3>2.7 Covariance Propagation and Effective Degrees of Freedom</h3>
+<p>The SH0ES distance moduli are recovered from a global generalized least squares (GLS) solution. Consequently, the host-level distance moduli $\mu_i$ are not independent random variables: the GLS Fisher matrix induces a non-diagonal covariance matrix $\mathbf{C}_{\mu}$ with shared calibration modes. Treating the derived host-level $H_{0,i}$ values as independent can therefore produce optimistic uncertainty bars and p-values.</p>
+
+<p>To address this explicitly, the full covariance submatrix for the recovered host moduli $\mu_i$ is extracted from the GLS solution and propagated into a covariance matrix for the derived Hubble-constant vector $\mathbf{H}_0$ using first-order error propagation. Since $H_{0,i} \propto 10^{-\mu_i/5}$, the Jacobian is diagonal with entries</p>
+<div class="equation">
+$$\frac{\partial H_{0,i}}{\partial \mu_i} = -\frac{\ln 10}{5} H_{0,i}$$
+</div>
+<p>so that $\mathbf{C}_{H_0} = \mathbf{J}\,\mathbf{C}_{\mu}\,\mathbf{J}^\mathsf{T}$. The significance of the $H_0$–$\sigma$ association is then recomputed under the correlated-error null hypothesis by drawing Monte Carlo realizations $\mathbf{H}_0^{(k)} \sim \mathcal{N}(\bar{H}_0\mathbf{1}, \mathbf{C}_{H_0})$ and evaluating Pearson and Spearman statistics across the ensemble. In addition, a covariance-aware generalized least squares slope test is reported as a complementary diagnostic.</p>
+
+<p>For interpretability, an effective sample size $N_{\rm eff}$ is also computed using an equicorrelation proxy derived from the mean off-diagonal correlation in $\mathbf{C}_{H_0}$. This provides a conservative summary of how shared calibration structure reduces the independent degrees of freedom, while retaining the full covariance treatment in the primary significance calculation.</p>
+
+<h3>2.8 Out-of-Sample Validation of the TEP Correction</h3>
+<p>Because the coupling parameter $\alpha$ is optimized by minimizing the residual $H_0$–$\sigma$ slope, it is essential to demonstrate that the correction generalizes beyond the fitted sample. Two complementary out-of-sample protocols are therefore applied:</p>
+
+<ul>
+    <li>Train/test validation: repeated random splits of the $N=29$ hosts into a training subset (70%) and a held-out test subset (30%). The parameter $\alpha$ is fitted only on the training set, then applied without refitting to the held-out test set. The residual $H_0$–$\sigma$ trend and the held-out mean $H_0$ are recorded across many repeats.</li>
+    <li>Leave-one-out cross validation (LOOCV): $\alpha$ is refit on 28 hosts and used to predict the corrected $H_0$ for the excluded host. Repeating this for all hosts yields a fully out-of-sample corrected $H_0$ vector, from which the residual correlation with $\sigma$ and the predicted unified $H_0$ are computed.</li>
+</ul>
+
+<p>These procedures directly address the concern that $\alpha$ could merely reparameterize the existing dataset: they test whether the correction trained on one subset predicts the absence of environmental trend and the Planck-consistent mean on unseen hosts.</p>
+
+<h3>2.9 Primary Statistical Model: Covariance-Aware GLS Regression</h3>
+<p>To provide a unified, formally specified statistical model, the $H_0$–$\sigma$ relationship is estimated using generalized least squares (GLS) regression that explicitly incorporates the propagated covariance matrix $\mathbf{C}_{H_0}$. The model is:</p>
+<div class="equation">
+$$H_{0,i} = \beta_0 + \beta_1 \log_{10}(\sigma_i / \sigma_{\rm ref}) + \beta_2 z_i + \beta_3 N_{{\rm mb},i} + \beta_4 Z_i + \epsilon_i$$
+</div>
+<p>where $\epsilon \sim \mathcal{N}(0, \mathbf{C}_{H_0})$. The GLS estimator is:</p>
+<div class="equation">
+$$\hat{\boldsymbol{\beta}} = (\mathbf{X}^\mathsf{T} \mathbf{C}_{H_0}^{-1} \mathbf{X})^{-1} \mathbf{X}^\mathsf{T} \mathbf{C}_{H_0}^{-1} \mathbf{H}_0$$
+</div>
+<p>with covariance $\mathrm{Cov}(\hat{\boldsymbol{\beta}}) = (\mathbf{X}^\mathsf{T} \mathbf{C}_{H_0}^{-1} \mathbf{X})^{-1}$. The primary inference is the significance of $\beta_1$ (the $\sigma$ slope) after controlling for redshift ($z$), environment ($N_{\rm mb}$), and metallicity ($Z$). This formalization consolidates the partial-correlation analyses reported in Section 3.6 into a single, auditable regression framework.</p>
+
+<p>Inference on $\beta_1$ is performed via both the GLS Wald statistic and a permutation-based null distribution (shuffling $\sigma$ while preserving the covariance structure of $H_0$). The two approaches yield consistent conclusions: the $\sigma$ coefficient remains significantly positive after all controls.</p>

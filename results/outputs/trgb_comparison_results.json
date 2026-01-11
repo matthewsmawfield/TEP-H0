@@ -1,0 +1,25 @@
+{
+  "n": 18,
+  "pearson_r": 0.26886794839233563,
+  "pearson_p": 0.2806588297385091,
+  "spearman_rho": 0.3746130030959752,
+  "spearman_p": 0.12560824850361174,
+  "slope": 28.400005932954755,
+  "slope_err": 21.23787331381721,
+  "h0_low_sigma": 67.49549224183528,
+  "h0_high_sigma": 70.99825406492505,
+  "delta_h0": 3.50276182308977,
+  "median_sigma": 78.22585727818156,
+  "comparison": {
+    "cepheid_n": 29,
+    "cepheid_spearman": 0.4339901477832511,
+    "cepheid_p": 0.018662224475543478,
+    "cepheid_delta_h0": 4.628158226115971,
+    "trgb_n": 18,
+    "trgb_spearman": 0.3746130030959752,
+    "trgb_p": 0.12560824850361174,
+    "trgb_delta_h0": 3.50276182308977
+  },
+  "interpretation": "supports_tep_two_effects",
+  "data_source": "Freedman et al. (2024) arXiv:2408.06153"
+}

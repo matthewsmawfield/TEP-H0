@@ -1,0 +1,286 @@
+{
+  "generated_at": "2026-01-11T10:34:25.361439+00:00",
+  "hosts": {
+    "NGC 105": {
+      "n_total_refs": 89,
+      "n_keyword_matches": 14,
+      "n_actionable": 2,
+      "top_actionable": [
+        {
+          "refcode": "2012A&A...545A..58S",
+          "authors": "Stanishev, V.; Rodrigues, M.; Mourao, A.; Flores, H.",
+          "title": "Type Ia supernova host galaxies as seen with IFU spectroscopy",
+          "score": 4
+        },
+        {
+          "refcode": "2014A&A...572A..38G",
+          "authors": "Galbany, L.; Stanishev, V.; Mourao, A. M.; Rodrigues, M.; Flores, H.; Garcia-Benito, R.; Mast, D.; Mendoza, M. A.; Sanchez, et al.",
+          "title": "Nearby supernova host galaxies from the CALIFA Survey. I. Sample, data analysis, and correlation to star-forming regions",
+          "score": 4
+        }
+      ]
+    },
+    "NGC 2442": {
+      "n_total_refs": 226,
+      "n_keyword_matches": 41,
+      "n_actionable": 3,
+      "top_actionable": [
+        {
+          "refcode": "1987A&AS...70..281B",
+          "authors": "BICA E., ALLOIN D.",
+          "title": "Analysis of absorption-line spectra in a sample of 164 galactic nuclei",
+          "score": 10
+        },
+        {
+          "refcode": "1986ApJ...302..564S",
+          "authors": "SIMIEN F., DE VAUCOULEURS G.",
+          "title": "Systematics of bulge-to-disk ratios",
+          "score": 3
+        },
+        {
+          "refcode": "2009ApJ...696..411W",
+          "authors": "Weinzirl, Tim; Jogee, Shardha; Khochfar, Sadegh; Burkert, Andreas; Kormendy, John",
+          "title": "Bulge n and B/T in High-Mass Galaxies: Constraints on the Origin of Bulges in Hierarchical Models",
+          "score": 3
+        }
+      ]
+    },
+    "NGC 2525": {
+      "n_total_refs": 146,
+      "n_keyword_matches": 38,
+      "n_actionable": 1,
+      "top_actionable": [
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles",
+          "score": 3
+        }
+      ]
+    },
+    "NGC 2608": {
+      "n_total_refs": 232,
+      "n_keyword_matches": 74,
+      "n_actionable": 3,
+      "top_actionable": [
+        {
+          "refcode": "1999A&A...348...77B",
+          "authors": "BOTTEMA, R.",
+          "title": "The kinematics of the bulge and the disc of NGC 7331",
+          "score": 6
+        },
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles",
+          "score": 3
+        },
+        {
+          "refcode": "2003JKAS...36..261A",
+          "authors": "Ann, Hong Bae",
+          "title": "CCD Surface Photometry of Spiral Galaxies: Bulge Morphology",
+          "score": 3
+        }
+      ]
+    },
+    "NGC 3447": {
+      "n_total_refs": 83,
+      "n_keyword_matches": 20,
+      "n_actionable": 0,
+      "top_actionable": []
+    },
+    "NGC 4038": {
+      "n_total_refs": 692,
+      "n_keyword_matches": 74,
+      "n_actionable": 7,
+      "top_actionable": [
+        {
+          "refcode": "2010MNRAS.402.1750G",
+          "authors": "Gieles, M.; Sana, H.; Portegies Zwart, S. F.",
+          "title": "On the velocity dispersion of young star clusters: super-virial or binaries?",
+          "score": 8
+        },
+        {
+          "refcode": "2013AJ....146...30K",
+          "authors": "Kuncarayakti, Hanindyo; Doi, Mamoru; Aldering, Greg; Arimoto, Nobuo; Maeda, Keiichi; Morokuma, Tomoki; Pereira, Rui; Usuda, et al.",
+          "title": "Integral Field Spectroscopy of Supernova Explosion Sites: Constraining the Mass and Metallicity of the Progenitors. I. Type Ib and Ic Supernovae",
+          "score": 4
+        },
+        {
+          "refcode": "2018A&A...613A..35K",
+          "authors": "Kuncarayakti, H.; Anderson, J. P.; Galbany, L.; Maeda, K.; Hamuy, M.; Aldering, G.; Arimoto, N.; Doi, M.; Morokuma, T.; Usuda, et al.",
+          "title": "Constraints on core-collapse supernova progenitors from explosion site integral field spectroscopy",
+          "score": 4
+        },
+        {
+          "refcode": "2006MNRAS.372.1856F",
+          "authors": "Firth, P.; Evstigneeva, E. A.; Jones, J. B.; Drinkwater, M. J.; Phillipps, S.; Gregg, M. D.",
+          "title": "Kinematics, substructure and luminosity-weighted dynamics of six nearby galaxy groups",
+          "score": 3
+        },
+        {
+          "refcode": "2012ApJ...745...65U",
+          "authors": "Ueda, Junko; Iono, Daisuke; Petitpas, Glen; Yun, Min S.; Ho, Paul T. P.; Kawabe, Ryohei; Mao, Rui-Qing; Martin, Sergio; Matsushita, et al.",
+          "title": "Unveiling the Physical Properties and Kinematics of Molecular Gas in the Antennae Galaxies (NGC 4038/9) through High-resolution CO (J = 3-2)",
+          "score": 3
+        },
+        {
+          "refcode": "2015MNRAS.451.1307Z",
+          "authors": "Zaragoza-Cardiel, Javier; Beckman, John E.; Font, Joan; Garcia-Lorenzo, Begona; Camps-Farina, Artemi; Fathi, Kambiz; et al.",
+          "title": "Comparative internal kinematics of the H II regions in interacting and isolated galaxies: implications for massive star formation modes",
+          "score": 3
+        },
+        {
+          "refcode": "2006A&A...445..471B",
+          "authors": "Bastian, N.; Emsellem, E.; Kissler-Patig, M.; Maraston, C.",
+          "title": "Young star cluster complexes in NGC 4038/39. Integral field spectroscopy using VIMOS-VLT",
+          "score": 2
+        }
+      ]
+    },
+    "NGC 4680": {
+      "n_total_refs": 139,
+      "n_keyword_matches": 29,
+      "n_actionable": 0,
+      "top_actionable": []
+    },
+    "NGC 5468": {
+      "n_total_refs": 213,
+      "n_keyword_matches": 50,
+      "n_actionable": 3,
+      "top_actionable": [
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles",
+          "score": 3
+        },
+        {
+          "refcode": "2003JKAS...36..261A",
+          "authors": "Ann, Hong Bae",
+          "title": "CCD Surface Photometry of Spiral Galaxies: Bulge Morphology",
+          "score": 3
+        },
+        {
+          "refcode": "2004ApJ...612..652D",
+          "authors": "Daly, Ruth A.; Djorgovski, S. G.",
+          "title": "Direct Determination of the Kinematics of the Universe and Properties of the Dark Energy as Functions of Redshift",
+          "score": 3
+        }
+      ]
+    },
+    "NGC 5861": {
+      "n_total_refs": 193,
+      "n_keyword_matches": 47,
+      "n_actionable": 1,
+      "top_actionable": [
+        {
+          "refcode": "1998AJ....116.1626B",
+          "authors": "BAGGETT, W., BAGGETT, S., ANDERSON, K.",
+          "title": "Bulge-Disk Decomposition of 659 Spiral and Lenticular Galaxy Brightness Profiles",
+          "score": 3
+        }
+      ]
+    },
+    "NGC 5917": {
+      "n_total_refs": 68,
+      "n_keyword_matches": 24,
+      "n_actionable": 1,
+      "top_actionable": [
+        {
+          "refcode": "2018A&A...613A..35K",
+          "authors": "Kuncarayakti, H.; Anderson, J. P.; Galbany, L.; Maeda, K.; Hamuy, M.; Aldering, G.; Arimoto, N.; Doi, M.; Morokuma, T.; Usuda, et al.",
+          "title": "Constraints on core-collapse supernova progenitors from explosion site integral field spectroscopy",
+          "score": 4
+        }
+      ]
+    },
+    "NGC 7250": {
+      "n_total_refs": 146,
+      "n_keyword_matches": 27,
+      "n_actionable": 0,
+      "top_actionable": []
+    },
+    "NGC 7329": {
+      "n_total_refs": 131,
+      "n_keyword_matches": 36,
+      "n_actionable": 2,
+      "top_actionable": [
+        {
+          "refcode": "1987A&AS...70..281B",
+          "authors": "BICA E., ALLOIN D.",
+          "title": "Analysis of absorption-line spectra in a sample of 164 galactic nuclei",
+          "score": 10
+        },
+        {
+          "refcode": "2017ApJ...845..114G",
+          "authors": "Gao, Hua; Ho, Luis C.",
+          "title": "An Optimal Strategy for Accurate Bulge-to-disk Decomposition of Disk Galaxies",
+          "score": 3
+        }
+      ]
+    }
+  },
+  "ranked_by_actionable": [
+    {
+      "galaxy": "NGC 4038",
+      "n_actionable": 7,
+      "n_total_refs": 692
+    },
+    {
+      "galaxy": "NGC 2608",
+      "n_actionable": 3,
+      "n_total_refs": 232
+    },
+    {
+      "galaxy": "NGC 2442",
+      "n_actionable": 3,
+      "n_total_refs": 226
+    },
+    {
+      "galaxy": "NGC 5468",
+      "n_actionable": 3,
+      "n_total_refs": 213
+    },
+    {
+      "galaxy": "NGC 7329",
+      "n_actionable": 2,
+      "n_total_refs": 131
+    },
+    {
+      "galaxy": "NGC 105",
+      "n_actionable": 2,
+      "n_total_refs": 89
+    },
+    {
+      "galaxy": "NGC 5861",
+      "n_actionable": 1,
+      "n_total_refs": 193
+    },
+    {
+      "galaxy": "NGC 2525",
+      "n_actionable": 1,
+      "n_total_refs": 146
+    },
+    {
+      "galaxy": "NGC 5917",
+      "n_actionable": 1,
+      "n_total_refs": 68
+    },
+    {
+      "galaxy": "NGC 7250",
+      "n_actionable": 0,
+      "n_total_refs": 146
+    },
+    {
+      "galaxy": "NGC 4680",
+      "n_actionable": 0,
+      "n_total_refs": 139
+    },
+    {
+      "galaxy": "NGC 3447",
+      "n_actionable": 0,
+      "n_total_refs": 83
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+[23:15:52] [INFO] 
+[23:15:52] [INFO] ================================================================================
+[23:15:52] [INFO]    Starting Step 1b: Aperture Correction
+[23:15:52] [INFO] ================================================================================
+[23:15:52] [INFO] 
+[23:15:52] [INFO] Initializing Aperture Correction Protocol
+[23:15:52] [INFO] Loaded 41 hosts from pipeline processing.
+[23:15:52] [PROCESS] Merging enriched metadata (R_eff, R25)...
+[23:15:52] [INFO] Correction Parameters (Jorgensen et al. 1995):
+[23:15:52] [INFO]   Beta (Slope):       0.04
+[23:15:52] [INFO]   Aperture Radius:    1.5 arcsec
+[23:15:52] [INFO]   Norm Radius:        R_eff / 8
+[23:15:52] [PROCESS] Calculating corrections...
+[23:15:52] [INFO] Aperture Correction Samples
+[23:15:52] [INFO] +----------+-----------+-----------+------------+--------+
+[23:15:52] [INFO] | Host     | R_eff (") | Raw Sigma | Corr Sigma | Delta  |
+[23:15:52] [INFO] +----------+-----------+-----------+------------+--------+
+[23:15:52] [INFO] | LMC      | 9684.8    | 27.4      | 21.0       | -6.44  |
+[23:15:52] [INFO] | M 101    | 432.6     | 23.6      | 20.4       | -3.15  |
+[23:15:52] [INFO] | NGC 1337 | 86.3      | 93.7      | 86.6       | -7.11  |
+[23:15:52] [INFO] | M 31     | 2858.2    | 169.8     | 136.4      | -33.39 |
+[23:15:52] [INFO] | NGC 0691 | 52.0      | 107.5     | 101.4      | -6.12  |
+[23:15:52] [INFO] +----------+-----------+-----------+------------+--------+
+[23:15:52] [SUCCESS] Applied corrections to 41/41 hosts.
+[23:15:52] [INFO] Mean Velocity Dispersion Change: -6.26 km/s
+[23:15:52] [SUCCESS] Updated /Users/matthewsmawfield/www/TEP-H0/data/processed/hosts_processed.csv with homogenized velocity dispersions.
+[23:15:52] [SUCCESS] Step 1b Complete.

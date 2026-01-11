@@ -1,0 +1,110 @@
+{
+  "stellar_absorption": {
+    "n_stellar": 17,
+    "n_hi": 12,
+    "n_total": 29,
+    "full_sample": {
+      "pearson_r": 0.4279417434741577,
+      "pearson_p": 0.020567348172728893,
+      "spearman_rho": 0.4339901477832511,
+      "spearman_p": 0.018662224475543478
+    },
+    "stellar_only": {
+      "pearson_r": 0.41958039938763225,
+      "pearson_p": 0.09361761535739041,
+      "spearman_rho": 0.3308823529411765,
+      "spearman_p": 0.19454252826661278,
+      "median_sigma": 91.36814985353718,
+      "h0_low_sigma": 66.20266621632842,
+      "h0_high_sigma": 73.73025465054553,
+      "delta_h0": 7.527588434217108
+    },
+    "stellar_hosts": [
+      "NGC 0691",
+      "NGC 1015",
+      "NGC 1309",
+      "NGC 1365",
+      "NGC 1559",
+      "NGC 3021",
+      "NGC 3147",
+      "NGC 3254",
+      "NGC 3370",
+      "NGC 3583",
+      "NGC 4639",
+      "NGC 5584",
+      "NGC 5728",
+      "NGC 7541",
+      "NGC 7678",
+      "NGC 976",
+      "UGC 9391"
+    ],
+    "hi_hosts": [
+      "NGC 105",
+      "NGC 2442",
+      "NGC 2525",
+      "NGC 2608",
+      "NGC 3447",
+      "NGC 4038",
+      "NGC 4680",
+      "NGC 5468",
+      "NGC 5861",
+      "NGC 5917",
+      "NGC 7250",
+      "NGC 7329"
+    ]
+  },
+  "gold_standard": {
+    "n_gold": 8,
+    "gold_sources": [
+      "Kormendy&Ho2013",
+      "SDSS DR7",
+      "Ho+2009"
+    ],
+    "gold_hosts": [
+      "NGC 3147",
+      "NGC 3254",
+      "NGC 3370",
+      "NGC 3583",
+      "NGC 4639",
+      "NGC 5584",
+      "NGC 7678",
+      "UGC 9391"
+    ],
+    "pearson_r": 0.25611718802016126,
+    "pearson_p": 0.5403673443283467,
+    "spearman_rho": 0.04761904761904763,
+    "spearman_p": 0.9108491685195836
+  },
+  "density_control": {
+    "available": true,
+    "n_valid": 29,
+    "baseline_r": 0.4279417434741577,
+    "baseline_p": 0.020567348172728893,
+    "partial_r_h0_sigma_given_rho": 0.4584567185469272,
+    "partial_p": 0.012375976062289273,
+    "r_h0_rho": 0.10426814897368744,
+    "p_h0_rho": 0.5903884777568528,
+    "r_sigma_rho": -0.1894770544504407,
+    "p_sigma_rho": 0.3249003785430312
+  },
+  "subsample_tep": {
+    "full_sample": {
+      "n": 29,
+      "alpha": 0.5799218750000006,
+      "unified_h0": 68.66071713459765,
+      "h0_error": 1.2798587516963436
+    },
+    "stellar_only": {
+      "n": 17,
+      "alpha": 0.5567187500000006,
+      "unified_h0": 67.77468333356326,
+      "h0_error": 1.8090149880958704
+    },
+    "gold_standard": {
+      "n": 0,
+      "alpha": null,
+      "unified_h0": null,
+      "h0_error": null
+    }
+  }
+}

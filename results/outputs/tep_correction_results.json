@@ -1,0 +1,14 @@
+{
+    "optimal_alpha": 0.5798828125000002,
+    "sigma_ref": 75.25,
+    "unified_h0": 68.6608052089788,
+    "h0_sem": 1.3025120696301784,
+    "bootstrap_h0_mean": 68.61690603944618,
+    "bootstrap_h0_std": 1.5068474071393165,
+    "bootstrap_alpha_mean": 0.5721187499999997,
+    "bootstrap_alpha_std": 0.16011992563681038,
+    "planck_h0": 67.4,
+    "tension_sigma": 0.7941398084301493,
+    "is_consistent": true,
+    "n_hosts": 29
+}

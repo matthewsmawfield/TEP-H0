@@ -1,0 +1,15 @@
+galaxy,claimed_w50,hipass_id_match,hipass_w50,hipass_w20,hipass_vsys,hipass_fhi,delta_w50,match_within_20
+NGC 1448,270.0,True,393.0,415.0,1168.0,141.0,123.0,False
+NGC 1559,206.0,True,244.0,290.0,1304.0,48.20000076293945,38.0,False
+NGC 2525,234.0,False,,,,,,False
+NGC 3447,157.0,False,,,,,,False
+NGC 3972,223.0,False,,,,,,False
+NGC 4424,186.0,False,,,,,,False
+NGC 7250,149.0,False,,,,,,False
+NGC 0976,314.0,False,,,,,,False
+NGC 976,314.0,False,,,,,,False
+NGC 105,243.0,False,,,,,,False
+NGC 1337,268.0,True,250.0,264.0,1239.0,84.30000305175781,18.0,True
+NGC 4038,306.0,False,,,,,,False
+UGC 9391,194.0,False,,,,,,False
+M 101,80.0,False,,,,,,False

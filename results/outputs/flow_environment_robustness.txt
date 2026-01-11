@@ -1,0 +1,18 @@
+Flow / Environment Robustness
+==============================
+
+Baseline Pearson r(H0, Sigma): 0.427942 (perm p=0.019200) N=29
+Partial r(H0, Sigma | zHD): 0.380225 (p=0.045944) N=29
+Partial r(H0, Sigma | zHD, Tully Nmb): 0.316361 (p=0.107906) N=29
+Partial r(H0, Sigma | zHD, Tully logpK): 0.490749 (p=0.014896) N=26
+
+Alternative velocity definitions (H0 = cz/d):
+  z_hd: Pearson r=0.427942 (perm p=0.019200) N=29
+  z_cmb: Pearson r=0.411143 (perm p=0.026800) N=29
+  z_hel: Pearson r=0.380530 (perm p=0.040600) N=29
+
+Monte Carlo with residual peculiar-velocity uncertainty:
+  N_draw=5000 N_hosts=29
+  r_mean=0.286481 r_std=0.119784
+  r_95CI=[0.043622, 0.509468]
+  P(r<=0)=0.009600

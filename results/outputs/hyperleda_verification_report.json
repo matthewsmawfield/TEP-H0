@@ -1,0 +1,91 @@
+{
+  "timestamp": "2026-01-11T11:31:55.477108",
+  "source": "HyperLEDA via OHP mirror (ledacat.cgi) with VizieR PGC resolution (VII/237/pgc)",
+  "reference": "Makarov et al. 2014, A&A, 570, A13",
+  "n_total": 43,
+  "n_verified": 17,
+  "n_discrepant": 13,
+  "n_not_found": 2,
+  "n_no_data": 11,
+  "verification_rate": 0.3953488372093023,
+  "discrepancies": [
+    {
+      "galaxy": "NGC 1015",
+      "lit_sigma": 78,
+      "leda_vdis": 106.5,
+      "discrepancy_pct": 26.76056338028169
+    },
+    {
+      "galaxy": "NGC 1448",
+      "lit_sigma": 95,
+      "leda_vdis": NaN,
+      "discrepancy_pct": 27.11209597792446
+    },
+    {
+      "galaxy": "NGC 2525",
+      "lit_sigma": 82,
+      "leda_vdis": NaN,
+      "discrepancy_pct": 25.5295290800328
+    },
+    {
+      "galaxy": "NGC 3021",
+      "lit_sigma": 88,
+      "leda_vdis": 55.7,
+      "discrepancy_pct": 57.989228007181325
+    },
+    {
+      "galaxy": "NGC 3254",
+      "lit_sigma": 95,
+      "leda_vdis": 129.9,
+      "discrepancy_pct": 26.86682063125481
+    },
+    {
+      "galaxy": "NGC 3447",
+      "lit_sigma": 55,
+      "leda_vdis": NaN,
+      "discrepancy_pct": 47.67082280805429
+    },
+    {
+      "galaxy": "NGC 4424",
+      "lit_sigma": 65,
+      "leda_vdis": 56.6,
+      "discrepancy_pct": 217.57430209187677
+    },
+    {
+      "galaxy": "NGC 7541",
+      "lit_sigma": 125,
+      "leda_vdis": 64.4,
+      "discrepancy_pct": 94.09937888198756
+    },
+    {
+      "galaxy": "NGC 7678",
+      "lit_sigma": 138,
+      "leda_vdis": 102.3,
+      "discrepancy_pct": 34.89736070381232
+    },
+    {
+      "galaxy": "NGC 105",
+      "lit_sigma": 85,
+      "leda_vdis": NaN,
+      "discrepancy_pct": 49.896265560165965
+    },
+    {
+      "galaxy": "NGC 1337",
+      "lit_sigma": 94,
+      "leda_vdis": NaN,
+      "discrepancy_pct": 23.611795877541038
+    },
+    {
+      "galaxy": "UGC 9391",
+      "lit_sigma": 68,
+      "leda_vdis": NaN,
+      "discrepancy_pct": 92.50451497767845
+    },
+    {
+      "galaxy": "M 101",
+      "lit_sigma": 28,
+      "leda_vdis": 43.7,
+      "discrepancy_pct": 41.643410456499794
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "catalog": "OGLE-IV classical Cepheids (Soszynski+ 2015)",
+  "vizier_source": "J/AcA/65/297",
+  "selection": {
+    "type": "FU (if available)",
+    "logP_min": 0.3979400086720376,
+    "logP_max": 2.0,
+    "inner_cut_kpc": 0.916163164827299,
+    "outer_cut_kpc": 2.9276828809313855,
+    "inner_quantile": 0.2,
+    "outer_quantile": 0.8
+  },
+  "baseline": {
+    "fixed_slope": -3.3,
+    "delta_mag": 0.028384033160063993,
+    "delta_err": 0.008598097721808503,
+    "n_inner": 419,
+    "n_outer": 419
+  },
+  "matched_bootstrap_logP": {
+    "n_inner": 419,
+    "n_outer": 419,
+    "n_boot": 1000,
+    "n_matched_mean": 340.0,
+    "n_matched_min": 340,
+    "delta_mean": 0.028498385098035612,
+    "delta_std": 0.009180946187009983,
+    "delta_p16": 0.019091352537437628,
+    "delta_p84": 0.03775736248401948
+  },
+  "matched_bootstrap_logP_color": {
+    "n_inner": 419,
+    "n_outer": 419,
+    "n_boot": 1000,
+    "n_matched_mean": 300.0,
+    "n_matched_min": 300,
+    "delta_mean": 0.03605929184148694,
+    "delta_std": 0.007561736679832734,
+    "delta_p16": 0.02845081397806105,
+    "delta_p84": 0.043657878948404304
+  },
+  "multivariate_pair_match_type": {
+    "features": [
+      "logP",
+      "VI_color",
+      "Vmag",
+      "Imag"
+    ],
+    "meta": {
+      "type_mode": "per_type",
+      "types_used": [
+        "FU"
+      ],
+      "meta_by_type": {
+        "FU": {
+          "n_inner": 419,
+          "n_outer": 419,
+          "n_matched": 414,
+          "caliper": 3.0
+        }
+      },
+      "n_inner_total": 419,
+      "n_outer_total": 419,
+      "n_matched_total": 414,
+      "caliper": 3.0
+    },
+    "result": {
+      "n_pairs": 414,
+      "n_boot": 1000,
+      "delta_base": 0.030331869850060755,
+      "delta_mean": 0.03044874284883438,
+      "delta_std": 0.0053622542404849535,
+      "delta_p16": 0.025138953797220795,
+      "delta_p84": 0.03577443291343492
+    },
+    "ks_balance_p": {
+      "logP": 3.573852398225206e-07,
+      "VI_color": 9.162996774594233e-10,
+      "Vmag": 0.01856735512123337,
+      "Imag": 0.0005818226883949913
+    }
+  }
+}

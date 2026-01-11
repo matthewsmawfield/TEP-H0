@@ -1,0 +1,47 @@
+[23:15:52] [INFO] 
+[23:15:52] [INFO] ================================================================================
+[23:15:52] [INFO]    Starting Step 2: Stratification
+[23:15:52] [INFO] ================================================================================
+[23:15:52] [INFO] 
+[23:15:52] [INFO] Loading and Merging Datasets...
+[23:15:52] [INFO] Merged 39 galaxies (Distances + Properties).
+[23:15:52] [INFO] Calculating Individual H0 Values...
+[23:15:52] [WARNING] Excluded 7 low-z hosts (z < 0.0035) to minimize peculiar velocity errors.
+[23:15:52] [SUCCESS] Final Sample Size: 29 SN Ia Hosts
+[23:15:52] [INFO] Sample H0 Calculations
+[23:15:52] [INFO] +----------+--------+----------+---------+---------------+
+[23:15:52] [INFO] | Host     | z_HD   | mu (mag) | D (Mpc) | H0 (km/s/Mpc) |
+[23:15:52] [INFO] +----------+--------+----------+---------+---------------+
+[23:15:52] [INFO] | NGC 0691 | 0.0086 | 32.822   | 36.7    | 69.88         |
+[23:15:52] [INFO] | NGC 1015 | 0.0081 | 32.618   | 33.4    | 73.19         |
+[23:15:52] [INFO] | NGC 105  | 0.0168 | 34.493   | 79.2    | 63.68         |
+[23:15:52] [INFO] | NGC 1309 | 0.0072 | 32.509   | 31.8    | 67.88         |
+[23:15:52] [INFO] | NGC 1365 | 0.0048 | 31.325   | 18.4    | 78.65         |
+[23:15:52] [INFO] +----------+--------+----------+---------+---------------+
+[23:15:52] [INFO] Estimating Host Environmental Densities...
+[23:15:52] [INFO] Calculated densities for 29 hosts.
+[23:15:52] [INFO] Mean Host Density: 0.1132 M_sun/pc^3
+[23:15:52] [INFO] Density Range: [0.0001, 1.7591]
+[23:15:52] [WARNING] Found 1 hosts above the effective transition density (rho > 0.5):
+[23:15:52] [WARNING]   - NGC 2442: 1.759 M_sun/pc^3
+[23:15:52] [SUCCESS] CONCLUSION: Sample mean is below the effective galactic transition density (rho_trans).
+[23:15:52] [INFO] Annotating Large-Scale Environment (Tully 2015 groups)...
+[23:15:52] [INFO] Matched 26/29 hosts to Tully 2015 group catalog.
+[23:15:52] [INFO] Stratification Analysis (Low vs High Density)
+[23:15:52] [INFO] Stratified H0 Results
+[23:15:52] [INFO] +--------------+-------------+----+---------+---------+
+[23:15:52] [INFO] | Bin          | Sigma Range | N  | Mean H0 | Std Err |
+[23:15:52] [INFO] +--------------+-------------+----+---------+---------+
+[23:15:52] [INFO] | Low Density  | <= 89.5     | 15 | 67.82   | 0.90    |
+[23:15:52] [INFO] | High Density | > 89.5      | 14 | 72.45   | 1.04    |
+[23:15:52] [INFO] | Difference   | -           | -  | +4.63   | -       |
+[23:15:52] [INFO] +--------------+-------------+----+---------+---------+
+[23:15:52] [INFO] Median Velocity Dispersion: 89.54 km/s
+[23:15:52] [TEST] Correlation (Sigma vs H0): r = 0.428
+[23:15:52] [WARNING] Significant Environmental Bias Detected (+4.63 km/s/Mpc)
+[23:15:52] [SUCCESS] Saved stratified data to /Users/matthewsmawfield/www/TEP-H0/results/outputs/stratified_h0.csv
+[23:15:52] [SUCCESS] Saved analysis metrics to /Users/matthewsmawfield/www/TEP-H0/results/outputs/stratification_results.json
+[23:15:52] [PROCESS] Generating Diagnostic Plots...
+[23:15:52] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/h0_vs_sigma.png
+[23:15:52] [SUCCESS] Copied plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/h0_vs_sigma.png
+[23:15:52] [SUCCESS] Step 2 Complete.

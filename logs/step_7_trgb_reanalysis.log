@@ -1,0 +1,19 @@
+[06:49:09] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
+[06:49:09] [INFO] Matched 13 hosts for differential analysis
+[06:49:09] [INFO] 
+Differential Modulus (TRGB - Cepheid) vs Sigma:
+[06:49:09] [INFO] +-----------------+---------------+--------------+
+[06:49:09] [INFO] | Metric          | Value         | Significance |
+[06:49:09] [INFO] +-----------------+---------------+--------------+
+[06:49:09] [INFO] | Pearson r       | 0.552         | p=0.0504     |
+[06:49:09] [INFO] | Spearman ρ      | 0.396         | p=0.1809     |
+[06:49:09] [INFO] | Slope (mag/dex) | 0.245 ± 0.100 | p=0.0318     |
+[06:49:09] [INFO] +-----------------+---------------+--------------+
+[06:49:09] [INFO] 
+Interpretation Check:
+[06:49:09] [INFO]   POSITIVE correlation detected.
+[06:49:09] [INFO]   High-σ hosts have μ_TRGB > μ_Ceph.
+[06:49:09] [INFO]   Implies μ_Ceph is UNDERESTIMATED at high σ.
+[06:49:09] [SUCCESS]   → CONSISTENT WITH TEP PREDICTION.
+[06:49:10] [INFO] Plot saved to /Users/matthewsmawfield/www/TEP-H0/results/figures/trgb_cepheid_residual.png
+[06:49:10] [INFO] Results saved to /Users/matthewsmawfield/www/TEP-H0/results/outputs/trgb_differential_results.json

@@ -1,0 +1,58 @@
+[23:16:40] [INFO] ============================================================
+[23:16:40] [INFO] STEP 6: ENHANCED ROBUSTNESS ANALYSIS
+[23:16:40] [INFO] Addressing referee concerns on σ heterogeneity and environment
+[23:16:40] [INFO] ============================================================
+[23:16:40] [INFO] Loaded 29 hosts from stratified analysis
+[23:16:40] [INFO] Loaded 29 entries from σ provenance table
+[23:16:40] [INFO] 
+--- STELLAR ABSORPTION SUBSAMPLE ---
+[23:16:40] [INFO] Stellar absorption hosts: 17
+[23:16:40] [INFO] HI linewidth proxy hosts: 12
+[23:16:40] [INFO] 
+Subsample Comparison:
+[23:16:40] [INFO] +-------------------------+----+-----------+---------+------------+---------+
+[23:16:40] [INFO] | Subsample               | N  | Pearson r | p-value | Spearman ρ | p-value |
+[23:16:40] [INFO] +-------------------------+----+-----------+---------+------------+---------+
+[23:16:40] [INFO] | Full Sample             | 29 | 0.428     | 0.0206  | 0.434      | 0.0187  |
+[23:16:40] [INFO] | Stellar Absorption Only | 17 | 0.420     | 0.0936  | 0.331      | 0.1945  |
+[23:16:40] [INFO] +-------------------------+----+-----------+---------+------------+---------+
+[23:16:40] [INFO] 
+Stellar-only stratification: ΔH0 = 7.53 km/s/Mpc (high - low σ)
+[23:16:40] [INFO] 
+--- GOLD STANDARD σ SUBSAMPLE ---
+[23:16:40] [INFO] Gold standard hosts (K&H13 + SDSS + Ho09): 8
+[23:16:40] [INFO]   - Kormendy&Ho2013: 0 hosts
+[23:16:40] [INFO]   - SDSS DR7: 0 hosts
+[23:16:40] [INFO]   - Ho+2009: 0 hosts
+[23:16:40] [INFO] Gold standard subsample: r = 0.256, p = 0.5404
+[23:16:40] [INFO] 
+--- LOCAL DENSITY CONTROL ---
+[23:16:40] [INFO] Hosts with valid local density: 29/29
+[23:16:40] [INFO] 
+Density Control Results:
+[23:16:40] [INFO] +--------------------------+---------------------+
+[23:16:40] [INFO] | Metric                   | Value               |
+[23:16:40] [INFO] +--------------------------+---------------------+
+[23:16:40] [INFO] | Baseline r(H0, σ)        | 0.428 (p = 0.0206)  |
+[23:16:40] [INFO] | Partial r(H0, σ | log ρ) | 0.458 (p = 0.0124)  |
+[23:16:40] [INFO] | r(H0, log ρ)             | 0.104 (p = 0.5904)  |
+[23:16:40] [INFO] | r(σ, log ρ)              | -0.189 (p = 0.3249) |
+[23:16:40] [INFO] +--------------------------+---------------------+
+[23:16:40] [INFO] 
+Signal after density control: r = 0.458 (p = 0.0124)
+[23:16:40] [INFO] 
+--- TEP CORRECTION ON SUBSAMPLES ---
+[23:16:40] [INFO] 
+TEP Correction Comparison:
+[23:16:40] [INFO] +---------------+----+-------+-----------------------+
+[23:16:40] [INFO] | Subsample     | N  | α_opt | Unified H0 (km/s/Mpc) |
+[23:16:40] [INFO] +---------------+----+-------+-----------------------+
+[23:16:40] [INFO] | Full Sample   | 29 | 0.580 | 68.66 ± 1.28          |
+[23:16:40] [INFO] | Stellar Only  | 17 | 0.557 | 67.77 ± 1.81          |
+[23:16:40] [INFO] | Gold Standard | 0  | N/A   | N/A                   |
+[23:16:40] [INFO] +---------------+----+-------+-----------------------+
+[23:16:40] [INFO] 
+Summary written to: /Users/matthewsmawfield/www/TEP-H0/results/outputs/subsample_sensitivity.txt
+[23:16:40] [INFO] ============================================================
+[23:16:40] [INFO] ENHANCED ROBUSTNESS ANALYSIS COMPLETE
+[23:16:40] [INFO] ============================================================

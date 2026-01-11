@@ -1,0 +1,14 @@
+{
+  "n": 29,
+  "n_eff_equicorr": 7.464844039972716,
+  "avg_offdiag_corr": 0.10303131702948858,
+  "gls_slope_per_kms": 0.09521570241057381,
+  "gls_slope_se": 0.010318904533308923,
+  "gls_slope_t": 9.227307230454759,
+  "gls_slope_p": 7.742673169275349e-10,
+  "pearson_r": 0.4279417434741577,
+  "spearman_rho": 0.4339901477832511,
+  "pearson_p_cov": 0.03945,
+  "spearman_p_cov": 0.02575,
+  "n_sims": 20000
+}

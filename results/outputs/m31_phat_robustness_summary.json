@@ -1,0 +1,20 @@
+{
+  "catalog": "Kodric et al. 2018 (J/ApJ/864/59) HST J/H photometry",
+  "n_total": 391,
+  "n_inner": 78,
+  "n_outer": 69,
+  "inner_cut_kpc": 5.0,
+  "outer_cut_kpc": 15.0,
+  "baseline": {
+    "delta_mag": 0.6807770840989953,
+    "delta_err": 0.18673881492861075,
+    "significance_sigma": 3.645611033567139,
+    "interpretation": "INNER FAINTER"
+  },
+  "color_matched": {
+    "n_matched": 73,
+    "delta_mag": 0.6198515079023713,
+    "delta_err": 0.15401149186805027
+  },
+  "conclusion": "Inner FAINTER - Consistent with Screened TEP (Inversion)"
+}
