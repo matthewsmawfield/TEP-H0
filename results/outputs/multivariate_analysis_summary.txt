@@ -4,8 +4,8 @@ Model 1: H0 ~ Sigma
 Dep. Variable:             h0_derived   R-squared:                       0.156
 Model:                            OLS   Adj. R-squared:                  0.141
 Method:                 Least Squares   F-statistic:                     10.00
-Date:                Sun, 11 Jan 2026   Prob (F-statistic):            0.00256
-Time:                        23:16:40   Log-Likelihood:                -74.198
+Date:                Mon, 12 Jan 2026   Prob (F-statistic):            0.00256
+Time:                        10:39:59   Log-Likelihood:                -74.198
 No. Observations:                  56   AIC:                             152.4
 Df Residuals:                      54   BIC:                             156.4
 Df Model:                           1                                         
@@ -31,8 +31,8 @@ Model 2: H0 ~ Sigma + MeanLogP (Age Proxy)
 Dep. Variable:             h0_derived   R-squared:                       0.166
 Model:                            OLS   Adj. R-squared:                  0.134
 Method:                 Least Squares   F-statistic:                     5.261
-Date:                Sun, 11 Jan 2026   Prob (F-statistic):            0.00824
-Time:                        23:16:40   Log-Likelihood:                -73.886
+Date:                Mon, 12 Jan 2026   Prob (F-statistic):            0.00824
+Time:                        10:39:59   Log-Likelihood:                -73.886
 No. Observations:                  56   AIC:                             153.8
 Df Residuals:                      53   BIC:                             159.8
 Df Model:                           2                                         
@@ -59,8 +59,8 @@ Model 3: H0 ~ Sigma + Color + Stretch
 Dep. Variable:             h0_derived   R-squared:                       0.251
 Model:                            OLS   Adj. R-squared:                  0.208
 Method:                 Least Squares   F-statistic:                     5.818
-Date:                Sun, 11 Jan 2026   Prob (F-statistic):            0.00166
-Time:                        23:16:40   Log-Likelihood:                -70.852
+Date:                Mon, 12 Jan 2026   Prob (F-statistic):            0.00166
+Time:                        10:39:59   Log-Likelihood:                -70.852
 No. Observations:                  56   AIC:                             149.7
 Df Residuals:                      52   BIC:                             157.8
 Df Model:                           3                                         
@@ -88,8 +88,8 @@ Model 4: H0 ~ Sigma + Age + Dust + Mass
 Dep. Variable:             h0_derived   R-squared:                       0.309
 Model:                            OLS   Adj. R-squared:                  0.255
 Method:                 Least Squares   F-statistic:                     5.714
-Date:                Sun, 11 Jan 2026   Prob (F-statistic):           0.000705
-Time:                        23:16:40   Log-Likelihood:                -68.587
+Date:                Mon, 12 Jan 2026   Prob (F-statistic):           0.000705
+Time:                        10:39:59   Log-Likelihood:                -68.587
 No. Observations:                  56   AIC:                             147.2
 Df Residuals:                      51   BIC:                             157.3
 Df Model:                           4                                         

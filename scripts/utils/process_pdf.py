@@ -164,15 +164,17 @@ def main():
             'from a systematic, environment-dependent bias in Cepheid-based distances, as predicted by '
             'the Temporal Equivalence Principle (TEP). '
             'Analysis of the SH0ES Cepheid sample (N=29), stratified by host galaxy velocity dispersion, '
-            'reveals a strong correlation (Spearman ρ = 0.638, p = 0.0002) between host potential depth '
-            'and derived H0. Low-density hosts (σ ≤ 88 km/s) yield H0 = 65.44 ± 1.88 km/s/Mpc, while '
-            'high-density hosts (σ > 88 km/s) yield H0 = 75.01 ± 1.23 km/s/Mpc—a systematic offset of '
-            'ΔH0 = 9.57 km/s/Mpc that exceeds the Hubble Tension magnitude. '
-            'Application of the TEP conformal correction with optimal coupling α = 0.87 ± 0.24 and '
+            'reveals a statistically significant correlation (Spearman ρ = 0.434, p = 0.019) between host '
+            'potential depth and derived H0. A median split yields H0 = 67.82 ± 1.62 km/s/Mpc (low-σ) '
+            'versus 72.45 ± 2.32 km/s/Mpc (high-σ), implying ΔH0 = 4.63 km/s/Mpc. '
+            'Application of the TEP conformal correction with optimal coupling α = 0.58 ± 0.16 and '
             'effective calibrator reference σ_ref = 75.25 km/s yields a unified local Hubble constant '
-            'of H0 = 67.27 ± 1.54 km/s/Mpc, reducing the tension with Planck to 0.08σ. '
+            'of H0 = 68.66 ± 1.51 km/s/Mpc, corresponding to a Planck tension of 0.79σ. '
+            'The anchor-host dichotomy (α_anchor ≈ 0 vs α_host ≈ 0.58) is resolved by group halo screening: '
+            'anchors reside in galaxy groups where ambient potential triggers chameleon-type screening, '
+            'while SN Ia hosts are biased toward isolated field galaxies. '
             'Keywords: Hubble tension, Cepheid variables, distance ladder, velocity dispersion, '
-            'temporal equivalence principle, gravitational time dilation.'
+            'temporal equivalence principle, gravitational time dilation, chameleon screening.'
         ),
         
         # Keywords for indexing
@@ -180,18 +182,18 @@ def main():
             'Hubble Tension; Hubble Constant; H0; Cepheid Variables; Period-Luminosity Relation; '
             'Distance Ladder; Type Ia Supernovae; SH0ES; Planck; CMB; Velocity Dispersion; '
             'Gravitational Potential; Temporal Equivalence Principle; TEP; Time Dilation; '
-            'Environmental Bias; Screening; Modified Gravity; Cosmology'
+            'Environmental Bias; Chameleon Screening; Group Halo Screening; Modified Gravity; Cosmology'
         ),
         
         # Production metadata
-        'Producer': 'TEP-H0 Research Project (Paper 12) - Version 0.2 (Kingston upon Hull)',
+        'Producer': 'TEP-H0 Research Project (Paper 12) - Version 0.3 (Kingston upon Hull)',
         
         # Rights and identifiers
         'Copyright': 'Creative Commons Attribution 4.0 International License (CC BY 4.0)',
         
         # Dates
-        'CreationDate': '2026:01:11 00:00:00',
-        'ModifyDate': '2026:01:11 00:00:00',
+        'CreationDate': '2026:01:12 00:00:00',
+        'ModifyDate': '2026:01:12 00:00:00',
         
         # XMP Dublin Core metadata (exiftool uses these prefixes)
         'XMP-dc:Creator': 'Matthew Lukin Smawfield',
@@ -201,7 +203,7 @@ def main():
         'XMP-dc:Identifier': f'doi:{args.doi}',
         'XMP-dc:Source': 'https://matthewsmawfield.github.io/TEP-H0/',
         'XMP-dc:Publisher': 'Zenodo',
-        'XMP-dc:Date': '2026-01-11',
+        'XMP-dc:Date': '2026-01-12',
         'XMP-dc:Type': 'Preprint',
         'XMP-dc:Format': 'application/pdf',
         'XMP-dc:Language': 'en',
@@ -209,7 +211,7 @@ def main():
         # PRISM (Publishing Requirements for Industry Standard Metadata)
         'XMP-prism:DOI': args.doi,
         'XMP-prism:URL': 'https://matthewsmawfield.github.io/TEP-H0/',
-        'XMP-prism:VersionIdentifier': '0.2',
+        'XMP-prism:VersionIdentifier': '0.3',
         'XMP-prism:PublicationName': 'TEP Research Series',
         
         # PDF/A metadata

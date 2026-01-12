@@ -1,102 +1,102 @@
-[23:15:55] [INFO] 
-[23:15:55] [INFO] ================================================================================
-[23:15:55] [INFO]    Starting Step 4: Robustness Checks
-[23:15:55] [INFO] ================================================================================
-[23:15:55] [INFO] 
-[23:15:55] [INFO] Initiating Jackknife Analysis...
-[23:15:55] [INFO] Loaded 29 hosts for Jackknife stability test.
-[23:15:59] [INFO] Correlation Tests (H0 vs Sigma)
-[23:15:59] [INFO] +------------------+-----------+---------+----------------------------+
-[23:15:59] [INFO] | Test             | Statistic | p-value | Interpretation             |
-[23:15:59] [INFO] +------------------+-----------+---------+----------------------------+
-[23:15:59] [INFO] | Pearson r        | 0.4279    | 0.0206  | Parametric                 |
-[23:15:59] [INFO] | Spearman ρ       | 0.4340    | 0.0187  | Non-parametric (rank)      |
-[23:15:59] [INFO] | Bootstrap p      | -         | 0.0218  | Permutation (N=10000)      |
-[23:15:59] [INFO] | GLS slope        | 9.227     | 0.0000  | Covariance-aware Wald test |
-[23:15:59] [INFO] | Pearson p (cov)  | 0.4279    | 0.0394  | Parametric MVN null        |
-[23:15:59] [INFO] | Spearman p (cov) | 0.4340    | 0.0257  | Parametric MVN null        |
-[23:15:59] [INFO] +------------------+-----------+---------+----------------------------+
-[23:15:59] [SUCCESS] Saved covariance-aware results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/covariance_robustness.json
-[23:15:59] [SUCCESS] Bootstrap p = 0.0218 < 0.05: Correlation is SIGNIFICANT.
-[23:15:59] [INFO] Jackknife Range: r in [0.3887, 0.5032]
-[23:15:59] [WARNING] CONCLUSION: Correlation is somewhat fragile.
-[23:15:59] [INFO] Most Influential Hosts (Supports Trend)
-[23:15:59] [INFO] +----------+-------------+---------+
-[23:15:59] [INFO] | Host     | r (without) | Delta r |
-[23:15:59] [INFO] +----------+-------------+---------+
-[23:15:59] [INFO] | NGC 3147 | 0.3887      | -0.0392 |
-[23:15:59] [INFO] | NGC 5728 | 0.3934      | -0.0345 |
-[23:15:59] [INFO] | NGC 7250 | 0.3974      | -0.0305 |
-[23:15:59] [INFO] +----------+-------------+---------+
-[23:15:59] [PROCESS] Generating Jackknife influence plot...
-[23:15:59] [SUCCESS] Saved Jackknife plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/jackknife_influence.png
-[23:15:59] [SUCCESS] Copied Jackknife plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/jackknife_influence.png
-[23:15:59] [INFO] Initiating Out-of-Sample Validation (Alpha)
-[23:15:59] [INFO] Out-of-Sample Validation Summary
-[23:15:59] [INFO] +------------+------------------------+-----------------+
-[23:15:59] [INFO] | Validation | Metric                 | Value           |
-[23:15:59] [INFO] +------------+------------------------+-----------------+
-[23:15:59] [INFO] | Baseline   | Slope dH0/dsigma       | 0.0775          |
-[23:15:59] [INFO] | Baseline   | Pearson r (p)          | 0.428 (0.0206)  |
-[23:15:59] [INFO] | Baseline   | Spearman rho (p)       | 0.434 (0.0187)  |
-[23:15:59] [INFO] | Train/Test | alpha mean ± std       | 0.574 ± 0.107   |
-[23:15:59] [INFO] | Train/Test | test slope median      | 0.0040          |
-[23:15:59] [INFO] | Train/Test | test |r| median        | 0.246           |
-[23:15:59] [INFO] | Train/Test | test H0 mean (median)  | 68.79           |
-[23:15:59] [INFO] | LOOCV      | alpha mean ± std       | 0.581 ± 0.030   |
-[23:15:59] [INFO] | LOOCV      | pred slope dH0/dsigma  | -0.0002         |
-[23:15:59] [INFO] | LOOCV      | Pearson r (p)          | -0.001 (0.9954) |
-[23:15:59] [INFO] | LOOCV      | Spearman rho (p)       | 0.017 (0.9293)  |
-[23:15:59] [INFO] | LOOCV      | H0 mean ± SEM          | 68.70 ± 1.32    |
-[23:15:59] [INFO] | LOOCV      | Planck tension (sigma) | 0.92            |
-[23:15:59] [INFO] +------------+------------------------+-----------------+
-[23:15:59] [SUCCESS] Saved out-of-sample validation to /Users/matthewsmawfield/www/TEP-H0/results/outputs/out_of_sample_validation.json
-[23:15:59] [INFO] Initiating Bivariate Analysis...
-[23:15:59] [INFO] Loaded 29 hosts for Bivariate Analysis.
-[23:15:59] [INFO] Bivariate Analysis Results
-[23:15:59] [INFO] +----------------------+------------------+-------------+---------+
-[23:15:59] [INFO] | Relation             | Correlation Type | Coefficient | p-value |
-[23:15:59] [INFO] +----------------------+------------------+-------------+---------+
-[23:15:59] [INFO] | H0 vs Sigma          | Pearson (Raw)    | 0.428       | 0.0206  |
-[23:15:59] [INFO] | H0 vs Metallicity    | Pearson (Raw)    | 0.304       | 0.1087  |
-[23:15:59] [INFO] | Sigma vs Metallicity | Pearson (Raw)    | 0.184       | 0.3389  |
-[23:15:59] [INFO] | H0 vs Sigma | Z      | Partial          | 0.397       | 0.0363  |
-[23:15:59] [INFO] | H0 vs Z | Sigma      | Partial          | 0.254       | 0.1928  |
-[23:15:59] [INFO] +----------------------+------------------+-------------+---------+
-[23:15:59] [SUCCESS] Saved stats to /Users/matthewsmawfield/www/TEP-H0/results/outputs/bivariate_stats.txt
-[23:15:59] [SUCCESS] Saved bivariate plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/bivariate_h0_sigma_metallicity.png
-[23:15:59] [SUCCESS] Copied bivariate plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/bivariate_h0_sigma_metallicity.png
-[23:15:59] [INFO] Redshift Cut Sensitivity Scan...
-[23:16:00] [SUCCESS] Saved redshift cut sensitivity results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/redshift_cut_sensitivity.txt
-[23:16:00] [INFO] Redshift Cut Sensitivity (H0 vs Sigma)
-[23:16:00] [INFO] +--------+----+-----------+------------+--------+
-[23:16:00] [INFO] | z_cut  | N  | Pearson r | Spearman ρ | Perm p |
-[23:16:00] [INFO] +--------+----+-----------+------------+--------+
-[23:16:00] [INFO] | 0.0035 | 29 | 0.428     | 0.434      | 0.0192 |
-[23:16:00] [INFO] | 0.0050 | 23 | 0.393     | 0.272      | 0.0598 |
-[23:16:00] [INFO] | 0.0100 | 5  | 0.920     | 0.800      | 0.0702 |
-[23:16:00] [INFO] | 0.0200 | 0  | nan       | nan        | nan    |
-[23:16:00] [INFO] +--------+----+-----------+------------+--------+
-[23:16:00] [INFO] Flow/Environment Confound Robustness...
-[23:16:01] [SUCCESS] Saved flow/environment robustness results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/flow_environment_robustness.txt
-[23:16:01] [INFO] Flow + Environment Controls
-[23:16:01] [INFO] +-----------------------------+-----------+---------+----+
-[23:16:01] [INFO] | Test                        | Statistic | p-value | N  |
-[23:16:01] [INFO] +-----------------------------+-----------+---------+----+
-[23:16:01] [INFO] | Baseline r(H0,Sigma)        | 0.428     | 0.0192  | 29 |
-[23:16:01] [INFO] | Partial r(H0,Sigma|z)       | 0.380     | 0.0459  | 29 |
-[23:16:01] [INFO] | Partial r(H0,Sigma|z,Nmb)   | 0.316     | 0.1079  | 29 |
-[23:16:01] [INFO] | Partial r(H0,Sigma|z,logpK) | 0.491     | 0.0149  | 26 |
-[23:16:01] [INFO] +-----------------------------+-----------+---------+----+
-[23:16:01] [INFO] v_pec Monte Carlo Robustness
-[23:16:01] [INFO] +-----------+----------------+
-[23:16:01] [INFO] | MC Metric | Value          |
-[23:16:01] [INFO] +-----------+----------------+
-[23:16:01] [INFO] | N_hosts   | 29             |
-[23:16:01] [INFO] | r_mean    | 0.286          |
-[23:16:01] [INFO] | r_std     | 0.120          |
-[23:16:01] [INFO] | r_95CI    | [0.044, 0.509] |
-[23:16:01] [INFO] | P(r<=0)   | 0.0096         |
-[23:16:01] [INFO] +-----------+----------------+
-[23:16:01] [SUCCESS] Step 4 Complete.
-[23:16:01] [PROCESS] Running Aperture Sensitivity Analysis...
+[10:39:15] [INFO] 
+[10:39:15] [INFO] ================================================================================
+[10:39:15] [INFO]    Starting Step 4: Robustness Checks
+[10:39:15] [INFO] ================================================================================
+[10:39:15] [INFO] 
+[10:39:15] [INFO] Initiating Jackknife Analysis...
+[10:39:15] [INFO] Loaded 29 hosts for Jackknife stability test.
+[10:39:18] [INFO] Correlation Tests (H0 vs Sigma)
+[10:39:18] [INFO] +------------------+-----------+---------+----------------------------+
+[10:39:18] [INFO] | Test             | Statistic | p-value | Interpretation             |
+[10:39:18] [INFO] +------------------+-----------+---------+----------------------------+
+[10:39:18] [INFO] | Pearson r        | 0.4279    | 0.0206  | Parametric                 |
+[10:39:18] [INFO] | Spearman ρ       | 0.4340    | 0.0187  | Non-parametric (rank)      |
+[10:39:18] [INFO] | Bootstrap p      | -         | 0.0218  | Permutation (N=10000)      |
+[10:39:18] [INFO] | GLS slope        | 9.227     | 0.0000  | Covariance-aware Wald test |
+[10:39:18] [INFO] | Pearson p (cov)  | 0.4279    | 0.0394  | Parametric MVN null        |
+[10:39:18] [INFO] | Spearman p (cov) | 0.4340    | 0.0257  | Parametric MVN null        |
+[10:39:18] [INFO] +------------------+-----------+---------+----------------------------+
+[10:39:18] [SUCCESS] Saved covariance-aware results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/covariance_robustness.json
+[10:39:18] [SUCCESS] Bootstrap p = 0.0218 < 0.05: Correlation is SIGNIFICANT.
+[10:39:18] [INFO] Jackknife Range: r in [0.3887, 0.5032]
+[10:39:18] [WARNING] CONCLUSION: Correlation is somewhat fragile.
+[10:39:18] [INFO] Most Influential Hosts (Supports Trend)
+[10:39:18] [INFO] +----------+-------------+---------+
+[10:39:18] [INFO] | Host     | r (without) | Delta r |
+[10:39:18] [INFO] +----------+-------------+---------+
+[10:39:18] [INFO] | NGC 3147 | 0.3887      | -0.0392 |
+[10:39:18] [INFO] | NGC 5728 | 0.3934      | -0.0345 |
+[10:39:18] [INFO] | NGC 7250 | 0.3974      | -0.0305 |
+[10:39:18] [INFO] +----------+-------------+---------+
+[10:39:18] [PROCESS] Generating Jackknife influence plot...
+[10:39:19] [SUCCESS] Saved Jackknife plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/jackknife_influence.png
+[10:39:19] [SUCCESS] Copied Jackknife plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/jackknife_influence.png
+[10:39:19] [INFO] Initiating Out-of-Sample Validation (Alpha)
+[10:39:19] [INFO] Out-of-Sample Validation Summary
+[10:39:19] [INFO] +------------+------------------------+-----------------+
+[10:39:19] [INFO] | Validation | Metric                 | Value           |
+[10:39:19] [INFO] +------------+------------------------+-----------------+
+[10:39:19] [INFO] | Baseline   | Slope dH0/dsigma       | 0.0775          |
+[10:39:19] [INFO] | Baseline   | Pearson r (p)          | 0.428 (0.0206)  |
+[10:39:19] [INFO] | Baseline   | Spearman rho (p)       | 0.434 (0.0187)  |
+[10:39:19] [INFO] | Train/Test | alpha mean ± std       | 0.574 ± 0.107   |
+[10:39:19] [INFO] | Train/Test | test slope median      | 0.0040          |
+[10:39:19] [INFO] | Train/Test | test |r| median        | 0.246           |
+[10:39:19] [INFO] | Train/Test | test H0 mean (median)  | 68.79           |
+[10:39:19] [INFO] | LOOCV      | alpha mean ± std       | 0.581 ± 0.030   |
+[10:39:19] [INFO] | LOOCV      | pred slope dH0/dsigma  | -0.0002         |
+[10:39:19] [INFO] | LOOCV      | Pearson r (p)          | -0.001 (0.9954) |
+[10:39:19] [INFO] | LOOCV      | Spearman rho (p)       | 0.017 (0.9293)  |
+[10:39:19] [INFO] | LOOCV      | H0 mean ± SEM          | 68.70 ± 1.32    |
+[10:39:19] [INFO] | LOOCV      | Planck tension (sigma) | 0.92            |
+[10:39:19] [INFO] +------------+------------------------+-----------------+
+[10:39:19] [SUCCESS] Saved out-of-sample validation to /Users/matthewsmawfield/www/TEP-H0/results/outputs/out_of_sample_validation.json
+[10:39:19] [INFO] Initiating Bivariate Analysis...
+[10:39:19] [INFO] Loaded 29 hosts for Bivariate Analysis.
+[10:39:19] [INFO] Bivariate Analysis Results
+[10:39:19] [INFO] +----------------------+------------------+-------------+---------+
+[10:39:19] [INFO] | Relation             | Correlation Type | Coefficient | p-value |
+[10:39:19] [INFO] +----------------------+------------------+-------------+---------+
+[10:39:19] [INFO] | H0 vs Sigma          | Pearson (Raw)    | 0.428       | 0.0206  |
+[10:39:19] [INFO] | H0 vs Metallicity    | Pearson (Raw)    | 0.304       | 0.1087  |
+[10:39:19] [INFO] | Sigma vs Metallicity | Pearson (Raw)    | 0.184       | 0.3389  |
+[10:39:19] [INFO] | H0 vs Sigma | Z      | Partial          | 0.397       | 0.0363  |
+[10:39:19] [INFO] | H0 vs Z | Sigma      | Partial          | 0.254       | 0.1928  |
+[10:39:19] [INFO] +----------------------+------------------+-------------+---------+
+[10:39:19] [SUCCESS] Saved stats to /Users/matthewsmawfield/www/TEP-H0/results/outputs/bivariate_stats.txt
+[10:39:19] [SUCCESS] Saved bivariate plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/bivariate_h0_sigma_metallicity.png
+[10:39:19] [SUCCESS] Copied bivariate plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/bivariate_h0_sigma_metallicity.png
+[10:39:19] [INFO] Redshift Cut Sensitivity Scan...
+[10:39:20] [SUCCESS] Saved redshift cut sensitivity results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/redshift_cut_sensitivity.txt
+[10:39:20] [INFO] Redshift Cut Sensitivity (H0 vs Sigma)
+[10:39:20] [INFO] +--------+----+-----------+------------+--------+
+[10:39:20] [INFO] | z_cut  | N  | Pearson r | Spearman ρ | Perm p |
+[10:39:20] [INFO] +--------+----+-----------+------------+--------+
+[10:39:20] [INFO] | 0.0035 | 29 | 0.428     | 0.434      | 0.0192 |
+[10:39:20] [INFO] | 0.0050 | 23 | 0.393     | 0.272      | 0.0598 |
+[10:39:20] [INFO] | 0.0100 | 5  | 0.920     | 0.800      | 0.0702 |
+[10:39:20] [INFO] | 0.0200 | 0  | nan       | nan        | nan    |
+[10:39:20] [INFO] +--------+----+-----------+------------+--------+
+[10:39:20] [INFO] Flow/Environment Confound Robustness...
+[10:39:21] [SUCCESS] Saved flow/environment robustness results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/flow_environment_robustness.txt
+[10:39:21] [INFO] Flow + Environment Controls
+[10:39:21] [INFO] +-----------------------------+-----------+---------+----+
+[10:39:21] [INFO] | Test                        | Statistic | p-value | N  |
+[10:39:21] [INFO] +-----------------------------+-----------+---------+----+
+[10:39:21] [INFO] | Baseline r(H0,Sigma)        | 0.428     | 0.0192  | 29 |
+[10:39:21] [INFO] | Partial r(H0,Sigma|z)       | 0.380     | 0.0459  | 29 |
+[10:39:21] [INFO] | Partial r(H0,Sigma|z,Nmb)   | 0.316     | 0.1079  | 29 |
+[10:39:21] [INFO] | Partial r(H0,Sigma|z,logpK) | 0.491     | 0.0149  | 26 |
+[10:39:21] [INFO] +-----------------------------+-----------+---------+----+
+[10:39:21] [INFO] v_pec Monte Carlo Robustness
+[10:39:21] [INFO] +-----------+----------------+
+[10:39:21] [INFO] | MC Metric | Value          |
+[10:39:21] [INFO] +-----------+----------------+
+[10:39:21] [INFO] | N_hosts   | 29             |
+[10:39:21] [INFO] | r_mean    | 0.286          |
+[10:39:21] [INFO] | r_std     | 0.120          |
+[10:39:21] [INFO] | r_95CI    | [0.044, 0.509] |
+[10:39:21] [INFO] | P(r<=0)   | 0.0096         |
+[10:39:21] [INFO] +-----------+----------------+
+[10:39:21] [SUCCESS] Step 4 Complete.
+[10:39:21] [PROCESS] Running Aperture Sensitivity Analysis...

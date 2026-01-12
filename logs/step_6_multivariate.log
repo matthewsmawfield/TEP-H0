@@ -1,14 +1,14 @@
-[23:16:40] [INFO] 
-[23:16:40] [INFO] ================================================================================
-[23:16:40] [INFO]    Starting Step 6: Multivariate Analysis
-[23:16:40] [INFO] ================================================================================
-[23:16:40] [INFO] 
-[23:16:40] [INFO] Loading and Merging Data...
-[23:16:40] [INFO] Merged Data: N=56 hosts available for analysis.
-[23:16:40] [INFO] Running Multivariate Regression...
-[23:16:40] [SUCCESS] Saved regression summaries to /Users/matthewsmawfield/www/TEP-H0/results/outputs/multivariate_analysis_summary.txt
-[23:16:40] [SUCCESS] Saved structured results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/multivariate_analysis_results.json
-[23:16:40] [WARNING] Sigma loses significance in full model (p=0.0947).
-[23:16:40] [PROCESS] Generating Robustness Plot...
-[23:16:40] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/multivariate_robustness.png
-[23:16:40] [SUCCESS] Step 6 Complete.
+[10:39:59] [INFO] 
+[10:39:59] [INFO] ================================================================================
+[10:39:59] [INFO]    Starting Step 6: Multivariate Analysis
+[10:39:59] [INFO] ================================================================================
+[10:39:59] [INFO] 
+[10:39:59] [INFO] Loading and Merging Data...
+[10:39:59] [INFO] Merged Data: N=56 hosts available for analysis.
+[10:39:59] [INFO] Running Multivariate Regression...
+[10:39:59] [SUCCESS] Saved regression summaries to /Users/matthewsmawfield/www/TEP-H0/results/outputs/multivariate_analysis_summary.txt
+[10:39:59] [SUCCESS] Saved structured results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/multivariate_analysis_results.json
+[10:39:59] [WARNING] Sigma loses significance in full model (p=0.0947).
+[10:39:59] [PROCESS] Generating Robustness Plot...
+[10:39:59] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/multivariate_robustness.png
+[10:39:59] [SUCCESS] Step 6 Complete.

@@ -1,15 +1,15 @@
 # The Cepheid Bias: Resolving the Hubble Tension
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18209703.svg)](https://doi.org/10.5281/zenodo.18209703)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18216583.svg)](https://doi.org/10.5281/zenodo.18216583)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 ![TEP-H0: Cepheid Bias](site/public/image.webp)
 
 **Author:** Matthew Lukin Smawfield  
-**Version:** v0.2 (Kingston upon Hull)  
-**Date:** 11 January 2026  
+**Version:** v0.3 (Kingston upon Hull)  
+**Date:** 12 January 2026  
 **Status:** Preprint (Open for Collaboration)  
-**DOI:** [10.5281/zenodo.18209703](https://doi.org/10.5281/zenodo.18209703)  
+**DOI:** [10.5281/zenodo.18216583](https://doi.org/10.5281/zenodo.18216583)  
 **Website:** [https://mlsmawfield.com/tep/h0/](https://mlsmawfield.com/tep/h0/)  
 **Paper Series:** TEP Series: Paper 12 (Cosmological Observations)
 
@@ -19,9 +19,11 @@ The Hubble Tension—the persistent 5σ discrepancy between local distance-ladde
 
 TEP posits that proper time accumulation depends on the local gravitational potential. Cepheid variable stars, acting as "standard clocks" via their period-luminosity relation, experience differential time flow governed by their host galaxy environment. Consistent with the anomalous spin-down rates observed in globular cluster pulsars (Paper 11), Cepheids in deep gravitational potentials (high velocity dispersion σ) experience period contraction relative to calibration environments. When interpreted through a universal P-L relation, this period deficit masquerades as diminished luminosity, causing systematic underestimation of distances to SN Ia host galaxies and consequent overestimation of H₀.
 
-Analysis of the SH0ES Cepheid sample (N=29), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived H₀ (Spearman ρ = 0.434, p = 0.019; Pearson r = 0.428, p = 0.021). A median-split stratification at σ_med ≈ 90 km/s yields H₀ = 67.82 ± 1.62 km/s/Mpc (low-σ; N=15) versus 72.45 ± 2.32 km/s/Mpc (high-σ; N=14), implying ΔH₀ = 4.63 km/s/Mpc. Because published σ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), we treat measurement methodology as a first-class provenance variable and report covariance-aware significance tests using the full SH0ES GLS distance-modulus covariance.
+Analysis of the SH0ES Cepheid sample (N=29), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived H₀ (Spearman ρ = 0.434, p = 0.019; Pearson r = 0.428, p = 0.021). A median-split stratification at σ_med ≈ 90 km/s yields H₀ = 67.82 ± 1.62 km/s/Mpc (low-σ; N=15) versus 72.45 ± 2.32 km/s/Mpc (high-σ; N=14), implying ΔH₀ = 4.63 km/s/Mpc. Because published σ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), measurement methodology is treated as a first-class provenance variable and covariance-aware significance tests are reported using the full SH0ES GLS distance-modulus covariance.
 
 Application of the TEP conformal correction with an optimized coupling α = 0.58 ± 0.16 and effective calibrator reference σ_ref = 75.25 km/s yields a unified local Hubble constant of H₀ = 68.66 ± 1.51 km/s/Mpc, corresponding to a Planck tension of 0.79σ. Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an "Inner Fainter" signal in HST photometry. This result, initially counter-intuitive, is resolved by the theory's density-dependent screening mechanism: the high-density M31 bulge (ρ > ρ_trans) is screened (restoring standard physics), while the lower-density SN Ia host disks remain unscreened. The M31 signal thus marks the empirical crossing of the screening threshold.
+
+The anchor–host mismatch (geometric anchors show near-zero coupling, α_anchor ≈ 0, in tension with the host-level α ≈ 0.58) finds a natural resolution in group halo screening: all three anchors (LMC, NGC 4258, M31) are members of galaxy groups, embedding them in deep ambient potentials that trigger chameleon-type screening regardless of internal disk densities. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies that lack this external screening. This framework generates a falsifiable prediction: the TEP distance-ladder bias should be unique to isolated field galaxies and suppressed in group/cluster environments.
 
 ## Key Results
 
@@ -46,7 +48,7 @@ Application of the TEP conformal correction with an optimized coupling α = 0.58
 | **Paper 9** | [TEP-SLR](https://github.com/matthewsmawfield/TEP-SLR) | Satellite Laser Ranging Validation | [10.5281/zenodo.18064582](https://doi.org/10.5281/zenodo.18064582) |
 | **Paper 10** | [TEP-EXP](https://github.com/matthewsmawfield/TEP-EXP) | What Do Precision Tests of General Relativity Actually Measure? | [10.5281/zenodo.18109761](https://doi.org/10.5281/zenodo.18109761) |
 | **Paper 11** | [TEP-COS](https://github.com/matthewsmawfield/TEP-COS) | Suppressed Density Scaling in Globular Cluster Pulsars | [10.5281/zenodo.18165798](https://doi.org/10.5281/zenodo.18165798) |
-| **Paper 12** | **TEP-H0** (This repo) | The Cepheid Bias: Resolving the Hubble Tension | [10.5281/zenodo.18209703](https://doi.org/10.5281/zenodo.18209703) |
+| **Paper 12** | **TEP-H0** (This repo) | The Cepheid Bias: Resolving the Hubble Tension | [10.5281/zenodo.18216583](https://doi.org/10.5281/zenodo.18216583) |
 
 ## Directory Structure
 
@@ -144,13 +146,13 @@ The analysis demonstrates a statistically significant host-level H₀–σ corre
 ## Citation
 
 ```bibtex
-@article{smawfield2026h0,
+@article{smawfield2026cepheidbias,
   title={The Cepheid Bias: Resolving the Hubble Tension},
   author={Smawfield, Matthew Lukin},
   journal={Zenodo},
   year={2026},
-  doi={10.5281/zenodo.18209703},
-  note={Preprint v0.2 (Kingston upon Hull)}
+  doi={10.5281/zenodo.18216583},
+  note={Preprint v0.3 (Kingston upon Hull)}
 }
 ```
 

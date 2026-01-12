@@ -396,26 +396,40 @@ class Step7TRGBComparison:
         # The DIFFERENTIAL test (Δμ = μ_TRGB - μ_Ceph vs σ) isolates the TEP effect.
         
         if comparison:
-            print_status("✓ Both indicators show significant H0-σ correlation", "SUCCESS")
+            cepheid_sig = comparison['cepheid_p'] < 0.05
+            trgb_sig = comparison['trgb_p'] < 0.05
+            trgb_pos = comparison['trgb_spearman'] > 0
+
+            if cepheid_sig:
+                print_status("✓ Cepheids show significant H0-σ correlation", "SUCCESS")
+            else:
+                print_status("• Cepheids do not show significant H0-σ correlation", "WARNING")
+
+            if trgb_sig:
+                print_status("✓ TRGB shows significant H0-σ correlation", "SUCCESS")
+            else:
+                print_status("• TRGB does not show significant H0-σ correlation", "INFO")
+
             print_status("", "INFO")
             print_status("  INTERPRETATION:", "INFO")
             print_status("  ───────────────", "INFO")
-            print_status("  This reveals TWO superimposed effects:", "INFO")
-            print_status("", "INFO")
-            print_status("  1. COMMON EFFECT (affects both indicators):", "INFO")
-            print_status("     → Peculiar velocities correlate with host mass/σ", "INFO")
-            print_status("     → Explains baseline H0-σ trend in both TRGB and Cepheids", "INFO")
-            print_status("", "INFO")
-            print_status("  2. CEPHEID-SPECIFIC EFFECT (TEP):", "INFO")
-            print_status("     → Period contraction in high-σ environments", "INFO")
-            print_status("     → Isolated by DIFFERENTIAL test: Δμ = μ_TRGB - μ_Ceph", "INFO")
-            print_status("     → See step_7_trgb_reanalysis.py for differential analysis", "INFO")
-            print_status("", "INFO")
-            print_status("  ✓ Finding BOTH correlate is STRONGER evidence for TEP:", "INFO")
-            print_status("    It demonstrates we can separate common systematics from", "INFO")
-            print_status("    the Cepheid-specific period-dependent bias.", "INFO")
-            
-            results['interpretation'] = 'supports_tep_two_effects'
+
+            if cepheid_sig and (trgb_pos or trgb_sig):
+                print_status("  This pattern is consistent with TWO superimposed effects:", "INFO")
+                print_status("", "INFO")
+                print_status("  1. COMMON EFFECT (can affect multiple indicators):", "INFO")
+                print_status("     → Peculiar velocities correlate with host mass/σ", "INFO")
+                print_status("     → Can induce baseline H0-σ structure in multiple indicators", "INFO")
+                print_status("", "INFO")
+                print_status("  2. CEPHEID-SPECIFIC EFFECT (TEP):", "INFO")
+                print_status("     → Period contraction in high-σ environments", "INFO")
+                print_status("     → Isolated by DIFFERENTIAL test: Δμ = μ_TRGB - μ_Ceph", "INFO")
+                print_status("     → See step_7_trgb_reanalysis.py for differential analysis", "INFO")
+                results['interpretation'] = 'supports_tep_two_effects'
+            else:
+                print_status("  Interpretation is inconclusive based on H0-σ alone.", "INFO")
+                print_status("  See step_7_trgb_reanalysis.py for the differential Δμ test.", "INFO")
+                results['interpretation'] = 'inconclusive'
         else:
             print_status("• Unable to compare - Cepheid data not available", "WARNING")
             results['interpretation'] = 'no_comparison'

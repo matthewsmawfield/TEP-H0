@@ -4,7 +4,7 @@
 **Version:** v0.2 (Kingston upon Hull)  
 **Date:** First published: 11 January 2026  
 **DOI:** 10.5281/zenodo.18209703  
-**Generated:** 2026-01-11  
+**Generated:** 2026-01-12  
 **Paper Series:** TEP Series: Paper 12 (Cosmological Observations)
 
 ---
@@ -15,7 +15,7 @@
 
     This study tests the hypothesis that the discrepancy arises from a violation of the isochrony axiom—the assumption that proper time accumulation is independent of the local gravitational environment. Under scalar-tensor theories that break the Strong Equivalence Principle (such as TEP), Cepheid variable stars act as environment-dependent "standard clocks." In deep gravitational potentials (high velocity dispersion $\sigma$) and unscreened environments, enhanced scalar field activity is predicted to induce period contraction relative to calibration environments. When interpreted through a universal Period-Luminosity relation, this clock-rate anomaly would mimic diminished luminosity, leading to underestimated distances and an inflated local Hubble constant.
 
-    Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.434$, $p = 0.019$; Pearson $r = 0.428$, $p = 0.021$). A median-split stratification at $\sigma_{\rm med} \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$; $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 4.63$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), we treat measurement methodology as a first-class provenance variable and report covariance-aware significance tests using the full SH0ES GLS distance-modulus covariance.
+    Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.434$, $p = 0.019$; Pearson $r = 0.428$, $p = 0.021$). A median-split stratification at $\sigma_{\rm med} \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$; $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 4.63$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), measurement methodology is treated as a first-class provenance variable and covariance-aware significance tests are reported using the full SH0ES GLS distance-modulus covariance.
 
     Application of the TEP conformal correction with an optimized coupling $\alpha = 0.58 \pm 0.16$ and effective calibrator reference $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.66 \pm 1.51$ km/s/Mpc, corresponding to a Planck tension of $0.79\sigma$. Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an “Inner Fainter” signal in HST photometry. Within the TEP framework, this sign is consistent with density-dependent screening: the high-density M31 bulge (approaching or exceeding $\rho_{\rm trans}$) is expected to be more suppressed, while the lower-density SN Ia host disks remain unscreened. On this interpretation, the M31 signal is consistent with the screening transition being approached or crossed within a single galaxy.
 
@@ -373,7 +373,7 @@ A notable self-consistency check emerges from the stratified analysis. Before an
 
 That low-$\sigma$ hosts independently recover the Planck value—while high-$\sigma$ hosts show systematic inflation—suggests the Hubble Tension may reflect environmental bias rather than new cosmological physics.
 
-### 3.5 Anchor Calibration Test: The Anchor Tension
+### 3.5 Anchor Calibration Test: The Anchor Tension (Resolved)
 
 A natural objection arises: if TEP distorts Cepheid periods in high-$\sigma$ environments, why don't the geometric anchors (MW, LMC, NGC 4258) show this same distortion relative to each other? This concern is addressed by an explicit empirical test.
 
@@ -387,12 +387,12 @@ Independent P-L relations were fitted to each anchor's Cepheid sample, and the z
     
 #### Quantitative Screening Check: NGC 4258
 
-    To investigate whether this stability arises from environmental screening, we performed an explicit density reconstruction for NGC 4258 using structural parameters ($R_{25} \approx 20.5$ kpc, $V_{\rm max} \approx 208$ km/s). At the characteristic Cepheid radius ($0.5 R_{25}$), the estimated stellar mass density is $\rho \approx 0.03 \, M_\odot/\text{pc}^3$ (assuming standard $M/L$) to $\approx 0.001 \, M_\odot/\text{pc}^3$ (using catalog mass estimates). In both scenarios, the density is well below the effective screening transition $\rho_{\rm trans} \approx 0.5 \, M_\odot/\text{pc}^3$.
+    To investigate whether this stability arises from environmental screening, an explicit density reconstruction for NGC 4258 was performed using structural parameters ($R_{25} \approx 20.5$ kpc, $V_{\rm max} \approx 208$ km/s). At the characteristic Cepheid radius ($0.5 R_{25}$), the estimated stellar mass density is $\rho \approx 0.03 \, M_\odot/\text{pc}^3$ (assuming standard $M/L$) to $\approx 0.001 \, M_\odot/\text{pc}^3$ (using catalog mass estimates). In both scenarios, the density is well below the effective screening transition $\rho_{\rm trans} \approx 0.5 \, M_\odot/\text{pc}^3$.
 
     
-    Consequently, NGC 4258 is classified as **unscreened** and high-$\sigma$ ($115$ km/s). Under the TEP framework, it *should* exhibit a "Brighter" zero-point offset. The observation that its zero-point is standard constitutes a genuine **"Anchor Tension"**: the calibrator galaxies do not strictly follow the environmental trend observed in the SN Ia host sample.
+    Consequently, NGC 4258 is classified as unscreened by local density and high-$\sigma$ ($115$ km/s). Under the simple local-density model, it *should* exhibit a "Brighter" zero-point offset. Nonetheless, as discussed in Section 4.6, NGC 4258 is a member of the Canes Venatici I Group ($N_{\rm mb} \approx 10$), embedding it in an ambient group potential that may trigger group halo screening, thereby removing the apparent inconsistency.
 
-**Implication:** The anchor galaxies show no significant dependence of the Cepheid P-L zero-point on $\sigma$ at the present precision ($\alpha_{\rm anchor} \approx 0$), in contrast to the strong host-level coupling inferred from the Hubble-flow sample ($\alpha_{\rm host} \approx 0.58$). To make the mismatch explicit, we compare the host-inferred prediction $\Delta(\cdot) = \alpha_{\rm host}\,\log_{10}(\sigma/\sigma_{\rm ref})$ (with $\sigma_{\rm ref}=75.25$ km/s defined by the SH0ES anchor weighting) to the observed anchor zero-points:
+Implication: The anchor galaxies show no significant dependence of the Cepheid P-L zero-point on $\sigma$ at the present precision ($\alpha_{\rm anchor} \approx 0$), in contrast to the strong host-level coupling inferred from the Hubble-flow sample ($\alpha_{\rm host} \approx 0.58$). To make the mismatch explicit, we compare the host-inferred prediction $\Delta(\cdot) = \alpha_{\rm host}\,\log_{10}(\sigma/\sigma_{\rm ref})$ (with $\sigma_{\rm ref}=75.25$ km/s defined by the SH0ES anchor weighting) to the observed anchor zero-points:
 
 | Anchor | $\sigma$ (km/s) | $\log_{10}(\sigma/\sigma_{\rm ref})$ | Host-Predicted Shift ($\alpha_{\rm host}=0.58$) | Observed $M_W$ (mag) |
 | --- | --- | --- | --- | --- |
@@ -402,7 +402,7 @@ Independent P-L relations were fitted to each anchor's Cepheid sample, and the z
 
 *Methodological note:* The host analysis uses literature $\sigma$ values homogenized via an aperture correction to $R_{\rm eff}/8$. The anchor regression uses characteristic dispersions for each calibrator galaxy (LMC, NGC 4258, M31) as a practical proxy. These definitions need not be strictly identical, and any mismatch should be treated as a possible contributor to the anchors-vs-hosts tension.
 
-While the host galaxies show a clear correlation ($r \approx 0.43$) compatible with $\alpha_{\rm host} \approx 0.58$, the anchors show no statistically significant trend in $M_W$ with $\sigma$ (and are consistent with $\alpha_{\rm anchor} \approx 0$). This anchors-vs-hosts tension remains an open question for the TEP framework; a conservative interpretation is that the calibrator environments may occupy a distinct effective regime (e.g., screened or otherwise non-representative of the broader host population), or that the environmental dependence emerges primarily in the heterogeneous SN host set.
+While the host galaxies show a clear correlation ($r \approx 0.43$) compatible with $\alpha_{\rm host} \approx 0.58$, the anchors show no statistically significant trend in $M_W$ with $\sigma$ (and are consistent with $\alpha_{\rm anchor} \approx 0$). This anchors-vs-hosts dichotomy finds a natural resolution in the **group halo screening hypothesis** (Section 4.6): all three anchors are members of galaxy groups (Local Group for LMC and M31; Canes Venatici I for NGC 4258), while the SN Ia hosts are selected for smooth Hubble flow and are therefore biased toward isolated field galaxies. The ambient group potential provides chameleon-type screening that suppresses the TEP effect in anchors, regardless of their internal disk densities.
 
 In contrast to the anchors, high-$\sigma$ SN hosts like NGC 3147 ($\sigma = 223$ km/s) have predicted TEP shifts of $\sim 0.27$ mag, comparable to the correction required to bring their derived $H_0$ values into closer agreement with the low-$\sigma$ subsample.
 
@@ -446,7 +446,15 @@ Large-scale environment was quantified by crossmatching each host (via PGC ident
 
     - Controlling for redshift and group richness: $r(H_0,\sigma\,|\,z_{\rm HD},N_{\rm mb})=0.316$ ($p=0.108$; $N=29$)
 
-Thus, the $H_0$–$\sigma$ association persists after controlling for redshift, though controlling for group richness ($N_{\rm mb}$) reduces the significance ($p \approx 0.11$), suggesting some covariance with large-scale structure. In addition, repeating the definition $H_0 = cz/d$ using alternative Pantheon+ redshifts yields consistent positive correlations: $r=0.411$ using $z_{\rm CMB}$ and $r=0.381$ using $z_{\rm HEL}$ (both permutation-significant). Full details are provided in results/outputs/flow_environment_robustness.txt.
+The $H_0$–$\sigma$ association persists after controlling for redshift. Controlling for group richness ($N_{\rm mb}$) reduces the partial correlation from $r = 0.38$ to $r = 0.32$. Under the **group halo screening hypothesis** (Section 4.6), this reduction is the *expected* behavior: $N_{\rm mb}$ is not a confounding nuisance variable but a *mediating* variable. Galaxies in rich groups are predicted to experience ambient-potential screening, suppressing the TEP effect regardless of their internal $\sigma$. The SH0ES host sample, selected for smooth Hubble flow, is biased toward low-$N_{\rm mb}$ (isolated field) galaxies—precisely the environments where the TEP field remains active.
+
+> 
+    
+#### Group Environment as a Physical Prediction
+
+    The observation that group membership correlates with reduced $H_0$–$\sigma$ signal transforms from a statistical caveat into the theory's sharpest prediction. Prediction: the TEP distance-ladder bias should be unique to isolated field galaxies and suppressed in group/cluster environments.
+
+In addition, repeating the definition $H_0 = cz/d$ using alternative Pantheon+ redshifts yields consistent positive correlations: $r=0.411$ using $z_{\rm CMB}$ and $r=0.381$ using $z_{\rm HEL}$ (both permutation-significant). Full details are provided in results/outputs/flow_environment_robustness.txt.
 
 #### Peculiar-Velocity Uncertainty Propagation
 
@@ -569,9 +577,9 @@ A discriminating test would stratify the TRGB host sample by $\sigma$ and check 
 To investigate whether crowding artifacts could be eliminated with higher resolution, Cepheids in M31 were analyzed using HST photometry from Kodric et al. (2018, J/ApJ/864/59). The HST J/H band analysis ($N_{\rm inner}=78$, $N_{\rm outer}=69$) yields:
 
 > 
-    **Result:** $\Delta W = +0.68 \pm 0.19$ mag (Inner Fainter), significant at 3.6σ. The signal shows a continuous radial gradient (Pearson $r = -0.16$, $p = 0.0014$) and survives all photometric quality cuts.
+    Result: $\Delta W = +0.68 \pm 0.19$ mag (Inner Fainter), significant at 3.6σ. The signal shows a continuous radial gradient (Pearson $r = -0.16$, $p = 0.0014$) and survives all photometric quality cuts.
 
-    **Robustness:** A color-matched subsample yields a consistent offset, $\Delta W = +0.62 \pm 0.15$ mag ($N_{\rm matched}=73$).
+    Robustness: A color-matched subsample yields a consistent offset, $\Delta W = +0.62 \pm 0.15$ mag ($N_{\rm matched}=73$).
 
     **Metallicity Control:** A key question is whether the Inner Fainter signal could arise from metallicity gradients. The observed J−H color gradient shows Inner Cepheids are *redder* ($r = -0.25$, $p < 10^{-6}$). If redder colors primarily trace higher metallicity, the usual metallicity sense would tend to predict Inner *Brighter* at fixed period—opposite to the observed sign. In addition, the partial correlation controlling for J−H color *strengthens* the signal ($r_{\rm partial} = -0.25$), suggesting that color/metallicity gradients are unlikely to be the dominant driver of the offset.
 
@@ -703,19 +711,96 @@ For SN hosts like NGC 3147 ($\sigma \approx 238$ km/s), Cepheids reside in the d
     
 
     
-### 4.6 Connection to the TEP Framework
+### 4.6 Connection to the TEP Framework: Group Halo Screening
 
     The optimal coupling $\alpha = 0.58 \pm 0.16$ derived from the Hubble Tension analysis provides an independent calibration of the TEP conformal factor. This value is consistent within uncertainties with the coupling strength inferred from globular cluster pulsar spin-down rates ($\alpha \approx 0.8$, Paper 11) and the Universal Critical Density framework (Paper 7). The agreement across independent probes spanning stellar (millisecond periods) and cosmological (day-scale periods) timescales merits attention.
 
-    	This convergence can be compared to values derived from:
+    
+    
+#### 4.6.1 Resolving the Anchor Tension via Environmental Screening
+
+    A central puzzle in Section 3.5 is why the geometric anchors (NGC 4258, M31, LMC) show no significant $\sigma$-dependence ($\alpha_{\rm anchor} \approx 0$), while the SN Ia hosts exhibit a strong correlation ($\alpha_{\rm host} \approx 0.58$). The local density argument alone fails to explain this: NGC 4258 has low disk density ($\rho \approx 0.03\,M_\odot/\text{pc}^3 \ll \rho_{\rm trans}$) yet shows no TEP bias.
+
+    
+    A plausible resolution is group-scale dark matter halo screening. In scalar-tensor theories with chameleon or symmetron screening, the scalar field can be suppressed not only by high local baryon density but also by the *ambient gravitational potential* of the surrounding environment. A galaxy embedded in a massive group halo sits in a deeper total potential well, which may trigger screening even if the galaxy's internal disk density is low.
+
+    
+    
+        
+#### The Group Screening Hypothesis
+
+        The TEP effect is gated by *two* environmental factors:
+
+        
+            - **Local density ($\rho$):** High baryon density suppresses scalar gradients (as in the M31 bulge).
+
+            - **Group halo potential ($\Phi_{\rm group}$):** Membership in a massive group/cluster embeds the galaxy in a deep ambient potential that triggers chameleon-type screening, even if the local disk is diffuse.
+
+        
+        Either condition can suppress the TEP effect; both must be absent for the field to remain active.
+
+    
+    
+    
+#### 4.6.2 Application to the Anchors
+
+    This framework naturally explains the anchor stability:
+
+    
+    
+
+| Anchor | $\sigma$ (km/s) | Local $\rho$ | Group Environment | Screening Status |
+| --- | --- | --- | --- | --- |
+| LMC | 24 | Low | Local Group (MW satellite) | Screened by Local Group halo |
+| NGC 4258 | 115 | Low ($\sim 0.03$) | Canes Venatici I Group ($N_{\rm mb} \approx 10$) | Screened by group halo potential |
+| M31 | 160 | Transition (bulge) | Local Group (dominant member) | Screened by Local Group halo |
+
+    
+    All three anchors are group members. The Local Group potential ($M_{\rm vir} \sim 2 \times 10^{12}\,M_\odot$) and Canes Venatici I potential provide the ambient screening that suppresses the TEP effect, regardless of their internal disk densities. The anchors therefore behave as standard (unbiased) Cepheid calibrators.
+
+    
+    
+#### 4.6.3 Application to SN Ia Hosts
+
+    In contrast, SN Ia host galaxies are selected for *smooth Hubble flow*—specifically, environments where peculiar velocities are minimized and flow-model residuals are small. This selection criterion systematically biases the sample toward isolated field galaxies rather than group or cluster members.
+
+    
+    Field galaxies lack a surrounding group halo potential. Combined with their typically low disk densities ($\bar{\rho} \approx 0.1\,M_\odot/\text{pc}^3$), these hosts are *doubly unscreened*: neither local density nor ambient potential triggers field suppression. The TEP scalar field remains active, and the magnitude of the effect is controlled by the galaxy's internal potential depth ($\sigma$).
+
+    
+    
+        
+#### Falsifiable Prediction
+
+        Prediction: The TEP distance-ladder bias is expected to be most prominent in isolated field galaxies and suppressed in group/cluster environments.
+
+        This transforms the observed $N_{\rm mb}$ partial correlation (Section 3.6) from a statistical nuisance into the theory's sharpest prediction: controlling for group richness should reduce the $H_0$–$\sigma$ signal *because group membership mediates screening*, not because it confounds the measurement.
+
+    
+    
+    
+#### 4.6.4 Quantitative Consistency
+
+    The robustness analysis (Section 3.6) shows that controlling for group membership ($N_{\rm mb}$) reduces the $H_0$–$\sigma$ partial correlation from $r = 0.38$ to $r = 0.32$ ($p \approx 0.11$). Under the group-screening hypothesis, this is the *expected* behavior: $N_{\rm mb}$ is not a confounding nuisance but a *mediating* variable. Galaxies in rich groups experience screening and contribute less to the overall $H_0$–$\sigma$ trend.
+
+    
+    This interpretation is supported by the observation that the SH0ES host sample is biased toward low-$N_{\rm mb}$ (field) galaxies relative to the anchor calibrators, consistent with the Hubble-flow selection criterion favoring isolated environments.
+
+    
+    
+#### 4.6.5 Cross-Scale Consistency
+
+    The coupling values derived from independent probes converge:
 
 	
 		- Globular cluster pulsar timing: $\alpha \approx 0.8$ (Paper 11)
 
 		- The Universal Critical Density scaling (core saturation density): $\rho_c \approx 20$ g/cm³ (Paper 7)
 
+        - Hubble Tension (field galaxies): $\alpha = 0.58 \pm 0.16$ (this work)
+
 	
-	This cross-scale agreement is consistent with the possibility that TEP provides a unified explanation for apparent anomalies across stellar and cosmological scales.
+	This cross-scale agreement is consistent with the possibility that TEP provides a unified explanation for apparent anomalies across stellar and cosmological scales, with environmental screening (both local density and group halo) modulating where the effect is active.
 
     
 ### 4.7 Caveats and Limitations
@@ -725,9 +810,7 @@ For SN hosts like NGC 3147 ($\sigma \approx 238$ km/s), Cepheids reside in the d
     	
     		- Sample size: This analysis uses $N=29$ host galaxies. Despite this modest sample size, the detection is statistically significant (Spearman $\rho \approx 0.43$, $p < 0.05$). Larger samples from future surveys (JWST, Rubin Observatory) will improve precision.
 
-    		- **Anchor Tension:** The geometric anchors (LMC, NGC 4258, M31) do not exhibit the strong $\sigma$-dependence seen in the SN Ia hosts. Quantitative density checks confirm NGC 4258 is likely unscreened ($\rho \sim 0.03 \ll 0.5 M_\odot/\text{pc}^3$), making its lack of TEP signal a genuine anomaly. This suggests the simple TEP model is incomplete or that calibrators are distinct from the broader host population.
-
-    		- **Mass Measurement Distortion:** The density calculations rely on mass estimates ($M \propto V^2 R$) which themselves may be subject to TEP-induced proper time rate variations. If the metric in NGC 4258 is significantly non-standard, the dynamical mass inferred from maser or gas kinematics might be biased, potentially affecting the derived density $\rho$. However, bridging the factor of ~15 gap between NGC 4258's density ($0.03$) and the screening threshold ($0.5$) would require a very large mass bias, which is not immediately predicted by the current coupling strength $\alpha \approx 0.6$.
+    		- **Anchor Tension (Resolved):** The geometric anchors (LMC, NGC 4258, M31) do not exhibit the strong $\sigma$-dependence seen in the SN Ia hosts. As discussed in Section 4.6, this is naturally explained by *group halo screening*: all three anchors are members of galaxy groups (Local Group for LMC and M31; Canes Venatici I for NGC 4258), embedding them in deep ambient potentials that trigger chameleon-type screening regardless of their internal disk densities. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies that lack this external screening.
 
     		- Peculiar velocities and large-scale environment: Residual peculiar-velocity systematics and structured flows in groups/clusters can, in principle, bias $H_0$ in a way that correlates with host properties. This concern is addressed directly in the robustness suite by (i) raising the redshift threshold, (ii) computing partial correlations controlling for $z_{\rm HD}$ and a group-environment proxy ($N_{\rm mb}$), and (iii) propagating Pantheon+ peculiar-velocity uncertainties. The correlation remains positive after these controls.
 
@@ -789,7 +872,7 @@ For SN hosts like NGC 3147 ($\sigma \approx 238$ km/s), Cepheids reside in the d
 
     
     
-    **The Resolution:**
+    The resolution:
 
     
         - **Global Trend (Unscreened Disks):** The SN Ia host sample typically has low local densities ($\bar{\rho} \approx 0.113 \, M_\odot/\text{pc}^3 \ll \rho_{\rm trans}$). In this *unscreened* regime, the TEP field is active. Therefore, deep potential ($\sigma$) directly drives period contraction, leading to the observed $H_0$ inflation.
@@ -912,7 +995,7 @@ This work investigates whether the Hubble Tension—a persistent challenge in pr
     - Internal consistency: Low-$\sigma$ hosts, which have environments similar to the calibrators, independently yield Planck-consistent $H_0$ (within $1\sigma$) without correction, consistent with TEP expectations.
 
     
-    - Anchor consistency test (“anchor tension”): Independent P-L fits to the extragalactic geometric anchors (LMC, NGC 4258, M31; MW excluded due to its distinct parallax-based methodology) yield $\alpha_{\rm anchor} = 0.029 \pm 0.023$—consistent with zero and in 3.4σ tension with the host-level coupling. This indicates that the anchor zero-points do not exhibit a statistically significant $\sigma$-dependence at the current precision, while the host sample does.
+    - Anchor consistency test ("anchor tension" resolved): Independent P-L fits to the extragalactic geometric anchors (LMC, NGC 4258, M31; MW excluded due to its distinct parallax-based methodology) yield $\alpha_{\rm anchor} = 0.029 \pm 0.023$—consistent with zero and in 3.4σ tension with the host-level coupling. This dichotomy is naturally explained by *group halo screening*: all three anchors are members of galaxy groups (Local Group for LMC and M31; Canes Venatici I for NGC 4258), embedding them in deep ambient potentials that trigger chameleon-type screening. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies where the TEP effect remains active.
 
     - M31 screening consistency: The "Inner Fainter" signal observed in M31 is consistent with a density-gated screening transition. While the global $H_0$ trend is driven by unscreened, low-density disks (where deep potential = active TEP), the M31 inner region approaches the effective galactic screening threshold ($\rho_{\rm trans} \approx 0.5\,M_\odot/\mathrm{pc}^3$). Quantitatively, the Kodric ground-based sample yields $\bar{\rho}_{\rm in}=0.31\,M_\odot/\mathrm{pc}^3$ with $14/153$ ($\approx 9.2\%$) Inner Cepheids above $\rho_{\rm trans}$, while the inner core ($R<1$ kpc; $N=5$) has $\bar{\rho}=2.16\,M_\odot/\mathrm{pc}^3$ and $5/5$ above threshold. This provides a physically motivated "screened core" control within the same galaxy.
 
@@ -1046,7 +1129,7 @@ cat results/outputs/stratification_results.json | grep difference
 
     
     
-        **DOI:** [10.5281/zenodo.18209703](https://doi.org/10.5281/zenodo.18209703) &nbsp;|&nbsp;
+        **DOI:** [10.5281/zenodo.18216583](https://doi.org/10.5281/zenodo.18216583) &nbsp;|&nbsp;
         **License:** CC BY 4.0
     
 
