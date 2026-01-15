@@ -25,65 +25,9 @@ Application of the TEP conformal correction with an optimized coupling α = 0.58
 
 The anchor–host mismatch (geometric anchors show near-zero coupling, α_anchor ≈ 0, in tension with the host-level α ≈ 0.58) finds a natural resolution in group halo screening: all three anchors (LMC, NGC 4258, M31) are members of galaxy groups, embedding them in deep ambient potentials that trigger chameleon-type screening regardless of internal disk densities. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies that lack this external screening. This framework generates a falsifiable prediction: the TEP distance-ladder bias should be unique to isolated field galaxies and suppressed in group/cluster environments.
 
-## Summary of Key Results and Findings
+## Key Findings
 
-### Primary Results Table
-
-| Metric | Value | Uncertainty | Significance |
-|--------|-------|-------------|--------------|
-| **Sample Size** | 29 SN Ia hosts | SH0ES Cepheid sample | GLS covariance-aware |
-| **Uncorrected H₀ (High-σ)** | 72.45 km/s/Mpc | ± 2.32 | N = 14 hosts |
-| **Uncorrected H₀ (Low-σ)** | 67.82 km/s/Mpc | ± 1.62 | N = 15 hosts |
-| **Environmental Bias (ΔH₀)** | 4.63 km/s/Mpc | — | High-σ minus Low-σ |
-| **TEP-Corrected H₀** | 68.66 km/s/Mpc | ± 1.51 | Unified value |
-| **Planck Tension** | 0.79σ | — | Resolved |
-
-### H₀–σ Correlation
-
-| Statistic | Value | p-value | Interpretation |
-|-----------|-------|---------|----------------|
-| **Spearman ρ** | 0.434 | p = 0.019 | Significant rank correlation |
-| **Pearson r** | 0.428 | p = 0.021 | Significant linear correlation |
-| **Median Split (σ_med)** | ~90 km/s | — | Stratification threshold |
-
-### TEP Correction Parameters
-
-| Parameter | Value | Uncertainty | Notes |
-|-----------|-------|-------------|-------|
-| **Coupling Constant (α)** | 0.58 | ± 0.16 | Optimized via GLS |
-| **Reference σ (σ_ref)** | 75.25 km/s | — | Effective calibrator |
-| **Bias Removed** | ΔH₀ → 0 | — | Environmental trend eliminated |
-
-### M31 Differential Analysis (HST PHAT)
-
-| Region | Wesenheit (W) | Significance | Interpretation |
-|--------|---------------|--------------|----------------|
-| **Inner Bulge (R < 1 kpc)** | Baseline | — | High density (screened) |
-| **Outer Disk** | −0.68 mag | 3.6σ | Inner Fainter (unscreened) |
-| **Color-Matched** | −0.62 mag | — | ΔW = +0.62 ± 0.15 mag |
-
-### Robustness Controls
-
-| Control Variable | Result | Interpretation |
-|------------------|--------|----------------|
-| **Metallicity** | Signal persists | Not driven by [Fe/H] |
-| **Age (Period)** | Signal persists | Not driven by evolutionary effects |
-| **Dust (Color)** | Signal persists | Not driven by extinction |
-| **Jackknife/Bootstrap** | Stable | α robust to resampling |
-| **LOOCV** | Stable | Out-of-sample validation |
-
-### Group Halo Screening (Anchor–Host Mismatch Resolution)
-
-| Anchor | Environment | α_anchor | Notes |
-|--------|-------------|----------|-------|
-| **LMC** | Local Group | ~0 | Group-screened |
-| **NGC 4258** | CVn I Group | ~0 | Group-screened |
-| **M31** | Local Group | ~0 | Group-screened |
-| **SN Ia Hosts** | Field (isolated) | 0.58 | Unscreened |
-
-### Key Interpretation
-
-The Hubble tension may not require new cosmological physics—it may arise from an environmental systematic in Cepheid-based distances. The significant correlation between H₀ and host velocity dispersion (ρ = 0.434, p = 0.019) indicates that Cepheid periods are affected by gravitational potential depth, exactly as TEP predicts. High-σ hosts yield inflated H₀ because their Cepheids experience period contraction that masquerades as diminished luminosity. The TEP correction (α = 0.58) eliminates this environmental trend, yielding H₀ = 68.66 ± 1.51 km/s/Mpc—statistically consistent with Planck (0.79σ). The M31 "Inner Fainter" signal and group halo screening mechanism explain why anchors show no bias while field hosts do.
+Analysis of 29 SH0ES Cepheid hosts reveals a significant correlation between derived H₀ and host galaxy velocity dispersion (ρ = 0.434, p = 0.019). High-σ hosts yield H₀ = 72.45 km/s/Mpc while low-σ hosts yield 67.82 km/s/Mpc—a 4.63 km/s/Mpc environmental bias. Applying the TEP conformal correction (α = 0.58) eliminates this trend, yielding a unified H₀ = 68.66 ± 1.51 km/s/Mpc, reducing Planck tension from 5σ to 0.79σ. A differential analysis within M31 (HST PHAT) detects an "Inner Fainter" signal (+0.68 mag, 3.6σ), explained by density-dependent screening: the high-density bulge is screened while the outer disk is not. The anchor–host mismatch is resolved by group halo screening—all anchors reside in galaxy groups, while SN Ia hosts are biased toward isolated field environments.
 
 ---
 
