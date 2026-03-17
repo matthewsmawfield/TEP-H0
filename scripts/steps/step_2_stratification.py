@@ -514,14 +514,28 @@ class Step2Stratification:
         
         plt.figure(figsize=(14, 9))
         
+        # Propagate mu uncertainty to H0: sigma_H0 = H0 * ln(10)/5 * sigma_mu
+        h0_err = df['h0_derived'] * (np.log(10) / 5) * df['error'] if 'error' in df.columns else None
+
         # Data
-        plt.scatter(df['sigma_inferred'], df['h0_derived'], 
-                   alpha=0.8, 
-                   color=colors['blue'], 
-                   s=100,
-                   edgecolor='white',
-                   label='SN Ia Hosts',
-                   zorder=3)
+        if h0_err is not None:
+            plt.errorbar(df['sigma_inferred'], df['h0_derived'],
+                        yerr=h0_err,
+                        fmt='o',
+                        color=colors['blue'],
+                        markersize=7,
+                        markeredgecolor='white',
+                        markeredgewidth=0.5,
+                        ecolor=colors['blue'],
+                        elinewidth=1.2,
+                        capsize=3,
+                        alpha=0.8,
+                        label='SN Ia Hosts',
+                        zorder=3)
+        else:
+            plt.scatter(df['sigma_inferred'], df['h0_derived'],
+                       alpha=0.8, color=colors['blue'], s=100,
+                       edgecolor='white', label='SN Ia Hosts', zorder=3)
         
         # Regression line
         if len(df) > 1:
