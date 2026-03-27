@@ -4,7 +4,7 @@ const { spawn } = require('child_process');
 const path = require('path');
 const fs = require('fs');
 const net = require('net');
-const { buildStaticSite } = require('./build.js');
+const { buildStaticSite, buildJournalSite } = require('./build.js');
 const { HTMLToMarkdownConverter } = require('./html-to-markdown.js');
 
 class DevServer {
@@ -31,6 +31,7 @@ class DevServer {
         console.log('\n🔄 Rebuilding site...');
         try {
             await buildStaticSite();
+            await buildJournalSite();
             console.log('📝 Generating markdown...');
             const converter = new HTMLToMarkdownConverter();
             await converter.convertSiteToMarkdown();
@@ -54,7 +55,10 @@ class DevServer {
         const watcher = chokidar.watch([
             path.join(__dirname, 'components'),
             path.join(__dirname, 'index.html'),
+            path.join(__dirname, 'journal.html'),
             path.join(__dirname, 'manifest.json'),
+            path.join(__dirname, 'manifest-journal.json'),
+            path.join(__dirname, 'styles'),
             path.join(__dirname, 'figures')
         ], { ignored: ['dist/**'], persistent: true, ignoreInitial: true });
 
