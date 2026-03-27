@@ -1,122 +1,122 @@
-[10:39:12] [INFO] 
-[10:39:12] [INFO] ================================================================================
-[10:39:12] [INFO]    Starting Step 3: TEP Correction
-[10:39:12] [INFO] ================================================================================
-[10:39:12] [INFO] 
-[10:39:12] [INFO] Loading Data...
-[10:39:12] [INFO] Loaded 29 hosts for correction.
-[10:39:12] [INFO] Calculating Effective Calibrator Sigma...
-[10:39:12] [INFO] Using SH0ES-motivated weights (based on P-L contribution).
-[10:39:12] [INFO] Geometric Anchor Sample
-[10:39:12] [INFO] +--------+--------------+--------+----------------------------+
-[10:39:12] [INFO] | Anchor | Sigma (km/s) | Weight | Description                |
-[10:39:12] [INFO] +--------+--------------+--------+----------------------------+
-[10:39:12] [INFO] | MW     | 30.0         | 0.20   | Milky Way Disk (Bovy+2012) |
-[10:39:12] [INFO] | LMC    | 24.0         | 0.25   | LMC Disk (vdMarel+2002)    |
-[10:39:12] [INFO] | N4258  | 115.0        | 0.55   | NGC 4258 Disk (K&H2013)    |
-[10:39:12] [INFO] +--------+--------------+--------+----------------------------+
-[10:39:12] [SUCCESS] Effective Reference Sigma (σ_ref): 75.25 km/s
-[10:39:12] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:12] [INFO] Optimization converged: True
-[10:39:12] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:12] [INFO] Applying Conformal Correction...
-[10:39:12] [INFO] Sample Corrections
-[10:39:12] [INFO] +----------+-------+----------+------------+----------+
-[10:39:12] [INFO] | Host     | Sigma | H0 (Raw) | Corr (mag) | H0 (TEP) |
-[10:39:12] [INFO] +----------+-------+----------+------------+----------+
-[10:39:12] [INFO] | NGC 5917 | 53.1  | 72.56    | -0.088     | 75.55    |
-[10:39:12] [INFO] | NGC 2608 | 83.0  | 76.42    | +0.025     | 75.56    |
-[10:39:12] [INFO] | NGC 3370 | 89.5  | 65.72    | +0.044     | 64.41    |
-[10:39:12] [INFO] | NGC 4639 | 91.4  | 47.25    | +0.049     | 46.20    |
-[10:39:12] [INFO] | NGC 976  | 212.4 | 76.91    | +0.261     | 68.19    |
-[10:39:12] [INFO] +----------+-------+----------+------------+----------+
-[10:39:12] [INFO] ------------------------------------------------------------
-[10:39:12] [SUCCESS] UNIFIED H0 (Statistical): 68.66 +/- 1.30 km/s/Mpc
-[10:39:12] [INFO] Note: This error (SEM) assumes alpha is fixed/known perfectly.
-[10:39:12] [INFO] ------------------------------------------------------------
-[10:39:12] [PROCESS] Generating Comparison Plots...
-[10:39:12] [SUCCESS] Saved comparison plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/tep_correction_comparison.png
-[10:39:12] [SUCCESS] Copied comparison plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/tep_correction_comparison.png
-[10:39:12] [INFO] Bootstrap Uncertainty Analysis (N=1000)...
-[10:39:14] [INFO] Bootstrap Results (Includes Optimization Uncertainty)
-[10:39:14] [INFO] +--------------+-------+------------------------+----------------+
-[10:39:14] [INFO] | Parameter    | Mean  | Std Dev (Robust Error) | 95% CI         |
-[10:39:14] [INFO] +--------------+-------+------------------------+----------------+
-[10:39:14] [INFO] | Alpha (α)    | 0.572 | 0.160                  | [0.254, 0.875] |
-[10:39:14] [INFO] | H0 (Unified) | 68.62 | 1.51                   | [65.34, 71.46] |
-[10:39:14] [INFO] +--------------+-------+------------------------+----------------+
-[10:39:14] [PROCESS] Sensitivity Analysis (Sigma Ref Scan)...
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:14] [INFO] Optimizing TEP Coupling (Alpha)...
-[10:39:14] [INFO] Optimization converged: True
-[10:39:14] [SUCCESS] Optimal Coupling Constant (α): 0.5799
-[10:39:15] [SUCCESS] Saved sensitivity plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/sensitivity_h0_vs_sigmaref.png
-[10:39:15] [SUCCESS] Copied sensitivity plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/sensitivity_h0_vs_sigmaref.png
-[10:39:15] [INFO] Final Tension Analysis
-[10:39:15] [INFO] Planck 2018 Value: 67.4 +/- 0.5
-[10:39:15] [INFO] ------------------------------------------------------------
-[10:39:15] [INFO] TEP Unified Value: 68.66
-[10:39:15] [INFO]   +/- 1.30 (Statistical SEM)
-[10:39:15] [INFO]   +/- 1.51 (Robust Bootstrap)
-[10:39:15] [INFO] ------------------------------------------------------------
-[10:39:15] [INFO] Tension (Statistical): 0.90 sigma
-[10:39:15] [INFO] Tension (Robust):      0.79 sigma
-[10:39:15] [SUCCESS] CONCLUSION: Result is consistent with Planck CMB (Robust).
-[10:39:15] [SUCCESS] Saved results JSON to /Users/matthewsmawfield/www/TEP-H0/results/outputs/tep_correction_results.json
-[10:39:15] [SUCCESS] Saved corrected data to /Users/matthewsmawfield/www/TEP-H0/results/outputs/tep_corrected_h0.csv
+[14:21:54] [INFO] 
+[14:21:54] [INFO] ================================================================================
+[14:21:54] [INFO]    Starting Step 3: TEP Correction
+[14:21:54] [INFO] ================================================================================
+[14:21:54] [INFO] 
+[14:21:54] [INFO] Loading Data...
+[14:21:54] [INFO] Loaded 29 hosts for correction.
+[14:21:54] [INFO] Calculating Effective Calibrator Sigma...
+[14:21:54] [INFO] Using SH0ES-motivated weights (based on P-L contribution).
+[14:21:54] [INFO] Geometric Anchor Sample
+[14:21:54] [INFO] +--------+--------------+--------+----------------------------+
+[14:21:54] [INFO] | Anchor | Sigma (km/s) | Weight | Description                |
+[14:21:54] [INFO] +--------+--------------+--------+----------------------------+
+[14:21:54] [INFO] | MW     | 30.0         | 0.20   | Milky Way Disk (Bovy+2012) |
+[14:21:54] [INFO] | LMC    | 24.0         | 0.25   | LMC Disk (vdMarel+2002)    |
+[14:21:54] [INFO] | N4258  | 115.0        | 0.55   | NGC 4258 Disk (K&H2013)    |
+[14:21:54] [INFO] +--------+--------------+--------+----------------------------+
+[14:21:54] [SUCCESS] Effective Reference Sigma (σ_ref): 75.25 km/s
+[14:21:54] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:54] [INFO] Optimization converged: True
+[14:21:54] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:54] [INFO] Applying Conformal Correction...
+[14:21:54] [INFO] Sample Corrections
+[14:21:54] [INFO] +----------+-------+----------+------------+----------+
+[14:21:54] [INFO] | Host     | Sigma | H0 (Raw) | Corr (mag) | H0 (TEP) |
+[14:21:54] [INFO] +----------+-------+----------+------------+----------+
+[14:21:54] [INFO] | NGC 5917 | 53.1  | 72.56    | -0.088     | 75.55    |
+[14:21:54] [INFO] | NGC 2608 | 83.0  | 76.42    | +0.025     | 75.56    |
+[14:21:54] [INFO] | NGC 3370 | 89.5  | 65.72    | +0.044     | 64.41    |
+[14:21:54] [INFO] | NGC 4639 | 91.4  | 47.25    | +0.049     | 46.20    |
+[14:21:54] [INFO] | NGC 976  | 212.4 | 76.91    | +0.261     | 68.19    |
+[14:21:54] [INFO] +----------+-------+----------+------------+----------+
+[14:21:54] [INFO] ------------------------------------------------------------
+[14:21:54] [SUCCESS] UNIFIED H0 (Statistical): 68.66 +/- 1.30 km/s/Mpc
+[14:21:54] [INFO] Note: This error (SEM) assumes alpha is fixed/known perfectly.
+[14:21:54] [INFO] ------------------------------------------------------------
+[14:21:54] [PROCESS] Generating Comparison Plots...
+[14:21:54] [SUCCESS] Saved comparison plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/tep_correction_comparison.png
+[14:21:54] [SUCCESS] Copied comparison plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/tep_correction_comparison.png
+[14:21:54] [INFO] Bootstrap Uncertainty Analysis (N=1000)...
+[14:21:56] [INFO] Bootstrap Results (Includes Optimization Uncertainty)
+[14:21:56] [INFO] +--------------+-------+------------------------+----------------+
+[14:21:56] [INFO] | Parameter    | Mean  | Std Dev (Robust Error) | 95% CI         |
+[14:21:56] [INFO] +--------------+-------+------------------------+----------------+
+[14:21:56] [INFO] | Alpha (α)    | 0.572 | 0.160                  | [0.254, 0.875] |
+[14:21:56] [INFO] | H0 (Unified) | 68.62 | 1.51                   | [65.34, 71.46] |
+[14:21:56] [INFO] +--------------+-------+------------------------+----------------+
+[14:21:56] [PROCESS] Sensitivity Analysis (Sigma Ref Scan)...
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [INFO] Optimizing TEP Coupling (Alpha)...
+[14:21:56] [INFO] Optimization converged: True
+[14:21:56] [SUCCESS] Optimal Coupling Constant (α): 0.5799
+[14:21:56] [SUCCESS] Saved sensitivity plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/sensitivity_h0_vs_sigmaref.png
+[14:21:56] [SUCCESS] Copied sensitivity plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/sensitivity_h0_vs_sigmaref.png
+[14:21:56] [INFO] Final Tension Analysis
+[14:21:56] [INFO] Planck 2018 Value: 67.4 +/- 0.5
+[14:21:56] [INFO] ------------------------------------------------------------
+[14:21:56] [INFO] TEP Unified Value: 68.66
+[14:21:56] [INFO]   +/- 1.30 (Statistical SEM)
+[14:21:56] [INFO]   +/- 1.51 (Robust Bootstrap)
+[14:21:56] [INFO] ------------------------------------------------------------
+[14:21:56] [INFO] Tension (Statistical): 0.90 sigma
+[14:21:56] [INFO] Tension (Robust):      0.79 sigma
+[14:21:56] [SUCCESS] CONCLUSION: Result is consistent with Planck CMB (Robust).
+[14:21:56] [SUCCESS] Saved results JSON to /Users/matthewsmawfield/www/TEP-H0/results/outputs/tep_correction_results.json
+[14:21:56] [SUCCESS] Saved corrected data to /Users/matthewsmawfield/www/TEP-H0/results/outputs/tep_corrected_h0.csv
