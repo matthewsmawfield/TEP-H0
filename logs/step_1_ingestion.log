@@ -1,49 +1,49 @@
-[10:39:11] [INFO] 
-[10:39:11] [INFO] ================================================================================
-[10:39:11] [INFO]    Starting Step 1: Data Ingestion
-[10:39:11] [INFO] ================================================================================
-[10:39:11] [INFO] 
-[10:39:11] [INFO] Reconstructing SH0ES Cepheid Catalog...
-[10:39:11] [INFO] Catalog Reconstruction Verification:
-[10:39:11] [INFO] SH0ES Cepheid Sample (First 3)
-[10:39:11] [INFO] +--------+------------+-------------+------------+
-[10:39:11] [INFO] | Source | Data (mag) | Period Term | Metal Term |
-[10:39:11] [INFO] +--------+------------+-------------+------------+
-[10:39:11] [INFO] | M101   | 23.691     | -0.164      | 0.053      |
-[10:39:11] [INFO] | M101   | 22.955     | -0.163      | 0.089      |
-[10:39:11] [INFO] | M101   | 23.535     | -0.157      | 0.089      |
-[10:39:11] [INFO] +--------+------------+-------------+------------+
-[10:39:11] [SUCCESS] Saved reconstructed catalog with 3130 Cepheids to /Users/matthewsmawfield/www/TEP-H0/data/interim/reconstructed_shoes_cepheids.csv
-[10:39:11] [INFO] Calculating R22 Distances (GLS Solution)...
-[10:39:11] [INFO] Solving GLS system: 3490 observations, 46 parameters
-[10:39:12] [SUCCESS] Saved mu covariance matrix to /Users/matthewsmawfield/www/TEP-H0/data/interim/r22_mu_covariance.npy
-[10:39:12] [SUCCESS] Saved mu covariance labels to /Users/matthewsmawfield/www/TEP-H0/data/interim/r22_mu_covariance_labels.json
-[10:39:12] [INFO] Recovered Distance Moduli
-[10:39:12] [INFO] +---------+-----------------------+--------+
-[10:39:12] [INFO] | Host ID | Distance Modulus (mu) | Error  |
-[10:39:12] [INFO] +---------+-----------------------+--------+
-[10:39:12] [INFO] | M101    | 29.1595               | 0.0388 |
-[10:39:12] [INFO] | M1337   | 32.9156               | 0.0821 |
-[10:39:12] [INFO] | N0691   | 32.8222               | 0.0877 |
-[10:39:12] [INFO] +---------+-----------------------+--------+
-[10:39:12] [SUCCESS] Saved 40 distances to /Users/matthewsmawfield/www/TEP-H0/data/interim/r22_distances.csv
-[10:39:12] [INFO] Using existing coordinates file.
-[10:39:12] [INFO] Checking for Pantheon+ Supernova Catalog...
-[10:39:12] [INFO] Pantheon+ dataset already exists locally.
-[10:39:12] [INFO] Cross-Matching & Property Enrichment...
-[10:39:12] [INFO] Matched 37 SH0ES hosts to Pantheon+ SN catalog.
-[10:39:12] [INFO] Loaded 41 velocity dispersions from literature CSV: /Users/matthewsmawfield/www/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv
-[10:39:12] [INFO] Found measured σ for 41/41 hosts (TEP-independent).
-[10:39:12] [INFO] Processed Host Properties (Top 5)
-[10:39:12] [INFO] +----------+---------+---------+--------------+
-[10:39:12] [INFO] | Host     | z_HD    | LogMass | Sigma (km/s) |
-[10:39:12] [INFO] +----------+---------+---------+--------------+
-[10:39:12] [INFO] | LMC      | nan     | -       | 27.4         |
-[10:39:12] [INFO] | M 101    | 0.00122 | 10.68   | 23.6         |
-[10:39:12] [INFO] | NGC 1337 | nan     | -       | 93.7         |
-[10:39:12] [INFO] | M 31     | nan     | -       | 169.8        |
-[10:39:12] [INFO] | NGC 0691 | 0.00855 | 10.83   | 107.5        |
-[10:39:12] [INFO] +----------+---------+---------+--------------+
-[10:39:12] [SUCCESS] Processed 41 hosts. Found Sigma for 41 hosts.
-[10:39:12] [SUCCESS] Saved processed host data to /Users/matthewsmawfield/www/TEP-H0/data/processed/hosts_processed.csv
-[10:39:12] [SUCCESS] Step 1 Complete.
+[18:13:50] [INFO] 
+[18:13:50] [INFO] ================================================================================
+[18:13:50] [INFO]    Starting Step 1: Data Ingestion
+[18:13:50] [INFO] ================================================================================
+[18:13:50] [INFO] 
+[18:13:50] [INFO] Reconstructing SH0ES Cepheid Catalog...
+[18:13:50] [INFO] Catalog Reconstruction Verification:
+[18:13:50] [INFO] SH0ES Cepheid Sample (First 3)
+[18:13:50] [INFO] +--------+------------+-------------+------------+
+[18:13:50] [INFO] | Source | Data (mag) | Period Term | Metal Term |
+[18:13:50] [INFO] +--------+------------+-------------+------------+
+[18:13:50] [INFO] | M101   | 23.691     | -0.164      | 0.053      |
+[18:13:50] [INFO] | M101   | 22.955     | -0.163      | 0.089      |
+[18:13:50] [INFO] | M101   | 23.535     | -0.157      | 0.089      |
+[18:13:50] [INFO] +--------+------------+-------------+------------+
+[18:13:50] [SUCCESS] Saved reconstructed catalog with 3130 Cepheids to /Users/matthewsmawfield/www/TEP-H0/data/interim/reconstructed_shoes_cepheids.csv
+[18:13:50] [INFO] Calculating R22 Distances (GLS Solution)...
+[18:13:50] [INFO] Solving GLS system: 3490 observations, 46 parameters
+[18:13:50] [SUCCESS] Saved mu covariance matrix to /Users/matthewsmawfield/www/TEP-H0/data/interim/r22_mu_covariance.npy
+[18:13:50] [SUCCESS] Saved mu covariance labels to /Users/matthewsmawfield/www/TEP-H0/data/interim/r22_mu_covariance_labels.json
+[18:13:50] [INFO] Recovered Distance Moduli
+[18:13:50] [INFO] +---------+-----------------------+--------+
+[18:13:50] [INFO] | Host ID | Distance Modulus (mu) | Error  |
+[18:13:50] [INFO] +---------+-----------------------+--------+
+[18:13:50] [INFO] | M101    | 29.1595               | 0.0388 |
+[18:13:50] [INFO] | M1337   | 32.9156               | 0.0821 |
+[18:13:50] [INFO] | N0691   | 32.8222               | 0.0877 |
+[18:13:50] [INFO] +---------+-----------------------+--------+
+[18:13:50] [SUCCESS] Saved 40 distances to /Users/matthewsmawfield/www/TEP-H0/data/interim/r22_distances.csv
+[18:13:50] [INFO] Using existing coordinates file.
+[18:13:50] [INFO] Checking for Pantheon+ Supernova Catalog...
+[18:13:50] [INFO] Pantheon+ dataset already exists locally.
+[18:13:50] [INFO] Cross-Matching & Property Enrichment...
+[18:13:50] [INFO] Matched 37 SH0ES hosts to Pantheon+ SN catalog.
+[18:13:50] [INFO] Loaded 41 velocity dispersions from literature CSV: /Users/matthewsmawfield/www/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv
+[18:13:50] [INFO] Found measured σ for 41/41 hosts (TEP-independent).
+[18:13:50] [INFO] Processed Host Properties (Top 5)
+[18:13:50] [INFO] +----------+---------+---------+--------------+
+[18:13:50] [INFO] | Host     | z_HD    | LogMass | Sigma (km/s) |
+[18:13:50] [INFO] +----------+---------+---------+--------------+
+[18:13:50] [INFO] | LMC      | nan     | -       | 27.4         |
+[18:13:50] [INFO] | M 101    | 0.00122 | 10.68   | 23.6         |
+[18:13:50] [INFO] | NGC 1337 | nan     | -       | 93.7         |
+[18:13:50] [INFO] | M 31     | nan     | -       | 169.8        |
+[18:13:50] [INFO] | NGC 0691 | 0.00855 | 10.83   | 107.5        |
+[18:13:50] [INFO] +----------+---------+---------+--------------+
+[18:13:50] [SUCCESS] Processed 41 hosts. Found Sigma for 41 hosts.
+[18:13:50] [SUCCESS] Saved processed host data to /Users/matthewsmawfield/www/TEP-H0/data/processed/hosts_processed.csv
+[18:13:50] [SUCCESS] Step 1 Complete.

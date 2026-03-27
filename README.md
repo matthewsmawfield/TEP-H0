@@ -1,15 +1,15 @@
 # The Cepheid Bias: Resolving the Hubble Tension
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18216583.svg)](https://doi.org/10.5281/zenodo.18216583)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18209702.svg)](https://doi.org/10.5281/zenodo.18209702)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 ![TEP-H0: Cepheid Bias](site/public/image.webp)
 
 **Author:** Matthew Lukin Smawfield  
-**Version:** v0.3 (Kingston upon Hull)  
-**Date:** 12 January 2026  
+**Version:** v0.4 (Kingston upon Hull)  
+**Date:** 27 March 2026  
 **Status:** Preprint (Open for Collaboration)  
-**DOI:** [10.5281/zenodo.18216583](https://doi.org/10.5281/zenodo.18216583)  
+**DOI:** [10.5281/zenodo.18209702](https://doi.org/10.5281/zenodo.18209702)  
 **Website:** [https://mlsmawfield.com/tep/h0/](https://mlsmawfield.com/tep/h0/)  
 **Paper Series:** TEP Series: Paper 12 (Cosmological Observations)
 
@@ -46,7 +46,7 @@ Analysis of 29 SH0ES Cepheid hosts reveals a significant correlation between der
 | **Paper 9** | [TEP-SLR](https://github.com/matthewsmawfield/TEP-SLR) | Satellite Laser Ranging Validation | [10.5281/zenodo.18064582](https://doi.org/10.5281/zenodo.18064582) |
 | **Paper 10** | [TEP-EXP](https://github.com/matthewsmawfield/TEP-EXP) | What Do Precision Tests of General Relativity Actually Measure? | [10.5281/zenodo.18109761](https://doi.org/10.5281/zenodo.18109761) |
 | **Paper 11** | [TEP-COS](https://github.com/matthewsmawfield/TEP-COS) | Suppressed Density Scaling in Globular Cluster Pulsars | [10.5281/zenodo.18165798](https://doi.org/10.5281/zenodo.18165798) |
-| **Paper 12** | **TEP-H0** (This repo) | The Cepheid Bias: Resolving the Hubble Tension | [10.5281/zenodo.18216583](https://doi.org/10.5281/zenodo.18216583) |
+| **Paper 12** | **TEP-H0** (This repo) | The Cepheid Bias: Resolving the Hubble Tension | [10.5281/zenodo.18209702](https://doi.org/10.5281/zenodo.18209702) |
 
 ## Directory Structure
 
@@ -149,8 +149,8 @@ The analysis demonstrates a statistically significant host-level H₀–σ corre
   author={Smawfield, Matthew Lukin},
   journal={Zenodo},
   year={2026},
-  doi={10.5281/zenodo.18216583},
-  note={Preprint v0.3 (Kingston upon Hull)}
+  doi={10.5281/zenodo.18209702},
+  note={Preprint v0.4 (Kingston upon Hull)}
 }
 ```
 

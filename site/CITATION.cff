@@ -17,8 +17,8 @@ abstract: |
 
       *Keywords:* Hubble tension – Cepheid variables – distance ladder – velocity dispersion – temporal equivalence principle – gravitational time dilation
 license: CC-BY-4.0
-version: 0.2
-date-released: 2026-01-11
+version: 0.4
+date-released: 2026-03-27
 keywords:
   - Hubble Tension
   - Cepheids
@@ -34,7 +34,7 @@ doi: 10.5281/zenodo.18209702
 
 preferred-citation:
   type: article
-  title: "The Cepheid Bias: Resolving the Hubble Tension (Kingston v0.2)"
+  title: "The Cepheid Bias: Resolving the Hubble Tension (Kingston upon Hull v0.4)"
   authors:
     - family-names: Smawfield
       given-names: Matthew Lukin

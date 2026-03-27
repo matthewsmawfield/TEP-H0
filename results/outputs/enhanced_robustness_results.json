@@ -101,10 +101,10 @@
       "h0_error": 1.8090149880958704
     },
     "gold_standard": {
-      "n": 0,
-      "alpha": null,
-      "unified_h0": null,
-      "h0_error": null
+      "n": 8,
+      "alpha": 0.42765625000000074,
+      "unified_h0": 65.90310412695055,
+      "h0_error": 3.3817789005737975
     }
   }
 }

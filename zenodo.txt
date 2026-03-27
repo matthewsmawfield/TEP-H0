@@ -1,3 +1,9 @@
+Title: The Cepheid Bias: Resolving the Hubble Tension
+Author: Matthew Lukin Smawfield
+Version: v0.4 (Kingston upon Hull)
+Date: 2026-03-27
+DOI: 10.5281/zenodo.18209702
+
 The Hubble tension—the persistent ~5-sigma discrepancy between local distance-ladder measurements (H0 ~ 73 km/s/Mpc) and early-universe CMB inference (H0 = 67.4 +/- 0.5 km/s/Mpc)—may reflect residual systematics in the calibration of Cepheid distances. This study tests an environment-dependent bias motivated by the Temporal Equivalence Principle (TEP): periodic phenomena used as clocks can acquire a host-dependent shift correlated with gravitational potential depth.
 
 Using the SH0ES Cepheid host sample (N=29) and Pantheon+ Hubble-diagram redshifts, the relationship between derived host-level H0 values and host central velocity dispersion sigma (a TEP-independent kinematic proxy for potential depth) is examined. A statistically significant correlation is found (Spearman rho = 0.434, p = 0.019; Pearson r = 0.428, p = 0.021). Propagating the full SH0ES GLS distance-modulus covariance into a non-diagonal covariance for the H0 vector, a correlated-null Monte Carlo test yields p_cov = 0.026 (Spearman) and p_cov = 0.039 (Pearson), with an effective sample size N_eff ~ 7.5. A median split at sigma_med ~ 90 km/s gives H0 = 67.82 +/- 1.62 km/s/Mpc (low-sigma; N=15) versus 72.45 +/- 2.32 km/s/Mpc (high-sigma; N=14), implying Delta H0 = 4.63 km/s/Mpc.
