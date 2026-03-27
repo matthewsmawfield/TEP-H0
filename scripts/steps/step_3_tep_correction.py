@@ -367,9 +367,22 @@ class Step3TEPCorrection:
         # Use a wide figure for side-by-side
         plt.figure(figsize=(14, 9))
         
+        # Propagate mu uncertainty to H0: sigma_H0 = H0 * ln(10)/5 * sigma_mu
+        h0_err = df['h0_derived'] * (np.log(10) / 5) * df['error'] if 'error' in df.columns else None
+        h0c_err = df['h0_corrected'] * (np.log(10) / 5) * df['error'] if 'error' in df.columns else None
+
+        eb_kw = dict(fmt='o', markersize=6, markeredgecolor='white', markeredgewidth=0.5,
+                     elinewidth=1.2, capsize=3, alpha=0.8)
+
         # Original
         plt.subplot(1, 2, 1)
-        plt.scatter(df['sigma_inferred'], df['h0_derived'], alpha=0.8, s=80, color=colors.get('light_blue', '#4b6785'), label='Original', edgecolor='white', linewidth=0.5)
+        if h0_err is not None:
+            plt.errorbar(df['sigma_inferred'], df['h0_derived'], yerr=h0_err,
+                        color=colors.get('light_blue', '#4b6785'), ecolor=colors.get('light_blue', '#4b6785'),
+                        label='Original', **eb_kw)
+        else:
+            plt.scatter(df['sigma_inferred'], df['h0_derived'], alpha=0.8, s=80,
+                       color=colors.get('light_blue', '#4b6785'), label='Original', edgecolor='white', linewidth=0.5)
         
         if len(df) > 1:
             z = np.polyfit(df['sigma_inferred'], df['h0_derived'], 1)
@@ -385,7 +398,13 @@ class Step3TEPCorrection:
         
         # Corrected
         plt.subplot(1, 2, 2)
-        plt.scatter(df['sigma_inferred'], df['h0_corrected'], alpha=0.8, s=80, color=colors['blue'], label='TEP Corrected', edgecolor='white', linewidth=0.5)
+        if h0c_err is not None:
+            plt.errorbar(df['sigma_inferred'], df['h0_corrected'], yerr=h0c_err,
+                        color=colors['blue'], ecolor=colors['blue'],
+                        label='TEP Corrected', **eb_kw)
+        else:
+            plt.scatter(df['sigma_inferred'], df['h0_corrected'], alpha=0.8, s=80,
+                       color=colors['blue'], label='TEP Corrected', edgecolor='white', linewidth=0.5)
         
         if len(df) > 1:
             z2 = np.polyfit(df['sigma_inferred'], df['h0_corrected'], 1)
