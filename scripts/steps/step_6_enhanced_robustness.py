@@ -397,8 +397,17 @@ class Step6EnhancedRobustness:
         alpha_stellar, h0_stellar, err_stellar = optimize_alpha(df_stellar)
         
         # Gold standard only
+        def _source_class(v: str) -> str:
+            s = str(v).lower().strip()
+            if 'kormendy' in s: return 'Kormendy&Ho2013'
+            if 'sdss' in s: return 'SDSS DR7'
+            if 'ho+2009' in s or 'ho+09' in s or 'j/apjs/183/1' in s: return 'Ho+2009'
+            return str(v).strip()
+            
+        sigma_prov_temp = sigma_prov.copy()
+        sigma_prov_temp['sigma_source_class'] = sigma_prov_temp['sigma_source'].apply(_source_class)
         gold_sources = ['Kormendy&Ho2013', 'SDSS DR7', 'Ho+2009']
-        gold_prov = sigma_prov[sigma_prov['sigma_source'].isin(gold_sources)]
+        gold_prov = sigma_prov_temp[sigma_prov_temp['sigma_source_class'].isin(gold_sources)]
         gold_hosts = gold_prov['normalized_name'].tolist()
         df_gold = df[df['normalized_name'].isin(gold_hosts)].copy()
         alpha_gold, h0_gold, err_gold = optimize_alpha(df_gold)

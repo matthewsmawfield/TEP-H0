@@ -10,7 +10,7 @@ Usage:
     python process_pdf.py <input_pdf> [--quality ebook|printer|prepress|default]
     
 Example:
-    python process_pdf.py site/public/docs/Smawfield_2026_TEP-H0_v0.2_KingstonUponHull.pdf --quality ebook
+    python process_pdf.py site/public/docs/Smawfield_2026_TEP-H0_v0.4_KingstonUponHull.pdf --quality ebook
 """
 
 import subprocess
@@ -108,7 +108,7 @@ def main():
     )
     parser.add_argument(
         '--doi',
-        default='10.5281/zenodo.18209703',
+        default='10.5281/zenodo.18209702',
         help='DOI to embed in metadata'
     )
     
@@ -203,7 +203,7 @@ def main():
         'XMP-dc:Identifier': f'doi:{args.doi}',
         'XMP-dc:Source': 'https://matthewsmawfield.github.io/TEP-H0/',
         'XMP-dc:Publisher': 'Zenodo',
-        'XMP-dc:Date': '2026-01-12',
+        'XMP-dc:Date': '2026-03-27',
         'XMP-dc:Type': 'Preprint',
         'XMP-dc:Format': 'application/pdf',
         'XMP-dc:Language': 'en',
@@ -211,7 +211,7 @@ def main():
         # PRISM (Publishing Requirements for Industry Standard Metadata)
         'XMP-prism:DOI': args.doi,
         'XMP-prism:URL': 'https://matthewsmawfield.github.io/TEP-H0/',
-        'XMP-prism:VersionIdentifier': '0.3',
+        'XMP-prism:VersionIdentifier': '0.4',
         'XMP-prism:PublicationName': 'TEP Research Series',
         
         # PDF/A metadata

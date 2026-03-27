@@ -1,39 +1,39 @@
-[10:39:59] [INFO] 
-[10:39:59] [INFO] ================================================================================
-[10:39:59] [INFO]    Starting Step 7: LMC Replication
-[10:39:59] [INFO] ================================================================================
-[10:39:59] [INFO] 
-[10:39:59] [INFO] Initiating LMC replication (OGLE classical Cepheids)
-[10:39:59] [PROCESS] Fetching OGLE-IV Cepheid catalog from VizieR...
-[10:39:59] [SUCCESS] Retrieved 4706 OGLE objects (raw table).
-[10:39:59] [INFO] After LMC sky cut (<= 12.0 deg): N=4705
-[10:39:59] [INFO] After fundamental-mode filter: N=2314
-[10:39:59] [INFO] After period cut (2.5 < P < 100.0 d): N=2093
-[10:39:59] [INFO] LMC Subsamples
-[10:39:59] [INFO] +--------+--------------------------+--------------+
-[10:39:59] [INFO] | Region | Radius selection         | N (Cepheids) |
-[10:39:59] [INFO] +--------+--------------------------+--------------+
-[10:39:59] [INFO] | Inner  | R_kpc <= 0.92 (20th pct) | 419          |
-[10:39:59] [INFO] | Outer  | R_kpc >= 2.93 (80th pct) | 419          |
-[10:39:59] [INFO] +--------+--------------------------+--------------+
-[10:39:59] [INFO] Detected Offset (Inner - Outer): +0.0284 mag (3.3 sigma)
-[10:39:59] [SUCCESS] Saved results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/lmc_results.csv
-[10:39:59] [INFO] Running LMC robustness suite...
-[10:40:16] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/TEP-H0/results/outputs/lmc_robustness_summary.csv
-[10:40:16] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/TEP-H0/results/outputs/lmc_robustness_summary.json
-[10:40:16] [INFO] LMC Differential Robustness Summary
-[10:40:16] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
-[10:40:16] [INFO] | Test               | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |
-[10:40:16] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
-[10:40:16] [INFO] | Baseline           | 419  | 419   | -         | +0.0284     | 0.0086  | -                  |
-[10:40:16] [INFO] | Matched logP       | 419  | 419   | 340.0     | +0.0285     | 0.0092  | [+0.0191, +0.0378] |
-[10:40:16] [INFO] | Matched logP+color | 419  | 419   | 300.0     | +0.0361     | 0.0076  | [+0.0285, +0.0437] |
-[10:40:16] [INFO] | MV match (Type)    | 419  | 419   | 414       | +0.0304     | 0.0054  | [+0.0251, +0.0358] |
-[10:40:16] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
-[10:40:16] [PROCESS] Generating LMC differential P–L plot...
-[10:40:16] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/lmc_differential_pl.png
-[10:40:16] [PROCESS] Generating LMC robustness plot...
-[10:40:17] [SUCCESS] Saved robustness plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/lmc_differential_robustness.png
-[10:40:17] [SUCCESS] Copied robustness plot to public figures directory.
-[10:40:17] [SUCCESS] Copied plot to public figures directory.
-[10:40:17] [SUCCESS] Step 7 Complete.
+[18:15:39] [INFO] 
+[18:15:39] [INFO] ================================================================================
+[18:15:39] [INFO]    Starting Step 7: LMC Replication
+[18:15:39] [INFO] ================================================================================
+[18:15:39] [INFO] 
+[18:15:39] [INFO] Initiating LMC replication (OGLE classical Cepheids)
+[18:15:39] [PROCESS] Fetching OGLE-IV Cepheid catalog from VizieR...
+[18:15:41] [SUCCESS] Retrieved 4706 OGLE objects (raw table).
+[18:15:41] [INFO] After LMC sky cut (<= 12.0 deg): N=4705
+[18:15:41] [INFO] After fundamental-mode filter: N=2314
+[18:15:41] [INFO] After period cut (2.5 < P < 100.0 d): N=2093
+[18:15:41] [INFO] LMC Subsamples
+[18:15:41] [INFO] +--------+--------------------------+--------------+
+[18:15:41] [INFO] | Region | Radius selection         | N (Cepheids) |
+[18:15:41] [INFO] +--------+--------------------------+--------------+
+[18:15:41] [INFO] | Inner  | R_kpc <= 0.92 (20th pct) | 419          |
+[18:15:41] [INFO] | Outer  | R_kpc >= 2.93 (80th pct) | 419          |
+[18:15:41] [INFO] +--------+--------------------------+--------------+
+[18:15:41] [INFO] Detected Offset (Inner - Outer): +0.0284 mag (3.3 sigma)
+[18:15:41] [SUCCESS] Saved results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/lmc_results.csv
+[18:15:41] [INFO] Running LMC robustness suite...
+[18:16:00] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/TEP-H0/results/outputs/lmc_robustness_summary.csv
+[18:16:00] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/TEP-H0/results/outputs/lmc_robustness_summary.json
+[18:16:00] [INFO] LMC Differential Robustness Summary
+[18:16:00] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
+[18:16:00] [INFO] | Test               | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |
+[18:16:00] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
+[18:16:00] [INFO] | Baseline           | 419  | 419   | -         | +0.0284     | 0.0086  | -                  |
+[18:16:00] [INFO] | Matched logP       | 419  | 419   | 340.0     | +0.0285     | 0.0092  | [+0.0191, +0.0378] |
+[18:16:00] [INFO] | Matched logP+color | 419  | 419   | 300.0     | +0.0361     | 0.0076  | [+0.0285, +0.0437] |
+[18:16:00] [INFO] | MV match (Type)    | 419  | 419   | 414       | +0.0304     | 0.0054  | [+0.0251, +0.0358] |
+[18:16:00] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
+[18:16:00] [PROCESS] Generating LMC differential P–L plot...
+[18:16:00] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/lmc_differential_pl.png
+[18:16:00] [PROCESS] Generating LMC robustness plot...
+[18:16:00] [SUCCESS] Saved robustness plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/lmc_differential_robustness.png
+[18:16:00] [SUCCESS] Copied robustness plot to public figures directory.
+[18:16:00] [SUCCESS] Copied plot to public figures directory.
+[18:16:00] [SUCCESS] Step 7 Complete.

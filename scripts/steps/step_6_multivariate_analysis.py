@@ -92,6 +92,7 @@ class Step6MultivariateAnalysis:
         if self.pantheon_path.exists():
             pan_df = pd.read_csv(self.pantheon_path, sep=r'\s+')
             pan_subset = pan_df[['CID', 'c', 'cERR', 'x1', 'x1ERR']].copy()
+            pan_subset = pan_subset.groupby('CID').mean().reset_index()
             pan_subset.rename(columns={'CID': 'pantheon_id'}, inplace=True)
         else:
             print_status("Pantheon data not found.", "ERROR")

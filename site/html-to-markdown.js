@@ -99,9 +99,9 @@ class HTMLToMarkdownConverter {
             const header = `# The Cepheid Bias: Resolving the Hubble Tension
 
 **Author:** Matthew Lukin Smawfield  
-**Version:** v0.2 (Kingston upon Hull)  
-**Date:** First published: 11 January 2026  
-**DOI:** 10.5281/zenodo.18209703  
+**Version:** v0.4 (Kingston upon Hull)  
+**Date:** First published: 11 January 2026 | Updated: 27 March 2026  
+**DOI:** 10.5281/zenodo.18209702  
 **Generated:** ${today}  
 **Paper Series:** TEP Series: Paper 12 (Cosmological Observations)
 

@@ -1,22 +1,22 @@
-[10:39:21] [INFO] 
-[10:39:21] [INFO] ================================================================================
-[10:39:21] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis
-[10:39:21] [INFO] ================================================================================
-[10:39:21] [INFO] 
-[10:39:21] [INFO] Using regenerated sigma catalog for provenance: /Users/matthewsmawfield/www/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv
-[10:39:21] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/TEP-H0/results/outputs/sigma_provenance_table.csv
-[10:39:21] [INFO] Analyzing 29 hosts with both Raw and Corrected data.
-[10:39:21] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/TEP-H0/results/outputs/aperture_sensitivity_grid.csv
-[10:39:21] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/TEP-H0/results/outputs/aperture_sensitivity_summary.json
-[10:39:21] [INFO] Sensitivity Results
-[10:39:21] [INFO] +-----------------+-------------------------+-----------------------+
-[10:39:21] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |
-[10:39:21] [INFO] +-----------------+-------------------------+-----------------------+
-[10:39:21] [INFO] | Correlation (r) | 0.4319                  | 0.4279                |
-[10:39:21] [INFO] | P-value         | 1.9314e-02              | 2.0567e-02            |
-[10:39:21] [INFO] | Significance    | Weak                    | Significant (>99%)    |
-[10:39:21] [INFO] +-----------------+-------------------------+-----------------------+
-[10:39:21] [SUCCESS] CONCLUSION: The signal is ROBUST. It exists independently of aperture corrections.
-[10:39:21] [PROCESS] Generating sensitivity plot...
-[10:39:22] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/aperture_sensitivity.png
-[10:39:22] [SUCCESS] Step 4b Complete.
+[18:14:53] [INFO] 
+[18:14:53] [INFO] ================================================================================
+[18:14:53] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis
+[18:14:53] [INFO] ================================================================================
+[18:14:53] [INFO] 
+[18:14:53] [INFO] Using regenerated sigma catalog for provenance: /Users/matthewsmawfield/www/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv
+[18:14:53] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/TEP-H0/results/outputs/sigma_provenance_table.csv
+[18:14:53] [INFO] Analyzing 29 hosts with both Raw and Corrected data.
+[18:14:53] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/TEP-H0/results/outputs/aperture_sensitivity_grid.csv
+[18:14:53] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/TEP-H0/results/outputs/aperture_sensitivity_summary.json
+[18:14:53] [INFO] Sensitivity Results
+[18:14:53] [INFO] +-----------------+-------------------------+-----------------------+
+[18:14:53] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |
+[18:14:53] [INFO] +-----------------+-------------------------+-----------------------+
+[18:14:53] [INFO] | Correlation (r) | 0.4319                  | 0.4279                |
+[18:14:53] [INFO] | P-value         | 1.9314e-02              | 2.0567e-02            |
+[18:14:53] [INFO] | Significance    | Weak                    | Significant (>99%)    |
+[18:14:53] [INFO] +-----------------+-------------------------+-----------------------+
+[18:14:53] [SUCCESS] CONCLUSION: The signal is ROBUST. It exists independently of aperture corrections.
+[18:14:53] [PROCESS] Generating sensitivity plot...
+[18:14:53] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/TEP-H0/results/figures/aperture_sensitivity.png
+[18:14:53] [SUCCESS] Step 4b Complete.

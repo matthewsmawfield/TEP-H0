@@ -1,0 +1,45 @@
+<div class="appendix">
+<h2>Appendix B: Code and Data Availability</h2>
+
+<p>All analysis code is publicly available at <a href="https://github.com/matthewsmawfield/TEP-H0">github.com/matthewsmawfield/TEP-H0</a> (DOI: <a href="https://doi.org/10.5281/zenodo.18209702">10.5281/zenodo.18209702</a>; licence: CC BY 4.0). The complete pipeline reproduces all results, figures, and statistics reported in this paper in under two minutes on standard hardware.</p>
+
+<h3>B.1 Quick Start</h3>
+<pre><code>git clone https://github.com/matthewsmawfield/TEP-H0.git
+pip install -r requirements.txt
+python scripts/run_pipeline.py</code></pre>
+<p>The pipeline automatically retrieves all required data from public archives (SH0ES, Pantheon+, HyperLEDA, VizieR).</p>
+
+<h3>B.2 Pipeline Steps</h3>
+<p>The analysis is organized into ten sequential steps:</p>
+<table class="data-table">
+    <thead>
+        <tr><th scope="col">Step</th><th scope="col">Script</th><th scope="col">Description</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>1</td><td><code>step_1_data_ingestion.py</code></td><td>Downloads SH0ES distance moduli and Pantheon+ redshifts; cross-matches with velocity dispersion catalogues</td></tr>
+        <tr><td>1b</td><td><code>step_1b_aperture_correction.py</code></td><td>Applies Jorgensen et al. (1995) aperture corrections to $R_{\rm eff}/8$</td></tr>
+        <tr><td>2</td><td><code>step_2_stratification.py</code></td><td>Calculates per-host $H_0$; stratifies by median $\sigma$; computes correlation statistics</td></tr>
+        <tr><td>3</td><td><code>step_3_tep_correction.py</code></td><td>Optimises $\alpha$ by minimising residual $H_0$–$\sigma$ slope; bootstrap uncertainty estimation</td></tr>
+        <tr><td>4</td><td><code>step_4_robustness_checks.py</code></td><td>Jackknife stability; bivariate analysis; covariance-aware significance; flow/environment controls</td></tr>
+        <tr><td>5</td><td><code>step_5_m31_analysis.py</code></td><td>Differential P-L analysis of M31 Cepheids (Inner vs Outer)</td></tr>
+        <tr><td>6</td><td><code>step_6_multivariate_analysis.py</code></td><td>OLS regression controlling for age, dust, and host mass</td></tr>
+        <tr><td>7</td><td><code>step_7_lmc_replication.py</code></td><td>Control test: LMC differential analysis (null signal expected)</td></tr>
+        <tr><td>8</td><td><code>step_8_m31_phat_analysis.py</code></td><td>HST J/H band analysis; metallicity control via colour matching</td></tr>
+        <tr><td>9</td><td><code>step_9_final_synthesis.py</code></td><td>Synthesis figures and final summary statistics</td></tr>
+        <tr><td>10</td><td><code>step_10_anchor_stratification.py</code></td><td>Independent P-L fits to geometric anchors (LMC, NGC 4258, M31)</td></tr>
+    </tbody>
+</table>
+
+<h3>B.3 Key Output Files</h3>
+<p>After running the pipeline, the following files contain the primary results:</p>
+<ul>
+    <li><code>results/outputs/tep_correction_results.json</code> — unified $H_0$, optimal $\alpha$, Planck tension</li>
+    <li><code>results/outputs/stratification_results.json</code> — high/low-$\sigma$ stratification statistics</li>
+    <li><code>results/outputs/covariance_robustness.json</code> — covariance-aware $p$-values and $N_{\rm eff}$</li>
+    <li><code>results/outputs/out_of_sample_validation.json</code> — train/test and LOOCV results</li>
+    <li><code>data/processed/hosts_processed.csv</code> — complete host galaxy catalogue with $\sigma$, $H_0$, and corrections</li>
+</ul>
+
+<h3>B.4 Dependencies</h3>
+<p>The pipeline requires Python 3.8+ with the following packages: <code>numpy</code>, <code>scipy</code>, <code>pandas</code>, <code>matplotlib</code>, <code>astropy</code>, <code>astroquery</code>.</p>
+</div>
