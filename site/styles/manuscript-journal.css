@@ -1,0 +1,166 @@
+/*
+ * manuscript-journal.css
+ * Journal submission overrides — loaded only by journal.html.
+ * Strips decorative elements forbidden by MNRAS style guidelines.
+ * Does NOT modify the public site (index.html).
+ */
+
+/* ── 1. Hide elements not permitted in journal submissions ─────────────── */
+.header-image,
+.manuscript-nav,
+.no-print,
+.version,
+.date,
+.paper-series,
+.doi .pdf-link,
+.contact-section {
+    display: none !important;
+}
+
+/* ── 2. Simplify header ────────────────────────────────────────────────── */
+.header {
+    border-bottom: 1px solid #000;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+}
+
+.title {
+    font-size: 20pt;
+    font-weight: bold;
+    color: #000;
+}
+
+.subtitle {
+    font-size: 12pt;
+    color: #000;
+    font-style: italic;
+}
+
+.author {
+    font-size: 11pt;
+    color: #000;
+}
+
+/* ── 3. Strip all coloured/shaded boxes → plain text blocks ────────────── */
+.abstract,
+.theorem,
+.principle,
+.key-concept,
+.key-finding,
+.key-insight,
+.key-quote,
+.summary-box,
+.conclusion-box,
+.validation-box,
+.warning-box,
+.critical-analysis,
+.experimental-section,
+.significance,
+.contact-section,
+.callout,
+.callout-warning,
+[class^="callout"] {
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-left: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 1em 0 !important;
+    font-style: normal !important;
+}
+
+/* Keep abstract label bold but not boxed */
+.abstract h2 {
+    font-size: 11pt;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 4px;
+}
+
+/* ── 4. Equation numbering ─────────────────────────────────────────────── */
+body {
+    counter-reset: equation;
+}
+
+div.equation {
+    position: relative;
+    counter-increment: equation;
+}
+
+div.equation::after {
+    content: "(" counter(equation) ")";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11pt;
+    color: #000;
+}
+
+/* ── 5. Strip table shading ────────────────────────────────────────────── */
+th,
+table.data-table th {
+    background-color: transparent !important;
+    font-weight: bold;
+    color: #000 !important;
+}
+
+tr:nth-child(even),
+table.data-table tr:nth-child(even) {
+    background-color: transparent !important;
+}
+
+/* ── 5. Plain heading colours ──────────────────────────────────────────── */
+h1, h2, h3, h4 {
+    color: #000 !important;
+}
+
+h1 {
+    border-bottom: 1px solid #000;
+}
+
+/* ── 6. Plain link colours ─────────────────────────────────────────────── */
+a, a:visited, a:hover {
+    color: #000 !important;
+    text-decoration: none !important;
+}
+
+/* ── 7. Body / typography ──────────────────────────────────────────────── */
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    max-width: 170mm;   /* A4 text block width */
+    margin: 0 auto;
+    padding: 20mm 0;
+    color: #000;
+    background: #fff;
+}
+
+/* ── 8. Print-specific overrides ───────────────────────────────────────── */
+@media print {
+    body {
+        font-size: 10pt;
+        line-height: 1.4;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .header-image,
+    .manuscript-nav,
+    .no-print {
+        display: none !important;
+    }
+
+    /* Ensure page breaks don't split figures or tables */
+    figure, table {
+        break-inside: avoid;
+    }
+
+    /* Appendix starts on new page */
+    .appendix, #section-appendix {
+        break-before: page;
+    }
+}

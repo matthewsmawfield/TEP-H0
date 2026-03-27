@@ -5,6 +5,8 @@
   "main": "index.html",
   "scripts": {
     "dev": "node dev-server.js",
+    "dev:journal": "node dev-server.js --journal",
+    "build:journal": "node build.js --journal",
     "start": "python3 -m http.server 8000",
     "build": "node build.js",
     "build:dev": "npm run build && cd dist && python3 -m http.server 8350",
