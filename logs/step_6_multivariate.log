@@ -1,14 +1,14 @@
-[18:15:38] [INFO] 
-[18:15:38] [INFO] ================================================================================
-[18:15:38] [INFO]    Starting Step 6: Multivariate Analysis
-[18:15:38] [INFO] ================================================================================
-[18:15:38] [INFO] 
-[18:15:38] [INFO] Loading and Merging Data...
-[18:15:38] [INFO] Merged Data: N=29 hosts available for analysis.
-[18:15:38] [INFO] Running Multivariate Regression...
-[18:15:38] [SUCCESS] Saved regression summaries to /Users/matthewsmawfield/www/TEP-H0/results/outputs/multivariate_analysis_summary.txt
-[18:15:38] [SUCCESS] Saved structured results to /Users/matthewsmawfield/www/TEP-H0/results/outputs/multivariate_analysis_results.json
-[18:15:38] [WARNING] Sigma loses significance in full model (p=0.1235).
-[18:15:38] [PROCESS] Generating Robustness Plot...
-[18:15:39] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/TEP-H0/site/public/figures/multivariate_robustness.png
-[18:15:39] [SUCCESS] Step 6 Complete.
+[14:24:39] [INFO] 
+[14:24:39] [INFO] ================================================================================
+[14:24:39] [INFO]    Starting Step 6: Multivariate Analysis
+[14:24:39] [INFO] ================================================================================
+[14:24:39] [INFO] 
+[14:24:39] [INFO] Loading and Merging Data...
+[14:24:39] [INFO] Merged Data: N=29 hosts available for analysis.
+[14:24:39] [INFO] Running Multivariate Regression...
+[14:24:39] [SUCCESS] Saved regression summaries to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/multivariate_analysis_summary.txt
+[14:24:39] [SUCCESS] Saved structured results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/multivariate_analysis_results.json
+[14:24:39] [WARNING] Sigma loses significance in full model (p=0.0750).
+[14:24:39] [PROCESS] Generating Robustness Plot...
+[14:24:39] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/multivariate_robustness.png
+[14:24:39] [SUCCESS] Step 6 Complete.

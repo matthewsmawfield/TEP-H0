@@ -90,15 +90,23 @@ def check_n4258_density():
     print_status(f"  Scenario A (LogM=10.75, Standard): {rho_high:.4f} M_sun/pc^3", "RESULT")
     print_status(f"  Scenario B (LogM=9.28,  File val): {rho_low:.4f} M_sun/pc^3", "RESULT")
     
-    # Transition threshold
-    rho_trans = 0.5
+    # Temporal Topology half-suppression density (TEP v0.7)
+    # S(rho) = 1 / (1 + (rho / rho_half)^2) where rho_half = 0.5 M_sun/pc^3
+    rho_half = 0.5
     print_status("-" * 40, "INFO")
-    print_status(f"Screening Threshold: {rho_trans} M_sun/pc^3", "INFO")
+    print_status(f"Temporal Topology: rho_half = {rho_half} M_sun/pc^3", "INFO")
     
-    if rho_high > rho_trans:
-        print_status("CONCLUSION (Std Mass): NGC 4258 is SCREENED.", "SUCCESS")
+    # Calculate shear suppression factors
+    s_high = 1.0 / (1.0 + (rho_high / rho_half)**2)
+    s_low = 1.0 / (1.0 + (rho_low / rho_half)**2)
+    
+    print_status(f"Shear Suppression S (Scenario A): {s_high:.3f} (S=1: active, S→0: suppressed)", "INFO")
+    print_status(f"Shear Suppression S (Scenario B): {s_low:.3f}", "INFO")
+    
+    if rho_high > rho_half:
+        print_status("CONCLUSION (Std Mass): NGC 4258 has APPRECIABLE SUPPRESSION (S < 0.5).", "SUCCESS")
     else:
-        print_status("CONCLUSION (Std Mass): NGC 4258 is UNSCREENED.", "WARNING")
+        print_status("CONCLUSION (Std Mass): NGC 4258 is in ACTIVE SHEAR REGIME (S > 0.5).", "WARNING")
 
 if __name__ == "__main__":
     check_n4258_density()

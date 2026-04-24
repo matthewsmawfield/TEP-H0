@@ -63,9 +63,57 @@
 </ul>
 <p>The correlation coefficient persists when restricting to stellar-absorption-only hosts ($N=17$, Pearson $r \approx 0.42$, $p \approx 0.09$). The reduction in formal significance relative to the full sample is expected from reduced statistical power ($\sim 41\%$ fewer degrees of freedom), not from the removal of spurious signal. Critically, the 12 kinematic-proxy hosts (9 HI + 3 rotation) do not cluster anomalously—they span the full $\sigma$–$H_0$ distribution and follow the same physical trend as stellar hosts (see Section 3.2). Application of the TEP correction to the stellar-only subsample yields $\alpha = 0.56$ and a unified $H_0 = 67.77 \pm 1.81$ km/s/Mpc, consistent with the full-sample result. Future systematic spectroscopic follow-up of all SH0ES hosts would further strengthen this analysis.</p>
 
-<h3>A.2 Aperture Correction Details</h3>
-<p>Literature $\sigma$ values are measured through apertures of varying physical size. To homogenize the sample, the Jorgensen et al. (1995) power-law correction is applied:</p>
+<h3>A.3 Theoretical Foundation: Cross-Sector Coupling</h3>
+<p>
+    The TEP framework (Jakarta v0.7) resolves the tension between stringent 
+    Solar System PPN bounds ($\alpha_\gamma \approx 0.003$) and the large 
+    effective coupling inferred from astrophysical clocks ($\alpha_{\rm clock} 
+    \approx 800$) through the conformal invariance of the 
+    photon sector. 
+</p>
+
+<p><strong>A.3.1 Metric Couplings.</strong>
+    Matter couples to the Jordan-frame metric $\tilde{g}_{\mu\nu} = A(\phi) 
+    g_{\mu\nu}$, where $A(\phi) = \exp(2\beta\phi/M_{\rm Pl})$. For photons, 
+    the Maxwell action $S_{\rm em} = -\frac{1}{4} \int d^4x \sqrt{-\tilde{g}} 
+    \tilde{g}^{\mu\alpha} \tilde{g}^{\nu\beta} F_{\mu\nu} F_{\alpha\beta}$ is 
+    invariant under the conformal transformation $\tilde{g}_{\mu\nu} \to 
+    \Omega^2 g_{\mu\nu}$ in 4D. Consequently, light propagation and the 
+    resulting Shapiro delay (constrained by Cassini) are only sensitive to 
+    the <em>gravitational</em> metric $g_{\mu\nu}$.
+</p>
+
+<p><strong>A.3.2 Clock Sensitivity.</strong>
+    In contrast, stellar pulsation and atomic transitions depend on particle 
+    masses, which scale as $m(\phi) = m_0 A(\phi)^{-1/2}$. This introduces a 
+    direct dependence on the scalar field $\phi$. The effective clock rate 
+    relative to a distant observer scales as:
+</p>
 <div class="equation">
-$$\sigma_{\rm corr} = \sigma_{\rm obs} \left( \frac{r_{\rm ap}}{R_{\rm eff}/8} \right)^{0.04}$$
+    $$\Gamma_t = \frac{d\tau}{dt} \propto A(\phi)^{1/2} = \exp(\beta\phi/M_{\rm Pl})$$
 </div>
-<p>where $r_{\rm ap}$ is the observational aperture radius (assumed 1.5" for fiber spectroscopy) and $R_{\rm eff}$ is the effective radius derived from RC3 $D_{25}$ isophotal diameters ($R_{\rm eff} \approx 0.5 R_{25}$). The correction is typically $\lesssim 10\%$ and does not qualitatively affect the correlation (see Section 4.1 and the aperture sensitivity envelope in Section 3.6).</p>
+
+<p><strong>A.3.3 Numerical Consistency.</strong>
+    In the unscreened regime, the scalar field tracks the potential as 
+    $\phi/M_{\rm Pl} = 2\alpha_0 \Phi/c^2$. With $\beta = \alpha_0 = \alpha_{\rm clock}$, 
+    this yields:
+</p>
+<div class="equation">
+    $$\Gamma_t = \exp(2\alpha_{\rm clock}^2 \Phi/c^2)$$
+</div>
+<p>
+    For the observed Cepheid bias $\alpha_{\rm eff} = (9.6 \pm 4.0) \times 10^5$ mag, 
+    the corresponding fundamental clock-sector coupling is $\alpha_{\rm clock} = 
+    \sqrt{K/2} \approx 794$, where $K = \alpha_{\rm eff} \ln(10) / (|b|)$. 
+    This large value is physically permissible because it remains hidden 
+    from photon-sector tests by the symmetry of the electromagnetic action.
+</p>
+
+<h3>A.4 Terminology Synchronization</h3>
+<p>
+    This study adopts the Jakarta v0.7 nomenclature. The 
+    mechanism previously referred to as "Temporal Shear" (v0.5) is now 
+    standardized as Temporal Shear, referring to the 
+    gradient-based suppression of scalar field activity in high-density 
+    environments.
+</p>

@@ -175,7 +175,7 @@
   "ols_inner_effect": {
     "n": 504,
     "beta_inner": 0.15874706604469963,
-    "se_inner": 0.1155903299307407,
+    "se_inner": 0.11559032961019304,
     "x_used": [
       "ri_color",
       "e_Wmag",

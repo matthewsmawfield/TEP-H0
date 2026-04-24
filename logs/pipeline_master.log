@@ -1,179 +1,184 @@
-[18:13:49] [INFO] 
-[18:13:49] [INFO] ================================================================================
-[18:13:49] [INFO]    TEP-H0 ANALYSIS PIPELINE INITIATED
-[18:13:49] [INFO] ================================================================================
-[18:13:49] [INFO] 
-[18:13:49] [INFO] Project Root: /Users/matthewsmawfield/www/TEP-H0
-[18:13:49] [INFO] Starting execution sequence...
-[18:13:49] [INFO] 
-[18:13:49] [INFO] ================================================================================
-[18:13:49] [INFO]    >>> STEP 1 (PRE-FLIGHT): COORDINATE PREPARATION
-[18:13:49] [INFO] ================================================================================
-[18:13:49] [INFO] 
-[18:13:50] [SUCCESS] Step 0 (Sigma Catalog) completed successfully.
-[18:13:50] [INFO] 
-[18:13:50] [INFO] ================================================================================
-[18:13:50] [INFO]    >>> STEP 1: DATA INGESTION
-[18:13:50] [INFO] ================================================================================
-[18:13:50] [INFO] 
-[18:13:50] [SUCCESS] Step 1 (Ingestion) completed successfully.
-[18:13:50] [INFO] 
-[18:13:50] [INFO] ================================================================================
-[18:13:50] [INFO]    >>> STEP 1b: APERTURE CORRECTION
-[18:13:50] [INFO] ================================================================================
-[18:13:50] [INFO] 
-[18:13:50] [PROCESS] Fetching host metadata (RC3) for aperture normalization...
-[18:13:50] [INFO] Fetching Galaxy Metadata (RC3)
-[18:13:50] [INFO] Loaded 41 hosts for metadata enrichment.
-[18:13:50] [PROCESS] Querying Vizier (Catalog VII/155)...
-[18:14:42] [SUCCESS] Metadata Retrieval Complete. Found RC3 data for 41/41 hosts.
-[18:14:42] [INFO] Sample Galaxy Metadata (RC3)
-[18:14:42] [INFO] +----------+----------+----------+------------+
-[18:14:42] [INFO] | Host     | log(D25) | R25 ('') | R_eff ('') |
-[18:14:42] [INFO] +----------+----------+----------+------------+
-[18:14:42] [INFO] | LMC      | 3.81     | 19369.6  | 9684.8     |
-[18:14:42] [INFO] | M 101    | 2.46     | 865.2    | 432.6      |
-[18:14:42] [INFO] | NGC 1337 | 1.76     | 172.6    | 86.3       |
-[18:14:42] [INFO] | M 31     | 3.28     | 5716.4   | 2858.2     |
-[18:14:42] [INFO] | NGC 0691 | 1.54     | 104.0    | 52.0       |
-[18:14:42] [INFO] +----------+----------+----------+------------+
-[18:14:42] [SUCCESS] Saved enriched metadata to /Users/matthewsmawfield/www/TEP-H0/data/processed/hosts_metadata_enriched.csv
-[18:14:42] [SUCCESS] Step 1b (Aperture Correction) completed successfully.
-[18:14:42] [INFO] 
-[18:14:42] [INFO] ================================================================================
-[18:14:42] [INFO]    >>> STEP 2: STRATIFICATION
-[18:14:42] [INFO] ================================================================================
-[18:14:42] [INFO] 
-[18:14:43] [SUCCESS] Step 2 (Stratification) completed successfully.
-[18:14:43] [INFO] 
-[18:14:43] [INFO] ================================================================================
-[18:14:43] [INFO]    >>> STEP 3: TEP CORRECTION
-[18:14:43] [INFO] ================================================================================
-[18:14:43] [INFO] 
-[18:14:45] [SUCCESS] Step 3 (Optimization) completed successfully.
-[18:14:45] [INFO] 
-[18:14:45] [INFO] ================================================================================
-[18:14:45] [INFO]    >>> STEP 4: ROBUSTNESS CHECKS
-[18:14:45] [INFO] ================================================================================
-[18:14:45] [INFO] 
-[18:14:45] [PROCESS] Running Jackknife and Bivariate Analysis...
-[18:14:53] [SUCCESS] Step 4 (Robustness) completed successfully.
-[18:14:53] [INFO] 
-[18:14:53] [INFO] ================================================================================
-[18:14:53] [INFO]    >>> STEP 5: M31 ANALYSIS
-[18:14:53] [INFO] ================================================================================
-[18:14:53] [INFO] 
-[18:15:38] [SUCCESS] Step 5 (M31 Differential Test) completed successfully.
-[18:15:38] [INFO] 
-[18:15:38] [INFO] ================================================================================
-[18:15:38] [INFO]    >>> STEP 6: MULTIVARIATE ANALYSIS
-[18:15:38] [INFO] ================================================================================
-[18:15:38] [INFO] 
-[18:15:39] [SUCCESS] Step 6 (Multivariate Analysis) completed successfully.
-[18:15:39] [INFO] 
-[18:15:39] [INFO] ================================================================================
-[18:15:39] [INFO]    >>> STEP 6b: ENHANCED ROBUSTNESS
-[18:15:39] [INFO] ================================================================================
-[18:15:39] [INFO] 
-[18:15:39] [SUCCESS] Step 6b (Enhanced Robustness) completed successfully.
-[18:15:39] [INFO] 
-[18:15:39] [INFO] ================================================================================
-[18:15:39] [INFO]    >>> STEP 7: LMC REPLICATION
-[18:15:39] [INFO] ================================================================================
-[18:15:39] [INFO] 
-[18:16:00] [SUCCESS] Step 7 (LMC Replication) completed successfully.
-[18:16:00] [INFO] 
-[18:16:00] [INFO] ================================================================================
-[18:16:00] [INFO]    >>> STEP 7b: TRGB COMPARISON
-[18:16:00] [INFO] ================================================================================
-[18:16:00] [INFO] 
-[18:16:00] [SUCCESS] Step 7b (TRGB Comparison) completed successfully.
-[18:16:00] [INFO] 
-[18:16:00] [INFO] ================================================================================
-[18:16:00] [INFO]    >>> STEP 8: M31 PHAT ANALYSIS
-[18:16:00] [INFO] ================================================================================
-[18:16:00] [INFO] 
-[18:16:03] [SUCCESS] Step 8 (M31 PHAT Analysis) completed successfully.
-[18:16:03] [INFO] 
-[18:16:03] [INFO] ================================================================================
-[18:16:03] [INFO]    >>> STEP 9: FINAL SYNTHESIS
-[18:16:03] [INFO] ================================================================================
-[18:16:03] [INFO] 
-[18:16:03] [SUCCESS] Step 9 (Final Synthesis) completed successfully.
-[18:16:03] [INFO] 
-[18:16:03] [INFO] ================================================================================
-[18:16:03] [INFO]    >>> STEP 10: ANCHOR STRATIFICATION TEST
-[18:16:03] [INFO] ================================================================================
-[18:16:03] [INFO] 
-[18:16:03] [INFO] ======================================================================
-[18:16:03] [INFO] STEP 10: ANCHOR STRATIFICATION TEST
-[18:16:03] [INFO] Testing for internal P-L tension in geometric anchors
-[18:16:03] [INFO] ======================================================================
-[18:16:03] [INFO] Loaded 3130 Cepheid measurements
-[18:16:03] [INFO] Anchor Sample Sizes:
-[18:16:03] [INFO] +--------+-----+----------+--------+
-[18:16:03] [INFO] | Anchor | N   | σ (km/s) | μ_geo  |
-[18:16:03] [INFO] +--------+-----+----------+--------+
-[18:16:03] [INFO] | N4258  | 443 | 115      | 29.397 |
-[18:16:03] [INFO] | LMC    | 339 | 24       | 18.477 |
-[18:16:03] [INFO] | M31    | 55  | 160      | 24.407 |
-[18:16:03] [INFO] +--------+-----+----------+--------+
-[18:16:03] [INFO] Independent P-L Fit Results:
-[18:16:03] [INFO] +--------+-----+-----+-----------+-------+--------+-------+
-[18:16:03] [INFO] | Anchor | N   | σ   | M_W (abs) | ± err | b_W    | ± err |
-[18:16:03] [INFO] +--------+-----+-----+-----------+-------+--------+-------+
-[18:16:03] [INFO] | N4258  | 443 | 115 | -5.837    | 0.022 | -3.288 | 0.078 |
-[18:16:03] [INFO] | LMC    | 339 | 24  | -5.878    | 0.005 | -3.291 | 0.019 |
-[18:16:03] [INFO] | M31    | 55  | 160 | -5.876    | 0.024 | -3.313 | 0.077 |
-[18:16:03] [INFO] +--------+-----+-----+-----------+-------+--------+-------+
-[18:16:03] [INFO] Multi-Anchor Regression:
-[18:16:03] [INFO]   α_anchor = 0.029 ± 0.023
-[18:16:03] [INFO]   Significance: 1.3σ
-[18:16:03] [INFO]   Pearson r = 0.384 (p = 0.7491)
-[18:16:03] [INFO]   Tension with host α: 3.4σ
-[18:16:03] [SUCCESS] Figure saved: /Users/matthewsmawfield/www/TEP-H0/results/figures/anchor_stratification_test.png
-[18:16:03] [SUCCESS] Results saved: /Users/matthewsmawfield/www/TEP-H0/results/outputs/anchor_stratification_test.json
-[18:16:03] [INFO] ======================================================================
-[18:16:03] [INFO] ANCHOR STRATIFICATION SUMMARY
-[18:16:03] [INFO] ======================================================================
-[18:16:03] [SUCCESS] α_anchor (0.029) is in 3.4σ tension with α_host (0.580)
-[18:16:03] [SUCCESS] Anchor calibration is NOT contaminated by TEP effects.
-[18:16:03] [SUCCESS] The H0–σ correlation in SN hosts is a genuine host-level systematic.
-[18:16:03] [SUCCESS] Step 10 (Anchor Stratification) completed successfully.
-[18:16:03] [INFO] 
-[18:16:03] [INFO] ================================================================================
-[18:16:03] [INFO]    >>> STEP 11: PIPELINE AUDIT
-[18:16:03] [INFO] ================================================================================
-[18:16:03] [INFO] 
-[18:16:03] [SUCCESS] Wrote pipeline audit report: /Users/matthewsmawfield/www/TEP-H0/results/outputs/pipeline_audit_report.json
-[18:16:03] [SUCCESS] Step 11 (Audit) PASSED: All outputs consistent.
-[18:16:03] [INFO] 
-[18:16:03] [INFO] ================================================================================
-[18:16:03] [INFO]    PIPELINE EXECUTION SUMMARY
-[18:16:03] [INFO] ================================================================================
-[18:16:03] [INFO] 
-[18:16:03] [INFO] Execution Timing
-[18:16:03] [INFO] +---------+--------------+-----------+
-[18:16:03] [INFO] | Step    | Duration (s) | Status    |
-[18:16:03] [INFO] +---------+--------------+-----------+
-[18:16:03] [INFO] | Step 0  | 0.00         | COMPLETED |
-[18:16:03] [INFO] | Step 1  | 0.88         | COMPLETED |
-[18:16:03] [INFO] | Step 1b | 52.08        | COMPLETED |
-[18:16:03] [INFO] | Step 2  | 0.48         | COMPLETED |
-[18:16:03] [INFO] | Step 3  | 2.51         | COMPLETED |
-[18:16:03] [INFO] | Step 4  | 7.76         | COMPLETED |
-[18:16:03] [INFO] | Step 5  | 45.21        | COMPLETED |
-[18:16:03] [INFO] | Step 6  | 0.19         | COMPLETED |
-[18:16:03] [INFO] | Step 6b | 0.02         | COMPLETED |
-[18:16:03] [INFO] | Step 7  | 21.62        | COMPLETED |
-[18:16:03] [INFO] | Step 7b | 0.18         | COMPLETED |
-[18:16:03] [INFO] | Step 8  | 2.39         | COMPLETED |
-[18:16:03] [INFO] | Step 9  | 0.10         | COMPLETED |
-[18:16:03] [INFO] | Step 10 | 0.15         | COMPLETED |
-[18:16:03] [INFO] | Step 11 | 0.01         | COMPLETED |
-[18:16:03] [INFO] | TOTAL   | 133.59       | SUCCESS   |
-[18:16:03] [INFO] +---------+--------------+-----------+
-[18:16:03] [SUCCESS] Total Execution Time: 133.59 seconds
-[18:16:03] [INFO] Results Directory: /Users/matthewsmawfield/www/TEP-H0/results/
-[18:16:03] [INFO] Logs Directory:    /Users/matthewsmawfield/www/TEP-H0/logs/
-[18:16:03] [SUCCESS] Pipeline finished.
+[14:23:49] [INFO] 
+[14:23:49] [INFO] ================================================================================
+[14:23:49] [INFO]    TEP-H0 ANALYSIS PIPELINE INITIATED
+[14:23:49] [INFO] ================================================================================
+[14:23:49] [INFO] 
+[14:23:49] [INFO] Project Root: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0
+[14:23:49] [INFO] Starting execution sequence...
+[14:23:49] [INFO] 
+[14:23:49] [INFO] ================================================================================
+[14:23:49] [INFO]    >>> STEP 1 (PRE-FLIGHT): COORDINATE PREPARATION
+[14:23:49] [INFO] ================================================================================
+[14:23:49] [INFO] 
+[14:23:49] [SUCCESS] Step 0 (Sigma Catalog) completed successfully.
+[14:23:49] [INFO] 
+[14:23:49] [INFO] ================================================================================
+[14:23:49] [INFO]    >>> STEP 1: DATA INGESTION
+[14:23:49] [INFO] ================================================================================
+[14:23:49] [INFO] 
+[14:23:50] [SUCCESS] Step 1 (Ingestion) completed successfully.
+[14:23:50] [INFO] 
+[14:23:50] [INFO] ================================================================================
+[14:23:50] [INFO]    >>> STEP 1b: APERTURE CORRECTION
+[14:23:50] [INFO] ================================================================================
+[14:23:50] [INFO] 
+[14:23:50] [PROCESS] Fetching host metadata (RC3) for aperture normalization...
+[14:23:50] [INFO] Fetching Galaxy Metadata (RC3)
+[14:23:50] [INFO] Loaded 41 hosts for metadata enrichment.
+[14:23:50] [PROCESS] Querying Vizier (Catalog VII/155)...
+[14:23:50] [SUCCESS] Metadata Retrieval Complete. Found RC3 data for 41/41 hosts.
+[14:23:50] [INFO] Sample Galaxy Metadata (RC3)
+[14:23:50] [INFO] +----------+----------+----------+------------+
+[14:23:50] [INFO] | Host     | log(D25) | R25 ('') | R_eff ('') |
+[14:23:50] [INFO] +----------+----------+----------+------------+
+[14:23:50] [INFO] | LMC      | 3.81     | 19369.6  | 9684.8     |
+[14:23:50] [INFO] | M 101    | 2.46     | 865.2    | 432.6      |
+[14:23:50] [INFO] | NGC 1337 | 1.76     | 172.6    | 86.3       |
+[14:23:50] [INFO] | M 31     | 3.28     | 5716.4   | 2858.2     |
+[14:23:50] [INFO] | NGC 0691 | 1.54     | 104.0    | 52.0       |
+[14:23:50] [INFO] +----------+----------+----------+------------+
+[14:23:50] [SUCCESS] Saved enriched metadata to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_metadata_enriched.csv
+[14:23:50] [SUCCESS] Step 1b (Aperture Correction) completed successfully.
+[14:23:50] [INFO] 
+[14:23:50] [INFO] ================================================================================
+[14:23:50] [INFO]    >>> STEP 2: STRATIFICATION
+[14:23:50] [INFO] ================================================================================
+[14:23:50] [INFO] 
+[14:23:51] [SUCCESS] Step 2 (Stratification) completed successfully.
+[14:23:51] [INFO] 
+[14:23:51] [INFO] ================================================================================
+[14:23:51] [INFO]    >>> STEP 3: TEP CORRECTION
+[14:23:51] [INFO] ================================================================================
+[14:23:51] [INFO] 
+[14:23:52] [SUCCESS] Step 3 (Optimization) completed successfully.
+[14:23:52] [INFO] 
+[14:23:52] [INFO] ================================================================================
+[14:23:52] [INFO]    >>> STEP 4: ROBUSTNESS CHECKS
+[14:23:52] [INFO] ================================================================================
+[14:23:52] [INFO] 
+[14:23:52] [PROCESS] Running Jackknife and Bivariate Analysis...
+[14:24:00] [SUCCESS] Step 4 (Robustness) completed successfully.
+[14:24:00] [INFO] 
+[14:24:00] [INFO] ================================================================================
+[14:24:00] [INFO]    >>> STEP 5: M31 ANALYSIS
+[14:24:00] [INFO] ================================================================================
+[14:24:00] [INFO] 
+[14:24:39] [SUCCESS] Step 5 (M31 Differential Test) completed successfully.
+[14:24:39] [INFO] 
+[14:24:39] [INFO] ================================================================================
+[14:24:39] [INFO]    >>> STEP 6: MULTIVARIATE ANALYSIS
+[14:24:39] [INFO] ================================================================================
+[14:24:39] [INFO] 
+[14:24:39] [SUCCESS] Step 6 (Multivariate Analysis) completed successfully.
+[14:24:39] [INFO] 
+[14:24:39] [INFO] ================================================================================
+[14:24:39] [INFO]    >>> STEP 6b: ENHANCED ROBUSTNESS
+[14:24:39] [INFO] ================================================================================
+[14:24:39] [INFO] 
+[14:24:39] [SUCCESS] Step 6b (Enhanced Robustness) completed successfully.
+[14:24:39] [INFO] 
+[14:24:39] [INFO] ================================================================================
+[14:24:39] [INFO]    >>> STEP 7: LMC REPLICATION
+[14:24:39] [INFO] ================================================================================
+[14:24:39] [INFO] 
+[14:24:58] [SUCCESS] Step 7 (LMC Replication) completed successfully.
+[14:24:58] [INFO] 
+[14:24:58] [INFO] ================================================================================
+[14:24:58] [INFO]    >>> STEP 7b: TRGB COMPARISON
+[14:24:58] [INFO] ================================================================================
+[14:24:58] [INFO] 
+[14:24:59] [SUCCESS] Step 7b (TRGB Comparison) completed successfully.
+[14:24:59] [INFO] 
+[14:24:59] [INFO] ================================================================================
+[14:24:59] [INFO]    >>> STEP 7c: TRGB DIFFERENTIAL REANALYSIS
+[14:24:59] [INFO] ================================================================================
+[14:24:59] [INFO] 
+[14:24:59] [SUCCESS] Step 7c (TRGB Differential Reanalysis) completed successfully.
+[14:24:59] [INFO] 
+[14:24:59] [INFO] ================================================================================
+[14:24:59] [INFO]    >>> STEP 8: M31 PHAT ANALYSIS
+[14:24:59] [INFO] ================================================================================
+[14:24:59] [INFO] 
+[14:24:59] [SUCCESS] Step 8 (M31 PHAT Analysis) completed successfully.
+[14:24:59] [INFO] 
+[14:24:59] [INFO] ================================================================================
+[14:24:59] [INFO]    >>> STEP 9: FINAL SYNTHESIS
+[14:24:59] [INFO] ================================================================================
+[14:24:59] [INFO] 
+[14:24:59] [SUCCESS] Step 9 (Final Synthesis) completed successfully.
+[14:24:59] [INFO] 
+[14:24:59] [INFO] ================================================================================
+[14:24:59] [INFO]    >>> STEP 10: ANCHOR STRATIFICATION TEST
+[14:24:59] [INFO] ================================================================================
+[14:24:59] [INFO] 
+[14:24:59] [INFO] ======================================================================
+[14:24:59] [INFO] STEP 10: ANCHOR STRATIFICATION TEST
+[14:24:59] [INFO] Testing for internal P-L tension in geometric anchors
+[14:24:59] [INFO] ======================================================================
+[14:24:59] [INFO] Loaded 3130 Cepheid measurements
+[14:24:59] [INFO] Anchor Sample Sizes:
+[14:24:59] [INFO] +--------+-----+----------+--------+
+[14:24:59] [INFO] | Anchor | N   | σ (km/s) | μ_geo  |
+[14:24:59] [INFO] +--------+-----+----------+--------+
+[14:24:59] [INFO] | N4258  | 443 | 115      | 29.397 |
+[14:24:59] [INFO] | LMC    | 339 | 24       | 18.477 |
+[14:24:59] [INFO] | M31    | 55  | 160      | 24.407 |
+[14:24:59] [INFO] +--------+-----+----------+--------+
+[14:24:59] [INFO] Independent P-L Fit Results:
+[14:24:59] [INFO] +--------+-----+-----+-----------+-------+--------+-------+
+[14:24:59] [INFO] | Anchor | N   | σ   | M_W (abs) | ± err | b_W    | ± err |
+[14:24:59] [INFO] +--------+-----+-----+-----------+-------+--------+-------+
+[14:24:59] [INFO] | N4258  | 443 | 115 | -5.837    | 0.022 | -3.288 | 0.078 |
+[14:24:59] [INFO] | LMC    | 339 | 24  | -5.878    | 0.005 | -3.291 | 0.019 |
+[14:24:59] [INFO] | M31    | 55  | 160 | -5.876    | 0.024 | -3.313 | 0.077 |
+[14:24:59] [INFO] +--------+-----+-----+-----------+-------+--------+-------+
+[14:24:59] [INFO] Multi-Anchor Regression (sigma^2/c^2 form):
+[14:24:59] [INFO]   α_anchor = 5.047e+00 ± 6.633e+02 mag
+[14:24:59] [INFO]   Significance: 0.0σ
+[14:24:59] [INFO]   Pearson r = 0.040 (p = 0.9743)
+[14:24:59] [INFO]   Tension with host α: 2.5σ
+[14:25:00] [SUCCESS] Figure saved: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/anchor_stratification_test.png
+[14:25:00] [SUCCESS] Results saved: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/anchor_stratification_test.json
+[14:25:00] [INFO] ======================================================================
+[14:25:00] [INFO] ANCHOR STRATIFICATION SUMMARY
+[14:25:00] [INFO] ======================================================================
+[14:25:00] [WARNING] Marginal tension (2.5σ) - more data needed
+[14:25:00] [SUCCESS] Step 10 (Anchor Stratification) completed successfully.
+[14:25:00] [INFO] 
+[14:25:00] [INFO] ================================================================================
+[14:25:00] [INFO]    >>> STEP 11: PIPELINE AUDIT
+[14:25:00] [INFO] ================================================================================
+[14:25:00] [INFO] 
+[14:25:00] [SUCCESS] Wrote pipeline audit report: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/pipeline_audit_report.json
+[14:25:00] [SUCCESS] Step 11 (Audit) PASSED: All outputs consistent.
+[14:25:00] [INFO] 
+[14:25:00] [INFO] ================================================================================
+[14:25:00] [INFO]    PIPELINE EXECUTION SUMMARY
+[14:25:00] [INFO] ================================================================================
+[14:25:00] [INFO] 
+[14:25:00] [INFO] Execution Timing
+[14:25:00] [INFO] +---------+--------------+-----------+
+[14:25:00] [INFO] | Step    | Duration (s) | Status    |
+[14:25:00] [INFO] +---------+--------------+-----------+
+[14:25:00] [INFO] | Step 0  | 0.00         | COMPLETED |
+[14:25:00] [INFO] | Step 1  | 0.76         | COMPLETED |
+[14:25:00] [INFO] | Step 1b | 0.08         | COMPLETED |
+[14:25:00] [INFO] | Step 2  | 0.40         | COMPLETED |
+[14:25:00] [INFO] | Step 3  | 1.31         | COMPLETED |
+[14:25:00] [INFO] | Step 4  | 7.95         | COMPLETED |
+[14:25:00] [INFO] | Step 5  | 39.32        | COMPLETED |
+[14:25:00] [INFO] | Step 6  | 0.19         | COMPLETED |
+[14:25:00] [INFO] | Step 6b | 0.02         | COMPLETED |
+[14:25:00] [INFO] | Step 7  | 19.07        | COMPLETED |
+[14:25:00] [INFO] | Step 7b | 0.18         | COMPLETED |
+[14:25:00] [INFO] | Step 7c | 0.23         | COMPLETED |
+[14:25:00] [INFO] | Step 8  | 0.49         | COMPLETED |
+[14:25:00] [INFO] | Step 9  | 0.11         | COMPLETED |
+[14:25:00] [INFO] | Step 10 | 0.16         | COMPLETED |
+[14:25:00] [INFO] | Step 11 | 0.01         | COMPLETED |
+[14:25:00] [INFO] | TOTAL   | 70.30        | SUCCESS   |
+[14:25:00] [INFO] +---------+--------------+-----------+
+[14:25:00] [SUCCESS] Total Execution Time: 70.30 seconds
+[14:25:00] [INFO] Results Directory: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/
+[14:25:00] [INFO] Logs Directory:    /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/logs/
+[14:25:00] [SUCCESS] Pipeline finished.

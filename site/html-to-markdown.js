@@ -77,12 +77,21 @@ class HTMLToMarkdownConverter {
         html = html.replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n## $1\n\n');
         html = html.replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n### $1\n\n');
         html = html.replace(/<h4[^>]*>(.*?)<\/h4>/gi, '\n#### $1\n\n');
-        html = html.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, '$1\n\n');
+        // Paragraphs - trim content to remove indentation from HTML formatting
+        html = html.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, (match, content) => {
+            const trimmed = content.replace(/^\s+/gm, '').replace(/\s+$/gm, '').trim();
+            return trimmed ? trimmed + '\n\n' : '';
+        });
         html = html.replace(/<a[^>]*href=["']([^"']*)["'][^>]*>(.*?)<\/a>/gi, '[$2]($1)');
         html = html.replace(/<(strong|b)[^>]*>(.*?)<\/(strong|b)>/gi, '**$2**');
         html = html.replace(/<(em|i)[^>]*>(.*?)<\/(em|i)>/gi, '*$2*');
-        html = html.replace(/<li[^>]*>(.*?)<\/li>/gi, '- $1\n');
+        html = html.replace(/<li[^>]*>(.*?)<\/li>/gi, (match, content) => {
+            const trimmed = content.replace(/^\s+/gm, '').replace(/\s+$/gm, '').trim();
+            return '- ' + trimmed + '\n';
+        });
         html = html.replace(/<\/?[A-Za-z][^>]*>/g, '');
+        // Clean up: remove indentation from lines, collapse multiple blank lines
+        html = html.replace(/^[ \t]+/gm, '');
         return html.replace(/\n{3,}/g, '\n\n').trim();
     }
 
@@ -97,19 +106,19 @@ class HTMLToMarkdownConverter {
             
             const today = new Date().toISOString().split('T')[0];
             const header = `# The Cepheid Bias: Resolving the Hubble Tension
-
-**Author:** Matthew Lukin Smawfield  
-**Version:** v0.4 (Kingston upon Hull)  
-**Date:** First published: 11 January 2026 | Updated: 27 March 2026  
-**DOI:** 10.5281/zenodo.18209702  
-**Generated:** ${today}  
-**Paper Series:** TEP Series: Paper 12 (Cosmological Observations)
+**Matthew Lukin Smawfield**  
+Version: v0.5 (Kingston upon Hull)  
+First published: 11 January 2026 · Last updated: 24 April 2026  
+DOI: 10.5281/zenodo.18209702  
+Paper Series: TEP Series: Paper 11 (Cosmological Observations)
 
 ---
 
 `;
             const markdown = header + this.htmlToMarkdown(mainMatch[1]);
-            const outputPath = path.join(__dirname, '..', '12manuscript-tep-h0.md');
+            const versionInfo = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'VERSION.json'), 'utf8'));
+            const version = versionInfo.version;
+            const outputPath = path.join(__dirname, '..', `11-TEP-H0-v${version}-KingstonUponHull.md`);
             fs.writeFileSync(outputPath, markdown, 'utf8');
             console.log(`✅ Markdown saved to: ${outputPath}`);
         } catch (error) {

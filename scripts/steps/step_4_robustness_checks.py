@@ -109,13 +109,22 @@ class Step4RobustnessChecks:
         return sub
 
     def _gls_fit(self, X, y, cov):
-        cov_reg = cov + np.eye(cov.shape[0]) * (1e-12 * np.trace(cov) / cov.shape[0])
-        cov_inv = np.linalg.inv(cov_reg)
-        XtCi = X.T @ cov_inv
-        fisher = XtCi @ X
-        fisher_inv = np.linalg.inv(fisher)
-        beta = fisher_inv @ (XtCi @ y)
-        return beta, fisher_inv
+        try:
+            cov_reg = cov + np.eye(cov.shape[0]) * (1e-12 * np.trace(cov) / cov.shape[0])
+            cov_inv = np.linalg.inv(cov_reg)
+            XtCi = X.T @ cov_inv
+            fisher = XtCi @ X
+            # Add small regularization for numerical stability
+            reg = 1e-10 * np.trace(fisher) / fisher.shape[0]
+            fisher_reg = fisher + reg * np.eye(fisher.shape[0])
+            fisher_inv = np.linalg.inv(fisher_reg)
+            beta = fisher_inv @ (XtCi @ y)
+            return beta, fisher_inv
+        except np.linalg.LinAlgError:
+            # Return NaN values if matrix inversion fails
+            beta = np.full(X.shape[1], np.nan)
+            fisher_inv = np.full((X.shape[1], X.shape[1]), np.nan)
+            return beta, fisher_inv
 
     def _covariance_aware_tests(self, df):
         cov, cov_labels = self._load_h0_covariance()
@@ -202,27 +211,34 @@ class Step4RobustnessChecks:
             return None
 
     def _fit_alpha(self, df, sigma_ref):
+        from scripts.utils.tep_correction import tep_correction
         sigma = df['sigma_inferred'].values.astype(float)
         mu = df['value'].values.astype(float)
         v = df['velocity'].values.astype(float)
 
         def objective(params):
             alpha = float(params[0])
-            corr = alpha * np.log10(sigma / sigma_ref)
+            corr = tep_correction(sigma, sigma_ref, alpha)
             mu_corr = mu + corr
             d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
             h0_corr = v / d_corr
             slope, _ = np.polyfit(sigma, h0_corr, 1)
             return float(slope * slope)
 
-        res = minimize(objective, x0=[0.7], method='Nelder-Mead', tol=1e-2)
+        res = minimize(
+            objective,
+            x0=[1.0e6],
+            method='Nelder-Mead',
+            options={'xatol': 10.0, 'fatol': 1e-6, 'maxiter': 500},
+        )
         return float(res.x[0])
 
     def _apply_alpha(self, df, alpha, sigma_ref):
+        from scripts.utils.tep_correction import tep_correction
         sigma = df['sigma_inferred'].values.astype(float)
         mu = df['value'].values.astype(float)
         v = df['velocity'].values.astype(float)
-        corr = float(alpha) * np.log10(sigma / float(sigma_ref))
+        corr = tep_correction(sigma, float(sigma_ref), float(alpha))
         mu_corr = mu + corr
         d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
         return v / d_corr

@@ -24,13 +24,13 @@
           "low_n": 15,
           "median_sigma": 89.53951311106145,
           "n": 29,
-          "pearson_p": 0.020567348172728893,
-          "pearson_r": 0.4279417434741577,
-          "spearman_p": 0.018662224475543478,
-          "spearman_rho": 0.4339901477832511
+          "pearson_p": 0.0116001769116666,
+          "pearson_r": 0.4621612433960245,
+          "spearman_p": 0.0045836144004947985,
+          "spearman_rho": 0.5113300492610836
         },
         "got": {
-          "correlation_r": 0.42794174347415764,
+          "correlation_r": 0.4621612433960245,
           "difference": 4.628158226115971,
           "difference_cov_err": 0.9405629326109087,
           "h0_covariance_saved": true,
@@ -60,22 +60,22 @@
       "details": {
         "expected": {
           "n": 29,
-          "pearson_r": 0.4279417434741577,
-          "spearman_rho": 0.4339901477832511
+          "pearson_r": 0.4621612433960245,
+          "spearman_rho": 0.5113300492610836
         },
         "got": {
           "avg_offdiag_corr": 0.10303131702948858,
-          "gls_slope_p": 7.742673169275349e-10,
-          "gls_slope_per_kms": 0.09521570241057381,
-          "gls_slope_se": 0.010318904533308923,
-          "gls_slope_t": 9.227307230454759,
+          "gls_slope_p": 1.2508216684636864e-11,
+          "gls_slope_per_kms": 0.11891153324294479,
+          "gls_slope_se": 0.010643601712829302,
+          "gls_slope_t": 11.172114144370356,
           "n": 29,
           "n_eff_equicorr": 7.464844039972716,
           "n_sims": 20000,
-          "pearson_p_cov": 0.03945,
-          "pearson_r": 0.4279417434741577,
-          "spearman_p_cov": 0.02575,
-          "spearman_rho": 0.4339901477832511
+          "pearson_p_cov": 0.02655,
+          "pearson_r": 0.4621612433960245,
+          "spearman_p_cov": 0.008,
+          "spearman_rho": 0.5113300492610836
         }
       },
       "name": "covariance_robustness_matches_recomputed",
@@ -84,21 +84,21 @@
     {
       "details": {
         "got": {
-          "bootstrap_alpha_mean": 0.5721187499999997,
-          "bootstrap_alpha_std": 0.16011992563681038,
-          "bootstrap_h0_mean": 68.61690603944618,
-          "bootstrap_h0_std": 1.5068474071393165,
-          "h0_sem": 1.3025120696301784,
+          "bootstrap_alpha_mean": 1157598.8464355469,
+          "bootstrap_alpha_std": 427261.06581288605,
+          "bootstrap_h0_mean": 68.13616161313495,
+          "bootstrap_h0_std": 1.491567922427454,
+          "h0_sem": 1.296510859163623,
           "is_consistent": true,
           "n_hosts": 29,
-          "optimal_alpha": 0.5798828125000002,
+          "optimal_alpha": 1049548.33984375,
           "planck_h0": 67.4,
           "sigma_ref": 75.25,
-          "tension_sigma": 0.7941398084301493,
-          "unified_h0": 68.6608052089788
+          "tension_sigma": 0.4890660609576291,
+          "unified_h0": 68.1693702237083
         },
-        "recomputed_tension_robust": 0.7941398084301493,
-        "recomputed_tension_sem": 0.9036839846444734
+        "recomputed_tension_robust": 0.4890660609576291,
+        "recomputed_tension_sem": 0.5536699315596317
       },
       "name": "tep_correction_internal_consistency",
       "ok": true
@@ -112,11 +112,11 @@
         },
         "inputs": {
           "hi_proxy_mode": "calibrated_vmax",
-          "hosts_csv": "/Users/matthewsmawfield/www/TEP-H0/data/interim/hosts_coords.csv",
+          "hosts_csv": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/hosts_coords.csv",
           "leda_url": "http://atlas.obs-hp.fr/hyperleda/ledacat.cgi",
           "lit_overrides_csv": null,
           "n_hosts_deduped": 41,
-          "n_hosts_raw": 42,
+          "n_hosts_raw": 41,
           "sleep_seconds": 0.4,
           "use_6dfgs": false,
           "use_apj929": true,
@@ -141,14 +141,14 @@
     },
     {
       "details": {
-        "path": "/Users/matthewsmawfield/www/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv"
+        "path": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv"
       },
       "name": "regenerated_sigma_catalog_present",
       "ok": true
     },
     {
       "details": {
-        "path": "/Users/matthewsmawfield/www/TEP-H0/data/raw/external/velocity_dispersions_literature.csv"
+        "path": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv"
       },
       "name": "legacy_sigma_catalog_present",
       "ok": true
@@ -157,15 +157,15 @@
       "details": {
         "expected": {
           "n": 29,
-          "pearson_r": 0.4279417434741577,
-          "spearman_rho": 0.4339901477832511
+          "pearson_r": 0.4621612433960245,
+          "spearman_rho": 0.5113300492610836
         },
         "got": {
           "full_sample": {
-            "pearson_p": 0.020567348172728893,
-            "pearson_r": 0.4279417434741577,
-            "spearman_p": 0.018662224475543478,
-            "spearman_rho": 0.4339901477832511
+            "pearson_p": 0.0116001769116666,
+            "pearson_r": 0.4621612433960245,
+            "spearman_p": 0.0045836144004947985,
+            "spearman_rho": 0.5113300492610836
           },
           "hi_hosts": [
             "NGC 105",
@@ -176,13 +176,14 @@
             "NGC 4038",
             "NGC 4680",
             "NGC 5468",
+            "NGC 5584",
             "NGC 5861",
             "NGC 5917",
             "NGC 7250",
             "NGC 7329"
           ],
-          "n_hi": 12,
-          "n_stellar": 17,
+          "n_hi": 13,
+          "n_stellar": 16,
           "n_total": 29,
           "stellar_hosts": [
             "NGC 0691",
@@ -196,7 +197,6 @@
             "NGC 3370",
             "NGC 3583",
             "NGC 4639",
-            "NGC 5584",
             "NGC 5728",
             "NGC 7541",
             "NGC 7678",
@@ -204,14 +204,14 @@
             "UGC 9391"
           ],
           "stellar_only": {
-            "delta_h0": 7.527588434217108,
+            "delta_h0": 9.172053327121574,
             "h0_high_sigma": 73.73025465054553,
-            "h0_low_sigma": 66.20266621632842,
-            "median_sigma": 91.36814985353718,
-            "pearson_p": 0.09361761535739041,
-            "pearson_r": 0.41958039938763225,
-            "spearman_p": 0.19454252826661278,
-            "spearman_rho": 0.3308823529411765
+            "h0_low_sigma": 64.55820132342396,
+            "median_sigma": 96.37171468447504,
+            "pearson_p": 0.026075458206201777,
+            "pearson_r": 0.5536716703562449,
+            "spearman_p": 0.014609731954981046,
+            "spearman_rho": 0.5970588235294118
           }
         }
       },
@@ -223,17 +223,17 @@
         "expected": {
           "cepheid_delta_h0": 4.628158226115971,
           "cepheid_n": 29,
-          "cepheid_spearman": 0.4339901477832511
+          "cepheid_spearman": 0.5113300492610836
         },
         "got": {
           "cepheid_delta_h0": 4.628158226115971,
           "cepheid_n": 29,
-          "cepheid_p": 0.018662224475543478,
-          "cepheid_spearman": 0.4339901477832511,
+          "cepheid_p": 0.0045836144004947985,
+          "cepheid_spearman": 0.5113300492610836,
           "trgb_delta_h0": 3.50276182308977,
           "trgb_n": 18,
-          "trgb_p": 0.12560824850361174,
-          "trgb_spearman": 0.3746130030959752
+          "trgb_p": 0.06301029106386723,
+          "trgb_spearman": 0.44685242518059853
         }
       },
       "name": "trgb_comparison_uses_current_cepheid_stats",
@@ -248,8 +248,8 @@
       "ok": true
     }
   ],
-  "outputs_dir": "/Users/matthewsmawfield/www/TEP-H0/results/outputs",
-  "project_root": "/Users/matthewsmawfield/www/TEP-H0",
+  "outputs_dir": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs",
+  "project_root": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0",
   "summary": {
     "derived_from_stratified_h0": {
       "delta_h0": 4.628158226115971,
@@ -259,10 +259,10 @@
       "low_n": 15,
       "median_sigma": 89.53951311106145,
       "n": 29,
-      "pearson_p": 0.020567348172728893,
-      "pearson_r": 0.4279417434741577,
-      "spearman_p": 0.018662224475543478,
-      "spearman_rho": 0.4339901477832511
+      "pearson_p": 0.0116001769116666,
+      "pearson_r": 0.4621612433960245,
+      "spearman_p": 0.0045836144004947985,
+      "spearman_rho": 0.5113300492610836
     },
     "n_checks": 12,
     "n_failed": 0,

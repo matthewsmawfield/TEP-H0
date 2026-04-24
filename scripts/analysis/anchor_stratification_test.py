@@ -105,18 +105,23 @@ def fit_pl_relation(log_p, W, W_err=None):
     """
     # Design matrix: [1, (log P - 1)]
     X = np.column_stack([np.ones_like(log_p), log_p - 1.0])
-    
     if W_err is None:
         # Unweighted OLS
         beta, residuals, rank, s = np.linalg.lstsq(X, W, rcond=None)
-        
+
         # Estimate uncertainties from residuals
         n = len(W)
         p = 2
         if n > p:
             sigma2 = np.sum((W - X @ beta)**2) / (n - p)
-            cov = sigma2 * np.linalg.inv(X.T @ X)
-            se = np.sqrt(np.diag(cov))
+            XtX = X.T @ X
+            reg = 1e-10 * np.trace(XtX) / XtX.shape[0]
+            XtX_reg = XtX + reg * np.eye(XtX.shape[0])
+            try:
+                cov = sigma2 * np.linalg.inv(XtX_reg)
+                se = np.sqrt(np.diag(cov))
+            except np.linalg.LinAlgError:
+                se = np.full(X.shape[1], np.nan)
         else:
             se = [np.nan, np.nan]
     else:
@@ -124,9 +129,15 @@ def fit_pl_relation(log_p, W, W_err=None):
         W_inv = np.diag(1.0 / W_err**2)
         XtWX = X.T @ W_inv @ X
         XtWy = X.T @ W_inv @ W
-        beta = np.linalg.solve(XtWX, XtWy)
-        cov = np.linalg.inv(XtWX)
-        se = np.sqrt(np.diag(cov))
+        reg = 1e-10 * np.trace(XtWX) / XtWX.shape[0]
+        XtWX_reg = XtWX + reg * np.eye(XtWX.shape[0])
+        try:
+            beta = np.linalg.solve(XtWX_reg, XtWy)
+            cov = np.linalg.inv(XtWX_reg)
+            se = np.sqrt(np.diag(cov))
+        except np.linalg.LinAlgError:
+            beta = np.array([np.nan, np.nan])
+            se = np.full(X.shape[1], np.nan)
     
     M_W, b_W = beta
     M_W_err, b_W_err = se
@@ -232,9 +243,15 @@ def run_anchor_stratification_test():
         # Weighted least squares
         XtWX = X.T @ W_mat @ X
         XtWy = X.T @ W_mat @ M_Ws
-        beta = np.linalg.solve(XtWX, XtWy)
-        cov = np.linalg.inv(XtWX)
-        se = np.sqrt(np.diag(cov))
+        reg = 1e-10 * np.trace(XtWX) / XtWX.shape[0]
+        XtWX_reg = XtWX + reg * np.eye(XtWX.shape[0])
+        try:
+            beta = np.linalg.solve(XtWX_reg, XtWy)
+            cov = np.linalg.inv(XtWX_reg)
+            se = np.sqrt(np.diag(cov))
+        except np.linalg.LinAlgError:
+            beta = np.array([np.nan, np.nan])
+            se = np.array([np.nan, np.nan])
         
         intercept, alpha_anchor = beta
         intercept_err, alpha_anchor_err = se

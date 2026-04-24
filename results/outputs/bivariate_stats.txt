@@ -1,6 +1,6 @@
 Bivariate Analysis Stats
-Pearson r(H0, Sigma): 0.4279 (p=0.0206)
+Pearson r(H0, Sigma): 0.4622 (p=0.0116)
 Pearson r(H0, Metal): 0.3041 (p=0.1087)
-Pearson r(Sigma, Metal): 0.1842 (p=0.3389)
-Partial r(H0, Sigma | Metal): 0.3972 (p=0.0363)
-Partial r(H0, Metal | Sigma): 0.2536 (p=0.1928)
+Pearson r(Sigma, Metal): 0.1907 (p=0.3217)
+Partial r(H0, Sigma | Metal): 0.4322 (p=0.0216)
+Partial r(H0, Metal | Sigma): 0.2481 (p=0.2030)

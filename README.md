@@ -6,28 +6,30 @@
 ![TEP-H0: Cepheid Bias](site/public/image.webp)
 
 **Author:** Matthew Lukin Smawfield  
-**Version:** v0.4 (Kingston upon Hull)  
-**Date:** 27 March 2026  
+**Version:** v0.5 (Kingston upon Hull)  
+**Date:** 24 April 2026  
 **Status:** Preprint (Open for Collaboration)  
 **DOI:** [10.5281/zenodo.18209702](https://doi.org/10.5281/zenodo.18209702)  
 **Website:** [https://mlsmawfield.com/tep/h0/](https://mlsmawfield.com/tep/h0/)  
-**Paper Series:** TEP Series: Paper 12 (Cosmological Observations)
+**Paper Series:** TEP Series: Paper 11 (Cosmological Observations)
 
 ## Abstract
 
 The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements (H₀ ≈ 73 km/s/Mpc) and early-universe CMB inference (H₀ = 67.4 ± 0.5 km/s/Mpc)—represents a significant challenge in precision cosmology. This study proposes that the tension arises from a systematic, environment-dependent bias in Cepheid-based distances, as predicted by the Temporal Equivalence Principle (TEP).
 
-TEP posits that proper time accumulation depends on the local gravitational potential. Cepheid variable stars, acting as "standard clocks" via their period-luminosity relation, experience differential time flow governed by their host galaxy environment. Consistent with the anomalous spin-down rates observed in globular cluster pulsars (Paper 11), Cepheids in deep gravitational potentials (high velocity dispersion σ) experience period contraction relative to calibration environments. When interpreted through a universal P-L relation, this period deficit masquerades as diminished luminosity, causing systematic underestimation of distances to SN Ia host galaxies and consequent overestimation of H₀.
+This study tests the hypothesis that the discrepancy arises from a violation of the isochrony axiom—the assumption that proper time accumulation is independent of the local gravitational environment. Under scalar-tensor theories that break the Strong Equivalence Principle (such as TEP), Cepheid variable stars act as environment-dependent "standard clocks." In deep gravitational potentials (high velocity dispersion σ) and active-shear environments, enhanced scalar field activity is predicted to induce period contraction relative to calibration environments. When interpreted through a universal Period-Luminosity relation, this clock-rate anomaly would mimic diminished luminosity, leading to underestimated distances and an inflated local Hubble constant.
 
 Analysis of the SH0ES Cepheid sample (N=29), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived H₀ (Spearman ρ = 0.434, p = 0.019; Pearson r = 0.428, p = 0.021). A median-split stratification at σ_med ≈ 90 km/s yields H₀ = 67.82 ± 1.62 km/s/Mpc (low-σ; N=15) versus 72.45 ± 2.32 km/s/Mpc (high-σ; N=14), implying ΔH₀ = 4.63 km/s/Mpc. Because published σ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), measurement methodology is treated as a first-class provenance variable and covariance-aware significance tests are reported using the full SH0ES GLS distance-modulus covariance.
 
-Application of the TEP conformal correction with an optimized coupling α = 0.58 ± 0.16 and effective calibrator reference σ_ref = 75.25 km/s yields a unified local Hubble constant of H₀ = 68.66 ± 1.51 km/s/Mpc, corresponding to a Planck tension of 0.79σ. Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an "Inner Fainter" signal in HST photometry. This result, initially counter-intuitive, is resolved by the theory's density-dependent screening mechanism: the high-density M31 bulge (ρ > ρ_trans) is screened (restoring standard physics), while the lower-density SN Ia host disks remain unscreened. The M31 signal thus marks the empirical crossing of the screening threshold.
+Application of the TEP conformal correction Δμ = α_eff·S(ρ)·(σ² − σ_ref²)/c²—derived from the TEP period-contraction P_obs = P_true(1 − |Φ|/c²)^α_int combined with the virial relation |Φ| ∝ σ²—with optimized effective coupling α_eff = (9.6 ± 4.0) × 10⁵ mag and effective calibrator reference σ_ref = 75.25 km/s yields a unified local Hubble constant of H₀ = 68.37 ± 1.54 km/s/Mpc, corresponding to a Planck tension of 0.60σ. The inferred α_eff ~ 10⁶ places this probe in the same coupling regime as the millisecond-pulsar spin-down excess (Paper 10), eliminating the cross-probe mismatch of earlier phenomenological log₁₀ σ scalings.
 
-The anchor–host mismatch (geometric anchors show near-zero coupling, α_anchor ≈ 0, in tension with the host-level α ≈ 0.58) finds a natural resolution in group halo screening: all three anchors (LMC, NGC 4258, M31) are members of galaxy groups, embedding them in deep ambient potentials that trigger chameleon-type screening regardless of internal disk densities. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies that lack this external screening. This framework generates a falsifiable prediction: the TEP distance-ladder bias should be unique to isolated field galaxies and suppressed in group/cluster environments.
+Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an "Inner Fainter" signal in HST photometry. Within the TEP v0.7 framework, this sign is consistent with continuous shear suppression: the high-density M31 bulge experiences progressive attenuation of Temporal Shear (suppression factor S ≈ 0.05 at R < 1 kpc), while the lower-density SN Ia host disks remain in the active-shear regime (⟨S⟩ = 0.946). On this interpretation, the M31 signal marks the empirical mapping of a continuous density-dependent suppression profile across a single galaxy.
+
+The anchor–host mismatch (geometric anchors show near-zero coupling, α_anchor ≈ (7.2 ± 7.9) × 10⁴ mag, in marginal 2.2σ tension with the host-level α ≈ 9.6 × 10⁵ mag) finds a natural resolution in group halo screening: all three anchors (LMC, NGC 4258, M31) are members of galaxy groups, embedding them in deep ambient potentials that trigger chameleon-type screening regardless of internal disk densities. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies that lack this external screening. This framework generates a falsifiable prediction: the TEP distance-ladder bias should be unique to isolated field galaxies and suppressed in group/cluster environments.
 
 ## Key Findings
 
-Analysis of 29 SH0ES Cepheid hosts reveals a significant correlation between derived H₀ and host galaxy velocity dispersion (ρ = 0.434, p = 0.019). High-σ hosts yield H₀ = 72.45 km/s/Mpc while low-σ hosts yield 67.82 km/s/Mpc—a 4.63 km/s/Mpc environmental bias. Applying the TEP conformal correction (α = 0.58) eliminates this trend, yielding a unified H₀ = 68.66 ± 1.51 km/s/Mpc, reducing Planck tension from 5σ to 0.79σ. A differential analysis within M31 (HST PHAT) detects an "Inner Fainter" signal (+0.68 mag, 3.6σ), explained by density-dependent screening: the high-density bulge is screened while the outer disk is not. The anchor–host mismatch is resolved by group halo screening—all anchors reside in galaxy groups, while SN Ia hosts are biased toward isolated field environments.
+Analysis of 29 SH0ES Cepheid hosts reveals a significant correlation between derived H₀ and host galaxy velocity dispersion (ρ = 0.434, p = 0.019). High-σ hosts yield H₀ = 72.45 km/s/Mpc while low-σ hosts yield 67.82 km/s/Mpc—a 4.63 km/s/Mpc environmental bias. Applying the physics-derived TEP conformal correction (α ≈ 9.6 × 10⁵ mag with σ² /c² scaling) eliminates this trend, yielding a unified H₀ = 68.37 ± 1.54 km/s/Mpc, reducing Planck tension from 5σ to 0.60σ. A differential analysis within M31 (HST PHAT) detects an "Inner Fainter" signal (+0.68 mag, 3.6σ), explained by density-dependent screening: the high-density bulge is screened while the outer disk is not. The anchor–host mismatch is resolved by group halo screening—all anchors reside in galaxy groups, while SN Ia hosts are biased toward isolated field environments.
 
 ---
 
@@ -37,16 +39,18 @@ Analysis of 29 SH0ES Cepheid hosts reveals a significant correlation between der
 |-------|-----------|-------|-----|
 | **Paper 0** | [TEP](https://github.com/matthewsmawfield/TEP) | Temporal Equivalence Principle: Dynamic Time & Emergent Light Speed | [10.5281/zenodo.16921911](https://doi.org/10.5281/zenodo.16921911) |
 | **Paper 1** | [TEP-GNSS](https://github.com/matthewsmawfield/TEP-GNSS) | Global Time Echoes: Distance-Structured Correlations in GNSS Clocks | [10.5281/zenodo.17127229](https://doi.org/10.5281/zenodo.17127229) |
-| **Paper 2** | [TEP-GNSS-II](https://github.com/matthewsmawfield/TEP-GNSS-II) | Global Time Echoes: 25-Year Temporal Evolution | [10.5281/zenodo.17517141](https://doi.org/10.5281/zenodo.17517141) |
-| **Paper 3** | [TEP-GNSS-RINEX](https://github.com/matthewsmawfield/TEP-GNSS-RINEX) | Global Time Echoes: Raw RINEX Validation | [10.5281/zenodo.17860166](https://doi.org/10.5281/zenodo.17860166) |
-| **Paper 4** | [TEP-GL](https://github.com/matthewsmawfield/TEP-GL) | Temporal-Spatial Coupling in Gravitational Lensing | [10.5281/zenodo.17982540](https://doi.org/10.5281/zenodo.17982540) |
-| **Paper 6** | [TEP-GTE](https://github.com/matthewsmawfield/TEP-GTE) | Global Time Echoes: Empirical Validation of TEP | [10.5281/zenodo.18004832](https://doi.org/10.5281/zenodo.18004832) |
-| **Paper 7** | [TEP-UCD](https://github.com/matthewsmawfield/TEP-UCD) | Universal Critical Density | [10.5281/zenodo.18064366](https://doi.org/10.5281/zenodo.18064366) |
-| **Paper 8** | [TEP-RBH](https://github.com/matthewsmawfield/TEP-RBH) | The Soliton Wake | [10.5281/zenodo.18059251](https://doi.org/10.5281/zenodo.18059251) |
-| **Paper 9** | [TEP-SLR](https://github.com/matthewsmawfield/TEP-SLR) | Satellite Laser Ranging Validation | [10.5281/zenodo.18064582](https://doi.org/10.5281/zenodo.18064582) |
-| **Paper 10** | [TEP-EXP](https://github.com/matthewsmawfield/TEP-EXP) | What Do Precision Tests of General Relativity Actually Measure? | [10.5281/zenodo.18109761](https://doi.org/10.5281/zenodo.18109761) |
-| **Paper 11** | [TEP-COS](https://github.com/matthewsmawfield/TEP-COS) | Suppressed Density Scaling in Globular Cluster Pulsars | [10.5281/zenodo.18165798](https://doi.org/10.5281/zenodo.18165798) |
-| **Paper 12** | **TEP-H0** (This repo) | The Cepheid Bias: Resolving the Hubble Tension | [10.5281/zenodo.18209702](https://doi.org/10.5281/zenodo.18209702) |
+| **Paper 2** | [TEP-GNSS-II](https://github.com/matthewsmawfield/TEP-GNSS-II) | Global Time Echoes: 25-Year Temporal Evolution of Distance-Structured Correlations in GNSS Clocks | [10.5281/zenodo.17517141](https://doi.org/10.5281/zenodo.17517141) |
+| **Paper 3** | [TEP-GNSS-RINEX](https://github.com/matthewsmawfield/TEP-GNSS-RINEX) | Global Time Echoes: Raw RINEX Validation of Distance-Structured Correlations in GNSS Clocks | [10.5281/zenodo.17860166](https://doi.org/10.5281/zenodo.17860166) |
+| **Paper 4** | [TEP-GL](https://github.com/matthewsmawfield/TEP-GL) | Temporal-Spatial Coupling in Gravitational Lensing: A Reinterpretation of Dark Matter Observations | [10.5281/zenodo.17982540](https://doi.org/10.5281/zenodo.17982540) |
+| **Paper 5** | [TEP-GTE](https://github.com/matthewsmawfield/TEP-GTE) | Global Time Echoes: Empirical Validation of the Temporal Equivalence Principle | [10.5281/zenodo.18004832](https://doi.org/10.5281/zenodo.18004832) |
+| **Paper 6** | [TEP-UCD](https://github.com/matthewsmawfield/TEP-UCD) | Universal Critical Density: Unifying Atomic, Galactic, and Compact Object Scales | [10.5281/zenodo.18064366](https://doi.org/10.5281/zenodo.18064366) |
+| **Paper 7** | [TEP-RBH](https://github.com/matthewsmawfield/TEP-RBH) | The Soliton Wake: A Runaway Black Hole as a Gravitational Soliton | [10.5281/zenodo.18059251](https://doi.org/10.5281/zenodo.18059251) |
+| **Paper 8** | [TEP-SLR](https://github.com/matthewsmawfield/TEP-SLR) | Global Time Echoes: Optical Validation of the Temporal Equivalence Principle via Satellite Laser Ranging | [10.5281/zenodo.18064582](https://doi.org/10.5281/zenodo.18064582) |
+| **Paper 9** | [TEP-EXP](https://github.com/matthewsmawfield/TEP-EXP) | What Do Precision Tests of General Relativity Actually Measure? | [10.5281/zenodo.18109761](https://doi.org/10.5281/zenodo.18109761) |
+| **Paper 10** | [TEP-COS](https://github.com/matthewsmawfield/TEP-COS) | The Temporal Equivalence Principle: Suppressed Density Scaling in Globular Cluster Pulsars | [10.5281/zenodo.18165798](https://doi.org/10.5281/zenodo.18165798) |
+| **Paper 11** | **TEP-H0** (This repo) | The Cepheid Bias: Resolving the Hubble Tension | [10.5281/zenodo.18209702](https://doi.org/10.5281/zenodo.18209702) |
+| **Paper 12** | [TEP-JWST](https://github.com/matthewsmawfield/TEP-JWST) | The Temporal Equivalence Principle: A Unified Resolution to the JWST High-Redshift Anomalies | [10.5281/zenodo.19000827](https://doi.org/10.5281/zenodo.19000827) |
+| **Paper 13** | [TEP-WB](https://github.com/matthewsmawfield/TEP-WB) | The Temporal Equivalence Principle: Density-Dependent Screening in Gaia DR3 Wide Binaries | [10.5281/zenodo.19102062](https://doi.org/10.5281/zenodo.19102062) |
 
 ## Directory Structure
 
@@ -66,7 +70,7 @@ TEP-H0/
 ├── site/
 │   ├── components/                # Manuscript HTML sections
 │   └── public/                    # Static assets
-├── 12manuscript-tep-h0.md         # Full manuscript (Markdown)
+├── 11manuscript-tep-h0.md         # Full manuscript (Markdown)
 └── requirements.txt               # Python dependencies
 ```
 
@@ -150,7 +154,7 @@ The analysis demonstrates a statistically significant host-level H₀–σ corre
   journal={Zenodo},
   year={2026},
   doi={10.5281/zenodo.18209702},
-  note={Preprint v0.4 (Kingston upon Hull)}
+  note={Preprint v0.5 (Kingston upon Hull)}
 }
 ```
 

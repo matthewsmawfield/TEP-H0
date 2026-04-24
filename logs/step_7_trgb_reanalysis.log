@@ -1,19 +1,19 @@
-[18:05:23] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
-[18:05:23] [INFO] Matched 13 hosts for differential analysis
-[18:05:23] [INFO] 
+[14:24:59] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
+[14:24:59] [INFO] Matched 13 hosts for differential analysis
+[14:24:59] [INFO] 
 Differential Modulus (TRGB - Cepheid) vs Sigma:
-[18:05:23] [INFO] +-----------------+---------------+--------------+
-[18:05:23] [INFO] | Metric          | Value         | Significance |
-[18:05:23] [INFO] +-----------------+---------------+--------------+
-[18:05:23] [INFO] | Pearson r       | 0.547         | p=0.0533     |
-[18:05:23] [INFO] | Spearman ρ      | 0.637         | p=0.0191     |
-[18:05:23] [INFO] | Slope (mag/dex) | 0.149 ± 0.061 | p=0.0322     |
-[18:05:23] [INFO] +-----------------+---------------+--------------+
-[18:05:23] [INFO] 
+[14:24:59] [INFO] +-----------------+---------------+--------------+
+[14:24:59] [INFO] | Metric          | Value         | Significance |
+[14:24:59] [INFO] +-----------------+---------------+--------------+
+[14:24:59] [INFO] | Pearson r       | 0.513         | p=0.0731     |
+[14:24:59] [INFO] | Spearman ρ      | 0.571         | p=0.0413     |
+[14:24:59] [INFO] | Slope (mag/dex) | 0.147 ± 0.067 | p=0.0505     |
+[14:24:59] [INFO] +-----------------+---------------+--------------+
+[14:24:59] [INFO] 
 Interpretation Check:
-[18:05:23] [INFO]   POSITIVE correlation detected.
-[18:05:23] [INFO]   High-σ hosts have μ_TRGB > μ_Ceph.
-[18:05:23] [INFO]   Implies μ_Ceph is UNDERESTIMATED at high σ.
-[18:05:23] [SUCCESS]   → CONSISTENT WITH TEP PREDICTION.
-[18:05:24] [INFO] Plot saved to /Users/matthewsmawfield/www/TEP-H0/results/figures/trgb_cepheid_residual.png
-[18:05:24] [INFO] Results saved to /Users/matthewsmawfield/www/TEP-H0/results/outputs/trgb_differential_results.json
+[14:24:59] [INFO]   POSITIVE correlation detected.
+[14:24:59] [INFO]   High-σ hosts have μ_TRGB > μ_Ceph.
+[14:24:59] [INFO]   Implies μ_Ceph is UNDERESTIMATED at high σ.
+[14:24:59] [SUCCESS]   → CONSISTENT WITH TEP PREDICTION.
+[14:24:59] [INFO] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/trgb_cepheid_residual.png
+[14:24:59] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json

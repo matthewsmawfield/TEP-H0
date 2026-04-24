@@ -1,0 +1,10 @@
+[13:04:50] [INFO] 
+[13:04:50] [INFO] ================================================================================
+[13:04:50] [INFO]    Starting TEP-H0 Step 12: Cosmological Inference Template
+[13:04:50] [INFO] ================================================================================
+[13:04:50] [INFO] 
+[13:04:50] [INFO] Initializing TEP-CLASS Parameter Mapping...
+[13:04:50] [INFO] Fiducial TEP H0: 68.37 km/s/Mpc
+[13:04:50] [INFO] Max G_eff enhancement at z=1100: 1.0000e+00
+[13:04:50] [SUCCESS] Step 12 template generated. Ready for hi_class integration.
+[13:04:50] [INFO] Results saved to results/outputs/cosmology_inference_template.json

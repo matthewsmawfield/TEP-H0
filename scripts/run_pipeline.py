@@ -2,7 +2,7 @@
 """
 TEP-H0 Analysis Pipeline Master Script
 ======================================
-Orchestrates the full analysis pipeline for Paper 12: "The Cepheid Bias: Resolving the Hubble Tension".
+Orchestrates the full analysis pipeline for Paper 11: "The Cepheid Bias: Resolving the Hubble Tension".
 
 This script serves as the central controller for the TEP-H0 analysis.
 It executes the scientific workflow in a strictly ordered sequence, ensuring
@@ -51,6 +51,7 @@ from scripts.steps.step_6_multivariate_analysis import Step6MultivariateAnalysis
 from scripts.steps.step_6_enhanced_robustness import Step6EnhancedRobustness
 from scripts.steps.step_7_lmc_replication import Step7LMCReplication
 from scripts.steps.step_7_trgb_comparison import Step7TRGBComparison
+from scripts.steps.step_7_trgb_reanalysis import Step7TRGBReanalysis
 from scripts.steps.step_8_m31_phat_analysis import Step8M31PHATAnalysis
 from scripts.steps.step_9_final_synthesis import Step9FinalSynthesis
 from scripts.steps.step_10_anchor_stratification import AnchorStratificationStep
@@ -211,6 +212,15 @@ def run_pipeline():
 
         set_step_logger(pipeline_logger)
         print_status("Step 7b (TRGB Comparison) completed successfully.", "SUCCESS")
+
+        # --- Step 7c: TRGB Differential Reanalysis ---
+        print_status(">>> STEP 7c: TRGB DIFFERENTIAL REANALYSIS", "TITLE")
+        t0 = time.time()
+        Step7TRGBReanalysis().run()
+        step_times['Step 7c'] = time.time() - t0
+
+        set_step_logger(pipeline_logger)
+        print_status("Step 7c (TRGB Differential Reanalysis) completed successfully.", "SUCCESS")
 
         # --- Step 8: M31 PHAT Analysis ---
         print_status(">>> STEP 8: M31 PHAT ANALYSIS", "TITLE")

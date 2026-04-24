@@ -31,12 +31,12 @@ As a control, we applied the same pipeline to the LMC (OGLE-IV), which lacks a m
 We verified the core TEP prediction (H0 bias correlated with host velocity dispersion σ) against referee concerns.
 
 ### Local Density Control
-- The correlation between H0 and σ persists after controlling for local galaxy density ($r_{partial} = 0.458$, $p = 0.0124$).
+- The correlation between H0 and σ persists after controlling for local galaxy density ($r_{partial} = 0.493$, $p = 0.0066$).
 - This rules out environmental density (e.g., crowding bias) as the sole driver of the H0 trend.
 
 ### Stellar Absorption Subsample
 - Restricting to hosts with high-quality stellar σ (excluding HI proxy) maintains the signal.
-- **Pearson r:** 0.41958039938763225
+- **Pearson r:** 0.5536716703562449
 
 ## 4. The Density-Potential Resolution
 
@@ -65,4 +65,4 @@ While M31 and SN hosts fit the model, NGC 4258 presents a challenge:
 
 ## 6. Conclusion
 
-The TEP hypothesis survives rigorous robustness testing in SN hosts and M31, but faces a challenge with NGC 4258 (Anchor Tension). The global H0-σ correlation (Step 6) is driven by unscreened disk environments. The M31 'Inner Fainter' signal (Step 8) is identified as the signature of the **screening threshold** being crossed. Future work must resolve why the anchor NGC 4258 appears standard despite its low density.
+The TEP hypothesis survives rigorous robustness testing in SN hosts and M31, but faces a challenge with NGC 4258 (Anchor Tension). The global H0-σ correlation (Step 6) is driven by unscreened disk environments. The M31 'Inner Fainter' signal (Step 8) is identified as progressive attenuation of Temporal Shear across a density gradient (Temporal Topology), with the inner bulge experiencing strong suppression ($S \approx 0.72$) relative to the unscreened outer disk ($S \approx 1$). Future work must resolve why the anchor NGC 4258 appears standard despite its low density.
