@@ -1,0 +1,20 @@
+# robots.txt for TEP-H0: The Cepheid Bias
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://matthewsmawfield.github.io/TEP-H0/sitemap.xml
+
+# Disallow access to hidden directories and files
+Disallow: /.*
+
+# Allow all files with these extensions
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+Allow: /*.pdf$
