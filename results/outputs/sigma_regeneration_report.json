@@ -286,13 +286,11 @@
       "pgc": 50323
     },
     {
-      "chosen_key": "sdss",
-      "direct_keys": [
-        "sdss"
-      ],
+      "chosen_key": "hi_log2vm",
+      "direct_keys": [],
       "direct_spread_kms": null,
       "galaxy": "NGC 5584",
-      "n_candidates": 3,
+      "n_candidates": 2,
       "pgc": 51344
     },
     {
@@ -395,11 +393,11 @@
   ],
   "inputs": {
     "hi_proxy_mode": "calibrated_vmax",
-    "hosts_csv": "/Users/matthewsmawfield/www/TEP-H0/data/interim/hosts_coords.csv",
+    "hosts_csv": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/hosts_coords.csv",
     "leda_url": "http://atlas.obs-hp.fr/hyperleda/ledacat.cgi",
     "lit_overrides_csv": null,
     "n_hosts_deduped": 41,
-    "n_hosts_raw": 42,
+    "n_hosts_raw": 41,
     "sleep_seconds": 0.4,
     "use_6dfgs": false,
     "use_apj929": true,
@@ -431,8 +429,8 @@
     ]
   },
   "provenance": {
-    "command": "/Users/matthewsmawfield/www/TEP-H0/scripts/utils/build_sigma_catalog.py --verbose --use-ledacat --use-ho2007 --use-bassdr2 --use-apj929 --use-mnras482",
-    "created_utc": "2026-01-11T11:27:50Z",
+    "command": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/utils/build_sigma_catalog.py --verbose --use-ledacat --use-ho2007 --use-bassdr2 --use-apj929 --use-mnras482",
+    "created_utc": "2026-04-24T08:19:48Z",
     "packages": {
       "astropy": "7.1.1",
       "astroquery": "0.4.11",
@@ -443,7 +441,7 @@
     },
     "platform": {
       "machine": "arm64",
-      "platform": "macOS-15.4.1-arm64-arm-64bit-Mach-O",
+      "platform": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
       "processor": "arm"
     },
     "python": {

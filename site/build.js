@@ -222,67 +222,9 @@ function copyRecursiveSync(src, dest) {
     }
 }
 
-async function buildJournalSite() {
-    console.log('🔨 Building journal submission site...');
-
-    const distDir = path.join(__dirname, 'dist');
-    if (!fs.existsSync(distDir)) fs.mkdirSync(distDir, { recursive: true });
-
-    const manifestPath = path.join(__dirname, 'manifest-journal.json');
-    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-
-    const journalHtmlPath = path.join(__dirname, 'journal.html');
-    let journalContent = fs.readFileSync(journalHtmlPath, 'utf8');
-
-    let componentsHtml = '';
-    const sortedSections = manifest.sections.sort((a, b) => a.order - b.order);
-
-    for (const section of sortedSections) {
-        console.log(`📄 Loading section: ${section.title}`);
-        const componentPath = path.join(__dirname, 'components', section.file);
-        if (fs.existsSync(componentPath)) {
-            const componentHtml = fs.readFileSync(componentPath, 'utf8');
-            componentsHtml += `
-            <section id="${section.id}" class="manuscript-section" data-section="${section.title}">
-                ${componentHtml}
-            </section>`;
-        } else {
-            console.warn(`⚠️  Component not found: ${section.file}`);
-        }
-    }
-
-    // Replace loading div + empty content div with inlined static content
-    let staticContent = journalContent;
-
-    // Remove the loading spinner div
-    staticContent = staticContent.replace(/<div id="loading"[^>]*>[\s\S]*?<\/div>/, '');
-
-    // Replace the empty manuscript-content div with inlined content
-    staticContent = staticContent.replace(
-        /<div id="manuscript-content"[^>]*><\/div>/,
-        `<div id="manuscript-content">${componentsHtml}</div>`
-    );
-
-    // Remove the dynamic loader script
-    staticContent = staticContent.replace(
-        /<script>\s*async function loadManuscriptComponents[\s\S]*?<\/script>/,
-        '<!-- Static build -->'
-    );
-
-    const outputPath = path.join(distDir, 'journal.html');
-    fs.writeFileSync(outputPath, staticContent, 'utf8');
-
-    console.log(`✅ Journal site built: ${outputPath}`);
-}
-
 // Run if called directly
 if (require.main === module) {
-    const arg = process.argv[2];
-    if (arg === '--journal') {
-        buildJournalSite();
-    } else {
-        buildStaticSite();
-    }
+    buildStaticSite();
 }
 
-module.exports = { buildStaticSite, buildJournalSite };
+module.exports = { buildStaticSite };

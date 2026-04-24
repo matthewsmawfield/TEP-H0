@@ -29,8 +29,11 @@ class Step0SigmaCatalog:
         report_json = self.root_dir / "results" / "outputs" / "sigma_regeneration_report.json"
 
         if out_csv.exists() and not rebuild:
-            print_status(f"Sigma catalog already exists; skipping rebuild: {out_csv}", "INFO")
-            return
+            if report_json.exists():
+                print_status(f"Sigma catalog already exists; skipping rebuild: {out_csv}", "INFO")
+                return
+            else:
+                print_status(f"Sigma catalog exists but report missing; will rebuild: {out_csv}", "WARNING")
 
         cmd = [sys.executable, str(self.root_dir / "scripts" / "utils" / "build_sigma_catalog.py"), "--verbose"]
         if use_ledacat:

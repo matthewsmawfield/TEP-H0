@@ -1,6 +1,6 @@
 # TEP-H0 Data
 
-This directory stores input data for the Cepheid analysis (Paper 12).
+This directory stores input data for the Cepheid analysis (Paper 11).
 
 ## Required Data
 

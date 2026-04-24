@@ -128,8 +128,15 @@ class AnchorStratificationStep:
             
             n, p = len(W), 2
             sigma2 = np.sum((W - X @ beta)**2) / (n - p)
-            cov = sigma2 * np.linalg.inv(X.T @ X)
-            se = np.sqrt(np.diag(cov))
+            XtX = X.T @ X
+            # Add small regularization to prevent singular matrix
+            reg = 1e-10 * np.trace(XtX) / XtX.shape[0]
+            XtX_reg = XtX + reg * np.eye(XtX.shape[0])
+            try:
+                cov = sigma2 * np.linalg.inv(XtX_reg)
+                se = np.sqrt(np.diag(cov))
+            except np.linalg.LinAlgError:
+                se = np.full(X.shape[1], np.nan)
             
             M_W_apparent = beta[0]
             M_W_absolute = M_W_apparent - ANCHOR_MU[name]
@@ -163,32 +170,42 @@ class AnchorStratificationStep:
         M_W_errs = np.array([results[n]['M_W_err'] for n in anchor_names])
         
         sigma_ref = 75.25
-        log_sigma_rel = np.log10(sigmas / sigma_ref)
+        # Physics-derived regressor: (sigma^2 - sigma_ref^2)/c^2
+        c_km_s = 299792.458
+        sigma_regressor = (sigmas**2 - sigma_ref**2) / c_km_s**2
         
         # Weighted least squares
         weights = 1.0 / M_W_errs**2
-        X = np.column_stack([np.ones_like(log_sigma_rel), log_sigma_rel])
+        X = np.column_stack([np.ones_like(sigma_regressor), sigma_regressor])
         W_mat = np.diag(weights)
         
         XtWX = X.T @ W_mat @ X
         XtWy = X.T @ W_mat @ M_Ws
-        beta = np.linalg.solve(XtWX, XtWy)
-        cov = np.linalg.inv(XtWX)
-        se = np.sqrt(np.diag(cov))
+        # Add small regularization for numerical stability
+        reg = 1e-10 * np.trace(XtWX) / XtWX.shape[0]
+        XtWX_reg = XtWX + reg * np.eye(XtWX.shape[0])
+        try:
+            beta = np.linalg.solve(XtWX_reg, XtWy)
+            cov = np.linalg.inv(XtWX_reg)
+            se = np.sqrt(np.diag(cov))
+        except np.linalg.LinAlgError:
+            beta = np.array([np.nan, np.nan])
+            se = np.array([np.nan, np.nan])
         
         intercept, alpha_anchor = beta
         intercept_err, alpha_anchor_err = se
         
         # Statistics
-        residuals = M_Ws - (intercept + alpha_anchor * log_sigma_rel)
+        residuals = M_Ws - (intercept + alpha_anchor * sigma_regressor)
         chi2 = np.sum((residuals / M_W_errs)**2)
         dof = len(M_Ws) - 2
         
-        r_pearson, p_pearson = stats.pearsonr(np.log10(sigmas), M_Ws)
+        r_pearson, p_pearson = stats.pearsonr(sigma_regressor, M_Ws)
         
         # Tension with host α (read from pipeline output if available)
-        alpha_host = 0.58
-        alpha_host_err = 0.16
+        # Default sentinel: no host alpha known
+        alpha_host = np.nan
+        alpha_host_err = np.nan
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
@@ -201,13 +218,24 @@ class AnchorStratificationStep:
                     alpha_host_err = float(tep['bootstrap_alpha_std'])
         except Exception:
             pass
-        tension = abs(alpha_anchor - alpha_host) / np.sqrt(alpha_anchor_err**2 + alpha_host_err**2)
+        if np.isfinite(alpha_host) and np.isfinite(alpha_host_err):
+            tension = abs(alpha_anchor - alpha_host) / np.sqrt(
+                alpha_anchor_err**2 + alpha_host_err**2
+            )
+        else:
+            tension = np.nan
         
-        print_status("Multi-Anchor Regression:", "SECTION")
-        print_status(f"  α_anchor = {alpha_anchor:.3f} ± {alpha_anchor_err:.3f}", "INFO")
-        print_status(f"  Significance: {abs(alpha_anchor)/alpha_anchor_err:.1f}σ", "INFO")
+        print_status("Multi-Anchor Regression (sigma^2/c^2 form):", "SECTION")
+        print_status(
+            f"  α_anchor = {alpha_anchor:.3e} ± {alpha_anchor_err:.3e} mag", "INFO"
+        )
+        if alpha_anchor_err > 0:
+            print_status(
+                f"  Significance: {abs(alpha_anchor)/alpha_anchor_err:.1f}σ", "INFO"
+            )
         print_status(f"  Pearson r = {r_pearson:.3f} (p = {p_pearson:.4f})", "INFO")
-        print_status(f"  Tension with host α: {tension:.1f}σ", "INFO")
+        if np.isfinite(tension):
+            print_status(f"  Tension with host α: {tension:.1f}σ", "INFO")
         
         return {
             'alpha_anchor': float(alpha_anchor),
@@ -245,17 +273,21 @@ class AnchorStratificationStep:
             ax1.annotate(name, (sigmas[i], M_Ws[i]), xytext=(10, 10),
                         textcoords='offset points', fontsize=12, fontweight='bold')
         
-        # Add regression line
+        # Add regression line (physics-derived: sigma^2/c^2 scaling)
         reg = results['regression']
         sigma_range = np.linspace(min(sigmas)*0.8, max(sigmas)*1.2, 100)
-        M_W_pred = reg['intercept'] + reg['alpha_anchor'] * np.log10(sigma_range / 75.25)
+        c_km_s = 299792.458
+        x_reg = (sigma_range**2 - 75.25**2) / c_km_s**2
+        M_W_pred = reg['intercept'] + reg['alpha_anchor'] * x_reg
         ax1.plot(sigma_range, M_W_pred, '--', color='#2E86AB', alpha=0.5,
-                label=rf"$\alpha_{{\rm anchor}} = {reg['alpha_anchor']:.3f}$")
+                label=rf"$\alpha_{{\rm anchor}} = {reg['alpha_anchor']:.2e}$")
         
-        # Add host α prediction
-        M_W_host = reg['intercept'] + reg.get('alpha_host', 0.58) * np.log10(sigma_range / 75.25)
-        ax1.plot(sigma_range, M_W_host, '--', color='#C73E1D', alpha=0.7,
-                label=rf"$\alpha_{{\rm host}} = {reg.get('alpha_host', 0.58):.3f}$")
+        # Add host α prediction (from pipeline if available)
+        alpha_host_plot = reg.get('alpha_host', np.nan)
+        if np.isfinite(alpha_host_plot):
+            M_W_host = reg['intercept'] + alpha_host_plot * x_reg
+            ax1.plot(sigma_range, M_W_host, '--', color='#C73E1D', alpha=0.7,
+                    label=rf"$\alpha_{{\rm host}} = {alpha_host_plot:.2e}$")
         
         ax1.set_xlabel(r'Velocity Dispersion $\sigma$ (km/s)', fontsize=14)
         ax1.set_ylabel(r'P-L Zero-Point $M_W$ (mag)', fontsize=14)
@@ -305,15 +337,22 @@ class AnchorStratificationStep:
         print_status("ANCHOR STRATIFICATION SUMMARY", "SECTION")
         print_status("=" * 70, "INFO")
         
-        if reg['tension_with_host'] > 2.5:
+        tension = reg.get('tension_with_host', np.nan)
+        alpha_host = reg.get('alpha_host', np.nan)
+        if np.isfinite(tension) and tension > 2.5:
             print_status(
-                f"α_anchor ({reg['alpha_anchor']:.3f}) is in {reg['tension_with_host']:.1f}σ tension with α_host ({reg.get('alpha_host', 0.58):.3f})",
+                f"α_anchor ({reg['alpha_anchor']:.2e}) is in {tension:.1f}σ tension with α_host ({alpha_host:.2e})",
                 "SUCCESS",
             )
             print_status("Anchor calibration is NOT contaminated by TEP effects.", "SUCCESS")
             print_status("The H0–σ correlation in SN hosts is a genuine host-level systematic.", "SUCCESS")
+        elif np.isfinite(tension):
+            print_status(f"Marginal tension ({tension:.1f}σ) - more data needed", "WARNING")
         else:
-            print_status(f"Marginal tension ({reg['tension_with_host']:.1f}σ) - more data needed", "WARNING")
+            print_status(
+                f"α_anchor = {reg['alpha_anchor']:.2e} ± {reg['alpha_anchor_err']:.2e} (host α unavailable)",
+                "INFO",
+            )
 
 
 def run_step():

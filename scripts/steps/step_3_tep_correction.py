@@ -1,51 +1,74 @@
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from scipy.optimize import minimize
-from pathlib import Path
-import sys
-import os
 import json
+import os
 import shutil
+import sys
+from pathlib import Path
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from scipy.optimize import minimize
 
 # Import TEP Logger
 try:
-    from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
+    from scripts.utils.logger import (
+        TEPLogger,
+        print_status,
+        print_table,
+        set_step_logger,
+    )
 except ImportError:
     # Add project root to path if needed
     sys.path.append(str(Path(__file__).resolve().parents[2]))
-    from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
+    from scripts.utils.logger import (
+        TEPLogger,
+        print_status,
+        print_table,
+        set_step_logger,
+    )
+
+from scripts.utils.tep_correction import tep_correction
+
 
 class Step3TEPCorrection:
     r"""
     Step 3: TEP Correction and Unification
     ======================================
-    
-    This step applies the Temporal Equivalence Principle (TEP) correction to the 
+
+    This step applies the Temporal Equivalence Principle (TEP) correction to the
     Cepheid distance moduli to resolve the Hubble Tension.
-    
+
     The Physics:
-    TEP predicts that clocks in deeper gravitational potentials run faster relative 
-    to a universal cosmic time. Since Cepheids are standard clocks (Leavitt Law), 
-    their periods are contracted in high-density environments (high $\sigma$).
-    
+    TEP predicts that clocks in deeper gravitational potentials run faster relative
+    to a universal cosmic time. Since Cepheids are standard clocks (Leavitt Law),
+    their periods are contracted in high-shear environments (high $\sigma$).
+
     $$ P_{\rm obs} = P_{\rm true} \cdot (1 - \Phi/c^2)^\alpha \approx P_{\rm true} \cdot (1 - \epsilon) $$
-    
-    This leads to an underestimated luminosity and distance modulus. The correction 
+
+    This leads to an underestimated luminosity and distance modulus. The correction
     restores the distance modulus to the value it would have in the calibrator environment:
-    
-    $$ \mu_{\rm corr} = \mu_{\rm obs} + \alpha \cdot \log_{10}\left(\frac{\sigma}{\sigma_{\rm ref}}\right) $$
-    
+
+    $$ \mu_{\rm corr} = \mu_{\rm obs} + \alpha \cdot S(\rho) \cdot \frac{\sigma^2 - \sigma_{\rm ref}^2}{c^2} $$
+
+    This form is the Taylor expansion of $P_{\rm obs}=P_{\rm true}\,(1-S\,|\Phi|/c^2)^{\alpha_{\rm int}}$
+    combined with the virial relation $|\Phi|\propto\sigma^2$ and the Wesenheit P-L
+    slope. The coupling $\alpha$ absorbs the virial proportionality, the P-L
+    slope, and $1/\ln 10$; it has units of magnitude and, given $\sigma^2/c^2\sim10^{-7}$,
+    is of order $10^6$. This places it on the same footing as the effective
+    coupling inferred from millisecond pulsar spin-down (Paper 10), eliminating
+    the cross-probe regime mismatch present in the earlier phenomenological
+    $\log_{10}(\sigma/\sigma_{\rm ref})$ scaling.
+
     Where:
-    - $\alpha$: The coupling constant (related to the scalar field screening).
-    - $\sigma_{\rm ref}$: The effective velocity dispersion of the calibrator sample (MW, LMC, N4258).
-    
+    - $\alpha$: Effective coupling (units: magnitude).
+    - $S(\rho) \in [0,1]$: Continuous shear-suppression factor from Temporal Topology.
+    - $\sigma_{\rm ref}$: Effective velocity dispersion of the calibrator sample (MW, LMC, N4258).
+
     Objective:
-    Find the optimal $\alpha$ that minimizes the correlation between corrected $H_0$ and $\sigma$, 
-    thereby removing the environmental bias.
+    Find the optimal $\alpha$ that minimizes the correlation between corrected $H_0$ and $\sigma$,
+    accounting for continuous environmental suppression of Temporal Shear.
     """
-    
+
     def __init__(self):
         self.root_dir = Path(__file__).resolve().parents[2]
         self.data_dir = self.root_dir / "data"
@@ -55,67 +78,76 @@ class Step3TEPCorrection:
         self.figures_dir.mkdir(parents=True, exist_ok=True)
         self.outputs_dir.mkdir(parents=True, exist_ok=True)
         self.logs_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # Initialize Logger
-        self.logger = TEPLogger("step_3_correction", log_file_path=self.logs_dir / "step_3_correction.log")
+        self.logger = TEPLogger(
+            "step_3_correction", log_file_path=self.logs_dir / "step_3_correction.log"
+        )
         set_step_logger(self.logger)
-        
+
         # Inputs
         self.input_path = self.outputs_dir / "stratified_h0.csv"
-        
+
         # Outputs
         self.corrected_output_path = self.outputs_dir / "tep_corrected_h0.csv"
         self.json_output_path = self.outputs_dir / "tep_correction_results.json"
         self.plot_path = self.figures_dir / "tep_correction_comparison.png"
-        
+
         self.public_figures_dir = self.root_dir / "site" / "public" / "figures"
         self.public_figures_dir.mkdir(parents=True, exist_ok=True)
 
     def load_data(self):
         """Loads the stratified dataset."""
         print_status("Loading Data...", "SECTION")
-        
+
         if not self.input_path.exists():
             print_status("Input file missing. Please run Step 2 first.", "ERROR")
             sys.exit(1)
-            
+
         df = pd.read_csv(self.input_path)
+        # Ensure shear_suppression exists; default to 1.0 (fully active) if missing
+        if "shear_suppression" not in df.columns:
+            df["shear_suppression"] = 1.0
+            print_status(
+                "shear_suppression column missing; defaulting all hosts to S=1.0 (fully active).",
+                "WARNING",
+            )
         print_status(f"Loaded {len(df)} hosts for correction.", "INFO")
         return df
 
     def calculate_effective_calibrator_sigma(self):
         """
         Calculates the effective velocity dispersion of the anchor sample.
-        
+
         WEIGHTING RATIONALE (SH0ES-motivated):
         The weights reflect each anchor's contribution to the P-L zero-point calibration,
         NOT simply the distance precision. From Riess et al. (2022), the contributions are:
-        
+
         - MW (~20%): Many Cepheids with individual Gaia parallaxes, but higher scatter
         - LMC (~25%): ~70 Cepheids with excellent HST photometry, precise DEB distance
         - N4258 (~55%): ~139 Cepheids, gold-standard maser distance, and critically:
           it is the ONLY anchor that is a GALAXY (like the SN hosts being corrected)
-        
-        NGC 4258 is weighted most heavily because it provides the most relevant 
+
+        NGC 4258 is weighted most heavily because it provides the most relevant
         calibration environment for extragalactic distance measurements.
-        
+
         CRITICAL: ANCHOR SIGMA VALUES
         These are DISK velocity dispersions at Cepheid locations, NOT central bulge values.
         Cepheids reside in galactic disks at R ~ 4-8 kpc, where the local potential is
         shallower than the nuclear region. Using central bulge dispersions (e.g., Ho+2009
         gives NGC 4258 = 148 km/s) would overestimate the effective potential.
-        
+
         Sources:
         - MW: Bovy+2012 thin disk σ_z at solar neighborhood = 30 km/s
-        - LMC: van der Marel+2002 disk dispersion = 24 km/s  
+        - LMC: van der Marel+2002 disk dispersion = 24 km/s
         - N4258: Kormendy & Ho 2013 intermediate-aperture value = 115 km/s
           (NOT the central bulge value of 148 km/s from Ho+2009)
-        
+
         The resulting σ_ref ≈ 75 km/s is validated by the empirical result that
         low-σ SN hosts (σ < 90 km/s) yield H0 = 67.8 km/s/Mpc, matching Planck.
         """
         print_status("Calculating Effective Calibrator Sigma...", "SECTION")
-        
+
         # Anchor velocity dispersions: DISK values at Cepheid locations
         # These are intentionally different from the central bulge values in the
         # regenerated sigma catalog, which uses Ho+2009 nuclear apertures.
@@ -124,304 +156,457 @@ class Step3TEPCorrection:
                 "ID": "MW",
                 "Sigma": 30.0,
                 "Desc": "Milky Way Disk (Bovy+2012)",
-                "Weight": 0.20  # ~270 Cepheids, individual parallaxes, higher scatter
+                "Weight": 0.20,  # ~270 Cepheids, individual parallaxes, higher scatter
             },
             {
                 "ID": "LMC",
                 "Sigma": 24.0,
                 "Desc": "LMC Disk (vdMarel+2002)",
-                "Weight": 0.25  # ~70 Cepheids, excellent photometry
+                "Weight": 0.25,  # ~70 Cepheids, excellent photometry
             },
             {
                 "ID": "N4258",
                 "Sigma": 115.0,
                 "Desc": "NGC 4258 Disk (K&H2013)",
-                "Weight": 0.55  # ~139 Cepheids, gold anchor, galaxy environment
-            }
+                "Weight": 0.55,  # ~139 Cepheids, gold anchor, galaxy environment
+            },
         ]
-        
-        print_status("Using SH0ES-motivated weights (based on P-L contribution).", "INFO")
-        
+
+        print_status(
+            "Using SH0ES-motivated weights (based on P-L contribution).", "INFO"
+        )
+
         # Display Anchor Table
         headers = ["Anchor", "Sigma (km/s)", "Weight", "Description"]
         rows = []
         numerator = 0
         denominator = 0
-        
+
         for a in anchors:
             rows.append([a["ID"], f"{a['Sigma']:.1f}", f"{a['Weight']:.2f}", a["Desc"]])
             numerator += a["Sigma"] * a["Weight"]
             denominator += a["Weight"]
-            
+
         print_table(headers, rows, title="Geometric Anchor Sample")
-        
+
         sigma_ref = numerator / denominator
-        print_status(f"Effective Reference Sigma (σ_ref): {sigma_ref:.2f} km/s", "SUCCESS")
-        
+        print_status(
+            f"Effective Reference Sigma (σ_ref): {sigma_ref:.2f} km/s", "SUCCESS"
+        )
+
         return sigma_ref
 
     def optimize_correction(self, df, sigma_ref):
         """Finds the optimal correction parameter alpha."""
         print_status("Optimizing TEP Coupling (Alpha)...", "SECTION")
-        
+
+        # Shear suppression factor S(rho) from Temporal Topology (TEP v0.7)
+        S = df["shear_suppression"].values
+
+        sigma_vals = df["sigma_inferred"].values
+
         # Objective function: minimize H0 vs σ correlation
         # We want the corrected H0 to be independent of environment (slope ~ 0)
         def objective(params):
             alpha = params[0]
-            
-            # Correction model: mu_corr = mu_obs + alpha * log10(sigma / sigma_ref)
-            correction = alpha * np.log10(df['sigma_inferred'] / sigma_ref)
-            mu_corr = df['value'] + correction
-            
-            d_corr = 10**((mu_corr - 25)/5)
-            h0_corr = df['velocity'] / d_corr
-            
+
+            # Physics-derived correction: mu_corr = mu_obs + alpha * S * (sigma^2 - sigma_ref^2)/c^2
+            correction = tep_correction(sigma_vals, sigma_ref, alpha, S)
+            mu_corr = df["value"].values + correction
+
+            d_corr = 10 ** ((mu_corr - 25) / 5)
+            h0_corr = df["velocity"].values / d_corr
+
             # Minimize squared slope of H0 vs Sigma
-            # We use polyfit slope instead of correlation to handle scale
-            slope, _ = np.polyfit(df['sigma_inferred'], h0_corr, 1)
-            
+            slope, _ = np.polyfit(sigma_vals, h0_corr, 1)
+
             return slope**2
-            
-        # Optimize
-        initial_guess = [0.5]
-        res = minimize(objective, x0=initial_guess, method='Nelder-Mead', tol=1e-4)
+
+        # Optimize. Alpha is now ~1e6 in this convention (sigma^2/c^2 ~ 1e-7),
+        # so seed the optimizer in the physically expected range.
+        initial_guess = [1.0e6]
+        res = minimize(
+            objective,
+            x0=initial_guess,
+            method="Nelder-Mead",
+            options={"xatol": 1.0, "fatol": 1e-8, "maxiter": 2000},
+        )
         best_alpha = res.x[0]
-        
+
         print_status(f"Optimization converged: {res.success}", "INFO")
-        print_status(f"Optimal Coupling Constant (α): {best_alpha:.4f}", "SUCCESS")
-        
+        print_status(
+            f"Optimal Coupling Constant (α): {best_alpha:.3e} mag  (σ^2/c^2 units)",
+            "SUCCESS",
+        )
+        print_status(
+            f"Mean effective coupling (α·⟨S⟩): {(best_alpha * S.mean()):.3e}",
+            "INFO",
+        )
+
         return best_alpha
 
     def apply_correction(self, df, alpha, sigma_ref):
         """Applies the correction and calculates stats."""
         print_status("Applying Conformal Correction...", "SECTION")
-        
-        correction = alpha * np.log10(df['sigma_inferred'] / sigma_ref)
-        df['mu_corrected'] = df['value'] + correction
-        df['dist_corrected'] = 10**((df['mu_corrected'] - 25)/5)
-        df['h0_corrected'] = df['velocity'] / df['dist_corrected']
-        
+
+        # Continuous shear-suppression factor (TEP v0.7)
+        S = df["shear_suppression"].values
+        sigma_vals = df["sigma_inferred"].values
+        df["effective_coupling"] = alpha * S
+
+        correction = tep_correction(sigma_vals, sigma_ref, alpha, S)
+        df["mu_corrected"] = df["value"].values + correction
+        df["dist_corrected"] = 10 ** ((df["mu_corrected"] - 25) / 5)
+        df["h0_corrected"] = df["velocity"] / df["dist_corrected"]
+
         # Sample Correction Table
-        headers = ["Host", "Sigma", "H0 (Raw)", "Corr (mag)", "H0 (TEP)"]
+        headers = [
+            "Host",
+            "Sigma",
+            "S(rho)",
+            "H0 (Raw)",
+            "Corr (mag)",
+            "H0 (TEP)",
+        ]
         rows = []
-        sample = df.sample(5, random_state=42).sort_values('sigma_inferred')
+        sample = df.sample(5, random_state=42).sort_values("sigma_inferred")
         for _, row in sample.iterrows():
-            rows.append([
-                row['normalized_name'],
-                f"{row['sigma_inferred']:.1f}",
-                f"{row['h0_derived']:.2f}",
-                f"{alpha * np.log10(row['sigma_inferred'] / sigma_ref):+.3f}",
-                f"{row['h0_corrected']:.2f}"
-            ])
-        print_table(headers, rows, title="Sample Corrections")
-        
-        h0_mean = df['h0_corrected'].mean()
+            rows.append(
+                [
+                    row["normalized_name"],
+                    f"{row['sigma_inferred']:.1f}",
+                    f"{row['shear_suppression']:.3f}",
+                    f"{row['h0_derived']:.2f}",
+                    f"{row['effective_coupling'] * (row['sigma_inferred']**2 - sigma_ref**2) / (299792.458**2):+.4f}",
+                    f"{row['h0_corrected']:.2f}",
+                ]
+            )
+        print_table(headers, rows, title="Sample Corrections (Suppression-Aware)")
+
+        h0_mean = df["h0_corrected"].mean()
         # Standard error of the mean (simple)
-        h0_sem = df['h0_corrected'].std() / np.sqrt(len(df))
-        
+        h0_sem = df["h0_corrected"].std() / np.sqrt(len(df))
+
         print_status("-" * 60, "INFO")
-        print_status(f"UNIFIED H0 (Statistical): {h0_mean:.2f} +/- {h0_sem:.2f} km/s/Mpc", "SUCCESS")
-        print_status("Note: This error (SEM) assumes alpha is fixed/known perfectly.", "INFO")
+        print_status(
+            f"UNIFIED H0 (Statistical): {h0_mean:.2f} +/- {h0_sem:.2f} km/s/Mpc",
+            "SUCCESS",
+        )
+        print_status(
+            "Note: This error (SEM) assumes alpha is fixed/known perfectly.", "INFO"
+        )
         print_status("-" * 60, "INFO")
-        
+
         return df, h0_mean, h0_sem
 
     def bootstrap_analysis(self, df, sigma_ref, n_boot=1000):
         """Performs bootstrap resampling to estimate robustness."""
         print_status(f"Bootstrap Uncertainty Analysis (N={n_boot})...", "SECTION")
-        
+
         # Set seed for reproducibility
         np.random.seed(42)
-        
+
         alphas = []
         h0s = []
-        
+
         n_samples = len(df)
-        
+
         # Suppress optimization warnings for speed
         import warnings
-        warnings.filterwarnings('ignore')
-        
+
+        warnings.filterwarnings("ignore")
+
         for _ in range(n_boot):
             # Resample with replacement
             sample = df.sample(n=n_samples, replace=True)
-            
+            S_sample = sample["shear_suppression"].values
+
+            sigma_sample = sample["sigma_inferred"].values
+            mu_sample = sample["value"].values
+            v_sample = sample["velocity"].values
+
             # Re-optimize alpha inline
-            # We capture the variation in alpha due to sample selection
             def obj(a):
-                corr = a * np.log10(sample['sigma_inferred'] / sigma_ref)
-                mc = sample['value'] + corr
-                dc = 10**((mc - 25)/5)
-                hc = sample['velocity'] / dc
-                slope, _ = np.polyfit(sample['sigma_inferred'], hc, 1)
+                corr = tep_correction(sigma_sample, sigma_ref, a[0], S_sample)
+                mc = mu_sample + corr
+                dc = 10 ** ((mc - 25) / 5)
+                hc = v_sample / dc
+                slope, _ = np.polyfit(sigma_sample, hc, 1)
                 return slope**2
-            
-            res = minimize(obj, x0=[0.7], method='Nelder-Mead', tol=1e-2)
+
+            res = minimize(
+                obj,
+                x0=[1.0e6],
+                method="Nelder-Mead",
+                options={"xatol": 10.0, "fatol": 1e-6, "maxiter": 500},
+            )
             alpha_boot = res.x[0]
-            
+
             # Calc H0 with the re-optimized alpha
-            corr = alpha_boot * np.log10(sample['sigma_inferred'] / sigma_ref)
-            mc = sample['value'] + corr
-            dc = 10**((mc - 25)/5)
-            hc = sample['velocity'] / dc
+            corr = tep_correction(sigma_sample, sigma_ref, alpha_boot, S_sample)
+            mc = mu_sample + corr
+            dc = 10 ** ((mc - 25) / 5)
+            hc = v_sample / dc
             h0_boot = hc.mean()
-            
+
             alphas.append(alpha_boot)
             h0s.append(h0_boot)
-            
+
         alphas = np.array(alphas)
         h0s = np.array(h0s)
         warnings.resetwarnings()
-        
+
         metrics = {
             "bootstrap_alpha_mean": float(np.mean(alphas)),
             "bootstrap_alpha_std": float(np.std(alphas)),
             "bootstrap_h0_mean": float(np.mean(h0s)),
-            "bootstrap_h0_std": float(np.std(h0s))
+            "bootstrap_h0_std": float(np.std(h0s)),
         }
-        
+
         # Bootstrap Results Table
         headers = ["Parameter", "Mean", "Std Dev (Robust Error)", "95% CI"]
         rows = [
             [
-                "Alpha (α)", 
-                f"{metrics['bootstrap_alpha_mean']:.3f}", 
-                f"{metrics['bootstrap_alpha_std']:.3f}",
-                f"[{np.percentile(alphas, 2.5):.3f}, {np.percentile(alphas, 97.5):.3f}]"
+                "Alpha (α)",
+                f"{metrics['bootstrap_alpha_mean']:.3e}",
+                f"{metrics['bootstrap_alpha_std']:.3e}",
+                f"[{np.percentile(alphas, 2.5):.3e}, {np.percentile(alphas, 97.5):.3e}]",
             ],
             [
-                "H0 (Unified)", 
-                f"{metrics['bootstrap_h0_mean']:.2f}", 
+                "H0 (Unified)",
+                f"{metrics['bootstrap_h0_mean']:.2f}",
                 f"{metrics['bootstrap_h0_std']:.2f}",
-                f"[{np.percentile(h0s, 2.5):.2f}, {np.percentile(h0s, 97.5):.2f}]"
-            ]
+                f"[{np.percentile(h0s, 2.5):.2f}, {np.percentile(h0s, 97.5):.2f}]",
+            ],
         ]
-        print_table(headers, rows, title="Bootstrap Results (Includes Optimization Uncertainty)")
-        
+        print_table(
+            headers, rows, title="Bootstrap Results (Includes Optimization Uncertainty)"
+        )
+
         return metrics
 
     def sensitivity_analysis(self, df):
         """Analyzes sensitivity of H0 to sigma_ref."""
         print_status("Sensitivity Analysis (Sigma Ref Scan)...", "PROCESS")
-        
+
         # Apply Style
         try:
             from scripts.utils.plot_style import apply_tep_style
+
             colors = apply_tep_style()
         except ImportError:
-            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'green': '#4a2650', 'dark': '#301E30', 'light_blue': '#4b6785'}
+            colors = {
+                "blue": "#395d85",
+                "accent": "#b43b4e",
+                "green": "#4a2650",
+                "dark": "#301E30",
+                "light_blue": "#4b6785",
+            }
 
         sigma_refs = np.linspace(30, 130, 20)
         h0_results = []
-        
+
         planck_h0 = 67.4
-        
+
         for sr in sigma_refs:
             # Re-optimize alpha for this sr
             alpha = self.optimize_correction(df, sr)
-            
-            # Apply
-            correction = alpha * np.log10(df['sigma_inferred'] / sr)
-            mu_corr = df['value'] + correction
-            dist_corr = 10**((mu_corr - 25)/5)
-            h0_corr = df['velocity'] / dist_corr
-            
+
+            # Apply with continuous suppression
+            S = df["shear_suppression"].values
+            correction = tep_correction(
+                df["sigma_inferred"].values, sr, alpha, S
+            )
+            mu_corr = df["value"].values + correction
+            dist_corr = 10 ** ((mu_corr - 25) / 5)
+            h0_corr = df["velocity"].values / dist_corr
+            h0_corr = pd.Series(h0_corr)
+
             h0_mean = h0_corr.mean()
             h0_results.append(h0_mean)
-            
+
         # Plot
         plt.figure(figsize=(14, 9))
-        plt.plot(sigma_refs, h0_results, marker='o', color=colors['blue'], label='Unified H0', linewidth=2.5)
-        plt.axhline(planck_h0, color=colors['accent'], linestyle='--', label='Planck CMB', linewidth=2.5)
-        plt.fill_between(sigma_refs, planck_h0 - 0.5, planck_h0 + 0.5, color=colors['accent'], alpha=0.15)
-        
-        plt.xlabel(r'Reference $\sigma_{ref}$ (km/s)')
-        plt.ylabel(r'Unified $H_0$ (km/s/Mpc)')
-        plt.title('Sensitivity of H0 to Calibrator Reference')
+        plt.plot(
+            sigma_refs,
+            h0_results,
+            marker="o",
+            color=colors["blue"],
+            label="Unified H0",
+            linewidth=2.5,
+        )
+        plt.axhline(
+            planck_h0,
+            color=colors["accent"],
+            linestyle="--",
+            label="Planck CMB",
+            linewidth=2.5,
+        )
+        plt.fill_between(
+            sigma_refs,
+            planck_h0 - 0.5,
+            planck_h0 + 0.5,
+            color=colors["accent"],
+            alpha=0.15,
+        )
+
+        plt.xlabel(r"Reference $\sigma_{ref}$ (km/s)")
+        plt.ylabel(r"Unified $H_0$ (km/s/Mpc)")
+        plt.title("Sensitivity of H0 to Calibrator Reference (Suppression-Aware)")
         plt.legend()
         plt.tight_layout()
-        
+
         path = self.figures_dir / "sensitivity_h0_vs_sigmaref.png"
         plt.savefig(path, dpi=300)
         print_status(f"Saved sensitivity plot to {path}", "SUCCESS")
         plt.close()
-        
+
         # Copy to public
         public_path = self.public_figures_dir / "sensitivity_h0_vs_sigmaref.png"
         shutil.copy(path, public_path)
         print_status(f"Copied sensitivity plot to {public_path}", "SUCCESS")
-        
+
         return list(zip(sigma_refs, h0_results))
 
     def plot_comparison(self, df, h0_mean):
         """Generates comparison plots."""
         print_status("Generating Comparison Plots...", "PROCESS")
-        
+
         # Apply Style
         try:
             from scripts.utils.plot_style import apply_tep_style
+
             colors = apply_tep_style()
         except ImportError:
-            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'green': '#4a2650', 'dark': '#301E30', 'light_blue': '#4b6785'}
-        
+            colors = {
+                "blue": "#395d85",
+                "accent": "#b43b4e",
+                "green": "#4a2650",
+                "dark": "#301E30",
+                "light_blue": "#4b6785",
+            }
+
         # Use a wide figure for side-by-side
         plt.figure(figsize=(14, 9))
-        
-        # Propagate mu uncertainty to H0: sigma_H0 = H0 * ln(10)/5 * sigma_mu
-        h0_err = df['h0_derived'] * (np.log(10) / 5) * df['error'] if 'error' in df.columns else None
-        h0c_err = df['h0_corrected'] * (np.log(10) / 5) * df['error'] if 'error' in df.columns else None
 
-        eb_kw = dict(fmt='o', markersize=6, markeredgecolor='white', markeredgewidth=0.5,
-                     elinewidth=1.2, capsize=3, alpha=0.8)
+        # Propagate mu uncertainty to H0: sigma_H0 = H0 * ln(10)/5 * sigma_mu
+        h0_err = (
+            df["h0_derived"] * (np.log(10) / 5) * df["error"]
+            if "error" in df.columns
+            else None
+        )
+        h0c_err = (
+            df["h0_corrected"] * (np.log(10) / 5) * df["error"]
+            if "error" in df.columns
+            else None
+        )
+
+        eb_kw = dict(
+            fmt="o",
+            markersize=6,
+            markeredgecolor="white",
+            markeredgewidth=0.5,
+            elinewidth=1.2,
+            capsize=3,
+            alpha=0.8,
+        )
 
         # Original
         plt.subplot(1, 2, 1)
         if h0_err is not None:
-            plt.errorbar(df['sigma_inferred'], df['h0_derived'], yerr=h0_err,
-                        color=colors.get('light_blue', '#4b6785'), ecolor=colors.get('light_blue', '#4b6785'),
-                        label='Original', **eb_kw)
+            plt.errorbar(
+                df["sigma_inferred"],
+                df["h0_derived"],
+                yerr=h0_err,
+                color=colors.get("light_blue", "#4b6785"),
+                ecolor=colors.get("light_blue", "#4b6785"),
+                label="Original",
+                **eb_kw,
+            )
         else:
-            plt.scatter(df['sigma_inferred'], df['h0_derived'], alpha=0.8, s=80,
-                       color=colors.get('light_blue', '#4b6785'), label='Original', edgecolor='white', linewidth=0.5)
-        
+            plt.scatter(
+                df["sigma_inferred"],
+                df["h0_derived"],
+                alpha=0.8,
+                s=80,
+                color=colors.get("light_blue", "#4b6785"),
+                label="Original",
+                edgecolor="white",
+                linewidth=0.5,
+            )
+
         if len(df) > 1:
-            z = np.polyfit(df['sigma_inferred'], df['h0_derived'], 1)
+            z = np.polyfit(df["sigma_inferred"], df["h0_derived"], 1)
             p = np.poly1d(z)
-            x = np.linspace(df['sigma_inferred'].min(), df['sigma_inferred'].max(), 100)
-            plt.plot(x, p(x), color=colors['dark'], linestyle='--', linewidth=3, label='Trend')
-            
+            x = np.linspace(df["sigma_inferred"].min(), df["sigma_inferred"].max(), 100)
+            plt.plot(
+                x,
+                p(x),
+                color=colors["dark"],
+                linestyle="--",
+                linewidth=3,
+                label="Trend",
+            )
+
         plt.title(f"Original Data\nMean H0: {df['h0_derived'].mean():.2f}")
-        plt.xlabel(r'Velocity Dispersion $\sigma$ (km/s)')
-        plt.ylabel(r'$H_0$ (km/s/Mpc)')
+        plt.xlabel(r"Velocity Dispersion $\sigma$ (km/s)")
+        plt.ylabel(r"$H_0$ (km/s/Mpc)")
         plt.ylim(55, 85)
         plt.legend()
-        
+
         # Corrected
         plt.subplot(1, 2, 2)
         if h0c_err is not None:
-            plt.errorbar(df['sigma_inferred'], df['h0_corrected'], yerr=h0c_err,
-                        color=colors['blue'], ecolor=colors['blue'],
-                        label='TEP Corrected', **eb_kw)
+            plt.errorbar(
+                df["sigma_inferred"],
+                df["h0_corrected"],
+                yerr=h0c_err,
+                color=colors["blue"],
+                ecolor=colors["blue"],
+                label="TEP Corrected",
+                **eb_kw,
+            )
         else:
-            plt.scatter(df['sigma_inferred'], df['h0_corrected'], alpha=0.8, s=80,
-                       color=colors['blue'], label='TEP Corrected', edgecolor='white', linewidth=0.5)
-        
+            plt.scatter(
+                df["sigma_inferred"],
+                df["h0_corrected"],
+                alpha=0.8,
+                s=80,
+                color=colors["blue"],
+                label="TEP Corrected",
+                edgecolor="white",
+                linewidth=0.5,
+            )
+
         if len(df) > 1:
-            z2 = np.polyfit(df['sigma_inferred'], df['h0_corrected'], 1)
+            z2 = np.polyfit(df["sigma_inferred"], df["h0_corrected"], 1)
             p2 = np.poly1d(z2)
-            plt.plot(x, p2(x), color=colors['blue'], linestyle='--', linewidth=3, label='Trend')
-            
-        plt.axhline(67.4, color=colors['accent'], linestyle=':', linewidth=2.5, label='Planck CMB')
+            plt.plot(
+                x,
+                p2(x),
+                color=colors["blue"],
+                linestyle="--",
+                linewidth=3,
+                label="Trend",
+            )
+
+        plt.axhline(
+            67.4,
+            color=colors["accent"],
+            linestyle=":",
+            linewidth=2.5,
+            label="Planck CMB",
+        )
         plt.title(f"TEP Corrected\nMean H0: {h0_mean:.2f}")
-        plt.xlabel(r'Velocity Dispersion $\sigma$ (km/s)')
+        plt.xlabel(r"Velocity Dispersion $\sigma$ (km/s)")
         plt.ylim(55, 85)
         plt.legend()
-        
+
         plt.tight_layout()
         plt.savefig(self.plot_path, dpi=300)
         print_status(f"Saved comparison plot to {self.plot_path}", "SUCCESS")
         plt.close()
-        
+
         # Copy to public
         public_path = self.public_figures_dir / "tep_correction_comparison.png"
         shutil.copy(self.plot_path, public_path)
@@ -429,40 +614,42 @@ class Step3TEPCorrection:
 
     def run(self):
         print_status("Starting Step 3: TEP Correction", "TITLE")
-        
+
         df = self.load_data()
-        
+
         # 1. Dynamic Sigma Ref
         sigma_ref = self.calculate_effective_calibrator_sigma()
-        
+
         # 2. Optimize
         alpha = self.optimize_correction(df, sigma_ref)
-        
+
         # 3. Apply
         final_df, h0_mean, h0_sem = self.apply_correction(df, alpha, sigma_ref)
-        
+
         # 4. Generate Comparison Plot
         self.plot_comparison(final_df, h0_mean)
-        
+
         # 5. Bootstrap
         boot_metrics = self.bootstrap_analysis(final_df, sigma_ref)
-        
+
         # 6. Sensitivity
         self.sensitivity_analysis(final_df)
-        
+
         # Combine Error Budget
         # We report Bootstrap STD as the robust error (conservative).
-        robust_error = boot_metrics['bootstrap_h0_std']
-        
+        robust_error = boot_metrics["bootstrap_h0_std"]
+
         # Planck Comparison
         planck_h0 = 67.4
         planck_err = 0.5
-        
+
         # Tension Calculation
         # We calculate tension using both errors for transparency
         tension_stat = abs(h0_mean - planck_h0) / np.sqrt(h0_sem**2 + planck_err**2)
-        tension_robust = abs(h0_mean - planck_h0) / np.sqrt(robust_error**2 + planck_err**2)
-        
+        tension_robust = abs(h0_mean - planck_h0) / np.sqrt(
+            robust_error**2 + planck_err**2
+        )
+
         print_status("Final Tension Analysis", "SECTION")
         print_status(f"Planck 2018 Value: {planck_h0} +/- {planck_err}", "INFO")
         print_status("-" * 60, "INFO")
@@ -472,38 +659,42 @@ class Step3TEPCorrection:
         print_status("-" * 60, "INFO")
         print_status(f"Tension (Statistical): {tension_stat:.2f} sigma", "RESULT")
         print_status(f"Tension (Robust):      {tension_robust:.2f} sigma", "RESULT")
-        
+
         if tension_robust < 1.0:
-            print_status("CONCLUSION: Result is consistent with Planck CMB (Robust).", "SUCCESS")
+            print_status(
+                "CONCLUSION: Result is consistent with Planck CMB (Robust).", "SUCCESS"
+            )
         else:
             print_status("CONCLUSION: Tension remains.", "WARNING")
-        
+
         # Compile and Save Results
         results = {
             "optimal_alpha": float(alpha),
             "sigma_ref": float(sigma_ref),
             "unified_h0": float(h0_mean),
             "h0_sem": float(h0_sem),
-            "bootstrap_h0_mean": float(boot_metrics['bootstrap_h0_mean']),
-            "bootstrap_h0_std": float(boot_metrics['bootstrap_h0_std']),
-            "bootstrap_alpha_mean": float(boot_metrics['bootstrap_alpha_mean']),
-            "bootstrap_alpha_std": float(boot_metrics['bootstrap_alpha_std']),
+            "bootstrap_h0_mean": float(boot_metrics["bootstrap_h0_mean"]),
+            "bootstrap_h0_std": float(boot_metrics["bootstrap_h0_std"]),
+            "bootstrap_alpha_mean": float(boot_metrics["bootstrap_alpha_mean"]),
+            "bootstrap_alpha_std": float(boot_metrics["bootstrap_alpha_std"]),
             "planck_h0": float(planck_h0),
             "tension_sigma": float(tension_robust),
             "is_consistent": bool(tension_robust < 1.0),
-            "n_hosts": len(final_df)
+            "n_hosts": len(final_df),
         }
-        
-        with open(self.json_output_path, 'w') as f:
+
+        with open(self.json_output_path, "w") as f:
             json.dump(results, f, indent=4)
         print_status(f"Saved results JSON to {self.json_output_path}", "SUCCESS")
-        
+
         final_df.to_csv(self.corrected_output_path, index=False)
         print_status(f"Saved corrected data to {self.corrected_output_path}", "SUCCESS")
+
 
 def main():
     step = Step3TEPCorrection()
     step.run()
+
 
 if __name__ == "__main__":
     main()

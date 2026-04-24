@@ -362,6 +362,7 @@ class Step6EnhancedRobustness:
         """Apply TEP correction to subsamples and verify consistency."""
         print_status("\n--- TEP CORRECTION ON SUBSAMPLES ---", "SECTION")
         
+        from scripts.utils.tep_correction import tep_correction
         sigma_ref = 75.25  # Fixed reference from anchors
         
         def optimize_alpha(subset_df):
@@ -369,20 +370,30 @@ class Step6EnhancedRobustness:
             if len(subset_df) < 5:
                 return np.nan, np.nan, np.nan
             
+            sigma_arr = subset_df['sigma_corrected'].values
+            mu_arr = subset_df['value'].values
+            z_arr = subset_df['z_hd'].values
+            
             def objective(alpha):
-                mu_corr = subset_df['value'].values + alpha * np.log10(subset_df['sigma_corrected'].values / sigma_ref)
+                a = float(alpha[0]) if hasattr(alpha, '__len__') else float(alpha)
+                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, a)
                 d_corr = 10 ** ((mu_corr - 25) / 5)
-                h0_corr = 299792.458 * subset_df['z_hd'].values / d_corr
-                slope, _, _, _, _ = stats.linregress(subset_df['sigma_corrected'].values, h0_corr)
+                h0_corr = 299792.458 * z_arr / d_corr
+                slope, _, _, _, _ = stats.linregress(sigma_arr, h0_corr)
                 return slope ** 2
             
-            result = minimize(objective, x0=0.8, method='Nelder-Mead')
-            alpha_opt = result.x[0]
+            result = minimize(
+                objective,
+                x0=[1.0e6],
+                method='Nelder-Mead',
+                options={'xatol': 10.0, 'fatol': 1e-6, 'maxiter': 500},
+            )
+            alpha_opt = float(result.x[0])
             
             # Compute unified H0
-            mu_corr = subset_df['value'].values + alpha_opt * np.log10(subset_df['sigma_corrected'].values / sigma_ref)
+            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, alpha_opt)
             d_corr = 10 ** ((mu_corr - 25) / 5)
-            h0_corr = 299792.458 * subset_df['z_hd'].values / d_corr
+            h0_corr = 299792.458 * z_arr / d_corr
             unified_h0 = np.mean(h0_corr)
             h0_std = np.std(h0_corr) / np.sqrt(len(h0_corr))
             

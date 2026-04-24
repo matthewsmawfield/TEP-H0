@@ -2,7 +2,7 @@
 """Unified PDF Processing Script
 Compresses PDF and embeds comprehensive metadata in one operation.
 
-This script processes the TEP-H0 manuscript PDF (Paper 12: "The Cepheid Bias: Resolving
+This script processes the TEP-H0 manuscript PDF (Paper 11: "The Cepheid Bias: Resolving
 the Hubble Tension") by compressing it for web distribution and embedding complete
 academic metadata for proper indexing and citation.
 
@@ -10,7 +10,7 @@ Usage:
     python process_pdf.py <input_pdf> [--quality ebook|printer|prepress|default]
     
 Example:
-    python process_pdf.py site/public/docs/Smawfield_2026_TEP-H0_v0.4_KingstonUponHull.pdf --quality ebook
+    python process_pdf.py site/public/docs/Smawfield_2026_TEP-H0_v0.5_KingstonUponHull.pdf --quality ebook
 """
 
 import subprocess
@@ -186,7 +186,7 @@ def main():
         ),
         
         # Production metadata
-        'Producer': 'TEP-H0 Research Project (Paper 12) - Version 0.3 (Kingston upon Hull)',
+        'Producer': 'TEP-H0 Research Project (Paper 11) - Version 0.5 (Kingston upon Hull)',
         
         # Rights and identifiers
         'Copyright': 'Creative Commons Attribution 4.0 International License (CC BY 4.0)',

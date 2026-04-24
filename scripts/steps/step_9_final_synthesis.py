@@ -248,7 +248,7 @@ class Step9FinalSynthesis:
             f.write("- **Mass Distortion Caveat:** We note that TEP-induced proper time rate variations could distort dynamical mass measurements ($M \\propto V^2 R$), potentially biasing the derived density. However, a factor of ~15 error would be required to shift NGC 4258 into the screened regime.\n")
 
             f.write("\n## 6. Conclusion\n\n")
-            f.write("The TEP hypothesis survives rigorous robustness testing in SN hosts and M31, but faces a challenge with NGC 4258 (Anchor Tension). The global H0-σ correlation (Step 6) is driven by unscreened disk environments. The M31 'Inner Fainter' signal (Step 8) is identified as the signature of the **screening threshold** being crossed. Future work must resolve why the anchor NGC 4258 appears standard despite its low density.\n")
+            f.write("The TEP hypothesis survives rigorous robustness testing in SN hosts and M31, but faces a challenge with NGC 4258 (Anchor Tension). The global H0-σ correlation (Step 6) is driven by unscreened disk environments. The M31 'Inner Fainter' signal (Step 8) is identified as progressive attenuation of Temporal Shear across a density gradient (Temporal Topology), with the inner bulge experiencing strong suppression ($S \\approx 0.72$) relative to the unscreened outer disk ($S \\approx 1$). Future work must resolve why the anchor NGC 4258 appears standard despite its low density.\n")
             
         print_status(f"Report written to {self.report_path}", "SUCCESS")
 

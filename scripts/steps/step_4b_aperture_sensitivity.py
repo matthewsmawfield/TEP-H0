@@ -327,19 +327,26 @@ class Step4bApertureSensitivity:
         mu_vals = work['value'].astype(float).values
         v_vals = work['velocity'].astype(float).values
 
+        from scripts.utils.tep_correction import tep_correction
+
         def objective(params):
             alpha = float(params[0])
-            corr = alpha * np.log10(sigma_vals / sigma_ref)
+            corr = tep_correction(sigma_vals, sigma_ref, alpha)
             mu_corr = mu_vals + corr
             d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
             h0_corr = v_vals / d_corr
             slope, _ = np.polyfit(sigma_vals, h0_corr, 1)
             return float(slope ** 2)
 
-        res = minimize(objective, x0=[0.7], method='Nelder-Mead', tol=1e-3)
+        res = minimize(
+            objective,
+            x0=[1.0e6],
+            method='Nelder-Mead',
+            options={'xatol': 10.0, 'fatol': 1e-6, 'maxiter': 500},
+        )
         alpha_opt = float(res.x[0])
 
-        corr = alpha_opt * np.log10(sigma_vals / sigma_ref)
+        corr = tep_correction(sigma_vals, sigma_ref, alpha_opt)
         mu_corr = mu_vals + corr
         d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
         h0_corr = v_vals / d_corr

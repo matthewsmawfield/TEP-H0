@@ -13,7 +13,7 @@
         "cov_err": 1.0384588218678676
     },
     "difference": 4.628158226115971,
-    "correlation_r": 0.42794174347415764,
+    "correlation_r": 0.4621612433960245,
     "h0_mean_cov_err": 0.8472139507882559,
     "difference_cov_err": 0.9405629326109087,
     "h0_covariance_saved": true,
