@@ -11,7 +11,7 @@
     
     <!-- Primary Meta Tags -->
     <meta name="title" content="The Cepheid Bias: Resolving the Hubble Tension">
-    <meta name="description" content="The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements ($H_0 \approx 73$ km/s/Mpc) and early-universe CMB inference ($H_0 = 67.4 \pm 0.5$ km/s/Mpc)—represents a significant challenge in precision cosmology. This study proposes that the tension arises from a systematic, environment-dependent bias in Cepheid-based distances, as predicted by the Temporal Equivalence Principle (TEP). This study tests the hypothesis that the discrepancy arises from a violation of the isochrony axiom—the assumption that proper time accumulation is independent of the local gravitational environment. Under scalar-tensor theories that break the Strong Equivalence Principle (such as TEP), Cepheid variable stars act as environment-dependent &quot;standard clocks.&quot; In deep gravitational potentials (high velocity dispersion $\sigma$) and active-shear environments, enhanced scalar field activity is predicted to induce period contraction relative to calibration environments. When interpreted through a universal Period-Luminosity relation, this clock-rate anomaly would mimic diminished luminosity, leading to underestimated distances and an inflated local Hubble constant. Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.434$, $p = 0.019$; Pearson $r = 0.428$, $p = 0.021$). A median-split stratification at $\sigma_{\rm med} \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$; $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 4.63$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), measurement methodology is treated as a first-class provenance variable and covariance-aware significance tests are reported using the full SH0ES GLS distance-modulus covariance. Application of the TEP conformal correction $\Delta\mu = \alpha_{\rm eff}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction $P_{\rm obs}=P_{\rm true}(1-|\Phi|/c^2)^{\alpha_{\rm eff}}$ combined with the virial relation $|\Phi|\propto\sigma^2$—with optimized effective coupling $\alpha_{\rm eff} = (9.6 \pm 4.0) \times 10^5$ mag and effective calibrator reference $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.37 \pm 1.54$ km/s/Mpc, corresponding to a Planck tension of $0.60\sigma$. The inferred $\alpha_{\rm eff}\sim10^6$ places this probe in the same coupling regime as the millisecond-pulsar spin-down excess (Paper 10), eliminating the cross-probe mismatch of earlier phenomenological $\log_{10}\sigma$ scalings. Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an &quot;Inner Fainter&quot; signal in HST photometry. Within the TEP v0.7 framework, this sign is consistent with continuous shear suppression: the high-density M31 bulge experiences progressive attenuation of Temporal Shear (suppression factor $S \approx 0.05$ at $R &lt; 1$ kpc), while the lower-density SN Ia host disks remain in the active-shear regime ($\langle S \rangle = 0.946$). On this interpretation, the M31 signal marks the empirical mapping of a continuous density-dependent suppression profile across a single galaxy. The anchor–host mismatch (geometric anchors show near-zero coupling, $\alpha_{\rm anchor} \approx (7.2 \pm 7.9) \times 10^4$ mag, in marginal 2.2$\sigma$ tension with the host-level $\alpha \approx 9.6 \times 10^5$ mag) finds a natural resolution in group halo screening: all three anchors (LMC, NGC 4258, M31) are members of galaxy groups, embedding them in deep ambient potentials that trigger chameleon-type screening regardless of internal disk densities. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies that lack this external screening. This framework generates a falsifiable prediction: the TEP distance-ladder bias should be unique to isolated field galaxies and suppressed in group/cluster environments. *Keywords:* Hubble tension – Cepheid variables – distance ladder – velocity dispersion – temporal equivalence principle – gravitational time dilation">
+    <meta name="description" content="TEP-H0 tests an environment-dependent Cepheid timing bias in the SH0ES sample. The corrected pipeline finds H0-sigma correlations of Spearman rho=0.511 (p=0.0046) and Pearson r=0.462 (p=0.0116), with kappa_Cep=(1.05 +/- 0.43)e6 mag and H0=68.17 km/s/Mpc (bootstrap 68.14 +/- 1.49), reducing Planck tension to 0.49 sigma.">
     <meta name="keywords" content="Hubble Tension, Cepheids, Cosmology, TEP, Modified Gravity, Screening, Time Dilation, Period-Luminosity Relation, SH0ES">
     <meta name="author" content="Matthew Lukin Smawfield">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -36,100 +36,76 @@
     </script>
     
     <!-- WebSite Schema for Google Search Site Name -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "The Cepheid Bias: Resolving the Hubble Tension",
-      "alternateName": ["TEP-H0", "Hubble Tension Resolution"],
-      "url": "https://mlsmawfield.com/tep/h0/"
-    }
-    </script>
     
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://mlsmawfield.com/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "TEP Research",
-          "item": "https://mlsmawfield.com/#manuscripts"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Hubble Tension",
-          "item": "https://mlsmawfield.com/tep/h0/"
-        }
-      ]
-    }
-    </script>
-
-    <!-- ScholarlyArticle Schema -->
+    
+    <!-- ScholarlyArticle Schema for Google Scholar -->
+    
+    <!-- Canonical URL -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "ScholarlyArticle",
       "headline": "The Cepheid Bias: Resolving the Hubble Tension",
       "name": "The Cepheid Bias: Resolving the Hubble Tension",
-      "description": "The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements ($H_0 \approx 73$ km/s/Mpc) and early-universe CMB inference ($H_0 = 67.4 \pm 0.5$ km/s/Mpc)—represents a significant challenge in precision cosmology. This study proposes that the tension arises from a systematic, environment-dependent bias in Cepheid-based distances, as predicted by the Temporal Equivalence Principle (TEP). This study tests the hypothesis that the discrepancy arises from a violation of the isochrony axiom—the assumption that proper time accumulation is independent of the local gravitational environment. Under scalar-tensor theories that break the Strong Equivalence Principle (such as TEP), Cepheid variable stars act as environment-dependent \"standard clocks.\" In deep gravitational potentials (high velocity dispersion $\sigma$) and active-shear environments, enhanced scalar field activity is predicted to induce period contraction relative to calibration environments. When interpreted through a universal Period-Luminosity relation, this clock-rate anomaly would mimic diminished luminosity, leading to underestimated distances and an inflated local Hubble constant. Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.434$, $p = 0.019$; Pearson $r = 0.428$, $p = 0.021$). A median-split stratification at $\sigma_{\rm med} \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$; $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 4.63$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), measurement methodology is treated as a first-class provenance variable and covariance-aware significance tests are reported using the full SH0ES GLS distance-modulus covariance. Application of the TEP conformal correction $\Delta\mu = \alpha_{\rm eff}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction $P_{\rm obs}=P_{\rm true}(1-|\Phi|/c^2)^{\alpha_{\rm eff}}$ combined with the virial relation $|\Phi|\propto\sigma^2$—with optimized effective coupling $\alpha_{\rm eff} = (9.6 \pm 4.0) \times 10^5$ mag and effective calibrator reference $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.37 \pm 1.54$ km/s/Mpc, corresponding to a Planck tension of $0.60\sigma$. The inferred $\alpha_{\rm eff}\sim10^6$ places this probe in the same coupling regime as the millisecond-pulsar spin-down excess (Paper 10), eliminating the cross-probe mismatch of earlier phenomenological $\log_{10}\sigma$ scalings. Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an \"Inner Fainter\" signal in HST photometry. Within the TEP v0.7 framework, this sign is consistent with continuous shear suppression: the high-density M31 bulge experiences progressive attenuation of Temporal Shear (suppression factor $S \approx 0.05$ at $R < 1$ kpc), while the lower-density SN Ia host disks remain in the active-shear regime ($\langle S \rangle = 0.946$). On this interpretation, the M31 signal marks the empirical mapping of a continuous density-dependent suppression profile across a single galaxy. The anchor–host mismatch (geometric anchors show near-zero coupling, $\alpha_{\rm anchor} \approx (7.2 \pm 7.9) \times 10^4$ mag, in marginal 2.2$\sigma$ tension with the host-level $\alpha \approx 9.6 \times 10^5$ mag) finds a natural resolution in group halo screening: all three anchors (LMC, NGC 4258, M31) are members of galaxy groups, embedding them in deep ambient potentials that trigger chameleon-type screening regardless of internal disk densities. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies that lack this external screening. This framework generates a falsifiable prediction: the TEP distance-ladder bias should be unique to isolated field galaxies and suppressed in group/cluster environments. *Keywords:* Hubble tension – Cepheid variables – distance ladder – velocity dispersion – temporal equivalence principle – gravitational time dilation"standard clocks\" via their period-luminosity relation, experience differential time flow governed by their host galaxy environment. Consistent with the anomalous spin-down rates observed in globular cluster pulsars (Paper 11), Cepheids in deep gravitational potentials (high velocity dispersion $\\sigma$) experience period contraction relative to calibration environments. When interpreted through a universal P-L relation, this period deficit masquerades as diminished luminosity, causing systematic underestimation of distances to SN Ia host galaxies and consequent overestimation of $H_0$. Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived $H_0$ (Spearman $\\rho = 0.434$, $p = 0.019$; Pearson $r = 0.428$, $p = 0.021$). A median-split stratification at $\\sigma_{\\rm med} \\approx 90$ km/s yields $H_0 = 67.82 \\pm 1.62$ km/s/Mpc (low-$\\sigma$; $N=15$) versus $72.45 \\pm 2.32$ km/s/Mpc (high-$\\sigma$; $N=14$), implying $\\Delta H_0 = 4.63$ km/s/Mpc. Because published $\\sigma$ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), we treat measurement methodology as a first-class provenance variable and report covariance-aware significance tests using the full SH0ES GLS distance-modulus covariance. Application of the TEP conformal correction with an optimized coupling $\\alpha = (9.6 \\pm 4.0)\\times10^5 \\text{ mag}$ and effective calibrator reference $\\sigma_{\\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.37 \\pm 1.54$ km/s/Mpc, corresponding to a Planck tension of $0.60\\sigma$. Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an “Inner Fainter” signal in HST photometry. This result, initially counter-intuitive, is resolved by the theory's density-dependent screening mechanism: the high-density M31 bulge ($\\rho > \\rho_{\\rm trans}$) is screened (restoring standard physics), while the lower-density SN Ia host disks remain unscreened. The M31 signal thus marks the empirical crossing of the screening threshold. *Keywords:* Hubble tension – Cepheid variables – distance ladder – velocity dispersion – temporal equivalence principle – gravitational time dilation",
+      "description": "Analysis of SH0ES Cepheid sample reveals environment-dependent bias predicting H0=68.14±1.49 km/s/Mpc, reducing Planck tension to 0.49σ. Observable Response Coefficient κ_Cep=(1.05±0.43)×10⁶ mag calibrated from TEP.",
+      "url": "https://matthewsmawfield.github.io/TEP-H0/",
+      "datePublished": "2026-01-11",
       "author": {
         "@type": "Person",
         "name": "Matthew Lukin Smawfield",
-        "url": "https://mlsmawfield.com/",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "ORCID",
-          "value": "0009-0003-8219-3159"
-        },
-        "sameAs": "https://orcid.org/0009-0003-8219-3159"
+        "givenName": "Matthew Lukin",
+        "familyName": "Smawfield",
+        "email": "matthew@mlsmawfield.com",
+        "orcid": "https://orcid.org/0009-0003-8219-3159"
       },
-      "datePublished": "2026-01-11",
-      "image": "https://mlsmawfield.com/tep/h0/public/image.jpg",
-      "url": "https://mlsmawfield.com/tep/h0/",
-      "sameAs": "https://doi.org/10.5281/zenodo.18209702",
       "publisher": {
         "@type": "Organization",
-        "name": "Independent Research",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://mlsmawfield.com/favicon.png"
-        }
+        "name": "Independent Research"
       },
+      "isPartOf": {
+        "@type": "Series",
+        "name": "TEP Research Series"
+      },
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "DOI",
+        "value": "10.5281/zenodo.18209702"
+      },
+      "about": [
+        {"@type": "Thing", "name": "Cosmology"},
+        {"@type": "Thing", "name": "Cepheid Variables"},
+        {"@type": "Thing", "name": "Distance Ladder"},
+        {"@type": "Thing", "name": "Modified Gravity"}
+      ],
+      "keywords": "Hubble tension; Cepheid variables; distance ladder; velocity dispersion; temporal equivalence principle; gravitational time dilation",
       "inLanguage": "en",
-      "license": "https://creativecommons.org/licenses/by/4.0/",
-      "isAccessibleForFree": true
+      "genre": "Preprint",
+      "temporalCoverage": "2026"
     }
     </script>
-    
-    <!-- Canonical URL -->
+
     <link rel="canonical" href="https://mlsmawfield.com/tep/h0/">
     <link rel="alternate" href="https://matthewsmawfield.github.io/TEP-H0/">
     
     <!-- Alternate PDF Version -->
-    <link rel="alternate" type="application/pdf" title="Full Preprint PDF" href="https://matthewsmawfield.github.io/TEP-H0/public/docs/11-TEP-H0-v0.5-KingstonuponHull.pdf">
+    <link rel="alternate" type="application/pdf" title="Full Preprint PDF" href="https://matthewsmawfield.github.io/TEP-H0/public/docs/11-TEP-H0-v0.6-KingstonuponHull.pdf">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://mlsmawfield.com/tep/h0/">
     <meta property="og:title" content="The Cepheid Bias: Resolving the Hubble Tension">
-    <meta property="og:description" content="The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements ($H_0 \approx 73$ km/s/Mpc) and early-universe CMB inference ($H_0 = 67.4 \pm 0.5$ km/s/Mpc)—represents a significant challenge in precision cosmology. This study proposes that the tension arises from a systematic, environment-dependent bias in Cepheid-based distances, as predicted by the Temporal Equivalence Principle (TEP). This study tests the hypothesis that the discrepancy arises from a violation of the isochrony axiom—the assumption that proper time accumulation is independent of the local gravitational environment. Under scalar-tensor theories that break the Strong Equivalence Principle (such as TEP), Cepheid variable stars act as environment-dependent &quot;standard clocks.&quot; In deep gravitational potentials (high velocity dispersion $\sigma$) and active-shear environments, enhanced scalar field activity is predicted to induce period contraction relative to calibration environments. When interpreted through a universal Period-Luminosity relation, this clock-rate anomaly would mimic diminished luminosity, leading to underestimated distances and an inflated local Hubble constant. Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.434$, $p = 0.019$; Pearson $r = 0.428$, $p = 0.021$). A median-split stratification at $\sigma_{\rm med} \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$; $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 4.63$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), measurement methodology is treated as a first-class provenance variable and covariance-aware significance tests are reported using the full SH0ES GLS distance-modulus covariance. Application of the TEP conformal correction $\Delta\mu = \alpha_{\rm eff}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction $P_{\rm obs}=P_{\rm true}(1-|\Phi|/c^2)^{\alpha_{\rm eff}}$ combined with the virial relation $|\Phi|\propto\sigma^2$—with optimized effective coupling $\alpha_{\rm eff} = (9.6 \pm 4.0) \times 10^5$ mag and effective calibrator reference $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.37 \pm 1.54$ km/s/Mpc, corresponding to a Planck tension of $0.60\sigma$. The inferred $\alpha_{\rm eff}\sim10^6$ places this probe in the same coupling regime as the millisecond-pulsar spin-down excess (Paper 10), eliminating the cross-probe mismatch of earlier phenomenological $\log_{10}\sigma$ scalings. Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an &quot;Inner Fainter&quot; signal in HST photometry. Within the TEP v0.7 framework, this sign is consistent with continuous shear suppression: the high-density M31 bulge experiences progressive attenuation of Temporal Shear (suppression factor $S \approx 0.05$ at $R &lt; 1$ kpc), while the lower-density SN Ia host disks remain in the active-shear regime ($\langle S \rangle = 0.946$). On this interpretation, the M31 signal marks the empirical mapping of a continuous density-dependent suppression profile across a single galaxy. The anchor–host mismatch (geometric anchors show near-zero coupling, $\alpha_{\rm anchor} \approx (7.2 \pm 7.9) \times 10^4$ mag, in marginal 2.2$\sigma$ tension with the host-level $\alpha \approx 9.6 \times 10^5$ mag) finds a natural resolution in group halo screening: all three anchors (LMC, NGC 4258, M31) are members of galaxy groups, embedding them in deep ambient potentials that trigger chameleon-type screening regardless of internal disk densities. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies that lack this external screening. This framework generates a falsifiable prediction: the TEP distance-ladder bias should be unique to isolated field galaxies and suppressed in group/cluster environments. *Keywords:* Hubble tension – Cepheid variables – distance ladder – velocity dispersion – temporal equivalence principle – gravitational time dilation">
+    <meta property="og:description" content="TEP-H0 tests an environment-dependent Cepheid timing bias in the SH0ES sample. The corrected pipeline finds H0-sigma correlations of Spearman rho=0.511 (p=0.0046) and Pearson r=0.462 (p=0.0116), with kappa_Cep=(1.05 +/- 0.43)e6 mag and H0=68.17 km/s/Mpc (bootstrap 68.14 +/- 1.49), reducing Planck tension to 0.49 sigma.">
     <meta property="og:image" content="https://mlsmawfield.com/tep/h0/public/image.jpg">
     <meta property="og:site_name" content="TEP-H0">
+    <meta property="article:published_time" content="2026-01-11T00:00:00Z">
+    <meta property="article:modified_time" content="2026-04-29T00:00:00Z">
+    <meta property="og:updated_time" content="2026-04-29T00:00:00Z">
     
     <!-- Google Scholar / Highwire Press Metadata -->
     <meta name="citation_title" content="The Cepheid Bias: Resolving the Hubble Tension">
     <meta name="citation_author" content="Smawfield, Matthew Lukin">
     <meta name="citation_publication_date" content="2026/01/11">
-    <meta name="citation_pdf_url" content="https://matthewsmawfield.github.io/TEP-H0/public/docs/11-TEP-H0-v0.5-KingstonuponHull.pdf">
+    <meta name="citation_pdf_url" content="https://matthewsmawfield.github.io/TEP-H0/public/docs/11-TEP-H0-v0.6-KingstonuponHull.pdf">
     <meta name="citation_doi" content="10.5281/zenodo.18209702">
     <meta name="citation_keywords" content="Hubble Tension; Cepheids; Cosmology; TEP; Modified Gravity; Screening">
 
@@ -137,7 +113,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://mlsmawfield.com/tep/h0/">
     <meta name="twitter:title" content="The Cepheid Bias: Resolving the Hubble Tension">
-    <meta name="twitter:description" content="The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements ($H_0 \approx 73$ km/s/Mpc) and early-universe CMB inference ($H_0 = 67.4 \pm 0.5$ km/s/Mpc)—represents a significant challenge in precision cosmology. This study proposes that the tension arises from a systematic, environment-dependent bias in Cepheid-based distances, as predicted by the Temporal Equivalence Principle (TEP). This study tests the hypothesis that the discrepancy arises from a violation of the isochrony axiom—the assumption that proper time accumulation is independent of the local gravitational environment. Under scalar-tensor theories that break the Strong Equivalence Principle (such as TEP), Cepheid variable stars act as environment-dependent &quot;standard clocks.&quot; In deep gravitational potentials (high velocity dispersion $\sigma$) and active-shear environments, enhanced scalar field activity is predicted to induce period contraction relative to calibration environments. When interpreted through a universal Period-Luminosity relation, this clock-rate anomaly would mimic diminished luminosity, leading to underestimated distances and an inflated local Hubble constant. Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.434$, $p = 0.019$; Pearson $r = 0.428$, $p = 0.021$). A median-split stratification at $\sigma_{\rm med} \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$; $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 4.63$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), measurement methodology is treated as a first-class provenance variable and covariance-aware significance tests are reported using the full SH0ES GLS distance-modulus covariance. Application of the TEP conformal correction $\Delta\mu = \alpha_{\rm eff}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction $P_{\rm obs}=P_{\rm true}(1-|\Phi|/c^2)^{\alpha_{\rm eff}}$ combined with the virial relation $|\Phi|\propto\sigma^2$—with optimized effective coupling $\alpha_{\rm eff} = (9.6 \pm 4.0) \times 10^5$ mag and effective calibrator reference $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.37 \pm 1.54$ km/s/Mpc, corresponding to a Planck tension of $0.60\sigma$. The inferred $\alpha_{\rm eff}\sim10^6$ places this probe in the same coupling regime as the millisecond-pulsar spin-down excess (Paper 10), eliminating the cross-probe mismatch of earlier phenomenological $\log_{10}\sigma$ scalings. Out-of-sample validation (train/test splits and LOOCV) shows that the optimized coupling is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an &quot;Inner Fainter&quot; signal in HST photometry. Within the TEP v0.7 framework, this sign is consistent with continuous shear suppression: the high-density M31 bulge experiences progressive attenuation of Temporal Shear (suppression factor $S \approx 0.05$ at $R &lt; 1$ kpc), while the lower-density SN Ia host disks remain in the active-shear regime ($\langle S \rangle = 0.946$). On this interpretation, the M31 signal marks the empirical mapping of a continuous density-dependent suppression profile across a single galaxy. The anchor–host mismatch (geometric anchors show near-zero coupling, $\alpha_{\rm anchor} \approx (7.2 \pm 7.9) \times 10^4$ mag, in marginal 2.2$\sigma$ tension with the host-level $\alpha \approx 9.6 \times 10^5$ mag) finds a natural resolution in group halo screening: all three anchors (LMC, NGC 4258, M31) are members of galaxy groups, embedding them in deep ambient potentials that trigger chameleon-type screening regardless of internal disk densities. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies that lack this external screening. This framework generates a falsifiable prediction: the TEP distance-ladder bias should be unique to isolated field galaxies and suppressed in group/cluster environments. *Keywords:* Hubble tension – Cepheid variables – distance ladder – velocity dispersion – temporal equivalence principle – gravitational time dilation">
+    <meta name="twitter:description" content="TEP-H0 tests an environment-dependent Cepheid timing bias in the SH0ES sample. The corrected pipeline finds H0-sigma correlations of Spearman rho=0.511 (p=0.0046) and Pearson r=0.462 (p=0.0116), with kappa_Cep=(1.05 +/- 0.43)e6 mag and H0=68.17 km/s/Mpc (bootstrap 68.14 +/- 1.49), reducing Planck tension to 0.49 sigma.">
     <meta name="twitter:image" content="https://mlsmawfield.com/tep/h0/public/image.jpg">
     
     <!-- Favicon -->
@@ -818,9 +794,13 @@
         <img src="public/image.jpg" alt="Hubble Tension Resolution" class="header-image">
         <h1 class="title">The Cepheid Bias: Resolving the Hubble Tension</h1>
         <div class="author">Matthew Lukin Smawfield</div>
-        <div class="version">Version: v0.5 (Kingston upon Hull)</div>
-        <div class="date">First published: 11 January 2026 | Updated: 24 April 2026</div>
-        <div class="series"><span class="doi"><a href="https://doi.org/10.5281/zenodo.18209702" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" itemprop="sameAs">10.5281/zenodo.18209702</a></span></div>
+        <div class="version">Version: v0.6 (Kingston upon Hull)</div>
+        <div class="date">First published: 11 January 2026 | Updated: 29 April 2026</div>
+        <div class="doi">DOI: <a href="https://doi.org/10.5281/zenodo.18209702" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();" itemprop="sameAs">10.5281/zenodo.18209702</a><a class="pdf-link no-print" href="public/docs/11-TEP-H0-v0.6-KingstonuponHull.pdf" aria-label="Download PDF (v0.6)" title="Download PDF (v0.6)">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+        </a></div>
         <div class="doi">Code Availability: <a href="https://github.com/matthewsmawfield/TEP-H0" target="_blank">github.com/matthewsmawfield/TEP-H0</a></div>
     </header>
 
@@ -842,14 +822,14 @@
     <ol class="manuscript-nav-list">
         <li><a href="/tep/theory/" class="nav-item" data-manuscript="theory">Temporal Equivalence Principle: Dynamic Time & Emergent Light Speed <span class="nav-meta">18 Aug 2025</span></a></li>
         <li><a href="/tep/gnss-i/" class="nav-item" data-manuscript="gnss-i">Global Time Echoes: Distance-Structured Correlations in GNSS Clocks <span class="nav-meta">17 Sep 2025</span></a></li>
-        <li><a href="/tep/gnss-ii/" class="nav-item" data-manuscript="gnss-ii">25-Year Temporal Evolution of Distance-Structured Correlations in GNSS <span class="nav-meta">3 Nov 2025</span></a></li>
-        <li><a href="/tep/gnss-iii/" class="nav-item" data-manuscript="gnss-iii">Global Time Echoes: Raw RINEX Validation <span class="nav-meta">17 Dec 2025</span></a></li>
+        <li><a href="/tep/gnss-ii/" class="nav-item" data-manuscript="gnss-ii">Global Time Echoes: 25-Year Analysis of CODE Precise Clock Products <span class="nav-meta">3 Nov 2025</span></a></li>
+        <li><a href="/tep/gnss-iii/" class="nav-item" data-manuscript="gnss-iii">Global Time Echoes: Raw RINEX Consistency Test <span class="nav-meta">9 Dec 2025</span></a></li>
         <li><a href="/tep/gl/" class="nav-item" data-manuscript="gl">Temporal-Spatial Coupling in Gravitational Lensing <span class="nav-meta">19 Dec 2025</span></a></li>
-        <li><a href="/tep/gte/" class="nav-item" data-manuscript="gte">Global Time Echoes: Empirical Validation of TEP <span class="nav-meta">21 Dec 2025</span></a></li>
-        <li><a href="/tep/ucd/" class="nav-item" data-manuscript="ucd">Universal Critical Density: Unifying Atomic, Galactic, and Compact Object Scales <span class="nav-meta">28 Dec 2025</span></a></li>
-        <li><a href="/tep/rbh/" class="nav-item" data-manuscript="rbh">The Soliton Wake: Identifying RBH-1 as a Gravitational Soliton <span class="nav-meta">28 Dec 2025</span></a></li>
-        <li><a href="/tep/slr/" class="nav-item" data-manuscript="slr">Global Time Echoes: Optical Validation of TEP via Satellite Laser Ranging <span class="nav-meta">30 Dec 2025</span></a></li>
-        <li><a href="/tep/exp/" class="nav-item" data-manuscript="exp">What Do Precision Tests of General Relativity Actually Measure? <span class="nav-meta">31 Dec 2025</span></a></li>
+        <li><a href="/tep/gte/" class="nav-item" data-manuscript="gte">Global Time Echoes: Empirical Synthesis <span class="nav-meta">21 Dec 2025</span></a></li>
+        <li><a href="/tep/ucd/" class="nav-item" data-manuscript="ucd">Universal Critical Density: Cross-Scale Consistency of ρ_T <span class="nav-meta">28 Dec 2025</span></a></li>
+        <li><a href="/tep/rbh/" class="nav-item" data-manuscript="rbh">The Soliton Wake: Exploring RBH-1 as a Temporal Topology Candidate <span class="nav-meta">28 Dec 2025</span></a></li>
+        <li><a href="/tep/slr/" class="nav-item" data-manuscript="slr">Global Time Echoes: Optical-Domain Consistency Test via Satellite Laser Ranging <span class="nav-meta">30 Dec 2025</span></a></li>
+        <li><a href="/tep/exp/" class="nav-item" data-manuscript="exp">What Do Precision Tests of General Relativity Measure? <span class="nav-meta">31 Dec 2025</span></a></li>
         <li><a href="/tep/cos/" class="nav-item" data-manuscript="cos">The Temporal Equivalence Principle: Suppressed Density Scaling in Globular Cluster Pulsars <span class="nav-meta">9 Jan 2026</span></a></li>
         <li><a href="/tep/h0/" class="nav-item active" data-manuscript="h0">The Cepheid Bias: Resolving the Hubble Tension <span class="nav-meta">11 Jan 2026</span></a></li>
     </ol>
@@ -1181,7 +1161,7 @@
         
         // Change title for PDF filename when printing
         const originalTitle = document.title;
-        const pdfTitle = 'Smawfield_2026_TEP-H0_v0.5_KingstonUponHull';
+        const pdfTitle = 'Smawfield_2026_TEP-H0_v0.6_KingstonUponHull';
         window.addEventListener('beforeprint', () => { document.title = pdfTitle; });
         window.addEventListener('afterprint', () => { document.title = originalTitle; });
     </script>

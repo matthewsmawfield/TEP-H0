@@ -57,7 +57,7 @@ class Step2Stratification:
     A significant difference between the bins ($\Delta H_0 > 0$) or a strong positive correlation
     confirms the presence of an environmental bias consistent with TEP Period Contraction.
 
-    Note on Screening (TEP v0.7):
+    Note on Screening (TEP v0.8):
     Rather than a binary screened/unscreened dichotomy, the TEP framework now employs
     a continuous geometric profile (Temporal Topology) in which the scalar field gradient
     (Temporal Shear) is progressively suppressed by ambient density. A dimensionless
@@ -339,7 +339,7 @@ class Step2Stratification:
     def calculate_densities(self, df):
         r"""
         Estimates the local stellar mass density for SH0ES hosts and computes a
-        continuous shear-suppression factor consistent with TEP v0.7.
+        continuous shear-suppression factor consistent with TEP v0.8.
 
         Physics:
         SH0ES Cepheids typically reside in the disks of spiral galaxies at

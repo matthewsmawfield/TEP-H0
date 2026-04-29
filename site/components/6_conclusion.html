@@ -9,19 +9,19 @@
 <p>
     Stratification of the SH0ES Cepheid host galaxies by directly measured
     velocity dispersion reveals a significant correlation (Spearman $\rho =
-    0.434$, $p = 0.019$) between host potential depth and derived $H_0$.
+    0.511$, $p = 0.0046$; Pearson $r=0.462$, $p=0.0116$) between host potential depth and derived $H_0$.
     High-$\sigma$ hosts yield systematically inflated $H_0$ values ($72.45 \pm
     2.32$ km/s/Mpc) compared to low-$\sigma$ hosts ($67.82 \pm 1.62$ km/s/Mpc),
     with the bias $\Delta H_0 = 4.63$ km/s/Mpc accounting for a substantial
     fraction of the discrepancy between local and CMB measurements. Application
-    of the TEP conformal correction $\Delta\mu = \alpha_{\rm eff}\cdot S(\rho)\cdot
+    of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot
     (\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction
-    formula and the virial relation $|\Phi|\propto\sigma^2$—with optimal
-    coupling $\alpha_{\rm eff} = (9.6 \pm 4.0)\times10^5$ mag (mean effective coupling
-    $\langle \alpha_{\rm eff} \cdot S \rangle = 9.0\times10^5$ after accounting for
+    formula and the virial relation $|\Phi|\propto\sigma^2$—with
+    response coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.43)\times10^6$ mag (mean
+    response $\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5$ after accounting for
     continuous shear suppression) and effective calibrator $\sigma_{\rm ref} =
-    75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.37 \pm 1.54$
-    km/s/Mpc, reducing the tension with Planck to $0.60\sigma$. This result is robust under bootstrap resampling. Notably,
+    75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.17$ km/s/Mpc
+    (bootstrap mean $68.14 \pm 1.49$), reducing the tension with Planck to $0.49\sigma$. This result is robust under bootstrap resampling. Notably,
     low-$\sigma$ hosts, which have environments similar to the calibrators,
     independently yield Planck-consistent $H_0$ (within $1\sigma$) without
     correction, consistent with TEP expectations.
@@ -29,8 +29,8 @@
 
 <p>
     Independent P-L fits to the extragalactic geometric anchors (LMC, NGC 4258,
-    M31) yield $\alpha_{\rm anchor} = (7.2 \pm 7.9)\times10^4$ mag—consistent with zero ($0.9\sigma$) and
-    in $2.2\sigma$ marginal tension with the host-level coupling. This dichotomy is naturally
+    M31) yield $\kappa_{\rm anchor} = 5.0 \pm 663$ mag—consistent with zero and in
+    a 2.5$\sigma$ comparison with the host-level response. This dichotomy is naturally
     explained by group halo shear suppression: all three anchors are members of
     galaxy groups (Local Group for LMC and M31; Canes Venatici I for NGC 4258),
     embedding them in deep ambient potentials that suppress Temporal Shear,
@@ -147,7 +147,7 @@ python scripts/run_pipeline.py</code></pre>
                     <td><strong>3</strong></td>
                     <td><code>step_3_tep_correction.py</code></td>
                     <td>
-                        Optimizes $\alpha$ by minimizing residual $H_0$–$\sigma$
+                        Optimizes $\kappa_{\rm Cep}$ by minimizing residual $H_0$–$\sigma$
                         slope; applies TEP correction; bootstrap uncertainty
                         estimation
                     </td>
@@ -247,7 +247,7 @@ python scripts/run_pipeline.py</code></pre>
     <ul>
         <li>
             <a href="results/outputs/tep_correction_results.json">tep_correction_results.json</a> — Unified
-            $H_0$, optimal $\alpha_{\rm eff}$, Planck tension
+            $H_0$, optimal $\kappa_{\rm Cep}$, Planck tension
         </li>
         <li>
             <code>results/outputs/stratification_results.json</code> —
@@ -292,7 +292,7 @@ python scripts/run_pipeline.py</code></pre>
         "
     ><code># Check key results match manuscript
 cat results/outputs/tep_correction_results.json | grep unified_h0
-# Expected: 68.37 (±0.01)
+# Expected: 68.14 (±0.01)
 
 cat results/outputs/stratification_results.json | grep difference
 # Expected: 4.63 (±0.01)</code></pre>

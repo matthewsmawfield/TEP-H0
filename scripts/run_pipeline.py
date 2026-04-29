@@ -13,7 +13,7 @@ Workflow Steps:
     and cross-matches hosts with external databases (Simbad, HyperLEDA).
 2.  **Stratification**: Calculates H0 for each host, stratifies the sample by 
     gravitational potential (velocity dispersion), and detects the environmental bias.
-3.  **TEP Correction**: Optimizes the TEP screening parameter (alpha), applies the 
+3.  **TEP Correction**: Optimizes the Observable Response Coefficient (kappa_cep), applies the 
     conformal time correction, and unifies the Hubble Constant.
 4.  **Robustness Checks**: Performs rigorous statistical tests (Jackknife, Bivariate 
     Analysis, Sensitivity Analysis) to validate the results against systematics.
@@ -43,6 +43,7 @@ from scripts.steps.step_1_data_ingestion import Step1DataIngestion
 from scripts.utils.fetch_metadata import fetch_galaxy_metadata
 from scripts.steps.step_1b_aperture_correction import Step1bApertureCorrection
 from scripts.steps.step_2_stratification import Step2Stratification
+from scripts.steps.step_2b_shear_suppression_viz import main as step2b_viz
 from scripts.steps.step_3_tep_correction import Step3TEPCorrection
 from scripts.steps.step_4_robustness_checks import Step4RobustnessChecks
 from scripts.steps.step_4b_aperture_sensitivity import Step4bApertureSensitivity
@@ -150,6 +151,16 @@ def run_pipeline():
         
         set_step_logger(pipeline_logger)
         print_status("Step 3 (Optimization) completed successfully.", "SUCCESS")
+        
+        # --- Step 3b: Shear Suppression Visualization ---
+        # Must run after Step 3 because it uses tep_corrected_h0.csv
+        print_status(">>> STEP 3B: SHEAR SUPPRESSION VISUALIZATION", "TITLE")
+        t0 = time.time()
+        step2b_viz()
+        step_times['Step 3b'] = time.time() - t0
+        
+        set_step_logger(pipeline_logger)
+        print_status("Step 3b (Shear Suppression Viz) completed successfully.", "SUCCESS")
 
         # --- Step 4: Robustness Checks ---
         print_status(">>> STEP 4: ROBUSTNESS CHECKS", "TITLE")
@@ -232,6 +243,18 @@ def run_pipeline():
         set_step_logger(pipeline_logger)
         print_status("Step 8 (M31 PHAT Analysis) completed successfully.", "SUCCESS")
 
+        # --- Step 10: Anchor Stratification Test ---
+        # Must run before final synthesis because the synthesis report reads
+        # anchor_stratification_test.json.
+        print_status(">>> STEP 10: ANCHOR STRATIFICATION TEST", "TITLE")
+        t0 = time.time()
+        step10 = AnchorStratificationStep()
+        step10.run()
+        step_times['Step 10'] = time.time() - t0
+
+        set_step_logger(pipeline_logger)
+        print_status("Step 10 (Anchor Stratification) completed successfully.", "SUCCESS")
+
         # --- Step 9: Final Synthesis ---
         print_status(">>> STEP 9: FINAL SYNTHESIS", "TITLE")
         t0 = time.time()
@@ -241,16 +264,6 @@ def run_pipeline():
 
         set_step_logger(pipeline_logger)
         print_status("Step 9 (Final Synthesis) completed successfully.", "SUCCESS")
-
-        # --- Step 10: Anchor Stratification Test ---
-        print_status(">>> STEP 10: ANCHOR STRATIFICATION TEST", "TITLE")
-        t0 = time.time()
-        step10 = AnchorStratificationStep()
-        step10.run()
-        step_times['Step 10'] = time.time() - t0
-
-        set_step_logger(pipeline_logger)
-        print_status("Step 10 (Anchor Stratification) completed successfully.", "SUCCESS")
 
         # --- Step 11: Pipeline Audit (Self-Check) ---
         if not args.skip_audit:

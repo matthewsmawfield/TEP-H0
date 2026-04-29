@@ -430,7 +430,7 @@
   },
   "provenance": {
     "command": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/utils/build_sigma_catalog.py --verbose --use-ledacat --use-ho2007 --use-bassdr2 --use-apj929 --use-mnras482",
-    "created_utc": "2026-04-24T08:19:48Z",
+    "created_utc": "2026-04-29T02:27:30Z",
     "packages": {
       "astropy": "7.1.1",
       "astroquery": "0.4.11",

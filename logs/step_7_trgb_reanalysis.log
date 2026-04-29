@@ -1,19 +1,19 @@
-[14:24:59] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
-[14:24:59] [INFO] Matched 13 hosts for differential analysis
-[14:24:59] [INFO] 
+[06:54:07] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
+[06:54:07] [INFO] Matched 13 hosts for differential analysis
+[06:54:07] [INFO] 
 Differential Modulus (TRGB - Cepheid) vs Sigma:
-[14:24:59] [INFO] +-----------------+---------------+--------------+
-[14:24:59] [INFO] | Metric          | Value         | Significance |
-[14:24:59] [INFO] +-----------------+---------------+--------------+
-[14:24:59] [INFO] | Pearson r       | 0.513         | p=0.0731     |
-[14:24:59] [INFO] | Spearman ρ      | 0.571         | p=0.0413     |
-[14:24:59] [INFO] | Slope (mag/dex) | 0.147 ± 0.067 | p=0.0505     |
-[14:24:59] [INFO] +-----------------+---------------+--------------+
-[14:24:59] [INFO] 
+[06:54:07] [INFO] +-----------------+---------------+--------------+
+[06:54:07] [INFO] | Metric          | Value         | Significance |
+[06:54:07] [INFO] +-----------------+---------------+--------------+
+[06:54:07] [INFO] | Pearson r       | 0.513         | p=0.0731     |
+[06:54:07] [INFO] | Spearman ρ      | 0.571         | p=0.0413     |
+[06:54:07] [INFO] | Slope (mag/dex) | 0.147 ± 0.067 | p=0.0505     |
+[06:54:07] [INFO] +-----------------+---------------+--------------+
+[06:54:07] [INFO] 
 Interpretation Check:
-[14:24:59] [INFO]   POSITIVE correlation detected.
-[14:24:59] [INFO]   High-σ hosts have μ_TRGB > μ_Ceph.
-[14:24:59] [INFO]   Implies μ_Ceph is UNDERESTIMATED at high σ.
-[14:24:59] [SUCCESS]   → CONSISTENT WITH TEP PREDICTION.
-[14:24:59] [INFO] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/trgb_cepheid_residual.png
-[14:24:59] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json
+[06:54:07] [INFO]   POSITIVE correlation detected.
+[06:54:07] [INFO]   High-σ hosts have μ_TRGB > μ_Ceph.
+[06:54:07] [INFO]   Implies μ_Ceph is UNDERESTIMATED at high σ.
+[06:54:07] [SUCCESS]   → CONSISTENT WITH TEP PREDICTION.
+[06:54:07] [INFO] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/trgb_cepheid_residual.png
+[06:54:07] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json

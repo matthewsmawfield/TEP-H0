@@ -1,0 +1,981 @@
+[0;37m[05:25:49] [INFO] [0m
+[0;37m[05:25:49] [INFO] ================================================================================[0m
+[0;37m[05:25:49] [INFO]    TEP-H0 ANALYSIS PIPELINE INITIATED[0m
+[0;37m[05:25:49] [INFO] ================================================================================[0m
+[0;37m[05:25:49] [INFO] [0m
+[0;37m[05:25:49] [INFO] Project Root: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0[0m
+[0;37m[05:25:49] [INFO] Starting execution sequence...[0m
+[0;37m[05:25:49] [INFO] [0m
+[0;37m[05:25:49] [INFO] ================================================================================[0m
+[0;37m[05:25:49] [INFO]    >>> STEP 1 (PRE-FLIGHT): COORDINATE PREPARATION[0m
+[0;37m[05:25:49] [INFO] ================================================================================[0m
+[0;37m[05:25:49] [INFO] [0m
+[0;37m[05:25:49] [INFO] Step 1 (Pre-flight): Preparing Host Coordinates...[0m
+[0;37m[05:25:49] [INFO] Reconstructing SH0ES Cepheid Catalog...[0m
+[0;37m[05:25:49] [INFO] Catalog Reconstruction Verification:[0m
+[0;37m[05:25:49] [INFO] SH0ES Cepheid Sample (First 3)[0m
+[0;37m[05:25:49] [INFO] +--------+------------+-------------+------------+[0m
+[0;37m[05:25:49] [INFO] | Source | Data (mag) | Period Term | Metal Term |[0m
+[0;37m[05:25:49] [INFO] +--------+------------+-------------+------------+[0m
+[0;37m[05:25:49] [INFO] | M101   | 23.691     | -0.164      | 0.053      |[0m
+[0;37m[05:25:49] [INFO] | M101   | 22.955     | -0.163      | 0.089      |[0m
+[0;37m[05:25:49] [INFO] | M101   | 23.535     | -0.157      | 0.089      |[0m
+[0;37m[05:25:49] [INFO] +--------+------------+-------------+------------+[0m
+[1;32m[05:25:49] [SUCCESS] Saved reconstructed catalog with 3130 Cepheids to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/reconstructed_shoes_cepheids.csv[0m
+[0;37m[05:25:49] [INFO] Using existing coordinates file.[0m
+[0;37m[05:25:49] [INFO] [0m
+[0;37m[05:25:49] [INFO] ================================================================================[0m
+[0;37m[05:25:49] [INFO]    >>> STEP 0: SIGMA CATALOG (PROVENANCE BUILD)[0m
+[0;37m[05:25:49] [INFO] ================================================================================[0m
+[0;37m[05:25:49] [INFO] [0m
+[1;33m[05:25:49] [WARNING] Sigma catalog exists but report missing; will rebuild: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv[0m
+[0;37m[05:25:49] [INFO] [0m
+[0;37m[05:25:49] [INFO] ================================================================================[0m
+[0;37m[05:25:49] [INFO]    STEP 0: Building sigma catalog with full provenance[0m
+[0;37m[05:25:49] [INFO] ================================================================================[0m
+[0;37m[05:25:49] [INFO] [0m
+[0;37m[05:25:49] [INFO] Command: /Users/matthewsmawfield/opt/miniconda3/bin/python /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/utils/build_sigma_catalog.py --verbose --use-ledacat --use-ho2007 --use-bassdr2 --use-apj929 --use-mnras482[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:25:49] [INFO] Loaded 41 hosts from /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/hosts_coords.csv[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:25:52] [INFO] [1/41] LMC | PGC=17223 | candidates=leda_vrot_proxy | CHOSEN=HyperLEDA (ledacat.cgi) | vrot/1.7 proxy | σ=27.4 | t=2.79s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:25:53] [INFO] [2/41] M 101 | PGC=50063 | log(2Vm)=2.137 | candidates=hi_log2vm,ho2009,leda_vdis | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=23.6 | ±8.7 | t=0.80s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:25:56] [INFO] [3/41] NGC 1337 | PGC=12916 | log(2Vm)=2.337 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=93.7 | t=2.95s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:25:58] [INFO] [4/41] M 31 | PGC=2557 | log(2Vm)=2.684 | candidates=hi_log2vm,ho2007,ho2009,leda_vdis | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=169.8 | ±5.2 | t=0.80s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:25:59] [INFO] [5/41] NGC 0691 | PGC=6793 | log(2Vm)=2.470 | candidates=hi_log2vm,ho2007,leda_vdis | CHOSEN=Ho 2007 (J/ApJ/668/94) | stellar absorption | σ=107.5 | t=0.81s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:00] [INFO] [6/41] NGC 1015 | PGC=9988 | log(2Vm)=2.151 | candidates=hi_log2vm,leda_vdis | CHOSEN=HyperLEDA (ledacat.cgi) | stellar absorption | σ=106.5 | ±6.6 | t=0.77s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:03] [INFO] [7/41] NGC 105 | PGC=212515 | candidates=leda_vrot_proxy | CHOSEN=HyperLEDA (ledacat.cgi) | vrot/1.7 proxy | σ=56.7 | t=2.74s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:04] [INFO] [8/41] NGC 1309 | PGC=12626 | log(2Vm)=2.070 | candidates=hi_log2vm,leda_vdis | CHOSEN=HyperLEDA (ledacat.cgi) | stellar absorption | σ=82.0 | ±26.7 | t=0.78s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:06] [INFO] [9/41] NGC 1365 | PGC=13179 | log(2Vm)=2.559 | candidates=hi_log2vm,ho2007,leda_vdis | CHOSEN=Ho 2007 (J/ApJ/668/94) | stellar absorption | σ=151.4 | t=0.84s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:09] [INFO] [10/41] NGC 1448 | PGC=13727 | log(2Vm)=2.571 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=129.9 | t=2.78s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:12] [INFO] [11/41] NGC 1559 | PGC=14814 | log(2Vm)=2.380 | candidates=apj929_84,hi_log2vm,leda_vrot_proxy | CHOSEN=ApJ 929:84 (VizieR J/ApJ/929/84) | stellar absorption | σ=72.6 | t=2.82s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:15] [INFO] [12/41] NGC 2442 | PGC=21373 | log(2Vm)=2.637 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=144.2 | t=2.81s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:19] [INFO] [13/41] NGC 2525 | PGC=22721 | log(2Vm)=2.271 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=86.5 | t=2.97s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:22] [INFO] [14/41] NGC 2608 | PGC=24111 | log(2Vm)=2.272 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=86.6 | t=2.98s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:23] [INFO] [15/41] NGC 3021 | PGC=28357 | log(2Vm)=2.357 | candidates=hi_log2vm,ho2007,leda_vdis | CHOSEN=Ho 2007 (J/ApJ/668/94) | stellar absorption | σ=57.3 | t=0.80s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:25] [INFO] [16/41] NGC 3147 | PGC=30019 | log(2Vm)=2.532 | candidates=bassdr2,hi_log2vm,ho2009,leda_vdis | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=219.8 | ±8.7 | t=1.28s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:26] [INFO] [17/41] NGC 3254 | PGC=30895 | log(2Vm)=2.566 | candidates=hi_log2vm,ho2007,ho2009,leda_vdis | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=117.8 | ±4.1 | t=0.93s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:28] [INFO] [18/41] NGC 3370 | PGC=32207 | log(2Vm)=2.390 | candidates=hi_log2vm,ho2007,ho2009,leda_vdis | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=94.6 | ±9.4 | t=0.79s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:31] [INFO] [19/41] NGC 3447 | PGC=32694 | log(2Vm)=2.027 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=67.8 | t=2.67s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:32] [INFO] [20/41] NGC 3583 | PGC=34232 | log(2Vm)=2.493 | candidates=hi_log2vm,ho2007,ho2009,leda_vdis,sdss | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=131.7 | ±10.1 | t=0.98s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:35] [INFO] [21/41] NGC 3972 | PGC=37466 | log(2Vm)=2.350 | candidates=hi_log2vm,leda_vrot_proxy,sdss | CHOSEN=SDSS (astroquery.sdss) | stellar absorption | σ=28.2 | ±9.9 | t=2.74s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:36] [INFO] [22/41] NGC 3982 | PGC=37520 | log(2Vm)=2.273 | candidates=hi_log2vm,ho2007,ho2009,leda_vdis,sdss | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=73.0 | ±4.0 | t=0.81s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:40] [INFO] [23/41] NGC 4038 | PGC=37967 | log(2Vm)=2.441 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=107.4 | t=2.80s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:41] [INFO] [24/41] NGC 4258 | PGC=39600 | log(2Vm)=2.591 | candidates=bassdr2,hi_log2vm,ho2007,ho2009,leda_vdis | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=148.0 | ±4.0 | t=0.88s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:42] [INFO] [25/41] NGC 4424 | PGC=40809 | log(2Vm)=1.767 | candidates=hi_log2vm,ho2009,leda_vdis,sdss | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=56.8 | ±9.2 | t=0.87s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:43] [INFO] [26/41] NGC 4536 | PGC=41823 | log(2Vm)=2.464 | candidates=hi_log2vm,ho2007,ho2009,leda_vdis | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=85.0 | ±1.0 | t=0.89s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:45] [INFO] [27/41] NGC 4639 | PGC=42741 | log(2Vm)=2.419 | candidates=hi_log2vm,ho2007,ho2009,leda_vdis | CHOSEN=Ho+2009 (J/ApJS/183/1) | stellar absorption | σ=96.0 | ±4.0 | t=0.88s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:48] [INFO] [28/41] NGC 4680 | PGC=43118 | log(2Vm)=2.408 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=102.7 | t=2.79s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:51] [INFO] [29/41] NGC 5468 | PGC=50323 | log(2Vm)=2.024 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=67.6 | t=2.90s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:55] [INFO] [30/41] NGC 5584 | PGC=51344 | log(2Vm)=2.225 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=82.1 | t=2.87s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:58] [INFO] [31/41] NGC 5643 | PGC=51969 | log(2Vm)=2.226 | candidates=bassdr2,hi_log2vm,leda_vrot_proxy | CHOSEN=BASS DR2 (Koss+2022; J/ApJS/261/6) | stellar absorption | σ=68.0 | ±1.0 | t=3.07s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:26:59] [INFO] [32/41] NGC 5728 | PGC=52521 | log(2Vm)=2.567 | candidates=bassdr2,hi_log2vm,ho2007,leda_vdis | CHOSEN=BASS DR2 (Koss+2022; J/ApJS/261/6) | stellar absorption | σ=176.0 | ±4.0 | t=0.90s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:27:03] [INFO] [33/41] NGC 5861 | PGC=54097 | log(2Vm)=2.472 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=112.2 | t=3.12s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:27:06] [INFO] [34/41] NGC 5917 | PGC=54809 | candidates=leda_vrot_proxy | CHOSEN=HyperLEDA (ledacat.cgi) | vrot/1.7 proxy | σ=54.5 | t=3.20s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:27:10] [INFO] [35/41] NGC 7250 | PGC=214816 | candidates=leda_vrot_proxy | CHOSEN=HyperLEDA (ledacat.cgi) | vrot/1.7 proxy | σ=41.8 | t=3.44s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:27:14] [INFO] [36/41] NGC 7329 | PGC=69453 | log(2Vm)=2.539 | candidates=hi_log2vm,leda_vrot_proxy | CHOSEN=HyperLEDA HI (VII/238/hidat) | HI proxy (calibrated_vmax) | σ=123.7 | t=3.30s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:27:15] [INFO] [37/41] NGC 7541 | PGC=70795 | log(2Vm)=2.597 | candidates=hi_log2vm,leda_vdis | CHOSEN=HyperLEDA (ledacat.cgi) | stellar absorption | σ=64.4 | ±34.6 | t=0.99s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:27:17] [INFO] [38/41] NGC 7678 | PGC=71534 | log(2Vm)=2.426 | candidates=hi_log2vm,ho2007,leda_vdis,sdss | CHOSEN=SDSS (astroquery.sdss) | stellar absorption | σ=76.9 | ±3.8 | t=0.91s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:27:20] [INFO] [39/41] NGC 976 | PGC=9776 | log(2Vm)=2.459 | candidates=hi_log2vm,leda_vrot_proxy,mnras482_1427 | CHOSEN=MNRAS 482:1427 (VizieR J/MNRAS/482/1427) | stellar absorption | σ=217.6 | ±18.1 | t=3.15s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:27:24] [INFO] [40/41] SMC | PGC=3085 | candidates=leda_vrot_proxy | CHOSEN=HyperLEDA (ledacat.cgi) | vrot/1.7 proxy | σ=25.5 | t=3.24s[0m[0m
+[0;37m[05:27:31] [INFO] [0;37m[05:27:29] [INFO] [41/41] UGC 9391 | PGC=52091 | log(2Vm)=2.004 | candidates=hi_log2vm,leda_vrot_proxy,sdss | CHOSEN=SDSS (astroquery.sdss) | stellar absorption | σ=74.5 | ±27.4 | t=4.60s[0m[0m
+[0;37m[05:27:31] [INFO] [1;32m[05:27:30] [SUCCESS] Wrote regenerated sigma CSV: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv[0m[0m
+[0;37m[05:27:31] [INFO] [1;32m[05:27:30] [SUCCESS] Wrote regeneration report: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sigma_regeneration_report.json[0m[0m
+[1;32m[05:27:31] [SUCCESS] Step 0 complete in 102.17s[0m
+[1;32m[05:27:31] [SUCCESS] Step 0 (Sigma Catalog) completed successfully.[0m
+[0;37m[05:27:31] [INFO] [0m
+[0;37m[05:27:31] [INFO] ================================================================================[0m
+[0;37m[05:27:31] [INFO]    >>> STEP 1: DATA INGESTION[0m
+[0;37m[05:27:31] [INFO] ================================================================================[0m
+[0;37m[05:27:31] [INFO] [0m
+[0;37m[05:27:31] [INFO] [0m
+[0;37m[05:27:31] [INFO] ================================================================================[0m
+[0;37m[05:27:31] [INFO]    Starting Step 1: Data Ingestion[0m
+[0;37m[05:27:31] [INFO] ================================================================================[0m
+[0;37m[05:27:31] [INFO] [0m
+[0;37m[05:27:31] [INFO] Reconstructing SH0ES Cepheid Catalog...[0m
+[0;37m[05:27:31] [INFO] Catalog Reconstruction Verification:[0m
+[0;37m[05:27:31] [INFO] SH0ES Cepheid Sample (First 3)[0m
+[0;37m[05:27:31] [INFO] +--------+------------+-------------+------------+[0m
+[0;37m[05:27:31] [INFO] | Source | Data (mag) | Period Term | Metal Term |[0m
+[0;37m[05:27:31] [INFO] +--------+------------+-------------+------------+[0m
+[0;37m[05:27:31] [INFO] | M101   | 23.691     | -0.164      | 0.053      |[0m
+[0;37m[05:27:31] [INFO] | M101   | 22.955     | -0.163      | 0.089      |[0m
+[0;37m[05:27:31] [INFO] | M101   | 23.535     | -0.157      | 0.089      |[0m
+[0;37m[05:27:31] [INFO] +--------+------------+-------------+------------+[0m
+[1;32m[05:27:31] [SUCCESS] Saved reconstructed catalog with 3130 Cepheids to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/reconstructed_shoes_cepheids.csv[0m
+[0;37m[05:27:31] [INFO] Calculating R22 Distances (GLS Solution)...[0m
+[0;37m[05:27:32] [INFO] Solving GLS system: 3490 observations, 46 parameters[0m
+[1;32m[05:27:33] [SUCCESS] Saved mu covariance matrix to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/r22_mu_covariance.npy[0m
+[1;32m[05:27:33] [SUCCESS] Saved mu covariance labels to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/r22_mu_covariance_labels.json[0m
+[0;37m[05:27:33] [INFO] Recovered Distance Moduli[0m
+[0;37m[05:27:33] [INFO] +---------+-----------------------+--------+[0m
+[0;37m[05:27:33] [INFO] | Host ID | Distance Modulus (mu) | Error  |[0m
+[0;37m[05:27:33] [INFO] +---------+-----------------------+--------+[0m
+[0;37m[05:27:33] [INFO] | M101    | 29.1595               | 0.0388 |[0m
+[0;37m[05:27:33] [INFO] | M1337   | 32.9156               | 0.0821 |[0m
+[0;37m[05:27:33] [INFO] | N0691   | 32.8222               | 0.0877 |[0m
+[0;37m[05:27:33] [INFO] +---------+-----------------------+--------+[0m
+[1;32m[05:27:33] [SUCCESS] Saved 40 distances to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/r22_distances.csv[0m
+[0;37m[05:27:33] [INFO] Using existing coordinates file.[0m
+[0;37m[05:27:33] [INFO] Checking for Pantheon+ Supernova Catalog...[0m
+[0;37m[05:27:33] [INFO] Pantheon+ dataset already exists locally.[0m
+[0;37m[05:27:33] [INFO] Cross-Matching & Property Enrichment...[0m
+[0;37m[05:27:33] [INFO] Matched 37 SH0ES hosts to Pantheon+ SN catalog.[0m
+[0;37m[05:27:33] [INFO] Loaded 41 velocity dispersions from literature CSV: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv[0m
+[0;37m[05:27:33] [INFO] Found measured σ for 41/41 hosts (TEP-independent).[0m
+[0;37m[05:27:33] [INFO] Processed Host Properties (Top 5)[0m
+[0;37m[05:27:33] [INFO] +----------+---------+---------+--------------+[0m
+[0;37m[05:27:33] [INFO] | Host     | z_HD    | LogMass | Sigma (km/s) |[0m
+[0;37m[05:27:33] [INFO] +----------+---------+---------+--------------+[0m
+[0;37m[05:27:33] [INFO] | LMC      | nan     | -       | 27.4         |[0m
+[0;37m[05:27:33] [INFO] | M 101    | 0.00122 | 10.68   | 23.6         |[0m
+[0;37m[05:27:33] [INFO] | NGC 1337 | nan     | -       | 93.7         |[0m
+[0;37m[05:27:33] [INFO] | M 31     | nan     | -       | 169.8        |[0m
+[0;37m[05:27:33] [INFO] | NGC 0691 | 0.00855 | 10.83   | 107.5        |[0m
+[0;37m[05:27:33] [INFO] +----------+---------+---------+--------------+[0m
+[1;32m[05:27:33] [SUCCESS] Processed 41 hosts. Found Sigma for 41 hosts.[0m
+[1;32m[05:27:33] [SUCCESS] Saved processed host data to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_processed.csv[0m
+[1;32m[05:27:33] [SUCCESS] Step 1 Complete.[0m
+[1;32m[05:27:33] [SUCCESS] Step 1 (Ingestion) completed successfully.[0m
+[0;37m[05:27:33] [INFO] [0m
+[0;37m[05:27:33] [INFO] ================================================================================[0m
+[0;37m[05:27:33] [INFO]    >>> STEP 1b: APERTURE CORRECTION[0m
+[0;37m[05:27:33] [INFO] ================================================================================[0m
+[0;37m[05:27:33] [INFO] [0m
+[0;34m[05:27:33] [PROCESS] Fetching host metadata (RC3) for aperture normalization...[0m
+[0;37m[05:27:33] [INFO] Fetching Galaxy Metadata (RC3)[0m
+[0;37m[05:27:33] [INFO] Loaded 41 hosts for metadata enrichment.[0m
+[0;34m[05:27:33] [PROCESS] Querying Vizier (Catalog VII/155)...[0m
+[1;32m[05:27:34] [SUCCESS] Metadata Retrieval Complete. Found RC3 data for 41/41 hosts.[0m
+[0;37m[05:27:34] [INFO] Sample Galaxy Metadata (RC3)[0m
+[0;37m[05:27:34] [INFO] +----------+----------+----------+------------+[0m
+[0;37m[05:27:34] [INFO] | Host     | log(D25) | R25 ('') | R_eff ('') |[0m
+[0;37m[05:27:34] [INFO] +----------+----------+----------+------------+[0m
+[0;37m[05:27:34] [INFO] | LMC      | 3.81     | 19369.6  | 9684.8     |[0m
+[0;37m[05:27:34] [INFO] | M 101    | 2.46     | 865.2    | 432.6      |[0m
+[0;37m[05:27:34] [INFO] | NGC 1337 | 1.76     | 172.6    | 86.3       |[0m
+[0;37m[05:27:34] [INFO] | M 31     | 3.28     | 5716.4   | 2858.2     |[0m
+[0;37m[05:27:34] [INFO] | NGC 0691 | 1.54     | 104.0    | 52.0       |[0m
+[0;37m[05:27:34] [INFO] +----------+----------+----------+------------+[0m
+[1;32m[05:27:34] [SUCCESS] Saved enriched metadata to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_metadata_enriched.csv[0m
+[0;37m[05:27:34] [INFO] [0m
+[0;37m[05:27:34] [INFO] ================================================================================[0m
+[0;37m[05:27:34] [INFO]    Starting Step 1b: Aperture Correction[0m
+[0;37m[05:27:34] [INFO] ================================================================================[0m
+[0;37m[05:27:34] [INFO] [0m
+[0;37m[05:27:34] [INFO] Initializing Aperture Correction Protocol[0m
+[0;37m[05:27:34] [INFO] Loaded 41 hosts from pipeline processing.[0m
+[0;34m[05:27:34] [PROCESS] Merging enriched metadata (R_eff, R25)...[0m
+[0;37m[05:27:34] [INFO] Correction Parameters (Jorgensen et al. 1995):[0m
+[0;37m[05:27:34] [INFO]   Beta (Slope):       0.04[0m
+[0;37m[05:27:34] [INFO]   Aperture Radius:    1.5 arcsec[0m
+[0;37m[05:27:34] [INFO]   Norm Radius:        R_eff / 8[0m
+[0;34m[05:27:34] [PROCESS] Calculating corrections...[0m
+[0;37m[05:27:34] [INFO] Aperture Correction Samples[0m
+[0;37m[05:27:34] [INFO] +----------+-----------+-----------+------------+--------+[0m
+[0;37m[05:27:34] [INFO] | Host     | R_eff (") | Raw Sigma | Corr Sigma | Delta  |[0m
+[0;37m[05:27:34] [INFO] +----------+-----------+-----------+------------+--------+[0m
+[0;37m[05:27:34] [INFO] | LMC      | 9684.8    | 27.4      | 21.0       | -6.44  |[0m
+[0;37m[05:27:34] [INFO] | M 101    | 432.6     | 23.6      | 20.4       | -3.15  |[0m
+[0;37m[05:27:34] [INFO] | NGC 1337 | 86.3      | 93.7      | 86.6       | -7.11  |[0m
+[0;37m[05:27:34] [INFO] | M 31     | 2858.2    | 169.8     | 136.4      | -33.39 |[0m
+[0;37m[05:27:34] [INFO] | NGC 0691 | 52.0      | 107.5     | 101.4      | -6.12  |[0m
+[0;37m[05:27:34] [INFO] +----------+-----------+-----------+------------+--------+[0m
+[1;32m[05:27:34] [SUCCESS] Applied corrections to 41/41 hosts.[0m
+[0;37m[05:27:34] [INFO] Mean Velocity Dispersion Change: -6.30 km/s[0m
+[1;32m[05:27:34] [SUCCESS] Updated /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_processed.csv with homogenized velocity dispersions.[0m
+[1;32m[05:27:34] [SUCCESS] Step 1b Complete.[0m
+[1;32m[05:27:34] [SUCCESS] Step 1b (Aperture Correction) completed successfully.[0m
+[0;37m[05:27:34] [INFO] [0m
+[0;37m[05:27:34] [INFO] ================================================================================[0m
+[0;37m[05:27:34] [INFO]    >>> STEP 2: STRATIFICATION[0m
+[0;37m[05:27:34] [INFO] ================================================================================[0m
+[0;37m[05:27:34] [INFO] [0m
+[0;37m[05:27:34] [INFO] [0m
+[0;37m[05:27:34] [INFO] ================================================================================[0m
+[0;37m[05:27:34] [INFO]    Starting Step 2: Stratification[0m
+[0;37m[05:27:34] [INFO] ================================================================================[0m
+[0;37m[05:27:34] [INFO] [0m
+[0;37m[05:27:34] [INFO] Loading and Merging Datasets...[0m
+[0;37m[05:27:34] [INFO] Merged 39 galaxies (Distances + Properties).[0m
+[0;37m[05:27:34] [INFO] Calculating Individual H0 Values...[0m
+[1;33m[05:27:34] [WARNING] Excluded 7 low-z hosts (z < 0.0035) to minimize peculiar velocity errors.[0m
+[1;32m[05:27:34] [SUCCESS] Final Sample Size: 29 SN Ia Hosts[0m
+[0;37m[05:27:34] [INFO] Sample H0 Calculations[0m
+[0;37m[05:27:34] [INFO] +----------+--------+----------+---------+---------------+[0m
+[0;37m[05:27:34] [INFO] | Host     | z_HD   | mu (mag) | D (Mpc) | H0 (km/s/Mpc) |[0m
+[0;37m[05:27:34] [INFO] +----------+--------+----------+---------+---------------+[0m
+[0;37m[05:27:34] [INFO] | NGC 0691 | 0.0086 | 32.822   | 36.7    | 69.88         |[0m
+[0;37m[05:27:34] [INFO] | NGC 1015 | 0.0081 | 32.618   | 33.4    | 73.19         |[0m
+[0;37m[05:27:34] [INFO] | NGC 105  | 0.0168 | 34.493   | 79.2    | 63.68         |[0m
+[0;37m[05:27:34] [INFO] | NGC 1309 | 0.0072 | 32.509   | 31.8    | 67.88         |[0m
+[0;37m[05:27:34] [INFO] | NGC 1365 | 0.0048 | 31.325   | 18.4    | 78.65         |[0m
+[0;37m[05:27:34] [INFO] +----------+--------+----------+---------+---------------+[0m
+[0;37m[05:27:34] [INFO] Estimating Host Environmental Densities & Shear Suppression...[0m
+[0;37m[05:27:34] [INFO] Calculated densities for 29 hosts.[0m
+[0;37m[05:27:34] [INFO] Mean Host Density: 0.1132 M_sun/pc^3[0m
+[0;37m[05:27:34] [INFO] Density Range: [0.0001, 1.7591][0m
+[0;37m[05:27:34] [INFO] Mean Shear Suppression (S): 0.946[0m
+[0;37m[05:27:34] [INFO] Suppression Range: [0.075, 1.000][0m
+[1;33m[05:27:34] [WARNING] Hosts with appreciable shear suppression (S < 0.8, N=2):[0m
+[1;33m[05:27:34] [WARNING]   - NGC 2442: rho=1.759, S=0.075[0m
+[1;33m[05:27:34] [WARNING]   - NGC 3021: rho=0.256, S=0.793[0m
+[0;37m[05:27:34] [INFO] Annotating Large-Scale Environment (Tully 2015 groups)...[0m
+[0;37m[05:27:34] [INFO] Matched 26/29 hosts to Tully 2015 group catalog.[0m
+[0;37m[05:27:34] [INFO] Stratification Analysis (Low vs High Potential)[0m
+[0;37m[05:27:34] [INFO] Stratified H0 Results[0m
+[0;37m[05:27:34] [INFO] +----------------+-------------+----+---------+---------+[0m
+[0;37m[05:27:34] [INFO] | Bin            | Sigma Range | N  | Mean H0 | Std Err |[0m
+[0;37m[05:27:34] [INFO] +----------------+-------------+----+---------+---------+[0m
+[0;37m[05:27:34] [INFO] | Low Potential  | <= 89.5     | 15 | 67.82   | 0.90    |[0m
+[0;37m[05:27:34] [INFO] | High Potential | > 89.5      | 14 | 72.45   | 1.04    |[0m
+[0;37m[05:27:34] [INFO] | Difference     | -           | -  | +4.63   | -       |[0m
+[0;37m[05:27:34] [INFO] +----------------+-------------+----+---------+---------+[0m
+[0;37m[05:27:34] [INFO] Median Velocity Dispersion: 89.54 km/s[0m
+[1;35m[05:27:34] [TEST] Correlation (Sigma vs H0): r = 0.462[0m
+[1;33m[05:27:34] [WARNING] Significant Environmental Bias Detected (+4.63 km/s/Mpc)[0m
+[1;32m[05:27:34] [SUCCESS] Saved stratified data to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/stratified_h0.csv[0m
+[1;32m[05:27:34] [SUCCESS] Saved analysis metrics to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/stratification_results.json[0m
+[0;34m[05:27:34] [PROCESS] Generating Diagnostic Plots...[0m
+[1;32m[05:27:35] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/h0_vs_sigma.png[0m
+[1;32m[05:27:35] [SUCCESS] Copied plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/h0_vs_sigma.png[0m
+[1;32m[05:27:35] [SUCCESS] Step 2 Complete.[0m
+[1;32m[05:27:35] [SUCCESS] Step 2 (Stratification) completed successfully.[0m
+[0;37m[05:27:35] [INFO] [0m
+[0;37m[05:27:35] [INFO] ================================================================================[0m
+[0;37m[05:27:35] [INFO]    >>> STEP 3: TEP CORRECTION[0m
+[0;37m[05:27:35] [INFO] ================================================================================[0m
+[0;37m[05:27:35] [INFO] [0m
+[0;37m[05:27:35] [INFO] [0m
+[0;37m[05:27:35] [INFO] ================================================================================[0m
+[0;37m[05:27:35] [INFO]    Starting Step 3: TEP Correction[0m
+[0;37m[05:27:35] [INFO] ================================================================================[0m
+[0;37m[05:27:35] [INFO] [0m
+[0;37m[05:27:35] [INFO] Loading Data...[0m
+[0;37m[05:27:35] [INFO] Loaded 29 hosts for correction.[0m
+[0;37m[05:27:35] [INFO] Calculating Effective Calibrator Sigma...[0m
+[0;37m[05:27:35] [INFO] Using SH0ES-motivated weights (based on P-L contribution).[0m
+[0;37m[05:27:35] [INFO] Geometric Anchor Sample[0m
+[0;37m[05:27:35] [INFO] +--------+--------------+--------+----------------------------+[0m
+[0;37m[05:27:35] [INFO] | Anchor | Sigma (km/s) | Weight | Description                |[0m
+[0;37m[05:27:35] [INFO] +--------+--------------+--------+----------------------------+[0m
+[0;37m[05:27:35] [INFO] | MW     | 30.0         | 0.20   | Milky Way Disk (Bovy+2012) |[0m
+[0;37m[05:27:35] [INFO] | LMC    | 24.0         | 0.25   | LMC Disk (vdMarel+2002)    |[0m
+[0;37m[05:27:35] [INFO] | N4258  | 115.0        | 0.55   | NGC 4258 Disk (K&H2013)    |[0m
+[0;37m[05:27:35] [INFO] +--------+--------------+--------+----------------------------+[0m
+[1;32m[05:27:35] [SUCCESS] Effective Reference Sigma (σ_ref): 75.25 km/s[0m
+[0;37m[05:27:35] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:35] [INFO] Optimization converged: True[0m
+[1;32m[05:27:35] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.050e+06 mag[0m
+[0;37m[05:27:35] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.932e+05[0m
+[0;37m[05:27:35] [INFO] Applying Conformal Correction...[0m
+[0;37m[05:27:35] [INFO] Sample Corrections (Suppression-Aware)[0m
+[0;37m[05:27:35] [INFO] +----------+-------+--------+----------+------------+----------+[0m
+[0;37m[05:27:35] [INFO] | Host     | Sigma | S(rho) | H0 (Raw) | Corr (mag) | H0 (TEP) |[0m
+[0;37m[05:27:35] [INFO] +----------+-------+--------+----------+------------+----------+[0m
+[0;37m[05:27:35] [INFO] | NGC 5917 | 53.1  | 0.998  | 72.56    | -0.0331    | 73.68    |[0m
+[0;37m[05:27:35] [INFO] | NGC 2608 | 83.0  | 0.971  | 76.42    | +0.0140    | 75.93    |[0m
+[0;37m[05:27:35] [INFO] | NGC 3370 | 89.5  | 0.995  | 65.72    | +0.0274    | 64.90    |[0m
+[0;37m[05:27:35] [INFO] | NGC 4639 | 91.4  | 0.995  | 47.25    | +0.0312    | 46.58    |[0m
+[0;37m[05:27:35] [INFO] | NGC 976  | 212.4 | 0.824  | 76.91    | +0.3793    | 64.58    |[0m
+[0;37m[05:27:35] [INFO] +----------+-------+--------+----------+------------+----------+[0m
+[0;37m[05:27:35] [INFO] ------------------------------------------------------------[0m
+[1;32m[05:27:35] [SUCCESS] UNIFIED H0 (Statistical): 68.17 +/- 1.30 km/s/Mpc[0m
+[0;37m[05:27:35] [INFO] Note: This error (SEM) assumes κ_Cep is fixed/known perfectly.[0m
+[0;37m[05:27:35] [INFO] ------------------------------------------------------------[0m
+[0;34m[05:27:35] [PROCESS] Generating Comparison Plots...[0m
+[1;32m[05:27:35] [SUCCESS] Saved comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/tep_correction_comparison.png[0m
+[1;32m[05:27:35] [SUCCESS] Copied comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/tep_correction_comparison.png[0m
+[0;37m[05:27:35] [INFO] Joint Bootstrap (kappa refit + H0): N=1000...[0m
+[0;37m[05:27:36] [INFO] Joint Bootstrap Results:[0m
+[0;37m[05:27:36] [INFO] Bootstrap (kappa refit per sample)[0m
+[0;37m[05:27:36] [INFO] +--------------+-----------+-------------------+------------------------+[0m
+[0;37m[05:27:36] [INFO] | Parameter    | Mean      | Std (Uncertainty) | 95% CI                 |[0m
+[0;37m[05:27:36] [INFO] +--------------+-----------+-------------------+------------------------+[0m
+[0;37m[05:27:36] [INFO] | H0 (Unified) | 68.14     | 1.49              | [65.07, 70.93]         |[0m
+[0;37m[05:27:36] [INFO] | kappa_Cep    | 1.158e+06 | 4.273e+05 (36.9%) | [6.320e+05, 2.408e+06] |[0m
+[0;37m[05:27:36] [INFO] +--------------+-----------+-------------------+------------------------+[0m
+[0;37m[05:27:36] [INFO] Converged: 1000/1000, residual |slope| = 1.78e-06[0m
+[0;37m[05:27:36] [INFO] Bootstrap H0 std combines host scatter AND kappa uncertainty.[0m
+[0;34m[05:27:36] [PROCESS] Sensitivity Analysis (Sigma Ref Scan)...[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.072e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.014e+06[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.070e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.013e+06[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.068e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.011e+06[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.066e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.009e+06[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.064e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.007e+06[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.061e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.004e+06[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.058e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.001e+06[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.055e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.983e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.052e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.952e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.048e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.918e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.044e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.882e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.040e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.844e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.036e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.804e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.032e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.763e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.027e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.720e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.022e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.675e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.017e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.628e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.012e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.580e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.007e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.531e+05[0m
+[0;37m[05:27:36] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
+[0;37m[05:27:36] [INFO] Optimization converged: True[0m
+[1;32m[05:27:36] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.002e+06 mag[0m
+[0;37m[05:27:36] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.480e+05[0m
+[1;32m[05:27:37] [SUCCESS] Saved sensitivity plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/sensitivity_h0_vs_sigmaref.png[0m
+[1;32m[05:27:37] [SUCCESS] Copied sensitivity plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/sensitivity_h0_vs_sigmaref.png[0m
+[1;32m[05:27:37] [SUCCESS] Saved sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sensitivity_h0_vs_sigmaref.csv[0m
+[0;37m[05:27:37] [INFO] Final Tension Analysis[0m
+[0;37m[05:27:37] [INFO] Planck 2018 Value: 67.4 +/- 0.5[0m
+[0;37m[05:27:37] [INFO] ------------------------------------------------------------[0m
+[0;37m[05:27:37] [INFO] TEP Unified Value: 68.17[0m
+[0;37m[05:27:37] [INFO]   +/- 1.30 (Statistical SEM, kappa fixed)[0m
+[0;37m[05:27:37] [INFO]   +/- 1.49 (Joint Bootstrap: host scatter + kappa)[0m
+[0;37m[05:27:37] [INFO]   kappa_Cep = (1.16e+06) +/- (4.27e+05)  [37%][0m
+[0;37m[05:27:37] [INFO] ------------------------------------------------------------[0m
+[0;37m[05:27:37] [INFO] Tension (Statistical):     0.55 sigma[0m
+[0;37m[05:27:37] [INFO] Tension (Joint Bootstrap): 0.49 sigma[0m
+[1;32m[05:27:37] [SUCCESS] CONCLUSION (Cepheid channel, unscreened Hubble-flow regime): H0 consistent with Planck CMB after κ_Cep correction.[0m
+[0;37m[05:27:37] [INFO] Note: Universal-TEP validation requires CROSS-CHANNEL consistency (κ_Cep vs κ_TRGB vs κ_SN vs κ_pulsar). Single-channel significance of κ_Cep from zero is NOT the TEP test (Jakarta §7; Istanbul §1.3).[0m
+[1;32m[05:27:37] [SUCCESS] Saved results JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/tep_correction_results.json[0m
+[1;32m[05:27:37] [SUCCESS] Saved corrected data to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/tep_corrected_h0.csv[0m
+[1;32m[05:27:37] [SUCCESS] Step 3 (Optimization) completed successfully.[0m
+[0;37m[05:27:37] [INFO] [0m
+[0;37m[05:27:37] [INFO] ================================================================================[0m
+[0;37m[05:27:37] [INFO]    >>> STEP 3B: SHEAR SUPPRESSION VISUALIZATION[0m
+[0;37m[05:27:37] [INFO] ================================================================================[0m
+[0;37m[05:27:37] [INFO] [0m
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_2b_shear_suppression_viz.py:256: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  fig.tight_layout()
+Saved figure to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/figure_08_shear_suppression.png
+Copied figure to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/figure_08_shear_suppression.png
+[1;32m[05:27:38] [SUCCESS] Step 3b (Shear Suppression Viz) completed successfully.[0m
+[0;37m[05:27:38] [INFO] [0m
+[0;37m[05:27:38] [INFO] ================================================================================[0m
+[0;37m[05:27:38] [INFO]    >>> STEP 4: ROBUSTNESS CHECKS[0m
+[0;37m[05:27:38] [INFO] ================================================================================[0m
+[0;37m[05:27:38] [INFO] [0m
+[0;34m[05:27:38] [PROCESS] Running Jackknife and Bivariate Analysis...[0m
+[0;37m[05:27:38] [INFO] [0m
+[0;37m[05:27:38] [INFO] ================================================================================[0m
+[0;37m[05:27:38] [INFO]    Starting Step 4: Robustness Checks[0m
+[0;37m[05:27:38] [INFO] ================================================================================[0m
+[0;37m[05:27:38] [INFO] [0m
+[0;37m[05:27:38] [INFO] Initiating Jackknife Analysis...[0m
+[0;37m[05:27:38] [INFO] Loaded 29 hosts for Jackknife stability test.[0m
+[0;37m[05:27:44] [INFO] Correlation Tests (H0 vs Sigma)[0m
+[0;37m[05:27:44] [INFO] +------------------+-----------+---------+----------------------------+[0m
+[0;37m[05:27:44] [INFO] | Test             | Statistic | p-value | Interpretation             |[0m
+[0;37m[05:27:44] [INFO] +------------------+-----------+---------+----------------------------+[0m
+[0;37m[05:27:44] [INFO] | Pearson r        | 0.4622    | 0.0116  | Parametric                 |[0m
+[0;37m[05:27:44] [INFO] | Spearman ρ       | 0.5113    | 0.0046  | Non-parametric (rank)      |[0m
+[0;37m[05:27:44] [INFO] | Bootstrap p      | -         | 0.0127  | Permutation (N=10000)      |[0m
+[0;37m[05:27:44] [INFO] | GLS slope        | 11.172    | 0.0000  | Covariance-aware Wald test |[0m
+[0;37m[05:27:44] [INFO] | Pearson p (cov)  | 0.4622    | 0.0266  | Parametric MVN null        |[0m
+[0;37m[05:27:44] [INFO] | Spearman p (cov) | 0.5113    | 0.0080  | Parametric MVN null        |[0m
+[0;37m[05:27:44] [INFO] +------------------+-----------+---------+----------------------------+[0m
+[1;32m[05:27:44] [SUCCESS] Saved covariance-aware results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/covariance_robustness.json[0m
+[1;32m[05:27:44] [SUCCESS] Bootstrap p = 0.0127 < 0.05: Correlation is SIGNIFICANT.[0m
+[0;37m[05:27:44] [INFO] Jackknife Range: r in [0.4291, 0.5416][0m
+[1;32m[05:27:44] [SUCCESS] CONCLUSION: Correlation is ROBUST. No single host drives the trend.[0m
+[0;37m[05:27:44] [INFO] Most Influential Hosts (Supports Trend)[0m
+[0;37m[05:27:44] [INFO] +----------+-------------+---------+[0m
+[0;37m[05:27:44] [INFO] | Host     | r (without) | Delta r |[0m
+[0;37m[05:27:44] [INFO] +----------+-------------+---------+[0m
+[0;37m[05:27:44] [INFO] | NGC 3147 | 0.4291      | -0.0331 |[0m
+[0;37m[05:27:44] [INFO] | NGC 5728 | 0.4301      | -0.0320 |[0m
+[0;37m[05:27:44] [INFO] | NGC 7250 | 0.4327      | -0.0295 |[0m
+[0;37m[05:27:44] [INFO] +----------+-------------+---------+[0m
+[0;34m[05:27:44] [PROCESS] Generating Jackknife influence plot...[0m
+[1;32m[05:27:44] [SUCCESS] Saved Jackknife plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/jackknife_influence.png[0m
+[1;32m[05:27:44] [SUCCESS] Copied Jackknife plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/jackknife_influence.png[0m
+[0;37m[05:27:44] [INFO] Initiating Out-of-Sample Validation (kappa_cep)[0m
+[0;37m[05:27:44] [INFO] Out-of-Sample Validation Summary[0m
+[0;37m[05:27:44] [INFO] +------------+------------------------+--------------------------+[0m
+[0;37m[05:27:44] [INFO] | Validation | Metric                 | Value                    |[0m
+[0;37m[05:27:44] [INFO] +------------+------------------------+--------------------------+[0m
+[0;37m[05:27:44] [INFO] | Baseline   | Slope dH0/dsigma       | 0.0851                   |[0m
+[0;37m[05:27:44] [INFO] | Baseline   | Pearson r (p)          | 0.462 (0.0116)           |[0m
+[0;37m[05:27:44] [INFO] | Baseline   | Spearman rho (p)       | 0.511 (0.0046)           |[0m
+[0;37m[05:27:44] [INFO] | Train/Test | kappa_cep mean ± std   | 1062225.220 ± 259070.157 |[0m
+[0;37m[05:27:44] [INFO] | Train/Test | test slope median      | 0.0095                   |[0m
+[0;37m[05:27:44] [INFO] | Train/Test | test |r| median        | 0.257                    |[0m
+[0;37m[05:27:44] [INFO] | Train/Test | test H0 mean (median)  | 67.89                    |[0m
+[0;37m[05:27:44] [INFO] | LOOCV      | kappa_cep mean ± std   | 1053185.614 ± 61990.721  |[0m
+[0;37m[05:27:44] [INFO] | LOOCV      | pred slope dH0/dsigma  | -0.0084                  |[0m
+[0;37m[05:27:44] [INFO] | LOOCV      | Pearson r (p)          | -0.050 (0.7976)          |[0m
+[0;37m[05:27:44] [INFO] | LOOCV      | Spearman rho (p)       | 0.038 (0.8431)           |[0m
+[0;37m[05:27:44] [INFO] | LOOCV      | H0 mean ± SEM          | 68.04 ± 1.32             |[0m
+[0;37m[05:27:44] [INFO] | LOOCV      | Planck tension (sigma) | 0.46                     |[0m
+[0;37m[05:27:44] [INFO] +------------+------------------------+--------------------------+[0m
+[1;32m[05:27:44] [SUCCESS] Saved out-of-sample validation to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/out_of_sample_validation.json[0m
+[0;37m[05:27:44] [INFO] Initiating Bivariate Analysis...[0m
+[0;37m[05:27:44] [INFO] Loaded 29 hosts for Bivariate Analysis.[0m
+[0;37m[05:27:44] [INFO] Bivariate Analysis Results[0m
+[0;37m[05:27:44] [INFO] +----------------------+------------------+-------------+---------+[0m
+[0;37m[05:27:44] [INFO] | Relation             | Correlation Type | Coefficient | p-value |[0m
+[0;37m[05:27:44] [INFO] +----------------------+------------------+-------------+---------+[0m
+[0;37m[05:27:44] [INFO] | H0 vs Sigma          | Pearson (Raw)    | 0.462       | 0.0116  |[0m
+[0;37m[05:27:44] [INFO] | H0 vs Metallicity    | Pearson (Raw)    | 0.304       | 0.1087  |[0m
+[0;37m[05:27:44] [INFO] | Sigma vs Metallicity | Pearson (Raw)    | 0.191       | 0.3217  |[0m
+[0;37m[05:27:44] [INFO] | H0 vs Sigma | Z      | Partial          | 0.432       | 0.0216  |[0m
+[0;37m[05:27:44] [INFO] | H0 vs Z | Sigma      | Partial          | 0.248       | 0.2030  |[0m
+[0;37m[05:27:44] [INFO] +----------------------+------------------+-------------+---------+[0m
+[1;32m[05:27:44] [SUCCESS] Saved stats to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/bivariate_stats.txt[0m
+[1;32m[05:27:44] [SUCCESS] Saved bivariate plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/bivariate_h0_sigma_metallicity.png[0m
+[1;32m[05:27:44] [SUCCESS] Copied bivariate plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/bivariate_h0_sigma_metallicity.png[0m
+[0;37m[05:27:44] [INFO] Redshift Cut Sensitivity Scan...[0m
+[1;32m[05:27:46] [SUCCESS] Saved redshift cut sensitivity results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/redshift_cut_sensitivity.txt[0m
+[0;37m[05:27:46] [INFO] Redshift Cut Sensitivity (H0 vs Sigma)[0m
+[0;37m[05:27:46] [INFO] +--------+----+-----------+------------+--------+[0m
+[0;37m[05:27:46] [INFO] | z_cut  | N  | Pearson r | Spearman ρ | Perm p |[0m
+[0;37m[05:27:46] [INFO] +--------+----+-----------+------------+--------+[0m
+[0;37m[05:27:46] [INFO] | 0.0035 | 29 | 0.462     | 0.511      | 0.0108 |[0m
+[0;37m[05:27:46] [INFO] | 0.0050 | 23 | 0.439     | 0.365      | 0.0320 |[0m
+[0;37m[05:27:46] [INFO] | 0.0070 | 16 | 0.563     | 0.526      | 0.0246 |[0m
+[0;37m[05:27:46] [INFO] | 0.0100 | 5  | 0.920     | 0.800      | 0.0702 |[0m
+[0;37m[05:27:46] [INFO] | 0.0150 | 1  | nan       | nan        | nan    |[0m
+[0;37m[05:27:46] [INFO] | 0.0200 | 0  | nan       | nan        | nan    |[0m
+[0;37m[05:27:46] [INFO] +--------+----+-----------+------------+--------+[0m
+[0;37m[05:27:46] [INFO] Flow/Environment Confound Robustness...[0m
+[1;32m[05:27:48] [SUCCESS] Saved flow/environment robustness results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/flow_environment_robustness.txt[0m
+[0;37m[05:27:48] [INFO] Flow + Environment Controls[0m
+[0;37m[05:27:48] [INFO] +-----------------------------+-----------+---------+----+[0m
+[0;37m[05:27:48] [INFO] | Test                        | Statistic | p-value | N  |[0m
+[0;37m[05:27:48] [INFO] +-----------------------------+-----------+---------+----+[0m
+[0;37m[05:27:48] [INFO] | Baseline r(H0,Sigma)        | 0.462     | 0.0108  | 29 |[0m
+[0;37m[05:27:48] [INFO] | Partial r(H0,Sigma|z)       | 0.418     | 0.0268  | 29 |[0m
+[0;37m[05:27:48] [INFO] | Partial r(H0,Sigma|z,Nmb)   | 0.359     | 0.0657  | 29 |[0m
+[0;37m[05:27:48] [INFO] | Partial r(H0,Sigma|z,logpK) | 0.550     | 0.0054  | 26 |[0m
+[0;37m[05:27:48] [INFO] +-----------------------------+-----------+---------+----+[0m
+[0;37m[05:27:48] [INFO] v_pec Monte Carlo Robustness[0m
+[0;37m[05:27:48] [INFO] +-----------+----------------+[0m
+[0;37m[05:27:48] [INFO] | MC Metric | Value          |[0m
+[0;37m[05:27:48] [INFO] +-----------+----------------+[0m
+[0;37m[05:27:48] [INFO] | N_hosts   | 29             |[0m
+[0;37m[05:27:48] [INFO] | r_mean    | 0.309          |[0m
+[0;37m[05:27:48] [INFO] | r_std     | 0.114          |[0m
+[0;37m[05:27:48] [INFO] | r_95CI    | [0.076, 0.521] |[0m
+[0;37m[05:27:48] [INFO] | P(r<=0)   | 0.0048         |[0m
+[0;37m[05:27:48] [INFO] +-----------+----------------+[0m
+[0;37m[05:27:48] [INFO] Joint v_pec + sigma Monte Carlo Robustness[0m
+[0;37m[05:27:48] [INFO] +-----------+----------------+[0m
+[0;37m[05:27:48] [INFO] | MC Metric | Value          |[0m
+[0;37m[05:27:48] [INFO] +-----------+----------------+[0m
+[0;37m[05:27:48] [INFO] | N_hosts   | 29             |[0m
+[0;37m[05:27:48] [INFO] | r_mean    | 0.305          |[0m
+[0;37m[05:27:48] [INFO] | r_std     | 0.116          |[0m
+[0;37m[05:27:48] [INFO] | r_95CI    | [0.067, 0.520] |[0m
+[0;37m[05:27:48] [INFO] | P(r<=0)   | 0.0060         |[0m
+[0;37m[05:27:48] [INFO] +-----------+----------------+[0m
+[1;32m[05:27:48] [SUCCESS] Step 4 Complete.[0m
+[0;34m[05:27:48] [PROCESS] Running Aperture Sensitivity Analysis...[0m
+[0;37m[05:27:48] [INFO] [0m
+[0;37m[05:27:48] [INFO] ================================================================================[0m
+[0;37m[05:27:48] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis[0m
+[0;37m[05:27:48] [INFO] ================================================================================[0m
+[0;37m[05:27:48] [INFO] [0m
+[0;37m[05:27:48] [INFO] Using regenerated sigma catalog for provenance: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv[0m
+[1;32m[05:27:48] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sigma_provenance_table.csv[0m
+[0;37m[05:27:48] [INFO] Analyzing 29 hosts with both Raw and Corrected data.[0m
+[1;32m[05:27:48] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_grid.csv[0m
+[1;32m[05:27:48] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_summary.json[0m
+[0;37m[05:27:48] [INFO] Sensitivity Results[0m
+[0;37m[05:27:48] [INFO] +-----------------+-------------------------+-----------------------+[0m
+[0;37m[05:27:48] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |[0m
+[0;37m[05:27:48] [INFO] +-----------------+-------------------------+-----------------------+[0m
+[0;37m[05:27:48] [INFO] | Correlation (r) | 0.4659                  | 0.4622                |[0m
+[0;37m[05:27:48] [INFO] | P-value         | 1.0854e-02              | 1.1600e-02            |[0m
+[0;37m[05:27:48] [INFO] | Significance    | Weak                    | Significant (>99%)    |[0m
+[0;37m[05:27:48] [INFO] +-----------------+-------------------------+-----------------------+[0m
+[1;32m[05:27:48] [SUCCESS] CONCLUSION: The signal is ROBUST. It exists independently of aperture corrections.[0m
+[0;34m[05:27:48] [PROCESS] Generating sensitivity plot...[0m
+[1;32m[05:27:48] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/aperture_sensitivity.png[0m
+[1;32m[05:27:48] [SUCCESS] Step 4b Complete.[0m
+[1;32m[05:27:48] [SUCCESS] Step 4 (Robustness) completed successfully.[0m
+[0;37m[05:27:48] [INFO] [0m
+[0;37m[05:27:48] [INFO] ================================================================================[0m
+[0;37m[05:27:48] [INFO]    >>> STEP 5: M31 ANALYSIS[0m
+[0;37m[05:27:48] [INFO] ================================================================================[0m
+[0;37m[05:27:48] [INFO] [0m
+[0;37m[05:27:48] [INFO] [0m
+[0;37m[05:27:48] [INFO] ================================================================================[0m
+[0;37m[05:27:48] [INFO]    Starting Step 5: M31 Analysis[0m
+[0;37m[05:27:48] [INFO] ================================================================================[0m
+[0;37m[05:27:48] [INFO] [0m
+[0;37m[05:27:48] [INFO] Initiating M31 Differential Analysis[0m
+[0;34m[05:27:48] [PROCESS] Fetching M31 Cepheid data (Kodric et al. 2018)...[0m
+[0;37m[05:27:49] [INFO] Retrieved main table.[0m
+[1;32m[05:27:49] [SUCCESS] Retrieved 5356 Cepheids from Vizier.[0m
+[0;37m[05:27:49] [INFO] Calculating Galactocentric Properties...[0m
+[0;37m[05:27:49] [INFO] Radial Range: 0.6 - 93.5 kpc[0m
+[0;37m[05:27:49] [INFO] M31 Subsamples[0m
+[0;37m[05:27:49] [INFO] +--------+--------------+---------------------------+--------------+[0m
+[0;37m[05:27:49] [INFO] | Region | Radius (kpc) | Mean Density (M_sun/pc^3) | N (Cepheids) |[0m
+[0;37m[05:27:49] [INFO] +--------+--------------+---------------------------+--------------+[0m
+[0;37m[05:27:49] [INFO] | Inner  | < 5.0        | 0.3092                    | 153          |[0m
+[0;37m[05:27:49] [INFO] | Outer  | > 15.0       | 0.0060                    | 919          |[0m
+[0;37m[05:27:49] [INFO] +--------+--------------+---------------------------+--------------+[0m
+[0;37m[05:27:49] [INFO] Screening Threshold Summary (rho_trans=0.5 M_sun/pc^3)[0m
+[0;37m[05:27:49] [INFO] +------------+--------------+---------------------------+-----+--------------+--------------+[0m
+[0;37m[05:27:49] [INFO] | Region     | Cut          | Mean Density (M_sun/pc^3) | N   | N(ρ>ρ_trans) | f(ρ>ρ_trans) |[0m
+[0;37m[05:27:49] [INFO] +------------+--------------+---------------------------+-----+--------------+--------------+[0m
+[0;37m[05:27:49] [INFO] | Inner      | R < 5.0 kpc  | 0.3092                    | 153 | 14           | 0.092        |[0m
+[0;37m[05:27:49] [INFO] | Inner core | R < 1.0 kpc  | 2.1591                    | 5   | 5            | 1.000        |[0m
+[0;37m[05:27:49] [INFO] | Outer      | R > 15.0 kpc | 0.0060                    | 919 | 0            | 0.000        |[0m
+[0;37m[05:27:49] [INFO] +------------+--------------+---------------------------+-----+--------------+--------------+[0m
+[0;37m[05:27:49] [INFO] Fitting Period-Luminosity Relations...[0m
+[0;37m[05:27:49] [INFO] P-L Fit Results (W = a + b*logP)[0m
+[0;37m[05:27:49] [INFO] +--------+---------------+--------+---------------+[0m
+[0;37m[05:27:49] [INFO] | Region | Intercept (a) | Error  | Slope (Fixed) |[0m
+[0;37m[05:27:49] [INFO] +--------+---------------+--------+---------------+[0m
+[0;37m[05:27:49] [INFO] | Inner  | 24.4306       | 0.1256 | -3.3          |[0m
+[0;37m[05:27:49] [INFO] | Outer  | 24.0746       | 0.0516 | -3.3          |[0m
+[0;37m[05:27:49] [INFO] | Offset | +0.3560       | 0.1357 | -             |[0m
+[0;37m[05:27:49] [INFO] +--------+---------------+--------+---------------+[0m
+[0;37m[05:27:49] [INFO] Detected Offset (Inner - Outer): +0.3560 mag (2.6 sigma)[0m
+[1;32m[05:27:49] [SUCCESS] CONCLUSION: Significant environmental P-L offset detected.[0m
+[1;32m[05:27:49] [SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_results.csv[0m
+[0;37m[05:27:49] [INFO] Running M31 robustness suite (matched subsamples and sensitivity tests)...[0m
+[0;34m[05:27:49] [PROCESS] Fetching PHAT footprint for spatial restriction...[0m
+[0;37m[05:27:49] [INFO] Identified 1683 Cepheids within PHAT footprint.[0m
+[0;37m[05:27:49] [INFO] PHAT-restricted Offset: +0.6304 +/- 0.1948 mag[0m
+[0;37m[05:28:44] [INFO] Inferred Wesenheit form: anchor='i', R0=2.88 (MAD score: i=0.005, r=0.005)[0m
+[1;32m[05:28:44] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_robustness_summary.csv[0m
+[1;32m[05:28:44] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_robustness_summary.json[0m
+[0;37m[05:28:44] [INFO] M31 Differential Robustness Summary[0m
+[0;37m[05:28:44] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+[0m
+[0;37m[05:28:44] [INFO] | Test               | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |[0m
+[0;37m[05:28:44] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+[0m
+[0;37m[05:28:44] [INFO] | Baseline           | 153  | 919   | -         | +0.3560     | 0.1357  | -                  |[0m
+[0;37m[05:28:44] [INFO] | Matched logP       | 153  | 919   | 152.0     | +0.2529     | 0.1615  | [+0.1029, +0.4130] |[0m
+[0;37m[05:28:44] [INFO] | Matched logP+color | 60   | 444   | 55.0      | -0.0170     | 0.1275  | [-0.1420, +0.1122] |[0m
+[0;37m[05:28:44] [INFO] | Matched logP+eW    | 153  | 919   | 150.0     | -0.1030     | 0.1289  | [-0.2228, +0.0267] |[0m
+[0;37m[05:28:44] [INFO] | MV match (Type)    | 153  | 919   | 29        | -0.1758     | 0.1043  | [-0.2809, -0.0745] |[0m
+[0;37m[05:28:44] [INFO] | MV match (Strict)  | 20   | 205   | 10        | -0.1869     | 0.0630  | [-0.2475, -0.1235] |[0m
+[0;37m[05:28:44] [INFO] | OLS inner (ctrl)   | 153  | 919   | -         | +0.1587     | 0.1156  | -                  |[0m
+[0;37m[05:28:44] [INFO] | Metallicity γ req  | 153  | 919   | -         | +0.741      | -       | -                  |[0m
+[0;37m[05:28:44] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+[0m
+[0;34m[05:28:44] [PROCESS] Generating Differential P-L Plot...[0m
+[1;32m[05:28:44] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/m31_differential_pl.png[0m
+[0;34m[05:28:44] [PROCESS] Generating M31 robustness plot...[0m
+[1;32m[05:28:50] [SUCCESS] Saved robustness plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/m31_differential_robustness.png[0m
+[1;32m[05:28:50] [SUCCESS] Copied robustness plot to public figures directory.[0m
+[1;32m[05:28:50] [SUCCESS] Copied plot to public figures directory.[0m
+[1;32m[05:28:50] [SUCCESS] Step 5 Complete.[0m
+[1;32m[05:28:50] [SUCCESS] Step 5 (M31 Differential Test) completed successfully.[0m
+[0;37m[05:28:50] [INFO] [0m
+[0;37m[05:28:50] [INFO] ================================================================================[0m
+[0;37m[05:28:50] [INFO]    >>> STEP 6: MULTIVARIATE ANALYSIS[0m
+[0;37m[05:28:50] [INFO] ================================================================================[0m
+[0;37m[05:28:50] [INFO] [0m
+[0;37m[05:28:50] [INFO] [0m
+[0;37m[05:28:50] [INFO] ================================================================================[0m
+[0;37m[05:28:50] [INFO]    Starting Step 6: Multivariate Analysis[0m
+[0;37m[05:28:50] [INFO] ================================================================================[0m
+[0;37m[05:28:50] [INFO] [0m
+[0;37m[05:28:50] [INFO] Loading and Merging Data...[0m
+[0;37m[05:28:50] [INFO] Merged Data: N=29 hosts available for analysis.[0m
+[0;37m[05:28:50] [INFO] Running Multivariate Regression...[0m
+[1;32m[05:28:51] [SUCCESS] Saved regression summaries to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/multivariate_analysis_summary.txt[0m
+[1;32m[05:28:51] [SUCCESS] Saved structured results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/multivariate_analysis_results.json[0m
+[1;32m[05:28:51] [SUCCESS] Sigma remains significant in primary astrophysical HC3 model (p=0.0067).[0m
+[0;37m[05:28:51] [INFO] Flow/environment model is a saturated mediator stress test; sigma HC3 p=0.2245.[0m
+[0;34m[05:28:51] [PROCESS] Generating Robustness Plot...[0m
+[1;32m[05:28:51] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/multivariate_robustness.png[0m
+[1;32m[05:28:51] [SUCCESS] Step 6 Complete.[0m
+[1;32m[05:28:51] [SUCCESS] Step 6 (Multivariate Analysis) completed successfully.[0m
+[0;37m[05:28:51] [INFO] [0m
+[0;37m[05:28:51] [INFO] ================================================================================[0m
+[0;37m[05:28:51] [INFO]    >>> STEP 6b: ENHANCED ROBUSTNESS[0m
+[0;37m[05:28:51] [INFO] ================================================================================[0m
+[0;37m[05:28:51] [INFO] [0m
+[0;37m[05:28:51] [INFO] ============================================================[0m
+[0;37m[05:28:51] [INFO] STEP 6: ENHANCED ROBUSTNESS ANALYSIS[0m
+[0;37m[05:28:51] [INFO] Addressing referee concerns on σ heterogeneity and environment[0m
+[0;37m[05:28:51] [INFO] ============================================================[0m
+[0;37m[05:28:51] [INFO] Loaded 29 hosts from stratified analysis[0m
+[0;37m[05:28:51] [INFO] Loaded 29 entries from σ provenance table[0m
+[0;37m[05:28:51] [INFO] 
+--- STELLAR ABSORPTION SUBSAMPLE ---[0m
+[0;37m[05:28:51] [INFO] Stellar absorption hosts: 16[0m
+[0;37m[05:28:51] [INFO] HI linewidth proxy hosts: 13[0m
+[0;37m[05:28:51] [INFO] 
+Subsample Comparison:[0m
+[0;37m[05:28:51] [INFO] +-------------------------+----+-----------+---------+------------+---------+[0m
+[0;37m[05:28:51] [INFO] | Subsample               | N  | Pearson r | p-value | Spearman ρ | p-value |[0m
+[0;37m[05:28:51] [INFO] +-------------------------+----+-----------+---------+------------+---------+[0m
+[0;37m[05:28:51] [INFO] | Full Sample             | 29 | 0.462     | 0.0116  | 0.511      | 0.0046  |[0m
+[0;37m[05:28:51] [INFO] | Stellar Absorption Only | 16 | 0.554     | 0.0261  | 0.597      | 0.0146  |[0m
+[0;37m[05:28:51] [INFO] +-------------------------+----+-----------+---------+------------+---------+[0m
+[0;37m[05:28:51] [INFO] 
+Stellar-only stratification: ΔH0 = 9.17 km/s/Mpc (high - low σ)[0m
+[0;37m[05:28:51] [INFO] 
+--- GOLD STANDARD σ SUBSAMPLE ---[0m
+[0;37m[05:28:51] [INFO] Gold standard hosts (K&H13 + SDSS + Ho09): 7[0m
+[0;37m[05:28:51] [INFO]   - Kormendy&Ho2013: 0 hosts[0m
+[0;37m[05:28:51] [INFO]   - SDSS DR7: 2 hosts[0m
+[0;37m[05:28:51] [INFO]   - Ho+2009: 5 hosts[0m
+[0;37m[05:28:51] [INFO] Gold standard subsample: r = 0.587, p = 0.1660[0m
+[0;37m[05:28:51] [INFO] 
+--- LOCAL DENSITY CONTROL ---[0m
+[0;37m[05:28:51] [INFO] Hosts with valid local density: 29/29[0m
+[0;37m[05:28:51] [INFO] 
+Density Control Results:[0m
+[0;37m[05:28:51] [INFO] +--------------------------+---------------------+[0m
+[0;37m[05:28:51] [INFO] | Metric                   | Value               |[0m
+[0;37m[05:28:51] [INFO] +--------------------------+---------------------+[0m
+[0;37m[05:28:51] [INFO] | Baseline r(H0, σ)        | 0.462 (p = 0.0116)  |[0m
+[0;37m[05:28:51] [INFO] | Partial r(H0, σ | log ρ) | 0.493 (p = 0.0066)  |[0m
+[0;37m[05:28:51] [INFO] | r(H0, log ρ)             | 0.104 (p = 0.5904)  |[0m
+[0;37m[05:28:51] [INFO] | r(σ, log ρ)              | -0.185 (p = 0.3357) |[0m
+[0;37m[05:28:51] [INFO] +--------------------------+---------------------+[0m
+[0;37m[05:28:51] [INFO] 
+Signal after density control: r = 0.493 (p = 0.0066)[0m
+[0;37m[05:28:51] [INFO] 
+--- TEP CORRECTION ON SUBSAMPLES ---[0m
+[0;37m[05:28:51] [INFO] 
+TEP Correction Comparison:[0m
+[0;37m[05:28:51] [INFO] +---------------+----+-------------+-----------------------+[0m
+[0;37m[05:28:51] [INFO] | Subsample     | N  | κ_Cep       | Unified H0 (km/s/Mpc) |[0m
+[0;37m[05:28:51] [INFO] +---------------+----+-------------+-----------------------+[0m
+[0;37m[05:28:51] [INFO] | Full Sample   | 29 | 1049548.340 | 68.17 ± 1.27          |[0m
+[0;37m[05:28:51] [INFO] | Stellar Only  | 16 | 1021954.346 | 66.15 ± 1.59          |[0m
+[0;37m[05:28:51] [INFO] | Gold Standard | 7  | 1220727.539 | 62.00 ± 2.68          |[0m
+[0;37m[05:28:51] [INFO] +---------------+----+-------------+-----------------------+[0m
+[0;37m[05:28:51] [INFO] 
+Summary written to: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/subsample_sensitivity.txt[0m
+[0;37m[05:28:51] [INFO] ============================================================[0m
+[0;37m[05:28:51] [INFO] ENHANCED ROBUSTNESS ANALYSIS COMPLETE[0m
+[0;37m[05:28:51] [INFO] ============================================================[0m
+[1;32m[05:28:51] [SUCCESS] Step 6b (Enhanced Robustness) completed successfully.[0m
+[0;37m[05:28:51] [INFO] [0m
+[0;37m[05:28:51] [INFO] ================================================================================[0m
+[0;37m[05:28:51] [INFO]    >>> STEP 7: LMC REPLICATION[0m
+[0;37m[05:28:51] [INFO] ================================================================================[0m
+[0;37m[05:28:51] [INFO] [0m
+[0;37m[05:28:51] [INFO] [0m
+[0;37m[05:28:51] [INFO] ================================================================================[0m
+[0;37m[05:28:51] [INFO]    Starting Step 7: LMC Replication[0m
+[0;37m[05:28:51] [INFO] ================================================================================[0m
+[0;37m[05:28:51] [INFO] [0m
+[0;37m[05:28:51] [INFO] Initiating LMC replication (OGLE classical Cepheids)[0m
+[0;34m[05:28:51] [PROCESS] Fetching OGLE-IV Cepheid catalog from VizieR...[0m
+[1;32m[05:28:51] [SUCCESS] Retrieved 4706 OGLE objects (raw table).[0m
+[0;37m[05:28:52] [INFO] After LMC sky cut (<= 12.0 deg): N=4705[0m
+[0;37m[05:28:52] [INFO] After fundamental-mode filter: N=2314[0m
+[0;37m[05:28:52] [INFO] After period cut (2.5 < P < 100.0 d): N=2093[0m
+[0;37m[05:28:52] [INFO] LMC Subsamples[0m
+[0;37m[05:28:52] [INFO] +--------+--------------------------+--------------+[0m
+[0;37m[05:28:52] [INFO] | Region | Radius selection         | N (Cepheids) |[0m
+[0;37m[05:28:52] [INFO] +--------+--------------------------+--------------+[0m
+[0;37m[05:28:52] [INFO] | Inner  | R_kpc <= 0.92 (20th pct) | 419          |[0m
+[0;37m[05:28:52] [INFO] | Outer  | R_kpc >= 2.93 (80th pct) | 419          |[0m
+[0;37m[05:28:52] [INFO] +--------+--------------------------+--------------+[0m
+[0;37m[05:28:52] [INFO] Detected Offset (Inner - Outer): +0.0284 mag (3.3 sigma)[0m
+[1;32m[05:28:52] [SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_results.csv[0m
+[0;37m[05:28:52] [INFO] Running LMC robustness suite...[0m
+[1;32m[05:29:20] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_robustness_summary.csv[0m
+[1;32m[05:29:20] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_robustness_summary.json[0m
+[0;37m[05:29:20] [INFO] LMC Differential Robustness Summary[0m
+[0;37m[05:29:20] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+[0m
+[0;37m[05:29:20] [INFO] | Test               | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |[0m
+[0;37m[05:29:20] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+[0m
+[0;37m[05:29:20] [INFO] | Baseline           | 419  | 419   | -         | +0.0284     | 0.0086  | -                  |[0m
+[0;37m[05:29:20] [INFO] | Matched logP       | 419  | 419   | 340.0     | +0.0285     | 0.0092  | [+0.0191, +0.0378] |[0m
+[0;37m[05:29:20] [INFO] | Matched logP+color | 419  | 419   | 300.0     | +0.0361     | 0.0076  | [+0.0285, +0.0437] |[0m
+[0;37m[05:29:20] [INFO] | MV match (Type)    | 419  | 419   | 414       | +0.0304     | 0.0054  | [+0.0251, +0.0358] |[0m
+[0;37m[05:29:20] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+[0m
+[0;34m[05:29:20] [PROCESS] Generating LMC differential P–L plot...[0m
+[1;32m[05:29:21] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/lmc_differential_pl.png[0m
+[0;34m[05:29:21] [PROCESS] Generating LMC robustness plot...[0m
+[1;32m[05:29:21] [SUCCESS] Saved robustness plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/lmc_differential_robustness.png[0m
+[1;32m[05:29:21] [SUCCESS] Copied robustness plot to public figures directory.[0m
+[1;32m[05:29:21] [SUCCESS] Copied plot to public figures directory.[0m
+[1;32m[05:29:21] [SUCCESS] Step 7 Complete.[0m
+[1;32m[05:29:21] [SUCCESS] Step 7 (LMC Replication) completed successfully.[0m
+[0;37m[05:29:21] [INFO] [0m
+[0;37m[05:29:21] [INFO] ================================================================================[0m
+[0;37m[05:29:21] [INFO]    >>> STEP 7b: TRGB COMPARISON[0m
+[0;37m[05:29:21] [INFO] ================================================================================[0m
+[0;37m[05:29:21] [INFO] [0m
+[0;37m[05:29:21] [INFO] STEP 7: TRGB-CEPHEID COMPARATIVE ANALYSIS[0m
+[0;37m[05:29:21] [INFO] Comparing H0-σ correlations across distance indicators[0m
+[0;37m[05:29:21] [INFO] Loading TRGB distances from Freedman et al. (2024)[0m
+[0;37m[05:29:21] [INFO] Source: arXiv:2408.06153, Table 2[0m
+[0;37m[05:29:21] [INFO] Loaded 20 TRGB distances from CCHP catalog[0m
+[0;37m[05:29:21] [INFO] 
+--- CROSS-MATCHING TRGB HOSTS WITH σ DATA ---[0m
+[0;37m[05:29:21] [INFO] Unmatched TRGB hosts: NGC 4039, NGC 4526[0m
+[0;37m[05:29:21] [INFO] Matched 18/20 TRGB hosts with σ data[0m
+[0;37m[05:29:21] [INFO] 
+--- COMPUTING H0 FROM TRGB DISTANCES ---[0m
+[0;37m[05:29:21] [INFO] TRGB H0 range: 43.8 - 114.9 km/s/Mpc[0m
+[0;37m[05:29:21] [INFO] TRGB H0 mean: 69.25 ± 16.95 km/s/Mpc[0m
+[0;37m[05:29:21] [INFO] TRGB host data saved to: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_hosts_data.csv[0m
+[0;37m[05:29:21] [INFO] 
+--- TRGB H0-σ CORRELATION ANALYSIS ---[0m
+[0;37m[05:29:21] [INFO] TRGB H0-σ Correlation Results[0m
+[0;37m[05:29:21] [INFO] +------------------+---------------+-----------------+[0m
+[0;37m[05:29:21] [INFO] | Metric           | Value         | Interpretation  |[0m
+[0;37m[05:29:21] [INFO] +------------------+---------------+-----------------+[0m
+[0;37m[05:29:21] [INFO] | N hosts          | 18            |                 |[0m
+[0;37m[05:29:21] [INFO] | Pearson r        | 0.315         | Moderate        |[0m
+[0;37m[05:29:21] [INFO] | Pearson p        | 0.2028        | Not significant |[0m
+[0;37m[05:29:21] [INFO] | Spearman ρ       | 0.447         | Moderate        |[0m
+[0;37m[05:29:21] [INFO] | Spearman p       | 0.0630        | Not significant |[0m
+[0;37m[05:29:21] [INFO] | ΔH0 (high-low σ) | 3.50 km/s/Mpc | Moderate        |[0m
+[0;37m[05:29:21] [INFO] +------------------+---------------+-----------------+[0m
+[0;37m[05:29:21] [INFO] 
+--- COMPARISON: TRGB vs CEPHEIDS ---[0m
+[0;37m[05:29:21] [INFO] +-----------------+------------+---------+----------------+--------------+[0m
+[0;37m[05:29:21] [INFO] | Indicator       | Spearman ρ | p-value | ΔH0 (km/s/Mpc) | Significant? |[0m
+[0;37m[05:29:21] [INFO] +-----------------+------------+---------+----------------+--------------+[0m
+[0;37m[05:29:21] [INFO] | Cepheids (N=29) | 0.511      | 0.0046  | 4.63           | YES          |[0m
+[0;37m[05:29:21] [INFO] | TRGB (N=18)     | 0.447      | 0.0630  | 3.50           | NO           |[0m
+[0;37m[05:29:21] [INFO] +-----------------+------------+---------+----------------+--------------+[0m
+[0;37m[05:29:21] [INFO] 
+============================================================[0m
+[0;37m[05:29:21] [INFO] COMPARATIVE ANALYSIS CONCLUSION[0m
+[0;37m[05:29:21] [INFO] ============================================================[0m
+[1;32m[05:29:21] [SUCCESS] ✓ Cepheids show significant H0-σ correlation[0m
+[0;37m[05:29:21] [INFO] • TRGB does not show significant H0-σ correlation[0m
+[0;37m[05:29:21] [INFO] [0m
+[0;37m[05:29:21] [INFO]   INTERPRETATION:[0m
+[0;37m[05:29:21] [INFO]   ───────────────[0m
+[0;37m[05:29:21] [INFO]   This pattern is consistent with TWO superimposed effects:[0m
+[0;37m[05:29:21] [INFO] [0m
+[0;37m[05:29:21] [INFO]   1. COMMON EFFECT (can affect multiple indicators):[0m
+[0;37m[05:29:21] [INFO]      → Peculiar velocities correlate with host mass/σ[0m
+[0;37m[05:29:21] [INFO]      → Can induce baseline H0-σ structure in multiple indicators[0m
+[0;37m[05:29:21] [INFO] [0m
+[0;37m[05:29:21] [INFO]   2. CEPHEID-SPECIFIC EFFECT (TEP):[0m
+[0;37m[05:29:21] [INFO]      → Period contraction in high-σ environments[0m
+[0;37m[05:29:21] [INFO]      → Isolated by DIFFERENTIAL test: Δμ = μ_TRGB - μ_Ceph[0m
+[0;37m[05:29:21] [INFO]      → See step_7_trgb_reanalysis.py for differential analysis[0m
+[0;37m[05:29:22] [INFO] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/trgb_h0_vs_sigma.png[0m
+[0;37m[05:29:22] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_comparison_results.json[0m
+[0;37m[05:29:22] [INFO] ============================================================[0m
+[0;37m[05:29:22] [INFO] TRGB-CEPHEID COMPARISON COMPLETE[0m
+[0;37m[05:29:22] [INFO] ============================================================[0m
+[1;32m[05:29:22] [SUCCESS] Step 7b (TRGB Comparison) completed successfully.[0m
+[0;37m[05:29:22] [INFO] [0m
+[0;37m[05:29:22] [INFO] ================================================================================[0m
+[0;37m[05:29:22] [INFO]    >>> STEP 7c: TRGB DIFFERENTIAL REANALYSIS[0m
+[0;37m[05:29:22] [INFO] ================================================================================[0m
+[0;37m[05:29:22] [INFO] [0m
+[0;37m[05:29:22] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)[0m
+[0;37m[05:29:22] [INFO] Matched 13 hosts for differential analysis[0m
+[0;37m[05:29:22] [INFO] 
+Differential Modulus (TRGB - Cepheid) vs Sigma:[0m
+[0;37m[05:29:22] [INFO] +-----------------+---------------+--------------+[0m
+[0;37m[05:29:22] [INFO] | Metric          | Value         | Significance |[0m
+[0;37m[05:29:22] [INFO] +-----------------+---------------+--------------+[0m
+[0;37m[05:29:22] [INFO] | Pearson r       | 0.513         | p=0.0731     |[0m
+[0;37m[05:29:22] [INFO] | Spearman ρ      | 0.571         | p=0.0413     |[0m
+[0;37m[05:29:22] [INFO] | Slope (mag/dex) | 0.147 ± 0.067 | p=0.0505     |[0m
+[0;37m[05:29:22] [INFO] +-----------------+---------------+--------------+[0m
+[0;37m[05:29:22] [INFO] 
+Interpretation Check:[0m
+[0;37m[05:29:22] [INFO]   POSITIVE correlation detected.[0m
+[0;37m[05:29:22] [INFO]   High-σ hosts have μ_TRGB > μ_Ceph.[0m
+[0;37m[05:29:22] [INFO]   Implies μ_Ceph is UNDERESTIMATED at high σ.[0m
+[1;32m[05:29:22] [SUCCESS]   → CONSISTENT WITH TEP PREDICTION.[0m
+[0;37m[05:29:22] [INFO] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/trgb_cepheid_residual.png[0m
+[0;37m[05:29:22] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json[0m
+[1;32m[05:29:22] [SUCCESS] Step 7c (TRGB Differential Reanalysis) completed successfully.[0m
+[0;37m[05:29:22] [INFO] [0m
+[0;37m[05:29:22] [INFO] ================================================================================[0m
+[0;37m[05:29:22] [INFO]    >>> STEP 8: M31 PHAT ANALYSIS[0m
+[0;37m[05:29:22] [INFO] ================================================================================[0m
+[0;37m[05:29:22] [INFO] [0m
+[0;37m[05:29:22] [INFO] [0m
+[0;37m[05:29:22] [INFO] ================================================================================[0m
+[0;37m[05:29:22] [INFO]    Starting Step 8: M31 HST Differential Analysis[0m
+[0;37m[05:29:22] [INFO] ================================================================================[0m
+[0;37m[05:29:22] [INFO] [0m
+[0;34m[05:29:22] [PROCESS] Fetching Kodric 2018 HST J/H catalog (J/ApJ/864/59)...[0m
+[1;32m[05:29:23] [SUCCESS] Downloaded 1113 Cepheids with HST J/H photometry[0m
+[0;37m[05:29:23] [INFO] After quality cuts: 391 classical Cepheids (P=10-60d)[0m
+[0;37m[05:29:23] [INFO] M31 HST Sample[0m
+[0;37m[05:29:23] [INFO] +--------+--------------+----+----------+----------+[0m
+[0;37m[05:29:23] [INFO] | Region | Cut          | N  | Mean W_H | Mean J-H |[0m
+[0;37m[05:29:23] [INFO] +--------+--------------+----+----------+----------+[0m
+[0;37m[05:29:23] [INFO] | Inner  | R < 5.0 kpc  | 78 | 18.31    | 0.680    |[0m
+[0;37m[05:29:23] [INFO] | Outer  | R > 15.0 kpc | 69 | 18.00    | 0.544    |[0m
+[0;37m[05:29:23] [INFO] +--------+--------------+----+----------+----------+[0m
+[0;37m[05:29:23] [INFO] === BASELINE ANALYSIS (No Color Matching) ===[0m
+[0;37m[05:29:23] [INFO] Baseline: ΔW = +0.681 ± 0.187 mag (3.6σ) [INNER FAINTER][0m
+[0;37m[05:29:23] [INFO] === COLOR-MATCHED ANALYSIS (Metallicity Control) ===[0m
+[0;37m[05:29:23] [INFO] Color-matched (N=73): ΔW = +0.620 ± 0.154 mag (4.0σ) [INNER FAINTER][0m
+[0;37m[05:29:23] [INFO] ============================================================[0m
+[0;37m[05:29:23] [INFO] [0m
+[0;37m[05:29:23] [INFO] ================================================================================[0m
+[0;37m[05:29:23] [INFO]    SUMMARY[0m
+[0;37m[05:29:23] [INFO] ================================================================================[0m
+[0;37m[05:29:23] [INFO] [0m
+[0;37m[05:29:23] [INFO] Baseline:      ΔW = +0.681 ± 0.187 mag [INNER FAINTER][0m
+[0;37m[05:29:23] [INFO] Color-matched: ΔW = +0.620 ± 0.154 mag [INNER FAINTER][0m
+[0;37m[05:29:23] [INFO] [0m
+[1;32m[05:29:23] [SUCCESS] *** M31 HST shows INNER FAINTER - CONSISTENT WITH SCREENED TEP ***[0m
+[0;37m[05:29:23] [INFO] Inner region (high density) is SCREENED (Standard); Outer is ACTIVE (Brighter).[0m
+[0;37m[05:29:23] [INFO] Relative to Outer (Brighter), Inner appears Fainter. Matches Screening Inversion.[0m
+[1;32m[05:29:23] [SUCCESS] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_phat_robustness_summary.json[0m
+[1;32m[05:29:24] [SUCCESS] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/m31_phat_differential_pl.png[0m
+[1;32m[05:29:24] [SUCCESS] Step 8 complete.[0m
+[1;32m[05:29:24] [SUCCESS] Step 8 (M31 PHAT Analysis) completed successfully.[0m
+[0;37m[05:29:24] [INFO] [0m
+[0;37m[05:29:24] [INFO] ================================================================================[0m
+[0;37m[05:29:24] [INFO]    >>> STEP 10: ANCHOR STRATIFICATION TEST[0m
+[0;37m[05:29:24] [INFO] ================================================================================[0m
+[0;37m[05:29:24] [INFO] [0m
+[0;37m[05:29:24] [INFO] ======================================================================[0m
+[0;37m[05:29:24] [INFO] STEP 10: ANCHOR STRATIFICATION TEST[0m
+[0;37m[05:29:24] [INFO] Testing for internal P-L tension in geometric anchors[0m
+[0;37m[05:29:24] [INFO] ======================================================================[0m
+[0;37m[05:29:24] [INFO] Loaded 3130 Cepheid measurements[0m
+[0;37m[05:29:24] [INFO] Anchor Sample Sizes:[0m
+[0;37m[05:29:24] [INFO] +--------+-----+----------+--------+[0m
+[0;37m[05:29:24] [INFO] | Anchor | N   | σ (km/s) | μ_geo  |[0m
+[0;37m[05:29:24] [INFO] +--------+-----+----------+--------+[0m
+[0;37m[05:29:24] [INFO] | N4258  | 443 | 115      | 29.397 |[0m
+[0;37m[05:29:24] [INFO] | LMC    | 339 | 24       | 18.477 |[0m
+[0;37m[05:29:24] [INFO] | M31    | 55  | 160      | 24.407 |[0m
+[0;37m[05:29:24] [INFO] +--------+-----+----------+--------+[0m
+[0;37m[05:29:24] [INFO] Independent P-L Fit Results:[0m
+[0;37m[05:29:24] [INFO] +--------+-----+-----+-----------+-------+--------+-------+[0m
+[0;37m[05:29:24] [INFO] | Anchor | N   | σ   | M_W (abs) | ± err | b_W    | ± err |[0m
+[0;37m[05:29:24] [INFO] +--------+-----+-----+-----------+-------+--------+-------+[0m
+[0;37m[05:29:24] [INFO] | N4258  | 443 | 115 | -5.837    | 0.022 | -3.288 | 0.078 |[0m
+[0;37m[05:29:24] [INFO] | LMC    | 339 | 24  | -5.878    | 0.005 | -3.291 | 0.019 |[0m
+[0;37m[05:29:24] [INFO] | M31    | 55  | 160 | -5.876    | 0.024 | -3.313 | 0.077 |[0m
+[0;37m[05:29:24] [INFO] +--------+-----+-----+-----------+-------+--------+-------+[0m
+[0;37m[05:29:24] [INFO] Multi-Anchor Regression (sigma^2/c^2 form):[0m
+[0;37m[05:29:24] [INFO]   κ_anchor = 5.047e+00 ± 6.633e+02 mag[0m
+[0;37m[05:29:24] [INFO]   Significance: 0.0σ[0m
+[0;37m[05:29:24] [INFO]   Pearson r = 0.040 (p = 0.9743)[0m
+[0;37m[05:29:24] [INFO]   κ comparison (3-anchor fit, error dominated by κ_host): 2.5σ[0m
+[0;37m[05:29:24] [INFO] Prediction Test A (NAIVE, S=1 for anchors — standard-GR-style):[0m
+[0;37m[05:29:24] [INFO]   N4258    σ=   115  Δμ_pred=+0.148  M_W obs=-5.837  pred=-5.730  resid=-0.107 (-1.7σ)[0m
+[0;37m[05:29:24] [INFO]   M31      σ=   160  Δμ_pred=+0.292  M_W obs=-5.876  pred=-5.586  resid=-0.291 (-2.4σ)[0m
+[0;37m[05:29:24] [INFO]   Mean |residual| = 2.0σ; chi2 = 8.52 / 2 dof[0m
+[0;37m[05:29:24] [INFO] Prediction Test B (TEP-AWARE, S_anchor from cosmological environment, ref=LMC with S=0.10):[0m
+[0;37m[05:29:24] [INFO]   N4258    S=0.50  Δμ_TEP=+0.050  M_W obs=-5.837  pred=-5.828  resid=-0.010 (-0.3σ)[0m
+[0;37m[05:29:24] [INFO]   M31      S=0.20  Δμ_TEP=+0.053  M_W obs=-5.876  pred=-5.825  resid=-0.051 (-1.6σ)[0m
+[0;37m[05:29:24] [INFO]   Mean |residual| = 0.9σ; chi2 = 2.51 / 2 dof[0m
+[1;32m[05:29:26] [SUCCESS] Figure saved: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/anchor_stratification_test.png[0m
+[1;32m[05:29:26] [SUCCESS] Results saved: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/anchor_stratification_test.json[0m
+[0;37m[05:29:26] [INFO] ======================================================================[0m
+[0;37m[05:29:26] [INFO] ANCHOR STRATIFICATION SUMMARY[0m
+[0;37m[05:29:26] [INFO] ======================================================================[0m
+[0;37m[05:29:26] [INFO] TEP framing: anchors lie in DEEP cosmological potential wells (LG/Local Volume); hosts are in Hubble flow (less screened). Density-regime screening is expected.[0m
+[1;33m[05:29:26] [WARNING] Marginal anchor/host κ comparison (2.5σ) — anchor sample (N=3) insufficient to discriminate screening regimes.[0m
+[1;32m[05:29:26] [SUCCESS] Step 10 (Anchor Stratification) completed successfully.[0m
+[0;37m[05:29:26] [INFO] [0m
+[0;37m[05:29:26] [INFO] ================================================================================[0m
+[0;37m[05:29:26] [INFO]    >>> STEP 9: FINAL SYNTHESIS[0m
+[0;37m[05:29:26] [INFO] ================================================================================[0m
+[0;37m[05:29:26] [INFO] [0m
+[0;37m[05:29:26] [INFO] [0m
+[0;37m[05:29:26] [INFO] ================================================================================[0m
+[0;37m[05:29:26] [INFO]    Starting Step 9: Final Synthesis[0m
+[0;37m[05:29:26] [INFO] ================================================================================[0m
+[0;37m[05:29:26] [INFO] [0m
+[1;32m[05:29:26] [SUCCESS] Saved comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/robustness_synthesis_plot.png[0m
+[1;32m[05:29:26] [SUCCESS] Report written to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/TEP_FINAL_ROBUSTNESS_REPORT.md[0m
+[1;32m[05:29:26] [SUCCESS] Step 9 Complete. Report generated.[0m
+[1;32m[05:29:26] [SUCCESS] Step 9 (Final Synthesis) completed successfully.[0m
+[0;37m[05:29:26] [INFO] [0m
+[0;37m[05:29:26] [INFO] ================================================================================[0m
+[0;37m[05:29:26] [INFO]    >>> STEP 11: PIPELINE AUDIT[0m
+[0;37m[05:29:26] [INFO] ================================================================================[0m
+[0;37m[05:29:26] [INFO] [0m
+[1;32m[05:29:26] [SUCCESS] Wrote pipeline audit report: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/pipeline_audit_report.json[0m
+[1;32m[05:29:26] [SUCCESS] Step 11 (Audit) PASSED: All outputs consistent.[0m
+[0;37m[05:29:26] [INFO] [0m
+[0;37m[05:29:26] [INFO] ================================================================================[0m
+[0;37m[05:29:26] [INFO]    PIPELINE EXECUTION SUMMARY[0m
+[0;37m[05:29:26] [INFO] ================================================================================[0m
+[0;37m[05:29:26] [INFO] [0m
+[0;37m[05:29:26] [INFO] Execution Timing[0m
+[0;37m[05:29:26] [INFO] +---------+--------------+-----------+[0m
+[0;37m[05:29:26] [INFO] | Step    | Duration (s) | Status    |[0m
+[0;37m[05:29:26] [INFO] +---------+--------------+-----------+[0m
+[0;37m[05:29:26] [INFO] | Step 0  | 102.25       | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 1  | 2.48         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 1b | 0.40         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 2  | 1.24         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 3  | 1.71         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 3b | 0.94         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 4  | 10.79        | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 5  | 61.67        | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 6  | 0.87         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 6b | 0.07         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 7  | 30.12        | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 7b | 0.67         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 7c | 0.50         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 8  | 1.26         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 10 | 2.62         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 9  | 0.14         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | Step 11 | 0.05         | COMPLETED |[0m
+[0;37m[05:29:26] [INFO] | TOTAL   | 217.83       | SUCCESS   |[0m
+[0;37m[05:29:26] [INFO] +---------+--------------+-----------+[0m
+[1;32m[05:29:26] [SUCCESS] Total Execution Time: 217.83 seconds[0m
+[0;37m[05:29:26] [INFO] Results Directory: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/[0m
+[0;37m[05:29:26] [INFO] Logs Directory:    /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/logs/[0m
+[1;32m[05:29:26] [SUCCESS] Pipeline finished.[0m

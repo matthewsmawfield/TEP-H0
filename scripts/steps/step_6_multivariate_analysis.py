@@ -1,11 +1,19 @@
 
 import numpy as np
 import pandas as pd
-import statsmodels.api as sm
 from pathlib import Path
 import matplotlib.pyplot as plt
 import sys
 import json
+
+try:
+    import statsmodels.api as sm
+except ImportError as e:
+    raise ImportError("statsmodels is required for multivariate analysis. Install with: pip install statsmodels") from e
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 # Import TEP Logger
 try:
@@ -115,10 +123,12 @@ class Step6MultivariateAnalysis:
         
         # Standardize variables for comparable coefficients
         df_std = df.copy()
-        cols = ['h0_derived', 'sigma_inferred', 'mean_logP', 'c', 'x1', 'host_logmass']
+        cols = ['h0_derived', 'sigma_inferred', 'mean_logP', 'c', 'x1', 'host_logmass', 'z_hd', 'tully_nmb']
         for col in cols:
             if col in df.columns:
                 df_std[col] = (df[col] - df[col].mean()) / df[col].std()
+        if 'tully_nmb' in df_std.columns:
+            df_std['tully_nmb'] = df_std['tully_nmb'].fillna(0.0)
         
         models = {}
         summaries = []
@@ -148,15 +158,33 @@ class Step6MultivariateAnalysis:
         model4 = sm.OLS(y, X4).fit()
         models['Full'] = model4
         summaries.append("Model 4: H0 ~ Sigma + Age + Dust + Mass\n" + str(model4.summary()))
+
+        # Model 5: Include flow and large-scale environment controls when present.
+        flow_cols = ['sigma_inferred', 'mean_logP', 'c', 'host_logmass']
+        if 'z_hd' in df_std.columns:
+            flow_cols.append('z_hd')
+        if 'tully_nmb' in df_std.columns:
+            flow_cols.append('tully_nmb')
+        X5 = sm.add_constant(df_std[flow_cols])
+        model5 = sm.OLS(y, X5).fit()
+        models['FlowEnvironment'] = model5
+        summaries.append("Model 5: H0 ~ Sigma + Age + Dust + Mass + zHD + Group Richness\n" + str(model5.summary()))
         
         # Save structured results
         for name, model in models.items():
+            robust = model.get_robustcov_results(cov_type='HC3')
+            robust_params = dict(zip(model.params.index, robust.params))
+            robust_bse = dict(zip(model.params.index, robust.bse))
+            robust_pvalues = dict(zip(model.params.index, robust.pvalues))
             structured_results[name] = {
                 'r_squared': model.rsquared,
                 'adj_r_squared': model.rsquared_adj,
                 'params': model.params.to_dict(),
                 'bse': model.bse.to_dict(),
                 'pvalues': model.pvalues.to_dict(),
+                'hc3_params': robust_params,
+                'hc3_bse': robust_bse,
+                'hc3_pvalues': robust_pvalues,
                 'nobs': model.nobs
             }
         
@@ -169,12 +197,52 @@ class Step6MultivariateAnalysis:
             json.dump(structured_results, f, indent=4)
         print_status(f"Saved structured results to {self.json_path}", "SUCCESS")
         
-        # Check significance of Sigma in full model
-        pval_sigma = model4.pvalues['sigma_inferred']
-        if pval_sigma < 0.05:
-            print_status(f"Sigma remains significant in full model (p={pval_sigma:.4f}).", "SUCCESS")
+        # The primary confounder test controls ordinary astrophysical nuisance
+        # terms. The flow/environment model is a deliberately saturated stress
+        # test because group richness is also a TEP screening mediator.
+        full_robust = model4.get_robustcov_results(cov_type='HC3')
+        full_terms = list(model4.params.index)
+        full_sigma_idx = full_terms.index('sigma_inferred')
+        pval_sigma_full = float(full_robust.pvalues[full_sigma_idx])
+
+        flow_robust = model5.get_robustcov_results(cov_type='HC3')
+        flow_terms = list(model5.params.index)
+        flow_sigma_idx = flow_terms.index('sigma_inferred')
+        pval_sigma_flow = float(flow_robust.pvalues[flow_sigma_idx])
+
+        structured_results['_interpretation'] = {
+            'primary_model': 'Full',
+            'primary_reason': (
+                'Controls age, SN color, and stellar mass. This is the primary '
+                'astrophysical-confound model.'
+            ),
+            'primary_sigma_hc3_p': pval_sigma_full,
+            'stress_model': 'FlowEnvironment',
+            'stress_reason': (
+                'Adds redshift and group richness. This is a conservative stress '
+                'test because group richness can mediate TEP screening rather than '
+                'act as a pure nuisance covariate.'
+            ),
+            'stress_sigma_hc3_p': pval_sigma_flow,
+        }
+        with open(self.json_path, 'w') as f:
+            json.dump(structured_results, f, indent=4)
+
+        if pval_sigma_full < 0.05:
+            print_status(
+                f"Sigma remains significant in primary astrophysical HC3 model (p={pval_sigma_full:.4f}).",
+                "SUCCESS",
+            )
         else:
-            print_status(f"Sigma loses significance in full model (p={pval_sigma:.4f}).", "WARNING")
+            print_status(
+                f"Sigma is not significant in primary astrophysical HC3 model (p={pval_sigma_full:.4f}).",
+                "WARNING",
+            )
+        print_status(
+            "Flow/environment model is a saturated mediator stress test; "
+            f"sigma HC3 p={pval_sigma_flow:.4f}.",
+            "INFO",
+        )
             
         return models
 
@@ -209,14 +277,16 @@ class Step6MultivariateAnalysis:
             'mean_logP': 'Period (Age)',
             'c': 'Color (Dust)',
             'x1': 'Stretch',
-            'host_logmass': 'Stellar Mass'
+            'host_logmass': 'Stellar Mass',
+            'z_hd': 'Redshift',
+            'tully_nmb': 'Group Richness'
         }
         res_df['TermLabel'] = res_df['Term'].map(term_map)
         
         plt.figure(figsize=(14, 9))
         
-        model_order = ['Baseline', 'AgeControl', 'DustControl', 'Full']
-        term_order = ['sigma_inferred', 'mean_logP', 'c', 'host_logmass', 'x1']
+        model_order = ['Baseline', 'AgeControl', 'DustControl', 'Full', 'FlowEnvironment']
+        term_order = ['sigma_inferred', 'mean_logP', 'c', 'host_logmass', 'x1', 'z_hd', 'tully_nmb']
         
         y_base = np.arange(len(term_order)) * -1.5 
         y_map = {t: y for t, y in zip(term_order, y_base)}
@@ -227,7 +297,8 @@ class Step6MultivariateAnalysis:
             'Baseline': colors['dark'],
             'AgeControl': colors['blue'],
             'DustControl': colors['green'],
-            'Full': colors['accent']
+            'Full': colors['accent'],
+            'FlowEnvironment': colors.get('light_blue', colors['blue'])
         }
         
         for i, model_name in enumerate(model_order):

@@ -61,57 +61,68 @@
     <li><strong>HI linewidth proxy:</strong> 9 hosts use HI 21-cm linewidth measurements calibrated via $\sigma = 0.467 \times V_{\rm max} + 42.9$ km/s (HyperLEDA calibrated_vmax mode). This introduces additional scatter but preserves the kinematic nature of the observable.</li>
     <li><strong>Rotation velocity proxy:</strong> 3 hosts (NGC 105, NGC 5917, NGC 7250) use rotation velocity converted via $\sigma \approx V_{\rm rot}/1.7$, a standard scaling for late-type spirals.</li>
 </ul>
-<p>The correlation coefficient persists when restricting to stellar-absorption-only hosts ($N=17$, Pearson $r \approx 0.42$, $p \approx 0.09$). The reduction in formal significance relative to the full sample is expected from reduced statistical power ($\sim 41\%$ fewer degrees of freedom), not from the removal of spurious signal. Critically, the 12 kinematic-proxy hosts (9 HI + 3 rotation) do not cluster anomalously—they span the full $\sigma$–$H_0$ distribution and follow the same physical trend as stellar hosts (see Section 3.2). Application of the TEP correction to the stellar-only subsample yields $\alpha = 0.56$ and a unified $H_0 = 67.77 \pm 1.81$ km/s/Mpc, consistent with the full-sample result. Future systematic spectroscopic follow-up of all SH0ES hosts would further strengthen this analysis.</p>
+<p>The correlation coefficient strengthens when restricting to stellar-absorption-only hosts ($N=16$, Pearson $r = 0.554$, $p = 0.026$). Critically, the 12 kinematic-proxy hosts (9 HI + 3 rotation) do not cluster anomalously—they span the full $\sigma$–$H_0$ distribution and follow the same physical trend as stellar hosts (see Section 3.2). Application of the TEP correction to the stellar-only subsample yields a unified $H_0 = 66.15 \pm 1.59$ km/s/Mpc, consistent with the full-sample result.</p>
 
-<h3>A.3 Theoretical Foundation: Cross-Sector Coupling</h3>
-<p>
-    The TEP framework (Jakarta v0.7) resolves the tension between stringent 
-    Solar System PPN bounds ($\alpha_\gamma \approx 0.003$) and the large 
-    effective coupling inferred from astrophysical clocks ($\alpha_{\rm clock} 
-    \approx 800$) through the conformal invariance of the 
-    photon sector. 
-</p>
+<h3>A.3 Sector interpretation of $\kappa_{\rm Cep}$</h3>
 
-<p><strong>A.3.1 Metric Couplings.</strong>
-    Matter couples to the Jordan-frame metric $\tilde{g}_{\mu\nu} = A(\phi) 
-    g_{\mu\nu}$, where $A(\phi) = \exp(2\beta\phi/M_{\rm Pl})$. For photons, 
-    the Maxwell action $S_{\rm em} = -\frac{1}{4} \int d^4x \sqrt{-\tilde{g}} 
-    \tilde{g}^{\mu\alpha} \tilde{g}^{\nu\beta} F_{\mu\nu} F_{\alpha\beta}$ is 
-    invariant under the conformal transformation $\tilde{g}_{\mu\nu} \to 
-    \Omega^2 g_{\mu\nu}$ in 4D. Consequently, light propagation and the 
-    resulting Shapiro delay (constrained by Cassini) are only sensitive to 
-    the <em>gravitational</em> metric $g_{\mu\nu}$.
-</p>
-
-<p><strong>A.3.2 Clock Sensitivity.</strong>
-    In contrast, stellar pulsation and atomic transitions depend on particle 
-    masses, which scale as $m(\phi) = m_0 A(\phi)^{-1/2}$. This introduces a 
-    direct dependence on the scalar field $\phi$. The effective clock rate 
-    relative to a distant observer scales as:
+<p><strong>A.3.1 Observable response coefficient.</strong>
+    The fitted coefficient $\kappa_{\rm Cep}$ is an observable Cepheid 
+    period-luminosity response coefficient. It is defined by the empirical 
+    correction
 </p>
 <div class="equation">
-    $$\Gamma_t = \frac{d\tau}{dt} \propto A(\phi)^{1/2} = \exp(\beta\phi/M_{\rm Pl})$$
-</div>
-
-<p><strong>A.3.3 Numerical Consistency.</strong>
-    In the unscreened regime, the scalar field tracks the potential as 
-    $\phi/M_{\rm Pl} = 2\alpha_0 \Phi/c^2$. With $\beta = \alpha_0 = \alpha_{\rm clock}$, 
-    this yields:
-</p>
-<div class="equation">
-    $$\Gamma_t = \exp(2\alpha_{\rm clock}^2 \Phi/c^2)$$
+    $$\Delta\mu = \kappa_{\rm Cep} \cdot S(\rho) \cdot \frac{\sigma^2 - \sigma_{\rm ref}^2}{c^2}.$$
 </div>
 <p>
-    For the observed Cepheid bias $\alpha_{\rm eff} = (9.6 \pm 4.0) \times 10^5$ mag, 
-    the corresponding fundamental clock-sector coupling is $\alpha_{\rm clock} = 
-    \sqrt{K/2} \approx 794$, where $K = \alpha_{\rm eff} \ln(10) / (|b|)$. 
-    This large value is physically permissible because it remains hidden 
-    from photon-sector tests by the symmetry of the electromagnetic action.
+    It should not be identified with the microscopic conformal coupling 
+    $\beta$, the scalar-tensor coupling $\alpha_0$, or a PPN coupling. 
+    It absorbs the Cepheid pulsation response, the P-L slope, the environmental 
+    activation factor, the virial mapping between $\sigma^2$ and potential 
+    depth, and the calibration geometry of the distance ladder.
+</p>
+
+<p><strong>A.3.2 Why Cassini is not a direct bound on $\kappa_{\rm Cep}$.</strong>
+    Cassini constrains the locally active scalar charge and gradient sector 
+    sourced by the Sun, together with any photon-cone or Shapiro-delay 
+    modifications. In TEP language, this is the screened local Temporal 
+    Shear/source-charge sector. By contrast, $\kappa_{\rm Cep}$ is a 
+    channel-level response coefficient for Cepheid pulsation periods in 
+    galactic environments. These are different observable projections. 
+    Conformal invariance of Maxwell theory removes a direct photon-cone 
+    split in the purely conformal limit, but it does not make conformal 
+    scalar sectors generally unconstrained. Such sectors remain constrained 
+    indirectly by PPN, equivalence-principle, clock-comparison, and 
+    source-screening tests.
+</p>
+
+<p><strong>A.3.3 What is not assumed here.</strong>
+    This paper does not infer a microscopic coupling from $\kappa_{\rm Cep}$. 
+    In particular, it does not assume
+</p>
+<div class="equation">
+    $$\kappa_{\rm Cep} \rightarrow \beta, \quad \kappa_{\rm Cep} \rightarrow \alpha_0, \quad \kappa_{\rm Cep} \rightarrow \alpha_{\rm clock}.$$
+</div>
+<p>
+    A microscopic mapping would require a transfer calculation from $\beta$ 
+    through the scalar-field boundary-value problem, environmental activation, 
+    source screening, and Cepheid pulsation physics. The present result 
+    should therefore be interpreted as a measurement of the Cepheid response 
+    coefficient, not as a measurement of a bare scalar coupling.
+</p>
+
+<p><strong>A.3.4 Cross-probe comparison.</strong>
+    The useful cross-probe comparison is between observable response 
+    coefficients, not microscopic couplings. Paper 10 constrains a pulsar 
+    response coefficient $\kappa_{\rm MSP}$; this paper constrains 
+    $\kappa_{\rm Cep}$. Their comparable magnitudes may be suggestive of 
+    a common temporal-response hierarchy, but the microscopic unification 
+    of these coefficients requires the full response dictionary and is not 
+    assumed here.
 </p>
 
 <h3>A.4 Terminology Synchronization</h3>
 <p>
-    This study adopts the Jakarta v0.7 nomenclature. The 
+    This study adopts the Jakarta v0.8 response-coefficient nomenclature. The 
     mechanism previously referred to as "Temporal Shear" (v0.5) is now 
     standardized as Temporal Shear, referring to the 
     gradient-based suppression of scalar field activity in high-density 

@@ -9,6 +9,10 @@ import sys
 import json
 import shutil
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 # Import TEP Logger
 try:
     from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
@@ -210,15 +214,16 @@ class Step4RobustnessChecks:
         except Exception:
             return None
 
-    def _fit_alpha(self, df, sigma_ref):
+    def _fit_kappa(self, df, sigma_ref):
         from scripts.utils.tep_correction import tep_correction
         sigma = df['sigma_inferred'].values.astype(float)
         mu = df['value'].values.astype(float)
         v = df['velocity'].values.astype(float)
+        S = df['shear_suppression'].values.astype(float) if 'shear_suppression' in df.columns else np.ones(len(df))
 
         def objective(params):
-            alpha = float(params[0])
-            corr = tep_correction(sigma, sigma_ref, alpha)
+            kappa_cep = float(params[0])
+            corr = tep_correction(sigma, sigma_ref, kappa_cep, S)
             mu_corr = mu + corr
             d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
             h0_corr = v / d_corr
@@ -233,18 +238,19 @@ class Step4RobustnessChecks:
         )
         return float(res.x[0])
 
-    def _apply_alpha(self, df, alpha, sigma_ref):
+    def _apply_kappa(self, df, kappa_cep, sigma_ref):
         from scripts.utils.tep_correction import tep_correction
         sigma = df['sigma_inferred'].values.astype(float)
         mu = df['value'].values.astype(float)
         v = df['velocity'].values.astype(float)
-        corr = tep_correction(sigma, float(sigma_ref), float(alpha))
+        S = df['shear_suppression'].values.astype(float) if 'shear_suppression' in df.columns else np.ones(len(df))
+        corr = tep_correction(sigma, float(sigma_ref), float(kappa_cep), S)
         mu_corr = mu + corr
         d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
         return v / d_corr
 
     def perform_out_of_sample_validation(self):
-        print_status("Initiating Out-of-Sample Validation (Alpha)", "SECTION")
+        print_status("Initiating Out-of-Sample Validation (kappa_cep)", "SECTION")
 
         if not self.stratified_path.exists():
             print_status("Stratified data missing. Run Step 2 first.", "ERROR")
@@ -277,7 +283,7 @@ class Step4RobustnessChecks:
         test_r = []
         test_rho = []
         test_h0_mean = []
-        alphas = []
+        kappa_ceps = []
 
         n_train = int(np.round(train_frac * n))
         for _ in range(n_repeats):
@@ -288,34 +294,34 @@ class Step4RobustnessChecks:
             train = df.iloc[train_idx]
             test = df.iloc[test_idx]
 
-            alpha_hat = self._fit_alpha(train, sigma_ref)
-            h0_test = self._apply_alpha(test, alpha_hat, sigma_ref)
+            kappa_hat = self._fit_kappa(train, sigma_ref)
+            h0_test = self._apply_kappa(test, kappa_hat, sigma_ref)
 
             slope_test, _ = np.polyfit(test['sigma_inferred'].values, h0_test, 1)
             r_test = stats.pearsonr(test['sigma_inferred'].values, h0_test)[0]
             rho_test = stats.spearmanr(test['sigma_inferred'].values, h0_test)[0]
 
-            alphas.append(alpha_hat)
+            kappa_ceps.append(kappa_hat)
             test_slopes.append(float(slope_test))
             test_r.append(float(r_test))
             test_rho.append(float(rho_test))
             test_h0_mean.append(float(np.mean(h0_test)))
 
-        alphas = np.array(alphas)
+        kappa_ceps = np.array(kappa_ceps)
         test_slopes = np.array(test_slopes)
         test_r = np.array(test_r)
         test_rho = np.array(test_rho)
         test_h0_mean = np.array(test_h0_mean)
 
-        loo_alphas = []
+        loo_kappa_ceps = []
         loo_pred = np.empty(n)
         for i in range(n):
             train = df.drop(index=i)
-            alpha_i = self._fit_alpha(train, sigma_ref)
-            loo_alphas.append(alpha_i)
-            loo_pred[i] = float(self._apply_alpha(df.iloc[[i]], alpha_i, sigma_ref)[0])
+            kappa_i = self._fit_kappa(train, sigma_ref)
+            loo_kappa_ceps.append(kappa_i)
+            loo_pred[i] = float(self._apply_kappa(df.iloc[[i]], kappa_i, sigma_ref)[0])
 
-        loo_alphas = np.array(loo_alphas)
+        loo_kappa_ceps = np.array(loo_kappa_ceps)
         loo_slope, _ = np.polyfit(sigma_all, loo_pred, 1)
         loo_r, loo_p = stats.pearsonr(sigma_all, loo_pred)
         loo_rho, loo_p_rho = stats.spearmanr(sigma_all, loo_pred)
@@ -331,11 +337,11 @@ class Step4RobustnessChecks:
             ["Baseline", "Slope dH0/dsigma", f"{base_slope:.4f}"],
             ["Baseline", "Pearson r (p)", f"{base_r:.3f} ({base_p:.4f})"],
             ["Baseline", "Spearman rho (p)", f"{base_rho:.3f} ({base_p_rho:.4f})"],
-            ["Train/Test", "alpha mean ± std", f"{np.mean(alphas):.3f} ± {np.std(alphas):.3f}"],
+            ["Train/Test", "kappa_cep mean ± std", f"{np.mean(kappa_ceps):.3f} ± {np.std(kappa_ceps):.3f}"],
             ["Train/Test", "test slope median", f"{np.median(test_slopes):.4f}"],
             ["Train/Test", "test |r| median", f"{np.median(np.abs(test_r)):.3f}"],
             ["Train/Test", "test H0 mean (median)", f"{np.median(test_h0_mean):.2f}"],
-            ["LOOCV", "alpha mean ± std", f"{np.mean(loo_alphas):.3f} ± {np.std(loo_alphas):.3f}"],
+            ["LOOCV", "kappa_cep mean ± std", f"{np.mean(loo_kappa_ceps):.3f} ± {np.std(loo_kappa_ceps):.3f}"],
             ["LOOCV", "pred slope dH0/dsigma", f"{loo_slope:.4f}"],
             ["LOOCV", "Pearson r (p)", f"{loo_r:.3f} ({loo_p:.4f})"],
             ["LOOCV", "Spearman rho (p)", f"{loo_rho:.3f} ({loo_p_rho:.4f})"],
@@ -359,8 +365,8 @@ class Step4RobustnessChecks:
             "train_test": {
                 "n_repeats": int(n_repeats),
                 "train_frac": float(train_frac),
-                "alpha_mean": float(np.mean(alphas)),
-                "alpha_std": float(np.std(alphas)),
+                "kappa_cep_mean": float(np.mean(kappa_ceps)),
+                "kappa_cep_std": float(np.std(kappa_ceps)),
                 "test_slope_median": float(np.median(test_slopes)),
                 "test_slope_q16": float(np.percentile(test_slopes, 16)),
                 "test_slope_q84": float(np.percentile(test_slopes, 84)),
@@ -370,8 +376,8 @@ class Step4RobustnessChecks:
                 "test_h0_mean_q84": float(np.percentile(test_h0_mean, 84)),
             },
             "loocv": {
-                "alpha_mean": float(np.mean(loo_alphas)),
-                "alpha_std": float(np.std(loo_alphas)),
+                "kappa_cep_mean": float(np.mean(loo_kappa_ceps)),
+                "kappa_cep_std": float(np.std(loo_kappa_ceps)),
                 "pred_h0_mean": float(loo_mean),
                 "pred_h0_sem": float(loo_sem) if loo_sem is not None else None,
                 "pred_slope": float(loo_slope),
@@ -503,7 +509,7 @@ class Step4RobustnessChecks:
             print_status("No z_hd column found in stratified data.", "ERROR")
             return None
 
-        cuts = [0.0035, 0.005, 0.01, 0.02]
+        cuts = [0.0035, 0.005, 0.007, 0.01, 0.015, 0.02]
         rows = []
         for zcut in cuts:
             sub = df[(pd.to_numeric(df['z_hd'], errors='coerce') >= zcut)].copy()
@@ -586,25 +592,37 @@ class Step4RobustnessChecks:
             vpecerr = pd.to_numeric(df['vpecerr'], errors='coerce').fillna(250.0).values
         else:
             vpecerr = np.full(len(df), 250.0)
+        if 'sigma_delta' in df.columns:
+            # sigma_delta is a signed aperture-correction shift in the current
+            # table, so use its magnitude as a conservative scale proxy.
+            sigma_err = np.abs(pd.to_numeric(df['sigma_delta'], errors='coerce').fillna(0.0).values)
+        else:
+            sigma_err = np.zeros(len(df))
 
         vel_hd = self._velocity_from_z(df['z_hd']).values
         d = pd.to_numeric(df['distance_mpc'], errors='coerce').values
         sigma = pd.to_numeric(df['sigma_inferred'], errors='coerce').values
 
-        mask = np.isfinite(vel_hd) & np.isfinite(d) & np.isfinite(sigma) & np.isfinite(vpecerr)
+        mask = np.isfinite(vel_hd) & np.isfinite(d) & np.isfinite(sigma) & np.isfinite(vpecerr) & np.isfinite(sigma_err)
         vel_hd = vel_hd[mask]
         d = d[mask]
         sigma = sigma[mask]
         vpecerr = vpecerr[mask]
+        sigma_err = sigma_err[mask]
 
         mc = None
+        mc_joint = None
         if len(vel_hd) >= 3:
             rng = np.random.default_rng(42)
             r_draws = np.empty(n_mc)
+            r_joint_draws = np.empty(n_mc)
             for i in range(n_mc):
                 v_draw = vel_hd + rng.normal(0.0, vpecerr)
                 h0_draw = v_draw / d
                 r_draws[i] = stats.pearsonr(sigma, h0_draw)[0]
+
+                sigma_draw = np.maximum(1.0, sigma + rng.normal(0.0, sigma_err))
+                r_joint_draws[i] = stats.pearsonr(sigma_draw, h0_draw)[0]
 
             mc = {
                 'n_mc': int(n_mc),
@@ -615,6 +633,16 @@ class Step4RobustnessChecks:
                 'r_p50': float(np.percentile(r_draws, 50)),
                 'r_p97p5': float(np.percentile(r_draws, 97.5)),
                 'p_r_le_0': float(np.mean(r_draws <= 0.0)),
+            }
+            mc_joint = {
+                'n_mc': int(n_mc),
+                'n_hosts': int(len(vel_hd)),
+                'r_mean': float(np.mean(r_joint_draws)),
+                'r_std': float(np.std(r_joint_draws)),
+                'r_p2p5': float(np.percentile(r_joint_draws, 2.5)),
+                'r_p50': float(np.percentile(r_joint_draws, 50)),
+                'r_p97p5': float(np.percentile(r_joint_draws, 97.5)),
+                'p_r_le_0': float(np.mean(r_joint_draws <= 0.0)),
             }
 
         with open(self.flow_env_stats_path, 'w') as f:
@@ -639,6 +667,12 @@ class Step4RobustnessChecks:
                 f.write(f"  r_mean={mc['r_mean']:.6f} r_std={mc['r_std']:.6f}\n")
                 f.write(f"  r_95CI=[{mc['r_p2p5']:.6f}, {mc['r_p97p5']:.6f}]\n")
                 f.write(f"  P(r<=0)={mc['p_r_le_0']:.6f}\n")
+            if mc_joint is not None:
+                f.write("\nJoint Monte Carlo with peculiar-velocity and sigma-measurement uncertainty:\n")
+                f.write(f"  N_draw={mc_joint['n_mc']} N_hosts={mc_joint['n_hosts']}\n")
+                f.write(f"  r_mean={mc_joint['r_mean']:.6f} r_std={mc_joint['r_std']:.6f}\n")
+                f.write(f"  r_95CI=[{mc_joint['r_p2p5']:.6f}, {mc_joint['r_p97p5']:.6f}]\n")
+                f.write(f"  P(r<=0)={mc_joint['p_r_le_0']:.6f}\n")
 
         print_status(f"Saved flow/environment robustness results to {self.flow_env_stats_path}", "SUCCESS")
 
@@ -662,6 +696,18 @@ class Step4RobustnessChecks:
                     ["P(r<=0)", f"{mc['p_r_le_0']:.4f}"],
                 ],
                 title="v_pec Monte Carlo Robustness"
+            )
+        if mc_joint is not None:
+            print_table(
+                ["MC Metric", "Value"],
+                [
+                    ["N_hosts", str(mc_joint['n_hosts'])],
+                    ["r_mean", f"{mc_joint['r_mean']:.3f}"],
+                    ["r_std", f"{mc_joint['r_std']:.3f}"],
+                    ["r_95CI", f"[{mc_joint['r_p2p5']:.3f}, {mc_joint['r_p97p5']:.3f}]"],
+                    ["P(r<=0)", f"{mc_joint['p_r_le_0']:.4f}"],
+                ],
+                title="Joint v_pec + sigma Monte Carlo Robustness"
             )
 
     def perform_jackknife_analysis(self):
@@ -724,7 +770,7 @@ class Step4RobustnessChecks:
                 rows.append(["GLS slope", f"{cov_results['gls_slope_t']:.3f}", f"{cov_results['gls_slope_p']:.4f}", "Covariance-aware Wald test"])
                 rows.append(["Pearson p (cov)", f"{cov_results['pearson_r']:.4f}", f"{cov_results['pearson_p_cov']:.4f}", "Parametric MVN null"])
                 rows.append(["Spearman p (cov)", f"{cov_results['spearman_rho']:.4f}", f"{cov_results['spearman_p_cov']:.4f}", "Parametric MVN null"])
-        except Exception as e:
+        except (KeyError, ValueError, np.linalg.LinAlgError) as e:
             print_status(f"Covariance-aware tests failed: {e}", "WARNING")
 
         print_table(headers, rows, title="Correlation Tests (H0 vs Sigma)")

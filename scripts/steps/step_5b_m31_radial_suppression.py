@@ -3,14 +3,14 @@
 Step 5b: M31 Radial Shear-Suppression Model
 ==========================================
 
-Tests the TEP v0.7 prediction that Temporal Shear is progressively suppressed
+Tests the TEP v0.8 prediction that Temporal Shear is progressively suppressed
 by ambient density, using M31 Cepheid P-L data as a controlled single-galaxy
 laboratory. Three competing models are compared:
 
   Model A (Null):          Standard P-L, no environment dependence.
   Model B (Step/ Binary):  Inner/outer intercept step at R = 5 kpc.
   Model C (Continuous):    Intercept varies smoothly with suppression S(ρ),
-                           consistent with TEP v0.7 Temporal Topology.
+                           consistent with TEP v0.8 Temporal Topology.
 
 The continuous model is strongly preferred if the scalar field gradient is
 attenuated smoothly rather than switching at a discrete threshold.

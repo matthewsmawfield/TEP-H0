@@ -13,6 +13,12 @@ Alternative velocity definitions (H0 = cz/d):
 
 Monte Carlo with residual peculiar-velocity uncertainty:
   N_draw=5000 N_hosts=29
-  r_mean=0.309113 r_std=0.116458
-  r_95CI=[0.073404, 0.524589]
-  P(r<=0)=0.005400
+  r_mean=0.308558 r_std=0.113619
+  r_95CI=[0.075585, 0.521494]
+  P(r<=0)=0.004800
+
+Joint Monte Carlo with peculiar-velocity and sigma-measurement uncertainty:
+  N_draw=5000 N_hosts=29
+  r_mean=0.305173 r_std=0.115696
+  r_95CI=[0.067335, 0.520416]
+  P(r<=0)=0.006000

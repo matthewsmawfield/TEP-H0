@@ -1,22 +1,22 @@
-[14:23:59] [INFO] 
-[14:23:59] [INFO] ================================================================================
-[14:23:59] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis
-[14:23:59] [INFO] ================================================================================
-[14:23:59] [INFO] 
-[14:23:59] [INFO] Using regenerated sigma catalog for provenance: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv
-[14:23:59] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sigma_provenance_table.csv
-[14:23:59] [INFO] Analyzing 29 hosts with both Raw and Corrected data.
-[14:23:59] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_grid.csv
-[14:23:59] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_summary.json
-[14:23:59] [INFO] Sensitivity Results
-[14:23:59] [INFO] +-----------------+-------------------------+-----------------------+
-[14:23:59] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |
-[14:23:59] [INFO] +-----------------+-------------------------+-----------------------+
-[14:23:59] [INFO] | Correlation (r) | 0.4659                  | 0.4622                |
-[14:23:59] [INFO] | P-value         | 1.0854e-02              | 1.1600e-02            |
-[14:23:59] [INFO] | Significance    | Weak                    | Significant (>99%)    |
-[14:23:59] [INFO] +-----------------+-------------------------+-----------------------+
-[14:23:59] [SUCCESS] CONCLUSION: The signal is ROBUST. It exists independently of aperture corrections.
-[14:23:59] [PROCESS] Generating sensitivity plot...
-[14:24:00] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/aperture_sensitivity.png
-[14:24:00] [SUCCESS] Step 4b Complete.
+[06:53:08] [INFO] 
+[06:53:08] [INFO] ================================================================================
+[06:53:08] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis
+[06:53:08] [INFO] ================================================================================
+[06:53:08] [INFO] 
+[06:53:08] [INFO] Using regenerated sigma catalog for provenance: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature_regenerated.csv
+[06:53:08] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sigma_provenance_table.csv
+[06:53:08] [INFO] Analyzing 29 hosts with both Raw and Corrected data.
+[06:53:08] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_grid.csv
+[06:53:08] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_summary.json
+[06:53:08] [INFO] Sensitivity Results
+[06:53:08] [INFO] +-----------------+-------------------------+-----------------------+
+[06:53:08] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |
+[06:53:08] [INFO] +-----------------+-------------------------+-----------------------+
+[06:53:08] [INFO] | Correlation (r) | 0.4659                  | 0.4622                |
+[06:53:08] [INFO] | P-value         | 1.0854e-02              | 1.1600e-02            |
+[06:53:08] [INFO] | Significance    | Weak                    | Significant (>99%)    |
+[06:53:08] [INFO] +-----------------+-------------------------+-----------------------+
+[06:53:08] [SUCCESS] CONCLUSION: The signal is ROBUST. It exists independently of aperture corrections.
+[06:53:08] [PROCESS] Generating sensitivity plot...
+[06:53:09] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/aperture_sensitivity.png
+[06:53:09] [SUCCESS] Step 4b Complete.

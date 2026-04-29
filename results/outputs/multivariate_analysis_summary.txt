@@ -4,8 +4,8 @@ Model 1: H0 ~ Sigma
 Dep. Variable:             h0_derived   R-squared:                       0.214
 Model:                            OLS   Adj. R-squared:                  0.184
 Method:                 Least Squares   F-statistic:                     7.333
-Date:                Fri, 24 Apr 2026   Prob (F-statistic):             0.0116
-Time:                        14:24:39   Log-Likelihood:                -37.156
+Date:                Wed, 29 Apr 2026   Prob (F-statistic):             0.0116
+Time:                        06:53:47   Log-Likelihood:                -37.156
 No. Observations:                  29   AIC:                             78.31
 Df Residuals:                      27   BIC:                             81.05
 Df Model:                           1                                         
@@ -31,8 +31,8 @@ Model 2: H0 ~ Sigma + MeanLogP (Age Proxy)
 Dep. Variable:             h0_derived   R-squared:                       0.254
 Model:                            OLS   Adj. R-squared:                  0.196
 Method:                 Least Squares   F-statistic:                     4.421
-Date:                Fri, 24 Apr 2026   Prob (F-statistic):             0.0222
-Time:                        14:24:39   Log-Likelihood:                -36.396
+Date:                Wed, 29 Apr 2026   Prob (F-statistic):             0.0222
+Time:                        06:53:47   Log-Likelihood:                -36.396
 No. Observations:                  29   AIC:                             78.79
 Df Residuals:                      26   BIC:                             82.89
 Df Model:                           2                                         
@@ -59,8 +59,8 @@ Model 3: H0 ~ Sigma + Color + Stretch
 Dep. Variable:             h0_derived   R-squared:                       0.328
 Model:                            OLS   Adj. R-squared:                  0.247
 Method:                 Least Squares   F-statistic:                     4.067
-Date:                Fri, 24 Apr 2026   Prob (F-statistic):             0.0175
-Time:                        14:24:39   Log-Likelihood:                -34.877
+Date:                Wed, 29 Apr 2026   Prob (F-statistic):             0.0175
+Time:                        06:53:47   Log-Likelihood:                -34.877
 No. Observations:                  29   AIC:                             77.75
 Df Residuals:                      25   BIC:                             83.22
 Df Model:                           3                                         
@@ -88,8 +88,8 @@ Model 4: H0 ~ Sigma + Age + Dust + Mass
 Dep. Variable:             h0_derived   R-squared:                       0.396
 Model:                            OLS   Adj. R-squared:                  0.296
 Method:                 Least Squares   F-statistic:                     3.939
-Date:                Fri, 24 Apr 2026   Prob (F-statistic):             0.0135
-Time:                        14:24:39   Log-Likelihood:                -33.322
+Date:                Wed, 29 Apr 2026   Prob (F-statistic):             0.0135
+Time:                        06:53:47   Log-Likelihood:                -33.322
 No. Observations:                  29   AIC:                             76.64
 Df Residuals:                      24   BIC:                             83.48
 Df Model:                           4                                         
@@ -107,6 +107,38 @@ Omnibus:                       12.422   Durbin-Watson:                   2.626
 Prob(Omnibus):                  0.002   Jarque-Bera (JB):               15.940
 Skew:                          -0.948   Prob(JB):                     0.000346
 Kurtosis:                       6.097   Cond. No.                         1.42
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+
+Model 5: H0 ~ Sigma + Age + Dust + Mass + zHD + Group Richness
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:             h0_derived   R-squared:                       0.434
+Model:                            OLS   Adj. R-squared:                  0.279
+Method:                 Least Squares   F-statistic:                     2.808
+Date:                Wed, 29 Apr 2026   Prob (F-statistic):             0.0349
+Time:                        06:53:47   Log-Likelihood:                -32.396
+No. Observations:                  29   AIC:                             78.79
+Df Residuals:                      22   BIC:                             88.36
+Df Model:                           6                                         
+Covariance Type:            nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+const          -7.999e-16      0.158  -5.07e-15      1.000      -0.327       0.327
+sigma_inferred     0.2551      0.182      1.402      0.175      -0.122       0.633
+mean_logP          0.3030      0.197      1.540      0.138      -0.105       0.711
+c                  0.3111      0.172      1.808      0.084      -0.046       0.668
+host_logmass       0.2094      0.166      1.264      0.219      -0.134       0.553
+z_hd              -0.0252      0.197     -0.128      0.900      -0.434       0.384
+tully_nmb          0.2332      0.199      1.170      0.255      -0.180       0.647
+==============================================================================
+Omnibus:                       13.764   Durbin-Watson:                   2.555
+Prob(Omnibus):                  0.001   Jarque-Bera (JB):               20.617
+Skew:                          -0.967   Prob(JB):                     3.34e-05
+Kurtosis:                       6.649   Cond. No.                         2.10
 ==============================================================================
 
 Notes:
