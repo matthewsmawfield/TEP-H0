@@ -1,14 +1,15 @@
-[14:24:39] [INFO] 
-[14:24:39] [INFO] ================================================================================
-[14:24:39] [INFO]    Starting Step 6: Multivariate Analysis
-[14:24:39] [INFO] ================================================================================
-[14:24:39] [INFO] 
-[14:24:39] [INFO] Loading and Merging Data...
-[14:24:39] [INFO] Merged Data: N=29 hosts available for analysis.
-[14:24:39] [INFO] Running Multivariate Regression...
-[14:24:39] [SUCCESS] Saved regression summaries to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/multivariate_analysis_summary.txt
-[14:24:39] [SUCCESS] Saved structured results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/multivariate_analysis_results.json
-[14:24:39] [WARNING] Sigma loses significance in full model (p=0.0750).
-[14:24:39] [PROCESS] Generating Robustness Plot...
-[14:24:39] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/multivariate_robustness.png
-[14:24:39] [SUCCESS] Step 6 Complete.
+[06:53:47] [INFO] 
+[06:53:47] [INFO] ================================================================================
+[06:53:47] [INFO]    Starting Step 6: Multivariate Analysis
+[06:53:47] [INFO] ================================================================================
+[06:53:47] [INFO] 
+[06:53:47] [INFO] Loading and Merging Data...
+[06:53:47] [INFO] Merged Data: N=29 hosts available for analysis.
+[06:53:47] [INFO] Running Multivariate Regression...
+[06:53:47] [SUCCESS] Saved regression summaries to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/multivariate_analysis_summary.txt
+[06:53:47] [SUCCESS] Saved structured results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/multivariate_analysis_results.json
+[06:53:47] [SUCCESS] Sigma remains significant in primary astrophysical HC3 model (p=0.0067).
+[06:53:47] [INFO] Flow/environment model is a saturated mediator stress test; sigma HC3 p=0.2245.
+[06:53:47] [PROCESS] Generating Robustness Plot...
+[06:53:48] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/multivariate_robustness.png
+[06:53:48] [SUCCESS] Step 6 Complete.

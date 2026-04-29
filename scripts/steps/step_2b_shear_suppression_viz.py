@@ -2,13 +2,14 @@
 """
 Figure 8: Continuous Shear-Suppression Framework Visualization.
 
-This script creates a four-panel figure visualizing the TEP v0.7 continuous
+This script creates a four-panel figure visualizing the TEP v0.8 continuous
 shear-suppression framework for the 29 SH0ES host galaxies. It demonstrates
-how local environmental density modulates the effective shear coupling via
+how local environmental density modulates the temporal response via
 the suppression factor S(rho), and how this density-dependent modulation
 propagates into corrected distance moduli and H0 estimates.
 """
 
+import json
 import shutil
 from pathlib import Path
 
@@ -23,6 +24,7 @@ def main() -> None:
     project_root = script_dir.parent.parent
 
     csv_path = project_root / "results" / "outputs" / "tep_corrected_h0.csv"
+    json_path = project_root / "results" / "outputs" / "tep_correction_results.json"
     fig_dir = project_root / "results" / "figures"
     public_dir = project_root / "site" / "public" / "figures"
 
@@ -31,7 +33,11 @@ def main() -> None:
 
     df = pd.read_csv(csv_path)
 
-    alpha_bare = 0.641
+    # Load fitted kappa_Cep from correction results
+    with open(json_path) as f:
+        tep_results = json.load(f)
+    kappa_cep = float(tep_results["optimal_kappa_cep"])
+    
     rho_half = 0.5
 
     df["delta_mu"] = np.abs(df["value"] - df["mu_corrected"])
@@ -165,7 +171,7 @@ def main() -> None:
         va="top",
     )
 
-    # -- Panel (c): Effective coupling alpha*S vs sigma ----------------
+    # -- Panel (c): Effective coupling kappa*S vs sigma ----------------
     ax = axs[1, 0]
     ax.scatter(
         df["sigma_inferred"],
@@ -179,16 +185,19 @@ def main() -> None:
         linewidth=0.5,
         zorder=3,
     )
+    # Reference line for unscreened coupling (S=1)
+    kappa_mantissa = kappa_cep / 1e5
     ax.axhline(
-        alpha_bare,
+        kappa_cep,
         color=tep_dark,
         linestyle="--",
         linewidth=1.5,
-        label=r"Bare $\alpha = 0.641$",
+        label=rf"Unscreened coupling $\kappa_{{\rm Cep}} = {kappa_mantissa:.2f} \times 10^5$ mag",
     )
     ax.set_xlabel(r"Velocity Dispersion $\sigma$ (km/s)")
-    ax.set_ylabel(r"Effective Coupling $\alpha \cdot S$")
+    ax.set_ylabel(r"Effective Coupling $\kappa_{\rm Cep} \cdot S$ [mag]")
     ax.legend(loc="upper right")
+    ax.set_ylim(top=kappa_cep * 1.15)  # Add 15% headroom for legend
     ax.text(
         0.02,
         0.98,
@@ -226,7 +235,7 @@ def main() -> None:
                 color=tep_dark,
             )
     ax.set_xlabel(r"Shear Suppression $S$")
-    ax.set_ylabel(r"$|\Delta\mu| = \alpha S \, |\log_{10}(\sigma/\sigma_{\rm ref})|$")
+    ax.set_ylabel(r"$|\Delta\mu| = \kappa_{\rm Cep} S \, (\sigma^2 - \sigma_{\rm ref}^2)/c^2$ [mag]")
     ax.text(
         0.02,
         0.98,
@@ -242,10 +251,13 @@ def main() -> None:
     # ------------------------------------------------------------------
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(0.0, 1.0))
     sm.set_array([])
-    cbar = fig.colorbar(sm, ax=axs, shrink=0.8, pad=0.02)
+    
+    # Create colorbar axis explicitly on the far right
+    cbar_ax = fig.add_axes([0.92, 0.15, 0.02, 0.7])
+    cbar = fig.colorbar(sm, cax=cbar_ax)
     cbar.set_label(r"Shear Suppression $S$", rotation=270, labelpad=20)
 
-    fig.tight_layout()
+    fig.tight_layout(rect=[0, 0, 0.90, 1])
 
     # ------------------------------------------------------------------
     # Save

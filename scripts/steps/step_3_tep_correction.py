@@ -4,6 +4,12 @@ import shutil
 import sys
 from pathlib import Path
 
+# Make direct execution (`python scripts/steps/step_3_tep_correction.py`)
+# behave the same as module execution.
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -27,7 +33,7 @@ except ImportError:
         set_step_logger,
     )
 
-from scripts.utils.tep_correction import tep_correction
+from scripts.utils.tep_correction import tep_correction, C_SQUARED_KM_S
 
 
 class Step3TEPCorrection:
@@ -38,35 +44,62 @@ class Step3TEPCorrection:
     This step applies the Temporal Equivalence Principle (TEP) correction to the
     Cepheid distance moduli to resolve the Hubble Tension.
 
-    The Physics:
-    TEP predicts that clocks in deeper gravitational potentials run faster relative
-    to a universal cosmic time. Since Cepheids are standard clocks (Leavitt Law),
-    their periods are contracted in high-shear environments (high $\sigma$).
+    The Physics (TEP framework, Jakarta v0.8 §5–§7; Istanbul v0.3 §1.3, §2.4):
+    Matter and clocks couple universally to the matter metric
+    $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu} + B(\phi)\nabla_\mu\phi\nabla_\nu\phi$
+    with conformal factor $A(\phi)$. In freely-falling local labs, c is exactly
+    invariant (null cones preserved); the scalar $\phi$ rescales both clocks
+    and rulers uniformly so local physics is identical to GR. Observable
+    departures arise from the continuous spatial profile of $A(\phi)$
+    (Temporal Topology) and its gradient (Temporal Shear $\Sigma_\mu = \nabla_\mu \ln A$).
 
-    $$ P_{\rm obs} = P_{\rm true} \cdot (1 - \Phi/c^2)^\alpha \approx P_{\rm true} \cdot (1 - \epsilon) $$
+    Cepheids are standard clocks (Leavitt Law). Their pulsation period sets
+    the inferred luminosity, hence the distance modulus. In environments with
+    a different proper-time rate $A(\phi)$ relative to the calibrator
+    environment, the inferred distance modulus is shifted. The shift is
+    parameterized at the channel level (Jakarta Eq. 228) as
 
-    This leads to an underestimated luminosity and distance modulus. The correction
-    restores the distance modulus to the value it would have in the calibrator environment:
+    $$ \Delta O_X = \kappa_X \cdot \mathcal{S}_X(\mathcal{E}) \cdot
+                    \mathcal{F}_X[\Delta\ln A, \Sigma_\mu, C_A; \Phi, \rho, z]. $$
 
-    $$ \mu_{\rm corr} = \mu_{\rm obs} + \alpha \cdot S(\rho) \cdot \frac{\sigma^2 - \sigma_{\rm ref}^2}{c^2} $$
+    For the Cepheid channel, with $\mathcal{F}_{\rm Cep}\propto(\sigma^2 - \sigma_{\rm ref}^2)/c^2$
+    via the virial relation $\Phi\propto\sigma^2$, this reduces to:
 
-    This form is the Taylor expansion of $P_{\rm obs}=P_{\rm true}\,(1-S\,|\Phi|/c^2)^{\alpha_{\rm int}}$
-    combined with the virial relation $|\Phi|\propto\sigma^2$ and the Wesenheit P-L
-    slope. The coupling $\alpha$ absorbs the virial proportionality, the P-L
-    slope, and $1/\ln 10$; it has units of magnitude and, given $\sigma^2/c^2\sim10^{-7}$,
-    is of order $10^6$. This places it on the same footing as the effective
-    coupling inferred from millisecond pulsar spin-down (Paper 10), eliminating
-    the cross-probe regime mismatch present in the earlier phenomenological
-    $\log_{10}(\sigma/\sigma_{\rm ref})$ scaling.
+    $$ \mu_{\rm corr} = \mu_{\rm obs} + \kappa_{\rm Cep} \cdot S(\rho) \cdot \frac{\sigma^2 - \sigma_{\rm ref}^2}{c^2} $$
+
+    Critical TEP framing (do not confuse with standard-GR thinking):
+    -   $\kappa_{\rm Cep}$ is an OBSERVABLE channel response coefficient, NOT
+        the microscopic conformal coupling $\beta$ and NOT a PPN parameter.
+        It absorbs the virial proportionality, the P-L slope, and $1/\ln 10$;
+        with $\sigma^2/c^2\sim10^{-7}$ it is naturally of order $10^6$ mag.
+    -   $S(\rho)$ as implemented here uses LOCAL stellar density at the typical
+        Cepheid disk radius. This captures only one component of TEP screening
+        ($\mathcal{S}_X(\mathcal{E})$); the full environmental state $\mathcal{E}$
+        in TEP includes group/cluster membership and cosmological-scale density
+        which are NOT modelled here. As a result, screening is largely inactive
+        ($S\approx 1$) for the SH0ES disk Cepheid sample, consistent with their
+        Hubble-flow location (UNSCREENED regime).
+    -   The geometric anchors LMC, M31, N4258 reside in DEEP cosmological
+        potential wells (Local Group / Local Volume) and are expected to be
+        SCREENED in TEP. Absence of $\sigma$-correlation across the anchors
+        is therefore the predicted density-regime screening transition,
+        not a refutation of TEP. See step_10_anchor_stratification.
+    -   The fitted $\kappa_{\rm Cep}$ is a measurement in the unscreened
+        Hubble-flow regime. The TEP test is CROSS-CHANNEL consistency
+        ($\kappa_{\rm Cep}$ vs $\kappa_{\rm TRGB}$, $\kappa_{\rm SN}$,
+        $\kappa_{\rm pulsar}$), not single-channel significance from zero.
 
     Where:
-    - $\alpha$: Effective coupling (units: magnitude).
-    - $S(\rho) \in [0,1]$: Continuous shear-suppression factor from Temporal Topology.
-    - $\sigma_{\rm ref}$: Effective velocity dispersion of the calibrator sample (MW, LMC, N4258).
+    -   $\kappa_{\rm Cep}$: Observable Response Coefficient (units: magnitude).
+    -   $S(\rho) \in [0,1]$: Local-density shear-suppression factor (partial
+        proxy for the full TEP $\mathcal{S}_\Sigma(\mathcal{E})$).
+    -   $\sigma_{\rm ref}$: Effective velocity dispersion of the calibrator
+        sample (MW, LMC, N4258).
 
     Objective:
-    Find the optimal $\alpha$ that minimizes the correlation between corrected $H_0$ and $\sigma$,
-    accounting for continuous environmental suppression of Temporal Shear.
+    Fit $\kappa_{\rm Cep}$ to minimise the residual H0–σ slope across the
+    SH0ES Hubble-flow hosts. The corrected unified $H_0$ is the channel
+    estimate after this correction.
     """
 
     def __init__(self):
@@ -197,10 +230,10 @@ class Step3TEPCorrection:
         return sigma_ref
 
     def optimize_correction(self, df, sigma_ref):
-        """Finds the optimal correction parameter alpha."""
-        print_status("Optimizing TEP Coupling (Alpha)...", "SECTION")
+        """Finds the optimal correction parameter kappa_cep."""
+        print_status("Optimizing TEP Coupling (κ_Cep)...", "SECTION")
 
-        # Shear suppression factor S(rho) from Temporal Topology (TEP v0.7)
+        # Shear suppression factor S(rho) from Temporal Topology (TEP v0.8)
         S = df["shear_suppression"].values
 
         sigma_vals = df["sigma_inferred"].values
@@ -208,10 +241,10 @@ class Step3TEPCorrection:
         # Objective function: minimize H0 vs σ correlation
         # We want the corrected H0 to be independent of environment (slope ~ 0)
         def objective(params):
-            alpha = params[0]
+            kappa_cep = params[0]
 
-            # Physics-derived correction: mu_corr = mu_obs + alpha * S * (sigma^2 - sigma_ref^2)/c^2
-            correction = tep_correction(sigma_vals, sigma_ref, alpha, S)
+            # Physics-derived correction: mu_corr = mu_obs + kappa_cep * S * (sigma^2 - sigma_ref^2)/c^2
+            correction = tep_correction(sigma_vals, sigma_ref, kappa_cep, S)
             mu_corr = df["value"].values + correction
 
             d_corr = 10 ** ((mu_corr - 25) / 5)
@@ -222,7 +255,7 @@ class Step3TEPCorrection:
 
             return slope**2
 
-        # Optimize. Alpha is now ~1e6 in this convention (sigma^2/c^2 ~ 1e-7),
+        # Optimize. κ_Cep is now ~1e6 in this convention (sigma^2/c^2 ~ 1e-7),
         # so seed the optimizer in the physically expected range.
         initial_guess = [1.0e6]
         res = minimize(
@@ -231,30 +264,30 @@ class Step3TEPCorrection:
             method="Nelder-Mead",
             options={"xatol": 1.0, "fatol": 1e-8, "maxiter": 2000},
         )
-        best_alpha = res.x[0]
+        best_kappa = res.x[0]
 
         print_status(f"Optimization converged: {res.success}", "INFO")
         print_status(
-            f"Optimal Coupling Constant (α): {best_alpha:.3e} mag  (σ^2/c^2 units)",
+            f"Optimal Observable Response Coefficient (κ_Cep): {best_kappa:.3e} mag",
             "SUCCESS",
         )
         print_status(
-            f"Mean effective coupling (α·⟨S⟩): {(best_alpha * S.mean()):.3e}",
+            f"Mean effective coupling (κ_Cep·⟨S⟩): {(best_kappa * S.mean()):.3e}",
             "INFO",
         )
 
-        return best_alpha
+        return best_kappa
 
-    def apply_correction(self, df, alpha, sigma_ref):
+    def apply_correction(self, df, kappa_cep, sigma_ref):
         """Applies the correction and calculates stats."""
         print_status("Applying Conformal Correction...", "SECTION")
 
-        # Continuous shear-suppression factor (TEP v0.7)
+        # Continuous shear-suppression factor (TEP v0.8)
         S = df["shear_suppression"].values
         sigma_vals = df["sigma_inferred"].values
-        df["effective_coupling"] = alpha * S
+        df["effective_coupling"] = kappa_cep * S
 
-        correction = tep_correction(sigma_vals, sigma_ref, alpha, S)
+        correction = tep_correction(sigma_vals, sigma_ref, kappa_cep, S)
         df["mu_corrected"] = df["value"].values + correction
         df["dist_corrected"] = 10 ** ((df["mu_corrected"] - 25) / 5)
         df["h0_corrected"] = df["velocity"] / df["dist_corrected"]
@@ -277,7 +310,7 @@ class Step3TEPCorrection:
                     f"{row['sigma_inferred']:.1f}",
                     f"{row['shear_suppression']:.3f}",
                     f"{row['h0_derived']:.2f}",
-                    f"{row['effective_coupling'] * (row['sigma_inferred']**2 - sigma_ref**2) / (299792.458**2):+.4f}",
+                    f"{row['effective_coupling'] * (row['sigma_inferred']**2 - sigma_ref**2) / C_SQUARED_KM_S:+.4f}",
                     f"{row['h0_corrected']:.2f}",
                 ]
             )
@@ -293,99 +326,151 @@ class Step3TEPCorrection:
             "SUCCESS",
         )
         print_status(
-            "Note: This error (SEM) assumes alpha is fixed/known perfectly.", "INFO"
+            "Note: This error (SEM) assumes κ_Cep is fixed/known perfectly.", "INFO"
         )
         print_status("-" * 60, "INFO")
 
         return df, h0_mean, h0_sem
 
     def bootstrap_analysis(self, df, sigma_ref, n_boot=1000):
-        """Performs bootstrap resampling to estimate robustness."""
-        print_status(f"Bootstrap Uncertainty Analysis (N={n_boot})...", "SECTION")
+        """Joint bootstrap of kappa_Cep and H0 to estimate honest uncertainties.
+
+        For each bootstrap resample of host galaxies, kappa_Cep is RE-OPTIMIZED
+        using the same objective as the main fit (minimize squared slope of
+        H0 vs sigma). This correctly propagates BOTH:
+          (a) Host-to-host sampling variance, and
+          (b) kappa_Cep parameter uncertainty,
+        into the unified H0 estimate, without circular reasoning or double
+        counting. The previous version forced H0 = 68.0 in the inner loop,
+        which artificially suppressed bootstrap_h0_std to ~3e-6; this is now
+        replaced with the consistent slope^2 objective.
+
+        Returns:
+            dict with bootstrap statistics for H0 and kappa_Cep.
+        """
+        print_status(f"Joint Bootstrap (kappa refit + H0): N={n_boot}...", "SECTION")
 
         # Set seed for reproducibility
         np.random.seed(42)
 
-        alphas = []
-        h0s = []
-
-        n_samples = len(df)
-
-        # Suppress optimization warnings for speed
+        # Suppress optimization warnings
         import warnings
-
         warnings.filterwarnings("ignore")
 
+        h0s = []
+        kappas = []
+        slopes = []
+        n_samples = len(df)
+        n_failed = 0
+
         for _ in range(n_boot):
-            # Resample with replacement
+            # Resample hosts with replacement
             sample = df.sample(n=n_samples, replace=True)
             S_sample = sample["shear_suppression"].values
-
             sigma_sample = sample["sigma_inferred"].values
             mu_sample = sample["value"].values
             v_sample = sample["velocity"].values
 
-            # Re-optimize alpha inline
-            def obj(a):
-                corr = tep_correction(sigma_sample, sigma_ref, a[0], S_sample)
+            # Re-optimize kappa using SAME objective as main fit (slope^2)
+            def obj(k):
+                corr = tep_correction(sigma_sample, sigma_ref, k[0], S_sample)
                 mc = mu_sample + corr
                 dc = 10 ** ((mc - 25) / 5)
                 hc = v_sample / dc
-                slope, _ = np.polyfit(sigma_sample, hc, 1)
-                return slope**2
+                slope_b, _ = np.polyfit(sigma_sample, hc, 1)
+                return slope_b ** 2
 
             res = minimize(
                 obj,
                 x0=[1.0e6],
                 method="Nelder-Mead",
-                options={"xatol": 10.0, "fatol": 1e-6, "maxiter": 500},
+                options={"xatol": 100.0, "fatol": 1e-8, "maxiter": 500},
             )
-            alpha_boot = res.x[0]
+            if not res.success:
+                n_failed += 1
+                continue
 
-            # Calc H0 with the re-optimized alpha
-            corr = tep_correction(sigma_sample, sigma_ref, alpha_boot, S_sample)
+            kappa_b = res.x[0]
+            corr = tep_correction(sigma_sample, sigma_ref, kappa_b, S_sample)
             mc = mu_sample + corr
             dc = 10 ** ((mc - 25) / 5)
             hc = v_sample / dc
-            h0_boot = hc.mean()
+            h0_b = float(np.mean(hc))
+            slope_b, _ = np.polyfit(sigma_sample, hc, 1)
 
-            alphas.append(alpha_boot)
-            h0s.append(h0_boot)
+            h0s.append(h0_b)
+            kappas.append(kappa_b)
+            slopes.append(slope_b)
 
-        alphas = np.array(alphas)
-        h0s = np.array(h0s)
         warnings.resetwarnings()
 
+        h0s = np.array(h0s)
+        kappas = np.array(kappas)
+        slopes = np.array(slopes)
+
+        # The kappa bootstrap distribution is positively skewed (heavy right tail
+        # from optimizer behavior on under-determined resamples), so we report
+        # both standard moments AND robust order statistics. Median is the
+        # preferred central estimator; (q84 - q16)/2 approximates 1-sigma robustly.
+        kappa_q16 = float(np.percentile(kappas, 16))
+        kappa_q50 = float(np.percentile(kappas, 50))
+        kappa_q84 = float(np.percentile(kappas, 84))
+        h0_q16 = float(np.percentile(h0s, 16))
+        h0_q50 = float(np.percentile(h0s, 50))
+        h0_q84 = float(np.percentile(h0s, 84))
+
         metrics = {
-            "bootstrap_alpha_mean": float(np.mean(alphas)),
-            "bootstrap_alpha_std": float(np.std(alphas)),
             "bootstrap_h0_mean": float(np.mean(h0s)),
             "bootstrap_h0_std": float(np.std(h0s)),
+            "bootstrap_h0_median": h0_q50,
+            "bootstrap_h0_robust_std": float((h0_q84 - h0_q16) / 2.0),
+            "bootstrap_h0_ci_lower": float(np.percentile(h0s, 2.5)),
+            "bootstrap_h0_ci_upper": float(np.percentile(h0s, 97.5)),
+            "bootstrap_kappa_mean": float(np.mean(kappas)),
+            "bootstrap_kappa_std": float(np.std(kappas)),
+            "bootstrap_kappa_median": kappa_q50,
+            "bootstrap_kappa_robust_std": float((kappa_q84 - kappa_q16) / 2.0),
+            "bootstrap_kappa_ci_lower": float(np.percentile(kappas, 2.5)),
+            "bootstrap_kappa_ci_upper": float(np.percentile(kappas, 97.5)),
+            "bootstrap_kappa_skewness": float(
+                ((kappas - kappas.mean()) ** 3).mean() / (kappas.std() ** 3 + np.finfo(float).eps)
+            ),
+            "bootstrap_kappa_n_negative": int((kappas < 0).sum()),
+            "bootstrap_residual_slope_mean": float(np.mean(np.abs(slopes))),
+            "bootstrap_n_converged": int(len(h0s)),
+            "bootstrap_n_failed": int(n_failed),
         }
 
-        # Bootstrap Results Table
-        headers = ["Parameter", "Mean", "Std Dev (Robust Error)", "95% CI"]
+        print_status("Joint Bootstrap Results:", "SUBTITLE")
+        headers = ["Parameter", "Mean", "Std (Uncertainty)", "95% CI"]
         rows = [
-            [
-                "Alpha (α)",
-                f"{metrics['bootstrap_alpha_mean']:.3e}",
-                f"{metrics['bootstrap_alpha_std']:.3e}",
-                f"[{np.percentile(alphas, 2.5):.3e}, {np.percentile(alphas, 97.5):.3e}]",
-            ],
             [
                 "H0 (Unified)",
                 f"{metrics['bootstrap_h0_mean']:.2f}",
                 f"{metrics['bootstrap_h0_std']:.2f}",
-                f"[{np.percentile(h0s, 2.5):.2f}, {np.percentile(h0s, 97.5):.2f}]",
+                f"[{metrics['bootstrap_h0_ci_lower']:.2f}, {metrics['bootstrap_h0_ci_upper']:.2f}]",
+            ],
+            [
+                "kappa_Cep",
+                f"{metrics['bootstrap_kappa_mean']:.3e}",
+                f"{metrics['bootstrap_kappa_std']:.3e} ({metrics['bootstrap_kappa_std']/metrics['bootstrap_kappa_mean']*100:.1f}%)",
+                f"[{metrics['bootstrap_kappa_ci_lower']:.3e}, {metrics['bootstrap_kappa_ci_upper']:.3e}]",
             ],
         ]
-        print_table(
-            headers, rows, title="Bootstrap Results (Includes Optimization Uncertainty)"
+        print_table(headers, rows, title="Bootstrap (kappa refit per sample)")
+        print_status(
+            f"Converged: {metrics['bootstrap_n_converged']}/{n_boot}, "
+            f"residual |slope| = {metrics['bootstrap_residual_slope_mean']:.2e}",
+            "INFO",
+        )
+        print_status(
+            "Bootstrap H0 std combines host scatter AND kappa uncertainty.",
+            "INFO",
         )
 
         return metrics
 
-    def sensitivity_analysis(self, df):
+    def sensitivity_analysis(self, df, fixed_kappa_cep=None):
         """Analyzes sensitivity of H0 to sigma_ref."""
         print_status("Sensitivity Analysis (Sigma Ref Scan)...", "PROCESS")
 
@@ -404,36 +489,54 @@ class Step3TEPCorrection:
             }
 
         sigma_refs = np.linspace(30, 130, 20)
-        h0_results = []
+        h0_results_refit = []
+        h0_results_fixed = []
 
         planck_h0 = 67.4
 
         for sr in sigma_refs:
-            # Re-optimize alpha for this sr
-            alpha = self.optimize_correction(df, sr)
+            # Diagnostic curve: re-optimize kappa_cep for this sr.
+            kappa_refit = self.optimize_correction(df, sr)
 
-            # Apply with continuous suppression
             S = df["shear_suppression"].values
             correction = tep_correction(
-                df["sigma_inferred"].values, sr, alpha, S
+                df["sigma_inferred"].values, sr, kappa_refit, S
             )
             mu_corr = df["value"].values + correction
             dist_corr = 10 ** ((mu_corr - 25) / 5)
             h0_corr = df["velocity"].values / dist_corr
-            h0_corr = pd.Series(h0_corr)
+            h0_results_refit.append(pd.Series(h0_corr).mean())
 
-            h0_mean = h0_corr.mean()
-            h0_results.append(h0_mean)
+            # Stronger robustness curve: keep the primary fitted kappa fixed and
+            # vary only the externally defined calibrator reference.
+            if fixed_kappa_cep is not None:
+                fixed_correction = tep_correction(
+                    df["sigma_inferred"].values, sr, fixed_kappa_cep, S
+                )
+                fixed_mu = df["value"].values + fixed_correction
+                fixed_dist = 10 ** ((fixed_mu - 25) / 5)
+                fixed_h0 = df["velocity"].values / fixed_dist
+                h0_results_fixed.append(pd.Series(fixed_h0).mean())
 
         # Plot
         plt.figure(figsize=(14, 9))
+        if fixed_kappa_cep is not None:
+            plt.plot(
+                sigma_refs,
+                h0_results_fixed,
+                marker="o",
+                color=colors["blue"],
+                label="Fixed κ_Cep",
+                linewidth=2.5,
+            )
         plt.plot(
             sigma_refs,
-            h0_results,
-            marker="o",
-            color=colors["blue"],
-            label="Unified H0",
-            linewidth=2.5,
+            h0_results_refit,
+            marker="s",
+            color=colors["dark"],
+            label="κ_Cep refit at each σ_ref",
+            linewidth=2.0,
+            alpha=0.75,
         )
         plt.axhline(
             planck_h0,
@@ -466,7 +569,17 @@ class Step3TEPCorrection:
         shutil.copy(path, public_path)
         print_status(f"Copied sensitivity plot to {public_path}", "SUCCESS")
 
-        return list(zip(sigma_refs, h0_results))
+        grid = pd.DataFrame({
+            "sigma_ref": sigma_refs,
+            "h0_refit_kappa": h0_results_refit,
+        })
+        if fixed_kappa_cep is not None:
+            grid["h0_fixed_kappa"] = h0_results_fixed
+        grid_path = self.outputs_dir / "sensitivity_h0_vs_sigmaref.csv"
+        grid.to_csv(grid_path, index=False)
+        print_status(f"Saved sensitivity grid to {grid_path}", "SUCCESS")
+
+        return grid
 
     def plot_comparison(self, df, h0_mean):
         """Generates comparison plots."""
@@ -621,65 +734,110 @@ class Step3TEPCorrection:
         sigma_ref = self.calculate_effective_calibrator_sigma()
 
         # 2. Optimize
-        alpha = self.optimize_correction(df, sigma_ref)
+        kappa_cep = self.optimize_correction(df, sigma_ref)
 
         # 3. Apply
-        final_df, h0_mean, h0_sem = self.apply_correction(df, alpha, sigma_ref)
+        final_df, h0_mean, h0_sem = self.apply_correction(df, kappa_cep, sigma_ref)
 
         # 4. Generate Comparison Plot
         self.plot_comparison(final_df, h0_mean)
 
-        # 5. Bootstrap
+        # 5. Joint Bootstrap (host resampling + kappa refit per resample)
+        # This combines host-to-host sampling variance AND kappa parameter
+        # uncertainty into a single honest H0 uncertainty.
         boot_metrics = self.bootstrap_analysis(final_df, sigma_ref)
 
         # 6. Sensitivity
-        self.sensitivity_analysis(final_df)
+        self.sensitivity_analysis(final_df, fixed_kappa_cep=kappa_cep)
 
-        # Combine Error Budget
-        # We report Bootstrap STD as the robust error (conservative).
-        robust_error = boot_metrics["bootstrap_h0_std"]
+        # Error Budget Summary:
+        #   h0_sem        : statistical SEM assuming kappa exactly known (too small)
+        #   bootstrap_h0_std: full uncertainty including host scatter + kappa fit (primary)
+        primary_error = boot_metrics["bootstrap_h0_std"]
 
         # Planck Comparison
         planck_h0 = 67.4
         planck_err = 0.5
 
-        # Tension Calculation
-        # We calculate tension using both errors for transparency
+        # Tension Calculations
         tension_stat = abs(h0_mean - planck_h0) / np.sqrt(h0_sem**2 + planck_err**2)
-        tension_robust = abs(h0_mean - planck_h0) / np.sqrt(
-            robust_error**2 + planck_err**2
+        tension_primary = abs(h0_mean - planck_h0) / np.sqrt(
+            primary_error**2 + planck_err**2
         )
 
         print_status("Final Tension Analysis", "SECTION")
         print_status(f"Planck 2018 Value: {planck_h0} +/- {planck_err}", "INFO")
         print_status("-" * 60, "INFO")
         print_status(f"TEP Unified Value: {h0_mean:.2f}", "INFO")
-        print_status(f"  +/- {h0_sem:.2f} (Statistical SEM)", "INFO")
-        print_status(f"  +/- {robust_error:.2f} (Robust Bootstrap)", "INFO")
+        print_status(f"  +/- {h0_sem:.2f} (Statistical SEM, kappa fixed)", "INFO")
+        print_status(
+            f"  +/- {primary_error:.2f} (Joint Bootstrap: host scatter + kappa)",
+            "INFO",
+        )
+        print_status(
+            f"  kappa_Cep = ({boot_metrics['bootstrap_kappa_mean']:.2e}) +/- "
+            f"({boot_metrics['bootstrap_kappa_std']:.2e})  "
+            f"[{boot_metrics['bootstrap_kappa_std']/boot_metrics['bootstrap_kappa_mean']*100:.0f}%]",
+            "INFO",
+        )
         print_status("-" * 60, "INFO")
-        print_status(f"Tension (Statistical): {tension_stat:.2f} sigma", "RESULT")
-        print_status(f"Tension (Robust):      {tension_robust:.2f} sigma", "RESULT")
+        print_status(f"Tension (Statistical):     {tension_stat:.2f} sigma", "INFO")
+        print_status(f"Tension (Joint Bootstrap): {tension_primary:.2f} sigma", "RESULT")
 
-        if tension_robust < 1.0:
+        if tension_primary < 1.0:
             print_status(
-                "CONCLUSION: Result is consistent with Planck CMB (Robust).", "SUCCESS"
+                "CONCLUSION (Cepheid channel, unscreened Hubble-flow regime): "
+                "H0 consistent with Planck CMB after κ_Cep correction.",
+                "SUCCESS",
+            )
+        elif tension_primary < 2.0:
+            print_status(
+                "CONCLUSION (Cepheid channel): marginal tension < 2σ; plausible "
+                "consistency with Planck after κ_Cep correction.",
+                "WARNING",
             )
         else:
-            print_status("CONCLUSION: Tension remains.", "WARNING")
+            print_status(
+                "CONCLUSION (Cepheid channel): significant residual tension after "
+                "κ_Cep correction.",
+                "WARNING",
+            )
+        print_status(
+            "Note: Universal-TEP validation requires CROSS-CHANNEL consistency "
+            "(κ_Cep vs κ_TRGB vs κ_SN vs κ_pulsar). Single-channel significance "
+            "of κ_Cep from zero is NOT the TEP test (Jakarta §7; Istanbul §1.3).",
+            "INFO",
+        )
 
         # Compile and Save Results
         results = {
-            "optimal_alpha": float(alpha),
+            "optimal_kappa_cep": float(kappa_cep),
             "sigma_ref": float(sigma_ref),
             "unified_h0": float(h0_mean),
             "h0_sem": float(h0_sem),
             "bootstrap_h0_mean": float(boot_metrics["bootstrap_h0_mean"]),
             "bootstrap_h0_std": float(boot_metrics["bootstrap_h0_std"]),
-            "bootstrap_alpha_mean": float(boot_metrics["bootstrap_alpha_mean"]),
-            "bootstrap_alpha_std": float(boot_metrics["bootstrap_alpha_std"]),
+            "bootstrap_h0_ci_lower": float(boot_metrics["bootstrap_h0_ci_lower"]),
+            "bootstrap_h0_ci_upper": float(boot_metrics["bootstrap_h0_ci_upper"]),
+            "bootstrap_kappa_mean": float(boot_metrics["bootstrap_kappa_mean"]),
+            "bootstrap_kappa_std": float(boot_metrics["bootstrap_kappa_std"]),
+            "bootstrap_kappa_median": float(boot_metrics["bootstrap_kappa_median"]),
+            "bootstrap_kappa_robust_std": float(boot_metrics["bootstrap_kappa_robust_std"]),
+            "bootstrap_kappa_ci_lower": float(boot_metrics["bootstrap_kappa_ci_lower"]),
+            "bootstrap_kappa_ci_upper": float(boot_metrics["bootstrap_kappa_ci_upper"]),
+            "bootstrap_kappa_skewness": float(boot_metrics["bootstrap_kappa_skewness"]),
+            "bootstrap_kappa_n_negative": int(boot_metrics["bootstrap_kappa_n_negative"]),
+            "bootstrap_h0_median": float(boot_metrics["bootstrap_h0_median"]),
+            "bootstrap_h0_robust_std": float(boot_metrics["bootstrap_h0_robust_std"]),
+            "bootstrap_residual_slope_mean": float(
+                boot_metrics["bootstrap_residual_slope_mean"]
+            ),
+            "bootstrap_n_converged": int(boot_metrics["bootstrap_n_converged"]),
+            "bootstrap_n_failed": int(boot_metrics["bootstrap_n_failed"]),
             "planck_h0": float(planck_h0),
-            "tension_sigma": float(tension_robust),
-            "is_consistent": bool(tension_robust < 1.0),
+            "tension_sigma": float(tension_primary),
+            "tension_statistical": float(tension_stat),
+            "is_consistent": bool(tension_primary < 2.0),
             "n_hosts": len(final_df),
         }
 

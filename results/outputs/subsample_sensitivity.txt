@@ -17,6 +17,6 @@ ENHANCED ROBUSTNESS ANALYSIS SUMMARY
    Partial r(H0, σ | log ρ) = 0.493 (p = 0.0066)
 
 4. TEP CORRECTION ON SUBSAMPLES
-   full_sample: α = 941253.662, H0 = 68.14 ± 1.26
-   stellar_only: α = 941876.221, H0 = 66.23 ± 1.60
-   gold_standard: α = 1217889.404, H0 = 61.97 ± 2.67
+   full_sample: κ_Cep = 1049548.340, H0 = 68.17 ± 1.27
+   stellar_only: κ_Cep = 1021954.346, H0 = 66.15 ± 1.59
+   gold_standard: κ_Cep = 1220727.539, H0 = 62.00 ± 2.68

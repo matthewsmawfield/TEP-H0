@@ -47,8 +47,8 @@
     \Psi_m]$, where $R$ is the Ricci scalar, $V(\phi)$ is the scalar potential,
     and $S_m$ is the matter action. The key feature is the disformal coupling:
     matter fields $\Psi_m$ couple not to the Einstein-frame metric $g_{\mu\nu}$
-    but to the Jordan-frame metric $\tilde{g}_{\mu\nu} = A(\phi) g_{\mu\nu} + B(\phi) \nabla_\mu\phi \nabla_\nu\phi$,
-    where $A(\phi) = \exp(2\beta\phi/M_{\rm Pl})$ is the conformal factor and $B(\phi)$ encodes
+    but to the Jordan-frame metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu} + B(\phi) \nabla_\mu\phi \nabla_\nu\phi$,
+    where $A(\phi) = \exp(\beta\phi/M_{\rm Pl})$ is the conformal factor and $B(\phi)$ encodes
     the disformal coupling. In the weak-field limit relevant to galactic potentials,
     the disformal term is subdominant and the conformal factor expands as
 </p>
@@ -57,12 +57,11 @@
     For a clock following a worldline in spacetime, proper time is measured in
     the Jordan frame. In the weak-field, non-relativistic limit where $\phi$
     tracks the Newtonian potential $\Phi$, the conformal factor expands as
-    $A(\phi) \approx 1 - \eta \Phi/c^2$, where $\eta = 4\beta^2$ is the dimensionless
-    coupling constant. The effective proper time interval measured by a local
-    clock becomes $d\tau = A(\Phi) \, d\tau_{\rm GR} = (1 - \eta \Phi/c^2)
+    $A(\phi) \approx 1 - \eta_{\rm clock} \Phi/c^2$, where $\eta_{\rm clock}$ is the effective clock-rate response coefficient. The effective proper time interval measured by a local
+    clock becomes $d\tau = A(\Phi) \, d\tau_{\rm GR} = (1 - \eta_{\rm clock} \Phi/c^2)
     d\tau_{\rm GR}$, where $d\tau_{\rm GR} \approx (1 + \Phi/c^2) dt$ is the
     standard Schwarzschild time dilation. In deep potentials ($\Phi \ll 0$), if
-    $\eta > 1$, the TEP term can exceed the geometric term, causing clocks to
+    $\eta_{\rm clock} > 1$, the TEP term can exceed the geometric term, causing clocks to
     run faster rather than slower—a departure from standard GR expectations.
     This sign reversal is central to the mechanism proposed here: Cepheids in
     deep potentials experience period contraction, not dilation, leading to
@@ -80,10 +79,11 @@
     shear-suppression factor $S(\rho) \in [0,1]$, with $S(\rho) = [1 +
     (\rho/\rho_{\rm half})^2]^{-1}$ where $\rho_{\rm half} \approx
     0.5\,M_\odot/\text{pc}^3$ is the galactic half-suppression density. The
-    fundamental saturation scale is the Universal Critical Density $\rho_c
-    \approx 20$ g/cm³ (Paper 6), empirically constrained by independent timing
-    observations spanning atomic, compact-object, and galactic regimes. The
-    galactic-scale $\rho_{\rm half}$ emerges from SPARC rotation-curve
+    associated series-level saturation scale is denoted $\rho_{\rm T}$,
+    the Temporal Topology saturation density. It is not used here as a binary
+    local-density switch; local suppression depends on environmental state,
+    source screening, and the active Temporal Shear sector.
+    The galactic-scale $\rho_{\rm half}$ emerges from SPARC rotation-curve
     normalizations.
 </p>
 
@@ -92,15 +92,15 @@
     parameters are therefore critical. First, the gravitational potential depth
     (traced by velocity dispersion $\sigma$) drives the magnitude of the TEP
     effect; deeper potentials cause stronger period contraction when Temporal
-    Shear is active. Second, the local density modulates the effective coupling
+    Shear is active. Second, the local density modulates the response coefficient
     via $S(\rho)$: if $\rho \gg \rho_{\rm half}$, shear is strongly suppressed
     and the clock-rate anomaly is attenuated. Most SN Ia host environments are
     diffuse disks ($\rho \ll \rho_{\rm half}$), placing them in the active-shear
     regime ($S \approx 1$) where the field scales with potential. Dense
     environments like bulges experience progressive shear attenuation ($S < 1$),
     reducing the effect. This duality—potential drives the magnitude while
-    density modulates the coupling—is central to the interpretation of the M31
-    differential test. The key observational proxy for TEP effects in
+    density modulates the response coefficient—is central to the interpretation
+    of the M31 differential test. The key observational proxy for TEP effects in
     active-shear galaxies is the velocity dispersion $\sigma$, via the virial
     theorem: $\sigma^2 \propto GM/R \propto |\Phi|$. Higher $\sigma$ indicates a
     deeper potential and stronger TEP-induced clock acceleration, provided the
@@ -133,7 +133,7 @@
     enhancement—manifesting observationally as "period contraction" in periodic
     phenomena. Paper 10 reports a 0.58 dex spin-down excess in globular cluster
     pulsars compared to field controls, consistent with TEP predictions for
-    intermediate-scale time-dilation enhancement ($\alpha_{\rm eff} \sim 10^6$–$10^7$). Consequently, Cepheids in deep galactic potentials (high velocity
+    intermediate-scale time-dilation enhancement ($\kappa_{\rm Cep} \sim 10^6$–$10^7$). Consequently, Cepheids in deep galactic potentials (high velocity
     dispersion $\sigma$) experience accelerated time flow relative to
     calibration environments, causing their pulsation periods to appear
     <em>shortened</em> to distant observers. When observers apply the standard
@@ -150,7 +150,47 @@
     comparable to the observed Hubble Tension.
 </p>
 
-<h3>1.4 Scope and Structure</h3>
+<h3>1.4 Caveats and Risk Assessment</h3>
+<p>
+    This analysis has several limitations that affect the strength of inference.
+    Table 1 summarizes the key risks, current mitigations, and required next
+    steps to strengthen the conclusions.
+</p>
+
+<table class="data-table">
+    <caption><strong>Table 1.</strong> Risk assessment and mitigation strategy.</caption>
+    <thead>
+        <tr>
+            <th>Risk</th>
+            <th>Current mitigation</th>
+            <th>Required next step</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Heterogeneous velocity dispersions</td>
+            <td>Provenance variable</td>
+            <td>Uniform spectroscopy</td>
+        </tr>
+        <tr>
+            <td>Small host sample</td>
+            <td>Bootstrap/LOOCV</td>
+            <td>Independent SN-host sample</td>
+        </tr>
+        <tr>
+            <td>Cepheid metallicity/dust degeneracy</td>
+            <td>Covariance-aware controls</td>
+            <td>Joint dust-metallicity-potential fit</td>
+        </tr>
+        <tr>
+            <td>TEP coefficient fitted on same sample</td>
+            <td>Validation splits</td>
+            <td>External prior or blind prediction</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>1.5 Scope and Structure</h3>
 <p>
     This paper presents a quantitative test of the TEP explanation for the
     Hubble Tension. Stratification of the SH0ES Cepheid host galaxies by

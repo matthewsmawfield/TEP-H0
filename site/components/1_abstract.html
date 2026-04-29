@@ -4,9 +4,9 @@
         The Hubble Tension—the persistent 5σ discrepancy between local
         distance-ladder measurements ($H_0 \approx 73$ km/s/Mpc) and
         early-universe CMB inference ($H_0 = 67.4 \pm 0.5$ km/s/Mpc)—represents
-        a significant challenge in precision cosmology. This study proposes that
-        the tension arises from a systematic, environment-dependent bias in
-        Cepheid-based distances, as predicted by the Temporal Equivalence
+        a significant challenge in precision cosmology. This paper tests whether
+        a component of the Hubble tension can be represented as an environment-dependent
+        Cepheid clock bias, as predicted by the Temporal Equivalence
         Principle (TEP).
     </p>
 
@@ -29,8 +29,8 @@
         Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy
         velocity dispersion (a TEP-independent kinematic observable), reveals a
         statistically significant correlation between host potential depth and
-        derived $H_0$ (Spearman $\rho = 0.434$, $p = 0.019$; Pearson $r =
-        0.428$, $p = 0.021$). A median-split stratification at $\sigma_{\rm med}
+        derived $H_0$ (Spearman $\rho = 0.511$, $p = 0.0046$; Pearson $r =
+        0.462$, $p = 0.0116$). A median-split stratification at $\sigma_{\rm med}
         \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$;
         $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$),
         implying $\Delta H_0 = 4.63$ km/s/Mpc. Because published $\sigma$ values
@@ -41,28 +41,23 @@
     </p>
 
     <p>
-        Application of the TEP conformal correction $\Delta\mu = \alpha_{\rm eff}\cdot
+        Application of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot
         S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP
-        period-contraction $P_{\rm obs}=P_{\rm true}(1-|\Phi|/c^2)^{\alpha_{\rm
-        eff}}$ combined with the virial relation $|\Phi|\propto\sigma^2$—with
-        optimized effective coupling $\alpha_{\rm eff} = (9.6 \pm 4.0) \times 10^5$ mag and
-        effective calibrator reference $\sigma_{\rm ref} = 75.25$ km/s yields a
-        unified local Hubble constant of $H_0 = 68.37 \pm 1.54$ km/s/Mpc,
-        corresponding to a Planck tension of $0.60\sigma$. The inferred $\alpha_{\rm eff}\sim10^6$ places this probe in the same coupling regime as the
-        millisecond-pulsar spin-down excess (Paper 10), eliminating the
-        cross-probe mismatch of earlier phenomenological $\log_{10}\sigma$
-        scalings.
+        period-contraction combined with the virial relation $|\Phi|\propto\sigma^2$—with
+        Observable Response Coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag and effective calibrator reference $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.17$ km/s/Mpc (bootstrap mean $68.14 \pm 1.49$), corresponding to a Planck tension of $0.49\sigma$. The inferred $\kappa_{\rm Cep}\sim10^6$ places this probe in the same response-coefficient regime as the
+        millisecond-pulsar spin-down excess (Paper 10), reducing the apparent
+        cross-probe mismatch at the observable-response level compared with
+        earlier phenomenological $\log_{10}\sigma$ scalings.
         Out-of-sample validation (train/test splits and LOOCV) shows that the
-        optimized coupling is stable and removes the residual environmental
+        fitted response coefficient is stable and removes the residual environmental
         trend in held-out hosts. A differential analysis within M31 yields an
-        "Inner Fainter" signal in HST photometry. Within the TEP v0.7 framework,
+        "Inner Fainter" signal in HST photometry. Within the TEP v0.8 framework,
         this sign is consistent with continuous shear suppression: the
         high-density M31 bulge experiences progressive attenuation of Temporal
         Shear (suppression factor $S \approx 0.05$ at $R < 1$ kpc), while the
         lower-density SN Ia host disks remain in the active-shear regime
         ($\langle S \rangle = 0.946$). On this interpretation, the M31 signal
-        marks the empirical mapping of a continuous density-dependent
-        suppression profile across a single galaxy.
+        marks the empirical mapping of a continuous environmental shear-suppression profile across a single galaxy.
     </p>
 
     <p>

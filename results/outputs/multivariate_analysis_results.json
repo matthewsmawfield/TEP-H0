@@ -14,6 +14,18 @@
             "const": 0.9999999999999962,
             "sigma_inferred": 0.011600176911666595
         },
+        "hc3_params": {
+            "const": -7.999243628598052e-16,
+            "sigma_inferred": 0.4621612433960243
+        },
+        "hc3_bse": {
+            "const": 0.16965927197288402,
+            "sigma_inferred": 0.10336797922830057
+        },
+        "hc3_pvalues": {
+            "const": 0.9999999999999962,
+            "sigma_inferred": 0.00012611324854549448
+        },
         "nobs": 29.0
     },
     "AgeControl": {
@@ -33,6 +45,21 @@
             "const": 0.9999999999999962,
             "sigma_inferred": 0.02012022483268602,
             "mean_logP": 0.2474254491581038
+        },
+        "hc3_params": {
+            "const": -7.999243628598052e-16,
+            "sigma_inferred": 0.4261704970817303,
+            "mean_logP": 0.2036601731176546
+        },
+        "hc3_bse": {
+            "const": 0.17230697052612143,
+            "sigma_inferred": 0.11772214672474027,
+            "mean_logP": 0.18988994082501845
+        },
+        "hc3_pvalues": {
+            "const": 0.9999999999999963,
+            "sigma_inferred": 0.0012485343755905135,
+            "mean_logP": 0.29334234011353544
         },
         "nobs": 29.0
     },
@@ -56,6 +83,24 @@
             "sigma_inferred": 0.026559544634854923,
             "c": 0.053759434857770204,
             "x1": 0.44432403280202915
+        },
+        "hc3_params": {
+            "const": -7.999243628598052e-16,
+            "sigma_inferred": 0.3979713493574458,
+            "c": 0.3472965022371954,
+            "x1": -0.13070475153773917
+        },
+        "hc3_bse": {
+            "const": 0.16580371529139928,
+            "sigma_inferred": 0.11253482842451695,
+            "c": 0.12985648486940957,
+            "x1": 0.16390273699339336
+        },
+        "hc3_pvalues": {
+            "const": 0.9999999999999962,
+            "sigma_inferred": 0.0016111789543594135,
+            "c": 0.013003271213430822,
+            "x1": 0.4326972826280405
         },
         "nobs": 29.0
     },
@@ -83,6 +128,94 @@
             "c": 0.07374880961817605,
             "host_logmass": 0.15781054365448602
         },
+        "hc3_params": {
+            "const": -7.999243628598052e-16,
+            "sigma_inferred": 0.31278928176026033,
+            "mean_logP": 0.19522609399304963,
+            "c": 0.3055877314743489,
+            "host_logmass": 0.2360692772376479
+        },
+        "hc3_bse": {
+            "const": 0.15914959484339655,
+            "sigma_inferred": 0.10538934419222094,
+            "mean_logP": 0.15992236267910964,
+            "c": 0.1094493925556499,
+            "host_logmass": 0.11644988389840424
+        },
+        "hc3_pvalues": {
+            "const": 0.999999999999996,
+            "sigma_inferred": 0.006696062715595855,
+            "mean_logP": 0.23403696279554628,
+            "c": 0.010114229484763237,
+            "host_logmass": 0.053885698206506995
+        },
         "nobs": 29.0
+    },
+    "FlowEnvironment": {
+        "r_squared": 0.43368359658499034,
+        "adj_r_squared": 0.2792336683808968,
+        "params": {
+            "const": -7.999243628598052e-16,
+            "sigma_inferred": 0.25514155990737897,
+            "mean_logP": 0.3029784419071617,
+            "c": 0.3111003470202927,
+            "host_logmass": 0.20938721618015177,
+            "z_hd": -0.02519251658428741,
+            "tully_nmb": 0.23323623058083387
+        },
+        "bse": {
+            "const": 0.15765155069057032,
+            "sigma_inferred": 0.18200756067357882,
+            "mean_logP": 0.19679151497648317,
+            "c": 0.17209489422926671,
+            "host_logmass": 0.1655925604945861,
+            "z_hd": 0.19723712763456588,
+            "tully_nmb": 0.19934234043499566
+        },
+        "pvalues": {
+            "const": 0.999999999999996,
+            "sigma_inferred": 0.174921152812649,
+            "mean_logP": 0.13792087270664033,
+            "c": 0.08434282479864244,
+            "host_logmass": 0.21929282915729298,
+            "z_hd": 0.8995253236273231,
+            "tully_nmb": 0.2545090498757015
+        },
+        "hc3_params": {
+            "const": -7.999243628598052e-16,
+            "sigma_inferred": 0.25514155990737897,
+            "mean_logP": 0.3029784419071617,
+            "c": 0.3111003470202927,
+            "host_logmass": 0.20938721618015177,
+            "z_hd": -0.02519251658428741,
+            "tully_nmb": 0.23323623058083387
+        },
+        "hc3_bse": {
+            "const": 0.25040982420084773,
+            "sigma_inferred": 0.20412953128893796,
+            "mean_logP": 0.1922606082251438,
+            "c": 0.1221780381072129,
+            "host_logmass": 0.11941293367054871,
+            "z_hd": 0.4122499767799939,
+            "tully_nmb": 1.0495270056732393
+        },
+        "hc3_pvalues": {
+            "const": 0.9999999999999976,
+            "sigma_inferred": 0.22446923161364407,
+            "mean_logP": 0.12932697023031772,
+            "c": 0.018402663035067334,
+            "host_logmass": 0.09344487883789557,
+            "z_hd": 0.9518235270971167,
+            "tully_nmb": 0.8261850416274154
+        },
+        "nobs": 29.0
+    },
+    "_interpretation": {
+        "primary_model": "Full",
+        "primary_reason": "Controls age, SN color, and stellar mass. This is the primary astrophysical-confound model.",
+        "primary_sigma_hc3_p": 0.006696062715595855,
+        "stress_model": "FlowEnvironment",
+        "stress_reason": "Adds redshift and group richness. This is a conservative stress test because group richness can mediate TEP screening rather than act as a pure nuisance covariate.",
+        "stress_sigma_hc3_p": 0.22446923161364407
     }
 }

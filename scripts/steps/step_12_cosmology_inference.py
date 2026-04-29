@@ -10,8 +10,8 @@ modified gravity parameters used in Boltzmann solvers.
 
 Theoretical Framework:
 - Metric: Jordan frame metric g_tilde = A(phi) g + B(phi) d_phi d_phi
-- Clock coupling: alpha_eff ~ 9.6e5
-- Screening scale: m_phi(rho) (Chameleon mechanism)
+- Clock response: kappa_cep ~ 1.05e6 mag (Observable Response Coefficient)
+- Screening scale: m_phi(rho) (candidate completion for continuous Temporal Shear suppression)
 
 Author: Matthew Lukin Smawfield
 Date: April 2026
@@ -28,14 +28,14 @@ def define_tep_cosmology_params():
     print_status("Initializing TEP-CLASS Parameter Mapping...", "INFO")
 
     # TEP Core Parameters (from Paper 11/12)
-    alpha_clock = 9.6e5    # Clock/Matter sector (mag)
-    alpha_gravity = 1.1e-3 # Gravitational sector (dimensionless, from Paper 12)
+    kappa_cep = 1.05e6      # Clock/Matter sector (mag) - Observable Response Coefficient
+    kappa_grav = 1.1e-3     # Gravitational sector (dimensionless, from Paper 12)
     m_phi_0 = 1.0          # h/Mpc (fiducial mass scale)
     rho_c = 20.0           # g/cm^3 (critical screening density)
     
     # Mapping to hi_class (Horndeski / Scalar-Tensor)
     params = {
-        'H0': 68.37,
+        'H0': 68.17,
         'omega_b': 0.02237,
         'omega_cdm': 0.1200,
         'tau_reio': 0.0544,
@@ -43,8 +43,8 @@ def define_tep_cosmology_params():
         'n_s': 0.9649,
         
         # TEP-specific
-        'tep_alpha_clock': alpha_clock,
-        'tep_alpha_gravity': alpha_gravity,
+        'tep_kappa_cep': kappa_cep,
+        'tep_kappa_grav': kappa_grav,
         'tep_m_phi': m_phi_0,
         'tep_rho_c': rho_c,
         'parameters_smg': 'tep_conformal_disformal',
@@ -58,15 +58,15 @@ def calculate_geff_k(k, z, params):
     Calculates the effective gravitational constant G_eff(k, z)
     using the TEP gravity-sector coupling.
     """
-    alpha_g = params['tep_alpha_gravity']
+    kappa_g = params['tep_kappa_grav']
     m_phi = params['tep_m_phi']
     
     # z-dependent density suppression
     m_phi_z = m_phi * (1.0 + z)
     
     # Scale-dependent enhancement (Gravitational Sector)
-    # G_eff / G_N = 1 + alpha_g * (k^2 / (m_phi^2 + k^2))
-    enhancement = 1.0 + alpha_g * (k**2 / (m_phi_z**2 + k**2))
+    # G_eff / G_N = 1 + kappa_g * (k^2 / (m_phi^2 + k^2))
+    enhancement = 1.0 + kappa_g * (k**2 / (m_phi_z**2 + k**2))
     
     return enhancement
 

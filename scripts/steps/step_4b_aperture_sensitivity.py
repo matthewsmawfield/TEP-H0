@@ -303,12 +303,12 @@ class Step4bApertureSensitivity:
         den = sum(w for _, w in anchors)
         return float(num / den)
 
-    def _optimize_alpha_and_unified_h0(self, df: pd.DataFrame, sigma_col: str, sigma_ref: float) -> dict:
+    def _optimize_kappa_and_unified_h0(self, df: pd.DataFrame, sigma_col: str, sigma_ref: float) -> dict:
         required = [sigma_col, 'value', 'velocity']
         missing = [c for c in required if c not in df.columns]
         if missing:
             return {
-                "alpha_opt": np.nan,
+                "kappa_cep_opt": np.nan,
                 "unified_h0": np.nan,
                 "post_slope": np.nan,
                 "post_r": np.nan,
@@ -317,7 +317,7 @@ class Step4bApertureSensitivity:
         work = df.dropna(subset=['value', 'velocity', sigma_col]).copy()
         if len(work) < 3:
             return {
-                "alpha_opt": np.nan,
+                "kappa_cep_opt": np.nan,
                 "unified_h0": np.nan,
                 "post_slope": np.nan,
                 "post_r": np.nan,
@@ -326,12 +326,13 @@ class Step4bApertureSensitivity:
         sigma_vals = work[sigma_col].astype(float).values
         mu_vals = work['value'].astype(float).values
         v_vals = work['velocity'].astype(float).values
+        S_vals = work['shear_suppression'].astype(float).values if 'shear_suppression' in work.columns else np.ones(len(work))
 
         from scripts.utils.tep_correction import tep_correction
 
         def objective(params):
-            alpha = float(params[0])
-            corr = tep_correction(sigma_vals, sigma_ref, alpha)
+            kappa_cep = float(params[0])
+            corr = tep_correction(sigma_vals, sigma_ref, kappa_cep, S_vals)
             mu_corr = mu_vals + corr
             d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
             h0_corr = v_vals / d_corr
@@ -344,9 +345,9 @@ class Step4bApertureSensitivity:
             method='Nelder-Mead',
             options={'xatol': 10.0, 'fatol': 1e-6, 'maxiter': 500},
         )
-        alpha_opt = float(res.x[0])
+        kappa_cep_opt = float(res.x[0])
 
-        corr = tep_correction(sigma_vals, sigma_ref, alpha_opt)
+        corr = tep_correction(sigma_vals, sigma_ref, kappa_cep_opt, S_vals)
         mu_corr = mu_vals + corr
         d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
         h0_corr = v_vals / d_corr
@@ -356,7 +357,7 @@ class Step4bApertureSensitivity:
         unified_h0 = float(np.mean(h0_corr))
 
         return {
-            "alpha_opt": alpha_opt,
+            "kappa_cep_opt": kappa_cep_opt,
             "unified_h0": unified_h0,
             "post_slope": float(post_slope),
             "post_r": float(post_r),
@@ -373,8 +374,8 @@ class Step4bApertureSensitivity:
             base_df['r_eff_arcsec'] = np.nan
 
         sigma_ref = self._calculate_sigma_ref()
-        can_optimize_alpha = all(c in base_df.columns for c in ['value', 'velocity'])
-        if not can_optimize_alpha:
+        can_optimize_kappa = all(c in base_df.columns for c in ['value', 'velocity'])
+        if not can_optimize_kappa:
             print_status(
                 "TEP optimization columns missing from stratified_h0.csv (need 'value' and 'velocity'); grid will report only raw H0–sigma metrics.",
                 "WARNING",
@@ -393,8 +394,8 @@ class Step4bApertureSensitivity:
 
                 m = self._metrics_for_sigma(tmp, 'sigma_scenario')
 
-                tep = self._optimize_alpha_and_unified_h0(tmp, 'sigma_scenario', sigma_ref) if can_optimize_alpha else {
-                    "alpha_opt": np.nan,
+                tep = self._optimize_kappa_and_unified_h0(tmp, 'sigma_scenario', sigma_ref) if can_optimize_kappa else {
+                    "kappa_cep_opt": np.nan,
                     "unified_h0": np.nan,
                     "post_slope": np.nan,
                     "post_r": np.nan,
@@ -409,7 +410,7 @@ class Step4bApertureSensitivity:
                     "delta_h0": m["delta_h0"],
                     "median_sigma": m.get("median_sigma", np.nan),
                     "sigma_ref": float(sigma_ref),
-                    "alpha_opt": tep["alpha_opt"],
+                    "kappa_cep_opt": tep["kappa_cep_opt"],
                     "unified_h0": tep["unified_h0"],
                     "post_slope": tep["post_slope"],
                     "post_r": tep["post_r"],
@@ -428,8 +429,8 @@ class Step4bApertureSensitivity:
             "slope_max": float(np.nanmax(grid_df['slope'].values)),
             "delta_h0_min": float(np.nanmin(grid_df['delta_h0'].values)),
             "delta_h0_max": float(np.nanmax(grid_df['delta_h0'].values)),
-            "alpha_min": float(np.nanmin(grid_df['alpha_opt'].values)) if 'alpha_opt' in grid_df.columns else np.nan,
-            "alpha_max": float(np.nanmax(grid_df['alpha_opt'].values)) if 'alpha_opt' in grid_df.columns else np.nan,
+            "kappa_cep_min": float(np.nanmin(grid_df['kappa_cep_opt'].values)) if 'kappa_cep_opt' in grid_df.columns else np.nan,
+            "kappa_cep_max": float(np.nanmax(grid_df['kappa_cep_opt'].values)) if 'kappa_cep_opt' in grid_df.columns else np.nan,
             "unified_h0_min": float(np.nanmin(grid_df['unified_h0'].values)) if 'unified_h0' in grid_df.columns else np.nan,
             "unified_h0_max": float(np.nanmax(grid_df['unified_h0'].values)) if 'unified_h0' in grid_df.columns else np.nan,
         }

@@ -255,7 +255,7 @@ class Step6EnhancedRobustness:
         
         print_status(f"Gold standard hosts (K&H13 + SDSS + Ho09): {len(gold_hosts)}", "INFO")
         for src in gold_sources:
-            n = len(sigma_prov[sigma_prov['sigma_source'] == src])
+            n = len(prov[prov['sigma_source_class'] == src])
             print_status(f"  - {src}: {n} hosts", "INFO")
         
         df_gold = df[df['normalized_name'].isin(gold_hosts)].copy()
@@ -363,20 +363,33 @@ class Step6EnhancedRobustness:
         print_status("\n--- TEP CORRECTION ON SUBSAMPLES ---", "SECTION")
         
         from scripts.utils.tep_correction import tep_correction
-        sigma_ref = 75.25  # Fixed reference from anchors
+        # Load sigma_ref dynamically from step 3 to keep subsample tests consistent
+        # with the main TEP correction.
+        sigma_ref = 75.25  # Fallback if tep_correction_results.json is missing
+        try:
+            tep_path = self.outputs_dir / "tep_correction_results.json"
+            if tep_path.exists():
+                with open(tep_path, "r") as f:
+                    _tep = json.load(f)
+                if isinstance(_tep, dict) and 'sigma_ref' in _tep:
+                    sigma_ref = float(_tep['sigma_ref'])
+        except Exception:
+            pass
         
-        def optimize_alpha(subset_df):
-            """Optimize alpha for a subset."""
+        def optimize_kappa(subset_df):
+            """Optimize kappa_cep for a subset."""
             if len(subset_df) < 5:
                 return np.nan, np.nan, np.nan
             
-            sigma_arr = subset_df['sigma_corrected'].values
+            sigma_col = 'sigma_inferred' if 'sigma_inferred' in subset_df.columns else 'sigma_corrected'
+            sigma_arr = subset_df[sigma_col].values
             mu_arr = subset_df['value'].values
             z_arr = subset_df['z_hd'].values
+            S_arr = subset_df['shear_suppression'].values if 'shear_suppression' in subset_df.columns else np.ones(len(subset_df))
             
-            def objective(alpha):
-                a = float(alpha[0]) if hasattr(alpha, '__len__') else float(alpha)
-                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, a)
+            def objective(kappa):
+                k = float(kappa[0]) if hasattr(kappa, '__len__') else float(kappa)
+                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, k, S_arr)
                 d_corr = 10 ** ((mu_corr - 25) / 5)
                 h0_corr = 299792.458 * z_arr / d_corr
                 slope, _, _, _, _ = stats.linregress(sigma_arr, h0_corr)
@@ -388,24 +401,28 @@ class Step6EnhancedRobustness:
                 method='Nelder-Mead',
                 options={'xatol': 10.0, 'fatol': 1e-6, 'maxiter': 500},
             )
-            alpha_opt = float(result.x[0])
+            kappa_cep_opt = float(result.x[0])
             
             # Compute unified H0
-            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, alpha_opt)
+            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, kappa_cep_opt, S_arr)
             d_corr = 10 ** ((mu_corr - 25) / 5)
             h0_corr = 299792.458 * z_arr / d_corr
             unified_h0 = np.mean(h0_corr)
             h0_std = np.std(h0_corr) / np.sqrt(len(h0_corr))
             
-            return alpha_opt, unified_h0, h0_std
+            return kappa_cep_opt, unified_h0, h0_std
         
         # Full sample
-        alpha_full, h0_full, err_full = optimize_alpha(df)
+        kappa_full, h0_full, err_full = optimize_kappa(df)
         
         # Stellar absorption only
+        sigma_prov = sigma_prov.copy()
+        for c in ['normalized_name', 'sigma_method', 'sigma_source']:
+            if c in sigma_prov.columns:
+                sigma_prov[c] = sigma_prov[c].astype(str).str.strip()
         stellar_hosts = sigma_prov[sigma_prov['sigma_method'] == 'stellar absorption']['normalized_name'].tolist()
         df_stellar = df[df['normalized_name'].isin(stellar_hosts)].copy()
-        alpha_stellar, h0_stellar, err_stellar = optimize_alpha(df_stellar)
+        kappa_stellar, h0_stellar, err_stellar = optimize_kappa(df_stellar)
         
         # Gold standard only
         def _source_class(v: str) -> str:
@@ -421,40 +438,40 @@ class Step6EnhancedRobustness:
         gold_prov = sigma_prov_temp[sigma_prov_temp['sigma_source_class'].isin(gold_sources)]
         gold_hosts = gold_prov['normalized_name'].tolist()
         df_gold = df[df['normalized_name'].isin(gold_hosts)].copy()
-        alpha_gold, h0_gold, err_gold = optimize_alpha(df_gold)
+        kappa_gold, h0_gold, err_gold = optimize_kappa(df_gold)
         
         results = {
             'full_sample': {
                 'n': len(df),
-                'alpha': float(alpha_full) if not np.isnan(alpha_full) else None,
+                'kappa_cep': float(kappa_full) if not np.isnan(kappa_full) else None,
                 'unified_h0': float(h0_full) if not np.isnan(h0_full) else None,
                 'h0_error': float(err_full) if not np.isnan(err_full) else None
             },
             'stellar_only': {
                 'n': len(df_stellar),
-                'alpha': float(alpha_stellar) if not np.isnan(alpha_stellar) else None,
+                'kappa_cep': float(kappa_stellar) if not np.isnan(kappa_stellar) else None,
                 'unified_h0': float(h0_stellar) if not np.isnan(h0_stellar) else None,
                 'h0_error': float(err_stellar) if not np.isnan(err_stellar) else None
             },
             'gold_standard': {
                 'n': len(df_gold),
-                'alpha': float(alpha_gold) if not np.isnan(alpha_gold) else None,
+                'kappa_cep': float(kappa_gold) if not np.isnan(kappa_gold) else None,
                 'unified_h0': float(h0_gold) if not np.isnan(h0_gold) else None,
                 'h0_error': float(err_gold) if not np.isnan(err_gold) else None
             }
         }
         
         print_status("\nTEP Correction Comparison:", "INFO")
-        headers = ["Subsample", "N", "α_opt", "Unified H0 (km/s/Mpc)"]
+        headers = ["Subsample", "N", "κ_Cep", "Unified H0 (km/s/Mpc)"]
         rows = [
             ["Full Sample", len(df), 
-             f"{alpha_full:.3f}" if not np.isnan(alpha_full) else "N/A",
+             f"{kappa_full:.3f}" if not np.isnan(kappa_full) else "N/A",
              f"{h0_full:.2f} ± {err_full:.2f}" if not np.isnan(h0_full) else "N/A"],
             ["Stellar Only", len(df_stellar),
-             f"{alpha_stellar:.3f}" if not np.isnan(alpha_stellar) else "N/A",
+             f"{kappa_stellar:.3f}" if not np.isnan(kappa_stellar) else "N/A",
              f"{h0_stellar:.2f} ± {err_stellar:.2f}" if not np.isnan(h0_stellar) else "N/A"],
             ["Gold Standard", len(df_gold),
-             f"{alpha_gold:.3f}" if not np.isnan(alpha_gold) else "N/A",
+             f"{kappa_gold:.3f}" if not np.isnan(kappa_gold) else "N/A",
              f"{h0_gold:.2f} ± {err_gold:.2f}" if not np.isnan(h0_gold) else "N/A"]
         ]
         print_table(headers, rows)
@@ -501,7 +518,7 @@ class Step6EnhancedRobustness:
             f.write("4. TEP CORRECTION ON SUBSAMPLES\n")
             for name, data in tep.items():
                 if data['unified_h0'] is not None:
-                    f.write(f"   {name}: α = {data['alpha']:.3f}, H0 = {data['unified_h0']:.2f} ± {data['h0_error']:.2f}\n")
+                    f.write(f"   {name}: κ_Cep = {data['kappa_cep']:.3f}, H0 = {data['unified_h0']:.2f} ± {data['h0_error']:.2f}\n")
             
         print_status(f"\nSummary written to: {self.subsample_stats_path}", "INFO")
 

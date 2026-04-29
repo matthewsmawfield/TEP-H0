@@ -225,19 +225,21 @@ def run_anchor_stratification_test():
         
         print_status("Zero-Point vs Velocity Dispersion:", "SECTION")
         
-        # ===== MULTI-ANCHOR REGRESSION =====
-        # Fit: M_W = a + α_anchor * log10(σ/σ_ref)
+        # ===== MULTI-ANCHOR REGRESSION (sigma^2/c^2 form) =====
+        # Physics-derived form consistent with TEP correction:
+        # M_W = a + κ_anchor * (σ^2 - σ_ref^2)/c^2
         # This directly tests if anchor zero-points correlate with potential depth
         
-        log_sigmas = np.log10(sigmas)
         sigma_ref = 75.25  # Same reference as main analysis
-        log_sigma_rel = np.log10(sigmas / sigma_ref)
+        c_km_s = 299792.458
+        # Physics-derived regressor: (sigma^2 - sigma_ref^2)/c^2 (matches step_3 correction form)
+        sigma_regressor = (sigmas**2 - sigma_ref**2) / c_km_s**2
         
         # Weighted linear regression
         weights = 1.0 / M_W_errs**2
         
         # Design matrix
-        X = np.column_stack([np.ones_like(log_sigma_rel), log_sigma_rel])
+        X = np.column_stack([np.ones_like(sigma_regressor), sigma_regressor])
         W_mat = np.diag(weights)
         
         # Weighted least squares
@@ -253,27 +255,46 @@ def run_anchor_stratification_test():
             beta = np.array([np.nan, np.nan])
             se = np.array([np.nan, np.nan])
         
-        intercept, alpha_anchor = beta
-        intercept_err, alpha_anchor_err = se
+        intercept, kappa_anchor = beta
+        intercept_err, kappa_anchor_err = se
         
         # Compute chi-squared and p-value
-        residuals = M_Ws - (intercept + alpha_anchor * log_sigma_rel)
+        residuals = M_Ws - (intercept + kappa_anchor * sigma_regressor)
         chi2 = np.sum((residuals / M_W_errs)**2)
         dof = len(M_Ws) - 2
         
-        # Correlation coefficient
-        r_pearson, p_pearson = stats.pearsonr(log_sigmas, M_Ws)
+        # Correlation coefficient (using sigma_regressor for physics consistency)
+        r_pearson, p_pearson = stats.pearsonr(sigma_regressor, M_Ws)
         
         print_status(f"Multi-Anchor Regression (N={len(names)} systems):", "SECTION")
-        print_status(f"  α_anchor = {alpha_anchor:.3f} ± {alpha_anchor_err:.3f}", "INFO")
-        print_status(f"  Significance: {abs(alpha_anchor)/alpha_anchor_err:.1f}σ", "INFO")
-        print_status(f"  Pearson r(log σ, M_W) = {r_pearson:.3f} (p = {p_pearson:.4f})", "INFO")
+        print_status(f"  κ_anchor = {kappa_anchor:.3e} ± {kappa_anchor_err:.3e} mag", "INFO")
+        if kappa_anchor_err > 0:
+            print_status(f"  Significance: {abs(kappa_anchor)/kappa_anchor_err:.1f}σ", "INFO")
+        print_status(f"  Pearson r = {r_pearson:.3f} (p = {p_pearson:.4f})", "INFO")
         print_status(f"  χ²/dof = {chi2:.2f}/{dof}", "INFO")
         
-        # Compare with main analysis α
-        alpha_main = 0.58
-        tension = abs(alpha_anchor - alpha_main) / np.sqrt(alpha_anchor_err**2 + 0.16**2)
-        print_status(f"  Comparison with host α = 0.58 ± 0.16: {tension:.1f}σ tension", "INFO")
+        # Compare with host κ_Cep from pipeline output
+        kappa_host = np.nan
+        kappa_host_err = np.nan
+        try:
+            project_root = Path(__file__).parent.parent.parent
+            tep_path = project_root / "results" / "outputs" / "tep_correction_results.json"
+            if tep_path.exists():
+                with open(tep_path, "r") as f:
+                    tep = json.load(f)
+                if isinstance(tep, dict) and 'optimal_kappa_cep' in tep:
+                    kappa_host = float(tep['optimal_kappa_cep'])
+                if isinstance(tep, dict) and 'bootstrap_kappa_std' in tep:
+                    kappa_host_err = float(tep['bootstrap_kappa_std'])
+        except Exception:
+            pass
+        
+        if np.isfinite(kappa_host) and np.isfinite(kappa_host_err) and np.isfinite(kappa_anchor_err):
+            tension = abs(kappa_anchor - kappa_host) / np.sqrt(kappa_anchor_err**2 + kappa_host_err**2)
+            print_status(f"  κ_Cep (hosts) = {kappa_host:.3e} ± {kappa_host_err:.3e} mag", "INFO")
+            print_status(f"  Tension with host κ_Cep: {tension:.1f}σ", "INFO")
+        else:
+            print_status(f"  Note: Host κ_Cep comparison unavailable", "INFO")
         
         # Pairwise comparisons
         print_status("Pairwise Comparisons:", "SECTION")
@@ -286,8 +307,8 @@ def run_anchor_stratification_test():
                     print_status(f"  Δ M_W ({name1} - {name2}) = {delta_MW:+.3f} ± {delta_MW_err:.3f} mag ({sig:.1f}σ)", "INFO")
         
         results['regression'] = {
-            'alpha_anchor': float(alpha_anchor),
-            'alpha_anchor_err': float(alpha_anchor_err),
+            'kappa_anchor': float(kappa_anchor),
+            'kappa_anchor_err': float(kappa_anchor_err),
             'intercept': float(intercept),
             'intercept_err': float(intercept_err),
             'r_pearson': float(r_pearson),
@@ -295,23 +316,29 @@ def run_anchor_stratification_test():
             'chi2': float(chi2),
             'dof': int(dof),
             'n_anchors': len(names),
-            'alpha_main': alpha_main,
-            'tension_with_main': float(tension),
+            'kappa_host': float(kappa_host) if np.isfinite(kappa_host) else None,
+            'kappa_host_err': float(kappa_host_err) if np.isfinite(kappa_host_err) else None,
+            'tension_with_host': float(tension) if np.isfinite(tension) else None,
         }
         
-        # Legacy pairwise test for backward compatibility
+        # Pairwise comparison: N4258 vs LMC (largest sigma contrast)
         if 'N4258' in results and 'LMC' in results:
             delta_MW = results['N4258']['M_W_absolute'] - results['LMC']['M_W_absolute']
             delta_MW_err = np.sqrt(results['N4258']['M_W_err']**2 + results['LMC']['M_W_err']**2)
-            delta_sigma = np.log10(ANCHOR_SIGMA['N4258'] / ANCHOR_SIGMA['LMC'])
-            expected_delta = alpha_main * delta_sigma
+            # Sigma^2/c^2 difference for this pair
+            delta_sigma_sq = (ANCHOR_SIGMA['N4258']**2 - ANCHOR_SIGMA['LMC']**2) / c_km_s**2
+            # Expected delta from host kappa_Cep if anchors were affected
+            if np.isfinite(kappa_host):
+                expected_delta = kappa_host * delta_sigma_sq
+            else:
+                expected_delta = None
             
             results['test'] = {
                 'delta_MW': float(delta_MW),
                 'delta_MW_err': float(delta_MW_err),
-                'delta_log_sigma': float(delta_sigma),
+                'delta_sigma_sq_over_c2': float(delta_sigma_sq),
                 'significance': float(abs(delta_MW) / delta_MW_err),
-                'tep_prediction': float(expected_delta),
+                'tep_prediction_host_kappa': float(expected_delta) if expected_delta is not None else None,
             }
     
     # Create figure
@@ -384,13 +411,22 @@ def create_anchor_comparison_figure(results):
         sigma_range = np.linspace(min(sigmas)*0.8, max(sigmas)*1.2, 100)
         # Use LMC as reference
         lmc_idx = names.index('LMC') if 'LMC' in names else 0
-        alpha = 0.58
+        # Load fitted kappa from tep_correction_results.json
+        import json
+        json_path = Path(__file__).resolve().parents[2] / "results" / "outputs" / "tep_correction_results.json"
+        if json_path.exists():
+            with open(json_path) as f:
+                tep_results = json.load(f)
+            kappa_cep_ref = float(tep_results.get("optimal_kappa_cep", 9.6e5))
+        else:
+            kappa_cep_ref = 9.6e5
         sigma_ref = sigmas[lmc_idx]
         M_W_ref = M_Ws[lmc_idx]
         
-        M_W_pred = M_W_ref + alpha * np.log10(sigma_range / sigma_ref)
+        M_W_pred = M_W_ref + kappa_cep_ref * ((sigma_range**2 - sigma_ref**2) / 299792.458**2)
+        kappa_mantissa = kappa_cep_ref / 1e5
         ax1.plot(sigma_range, M_W_pred, '--', color='#C73E1D', alpha=0.7,
-                label=rf'TEP prediction ($\alpha = {alpha}$)')
+                label=rf'TEP prediction ($\kappa_{{Cep}} = {kappa_mantissa:.2f}\times 10^5$)')
         ax1.legend(fontsize=11)
     
     ax1.grid(True, alpha=0.3)

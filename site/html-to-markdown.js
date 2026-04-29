@@ -107,10 +107,9 @@ class HTMLToMarkdownConverter {
             const today = new Date().toISOString().split('T')[0];
             const header = `# The Cepheid Bias: Resolving the Hubble Tension
 **Matthew Lukin Smawfield**  
-Version: v0.5 (Kingston upon Hull)  
-First published: 11 January 2026 · Last updated: 24 April 2026  
-DOI: 10.5281/zenodo.18209702  
-Paper Series: TEP Series: Paper 11 (Cosmological Observations)
+Version: v0.6 (Kingston upon Hull)  
+First published: 11 January 2026 · Last updated: 29 April 2026  
+DOI: 10.5281/zenodo.18209702
 
 ---
 

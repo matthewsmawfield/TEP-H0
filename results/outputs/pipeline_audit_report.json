@@ -84,20 +84,34 @@
     {
       "details": {
         "got": {
-          "bootstrap_alpha_mean": 1157598.8464355469,
-          "bootstrap_alpha_std": 427261.06581288605,
-          "bootstrap_h0_mean": 68.13616161313495,
-          "bootstrap_h0_std": 1.491567922427454,
+          "bootstrap_h0_ci_lower": 65.06646525996793,
+          "bootstrap_h0_ci_upper": 70.9257235792396,
+          "bootstrap_h0_mean": 68.1361590725598,
+          "bootstrap_h0_median": 68.13166719562426,
+          "bootstrap_h0_robust_std": 1.4771193339310997,
+          "bootstrap_h0_std": 1.491564681860745,
+          "bootstrap_kappa_ci_lower": 631960.44921875,
+          "bootstrap_kappa_ci_upper": 2408137.20703125,
+          "bootstrap_kappa_mean": 1157600.1953125,
+          "bootstrap_kappa_median": 1071728.515625,
+          "bootstrap_kappa_n_negative": 1,
+          "bootstrap_kappa_robust_std": 313849.609375,
+          "bootstrap_kappa_skewness": 1.924716163928255,
+          "bootstrap_kappa_std": 427260.1288735341,
+          "bootstrap_n_converged": 1000,
+          "bootstrap_n_failed": 0,
+          "bootstrap_residual_slope_mean": 1.7836365723046823e-06,
           "h0_sem": 1.296510859163623,
           "is_consistent": true,
           "n_hosts": 29,
-          "optimal_alpha": 1049548.33984375,
+          "optimal_kappa_cep": 1049548.33984375,
           "planck_h0": 67.4,
           "sigma_ref": 75.25,
-          "tension_sigma": 0.4890660609576291,
+          "tension_sigma": 0.48906701616272447,
+          "tension_statistical": 0.5536699315596317,
           "unified_h0": 68.1693702237083
         },
-        "recomputed_tension_robust": 0.4890660609576291,
+        "recomputed_tension_bootstrap": 0.48906701616272447,
         "recomputed_tension_sem": 0.5536699315596317
       },
       "name": "tep_correction_internal_consistency",
@@ -246,6 +260,176 @@
       },
       "name": "hosts_coords_duplicates_reported",
       "ok": true
+    },
+    {
+      "details": {
+        "files_with_missing_critical_tokens": {},
+        "missing_tokens_global": [],
+        "paths": [
+          "README.md",
+          "zenodo.txt",
+          "manuscripts/11-TEP-H0-v0.6-KingstonUponHull.md",
+          "11-TEP-H0-v0.6-KingstonUponHull.md",
+          "site/components/1_abstract.html",
+          "site/components/4_results.html",
+          "site/components/5_discussion.html",
+          "site/components/6_conclusion.html",
+          "site/dist/index.html",
+          "site/codemeta.json",
+          "site/index.html",
+          "results/outputs/TEP_FINAL_ROBUSTNESS_REPORT.md"
+        ],
+        "required_tokens": [
+          "0.511",
+          "0.0046",
+          "0.462",
+          "0.0116",
+          "68.17",
+          "68.14",
+          "1.49",
+          "0.49",
+          "1.05",
+          "0.43"
+        ]
+      },
+      "name": "narrative_surfaces_include_current_headline_numbers",
+      "ok": true
+    },
+    {
+      "details": {
+        "forbidden_hits": {},
+        "paths": [
+          "README.md",
+          "zenodo.txt",
+          "manuscripts/11-TEP-H0-v0.6-KingstonUponHull.md",
+          "11-TEP-H0-v0.6-KingstonUponHull.md",
+          "site/components/1_abstract.html",
+          "site/components/4_results.html",
+          "site/components/5_discussion.html",
+          "site/components/6_conclusion.html",
+          "site/dist/index.html",
+          "site/codemeta.json",
+          "site/index.html",
+          "results/outputs/TEP_FINAL_ROBUSTNESS_REPORT.md"
+        ]
+      },
+      "name": "narrative_surfaces_have_no_stale_framing_or_numbers",
+      "ok": true
+    },
+    {
+      "details": {
+        "interpretation": {
+          "primary_model": "Full",
+          "primary_reason": "Controls age, SN color, and stellar mass. This is the primary astrophysical-confound model.",
+          "primary_sigma_hc3_p": 0.006696062715595855,
+          "stress_model": "FlowEnvironment",
+          "stress_reason": "Adds redshift and group richness. This is a conservative stress test because group richness can mediate TEP screening rather than act as a pure nuisance covariate.",
+          "stress_sigma_hc3_p": 0.22446923161364407
+        }
+      },
+      "name": "multivariate_primary_interpretation_is_defensible",
+      "ok": true
+    },
+    {
+      "details": {
+        "anchor": {
+          "chi2": 3.3550362539980783,
+          "dof": 1,
+          "intercept": -5.875784450664815,
+          "intercept_err": 0.0046903430458121315,
+          "kappa_anchor": 5.04733256828341,
+          "kappa_anchor_err": 663.2809830949317,
+          "kappa_host": 1049548.33984375,
+          "kappa_host_err": 427260.1288735341,
+          "n_anchors": 3,
+          "p_pearson": 0.9742700749692184,
+          "prediction_test": {
+            "chi2": 8.51894791696181,
+            "dof": 2,
+            "mean_abs_tension_sigma": 2.03239490776088,
+            "naive_chi2": 8.51894791696181,
+            "naive_mean_abs_tension_sigma": 2.03239490776088,
+            "naive_predictions": [
+              {
+                "M_W_obs": -5.837261032546088,
+                "M_W_pred": -5.730046267942188,
+                "anchor": "N4258",
+                "d_mu_err": 0.060132208392024274,
+                "d_mu_pred": 0.14771249462331196,
+                "residual": -0.10721476460390011,
+                "sigma": 115.0,
+                "tension_sigma": -1.67344519347133
+              },
+              {
+                "M_W_obs": -5.8761945771974275,
+                "M_W_pred": -5.58553349057137,
+                "anchor": "M31",
+                "d_mu_err": 0.11896184542667525,
+                "d_mu_pred": 0.2922252719941307,
+                "residual": -0.2906610866260575,
+                "sigma": 160.0,
+                "tension_sigma": -2.39134462205043
+              }
+            ],
+            "predictions": [
+              {
+                "M_W_obs": -5.837261032546088,
+                "M_W_pred": -5.730046267942188,
+                "anchor": "N4258",
+                "d_mu_err": 0.060132208392024274,
+                "d_mu_pred": 0.14771249462331196,
+                "residual": -0.10721476460390011,
+                "sigma": 115.0,
+                "tension_sigma": -1.67344519347133
+              },
+              {
+                "M_W_obs": -5.8761945771974275,
+                "M_W_pred": -5.58553349057137,
+                "anchor": "M31",
+                "d_mu_err": 0.11896184542667525,
+                "d_mu_pred": 0.2922252719941307,
+                "residual": -0.2906610866260575,
+                "sigma": 160.0,
+                "tension_sigma": -2.39134462205043
+              }
+            ],
+            "reference_S_assumed": 0.1,
+            "reference_anchor": "LMC",
+            "tep_screened_chi2": 2.507603467057176,
+            "tep_screened_mean_abs_tension_sigma": 0.9350821357046876,
+            "tep_screened_predictions": [
+              {
+                "M_W_obs": -5.837261032546088,
+                "M_W_pred": -5.827662459468641,
+                "S_anchor_assumed": 0.5,
+                "anchor": "N4258",
+                "d_mu_err": 0.020393679933254416,
+                "d_mu_pred": 0.05009630309685986,
+                "residual": -0.00959857307744727,
+                "sigma": 115.0,
+                "tension_sigma": -0.3191088140303244
+              },
+              {
+                "M_W_obs": -5.8761945771974275,
+                "M_W_pred": -5.825253694220374,
+                "S_anchor_assumed": 0.2,
+                "anchor": "M31",
+                "d_mu_err": 0.021374263019645623,
+                "d_mu_pred": 0.0525050683451271,
+                "residual": -0.0509408829770539,
+                "sigma": 160.0,
+                "tension_sigma": -1.5510554573790507
+              }
+            ]
+          },
+          "r_pearson": 0.04040546930065503,
+          "sigma_ref": 75.25,
+          "tension_with_host": 2.456447388621007
+        },
+        "host_comparison": {}
+      },
+      "name": "anchor_screening_result_is_current",
+      "ok": true
     }
   ],
   "outputs_dir": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs",
@@ -264,7 +448,7 @@
       "spearman_p": 0.0045836144004947985,
       "spearman_rho": 0.5113300492610836
     },
-    "n_checks": 12,
+    "n_checks": 16,
     "n_failed": 0,
     "ok": true
   }

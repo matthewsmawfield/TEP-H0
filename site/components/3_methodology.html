@@ -97,14 +97,17 @@
 </p>
 <div class="equation">$$P_{\rm obs} = P_{\rm true} \cdot A(\phi)^{k_{\rm clock}/2}$$</div>
 <p>
-    where $A(\phi) = \exp(2\beta\phi/M_{\rm Pl})$ is the conformal factor to 
-    which matter couples (Jakarta v0.7). In the unscreened regime, the scalar 
+    where $A(\phi) = \exp(\beta\phi/M_{\rm Pl})$ is the conformal factor to 
+    which matter couples (Jakarta v0.8). In the unscreened regime, the scalar 
     field tracks the gravitational potential as $\phi/M_{\rm Pl} \approx 
-    2\beta \Phi/c^2$, yielding a clock rate $d\tau/dt = \exp(2\beta^2 \Phi/c^2)$. 
-    Crucially, as demonstrated in Jakarta v0.7, <strong>photons are 
-    conformally invariant</strong> and thus decouple from this enhancement, 
-    reconciling the large clock-sector coupling ($\beta \approx 800$) with 
-    stringent PPN bounds on the photon coupling ($\alpha_\gamma \approx 0.003$).
+    2\beta \Phi/c^2$, yielding a clock rate $d\tau/dt = \exp(2\beta^2 \Phi/c^2)$.
+    The fitted coefficient $\kappa_{\rm Cep}$ is an observable Cepheid
+    period-luminosity response coefficient. It should not be identified with
+    the microscopic conformal coupling $\beta$, the scalar-tensor coupling
+    $\alpha_0$, or a PPN coupling. It absorbs the Cepheid pulsation response,
+    the P-L slope, the environmental activation factor, the virial mapping
+    between $\sigma^2$ and potential depth, and the calibration geometry
+    of the distance ladder.
 </p>
 <p>
     In deep potentials, the clock rate enhancement induces 
@@ -126,7 +129,7 @@
 </p>
 
 <p>
-    In the TEP v0.7 framework, the scalar field gradient (Temporal Shear) is
+    In the TEP v0.8 framework, the scalar field gradient (Temporal Shear) is
     progressively suppressed by ambient matter density through a continuous
     spatial profile, rather than switching at a discrete
     threshold. The suppression is quantified by a dimensionless
@@ -135,10 +138,11 @@
 
 <div class="footnote" id="fn-screening">
     <sup>1</sup>The screening factor $S(\rho)$ derives from the canonical
-    Temporal Shear mechanism (Paper 0, v0.7), where the continuous
+    Temporal Shear mechanism (Paper 0, v0.8), where the continuous
     spatial profile of the scalar field suppresses Temporal Shear in
-    dense environments via a chameleon-type density-dependent effective
-    mass $m_{\rm eff}(\rho)$. See Paper 6, Box 6.5 for the soliton
+    dense environments via environment-responsive suppression of the locally active Temporal Shear sector.
+    A chameleon-like density-mass completion is one possible microscopic realization, but it is not assumed in the present Cepheid analysis.
+    See Paper 6, Box 6.5 for the soliton
     derivation and the $R_{\rm sol} \propto M^{1/3}$ scaling from the
     canonical action with saturation potential $V(\phi)$.
 </div>
@@ -150,8 +154,8 @@
     half-suppression density and the exponent $n=2$ controls the steepness of
     the transition. $S = 1$ corresponds to fully active shear (unsuppressed),
     while $S \rightarrow 0$ indicates deep suppression in dense environments.
-    The Universal Critical Density $\rho_c \approx 20$ g/cm³ (Paper 6) remains
-    the fundamental core saturation scale; $\rho_{\rm half}$ is its
+    The Temporal Topology saturation density $\rho_{\rm T}$ (Paper 6) remains
+    the series-level saturation scale; $\rho_{\rm half}$ is its
     galactic-scale manifestation derived from SPARC rotation-curve
     normalizations.
 </p>
@@ -173,18 +177,23 @@
     becomes:
 </p>
 <div class="equation">
-    $$\mu_{\rm corr} = \mu_{\rm obs} + \alpha_{\rm eff} \cdot S(\rho) \cdot
+    $$\mu_{\rm corr} = \mu_{\rm obs} + \kappa_{\rm Cep} \cdot S(\rho) \cdot
     \frac{\sigma_{\rm host}^2 - \sigma_{\rm ref}^2}{c^2}$$
 </div>
 <p>
-    where $\alpha_{\rm eff}$ is the <em>effective</em> clock-sector TEP coupling—absorbing the
-    intrinsic coupling $\alpha_{\rm int}$, the virial proportionality between
-    $|\Phi|$ and $\sigma^2$, the P-L slope $b$, and the factor $1/\ln 10$—and
-    $S(\rho)$ encodes the environment-dependent attenuation of Temporal Shear.
-    In this convention $\alpha_{\rm eff}$ has units of magnitude, and with
+    where $\kappa_{\rm Cep}$ is the <strong>Observable Response Coefficient</strong>
+    for Cepheid period-luminosity anomalies—an astrophysical response parameter
+    that absorbs the intrinsic coupling $\beta$, the virial proportionality
+    between $|\Phi|$ and $\sigma^2$, the P-L slope $b$, the factor $1/\ln 10$,
+    stellar physics, environmental activation, and transfer functions. This is
+    distinct from a bare scalar coupling: Cassini bounds the bare coupling
+    $\beta \lesssim 10^{-3}$, while $\kappa_{\rm Cep} \sim 10^6$ is an
+    <em>observable response</em> that includes all astrophysical amplification
+    mechanisms. $S(\rho)$ encodes the environment-dependent attenuation of Temporal
+    Shear. In this convention $\kappa_{\rm Cep}$ has units of magnitude, and with
     $\sigma^2/c^2 \sim 10^{-7}$ it naturally takes values of order $10^6$,
-    placing the distance-ladder coupling in the same regime as the
-    millisecond-pulsar effective coupling of Paper 10. For the SN Ia host
+    placing the distance-ladder response in the same regime as the
+    millisecond-pulsar response coefficient of Paper 10. For the SN Ia host
     sample, the mean suppression is weak ($\langle S \rangle = 0.946$), with
     only two hosts (NGC 2442 and NGC 3021) showing appreciable attenuation ($S <
     0.8$); the correction is therefore dominated by the bare coupling, while
@@ -270,14 +279,22 @@
 <p>
     This value is determined <em>a priori</em> from the published ladder
     structure and anchor properties. It is not tuned to minimize tension, nor is
-    it a lever for adjusting results. The only free parameter in the TEP correction model is $\alpha_{\rm eff}$, the effective clock-sector coupling, which is constrained by
+    it a lever for adjusting results. The only fitted response parameter in the TEP correction model is $\kappa_{\rm Cep}$, the Cepheid period-luminosity response coefficient, which is constrained by
     requiring the corrected sample to show no residual $H_0$–$\sigma$
     dependence.
 </p>
 
+<p>
+    The large Observable Response Coefficient $\kappa_{\rm Cep} \sim 10^6$ mag applies to the
+    clock-rate sector in unscreened Cepheid environments. Its compatibility with
+    Cassini, MICROSCOPE, and GW170817 follows from sector decoupling derived in
+    Appendix A.3; in brief, each of those tests constrains a different observable
+    sector than the conformal clock-rate response.
+</p>
+
 <h3>2.5 Optimization Procedure</h3>
 <p>
-    The optimal coupling $\alpha_{\rm eff}$ is determined by minimizing the slope of the
+    The response coefficient $\kappa_{\rm Cep}$ is determined by minimizing the slope of the
     corrected $H_0$ vs. $\sigma$ relation:
 </p>
 <div class="equation">
@@ -294,9 +311,9 @@
     To rigorously quantify uncertainties and ensure results are not driven by
     specific sample selection or parameter tuning, two statistical protocols are
     employed. First, bootstrap resampling is used to estimate uncertainties on
-    the optimal coupling $\alpha$ and the unified $H_0$: a total of $N=1000$
+    the fitted response coefficient $\kappa_{\rm Cep}$ and the unified $H_0$: a total of $N=1000$
     pseudo-samples are generated by resampling the 29 host galaxies with
-    replacement, $\alpha$ is re-optimized for each pseudo-sample, and the
+    replacement, $\kappa_{\rm Cep}$ is re-optimized for each pseudo-sample, and the
     reported uncertainties represent the standard deviation of these bootstrap
     distributions. Second, a sensitivity analysis assesses the stability of the
     solution against the choice of calibrator reference $\sigma_{\rm ref}$:
@@ -348,18 +365,18 @@
 
 <h3>2.8 Out-of-Sample Validation of the TEP Correction</h3>
 <p>
-    Because the coupling parameter $\alpha_{\rm eff}$ is optimized by minimizing the
+    Because the Observable Response Coefficient $\kappa_{\rm Cep}$ is optimized by minimizing the
     residual $H_0$–$\sigma$ slope, it is essential to demonstrate that the
     correction generalizes beyond the fitted sample. Two complementary
     out-of-sample protocols are therefore applied. Train/test validation
     involves repeated random splits of the $N=29$ hosts into a training subset
-    (70%) and a held-out test subset (30%); the parameter $\alpha_{\rm eff}$ is fitted
+    (70%) and a held-out test subset (30%); the parameter $\kappa_{\rm Cep}$ is fitted
     only on the training set, then applied without refitting to the held-out
     test set, and the residual $H_0$–$\sigma$ trend and held-out mean $H_0$ are
-    recorded across many repeats. Leave-one-out cross validation (LOOCV) refits $\alpha_{\rm eff}$ on 28 hosts and uses it to predict the corrected $H_0$ for the
+    recorded across many repeats. Leave-one-out cross validation (LOOCV) refits $\kappa_{\rm Cep}$ on 28 hosts and uses it to predict the corrected $H_0$ for the
     excluded host; repeating this for all hosts yields a fully out-of-sample
     corrected $H_0$ vector. These procedures directly address the concern that
-    $\alpha_{\rm eff}$ could merely reparameterize the existing dataset by testing whether
+    $\kappa_{\rm Cep}$ could merely reparameterize the existing dataset by testing whether
     the correction trained on one subset predicts the absence of environmental
     trend and the Planck-consistent mean on unseen hosts.
 </p>

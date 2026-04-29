@@ -71,7 +71,7 @@ class Step5M31Analysis:
 
     Prediction:
     A significant offset $\Delta W$ confirms environmental dependence.
-    Note on Temporal Topology (TEP v0.7): Rather than a discrete screened/unscreened dichotomy,
+    Note on Temporal Topology (TEP v0.8): Rather than a discrete screened/unscreened dichotomy,
     the scalar field gradient (Temporal Shear) is progressively suppressed by ambient density.
     The M31 bulge exhibits partial-to-strong suppression, while the outer disk remains active.
     This continuous framework predicts a smooth radial transition rather than a sharp threshold.
@@ -182,7 +182,7 @@ class Step5M31Analysis:
     def calculate_shear_suppression(self, rho_local):
         """
         Computes the continuous shear-suppression factor S(rho) consistent with
-        TEP v0.7 Temporal Topology.
+        TEP v0.8 Temporal Topology.
 
         S(rho) = 1 / (1 + (rho / rho_half)^n)
 
