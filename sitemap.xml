@@ -5,13 +5,13 @@
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <url>
         <loc>https://matthewsmawfield.github.io/TEP-H0/</loc>
-        <lastmod>2026-03-27</lastmod>
+        <lastmod>2026-04-29</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://matthewsmawfield.github.io/TEP-H0/public/docs/Smawfield_2026_TEP-H0_v0.4_KingstonUponHull.pdf</loc>
-        <lastmod>2026-03-27</lastmod>
+        <loc>https://matthewsmawfield.github.io/TEP-H0/public/docs/11-TEP-H0-v0.6-KingstonuponHull.pdf</loc>
+        <lastmod>2026-04-29</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
