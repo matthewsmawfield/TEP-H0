@@ -2410,5 +2410,15 @@ environments.
 
 - [The Cepheid Bias: Resolving the Hubble Tension 11 Jan 2026](/tep/h0/)
 
+- [Temporal Equivalence Principle: A Unified Resolution to the JWST High-Redshift Anomalies 13 Mar 2026](/tep/jwst/)
+
+- [Temporal Equivalence Principle: Temporal Shear Recovery in Gaia DR3 Wide Binaries 19 Mar 2026](/tep/wb/)
+
+- [Temporal Equivalence Principle: Temporal Shear in the Earth Flyby Anomaly 17 May 2026](/tep/efa/)
+
+- [Temporal Equivalence Principle: Synchronization Holonomy in Pulsar Scintillation 17 May 2026](/tep/j0437/)
+
+- [Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect 17 May 2026](/tep/llr/)
+
 ← Previous
 Next →

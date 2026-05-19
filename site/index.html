@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="msvalidate.01" content="F8DFE14889E215877815871325AAE778">
     <meta name="theme-color" content="#1C2E4A">
     <meta name="msapplication-TileColor" content="#1C2E4A">
     <meta name="mobile-web-app-capable" content="yes">
@@ -11,7 +12,7 @@
     
     <!-- Primary Meta Tags -->
     <meta name="title" content="The Cepheid Bias: Resolving the Hubble Tension">
-    <meta name="description" content="TEP-H0 tests an environment-dependent Cepheid timing bias in the SH0ES sample. The corrected pipeline finds H0-sigma correlations of Spearman rho=0.511 (p=0.0046) and Pearson r=0.462 (p=0.0116), with kappa_Cep=(1.05 +/- 0.43)e6 mag and H0=68.17 km/s/Mpc (bootstrap 68.14 +/- 1.49), reducing Planck tension to 0.49 sigma.">
+    <meta name="description" content="Cepheid clock bias in SH0ES under TEP screening as a candidate contributor to the Hubble tension. Reproducible pipeline and data in this repository.">
     <meta name="keywords" content="Hubble Tension, Cepheids, Cosmology, TEP, Modified Gravity, Screening, Time Dilation, Period-Luminosity Relation, SH0ES">
     <meta name="author" content="Matthew Lukin Smawfield">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
@@ -45,9 +46,11 @@
     {
       "@context": "https://schema.org",
       "@type": "ScholarlyArticle",
+  "@id": "https://mlsmawfield.com/tep/h0/#article",
+  "sameAs": "https://doi.org/10.5281/zenodo.18209702",
       "headline": "The Cepheid Bias: Resolving the Hubble Tension",
       "name": "The Cepheid Bias: Resolving the Hubble Tension",
-      "description": "Analysis of SH0ES Cepheid sample reveals environment-dependent bias predicting H0=68.14±1.49 km/s/Mpc, reducing Planck tension to 0.49σ. Observable Response Coefficient κ_Cep=(1.05±0.43)×10⁶ mag calibrated from TEP.",
+      "description": "Cepheid clock bias in SH0ES under TEP screening as a candidate contributor to the Hubble tension.",
       "url": "https://matthewsmawfield.github.io/TEP-H0/",
       "datePublished": "2026-01-11",
       "author": {
@@ -84,37 +87,54 @@
     }
     </script>
 
-    <link rel="canonical" href="https://mlsmawfield.com/tep/h0/">
-    <link rel="alternate" href="https://matthewsmawfield.github.io/TEP-H0/">
+    <link rel="canonical" href="https://matthewsmawfield.github.io/TEP-H0/">
+    <link rel="alternate" href="https://mlsmawfield.com/tep/h0/">
     
     <!-- Alternate PDF Version -->
     <link rel="alternate" type="application/pdf" title="Full Preprint PDF" href="https://matthewsmawfield.github.io/TEP-H0/public/docs/11-TEP-H0-v0.6-KingstonuponHull.pdf">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://mlsmawfield.com/tep/h0/">
+    <meta property="og:url" content="https://matthewsmawfield.github.io/TEP-H0/">
     <meta property="og:title" content="The Cepheid Bias: Resolving the Hubble Tension">
-    <meta property="og:description" content="TEP-H0 tests an environment-dependent Cepheid timing bias in the SH0ES sample. The corrected pipeline finds H0-sigma correlations of Spearman rho=0.511 (p=0.0046) and Pearson r=0.462 (p=0.0116), with kappa_Cep=(1.05 +/- 0.43)e6 mag and H0=68.17 km/s/Mpc (bootstrap 68.14 +/- 1.49), reducing Planck tension to 0.49 sigma.">
-    <meta property="og:image" content="https://mlsmawfield.com/tep/h0/public/image.jpg">
+    <meta property="og:description" content="Cepheid clock bias in SH0ES under TEP screening as a candidate contributor to the Hubble tension. Reproducible pipeline and data in this repository.">
+    <meta property="og:image" content="https://matthewsmawfield.github.io/TEP-H0/public/image.jpg">
     <meta property="og:site_name" content="TEP-H0">
     <meta property="article:published_time" content="2026-01-11T00:00:00Z">
+    <meta property="article:author" content="Matthew Lukin Smawfield">
     <meta property="article:modified_time" content="2026-04-29T00:00:00Z">
     <meta property="og:updated_time" content="2026-04-29T00:00:00Z">
     
     <!-- Google Scholar / Highwire Press Metadata -->
     <meta name="citation_title" content="The Cepheid Bias: Resolving the Hubble Tension">
     <meta name="citation_author" content="Smawfield, Matthew Lukin">
+    <meta name="citation_date" content="2026/01/11">
     <meta name="citation_publication_date" content="2026/01/11">
+    <meta name="citation_online_date" content="2026/01/11">
     <meta name="citation_pdf_url" content="https://matthewsmawfield.github.io/TEP-H0/public/docs/11-TEP-H0-v0.6-KingstonuponHull.pdf">
     <meta name="citation_doi" content="10.5281/zenodo.18209702">
     <meta name="citation_keywords" content="Hubble Tension; Cepheids; Cosmology; TEP; Modified Gravity; Screening">
 
+    <!-- Dublin Core Metadata -->
+    <meta name="dc.title" content="The Cepheid Bias: Resolving the Hubble Tension">
+    <meta name="dc.creator" content="Smawfield, Matthew Lukin">
+    <meta name="dc.subject" content="Physics; Cosmology; Hubble Tension; Cepheids; Modified Gravity; Temporal Equivalence Principle">
+    <meta name="dc.description" content="The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements ($H_0 \approx 73$ km/s/Mpc) and early-universe CMB inference ($H_0 = 67.4 \pm 0.5$ km/s/Mpc)—represents a significant challenge in precision cosmology. This study proposes that the tension arises from a systematic, environment-dependent bias in Cepheid-based distances, as predicted by the Temporal Equivalence Principle (TEP). This study tests the hypothesis that the discrepancy arises from a violation of the isochrony axiom—the assumption that proper time accumulation is independent of the local gravitational environment. Under scalar-tensor theories that break the Strong Equivalence Principle (such as TEP), Cepheid variable stars act as environment-dependent &quot;standard clocks.&quot; In deep gravitational potentials (high velocity dispersion $\sigma$) and active-shear environments, enhanced scalar field activity is predicted to induce period contraction relative to calibration environments. When interpreted through a universal Period-Luminosity relation, this clock-rate anomaly would mimic diminished luminosity, leading to underestimated distances and an inflated local Hubble constant. Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.511$, $p = 0.0046$; Pearson $r = 0.462$, $p = 0.0116$). A median-split stratification at $\sigma_{\rm med} \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$; $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 4.63$ km/s/Mpc.">
+    <meta name="dc.publisher" content="Independent Research">
+    <meta name="dc.date" content="2026-01-11">
+    <meta name="dc.type" content="Text.Article">
+    <meta name="dc.format" content="text/html">
+    <meta name="dc.identifier" content="https://mlsmawfield.com/tep/h0/">
+    <meta name="dc.rights" content="https://creativecommons.org/licenses/by/4.0/">
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://mlsmawfield.com/tep/h0/">
+    <meta name="twitter:url" content="https://matthewsmawfield.github.io/TEP-H0/">
     <meta name="twitter:title" content="The Cepheid Bias: Resolving the Hubble Tension">
-    <meta name="twitter:description" content="TEP-H0 tests an environment-dependent Cepheid timing bias in the SH0ES sample. The corrected pipeline finds H0-sigma correlations of Spearman rho=0.511 (p=0.0046) and Pearson r=0.462 (p=0.0116), with kappa_Cep=(1.05 +/- 0.43)e6 mag and H0=68.17 km/s/Mpc (bootstrap 68.14 +/- 1.49), reducing Planck tension to 0.49 sigma.">
-    <meta name="twitter:image" content="https://mlsmawfield.com/tep/h0/public/image.jpg">
+    <meta name="twitter:creator" content="@matthewsmawfield">
+    <meta name="twitter:site" content="@matthewsmawfield">
+    <meta name="twitter:description" content="Cepheid clock bias in SH0ES under TEP screening as a candidate contributor to the Hubble tension.">
+    <meta name="twitter:image" content="https://matthewsmawfield.github.io/TEP-H0/public/image.jpg">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="public/favicon.svg">
@@ -788,7 +808,9 @@
             }
         }
     </style>
-  </head>
+      <meta name="citation_abstract_html_url" content="https://matthewsmawfield.github.io/TEP-H0/">
+    <meta name="citation_fulltext_html_url" content="https://matthewsmawfield.github.io/TEP-H0/">
+</head>
 <body>
     <header class="header" role="banner">
         <img src="public/image.jpg" alt="Hubble Tension Resolution" class="header-image">
@@ -805,6 +827,7 @@
     </header>
 
     <main id="main-content" role="main">
+    <article itemscope itemtype="https://schema.org/ScholarlyArticle">
         <div id="loading" class="loading">
             Loading manuscript components...
         </div>
@@ -832,6 +855,11 @@
         <li><a href="/tep/exp/" class="nav-item" data-manuscript="exp">What Do Precision Tests of General Relativity Measure? <span class="nav-meta">31 Dec 2025</span></a></li>
         <li><a href="/tep/cos/" class="nav-item" data-manuscript="cos">The Temporal Equivalence Principle: Suppressed Density Scaling in Globular Cluster Pulsars <span class="nav-meta">9 Jan 2026</span></a></li>
         <li><a href="/tep/h0/" class="nav-item active" data-manuscript="h0">The Cepheid Bias: Resolving the Hubble Tension <span class="nav-meta">11 Jan 2026</span></a></li>
+        <li><a href="/tep/jwst/" class="nav-item" data-manuscript="jwst">Temporal Equivalence Principle: A Unified Resolution to the JWST High-Redshift Anomalies <span class="nav-meta">13 Mar 2026</span></a></li>
+        <li><a href="/tep/wb/" class="nav-item" data-manuscript="wb">Temporal Equivalence Principle: Temporal Shear Recovery in Gaia DR3 Wide Binaries <span class="nav-meta">19 Mar 2026</span></a></li>
+        <li><a href="/tep/efa/" class="nav-item" data-manuscript="efa">Temporal Equivalence Principle: Temporal Shear in the Earth Flyby Anomaly <span class="nav-meta">17 May 2026</span></a></li>
+        <li><a href="/tep/j0437/" class="nav-item" data-manuscript="j0437">Temporal Equivalence Principle: Synchronization Holonomy in Pulsar Scintillation <span class="nav-meta">17 May 2026</span></a></li>
+        <li><a href="/tep/llr/" class="nav-item" data-manuscript="llr">Temporal Equivalence Principle: Lunar Laser Ranging and the Nordtvedt Effect <span class="nav-meta">17 May 2026</span></a></li>
     </ol>
     
     <div class="manuscript-nav-controls">
@@ -1005,7 +1033,12 @@
         { id: 'slr', path: '/tep/slr/', name: 'SLR' },
         { id: 'exp', path: '/tep/exp/', name: 'EXP' },
         { id: 'cos', path: '/tep/cos/', name: 'COS' },
-        { id: 'h0', path: '/tep/h0/', name: 'H0' }
+        { id: 'h0', path: '/tep/h0/', name: 'H0' },
+        { id: 'jwst', path: '/tep/jwst/', name: 'JWST' },
+        { id: 'wb', path: '/tep/wb/', name: 'WB' },
+        { id: 'efa', path: '/tep/efa/', name: 'EFA' },
+        { id: 'j0437', path: '/tep/j0437/', name: 'J0437' },
+        { id: 'llr', path: '/tep/llr/', name: 'LLR' }
     ];
     
     // Detect current manuscript from URL
@@ -1068,7 +1101,8 @@
 })();
 </script>
 
-    </main>
+        </article>
+</main>
 
     <!-- Component Loading Script -->
     <script>
