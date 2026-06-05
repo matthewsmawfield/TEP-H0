@@ -136,7 +136,7 @@ shear-suppression factor $S(\rho) \in [0,1]$, with $S(\rho) = [1 +
 (\rho/\rho_{\rm half})^2]^{-1}$ where $\rho_{\rm half} \approx
 0.5\,M_\odot/\text{pc}^3$ is the galactic half-suppression density. The
 associated series-level saturation scale is denoted $\rho_{\rm T}$,
-the Temporal Topology saturation density. It is not used here as a binary
+the Temporal Topology saturation proximity scale. It is not used here as a binary
 local-density switch; local suppression depends on environmental state,
 source screening, and the active Temporal Shear sector.
 The galactic-scale $\rho_{\rm half}$ emerges from SPARC rotation-curve
@@ -351,7 +351,7 @@ where $\rho_{\rm half} \approx 0.5 \, M_\odot/\text{pc}^3$ is the galactic
 half-suppression density and the exponent $n=2$ controls the steepness of
 the transition. $S = 1$ corresponds to fully active shear (unsuppressed),
 while $S \rightarrow 0$ indicates deep suppression in dense environments.
-The Temporal Topology saturation density $\rho_{\rm T}$ (Paper 6) remains
+The Temporal Topology saturation proximity scale $\rho_{\rm T}$ (Paper 6) remains
 the series-level saturation scale; $\rho_{\rm half}$ is its
 galactic-scale manifestation derived from SPARC rotation-curve
 normalizations.
@@ -1851,7 +1851,7 @@ environment and its continuous modulation of Temporal Shear. This
 requires distinguishing two density scales discussed in Paper 6:
 
 Universal Critical Density ($\rho_{\rm T}$):
-The series-level saturation density of the scalar sector.
+The series-level saturation proximity scale of the scalar sector.
 
 Half-Suppression Density ($\rho_{\rm half} \approx 0.5 \,
 M_\odot/\text{pc}^3$):
@@ -1881,7 +1881,7 @@ standard-clock behavior and appears fainter.
 Is the half-suppression density $\rho_{\rm half}$ tuned to fit M31?
 No—it is derived independently from the SPARC rotation curve
 database (Paper 6) as the galactic-scale manifestation of the
-series-level saturation density $\rho_{\rm T}$. The galaxy
+series-level saturation proximity scale $\rho_{\rm T}$. The galaxy
 scaling $R_{\rm DM} \propto M^{1/3}$ normalizes to $\rho_{\rm half}
 \approx 0.5\,M_\odot/\text{pc}^3$. This independent scale is
 explicitly compared to the study environments:
