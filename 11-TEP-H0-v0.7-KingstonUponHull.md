@@ -596,7 +596,7 @@ med} \approx 90$ km/s) reveals the following structure:
 | High Potential | 14 | 90–223 km/s | $72.45 \pm 2.32$ |
 | Difference | $+4.63$ km/s/Mpc |  |  |
 
-The $4.63$ km/s/Mpc offset between high- and low-density hosts accounts for
+The $4.63$ km/s/Mpc offset between dense and dilute hosts accounts for
 a significant fraction of the Hubble tension. Notably, the dilute
 subsample yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc—consistent with Planck
 ($67.4 \pm 0.5$ km/s/Mpc) within $1\sigma$. The tension is driven primarily
