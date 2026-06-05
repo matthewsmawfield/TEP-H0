@@ -54,9 +54,9 @@ fitted response coefficient is stable and removes the residual environmental
 trend in held-out hosts. A differential analysis within M31 yields an
 "Inner Fainter" signal in HST photometry. Within the TEP v0.8 framework,
 this sign is consistent with continuous shear suppression: the
-high-density M31 bulge experiences progressive attenuation of Temporal
+dense M31 bulge experiences progressive attenuation of Temporal
 Shear (suppression factor $S \approx 0.05$ at $R < 1$ kpc), while the
-lower-density SN Ia host disks remain in the active-shear regime
+more dilute SN Ia host disks remain in the active-shear regime
 ($\langle S \rangle = 0.946$). On this interpretation, the M31 signal
 marks the empirical mapping of a continuous environmental shear-suppression profile across a single galaxy.
 
@@ -597,10 +597,10 @@ med} \approx 90$ km/s) reveals the following structure:
 | Difference | $+4.63$ km/s/Mpc |  |  |
 
 The $4.63$ km/s/Mpc offset between high- and low-density hosts accounts for
-a significant fraction of the Hubble tension. Notably, the low-density
+a significant fraction of the Hubble tension. Notably, the dilute
 subsample yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc—consistent with Planck
 ($67.4 \pm 0.5$ km/s/Mpc) within $1\sigma$. The tension is driven primarily
-by the high-density hosts.
+by the dense hosts.
 
 This pattern is consistent with TEP predictions for the active-shear regime
 (Paper 10). Low-$\sigma$ hosts have shallow potentials similar to the MW/LMC
@@ -2383,5 +2383,5 @@ assumed here.
 This study adopts the Jakarta v0.8 response-coefficient nomenclature. The
 mechanism previously referred to as "Temporal Shear" (v0.5) is now
 standardized as Temporal Shear, referring to the
-gradient-based suppression of scalar field activity in high-density
+gradient-based suppression of scalar field activity in dense
 environments.
