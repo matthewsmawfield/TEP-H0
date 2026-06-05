@@ -198,7 +198,7 @@ async def generate_pdf(quality: str = 'high', wait_time: float = 5.0, skip_build
         options['prefer_css_page_size'] = True
     elif quality == 'print':
         options = presets['print_ready'].copy()
-        options['scale'] = 0.63
+        options['scale'] = 0.72
         options['device_scale_factor'] = 2.0
     else:
         options = presets['web_optimized'].copy()

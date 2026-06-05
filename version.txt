@@ -1,3 +1,5 @@
+v0.7 (Kingston upon Hull) — 05 June 2026 — Renamed conformal coupling notation from beta_conf to beta_A to avoid PPN collision
+
 v0.6 (Kingston upon Hull) - Theoretical Synchronization
 
 - Aligned with TEP v0.8 framework: Adopted continuous Temporal Topology nomenclature, replacing discrete thin-shell/screening language with fluid Temporal Shear formalization using continuous shear-suppression factor S(ρ) = [1 + (ρ/ρ_half)²]⁻¹.
