@@ -1,4 +1,4 @@
-cff-version: 0.6
+cff-version: 1.2.0
 title: 'The Cepheid Bias: Resolving the Hubble Tension'
 message: If you use this software, please cite it as below.
 type: article
@@ -70,7 +70,7 @@ abstract: 'The Hubble Tension—the persistent 5σ discrepancy between local dis
 
   '
 license: CC-BY-4.0
-version: "0.7" (Kingston upon Hull)
+version: v0.7 (Kingston upon Hull)
 date-released: 2026-06-05
 keywords:
 - Temporal Equivalence Principle
