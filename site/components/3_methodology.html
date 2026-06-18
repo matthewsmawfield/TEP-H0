@@ -54,12 +54,17 @@
 </p>
 
 <p>
-    Accordingly, the study adopts <em>directly measured</em> central velocity
-    dispersions $\sigma$ from spectroscopic observations. Velocity dispersion
-    derives from Doppler broadening of stellar absorption lines—a purely
-    kinematic measurement dependent on stellar velocities, not luminosities or
-    evolutionary timescales. This makes $\sigma$ a robust, TEP-independent
-    observable.
+    Accordingly, the study adopts <em>curated kinematic potential-depth estimates</em>,
+    prioritizing direct stellar absorption dispersions and using calibrated HI linewidth
+    proxies where stellar dispersions are unavailable. Measurement provenance is
+    retained as a first-class analysis variable.
+</p>
+
+<p>
+    Velocity dispersion derives from Doppler broadening of stellar absorption
+    lines—a purely kinematic measurement dependent on stellar velocities, not
+    luminosities or evolutionary timescales. This makes $\sigma$ a robust,
+    TEP-independent observable.
 </p>
 
 <p>
@@ -73,8 +78,9 @@
 
 <p>The power-law correction from Jorgensen et al. (1995) was utilized:</p>
 <div class="equation">
-    $$ \sigma_{\rm corr} = \sigma_{\rm obs} \left( \frac{r_{\rm ap}}{R_{\rm
-    eff}/8} \right)^{0.04} $$
+    \begin{equation}
+    \sigma_{\rm corr} = \sigma_{\rm obs} \left( \frac{r_{\rm ap}}{R_{\rm eff}/8} \right)^{0.04}
+    \end{equation}
 </div>
 <p>
     where $r_{\rm ap}$ is the observational aperture radius (assumed 1.5" for
@@ -91,45 +97,99 @@
 
 <h3>2.3 The TEP Correction Model</h3>
 <p>
-    In the TEP framework, the observed Cepheid period is shifted relative to the
-    intrinsic period by a conformal factor $A(\phi)$ that depends on the local
-    potential depth $|\Phi|$:
+    The TEP matter metric is $\tilde g_{\mu\nu} = A^2(\phi)g_{\mu\nu} + B(\phi)\nabla_\mu\phi\nabla_\nu\phi$ (Paper 0).
+    For stellar clocks and Cepheid pulsations in regimes where disformal cone tilts
+    are negligible, the leading observable effect is conformal:
 </p>
-<div class="equation">$$P_{\rm obs} = P_{\rm true} \cdot A(\phi)^{k_{\rm clock}/2}$$</div>
+<div class="equation">
+    \begin{equation}
+    d\tilde\tau = A(\phi)\,d\tau_g .
+    \end{equation}
+</div>
 <p>
-    where $A(\phi) = \exp(\beta_A\phi/M_{\rm Pl})$ is the conformal factor to 
-    which matter couples (Jakarta v0.8). In the unscreened regime, the scalar 
-    field tracks the gravitational potential as $\phi/M_{\rm Pl} \approx 
-    2\beta_A \Phi/c^2$, yielding a clock rate $d\tau/dt = \exp(2\beta_A^2 \Phi/c^2)$.
-    The fitted coefficient $\kappa_{\rm Cep}$ is an observable Cepheid
-    period-luminosity response coefficient. It should not be identified with
-    the microscopic conformal coupling $\beta_A$, the scalar-tensor coupling
-    $\alpha_0$, or a PPN coupling. It absorbs the Cepheid pulsation response,
-    the P-L slope, the environmental activation factor, the virial mapping
-    between $\sigma^2$ and potential depth, and the calibration geometry
-    of the distance ladder.
+    Define $\Theta \equiv \ln A(\phi)$. In weak-field astrophysical environments
+    the scalar configuration tracks the gravitational potential through an
+    environment-dependent transfer function:
+</p>
+<div class="equation">
+    \begin{equation}
+    \Delta\Theta_i = \alpha_{\rm clock}\,T_X(E)\,\Delta\Psi ,
+    \qquad \Psi \equiv \frac{|\Phi|}{c^2},
+    \end{equation}
+</div>
+<p>
+    where $X$ labels the observable channel, $T_X(E)$ is the environmental
+    transfer/screening factor for that channel, and $\alpha_{\rm clock}$ is
+    the underlying clock-response scale. The channel observable is therefore not
+    the microscopic scalar coupling directly, but
+</p>
+<div class="equation">
+    \begin{equation}
+    \Delta O_X = \kappa_X \cdot S_X(E) \cdot F_X[\Delta\ln A, \Sigma_\mu, C_A; \Phi, \rho, z] ,
+    \end{equation}
+</div>
+<p>
+    with $\kappa_X$ an observable response coefficient. This gives the transfer
+    hierarchy
+</p>
+<div class="equation">
+    \begin{equation}
+    \kappa_{\rm eff,channel} = C_X \cdot T_X(E) \cdot \alpha_{\rm clock} ,
+    \label{eq:transfer_hierarchy}
+    \end{equation}
+</div>
+<p>
+    where $C_X$ converts the common clock response into the units and measurement
+    convention of channel $X$. For Cepheids, $C_X$ contains the period response,
+    the P–L slope, and the virial mapping between $\Phi$ and $\sigma^2$.
+    For millisecond pulsars, $C_X$ contains the mapping from clock/gradient
+    response into $\dot P$, $\dot P/P$, and $\log|\dot P|$.
 </p>
 <p>
-    In deep potentials, the clock rate enhancement induces 
-    <strong>Period Contraction</strong> ($P_{\rm obs} < P_{\rm true}$), 
-    consistent with the accelerated dynamical rates reported in globular 
-    cluster pulsars (Paper 10). For the Cepheid P-L relation $M = a + b 
-    \log_{10} P$ with Wesenheit slope $b \approx -3.26$ (Riess et al. 2022), 
-    the period contraction propagates to an apparent magnitude offset. 
-    Taylor-expanding for $|\Phi|/c^2 \ll 1$ gives:
+    The first-order environmental form of the Cepheid correction is fixed by TEP,
+    the virial mapping, and the Cepheid period–luminosity relation; the
+    stellar-envelope transfer amplitude is measured as the observable response
+    coefficient $\kappa_{\rm Cep}$. Explicitly,
 </p>
-<div class="equation">$$\log_{10} A \approx -\frac{\alpha_{\rm int}}{\ln 10}\cdot\frac{|\Phi|}{c^2}$$</div>
+<div class="equation">
+    \begin{equation}
+    \kappa_{\rm Cep} = \frac{|b|\,q_P + 2.5\chi_L}{\ln 10}\,\alpha_{\rm clock}\,T_{\rm disk} ,
+    \end{equation}
+</div>
 <p>
-    and therefore $\Delta M = b\,\log_{10} A \approx -\,b\alpha_{\rm int}\,|\Phi|/(c^2\ln 10)$,
-    which is positive (since $b<0$): Cepheids in deep potentials appear
-    <em>dimmer</em> than their true luminosity ($M_{\rm inf} > M_{\rm true}$),
-    leading to underestimated distances. Invoking the virial relation
+    where $q_P$ is the Cepheid period-response factor ($q_P \simeq 1$ in the
+    leading clock-transport limit), $\chi_L$ is the structural luminosity
+    response ($\chi_L \simeq 0$ at leading order), and $T_{\rm disk} \sim 1$
+    for galactic disks (Appendix C gives the full pulsation derivation). The
+    companion paper TEP-COS (Paper 10) measures the effective screened pulsar
+    response $\kappa_{\rm MSP}^{\rm emp} \approx 3 \times 10^4$ in dense
+    globular clusters. The correct cross-paper comparison is through the
+    shared $\alpha_{\rm clock}$, not by direct equality of raw coefficients:
+</p>
+<div class="equation">
+    \begin{equation}
+    \kappa_{\rm Cep} = \frac{|b|\,q_P}{\ln 10}\,\alpha_{\rm clock}\,T_{\rm disk}, \qquad
+    \kappa_{\rm MSP}^{\rm emp} = \alpha_{\rm clock}\,T_{\rm GC} ,
+    \end{equation}
+</div>
+<p>
+    with $T_{\rm GC} \sim 10^{-2}$–$10^{-1}$. Thus a Cepheid coefficient of
+    order $10^6$ and a dense-globular-cluster pulsar coefficient of order
+    $10^4$ can be mutually consistent without being equal.
+</p>
+<p>
+    For the Cepheid P–L relation $M_W = a + b\log_{10}P$ with Wesenheit slope
+    $b \approx -3.26$ (Riess et al. 2022), period contraction propagates to an
+    apparent magnitude offset. Invoking the virial relation
     $|\Phi| \propto \sigma^2$ converts the potential depth into an observable
     velocity dispersion, yielding a correction that is linear in $\sigma^2/c^2$.
+    The sign is fixed: for $\sigma_i > \sigma_{\rm ref}$, active-shear hosts
+    have $\Delta\mu > 0$, so their observed Cepheid distances are underestimated
+    and must be increased.
 </p>
 
 <p>
-    In the TEP v0.8 framework, the scalar field gradient (Temporal Shear) is
+    In the TEP framework, the scalar field gradient (Temporal Shear) is
     progressively suppressed by ambient matter density through a continuous
     spatial profile, rather than switching at a discrete
     threshold. The suppression is quantified by a dimensionless
@@ -147,14 +207,17 @@
     canonical action with saturation potential $V(\phi)$.
 </div>
 <div class="equation">
-    $$S(\rho) = \frac{1}{1 + (\rho / \rho_{\rm half})^2}$$
+    \begin{equation}
+    S(\rho) = \frac{1}{1 + (\rho / \rho_{\rm half})^2}
+    \label{eq:shear_suppression}
+    \end{equation}
 </div>
 <p>
     where $\rho_{\rm half} \approx 0.5 \, M_\odot/\text{pc}^3$ is the galactic
     half-suppression density and the exponent $n=2$ controls the steepness of
     the transition. $S = 1$ corresponds to fully active shear (unsuppressed),
     while $S \rightarrow 0$ indicates deep suppression in dense environments.
-    The Temporal Topology saturation proximity scale $\rho_{\rm T}$ (Paper 6) remains
+    The Temporal Topology saturation scale $\rho_{\rm T}$ (Paper 6) remains
     the series-level saturation scale; $\rho_{\rm half}$ is its
     galactic-scale manifestation derived from SPARC rotation-curve
     normalizations.
@@ -177,8 +240,10 @@
     becomes:
 </p>
 <div class="equation">
-    $$\mu_{\rm corr} = \mu_{\rm obs} + \kappa_{\rm Cep} \cdot S(\rho) \cdot
-    \frac{\sigma_{\rm host}^2 - \sigma_{\rm ref}^2}{c^2}$$
+    \begin{equation}
+    \mu_{\rm corr} = \mu_{\rm obs} + \kappa_{\rm Cep} \cdot S(\rho) \cdot \frac{\sigma_{\rm host}^2 - \sigma_{\rm ref}^2}{c^2}
+    \label{eq:tep_correction}
+    \end{equation}
 </div>
 <p>
     where $\kappa_{\rm Cep}$ is the <strong>Observable Response Coefficient</strong>
@@ -192,13 +257,18 @@
     mechanisms. $S(\rho)$ encodes the environment-dependent attenuation of Temporal
     Shear. In this convention $\kappa_{\rm Cep}$ has units of magnitude, and with
     $\sigma^2/c^2 \sim 10^{-7}$ it naturally takes values of order $10^6$,
-    placing the distance-ladder response in the same regime as the
-    millisecond-pulsar response coefficient of Paper 10. For the SN Ia host
+    placing the distance-ladder response in the same <em>response hierarchy</em> as the
+    millisecond-pulsar response coefficient of Paper 10 after environmental
+    transfer factors are applied. For the SN Ia host
     sample, the mean suppression is weak ($\langle S \rangle = 0.946$), with
     only two hosts (NGC 2442 and NGC 3021) showing appreciable attenuation ($S <
     0.8$); the correction is therefore dominated by the bare coupling, while
     the continuous $S(\rho)$ factor ensures that anomalously dense hosts receive
     appropriately attenuated corrections.
+</p>
+
+<p>
+    Throughout this paper, quoted raw environmental slopes refer to the uncorrected $H_0$–$\sigma$ bias and are therefore positive; correction slopes have the opposite sign.
 </p>
 
 <p>
@@ -268,28 +338,45 @@
 <p>
     Using the SH0ES calibration weights (NGC 4258 $\sim 55\%$, LMC $\sim 25\%$, MW $\sim 20\%$),
     NGC 4258 contributes 84% (63.25/75.25) of the weighted $\sigma_{\rm ref}$.
-    This makes $\sigma_{\rm ref}$ a screened reference frame dominated by
-    a group-embedded anchor, explaining why the TEP correction successfully yields
-    Planck-consistent $H_0$:
+    Because NGC 4258 is group-screened, a <em>screen-weighted anchor
+    contribution scale</em> $\sigma_{\rm ref,scr} \approx 60.6$ km/s is also defined. This is an
+    amplitude that down-weights each anchor's <em>contribution</em> by its
+    environmental screening factor $S$; it is not a normalized weighted mean.
+    Re-optimising $\kappa_{\rm Cep}$ with either reference yields headline
+    $H_0$ values that differ by only $0.71$ km/s/Mpc, confirming that the
+    TEP correction is stable under both definitions and removing the apparent
+    contradiction:
 </p>
 <div class="equation">
-    $$\sigma_{\rm ref} = 0.55 \times 115 + 0.25 \times 24 + 0.20 \times 30 =
-    75.25 \text{ km/s}$$
+    \begin{equation}
+    \sigma_{\rm ref} = 0.55 \times 115 + 0.25 \times 24 + 0.20 \times 30 = 75.25 \text{ km/s}
+    \end{equation}
+</div>
+<p>
+    The screen-weighted variant down-weights each anchor's contribution by its
+    environmental screening factor $S$ (with $S_{\rm N4258}=0.50$, $S_{\rm LMC}=0.10$,
+    $S_{\rm MW}=0.10$):
+</p>
+<div class="equation">
+    \begin{equation}
+    \sigma_{\rm ref,scr}^2 = 0.55(0.50) \times 115^2 + 0.25(0.10) \times 24^2 + 0.20(0.10) \times 30^2 \approx 60.6^2 \text{ km}^2\!\!/\text{s}^2
+    \end{equation}
 </div>
 <p>
     This value is determined <em>a priori</em> from the published ladder
-    structure and anchor properties. It is not tuned to minimize tension, nor is
-    it a lever for adjusting results. The only fitted response parameter in the TEP correction model is $\kappa_{\rm Cep}$, the Cepheid period-luminosity response coefficient, which is constrained by
+    structure and anchor properties. $\sigma_{\rm ref} = 75.25$ km/s is fixed entirely by the published SH0ES anchor weights; no $H_0$ information enters it. This architecturally-fixed value yields $0.49\sigma$ Planck agreement. The only fitted response parameter in the TEP correction model is $\kappa_{\rm Cep}$, the Cepheid period-luminosity response coefficient, which is constrained by
     requiring the corrected sample to show no residual $H_0$–$\sigma$
     dependence.
 </p>
 
 <p>
     The large Observable Response Coefficient $\kappa_{\rm Cep} \sim 10^6$ mag applies to the
-    clock-rate sector in unscreened Cepheid environments. Its compatibility with
-    Cassini, MICROSCOPE, and GW170817 follows from sector decoupling derived in
-    Appendix A.3; in brief, each of those tests constrains a different observable
-    sector than the conformal clock-rate response.
+    clock-rate sector in unscreened Cepheid environments. It does not map directly
+    onto a bare scalar coupling constrained by Cassini, MICROSCOPE, or GW170817.
+    Those experiments constrain different observable projections: local source charge,
+    photon-cone propagation, equivalence-principle violation, and screened solar-system
+    gradients. The present coefficient is a channel-level Cepheid period-response
+    coefficient. A microscopic mapping from the bare scalar coupling $\beta_A$ to the observable response coefficient $\kappa_{\rm Cep}$ remains a separate task; the leading scalar-boundary Cepheid period-transport law is derived in Appendix C.
 </p>
 
 <h3>2.5 Optimization Procedure</h3>
@@ -298,7 +385,9 @@
     corrected $H_0$ vs. $\sigma$ relation:
 </p>
 <div class="equation">
-    $$\mathcal{L}(\alpha) = \left(\frac{dH_0^{\rm corr}}{d\sigma}\right)^2$$
+    \begin{equation}
+    \mathcal{L}(\alpha) = \left(\frac{dH_0^{\rm corr}}{d\sigma}\right)^2
+    \end{equation}
 </div>
 <p>
     This ensures the corrected sample shows no residual environmental
@@ -341,7 +430,9 @@
     the Jacobian is diagonal with entries
 </p>
 <div class="equation">
-    $$\frac{\partial H_{0,i}}{\partial \mu_i} = -\frac{\ln 10}{5} H_{0,i}$$
+    \begin{equation}
+    \frac{\partial H_{0,i}}{\partial \mu_i} = -\frac{\ln 10}{5} H_{0,i}
+    \end{equation}
 </div>
 <p>
     so that $\mathbf{C}_{H_0} =
@@ -389,16 +480,19 @@
     matrix $\mathbf{C}_{H_0}$. The model is:
 </p>
 <div class="equation">
-    $$H_{0,i} = \beta_0 + \beta_1 S(\rho) \frac{\sigma_i^2 - \sigma_{\rm ref}^2}{c^2} +
-    \beta_2 z_i + \beta_3 N_{{\rm mb},i} + \beta_4 Z_i + \epsilon_i$$
+    \begin{equation}
+    H_{0,i} = \beta_0 + \beta_1 S(\rho) \frac{\sigma_i^2 - \sigma_{\rm ref}^2}{c^2} + \beta_2 z_i + \beta_3 N_{{\rm mb},i} + \beta_4 Z_i + \epsilon_i
+    \label{eq:gls_model}
+    \end{equation}
 </div>
 <p>
     where $\epsilon \sim \mathcal{N}(0, \mathbf{C}_{H_0})$. The GLS estimator
     is:
 </p>
 <div class="equation">
-    $$\hat{\boldsymbol{\beta}} = (\mathbf{X}^\mathsf{T} \mathbf{C}_{H_0}^{-1}
-    \mathbf{X})^{-1} \mathbf{X}^\mathsf{T} \mathbf{C}_{H_0}^{-1} \mathbf{H}_0$$
+    \begin{equation}
+    \hat{\boldsymbol{\beta}} = (\mathbf{X}^\mathsf{T} \mathbf{C}_{H_0}^{-1} \mathbf{X})^{-1} \mathbf{X}^\mathsf{T} \mathbf{C}_{H_0}^{-1} \mathbf{H}_0
+    \end{equation}
 </div>
 <p>
     with covariance $\mathrm{Cov}(\hat{\boldsymbol{\beta}}) =

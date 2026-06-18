@@ -1,4 +1,4 @@
-# The Soliton Wake: Exploring RBH-1 as Temporal Topology
+# The Soliton Wake: Exploring RBH-1 as a Temporal Topology Candidate
 **Matthew Lukin Smawfield**
 Version: v0.3 (Blantyre)
 First published: 28 December 2025 · Last updated: 29 April 2026
@@ -55,7 +55,7 @@ Taken together, the kinematics and thermodynamic diagnostics suggest a large per
 ## The Cooling Bottleneck
 
 A bow shock at $v_s \sim 10^3$ km/s corresponds to Mach numbers $\mathcal{M} \gg 1$ in typical circumgalactic conditions. Standard Rankine–Hugoniot jump conditions mandate substantial conversion of bulk kinetic energy into thermal energy. For $v_s \approx 1000$ km/s, the characteristic post-shock temperature is:
-$ T_s \approx \frac{3}{16k_B} \mu m_p v_s^2 \approx 1.4 \times 10^7 \text{ K} $
+\begin{equation} \label{eq:shock_temp} T_s \approx \frac{3}{16k_B} \mu m_p v_s^2 \approx 1.4 \times 10^7 \text{ K} \end{equation}
 
 At this temperature, thermal pressure strongly suppresses gravitational collapse. Since the Jeans mass scales as $M_J \propto T^{3/2}$, raising the temperature from $100$ K to $10^7$ K increases the characteristic collapse mass scale by a factor of $10^{7.5}$ ($\sim 3\times 10^7$), making in-situ star formation in recently shocked gas difficult without highly efficient cooling.
 
@@ -66,24 +66,24 @@ The standard resolution invokes rapid radiative cooling, potentially aided by tu
 #### Bremsstrahlung Cooling Time
 
 The thermal energy density of a fully ionized plasma is $E = (3/2) n k_B T$, and the radiative cooling rate per volume is $\dot{E} = n^2 \Lambda(T)$, where $\Lambda(T)$ is the cooling function. At $T \sim 10^7$ K, cooling is dominated by free-free (Bremsstrahlung) emission with contributions from metal-line cooling, yielding $\Lambda(T) \approx 2.5 \times 10^{-23}$ erg cm$^3$ s$^{-1}$ for solar metallicity (Sutherland & Dopita 1993). The cooling time is:
-$ t_{\mathrm{cool}} = \frac{E}{\dot{E}} = \frac{3 k_B T}{2 n \Lambda(T)} $
+\begin{equation} \label{eq:cooling_time} t_{\mathrm{cool}} = \frac{E}{\dot{E}} = \frac{3 k_B T}{2 n \Lambda(T)} \end{equation}
 
 Substituting the post-shock temperature $T = 1.4 \times 10^7$ K and a post-shock density $n = 0.1$ cm$^{-3}$ (this high value is adopted as a conservative upper bound for a compressed/clumpy phase, distinct from the ambient CGM mean $n_{\rm CGM} \sim 10^{-3}$ cm$^{-3}$; note that since $t_{\rm cool} \propto 1/n$, lower densities would yield even longer cooling times):
-$ t_{\mathrm{cool}} = \frac{3 \times (1.38 \times 10^{-16}\,\mathrm{erg\,K^{-1}}) \times (1.4 \times 10^7\,\mathrm{K})}{2 \times (0.1\,\mathrm{cm^{-3}}) \times (2.5 \times 10^{-23}\,\mathrm{erg\,cm^3\,s^{-1}})} \approx 36\,\mathrm{Myr} $
+\begin{equation} \label{eq:cooling_time_value} t_{\mathrm{cool}} = \frac{3 \times (1.38 \times 10^{-16}\,\mathrm{erg\,K^{-1}}) \times (1.4 \times 10^7\,\mathrm{K})}{2 \times (0.1\,\mathrm{cm^{-3}}) \times (2.5 \times 10^{-23}\,\mathrm{erg\,cm^3\,s^{-1}})} \approx 36\,\mathrm{Myr} \end{equation}
 
 #### Dynamical Timescale
 
 The relevant comparison timescale is the sound-crossing time of the wake. The post-shock sound speed for a fully ionized plasma ($\gamma = 5/3$, mean molecular weight $\mu = 0.6$) at $T = 1.4 \times 10^7$ K is:
-$ c_s = \sqrt{\frac{\gamma k_B T}{\mu m_p}} \approx 560\,\mathrm{km\,s^{-1}} $
+\begin{equation} \label{eq:sound_speed} c_s = \sqrt{\frac{\gamma k_B T}{\mu m_p}} \approx 560\,\mathrm{km\,s^{-1}} \end{equation}
 
 For the observed wake radius $w \approx 0.7$ kpc (van Dokkum et al. 2025), the dynamical timescale is:
-$ t_{\mathrm{dyn}} = \frac{w}{c_s} \approx 1.2\,\mathrm{Myr} $
+\begin{equation} \label{eq:dyn_time} t_{\mathrm{dyn}} = \frac{w}{c_s} \approx 1.2\,\mathrm{Myr} \end{equation}
 
 #### The Critical Inequality
 
 Comparing these timescales yields the fundamental constraint:
-$ \frac{t_{\mathrm{cool}}}{t_{\mathrm{dyn}}} = \frac{36\,\mathrm{Myr}}{1.2\,\mathrm{Myr}} \approx 30 $
-$ t_{\mathrm{cool}} \gg t_{\mathrm{dyn}} \quad (\text{by a factor of } \sim 30) $
+\begin{equation} \label{eq:cool_dyn_ratio} \frac{t_{\mathrm{cool}}}{t_{\mathrm{dyn}}} = \frac{36\,\mathrm{Myr}}{1.2\,\mathrm{Myr}} \approx 30 \end{equation}
+\begin{equation} \label{eq:cooling_inequality} t_{\mathrm{cool}} \gg t_{\mathrm{dyn}} \quad (\text{by a factor of } \sim 30) \end{equation}
 This inequality is robust across the plausible parameter space. Sensitivity analysis shows that only at densities $n \gtrsim 1$ cm$^{-3}$ (an order of magnitude higher than typical circumgalactic values) does the ratio approach unity. While dust-gas collisional cooling can shorten timescales in some environments, high-velocity shocks ($v \sim 1000$ km/s) efficiently destroy dust grains via sputtering (Draine & Salpeter 1979), reducing the efficacy of this pathway in the immediate post-shock region. For fiducial parameters, shock-heated gas at $10^7$ K would expand and rarefy long before radiating sufficient energy to reach star-forming temperatures ($T \lesssim 10^4$ K).
 
 ![Cooling Sensitivity Analysis](site/figures/figure_02_sensitivity.png)
@@ -142,11 +142,11 @@ To move beyond qualitative description, the explicit mapping between the scalar 
 
 ### The Metric Redshift Relation
 In the TEP framework, the effective matter metric $\tilde{g}_{\mu\nu}$ is conformally related to the gravitational metric $g_{\mu\nu}$ by a scalar function $A(\phi)$. The proper time interval $d\tau$ for a comoving observer is related to the coordinate time $dt$ by:
-$ d\tau = A(\phi) dt $
+\begin{equation} \label{eq:proper_time} d\tau = A(\phi) dt \end{equation}
 An emitter located within the soliton (where the field value is $\phi$) emits photons with a proper frequency $\nu_0$. To an external observer at infinity (where $A(\phi_\infty) \to 1$), the received frequency $\nu_{\text{obs}}$ is redshifted solely by the change in the local clock rate:
-$ 1 + z_{\text{metric}} = \frac{\nu_0}{\nu_{\text{obs}}} = \frac{1}{A(\phi)} $
+\begin{equation} \label{eq:metric_redshift} 1 + z_{\text{metric}} = \frac{\nu_0}{\nu_{\text{obs}}} = \frac{1}{A(\phi)} \end{equation}
 This produces an *apparent* Doppler shift. Even if the gas is static ($v_{\text{pec}} = 0$), an observer interprets the frequency shift as a line-of-sight velocity $v_{\text{app}}$:
-$ v_{\text{app}} \approx c \cdot z_{\text{metric}} \approx c \left( \frac{1}{A(\phi)} - 1 \right) $
+\begin{equation} \label{eq:apparent_velocity} v_{\text{app}} \approx c \cdot z_{\text{metric}} \approx c \left( \frac{1}{A(\phi)} - 1 \right) \end{equation}
 
 ### Predicting the Velocity Discontinuity
 
@@ -156,12 +156,12 @@ The connection is that $R_{\rm trans}$ is not arbitrary; it scales with the core
 
 For a weak-field conformal coupling, $A(\phi) \approx 1 + 2\beta_{\text{eff}}\Phi/c^2$ where $\Phi = -GM/r$ is the Newtonian potential and $\beta_{\text{eff}}$ is the effective coupling strength (scalar charge) at the transition boundary where Temporal Shear has recovered. Substituting into the apparent velocity formula:
 
-$ v_{\text{app}} \approx c \left( \frac{1}{1 - 2\beta_{\text{eff}}GM/(R_{\text{trans}} c^2)} - 1 \right) \approx \beta_{\text{eff}} \frac{GM}{R_{\text{trans}} c} $
+\begin{equation} \label{eq:velocity_discontinuity} v_{\text{app}} \approx c \left( \frac{1}{1 - 2\beta_{\text{eff}}GM/(R_{\text{trans}} c^2)} - 1 \right) \approx \beta_{\text{eff}} \frac{GM}{R_{\text{trans}} c} \end{equation}
 
 #### Box 2.2: The Temporal Shear Constraint
 A naive application of the full field gradient at the core radius ($R \sim 1.3 R_S$) would imply a relativistic redshift $z \sim 0.25$ ($v \sim 75,000$ km/s), drastically exceeding the observed $\sim 650$ km/s. This discrepancy is physically instructive: it indicates that the Temporal Shear must be strongly suppressed near the compact object. In the deep density well of the core, the Temporal Topology is flattened, driving the local field gradient toward zero and ensuring that the scalar contribution to the metric remains negligible in the interior.
 The observed velocity discontinuity ($v \approx 650$ km/s) combined with the transition scale ($R_{\text{trans}} \sim 1$ kpc) constrains the effective coupling product at the radius where Temporal Shear has recovered:
-$\beta_{\text{eff}} \frac{GM}{R_{\text{trans}} c^2} \sim \frac{v}{c} \sim 2 \times 10^{-3}$
+\begin{equation} \label{eq:coupling_constraint} \beta_{\text{eff}} \frac{GM}{R_{\text{trans}} c^2} \sim \frac{v}{c} \sim 2 \times 10^{-3} \end{equation}
 This implies that while the *geometric* structure of the soliton candidate is governed by the characteristic density $\rho_T$, the *amplitude* of the metric shock reflects the recovered Temporal Shear at the transition radius, consistent with the scalar field being a sub-dominant component of the total potential.
 
 ### Predicting Line Widths (The Discriminator)
@@ -169,7 +169,7 @@ This implies that while the *geometric* structure of the soliton candidate is go
 The key distinction lies in the second moment of the line distribution (line width).
 - **Thermal Shock:** The velocity jump comes from chaotic thermalization. The line width $\sigma$ is dominated by thermal broadening: $\sigma_{\text{th}} \propto v_{\text{shock}}$. For $v \sim 1000$ km/s, $\sigma \sim 100$ km/s.
 **Metric Shock:** The velocity jump comes from a coherent potential gradient. The line width is dominated only by the gradient variation across the telescope beam width plus the intrinsic cold-gas thermal width:
-$ \sigma_{\text{obs}}^2 = \sigma_{\text{th,cold}}^2 + \sigma_{\text{grad}}^2 + \sigma_{\text{inst}}^2 $
+\begin{equation} \label{eq:line_width} \sigma_{\text{obs}}^2 = \sigma_{\text{th,cold}}^2 + \sigma_{\text{grad}}^2 + \sigma_{\text{inst}}^2 \end{equation}
 Since the gas remains cold ($T \sim 10^4$ K, $\sigma_{\text{th}} \sim 10$ km/s) and the gradient is coherent, the predicted line width is narrow ($\sigma \ll v_{\text{app}}$).
 
 Prediction: the metric shock model predicts a large centroid shift ($\sim 600$ km/s) with a narrow line width ($\sim 30$ km/s). This constitutes a specific discriminant between coherent redshift gradients and thermalized shocks.
@@ -189,14 +189,14 @@ In the TEP framework, the matter metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\n
 - **Effective gravity:** In the Jordan frame (where matter couples to $\tilde{g}_{\mu\nu}$), the effective gravitational constant is $\tilde{G} = G / A(\phi) = \gamma^2 G$. Gravity is enhanced.
 
 The modified Jeans mass in the matter frame is:
-$\tilde{M}_J \sim \frac{c_s^3}{\tilde{G}^{3/2} \rho^{1/2}} = \frac{c_s^3}{(\gamma^2 G)^{3/2} \rho^{1/2}} = \frac{M_J}{\gamma^3}$
+\begin{equation} \label{eq:jeans_mass} \tilde{M}_J \sim \frac{c_s^3}{\tilde{G}^{3/2} \rho^{1/2}} = \frac{c_s^3}{(\gamma^2 G)^{3/2} \rho^{1/2}} = \frac{M_J}{\gamma^3} \end{equation}
 **Caveat on Timescales:** This derivation assumes the sound speed $c_s$ is unchanged, which holds if the gas temperature is set by external radiation (CMB floor) rather than local thermodynamics.
 The magnitude of the effect depends on the depth of the potential well. The relevant $\gamma$ has two regimes:
 - **Transition Zone ($R \sim 1$ kpc):** The gradient is shallow ($z_{\rm metric} \sim 10^{-3}$), producing the kinematic "kick" (metric shock) that mimics the velocity discontinuity. The transit time is $\sim 1$ Myr, comparable to the dynamical time.
 - **Core Zone ($R \sim 10^8$ km):** The potential is deep ($\gamma \sim 2$–$3$), yielding massive Jeans-mass reduction ($M_J' \sim 0.1 M_J$). While the transit time is short ($\sim$ days), this region may act as a catalytic "crusher," triggering collapse in high-impact-parameter gas that then evolves in the wake.
 The primary observational claim relies on the Transition Zone kinematics (the metric shock); the core-induced collapse enhancement is a secondary hypothesis for the star-formation efficiency.
 
-The key point is that the Jeans-mass reduction is a derived consequence of the conformal coupling, not an ad hoc assumption. The magnitude depends on the depth of the potential well, which is constrained by the observed velocity discontinuity and the saturation density.
+The key point is that the Jeans-mass reduction is a derived consequence of the conformal coupling, not an ad hoc assumption. The magnitude depends on the depth of the potential well, which is constrained by the observed velocity discontinuity and the saturation scale.
 
 Crucially, this reinterprets the measured $\sim 600$ km/s velocity jump. It is not a bulk flow of hot plasma, but a *differential proper-time lag* across the soliton boundary. Furthermore, the observed speed of the object ($\sim 1000$ km/s $\approx 10^{-3}c$) is interpreted not as a ballistic trajectory, but as the characteristic group velocity of the scalar wave packet, set by the gradient of the local cosmic potential. In scalar-tensor theories with density-dependent gradient suppression, the group velocity scales as $v_g \sim c \sqrt{|\Phi|/c^2}$ where $\Phi$ is the ambient gravitational potential; for CGM environments with $|\Phi|/c^2 \sim 10^{-6}$, this yields $v_g \sim 10^{-3}c \sim 300$–$1000$ km/s—consistent with the observed proper motion.
 The Discriminator: How can these models be distinguished? The primary discriminant is the line profile.
@@ -265,17 +265,17 @@ $\rho_T$ will either tighten or break the RBH-1 concordance.
 ## Required Conformal Factor Gradient
 A redshift-like velocity offset Δv corresponds to a fractional frequency
 shift:
-$\frac{\Delta \nu}{\nu} = \frac{\Delta v}{c} \approx \frac{650 \text{
-km/s}}{3 \times 10^5 \text{ km/s}} \approx 2.2 \times 10^{-3}$
+\begin{equation} \label{eq:frequency_shift} \frac{\Delta \nu}{\nu} = \frac{\Delta v}{c} \approx \frac{650 \text{
+km/s}}{3 \times 10^5 \text{ km/s}} \approx 2.2 \times 10^{-3} \end{equation}
 In the conformal time framework, clock rates scale as A. A spatial gradient
 in A produces an apparent Doppler shift for observers using coordinate time.
 The required change in ln(A) across the discontinuity is:
-$\Delta \ln(A) \approx \frac{\Delta v}{c} \approx 2.2 \times
-10^{-3}$
+\begin{equation} \label{eq:log_a} \Delta \ln(A) \approx \frac{\Delta v}{c} \approx 2.2 \times
+10^{-3} \end{equation}
 If this gradient occurs over a characteristic scale L ~ 1 kpc (the observed
 width of the kinematic discontinuity), the implied gradient is:
-$\nabla \ln(A) \sim \frac{2.2 \times 10^{-3}}{1 \text{ kpc}} \approx
-7 \times 10^{-23} \text{ m}^{-1}$
+\begin{equation} \label{eq:gradient_log_a} \nabla \ln(A) \sim \frac{2.2 \times 10^{-3}}{1 \text{ kpc}} \approx
+7 \times 10^{-23} \text{ m}^{-1} \end{equation}
 
 ## Lensing and Clock Signatures
 A critical prediction of the conformal scalar-tensor framework is the
@@ -290,10 +290,10 @@ disformal couplings or strong-field corrections could modify this; the
 prediction here assumes the conformal limit.)
 For light passing through the wake boundary ($b \sim 1$ kpc), the deflection
 angle depends only on the bare mass $M \approx 2 \times 10^7 M_\odot$:
-$\theta_{\text{lens}} \sim \frac{4GM}{c^2 b} \sim \frac{4 \times 6.67
+\begin{equation} \label{eq:lensing_angle} \theta_{\text{lens}} \sim \frac{4GM}{c^2 b} \sim \frac{4 \times 6.67
 \times 10^{-11} \times 2 \times 10^7 \times 2 \times 10^{30}}{(3 \times
 10^8)^2 \times 3 \times 10^{19}} \sim 4 \times 10^{-9} \text{ rad} \approx
-0.8 \, \text{mas}$
+0.8 \, \text{mas} \end{equation}
 This value ($\sim 0.8$ milliarcseconds) is far below current observational
 limits (HST resolution $\sim 50$ mas).
 
@@ -310,8 +310,8 @@ For stars formed within the wake, the metric gradient would produce a
 systematic redshift offset in their absorption lines relative to stars
 formed outside the wake. If the wake interior has $\Delta \ln(A) \sim
 10^{-3}$ relative to the ambient medium, stellar spectra should show:
-$\Delta v_{\text{stellar}} \sim 650 \text{ km/s} \times
-\frac{\text{interior field strength}}{\text{apex field strength}}$
+\begin{equation} \label{eq:stellar_velocity} \Delta v_{\text{stellar}} \sim 650 \text{ km/s} \times
+\frac{\text{interior field strength}}{\text{apex field strength}} \end{equation}
 This is a testable prediction: spatially resolved spectroscopy of individual
 stellar clusters along the wake should reveal systematic velocity offsets
 correlated with position, distinct from the Hubble flow and peculiar
@@ -327,8 +327,8 @@ with sharp density cutoffs, TEP screening operates through continuous field grad
 flattening. The Temporal Shear is gradually suppressed in deep potential wells,
 avoiding the fine-tuning problems of thin-shell approximations while maintaining
 fifth-force suppression in dense environments.
-$S = \frac{\beta_0}{\beta_{\text{eff}}} \propto
-\left(\frac{\rho}{\rho_T}\right)^{1/3}$
+\begin{equation} \label{eq:screening_factor} S = \frac{\beta_0}{\beta_{\text{eff}}} \propto
+\left(\frac{\rho}{\rho_T}\right)^{1/3} \end{equation}
 For RBH-1 at the crossover mass (M ~ 10⁷ M_☉, ρ ~ ρ_T ~ 20 g/cm³), the
 suppression factor is S ~ 1, meaning the Temporal Shear is near the
 transition between strongly flattened and asymptotically recovered profiles.
@@ -381,9 +381,9 @@ For RBH-1 itself, direct empirical tests are available using published JWST and 
 ## 4.1 The Line Width Test
 In a single-phase thermal shock where the [O III]-emitting gas resides predominantly at $T \sim 10^7$ K, thermal Doppler motion would broaden spectral lines to $\sigma_{\text{th}} \approx 80\text{--}85$ km/s. In practice, [O III] emission in shock-heated environments often arises from cooler recombination/cooling zones rather than the hottest post-shock plasma; however, if a substantial hot-phase component contributes to the line flux, it should produce detectable broad wings. In contrast, a metric shock produces a coherent redshift gradient without thermalization; the gas remains cold, and line widths stay narrow (see Figure 4).
 Higher-resolution Keck/LRIS spectroscopy of the [O III] λ5007 knot at the tip of the wake yields (van Dokkum et al. 2025, Appendix C):
-$\sigma_{\text{obs}} = 36 \pm 4 \text{ km/s} \quad \xrightarrow{\text{instr. corr.}} \quad \sigma = 31 \pm 4 \text{ km/s}$
+\begin{equation} \label{eq:line_width_obs} \sigma_{\text{obs}} = 36 \pm 4 \text{ km/s} \quad \xrightarrow{\text{instr. corr.}} \quad \sigma = 31 \pm 4 \text{ km/s} \end{equation}
 where the instrumental resolution $\sigma_{\text{instr}} = 18$ km/s has been subtracted in quadrature. The key inequality:
-$\sigma_{\text{obs}} \approx 31 \text{ km/s} \ll \sigma_{\text{thermal}}(10^7 \text{ K}) \approx 85 \text{ km/s}$
+\begin{equation} \label{eq:line_width_inequality} \sigma_{\text{obs}} \approx 31 \text{ km/s} \ll \sigma_{\text{thermal}}(10^7 \text{ K}) \approx 85 \text{ km/s} \end{equation}
 This observed dispersion is 3× smaller than expected if the [O III]-emitting gas were predominantly at $T \sim 10^7$ K, and 10× larger than pure thermal broadening at $T \sim 10^4$ K ($\sigma_{\text{th}} \approx 2$–$3$ km/s). The intermediate value ($\sigma \approx 31$ km/s) is consistent with cold gas experiencing bulk/turbulent motions or a coherent velocity gradient across the beam.
 
 ![Line Width Test: Thermal vs Metric Shock](site/figures/figure_04_line_width.png)
@@ -415,7 +415,7 @@ The narrow line width is in tension with a single-phase thermal shock in which t
 ## 4.2 The Wake Collimation Test
 Thermal shocks generate turbulence via Kelvin-Helmholtz instabilities at the shear layer between the wake and the ambient medium. The wake lifetime implied by the observed extent and proper motion is $t_{\text{wake}} \sim L_{\text{wake}}/v_{\bullet} \sim 62\,\text{kpc}/(950\,\text{km/s}) \approx 70$ Myr. Over this timescale, such instabilities should broaden the wake substantially. The characteristic K-H growth timescale is $\tau_{\text{KH}} \sim \lambda / v_{\text{shear}} \approx 3$ Myr for $\lambda \sim 1$ kpc and $v_{\text{shear}} \sim 300$ km/s. Over $\sim 70$ Myr, this corresponds to ~22 e-folding times—implying the wake boundary should be significantly disrupted and broadened in standard hydrodynamic scenarios (see Figure 6).
 Instead, HST WFC3/UVIS imaging reveals (van Dokkum et al. 2025, Section 6.2.1):
-$R_{\text{wake}} \approx 0.7 \text{ kpc} \quad \text{over} \quad L_{\text{wake}} = 62 \text{ kpc} \quad \Rightarrow \quad \text{Aspect Ratio: } 50:1$
+\begin{equation} \label{eq:aspect_ratio} R_{\text{wake}} \approx 0.7 \text{ kpc} \quad \text{over} \quad L_{\text{wake}} = 62 \text{ kpc} \quad \Rightarrow \quad \text{Aspect Ratio: } 50:1 \end{equation}
 This is described by the authors as "strikingly narrow." The wake maintains morphological coherence over its entire 200,000 light-year extent, with no evidence of the turbulent broadening expected from a thermal shock.
 In the metric shock interpretation, the apex discontinuity is attributed to a coherent redshift boundary rather than collisional thermalization. In that picture, the effective shear-driven mixing that seeds Kelvin-Helmholtz growth is expected to be suppressed relative to a turbulent bow-shock layer, and the wake can remain collimated without requiring fine-tuned magnetic draping.
 
@@ -508,13 +508,13 @@ Figure 10: Universal Scaling Law. The temporal topology scale ($R_T \propto M^{1
 
 Given $\rho_T \approx 20$ g/cm³ (from Paper 6), the consistency check for the temporal scale of RBH-1 ($M \approx 2 \times 10^7 M_\odot$) yields:
 
-$R_T = \left(\frac{3M}{4\pi \rho_T}\right)^{1/3} \approx 7.8 \times 10^7 \text{ km} \approx 1.3 R_S$
+\begin{equation} \label{eq:rt_falsification} R_T = \left(\frac{3M}{4\pi \rho_T}\right)^{1/3} \approx 7.8 \times 10^7 \text{ km} \approx 1.3 R_S \end{equation}
 
 ### Uncertainty Propagation
 
 The check uncertainty derives from two inputs: the mass estimate and the characteristic density. For the mass $M \sim 2 \times 10^7 M_\odot$ (van Dokkum et al. 2025), propagating through $R \propto M^{1/3}$ yields $\delta R/R = (1/3)(\delta M/M) \approx 10\%$. The characteristic density $\rho_T \approx 20$ g/cm³ carries systematic uncertainty of order $\pm 30\%$ from the GNSS calibration (Paper 6), contributing $\delta R/R = (1/3)(\delta\rho_T/\rho_T) \approx 10\%$. Combined in quadrature:
 
-$R_T = (7.8 \pm 1.1) \times 10^7 \text{ km} \quad (1\sigma)$
+\begin{equation} \label{eq:rt_uncertainty} R_T = (7.8 \pm 1.1) \times 10^7 \text{ km} \quad (1\sigma) \end{equation}
 
 The correspondence $R_T \approx 1.3 R_S$ places the temporal topology scale just outside the Schwarzschild horizon. This would predict a "naked halo" phenomenology if RBH-1 is a soliton: the object interacts with the environment via its metric gradient (the "hair") rather than just its horizon.
 
@@ -726,7 +726,7 @@ Smawfield, M. L. (2026). *The Cepheid Bias: Resolving the Hubble Tension*. Prepr
 
 Smawfield, M. L. (2026). *Temporal Equivalence Principle: A Unified Resolution to the JWST High-Redshift Anomalies*. Preprint v0.4 (Kos). Zenodo. DOI: [10.5281/zenodo.19000827](https://doi.org/10.5281/zenodo.19000827) (Paper 12)
 
-Smawfield, M. L. (2026). *Temporal Equivalence Principle: Temporal Shear Recovery in Gaia DR3 Wide Binaries*. Preprint v0.3 (Kilifi). Zenodo. DOI: [10.5281/zenodo.19102061](https://doi.org/10.5281/zenodo.19102061) (Paper 13)
+Smawfield, M. L. (2026). *Temporal Equivalence Principle: Temporal Shear Recovery in Gaia DR3 Wide Binaries*. Preprint v0.4 (Kilifi). Zenodo. DOI: [10.5281/zenodo.19102061](https://doi.org/10.5281/zenodo.19102061) (Paper 13)
 
 Stevenson, S. D., et al. 2025, *MNRAS* (DOI: 10.1093/mnras/staf2087; arXiv:2509.06913)
 

@@ -41,12 +41,16 @@ import numpy as np
 from scipy import stats
 from pathlib import Path
 import sys
+import shutil
 import matplotlib.pyplot as plt
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 try:
     from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
 except ImportError:
-    sys.path.append(str(Path(__file__).resolve().parents[2]))
     from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
 
 class Step7TRGBReanalysis:
@@ -124,7 +128,7 @@ class Step7TRGBReanalysis:
             print_status("  → INCONCLUSIVE / TENSION.", "WARNING")
             
         # 6. Save Plot
-        self._plot_differential(merged, slope, intercept, r, p)
+        self._plot_differential(merged, slope, intercept, r, p, std_err, len(merged))
         
         # 7. Write Results
         results = {
@@ -147,7 +151,7 @@ class Step7TRGBReanalysis:
         
         return results
 
-    def _plot_differential(self, df, slope, intercept, r, p):
+    def _plot_differential(self, df, slope, intercept, r, p, std_err, n):
         import matplotlib.pyplot as plt
         
         # Apply TEP style
@@ -162,17 +166,42 @@ class Step7TRGBReanalysis:
         
         fig, ax = plt.subplots(figsize=(14, 9)) # Standard TEP size
         
+        # Filter out non-positive sigma values (log scale requires positive data)
+        plot_df = df[df['sigma'] > 0].copy()
+        if len(plot_df) == 0:
+            print_status("No positive sigma values available for plot; skipping.", "WARNING")
+            plt.close()
+            return
+        
         # Error bars: combine TRGB and Cepheid errors
         # Cepheid error is 'error' column in stratified_h0
-        df['total_err'] = np.sqrt(df['mu_trgb_err']**2 + df['error']**2)
+        plot_df['total_err'] = np.sqrt(plot_df['mu_trgb_err']**2 + plot_df['error']**2)
         
-        ax.errorbar(df['sigma'], df['delta_mu'], yerr=df['total_err'], 
+        ax.errorbar(plot_df['sigma'], plot_df['delta_mu'], yerr=plot_df['total_err'], 
                    fmt='o', color=colors['dark'], alpha=0.8, label='Data', capsize=3, markeredgecolor=colors['purple'])
         
         # Fit line
-        x_range = np.linspace(df['sigma'].min()*0.9, df['sigma'].max()*1.1, 100)
+        x_min = plot_df['sigma'].min()
+        x_max = plot_df['sigma'].max()
+        x_range = np.linspace(x_min * 0.9, x_max * 1.1, 100)
         y_fit = slope * np.log10(x_range) + intercept
-        ax.plot(x_range, y_fit, linestyle='--', linewidth=2.5, color=colors['accent'], label=f'Fit: slope={slope:.2f} mag/dex')
+        ax.plot(x_range, y_fit, linestyle='--', linewidth=2.5, color=colors['accent'], label=f'Fit: slope={slope:.2f}±{std_err:.2f} mag/dex')
+        
+        # Confidence band (95%)
+        x_log = plot_df['log_sigma'].values
+        y_obs = plot_df['delta_mu'].values
+        n = len(x_log)
+        y_pred_obs = slope * x_log + intercept
+        residuals = y_obs - y_pred_obs
+        mse = np.sum(residuals**2) / max(n - 2, 1)
+        x_mean = np.mean(x_log)
+        ssx = np.sum((x_log - x_mean)**2)
+        log_x_range = np.log10(x_range)
+        se_fit = np.sqrt(mse * (1/n + (log_x_range - x_mean)**2 / ssx))
+        t_val = stats.t.ppf(0.975, max(n - 2, 1))
+        lower = y_fit - t_val * se_fit
+        upper = y_fit + t_val * se_fit
+        ax.fill_between(x_range, lower, upper, alpha=0.15, color=colors['accent'], label='95% CI')
         
         # Zero line
         ax.axhline(0, color=colors['purple'], linestyle=':', alpha=0.6, linewidth=1.5)
@@ -180,7 +209,7 @@ class Step7TRGBReanalysis:
         ax.set_xscale('log')
         ax.set_xlabel(r'Velocity Dispersion $\sigma$ (km/s)')
         ax.set_ylabel(r'$\Delta \mu = \mu_{\rm TRGB} - \mu_{\rm Cepheid}$ (mag)')
-        ax.set_title(f'TRGB - Cepheid Differential Distance\nPearson $r={r:.2f}$, $p={p:.3f}$')
+        ax.set_title(f'TRGB - Cepheid Differential Distance (N={n})\nPearson $r={r:.2f}$, $p={p:.3f}$')
         
         # Add galaxy names with smart offset avoiding clutter
         offsets = {
@@ -199,7 +228,7 @@ class Step7TRGBReanalysis:
             'NGC 1559': (0, -15)     # Isolated
         }
 
-        for _, row in df.iterrows():
+        for _, row in plot_df.iterrows():
             name = row['galaxy']
             xytext = offsets.get(name, (5, 5))
             
@@ -211,10 +240,16 @@ class Step7TRGBReanalysis:
         ax.legend(frameon=True)
         # Grid is handled by apply_tep_style
         
-        output_path = self.figures_dir / "trgb_cepheid_residual.png"
+        output_path = self.figures_dir / "supplement_03_trgb_cepheid_residual.png"
         plt.savefig(output_path, bbox_inches='tight')
         print_status(f"Plot saved to {output_path}", "INFO")
         plt.close()
+
+        public_dir = self.root_dir / "site" / "public" / "figures"
+        public_dir.mkdir(parents=True, exist_ok=True)
+        public_path = public_dir / "supplement_03_trgb_cepheid_residual.png"
+        shutil.copy(output_path, public_path)
+        print_status(f"Copied plot to {public_path}", "INFO")
 
 def main():
     step = Step7TRGBReanalysis()

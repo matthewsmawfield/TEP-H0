@@ -48,15 +48,10 @@ tmp/
 # Build output (auto-generated)
 site/dist/
 
-# Ignore massive data files
-results/**/*.fits
-results/**/*.hdf5
-data/raw/external/Cepheid-Distance-Ladder-Data/
-
 # Private research notes (should never be committed)
 research
 .windsurf
 # IDE files
 *.code-workspace
 
-.devin
+.devin/

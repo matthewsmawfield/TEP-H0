@@ -1,7 +1,7 @@
 {
   "stellar_absorption": {
-    "n_stellar": 16,
-    "n_hi": 13,
+    "n_stellar": 17,
+    "n_hi": 12,
     "n_total": 29,
     "full_sample": {
       "pearson_r": 0.4621612433960245,
@@ -10,14 +10,14 @@
       "spearman_p": 0.0045836144004947985
     },
     "stellar_only": {
-      "pearson_r": 0.5536716703562449,
-      "pearson_p": 0.026075458206201777,
-      "spearman_rho": 0.5970588235294118,
-      "spearman_p": 0.014609731954981046,
-      "median_sigma": 96.37171468447504,
-      "h0_low_sigma": 64.55820132342396,
+      "pearson_r": 0.4724797037153029,
+      "pearson_p": 0.05547293718317806,
+      "spearman_rho": 0.4607843137254902,
+      "spearman_p": 0.06267762211132862,
+      "median_sigma": 91.36814985353718,
+      "h0_low_sigma": 66.20266621632842,
       "h0_high_sigma": 73.73025465054553,
-      "delta_h0": 9.172053327121574
+      "delta_h0": 7.527588434217108
     },
     "stellar_hosts": [
       "NGC 0691",
@@ -31,6 +31,7 @@
       "NGC 3370",
       "NGC 3583",
       "NGC 4639",
+      "NGC 5584",
       "NGC 5728",
       "NGC 7541",
       "NGC 7678",
@@ -46,7 +47,6 @@
       "NGC 4038",
       "NGC 4680",
       "NGC 5468",
-      "NGC 5584",
       "NGC 5861",
       "NGC 5917",
       "NGC 7250",
@@ -54,25 +54,21 @@
     ]
   },
   "gold_standard": {
-    "n_gold": 7,
+    "n_gold": 3,
     "gold_sources": [
       "Kormendy&Ho2013",
       "SDSS DR7",
       "Ho+2009"
     ],
     "gold_hosts": [
-      "NGC 3147",
-      "NGC 3254",
-      "NGC 3370",
-      "NGC 3583",
-      "NGC 4639",
+      "NGC 5584",
       "NGC 7678",
       "UGC 9391"
     ],
-    "pearson_r": 0.5868182141976073,
-    "pearson_p": 0.16604652542532608,
-    "spearman_rho": 0.5714285714285715,
-    "spearman_p": 0.1802019889115274
+    "pearson_r": null,
+    "pearson_p": null,
+    "spearman_rho": null,
+    "spearman_p": null
   },
   "density_control": {
     "available": true,
@@ -83,7 +79,7 @@
     "partial_p": 0.0066238448918061734,
     "r_h0_rho": 0.10426814897368744,
     "p_h0_rho": 0.5903884777568528,
-    "r_sigma_rho": -0.18538490712650607,
+    "r_sigma_rho": -0.18538490712650604,
     "p_sigma_rho": 0.3356504053384904
   },
   "subsample_tep": {
@@ -94,16 +90,109 @@
       "h0_error": 1.2739611240484576
     },
     "stellar_only": {
-      "n": 16,
-      "kappa_cep": 1021954.345703125,
-      "unified_h0": 66.14812893894202,
-      "h0_error": 1.5903133397855307
+      "n": 17,
+      "kappa_cep": 894232.177734375,
+      "unified_h0": 67.25019822325487,
+      "h0_error": 1.671965875672109
     },
     "gold_standard": {
-      "n": 7,
-      "kappa_cep": 1220727.5390625,
-      "unified_h0": 61.99905392185119,
-      "h0_error": 2.676400511161808
+      "n": 3,
+      "kappa_cep": null,
+      "unified_h0": null,
+      "h0_error": null
     }
-  }
+  },
+  "convergence": {
+    "tiers": [
+      {
+        "tier": "Full sample",
+        "n": 29,
+        "h0_raw": 70.05852959777373,
+        "h0_raw_sem": 1.4395359826617715,
+        "h0_corrected": 68.1693702237083,
+        "h0_corrected_sem": 1.296510859163623,
+        "correction_kms": 1.8891593740654287,
+        "dH_dkappa": -1.799973667098244e-06,
+        "kappa_for_planck": 1476982.4950048102,
+        "kappa_bound_1sigma": 2276736.4075064617,
+        "delta_planck": 0.7693702237082931,
+        "tension_sigma_planck": 0.5934159504106372
+      },
+      {
+        "tier": "Stellar only",
+        "n": 17,
+        "h0_raw": 69.74506077360707,
+        "h0_raw_sem": 1.9973274915096089,
+        "h0_corrected": 66.84552936978037,
+        "h0_corrected_sem": 1.724965573096282,
+        "correction_kms": 2.8995314038266997,
+        "dH_dkappa": -2.762646839361742e-06,
+        "kappa_for_planck": 848845.6577927426,
+        "kappa_bound_1sigma": 1571821.7049124872,
+        "delta_planck": -0.5544706302196403,
+        "tension_sigma_planck": 0.3214386645551282
+      },
+      {
+        "tier": "Gold standard",
+        "n": 3,
+        "h0_raw": 70.4142502490952,
+        "h0_raw_sem": 5.235480108240313,
+        "h0_corrected": 70.44235400767027,
+        "h0_corrected_sem": 5.153933408116743,
+        "correction_kms": -0.02810375857507097,
+        "dH_dkappa": 2.677700255259789e-08,
+        "kappa_for_planck": null,
+        "kappa_bound_1sigma": null,
+        "delta_planck": 3.0423540076702693,
+        "tension_sigma_planck": 0.5902975003283853
+      }
+    ],
+    "tightest_bound": 1571821.7049124872,
+    "tightest_bound_tier": "Stellar only",
+    "uniform_kappa": 1049548.33984375
+  },
+  "composition": [
+    {
+      "tier": "Full sample",
+      "n": 29,
+      "mean_sigma": 97.45841387695226,
+      "median_sigma": 89.53951311106145,
+      "mean_redshift": 0.007712413793103449,
+      "group_richness_mean": 3.9615384615384617,
+      "n_high_sigma": 14,
+      "n_low_sigma": 15,
+      "raw_slope": 0.08511786648710828,
+      "corrected_mean_full_kappa": 68.1693702237083,
+      "corrected_mean_refit_kappa": 68.1693702237083,
+      "refit_kappa": 1049548.33984375
+    },
+    {
+      "tier": "Stellar only",
+      "n": 17,
+      "mean_sigma": 107.49719066898506,
+      "median_sigma": 91.36814985353718,
+      "mean_redshift": 0.007669411764705882,
+      "group_richness_mean": 5.125,
+      "n_high_sigma": 9,
+      "n_low_sigma": 8,
+      "raw_slope": 0.08139686578841943,
+      "corrected_mean_full_kappa": 66.84552936978037,
+      "corrected_mean_refit_kappa": 67.25019822325487,
+      "refit_kappa": 894232.177734375
+    },
+    {
+      "tier": "Gold standard",
+      "n": 3,
+      "mean_sigma": 74.51299076319982,
+      "median_sigma": 73.6325721323864,
+      "mean_redshift": 0.008110000000000001,
+      "group_richness_mean": 1.0,
+      "n_high_sigma": 0,
+      "n_low_sigma": 3,
+      "raw_slope": 3.2199151651324756,
+      "corrected_mean_full_kappa": 70.44235400767027,
+      "corrected_mean_refit_kappa": null,
+      "refit_kappa": null
+    }
+  ]
 }

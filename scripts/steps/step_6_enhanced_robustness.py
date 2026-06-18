@@ -53,6 +53,7 @@ class Step6EnhancedRobustness:
         # Outputs
         self.enhanced_results_path = self.outputs_dir / "enhanced_robustness_results.json"
         self.subsample_stats_path = self.outputs_dir / "subsample_sensitivity.txt"
+        self.composition_table_path = self.outputs_dir / "subset_composition_table.json"
     
     def run(self):
         """Execute enhanced robustness analysis."""
@@ -82,6 +83,12 @@ class Step6EnhancedRobustness:
         # 4. TEP correction on subsamples
         results['subsample_tep'] = self._tep_correction_subsamples(df, sigma_prov)
         
+        # 5. σ-quality convergence test (uniform κ across tiers)
+        results['convergence'] = self._convergence_analysis(df, sigma_prov)
+
+        # 6. Subset composition table
+        results['composition'] = self._subset_composition_table(df, sigma_prov)
+
         # Save results
         with open(self.enhanced_results_path, 'w') as f:
             json.dump(results, f, indent=2)
@@ -464,7 +471,7 @@ class Step6EnhancedRobustness:
         print_status("\nTEP Correction Comparison:", "INFO")
         headers = ["Subsample", "N", "κ_Cep", "Unified H0 (km/s/Mpc)"]
         rows = [
-            ["Full Sample", len(df), 
+            ["Full Sample", len(df),
              f"{kappa_full:.3f}" if not np.isnan(kappa_full) else "N/A",
              f"{h0_full:.2f} ± {err_full:.2f}" if not np.isnan(h0_full) else "N/A"],
             ["Stellar Only", len(df_stellar),
@@ -475,9 +482,354 @@ class Step6EnhancedRobustness:
              f"{h0_gold:.2f} ± {err_gold:.2f}" if not np.isnan(h0_gold) else "N/A"]
         ]
         print_table(headers, rows)
-        
+
         return results
+
+    def _convergence_analysis(self, df, sigma_prov):
+        """Convergence of corrected H0 as σ-data quality improves.
+
+        Applies the FULL-SAMPLE fitted κ_Cep uniformly to each subsample
+        (Full, Stellar-only, Gold-standard) and tests whether corrected H0
+        converges.  Because proxy σ measurements dilute the H0–σ correlation
+        (additional scatter weakens the apparent environmental bias), the
+        TEP correction should grow stronger as data quality improves.  The
+        Gold-standard subsample therefore provides an upper bound on κ_Cep:
+        if the cleanest data over-correct (land below Planck), the coefficient
+        cannot be arbitrarily large.
+        """
+        print_status("\n--- σ-QUALITY CONVERGENCE TEST ---", "SECTION")
+        from scripts.utils.tep_correction import tep_correction
+
+        sigma_ref = 75.25
+        try:
+            tep_path = self.outputs_dir / "tep_correction_results.json"
+            if tep_path.exists():
+                with open(tep_path, "r") as f:
+                    _tep = json.load(f)
+                if isinstance(_tep, dict) and 'sigma_ref' in _tep:
+                    sigma_ref = float(_tep['sigma_ref'])
+        except Exception:
+            pass
+
+        # Use the FULL-SAMPLE fitted kappa (uniform across subsamples)
+        kappa_full = 1.05e6
+        try:
+            tep_path = self.outputs_dir / "tep_correction_results.json"
+            if tep_path.exists():
+                with open(tep_path, "r") as f:
+                    _tep = json.load(f)
+                if isinstance(_tep, dict) and 'optimal_kappa_cep' in _tep:
+                    kappa_full = float(_tep['optimal_kappa_cep'])
+        except Exception:
+            pass
+
+        # Build provenance masks
+        prov = sigma_prov.copy()
+        for c in ['normalized_name', 'sigma_method', 'sigma_source']:
+            if c in prov.columns:
+                prov[c] = prov[c].astype(str).str.strip()
+
+        def _source_class(v):
+            s = str(v).lower().strip()
+            if 'kormendy' in s:
+                return 'Kormendy&Ho2013'
+            if 'sdss' in s:
+                return 'SDSS DR7'
+            if 'ho+2009' in s or 'ho+09' in s or 'j/apjs/183/1' in s:
+                return 'Ho+2009'
+            return str(v).strip()
+
+        prov['sigma_source_class'] = prov['sigma_source'].apply(_source_class)
+        gold_sources = ['Kormendy&Ho2013', 'SDSS DR7', 'Ho+2009']
+        prov['is_gold'] = prov['sigma_source_class'].isin(gold_sources)
+        prov['is_stellar'] = prov['sigma_method'].str.lower().str.contains('stellar absorption', na=False)
+
+        lookup = prov.set_index('normalized_name')
+        df = df.copy()
+        df['normalized_name'] = df['normalized_name'].astype(str).str.strip()
+        df['is_gold'] = df['normalized_name'].map(lookup['is_gold']).fillna(False)
+        df['is_stellar'] = df['normalized_name'].map(lookup['is_stellar']).fillna(False)
+
+        planck = 67.4
+        tiers = [
+            ("Full sample", np.ones(len(df), dtype=bool)),
+            ("Stellar only", df['is_stellar'].values),
+            ("Gold standard", df['is_gold'].values),
+        ]
+
+        convergence_results = []
+        for tier_name, mask in tiers:
+            sub = df[mask]
+            if len(sub) == 0:
+                continue
+            sigma = sub['sigma_inferred'].values.astype(float)
+            mu = sub['value'].values.astype(float)
+            z = sub['z_hd'].values.astype(float)
+            S = (
+                sub['shear_suppression'].values.astype(float)
+                if 'shear_suppression' in sub.columns
+                else np.ones(len(sub))
+            )
+
+            # Raw H0
+            d_raw = 10 ** ((mu - 25) / 5)
+            h0_raw = 299792.458 * z / d_raw
+            h0_raw_mean = float(np.mean(h0_raw))
+            h0_raw_sem = float(np.std(h0_raw, ddof=1) / np.sqrt(len(h0_raw)))
+
+            # Corrected H0 with FULL-SAMPLE kappa
+            dmu = tep_correction(sigma, sigma_ref, kappa_full, S)
+            mu_corr = mu + dmu
+            d_corr = 10 ** ((mu_corr - 25) / 5)
+            h0_corr = 299792.458 * z / d_corr
+            h0_corr_mean = float(np.mean(h0_corr))
+            h0_corr_sem = float(np.std(h0_corr, ddof=1) / np.sqrt(len(h0_corr)))
+
+            # Correction magnitude
+            correction = h0_raw_mean - h0_corr_mean
+
+            # Linear sensitivity: H0(κ) ≈ H0(0) + (dH/dκ)·κ
+            dH_dkappa = (h0_corr_mean - h0_raw_mean) / kappa_full
+
+            # κ that would give exactly Planck (if dH/dκ < 0 and H0_raw > Planck)
+            kappa_for_planck = None
+            kappa_bound_1sigma = None
+            if dH_dkappa < 0 and h0_raw_mean > planck:
+                kappa_for_planck = float((planck - h0_raw_mean) / dH_dkappa)
+                kappa_bound_1sigma = float(
+                    (planck - (h0_raw_mean + h0_raw_sem)) / dH_dkappa
+                )
+
+            # Distance from Planck
+            delta_planck = h0_corr_mean - planck
+            tension_sigma = (
+                abs(delta_planck) / h0_corr_sem if h0_corr_sem > 0 else None
+            )
+
+            convergence_results.append({
+                "tier": tier_name,
+                "n": int(len(sub)),
+                "h0_raw": h0_raw_mean,
+                "h0_raw_sem": h0_raw_sem,
+                "h0_corrected": h0_corr_mean,
+                "h0_corrected_sem": h0_corr_sem,
+                "correction_kms": correction,
+                "dH_dkappa": float(dH_dkappa),
+                "kappa_for_planck": kappa_for_planck,
+                "kappa_bound_1sigma": kappa_bound_1sigma,
+                "delta_planck": float(delta_planck),
+                "tension_sigma_planck": float(tension_sigma) if tension_sigma is not None else None,
+            })
+
+        # Print table
+        headers = [
+            "Tier", "N", "Raw H0", "Corr H0", "Corr.", "κ Planck", "κ < (1σ)"
+        ]
+        rows = []
+        for r in convergence_results:
+            k_planck = f"{r['kappa_for_planck']:.3e}" if r['kappa_for_planck'] is not None else "N/A"
+            k_bound = f"{r['kappa_bound_1sigma']:.3e}" if r['kappa_bound_1sigma'] is not None else "N/A"
+            rows.append([
+                r['tier'],
+                str(r['n']),
+                f"{r['h0_raw']:.2f}",
+                f"{r['h0_corrected']:.2f}",
+                f"{r['correction_kms']:.2f}",
+                k_planck,
+                k_bound,
+            ])
+        print_table(headers, rows, title="Convergence (uniform κ)")
+
+        # Identify the tightest positive upper bound
+        bounds = [
+            (r['tier'], r['kappa_bound_1sigma'])
+            for r in convergence_results
+            if r['kappa_bound_1sigma'] is not None and r['kappa_bound_1sigma'] > 0
+        ]
+        if bounds:
+            tightest_tier, tightest_bound = min(bounds, key=lambda x: x[1])
+            print_status(
+                f"Tightest 1σ upper bound: κ_Cep < {tightest_bound:.3e} ({tightest_tier}).",
+                "RESULT",
+            )
+        else:
+            tightest_bound = None
+            tightest_tier = None
+
+        return {
+            "tiers": convergence_results,
+            "tightest_bound": float(tightest_bound) if tightest_bound is not None else None,
+            "tightest_bound_tier": tightest_tier,
+            "uniform_kappa": float(kappa_full),
+        }
     
+    def _subset_composition_table(self, df, sigma_prov):
+        """Subset-composition table for full / stellar-only / gold-standard.
+
+        Reports descriptive statistics, raw slope, and corrected means
+        using both the full-sample κ and a refit κ per subset.
+        """
+        print_status("\n--- SUBSET COMPOSITION TABLE ---", "SECTION")
+        from scripts.utils.tep_correction import tep_correction
+
+        sigma_ref = 75.25
+        kappa_full = 1.05e6
+        try:
+            tep_path = self.outputs_dir / "tep_correction_results.json"
+            if tep_path.exists():
+                with open(tep_path, "r") as f:
+                    _tep = json.load(f)
+                if isinstance(_tep, dict):
+                    sigma_ref = float(_tep.get("sigma_ref", sigma_ref))
+                    kappa_full = float(_tep.get("optimal_kappa_cep", kappa_full))
+        except Exception:
+            pass
+
+        # Build provenance masks
+        prov = sigma_prov.copy()
+        for c in ["normalized_name", "sigma_method", "sigma_source"]:
+            if c in prov.columns:
+                prov[c] = prov[c].astype(str).str.strip()
+
+        def _source_class(v):
+            s = str(v).lower().strip()
+            if "kormendy" in s:
+                return "Kormendy&Ho2013"
+            if "sdss" in s:
+                return "SDSS DR7"
+            if "ho+2009" in s or "ho+09" in s or "j/apjs/183/1" in s:
+                return "Ho+2009"
+            return str(v).strip()
+
+        prov["sigma_source_class"] = prov["sigma_source"].apply(_source_class)
+        gold_sources = ["Kormendy&Ho2013", "SDSS DR7", "Ho+2009"]
+        prov["is_gold"] = prov["sigma_source_class"].isin(gold_sources)
+        prov["is_stellar"] = prov["sigma_method"].str.lower().str.contains("stellar absorption", na=False)
+
+        lookup = prov.set_index("normalized_name")
+        df = df.copy()
+        df["normalized_name"] = df["normalized_name"].astype(str).str.strip()
+        df["is_gold"] = df["normalized_name"].map(lookup["is_gold"]).fillna(False)
+        df["is_stellar"] = df["normalized_name"].map(lookup["is_stellar"]).fillna(False)
+
+        full_median_sigma = df["sigma_inferred"].median()
+
+        def _optimize_kappa_subset(subset_df):
+            """Optimize κ_Cep for a subset."""
+            if len(subset_df) < 5:
+                return np.nan, np.nan, np.nan
+            sigma_arr = subset_df["sigma_inferred"].values.astype(float)
+            mu_arr = subset_df["value"].values.astype(float)
+            z_arr = subset_df["z_hd"].values.astype(float)
+            S_arr = (
+                subset_df["shear_suppression"].values.astype(float)
+                if "shear_suppression" in subset_df.columns
+                else np.ones(len(subset_df))
+            )
+
+            def objective(kappa):
+                k = float(kappa[0]) if hasattr(kappa, "__len__") else float(kappa)
+                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, k, S_arr)
+                d_corr = 10 ** ((mu_corr - 25) / 5)
+                h0_corr = 299792.458 * z_arr / d_corr
+                slope, _, _, _, _ = stats.linregress(sigma_arr, h0_corr)
+                return slope ** 2
+
+            result = minimize(
+                objective,
+                x0=[1.0e6],
+                method="Nelder-Mead",
+                options={"xatol": 10.0, "fatol": 1e-6, "maxiter": 500},
+            )
+            kappa_opt = float(result.x[0])
+            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, kappa_opt, S_arr)
+            d_corr = 10 ** ((mu_corr - 25) / 5)
+            h0_corr = 299792.458 * z_arr / d_corr
+            unified_h0 = float(np.mean(h0_corr))
+            return kappa_opt, unified_h0, float(np.mean(sigma_arr))
+
+        tiers = [
+            ("Full sample", np.ones(len(df), dtype=bool)),
+            ("Stellar only", df["is_stellar"].values),
+            ("Gold standard", df["is_gold"].values),
+        ]
+
+        composition = []
+        for tier_name, mask in tiers:
+            sub = df[mask]
+            if len(sub) == 0:
+                continue
+            sigma = sub["sigma_inferred"].values.astype(float)
+            mu = sub["value"].values.astype(float)
+            z = sub["z_hd"].values.astype(float)
+            S = (
+                sub["shear_suppression"].values.astype(float)
+                if "shear_suppression" in sub.columns
+                else np.ones(len(sub))
+            )
+            tully_nmb = pd.to_numeric(sub.get("tully_nmb", pd.Series([np.nan] * len(sub))), errors="coerce")
+
+            # Raw H0 and slope
+            d_raw = 10 ** ((mu - 25) / 5)
+            h0_raw = 299792.458 * z / d_raw
+            raw_slope, _, _, _, _ = stats.linregress(sigma, h0_raw)
+
+            # Corrected with full-sample κ
+            dmu_full = tep_correction(sigma, sigma_ref, kappa_full, S)
+            mu_corr_full = mu + dmu_full
+            d_corr_full = 10 ** ((mu_corr_full - 25) / 5)
+            h0_corr_full = 299792.458 * z / d_corr_full
+
+            # Corrected with refit κ
+            kappa_refit, h0_refit, _ = _optimize_kappa_subset(sub)
+
+            n_high = int((sigma > full_median_sigma).sum())
+            n_low = int((sigma <= full_median_sigma).sum())
+
+            entry = {
+                "tier": tier_name,
+                "n": int(len(sub)),
+                "mean_sigma": float(np.mean(sigma)),
+                "median_sigma": float(np.median(sigma)),
+                "mean_redshift": float(np.mean(z)),
+                "group_richness_mean": float(tully_nmb.mean()) if tully_nmb.notna().any() else None,
+                "n_high_sigma": n_high,
+                "n_low_sigma": n_low,
+                "raw_slope": float(raw_slope),
+                "corrected_mean_full_kappa": float(np.mean(h0_corr_full)),
+                "corrected_mean_refit_kappa": float(h0_refit) if np.isfinite(h0_refit) else None,
+                "refit_kappa": float(kappa_refit) if np.isfinite(kappa_refit) else None,
+            }
+            composition.append(entry)
+
+        # Print table
+        headers = [
+            "Tier", "N", "Mean σ", "Median σ", "Mean z",
+            "Group Richness", "N high-σ", "N low-σ", "Raw slope",
+            "Corr H0 (full κ)", "Corr H0 (refit κ)",
+        ]
+        rows = []
+        for c in composition:
+            rows.append([
+                c["tier"],
+                str(c["n"]),
+                f"{c['mean_sigma']:.1f}",
+                f"{c['median_sigma']:.1f}",
+                f"{c['mean_redshift']:.4f}",
+                f"{c['group_richness_mean']:.1f}" if c['group_richness_mean'] is not None else "N/A",
+                str(c['n_high_sigma']),
+                str(c['n_low_sigma']),
+                f"{c['raw_slope']:.2f}",
+                f"{c['corrected_mean_full_kappa']:.2f}",
+                f"{c['corrected_mean_refit_kappa']:.2f}" if c['corrected_mean_refit_kappa'] is not None else "N/A",
+            ])
+        print_table(headers, rows, title="Subset Composition")
+
+        with open(self.composition_table_path, "w") as f:
+            json.dump(composition, f, indent=2)
+        print_status(f"Saved composition table to {self.composition_table_path}", "SUCCESS")
+        return composition
+
     def _write_summary(self, results):
         """Write summary to text file."""
         with open(self.subsample_stats_path, 'w') as f:
@@ -519,6 +871,15 @@ class Step6EnhancedRobustness:
             for name, data in tep.items():
                 if data['unified_h0'] is not None:
                     f.write(f"   {name}: κ_Cep = {data['kappa_cep']:.3f}, H0 = {data['unified_h0']:.2f} ± {data['h0_error']:.2f}\n")
+            f.write("\n")
+            
+            # Convergence analysis
+            conv = results.get('convergence', {})
+            f.write("5. σ-QUALITY CONVERGENCE (uniform κ)\n")
+            for tier in conv.get('tiers', []):
+                f.write(f"   {tier['tier']}: N={tier['n']}, raw H0={tier['h0_raw']:.2f}, corrected H0={tier['h0_corrected']:.2f}, correction={tier['correction_kms']:.2f} km/s/Mpc\n")
+            if conv.get('tightest_bound') is not None:
+                f.write(f"   Tightest 1σ upper bound: κ_Cep < {conv['tightest_bound']:.3e} ({conv['tightest_bound_tier']})\n")
             
         print_status(f"\nSummary written to: {self.subsample_stats_path}", "INFO")
 

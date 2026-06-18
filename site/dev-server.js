@@ -13,7 +13,7 @@ class DevServer {
         this.buildQueue = false;
         this.liveServerProcess = null;
         this.watcherReady = false;
-        this.port = 51736; // Unique port for TEP-H0
+        this.port = 51811; // Unique port for TEP-H0
     }
 
     async startLiveServer() {

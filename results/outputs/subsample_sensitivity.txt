@@ -2,14 +2,13 @@ ENHANCED ROBUSTNESS ANALYSIS SUMMARY
 ==================================================
 
 1. STELLAR ABSORPTION SUBSAMPLE
-   N_stellar = 16, N_HI = 13
-   Pearson r = 0.554 (p = 0.0261)
-   Spearman ρ = 0.597 (p = 0.0146)
-   ΔH0 (high - low σ) = 9.17 km/s/Mpc
+   N_stellar = 17, N_HI = 12
+   Pearson r = 0.472 (p = 0.0555)
+   Spearman ρ = 0.461 (p = 0.0627)
+   ΔH0 (high - low σ) = 7.53 km/s/Mpc
 
 2. GOLD STANDARD σ SUBSAMPLE
-   N = 7 (sources: Kormendy&Ho2013, SDSS DR7, Ho+2009)
-   Pearson r = 0.587 (p = 0.1660)
+   N = 3 (sources: Kormendy&Ho2013, SDSS DR7, Ho+2009)
 
 3. LOCAL DENSITY CONTROL
    N with valid density = 29
@@ -18,5 +17,10 @@ ENHANCED ROBUSTNESS ANALYSIS SUMMARY
 
 4. TEP CORRECTION ON SUBSAMPLES
    full_sample: κ_Cep = 1049548.340, H0 = 68.17 ± 1.27
-   stellar_only: κ_Cep = 1021954.346, H0 = 66.15 ± 1.59
-   gold_standard: κ_Cep = 1220727.539, H0 = 62.00 ± 2.68
+   stellar_only: κ_Cep = 894232.178, H0 = 67.25 ± 1.67
+
+5. σ-QUALITY CONVERGENCE (uniform κ)
+   Full sample: N=29, raw H0=70.06, corrected H0=68.17, correction=1.89 km/s/Mpc
+   Stellar only: N=17, raw H0=69.75, corrected H0=66.85, correction=2.90 km/s/Mpc
+   Gold standard: N=3, raw H0=70.41, corrected H0=70.44, correction=-0.03 km/s/Mpc
+   Tightest 1σ upper bound: κ_Cep < 1.572e+06 (Stellar only)

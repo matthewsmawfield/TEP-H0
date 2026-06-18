@@ -1,0 +1,31 @@
+&model
+  model_type = 'EVOL'
+  file = '../mesa_rsp/LOGS/profile.data.GYRE'
+  file_format = 'MESA'
+/
+
+&constants
+/
+
+&mode
+  l = 0
+/
+
+&osc
+  outer_bound = 'VACUUM'
+/
+
+&num
+  diff_scheme = 'MAGNUS_GL2'
+/
+
+&scan
+  grid_type = 'INVERSE'
+  freq_min = 0.01
+  freq_max = 10.0
+  freq_units = 'CYC_PER_DAY'
+/
+
+&ad_output
+  summary_file = 'summary.h5'
+/

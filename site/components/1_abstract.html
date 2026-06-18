@@ -1,7 +1,7 @@
 <div class="abstract">
     <h2>Abstract</h2>
     <p>
-        The Hubble Tension—the persistent 5σ discrepancy between local
+        The Hubble Tension—the persistent $5\sigma$ discrepancy between local
         distance-ladder measurements ($H_0 \approx 73$ km/s/Mpc) and
         early-universe CMB inference ($H_0 = 67.4 \pm 0.5$ km/s/Mpc)—represents
         a significant challenge in precision cosmology. This paper tests whether
@@ -34,30 +34,31 @@
         \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$;
         $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$),
         implying $\Delta H_0 = 4.63$ km/s/Mpc. Because published $\sigma$ values
-        are heterogeneous (direct stellar absorption and calibrated HI/rotation
+        are heterogeneous (direct stellar absorption and calibrated HI linewidth
         proxies), measurement methodology is treated as a first-class provenance
         variable and covariance-aware significance tests are reported using the
-        full SH0ES GLS distance-modulus covariance.
+        full SH0ES GLS distance-modulus covariance. A Bayesian model comparison
+        (environmental correction with free $\kappa_{\rm Cep}$ vs. a no-environment null)
+        in the host-contrast likelihood—which projects out the shared calibration mode
+        and tests only the environmental structure—yields $\Delta{\rm BIC}=88$.
+        In the raw full-covariance likelihood the evidence appears weaker
+        ($\Delta{\rm BIC}\approx -3$) because the shared calibration uncertainty dominates the
+        absolute likelihood; the host-contrast result is nevertheless robust
+        because the calibration covariance cancels in the slope.
     </p>
 
     <p>
-        Application of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot
-        S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP
+        Application of the TEP conformal correction
+        $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP
         period-contraction combined with the virial relation $|\Phi|\propto\sigma^2$—with
-        Observable Response Coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag and effective calibrator reference $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.17$ km/s/Mpc (bootstrap mean $68.14 \pm 1.49$), corresponding to a Planck tension of $0.49\sigma$. The inferred $\kappa_{\rm Cep}\sim10^6$ places this probe in the same response-coefficient regime as the
-        millisecond-pulsar spin-down excess (Paper 10), reducing the apparent
-        cross-probe mismatch at the observable-response level compared with
-        earlier phenomenological $\log_{10}\sigma$ scalings.
+        Observable Response Coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag and effective calibrator reference $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.17$ km/s/Mpc (bootstrap mean $68.14 \pm 1.49$), corresponding to a Planck tension of $0.49\sigma$.
         Out-of-sample validation (train/test splits and LOOCV) shows that the
         fitted response coefficient is stable and removes the residual environmental
         trend in held-out hosts. A differential analysis within M31 yields an
-        "Inner Fainter" signal in HST photometry. Within the TEP v0.8 framework,
-        this sign is consistent with continuous shear suppression: the
-        dense M31 bulge experiences progressive attenuation of Temporal
-        Shear (suppression factor $S \approx 0.05$ at $R < 1$ kpc), while the
-        more dilute SN Ia host disks remain in the active-shear regime
-        ($\langle S \rangle = 0.946$). On this interpretation, the M31 signal
-        marks the empirical mapping of a continuous environmental shear-suppression profile across a single galaxy.
+        "Inner Fainter" signal in HST photometry consistent with density-dependent
+        shear suppression, while the predicted differential-insensitivity signature
+        for TRGB (a non-periodic indicator) provides a falsifiable test for
+        follow-up CCHP and independent Cepheid-host samples.
     </p>
 
     <p>

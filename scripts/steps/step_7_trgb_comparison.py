@@ -257,7 +257,7 @@ class Step7TRGBComparison:
     
     def _plot_results(self, df, results):
         """
-        Generate TRGB H0 vs σ plot.
+        Generate TRGB H_0 vs σ plot.
         """
         import matplotlib.pyplot as plt
         
@@ -265,7 +265,7 @@ class Step7TRGBComparison:
             from scripts.utils.plot_style import apply_tep_style
             colors = apply_tep_style()
         except ImportError:
-            colors = {'blue': '#395d85', 'accent': '#E74C3C', 'dark': '#301E30'}
+            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'dark': '#301E30'}
         
         fig, ax = plt.subplots(figsize=(14, 9))
         
@@ -304,7 +304,7 @@ class Step7TRGBComparison:
         ax.axhline(67.4, color='gray', linestyle=':', alpha=0.5, label='Planck H0')
         
         plt.tight_layout()
-        output_path = self.figures_dir / "trgb_h0_vs_sigma.png"
+        output_path = self.figures_dir / "trgb_figure_01_h0_vs_sigma.png"
         plt.savefig(output_path, dpi=150, bbox_inches='tight')
         print_status(f"Saved plot to {output_path}", "INFO")
         plt.close()

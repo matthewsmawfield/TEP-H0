@@ -1,4 +1,11 @@
-v0.7 (Kingston upon Hull) — 05 June 2026 — Renamed conformal coupling notation from beta_conf to beta_A to avoid PPN collision
+v0.7 (Kingston upon Hull) — 18 June 2026 — Refined figures, standardized notation, and expanded validation
+
+- Standardized notation and typography: renamed conformal coupling β_conf → β_A, removed legacy ALPHA_0 in favor of KAPPA_GAL, enforced SH0ES spelling consistency, and harmonized ΔBIC and math formatting across manuscript and captions.
+- Revised and updated figures: ensured theoretical alignment, visual consistency, outlier transparency, and SH0ES typographic uniformity throughout.
+- Added stellar validation pipeline (Step 13): RSP/GYRE structural tests and kappa_cep closure constraints from first principles.
+- Added M31 radial suppression analysis (Step 5b): continuous Model C and step-function Model B for shear-attenuation profile.
+- Added joint environmental-screening model: unified hosts+anchors fit with single κ_Cep and environment-specific screening factors.
+- Added frozen-prior out-of-sample validation (Step 3c): train/test split to guard against overfitting.
 
 v0.6 (Kingston upon Hull) - Theoretical Synchronization
 

@@ -109,7 +109,7 @@ Related: [Paper 1 (Multi-Center)](https://matthewsmawfield.github.io/TEP-GNSS/) 
 The Temporal Equivalence Principle (TEP) represents a proposed extension to
 the foundations of General Relativity, positing a fundamental coupling
 between spatial and temporal fluctuations in geodetic measurements.
-Formulated within a Bi-Metric Geometry framework (TEP v0.7, Jakarta;
+Formulated within a Bi-Metric Geometry framework (TEP, Paper 0;
 Smawfield, 2025), the theory employs continuous geometric screening rather
 than discrete thin-shell approximations: the scalar time field exhibits a
 spatially varying Temporal Topology, and its gradient (Temporal Shear)
@@ -1652,7 +1652,7 @@ The OPTIMAL_100 filter (100 spatially balanced stations) was designed to maximiz
 
 Finding: When ionospheric delay is removed (Ionofree) and the network has optimal spatial balance (OPTIMAL_100), the summer-season correlation length (for pos_jitter) is *6,060 km*. This is closely corroborated by the Precise mode (using IGS SP3 products), which yields *6,259 km* in the same condition—a 3% agreement. Both values are within 1σ of CODE's 25-year PPP benchmark (4201 ± 1967 km; upper 1σ bound 6168 km).
 
-Physical interpretation within TEP v0.7:
+Physical interpretation within TEP:
 
 - Summer ionosphere: Lower ambient electron density reduces local flattening of the Temporal Topology, permitting stronger Temporal Shear (field gradient) and longer apparent correlation lengths
 
@@ -1710,7 +1710,7 @@ Conclusion: The correlation structure is detectable without restrictive station 
 
 ### 3.7.5 The Temporal Topology Model: Unified Interpretation
 
-The three signatures can be interpreted within the continuous geometric screening framework of TEP v0.7:
+The three signatures can be interpreted within the continuous geometric screening framework of TEP:
 
 #### Interpretive Model: Temporal Topology Relaxation and Temporal Shear Modulation
 
@@ -3284,7 +3284,7 @@ period. This produced 48 independent seasonal measurements (4 seasons ×
 The Temporal Topology Model
 
 Key insight: the observed seasonality is interpreted within the TEP
-v0.7 continuous geometric screening framework. Rather than a binary
+continuous geometric screening framework. Rather than a binary
 screened/unscreened transition, the scalar time field exhibits a
 continuous spatial profile (Temporal Topology) whose local gradient
 (Temporal Shear) drives the observable response:
@@ -3734,7 +3734,7 @@ invariance; Kp independence | Supported |
 months | Supported |
 
 Across the sixteen comparisons summarized above, the observations are
-broadly consistent with the expectations of TEP v0.7 (Jakarta), which posits
+broadly consistent with the expectations of TEP (Paper 0), which posits
 continuous geometric screening (manifesting as Temporal Topology governed by shear suppression) rather than discrete
 thin-shell boundaries. The detection of exponential decay, directional
 anisotropy, and orbital velocity coupling in raw data—together with their
@@ -4122,7 +4122,7 @@ Smawfield, M. L. (2026). *The Cepheid Bias: Resolving the Hubble Tension*. Prepr
 
 Smawfield, M. L. (2026). *Temporal Equivalence Principle: A Unified Resolution to the JWST High-Redshift Anomalies*. Preprint v0.4 (Kos). Zenodo. DOI: [10.5281/zenodo.19000827](https://doi.org/10.5281/zenodo.19000827) (Paper 12)
 
-Smawfield, M. L. (2026). *Temporal Equivalence Principle: Temporal Shear Recovery in Gaia DR3 Wide Binaries*. Preprint v0.3 (Kilifi). Zenodo. DOI: [10.5281/zenodo.19102061](https://doi.org/10.5281/zenodo.19102061) (Paper 13)
+Smawfield, M. L. (2026). *Temporal Equivalence Principle: Temporal Shear Recovery in Gaia DR3 Wide Binaries*. Preprint v0.4 (Kilifi). Zenodo. DOI: [10.5281/zenodo.19102061](https://doi.org/10.5281/zenodo.19102061) (Paper 13)
 
 ### Supporting References
 

@@ -58,10 +58,9 @@
 <p>The velocity dispersion compilation draws from multiple sources with heterogeneous methodology:</p>
 <ul>
     <li><strong>Stellar absorption (direct):</strong> 17 hosts have $\sigma$ measured from stellar absorption line broadening, the gold-standard method. Sources include HyperLEDA, SDSS DR7, Ho et al. (2007, 2009), BASS DR2, and MNRAS 482:1427.</li>
-    <li><strong>HI linewidth proxy:</strong> 9 hosts use HI 21-cm linewidth measurements calibrated via $\sigma = 0.467 \times V_{\rm max} + 42.9$ km/s (HyperLEDA calibrated_vmax mode). This introduces additional scatter but preserves the kinematic nature of the observable.</li>
-    <li><strong>Rotation velocity proxy:</strong> 3 hosts (NGC 105, NGC 5917, NGC 7250) use rotation velocity converted via $\sigma \approx V_{\rm rot}/1.7$, a standard scaling for late-type spirals.</li>
+    <li><strong>HI linewidth proxy:</strong> 12 hosts use HI 21-cm linewidth measurements calibrated via $\sigma = 0.467 \times V_{\rm max} + 42.9$ km/s (HyperLEDA calibrated_vmax mode). This introduces additional scatter but preserves the kinematic nature of the observable.</li>
 </ul>
-<p>The correlation coefficient strengthens when restricting to stellar-absorption-only hosts ($N=16$, Pearson $r = 0.554$, $p = 0.026$). Critically, the 12 kinematic-proxy hosts (9 HI + 3 rotation) do not cluster anomalously—they span the full $\sigma$–$H_0$ distribution and follow the same physical trend as stellar hosts (see Section 3.2). Application of the TEP correction to the stellar-only subsample yields a unified $H_0 = 66.15 \pm 1.59$ km/s/Mpc, consistent with the full-sample result.</p>
+<p>The correlation coefficient strengthens when restricting to stellar-absorption-only hosts ($N=17$, Pearson $r = 0.472$, $p = 0.055$). Critically, the 12 kinematic-proxy hosts do not cluster anomalously—they span the full $\sigma$–$H_0$ distribution and follow the same physical trend as stellar hosts (see Section 3.2). Application of the TEP correction to the stellar-only subsample yields a unified $H_0 = 67.25 \pm 1.67$ km/s/Mpc, consistent with the full-sample result.</p>
 
 <h3>A.3 Sector interpretation of $\kappa_{\rm Cep}$</h3>
 
@@ -71,7 +70,10 @@
     correction
 </p>
 <div class="equation">
-    $$\Delta\mu = \kappa_{\rm Cep} \cdot S(\rho) \cdot \frac{\sigma^2 - \sigma_{\rm ref}^2}{c^2}.$$
+    \begin{equation}
+    \Delta\mu = \kappa_{\rm Cep} \cdot S(\rho) \cdot \frac{\sigma^2 - \sigma_{\rm ref}^2}{c^2}
+    \label{eq:delta_mu_def}
+    \end{equation}
 </div>
 <p>
     It should not be identified with the microscopic conformal coupling 
@@ -100,7 +102,9 @@
     In particular, it does not assume
 </p>
 <div class="equation">
-    $$\kappa_{\rm Cep} \rightarrow \beta_A, \quad \kappa_{\rm Cep} \rightarrow \alpha_0, \quad \kappa_{\rm Cep} \rightarrow \alpha_{\rm clock}.$$
+    \begin{equation}
+    \kappa_{\rm Cep} \rightarrow \beta_A, \quad \kappa_{\rm Cep} \rightarrow \alpha_0, \quad \kappa_{\rm Cep} \rightarrow \alpha_{\rm clock}
+    \end{equation}
 </div>
 <p>
     A microscopic mapping would require a transfer calculation from $\beta_A$ 
@@ -111,18 +115,21 @@
 </p>
 
 <p><strong>A.3.4 Cross-probe comparison.</strong>
-    The useful cross-probe comparison is between observable response 
-    coefficients, not microscopic couplings. Paper 10 constrains a pulsar 
-    response coefficient $\kappa_{\rm MSP}$; this paper constrains 
-    $\kappa_{\rm Cep}$. Their comparable magnitudes may be suggestive of 
-    a common temporal-response hierarchy, but the microscopic unification 
-    of these coefficients requires the full response dictionary and is not 
-    assumed here.
+    The useful cross-probe comparison is between observable response
+    coefficients, not microscopic couplings. Paper 10 measures the
+    <em>effective</em> screened pulsar response coefficient
+    $\kappa_{\rm MSP}^{\rm emp} \approx 3 \times 10^4$ in dense globular
+    clusters (step_5_55_kappa_msp_prior.json); this paper constrains the
+    bare Cepheid response $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$
+    mag in the looser galactic-disk regime. The ratio is consistent with
+    the TEP framework's prediction of dense-cluster geometric suppression.
+    The microscopic unification of these coefficients requires the full
+    response dictionary and is not assumed here.
 </p>
 
 <h3>A.4 Terminology Synchronization</h3>
 <p>
-    This study adopts the Jakarta v0.8 response-coefficient nomenclature. The 
+    This study adopts the Paper 0 response-coefficient nomenclature. The 
     mechanism previously referred to as "Temporal Shear" (v0.5) is now 
     standardized as Temporal Shear, referring to the 
     gradient-based suppression of scalar field activity in dense 

@@ -214,6 +214,25 @@ class HTMLToPDFConverter:
             except:
                 logger.warning("Could not verify content loading, proceeding anyway")
             
+            # Wait specifically for MathJax to finish typesetting
+            try:
+                mathjax_ready = await page.wait_for_function(
+                    """() => {
+                        if (typeof window.MathJax === 'undefined') return true;
+                        if (window.MathJax.startup && window.MathJax.startup.promise) {
+                            return window.MathJax.startup.promise.isResolved ||
+                                   document.querySelectorAll('mjx-container').length > 0;
+                        }
+                        return document.querySelectorAll('mjx-container').length > 0;
+                    }""",
+                    timeout=30000
+                )
+                logger.info("MathJax typesetting complete")
+                # Extra wait for MathJax fonts to settle
+                await page.wait_for_timeout(2000)
+            except:
+                logger.warning("MathJax wait timed out, proceeding anyway")
+
             # Wait specifically for images to load
             try:
                 images_loaded = await page.wait_for_function(

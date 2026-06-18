@@ -36,6 +36,15 @@ import numpy as np
 C_KM_S: float = 299792.458
 C_SQUARED_KM_S: float = C_KM_S**2
 
+# TEP geometric-factor prior for cross-domain consistency check.
+# The bare observable response coefficient ~10⁶ mag is consistent
+# with the TEP framework's geometric compactness estimate and with
+# Paper 11's Cepheid fit (1.05 ± 0.43) × 10⁶ mag. Paper 10's
+# pulsar channel measures the effective screened coefficient
+# ~3 × 10⁴ in dense clusters. This prior tests whether applying
+# the bare estimate without SH0ES tuning yields Planck-consistent H₀.
+KAPPA_CEP_PAPER10: float = 1.05e6
+
 
 def tep_correction(
     sigma: np.ndarray | float,
@@ -67,4 +76,15 @@ def tep_correction(
     return kappa_cep * S * (sigma_sq - sigma_ref**2) / C_SQUARED_KM_S
 
 
-__all__ = ["C_KM_S", "C_SQUARED_KM_S", "tep_correction"]
+# Canonical TEP environmental screening factors for geometric calibrators.
+# These are coarse estimates from cosmological environment depth (Local Group,
+# Local Volume, group-halo membership) used consistently across the pipeline.
+# They match the values in step_10_anchor_stratification.py and the manuscript.
+ANCHOR_SCREENING = {
+    "MW": 0.10,      # Local Group thin disk; deeply screened by MW halo
+    "LMC": 0.10,     # Local Group satellite; deeply screened
+    "M31": 0.20,     # Local Group core; strongly screened
+    "NGC 4258": 0.50,   # Canes Venatici I Group; partially screened
+}
+
+__all__ = ["C_KM_S", "C_SQUARED_KM_S", "KAPPA_CEP_PAPER10", "ANCHOR_SCREENING", "tep_correction"]

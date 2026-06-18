@@ -93,11 +93,21 @@ class Step1bApertureCorrection:
 
         hosts_df['sigma_corrected'] = hosts_df.apply(correct_row, axis=1)
         
+        # When r_eff is unavailable, default to measured sigma (no correction possible)
+        missing_r_eff = hosts_df['r_eff_arcsec'].isna()
+        if missing_r_eff.any():
+            n_missing = missing_r_eff.sum()
+            print_status(
+                f"r_eff unavailable for {n_missing}/{len(hosts_df)} hosts; using measured sigma (no aperture correction).",
+                "WARNING",
+            )
+            hosts_df.loc[missing_r_eff, 'sigma_corrected'] = hosts_df.loc[missing_r_eff, 'sigma_measured']
+        
         # Calculate deltas for reporting
         hosts_df['sigma_delta'] = hosts_df['sigma_corrected'] - hosts_df['sigma_measured']
         
         # Update inferred sigma to use the corrected value
-        hosts_df['sigma_inferred'] = hosts_df['sigma_corrected'].fillna(hosts_df['sigma_measured'])
+        hosts_df['sigma_inferred'] = hosts_df['sigma_corrected']
         
         # Verification Table
         headers = ["Host", "R_eff (\")", "Raw Sigma", "Corr Sigma", "Delta"]

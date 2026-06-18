@@ -19,16 +19,17 @@ import sys
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from scripts.utils.plot_style import apply_tep_style
 from scripts.utils.logger import print_status, print_table
+from scripts.utils.tep_correction import ANCHOR_SCREENING
 
 # Anchor properties
 ANCHOR_SIGMA = {
-    'N4258': 115.0,
+    'NGC 4258': 115.0,
     'LMC': 24.0,
     'M31': 160.0,
 }
 
 ANCHOR_MU = {
-    'N4258': 29.397,
+    'NGC 4258': 29.397,
     'LMC': 18.477,
     'M31': 24.407,
 }
@@ -50,7 +51,12 @@ class AnchorStratificationStep:
         print_status("STEP 10: ANCHOR STRATIFICATION TEST", "SECTION")
         print_status("Testing for internal P-L tension in geometric anchors", "INFO")
         print_status("=" * 70, "INFO")
-        
+
+        # Explicit replication transparency: canonical hardcoded screening inputs
+        print_status("Canonical Anchor Screening Inputs (tep_correction.ANCHOR_SCREENING):", "SECTION")
+        for _scr_name, _scr_val in ANCHOR_SCREENING.items():
+            print_status(f"  S_{{{_scr_name}}} = {_scr_val:.2f}", "INFO")
+
         # Load Cepheid data
         df = self._load_cepheid_data()
         if df is None:
@@ -68,7 +74,11 @@ class AnchorStratificationStep:
         
         # Create visualization
         self._create_figure(results)
-        
+
+        # Persist hardcoded screening inputs for replication transparency
+        results['anchor_screening_inputs'] = dict(ANCHOR_SCREENING)
+        results['anchor_screening_source'] = 'scripts.utils.tep_correction.ANCHOR_SCREENING'
+
         # Save results
         self._save_results(results)
         
@@ -96,7 +106,7 @@ class AnchorStratificationStep:
         """Extract Cepheid samples for each anchor."""
         anchors = {}
         
-        anchors['N4258'] = df[df['Source'] == 'N4258'].copy()
+        anchors['NGC 4258'] = df[df['Source'] == 'N4258'].copy()
         anchors['LMC'] = df[df['Source'].str.startswith('LMC')].copy()
         anchors['M31'] = df[df['Source'] == 'M31'].copy()
         
@@ -237,21 +247,15 @@ class AnchorStratificationStep:
         # TEP requires the response to be modulated by an environmental
         # screening factor S_Σ(E) (Jakarta §7). The geometric anchors live in
         # deep cosmological potential wells (LMC bound to MW; M31 in Local
-        # Group core; N4258 in Local Volume), where TEP predicts S_Σ → 0.
+        # Group core; NGC 4258 in Local Volume), where TEP predicts S_Σ → 0.
         # SH0ES hosts in the Hubble flow are in lower-density environments
         # where S_Σ ≈ 1 (the regime used to fit κ_host).
         #
         # We provide BOTH a naive (S=1, standard-GR-style) test and a
         # TEP-aware test that applies plausible cosmological-environment
-        # screening factors to anchors. The TEP-aware values are coarse
-        # estimates from environment depth, intended to demonstrate the
-        # qualitative effect; quantitative cosmological S(E) modeling is left
-        # to a dedicated channel-screening study.
-        ANCHOR_S_TEP = {
-            'LMC':   0.10,   # bound to MW halo; deeply screened
-            'M31':   0.20,   # Local Group core; strongly screened
-            'N4258': 0.50,   # Local Volume; partially screened
-        }
+        # screening factors to anchors. The TEP-aware values are the canonical
+        # ANCHOR_SCREENING imported from tep_correction.py (used consistently
+        # in step_3 and the manuscript).
         prediction_test = None
         if np.isfinite(kappa_host) and np.isfinite(kappa_host_err) and len(sigmas) >= 2:
             ref_idx = int(np.argmin(sigmas))
@@ -262,7 +266,7 @@ class AnchorStratificationStep:
             predictions_tep = []
             chi2_naive = 0.0
             chi2_tep = 0.0
-            S_ref = ANCHOR_S_TEP.get(anchor_names[ref_idx], 1.0)
+            S_ref = ANCHOR_SCREENING.get(anchor_names[ref_idx], 1.0)
             for i, name in enumerate(anchor_names):
                 if i == ref_idx:
                     continue
@@ -278,7 +282,7 @@ class AnchorStratificationStep:
                 # TEP-aware prediction (per-anchor S applied) using the same
                 # reference-subtracted response as the primary correction:
                 # Δμ_i = κ_Cep S_i (σ_i² - σ_ref²) / c².
-                S_i = ANCHOR_S_TEP.get(name, 1.0)
+                S_i = ANCHOR_SCREENING.get(name, 1.0)
                 d_mu_tep = kappa_host * (
                     S_i * (sigmas[i]**2 - sigma_ref**2)
                     - S_ref * (sigma_anchor**2 - sigma_ref**2)
@@ -436,16 +440,21 @@ class AnchorStratificationStep:
         c_km_s = 299792.458
         sigma_ref_fit = float(reg.get('sigma_ref', 75.25))
         x_reg = (sigma_range**2 - sigma_ref_fit**2) / c_km_s**2
+        # Rescale x-axis by 10^7 for readability
+        x_reg_scaled = x_reg * 1e7
         M_W_pred = reg['intercept'] + reg['kappa_anchor'] * x_reg
+        kappa_mantissa = reg['kappa_anchor'] / 1e6
+        kappa_err_mantissa = reg.get('kappa_anchor_err', 0) / 1e6
         ax1.plot(sigma_range, M_W_pred, '--', color='#2E86AB', alpha=0.5,
-                label=rf"$\kappa_{{\rm anchor}} = {reg['kappa_anchor']:.2e}$")
+                label=rf"$\kappa_{{\rm anchor}} = ({kappa_mantissa:.2f} \pm {kappa_err_mantissa:.2f}) \times 10^6$ mag")
         
         # Add host κ_Cep prediction (from pipeline if available)
         kappa_host_plot = reg.get('kappa_host', np.nan)
         if np.isfinite(kappa_host_plot):
             M_W_host = reg['intercept'] + kappa_host_plot * x_reg
+            kappa_host_mantissa = kappa_host_plot / 1e6
             ax1.plot(sigma_range, M_W_host, '--', color='#C73E1D', alpha=0.7,
-                    label=rf"$\kappa_{{\rm host}} = {kappa_host_plot:.2e}$")
+                    label=rf"$\kappa_{{\rm host}} = {kappa_host_mantissa:.2f} \times 10^6$ mag")
         
         ax1.set_xlabel(r'Velocity Dispersion $\sigma$ (km/s)', fontsize=14)
         ax1.set_ylabel(r'P-L Zero-Point $M_W$ (mag)', fontsize=14)
@@ -500,9 +509,9 @@ class AnchorStratificationStep:
         pred_test = reg.get('prediction_test')
 
         # TEP framing (Jakarta v0.8 §7; Istanbul v0.3 §2.4):
-        # The geometric anchors (LMC, M31, N4258) reside in DEEP cosmological
+        # The geometric anchors (LMC, M31, NGC 4258) reside in DEEP cosmological
         # potential wells — LMC bound to MW halo, M31 in Local Group core,
-        # N4258 in Local Volume. Per TEP, environmental state E suppresses the
+        # NGC 4258 in Local Volume. Per TEP, environmental state E suppresses the
         # observable Temporal Shear: Σ_μ^obs = S_Σ(E) Σ_μ with S_Σ → 0 in dense
         # regimes. SH0ES hosts in the Hubble flow probe the UNSCREENED regime.
         # An apparent anchor-vs-host κ mismatch is the PREDICTED density-regime

@@ -13,6 +13,7 @@ if str(PROJECT_ROOT) not in sys.path:
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy import stats
 from scipy.optimize import minimize
 
 # Import TEP Logger
@@ -33,7 +34,7 @@ except ImportError:
         set_step_logger,
     )
 
-from scripts.utils.tep_correction import tep_correction, C_SQUARED_KM_S
+from scripts.utils.tep_correction import tep_correction, C_SQUARED_KM_S, ANCHOR_SCREENING
 
 
 class Step3TEPCorrection:
@@ -124,7 +125,7 @@ class Step3TEPCorrection:
         # Outputs
         self.corrected_output_path = self.outputs_dir / "tep_corrected_h0.csv"
         self.json_output_path = self.outputs_dir / "tep_correction_results.json"
-        self.plot_path = self.figures_dir / "tep_correction_comparison.png"
+        self.plot_path = self.figures_dir / "figure_03_tep_correction_comparison.png"
 
         self.public_figures_dir = self.root_dir / "site" / "public" / "figures"
         self.public_figures_dir.mkdir(parents=True, exist_ok=True)
@@ -178,6 +179,16 @@ class Step3TEPCorrection:
 
         The resulting σ_ref ≈ 75 km/s is validated by the empirical result that
         low-σ SN hosts (σ < 90 km/s) yield H0 = 67.8 km/s/Mpc, matching Planck.
+
+        SCREENED-EFFECTIVE VARIANT:
+        Because the TEP framework argues the geometric anchors reside in deep
+        cosmological potential wells (Local Group / Local Volume) where Temporal
+        Shear is suppressed, their effective contribution to the *active-shear*
+        reference should be weighted by the environmental screening factor S.
+        The correction uses σ², so the screened reference is
+        σ_ref,scr² = Σ w_i S_i σ_i² / Σ w_i.
+        Both standard and screened σ_ref are returned; the headline H₀ is
+        required to be stable under both definitions.
         """
         print_status("Calculating Effective Calibrator Sigma...", "SECTION")
 
@@ -210,24 +221,35 @@ class Step3TEPCorrection:
         )
 
         # Display Anchor Table
-        headers = ["Anchor", "Sigma (km/s)", "Weight", "Description"]
+        headers = ["Anchor", "Sigma (km/s)", "S", "Weight", "Description"]
         rows = []
-        numerator = 0
-        denominator = 0
+        numerator = 0.0
+        denominator = 0.0
+        numerator_scr = 0.0
 
         for a in anchors:
-            rows.append([a["ID"], f"{a['Sigma']:.1f}", f"{a['Weight']:.2f}", a["Desc"]])
+            S = ANCHOR_SCREENING.get(a["ID"], 1.0)
+            rows.append(
+                [a["ID"], f"{a['Sigma']:.1f}", f"{S:.2f}", f"{a['Weight']:.2f}", a["Desc"]]
+            )
             numerator += a["Sigma"] * a["Weight"]
             denominator += a["Weight"]
+            numerator_scr += a["Weight"] * S * (a["Sigma"] ** 2)
 
         print_table(headers, rows, title="Geometric Anchor Sample")
 
         sigma_ref = numerator / denominator
+        sigma_ref_screened = np.sqrt(numerator_scr / denominator)
         print_status(
-            f"Effective Reference Sigma (σ_ref): {sigma_ref:.2f} km/s", "SUCCESS"
+            f"Standard Reference Sigma (σ_ref):       {sigma_ref:.2f} km/s", "SUCCESS"
+        )
+        print_status(
+            f"Screened-Effective Sigma (σ_ref,scr):   {sigma_ref_screened:.2f} km/s  "
+            f"(NGC 4258 contribution down-weighted by S={ANCHOR_SCREENING['NGC 4258']:.2f})",
+            "SUCCESS",
         )
 
-        return sigma_ref
+        return sigma_ref, sigma_ref_screened
 
     def optimize_correction(self, df, sigma_ref):
         """Finds the optimal correction parameter kappa_cep."""
@@ -471,7 +493,7 @@ class Step3TEPCorrection:
         return metrics
 
     def sensitivity_analysis(self, df, fixed_kappa_cep=None):
-        """Analyzes sensitivity of H0 to sigma_ref."""
+        """Analyzes sensitivity of H_0 to sigma_ref."""
         print_status("Sensitivity Analysis (Sigma Ref Scan)...", "PROCESS")
 
         # Apply Style
@@ -491,6 +513,8 @@ class Step3TEPCorrection:
         sigma_refs = np.linspace(30, 130, 20)
         h0_results_refit = []
         h0_results_fixed = []
+        h0_err_refit = []
+        h0_err_fixed = []
 
         planck_h0 = 67.4
 
@@ -506,6 +530,7 @@ class Step3TEPCorrection:
             dist_corr = 10 ** ((mu_corr - 25) / 5)
             h0_corr = df["velocity"].values / dist_corr
             h0_results_refit.append(pd.Series(h0_corr).mean())
+            h0_err_refit.append(pd.Series(h0_corr).sem())
 
             # Stronger robustness curve: keep the primary fitted kappa fixed and
             # vary only the externally defined calibrator reference.
@@ -517,6 +542,7 @@ class Step3TEPCorrection:
                 fixed_dist = 10 ** ((fixed_mu - 25) / 5)
                 fixed_h0 = df["velocity"].values / fixed_dist
                 h0_results_fixed.append(pd.Series(fixed_h0).mean())
+                h0_err_fixed.append(pd.Series(fixed_h0).sem())
 
         # Plot
         plt.figure(figsize=(14, 9))
@@ -526,17 +552,35 @@ class Step3TEPCorrection:
                 h0_results_fixed,
                 marker="o",
                 color=colors["blue"],
-                label="Fixed κ_Cep",
+                label=r"Fixed $\kappa_{\rm Cep}$",
                 linewidth=2.5,
+                zorder=3,
+            )
+            plt.fill_between(
+                sigma_refs,
+                np.array(h0_results_fixed) - np.array(h0_err_fixed),
+                np.array(h0_results_fixed) + np.array(h0_err_fixed),
+                color=colors["blue"],
+                alpha=0.15,
+                zorder=1,
             )
         plt.plot(
             sigma_refs,
             h0_results_refit,
             marker="s",
             color=colors["dark"],
-            label="κ_Cep refit at each σ_ref",
+            label=r"$\kappa_{\rm Cep}$ refit at each $\sigma_{\rm ref}$",
             linewidth=2.0,
             alpha=0.75,
+            zorder=3,
+        )
+        plt.fill_between(
+            sigma_refs,
+            np.array(h0_results_refit) - np.array(h0_err_refit),
+            np.array(h0_results_refit) + np.array(h0_err_refit),
+            color=colors["dark"],
+            alpha=0.10,
+            zorder=1,
         )
         plt.axhline(
             planck_h0,
@@ -544,6 +588,7 @@ class Step3TEPCorrection:
             linestyle="--",
             label="Planck CMB",
             linewidth=2.5,
+            zorder=2,
         )
         plt.fill_between(
             sigma_refs,
@@ -551,30 +596,45 @@ class Step3TEPCorrection:
             planck_h0 + 0.5,
             color=colors["accent"],
             alpha=0.15,
+            zorder=0,
+        )
+        
+        # Add vertical marker at primary architectural sigma_ref
+        sigma_ref_primary = 75.25
+        plt.axvline(
+            sigma_ref_primary,
+            color=colors["green"],
+            linestyle="-",
+            linewidth=2.0,
+            alpha=0.8,
+            label="Primary ($\\sigma_{\\rm ref}=75.25$ km/s)",
+            zorder=4,
         )
 
         plt.xlabel(r"Reference $\sigma_{ref}$ (km/s)")
         plt.ylabel(r"Unified $H_0$ (km/s/Mpc)")
-        plt.title("Sensitivity of H0 to Calibrator Reference (Suppression-Aware)")
+        plt.title(r"Sensitivity of $H_0$ to Calibrator Reference (Suppression-Aware)")
         plt.legend()
         plt.tight_layout()
 
-        path = self.figures_dir / "sensitivity_h0_vs_sigmaref.png"
+        path = self.figures_dir / "supplement_01_sensitivity_h0_vs_sigmaref.png"
         plt.savefig(path, dpi=300)
         print_status(f"Saved sensitivity plot to {path}", "SUCCESS")
         plt.close()
 
         # Copy to public
-        public_path = self.public_figures_dir / "sensitivity_h0_vs_sigmaref.png"
+        public_path = self.public_figures_dir / "supplement_01_sensitivity_h0_vs_sigmaref.png"
         shutil.copy(path, public_path)
         print_status(f"Copied sensitivity plot to {public_path}", "SUCCESS")
 
         grid = pd.DataFrame({
             "sigma_ref": sigma_refs,
             "h0_refit_kappa": h0_results_refit,
+            "h0_refit_err": h0_err_refit,
         })
         if fixed_kappa_cep is not None:
             grid["h0_fixed_kappa"] = h0_results_fixed
+            grid["h0_fixed_err"] = h0_err_fixed
         grid_path = self.outputs_dir / "sensitivity_h0_vs_sigmaref.csv"
         grid.to_csv(grid_path, index=False)
         print_status(f"Saved sensitivity grid to {grid_path}", "SUCCESS")
@@ -649,6 +709,7 @@ class Step3TEPCorrection:
             )
 
         if len(df) > 1:
+            # Linear empirical fit to highlight the raw correlation baseline
             z = np.polyfit(df["sigma_inferred"], df["h0_derived"], 1)
             p = np.poly1d(z)
             x = np.linspace(df["sigma_inferred"].min(), df["sigma_inferred"].max(), 100)
@@ -661,7 +722,30 @@ class Step3TEPCorrection:
                 label="Trend",
             )
 
-        plt.title(f"Original Data\nMean H0: {df['h0_derived'].mean():.2f}")
+        # Highlight NGC 4639 outlier in orange (consistent across figure deck)
+        outlier_mask = df["normalized_name"].str.contains("4639", na=False)
+        if outlier_mask.any():
+            outlier = df[outlier_mask].iloc[0]
+            plt.scatter(
+                outlier["sigma_inferred"],
+                outlier["h0_derived"],
+                color="#E67E22",
+                s=120,
+                edgecolor="white",
+                linewidth=1.5,
+                zorder=5,
+            )
+            plt.annotate(
+                "NGC 4639",
+                xy=(outlier["sigma_inferred"], outlier["h0_derived"]),
+                xytext=(outlier["sigma_inferred"] - 14, outlier["h0_derived"] - 4),
+                fontsize=9,
+                color="#E67E22",
+                fontweight="bold",
+                arrowprops=dict(arrowstyle="->", color="#E67E22", lw=1.0),
+            )
+
+        plt.title(rf"Original Data" + "\n" + rf"Mean $H_0$: {df['h0_derived'].mean():.2f}")
         plt.xlabel(r"Velocity Dispersion $\sigma$ (km/s)")
         plt.ylabel(r"$H_0$ (km/s/Mpc)")
         plt.ylim(55, 85)
@@ -694,15 +778,39 @@ class Step3TEPCorrection:
         if len(df) > 1:
             z2 = np.polyfit(df["sigma_inferred"], df["h0_corrected"], 1)
             p2 = np.poly1d(z2)
+            slope_corrected = z2[0]
+            
+            # Calculate correlation and p-value for corrected data
+            r_corr, p_corr = stats.pearsonr(df["sigma_inferred"], df["h0_corrected"])
+            
             plt.plot(
                 x,
                 p2(x),
                 color=colors["blue"],
                 linestyle="--",
                 linewidth=3,
-                label="Trend",
+                label=r"Trend, $r \simeq 0$ (fitted correction)",
             )
 
+        # Highlight NGC 4639 outlier in orange (consistent across figure deck)
+        if outlier_mask.any():
+            plt.scatter(
+                outlier["sigma_inferred"],
+                outlier["h0_corrected"],
+                color="#E67E22",
+                s=120,
+                edgecolor="white",
+                linewidth=1.5,
+                zorder=5,
+            )
+
+        plt.axhspan(
+            66.9,
+            67.9,
+            alpha=0.12,
+            color=colors["accent"],
+            label="Planck CMB $1\\sigma$ band",
+        )
         plt.axhline(
             67.4,
             color=colors["accent"],
@@ -710,7 +818,7 @@ class Step3TEPCorrection:
             linewidth=2.5,
             label="Planck CMB",
         )
-        plt.title(f"TEP Corrected\nMean H0: {h0_mean:.2f}")
+        plt.title(rf"TEP Corrected" + "\n" + rf"Mean $H_0$: {h0_mean:.2f}")
         plt.xlabel(r"Velocity Dispersion $\sigma$ (km/s)")
         plt.ylim(55, 85)
         plt.legend()
@@ -721,34 +829,131 @@ class Step3TEPCorrection:
         plt.close()
 
         # Copy to public
-        public_path = self.public_figures_dir / "tep_correction_comparison.png"
+        public_path = self.public_figures_dir / "figure_03_tep_correction_comparison.png"
         shutil.copy(self.plot_path, public_path)
         print_status(f"Copied comparison plot to {public_path}", "SUCCESS")
+
+    def screened_variant_analysis(self, df, sigma_ref_screened):
+        """Re-optimise κ_Cep and compute H₀ using the screened-effective σ_ref.
+
+        Returns dict with screened-variant kappa, H0 mean, and H0 SEM.
+        """
+        print_status(
+            "Screened-Effective Variant (σ_ref,scr = "
+            f"{sigma_ref_screened:.2f} km/s)...",
+            "SECTION",
+        )
+        kappa_scr = self.optimize_correction(df, sigma_ref_screened)
+        _, h0_mean_scr, h0_sem_scr = self.apply_correction(
+            df, kappa_scr, sigma_ref_screened
+        )
+        print_status(
+            f"Screened Variant: κ_Cep = {kappa_scr:.3e} mag, "
+            f"H0 = {h0_mean_scr:.2f} km/s/Mpc",
+            "INFO",
+        )
+        return {
+            "kappa_cep_screened": float(kappa_scr),
+            "sigma_ref_screened": float(sigma_ref_screened),
+            "unified_h0_screened": float(h0_mean_scr),
+            "h0_sem_screened": float(h0_sem_scr),
+        }
+
+    def slope_convention_audit(self, df, kappa_cep, sigma_ref):
+        """Sign-convention audit to prevent old negative-slope language.
+
+        Checks three sign relationships that must hold for the TEP
+        correction to be physically consistent:
+        1. raw H0 vs σ slope is positive (deep potential → high H0)
+        2. correction (H0_corr − H0_raw) vs σ slope is negative
+           (high-σ hosts are corrected downward)
+        3. distance-modulus correction Δμ is positive for high-σ hosts
+           (period contraction makes stars appear brighter → add to μ)
+        """
+        sigma_vals = df["sigma_inferred"].values.astype(float)
+        h0_raw = df["h0_derived"].values.astype(float)
+        h0_corr = df["h0_corrected"].values.astype(float)
+        correction_delta = h0_corr - h0_raw
+
+        raw_slope, _ = np.polyfit(sigma_vals, h0_raw, 1)
+        corr_delta_slope, _ = np.polyfit(sigma_vals, correction_delta, 1)
+
+        S = (
+            df["shear_suppression"].values.astype(float)
+            if "shear_suppression" in df.columns
+            else np.ones(len(df))
+        )
+        from scripts.utils.tep_correction import tep_correction
+        dmu = tep_correction(sigma_vals, sigma_ref, kappa_cep, S)
+        high_sigma_mask = sigma_vals > sigma_ref
+        dmu_high_mean = np.mean(dmu[high_sigma_mask]) if np.any(high_sigma_mask) else np.nan
+
+        audit = {
+            "raw_slope_H0_sigma_positive": bool(raw_slope > 0),
+            "correction_slope_H0_sigma_negative": bool(corr_delta_slope < 0),
+            "distance_modulus_correction_high_sigma_positive": bool(dmu_high_mean > 0),
+            "raw_slope_value": float(raw_slope),
+            "correction_delta_slope_value": float(corr_delta_slope),
+            "dmu_high_sigma_mean": float(dmu_high_mean),
+        }
+        all_ok = all([
+            audit["raw_slope_H0_sigma_positive"],
+            audit["correction_slope_H0_sigma_negative"],
+            audit["distance_modulus_correction_high_sigma_positive"],
+        ])
+
+        print_status("Slope Convention Audit", "SECTION")
+        headers = ["Check", "Value", "Status"]
+        rows = [
+            ["raw slope H0–σ > 0", f"{raw_slope:+.4f}", "PASS" if audit["raw_slope_H0_sigma_positive"] else "FAIL"],
+            ["correction slope < 0", f"{corr_delta_slope:+.4f}", "PASS" if audit["correction_slope_H0_sigma_negative"] else "FAIL"],
+            ["Δμ(high σ) > 0", f"{dmu_high_mean:+.4f} mag", "PASS" if audit["distance_modulus_correction_high_sigma_positive"] else "FAIL"],
+        ]
+        print_table(headers, rows)
+        if not all_ok:
+            print_status("SLOPE CONVENTION AUDIT FAILED — sign inconsistency detected!", "CRITICAL")
+            raise RuntimeError("Slope convention audit failed: inconsistent signs.")
+        print_status("Slope convention audit PASSED.", "SUCCESS")
+        return audit
 
     def run(self):
         print_status("Starting Step 3: TEP Correction", "TITLE")
 
         df = self.load_data()
 
-        # 1. Dynamic Sigma Ref
-        sigma_ref = self.calculate_effective_calibrator_sigma()
+        # 1. Dynamic Sigma Ref (both standard and screened-effective)
+        sigma_ref, sigma_ref_screened = self.calculate_effective_calibrator_sigma()
 
-        # 2. Optimize
+        # 2. Optimize (standard σ_ref — primary headline)
         kappa_cep = self.optimize_correction(df, sigma_ref)
 
-        # 3. Apply
+        # 3. Apply (standard)
         final_df, h0_mean, h0_sem = self.apply_correction(df, kappa_cep, sigma_ref)
 
-        # 4. Generate Comparison Plot
+        # 4. Slope Convention Audit (must pass before proceeding)
+        audit = self.slope_convention_audit(final_df, kappa_cep, sigma_ref)
+
+        # 5. Generate Comparison Plot
         self.plot_comparison(final_df, h0_mean)
 
-        # 5. Joint Bootstrap (host resampling + kappa refit per resample)
+        # 6. Joint Bootstrap (host resampling + kappa refit per resample)
         # This combines host-to-host sampling variance AND kappa parameter
         # uncertainty into a single honest H0 uncertainty.
         boot_metrics = self.bootstrap_analysis(final_df, sigma_ref)
 
-        # 6. Sensitivity
+        # 7. Sensitivity
         self.sensitivity_analysis(final_df, fixed_kappa_cep=kappa_cep)
+
+        # 8. Screened-Effective Variant
+        screened_results = self.screened_variant_analysis(df, sigma_ref_screened)
+
+        # Stability check
+        delta_h0_screened = abs(h0_mean - screened_results["unified_h0_screened"])
+        print_status(
+            f"Screened-Reference Stability: ΔH0 = {delta_h0_screened:.2f} km/s/Mpc "
+            f"(standard {h0_mean:.2f} vs screened {screened_results['unified_h0_screened']:.2f})",
+            "SUCCESS" if delta_h0_screened < 1.0 else "WARNING",
+        )
 
         # Error Budget Summary:
         #   h0_sem        : statistical SEM assuming kappa exactly known (too small)
@@ -839,6 +1044,14 @@ class Step3TEPCorrection:
             "tension_statistical": float(tension_stat),
             "is_consistent": bool(tension_primary < 2.0),
             "n_hosts": len(final_df),
+            # Slope convention audit
+            "slope_audit": audit,
+            # Screened-effective variant
+            "sigma_ref_screened": screened_results["sigma_ref_screened"],
+            "optimal_kappa_cep_screened": screened_results["kappa_cep_screened"],
+            "unified_h0_screened": screened_results["unified_h0_screened"],
+            "h0_screened_sem": screened_results["h0_sem_screened"],
+            "delta_h0_screened": float(delta_h0_screened),
         }
 
         with open(self.json_output_path, "w") as f:

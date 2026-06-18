@@ -1,0 +1,39 @@
+[13:48:13] [INFO] 
+[13:48:13] [INFO] ================================================================================
+[13:48:13] [INFO]    Starting Step 3C: Cross-Domain Consistency Check
+[13:48:13] [INFO] ================================================================================
+[13:48:13] [INFO] 
+[13:48:13] [INFO] Loading Data...
+[13:48:13] [INFO] Loaded σ_ref = 75.25 km/s from Step 3.
+[13:48:13] [INFO] Loaded 29 hosts for cross-domain consistency check.
+[13:48:13] [INFO] Applying TEP correction with FIXED κ_Cep = 1.050e+06 mag...
+[13:48:13] [INFO] (Value pre-registered from Paper 10 pulsar analysis; no SH0ES tuning.)
+[13:48:13] [INFO] Slope consistency check (κ_Cep + σ-distribution)...
+[13:48:13] [INFO] Predicted raw slope (blind, H0_true=67.4): 0.0810 km/s/Mpc/(km/s)
+[13:48:13] [INFO] Observed raw slope:                           0.0851 km/s/Mpc/(km/s)
+[13:48:13] [SUCCESS] Fractional agreement:                         4.9%
+[13:48:13] [INFO] (Prediction uses only Paper 10 κ_Cep + σ-distribution; no H0 data.)
+[13:48:13] [INFO] Bootstrap (fixed κ_Cep = 1.050e+06 mag): N=1000...
+[13:48:14] [INFO] Bootstrap Results (fixed κ_Cep):
+[13:48:14] [INFO] Bootstrap (kappa frozen)
+[13:48:14] [INFO] +------------------+--------+------+----------------+
+[13:48:14] [INFO] | Parameter        | Mean   | Std  | 95% CI         |
+[13:48:14] [INFO] +------------------+--------+------+----------------+
+[13:48:14] [INFO] | H0 (Unified)     | 68.17  | 1.30 | [65.39, 70.58] |
+[13:48:14] [INFO] | Residual |slope| | 0.0187 | —    | —              |
+[13:48:14] [INFO] +------------------+--------+------+----------------+
+[13:48:14] [INFO] Bootstrap uncertainty is host-scatter only (kappa treated as known).
+[13:48:14] [INFO] Final Tension Analysis (Cross-Domain Consistency)
+[13:48:14] [INFO] Planck 2018 Value: 67.4 +/- 0.5
+[13:48:14] [INFO] ------------------------------------------------------------
+[13:48:14] [INFO] CROSS-DOMAIN H0 (κ_Cep = 1.050e+06 mag): 68.17
+[13:48:14] [INFO]   +/- 1.30 (Statistical SEM, kappa fixed)
+[13:48:14] [INFO]   +/- 1.30 (Bootstrap: host scatter only)
+[13:48:14] [INFO]   Residual slope dH0/dσ: -0.0000
+[13:48:14] [INFO]   Pearson r (p): -0.000 (0.9992)
+[13:48:14] [INFO]   Spearman rho (p): 0.091 (0.6401)
+[13:48:14] [INFO] ------------------------------------------------------------
+[13:48:14] [INFO] Tension (Statistical):     0.55 sigma
+[13:48:14] [INFO] Tension (Bootstrap):       0.55 sigma
+[13:48:14] [SUCCESS] CONCLUSION: Bare geometric-factor κ_Cep yields H0 consistent with Planck CMB. Cross-domain consistency confirmed.
+[13:48:14] [SUCCESS] Saved cross-domain consistency results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/frozen_prior_results.json

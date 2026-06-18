@@ -24,5 +24,18 @@
     "tension_sigma": 0.48906701616272447,
     "tension_statistical": 0.5536699315596317,
     "is_consistent": true,
-    "n_hosts": 29
+    "n_hosts": 29,
+    "slope_audit": {
+        "raw_slope_H0_sigma_positive": true,
+        "correction_slope_H0_sigma_negative": true,
+        "distance_modulus_correction_high_sigma_positive": true,
+        "raw_slope_value": 0.08511786648710849,
+        "correction_delta_slope_value": -0.08511789150303709,
+        "dmu_high_sigma_mean": 0.09845959358572046
+    },
+    "sigma_ref_screened": 85.47602002901165,
+    "optimal_kappa_cep_screened": 1042153.9306640625,
+    "unified_h0_screened": 68.74882730083228,
+    "h0_screened_sem": 1.3042698506161945,
+    "delta_h0_screened": 0.5794570771239762
 }

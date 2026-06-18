@@ -42,7 +42,7 @@ try:
 
     colors = apply_tep_style()
 except ImportError:
-    colors = {"blue": "#395d85", "accent": "#b43b4e", "dark": "#301E30"}
+    colors = {"blue": "#395d85", "accent": "#b43b4e", "dark": "#301E30", "light_blue": "#4b6785", "green": "#4a2650"}
 
 
 class Step5M31Analysis:

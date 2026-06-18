@@ -10,5 +10,68 @@
   "spearman_rho": 0.5113300492610836,
   "pearson_p_cov": 0.02655,
   "spearman_p_cov": 0.008,
-  "n_sims": 20000
+  "n_sims": 20000,
+  "bayesian_comparison": {
+    "n": 29,
+    "sigma_ref": 75.25,
+    "null_chi2": 540.790742128356,
+    "null_bic": 544.1580379583424,
+    "tep_chi2": 443.4449306702943,
+    "tep_bic": 450.1795223302672,
+    "delta_chi2": 97.34581145806169,
+    "delta_bic": 93.97851562807523,
+    "bayes_factor": 2.5537323460051626e+20,
+    "ln_bayes_factor": 46.989257814037614,
+    "evidence_strength": "very strong",
+    "kappa_wls_implied": 1525704.2775596895,
+    "wls_beta_x": 45631245.4934433,
+    "wls_mu_tep": 64.94508277800821,
+    "gls_crosscheck": {
+      "null_chi2": 575.1289751176562,
+      "tep_chi2": 575.0437046391701,
+      "null_bic": 578.4962709476426,
+      "tep_bic": 581.778296299143,
+      "delta_bic": -3.2820253515003515
+    },
+    "projected": {
+      "n_eff": 28,
+      "null_chi2": 575.1289751176557,
+      "tep_chi2": 483.755940720485,
+      "delta_chi2": 91.37303439717073,
+      "delta_bic": 88.04082988699554,
+      "bayes_factor": 1.3116661202390977e+19,
+      "ln_bayes_factor": 44.02041494349777,
+      "evidence_strength": "very strong",
+      "beta_proj": 0.0,
+      "null_bic_matched": 578.4962709476422,
+      "tep_bic_matched": 490.4905323804579,
+      "delta_bic_matched": 88.00573856718427
+    }
+  },
+  "provenance_eiv": {
+    "beta": [
+      64.39558818520992,
+      52594701.15122178,
+      0.0,
+      0.7279964766009849
+    ],
+    "beta_se": [
+      0.6161978528678632,
+      6282325.879762168,
+      0.0,
+      0.8411604990435366
+    ],
+    "beta1_t": 8.371851788308199,
+    "beta1_p": 1.016204187465064e-08,
+    "gamma_HI": 0.0,
+    "gamma_HI_se": 0.0,
+    "gamma_rotation": 0.7279964766009849,
+    "gamma_rotation_se": 0.8411604990435366,
+    "n_stellar": 17,
+    "n_hi": 0,
+    "n_rot": 12,
+    "mean_x_err_stellar": 2.6622473034460848e-08,
+    "mean_x_err_hi": null,
+    "mean_x_err_rot": 7.270541521873434e-09
+  }
 }

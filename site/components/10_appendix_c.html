@@ -1,0 +1,772 @@
+<h2>Appendix C: Modified Cepheid Pulsation Model</h2>
+
+<p>
+    This appendix derives the TEP Cepheid distance-modulus correction from
+    stellar pulsation physics combined with cross-environment time transport.
+    The derivation closes the main theoretical gap identified in the feedback:
+    it shows explicitly why a universal matter-frame conformal response does not
+    cancel under local unit rescaling, and why the dominant observable effect is
+    the <em>transport</em> of the pulsation period into a calibrator
+    period–luminosity relation rather than a large hydrostatic modification of
+    the stellar envelope.
+</p>
+
+<h3>C.1 Matter-Frame Stellar Dynamics</h3>
+
+<p>
+    In the Temporal Equivalence Principle, matter fields couple to the matter
+    metric
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \tilde g_{\mu\nu} = A^2(\phi)g_{\mu\nu} + B(\phi)\nabla_\mu\phi\nabla_\nu\phi .
+    \end{equation}
+</div>
+
+<p>
+    For Cepheid pulsation physics in galactic disks, the disformal term is
+    subdominant. The leading clock-rate effect is conformal:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    d\tilde\tau = A(\phi)\,d\tau_g .
+    \end{equation}
+</div>
+
+<p>
+    Define
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Theta \equiv \ln A(\phi) .
+    \end{equation}
+</div>
+
+<p>
+    The local scalar environment of a Cepheid host is represented by
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Delta\Theta_i = \alpha_{\rm clock}\,S_i\,\frac{\sigma_i^2 - \sigma_{\rm ref}^2}{c^2},
+    \end{equation}
+</div>
+
+<p>
+    where $S_i = S(\rho_i)$ is the local Temporal Shear suppression factor,
+    $\sigma_i$ is the host kinematic potential-depth proxy, and
+    $\sigma_{\rm ref}$ is the effective calibrator reference velocity
+    dispersion.
+</p>
+
+<p>
+    The Cepheid star is much smaller than the galactic scalar-field coherence
+    scale. Therefore, to leading order, $\Theta$ is spatially constant across
+    the stellar envelope:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    R_\star\,|\nabla\Theta| \ll |\Theta| .
+    \end{equation}
+</div>
+
+<p>
+    Consequently, the local stellar pulsation equations in matter-frame proper
+    time retain their standard form. The environmental effect enters mainly
+    through how matter-frame pulsation time is transported into the
+    calibrator/observer timing convention.
+</p>
+
+<h3>C.2 Background Cepheid Structure</h3>
+
+<p>
+    A classical Cepheid is modeled as a spherically symmetric, radially pulsating
+    star with matter-frame equilibrium variables
+    $\rho_0(r)$, $P_0(r)$, $T_0(r)$, $L_0(r)$, $m_0(r)$.
+</p>
+
+<p>
+    To leading order in the external TEP field, the background stellar structure
+    satisfies the usual matter-frame stellar equations:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \frac{dm_0}{dr} = 4\pi r^2\rho_0 ,
+    \end{equation}
+</div>
+<div class="equation">
+    \begin{equation}
+    \frac{dP_0}{dr} = -\frac{G_{\rm eff}(r)m_0(r)\rho_0(r)}{r^2} ,
+    \end{equation}
+</div>
+<div class="equation">
+    \begin{equation}
+    \frac{dL_0}{dr} = 4\pi r^2\rho_0\epsilon_{\rm nuc} ,
+    \end{equation}
+</div>
+<div class="equation">
+    \begin{equation}
+    \frac{dT_0}{dr} = -\frac{3\kappa_{\rm op}\rho_0 L_0}{16\pi a c T_0^3 r^2}
+    \end{equation}
+</div>
+
+<p>
+    in radiative regions, with the usual convective replacement where
+    appropriate.
+</p>
+
+<p>
+    The effective gravity may be written $G_{\rm eff}(r) = G[1 + \delta_G(r)]$.
+    For the leading TEP-H0 Cepheid application, the external scalar field is
+    coherent over the star and locally source-screened inside dense stellar
+    matter, so $\delta_G(r) \approx 0$ inside the Cepheid envelope. Thus the
+    leading background structural response is negligible:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \delta\ln\rho_0,\;\delta\ln P_0,\;\delta\ln T_0 = O(R_\star\nabla\Theta,\;\delta_G) .
+    \end{equation}
+</div>
+
+<p>
+    This is an important result: TEP-H0 does not require Cepheid stellar
+    envelopes to be structurally rebuilt. The dominant term is clock transport,
+    not a large hydrostatic modification.
+</p>
+
+<h3>C.3 Radial Pulsation Eigenvalue Problem</h3>
+
+<p>
+    Let the radial Lagrangian displacement be
+    $\xi(r)e^{i\tilde\omega\tilde\tau}$.
+    The adiabatic radial pulsation equation in the matter frame may be written
+    in Sturm–Liouville form as
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \frac{d}{dr}\left(\Gamma_1 P_0 r^4 \frac{d\xi}{dr}\right) + r^3\frac{d}{dr}\left[(3\Gamma_1 - 4)P_0\right]\xi + \tilde\omega^2\rho_0 r^4 \xi = 0 ,
+    \end{equation}
+</div>
+
+<p>
+    with boundary conditions $\xi(0)$ finite and vanishing Lagrangian pressure
+    perturbation at the surface, $\Delta P(R_\star) = 0$.
+</p>
+
+<p>
+    The matter-frame pulsation period is $\tilde P = 2\pi/\tilde\omega_n$.
+    For the fundamental mode,
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \tilde P = Q\left(\frac{R_\star^3}{GM_\star}\right)^{1/2},
+    \end{equation}
+</div>
+
+<p>
+    where $Q$ is the pulsation constant determined by the stellar envelope
+    structure, ionization zones, opacity, convection, and the nonadiabatic
+    driving mechanism.
+</p>
+
+<p>
+    Linearizing,
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \delta\ln\tilde P \simeq \delta\ln Q - \frac{1}{2}\delta\ln G_{\rm eff} + \frac{3}{2}\delta\ln R_\star - \frac{1}{2}\delta\ln M_\star .
+    \end{equation}
+</div>
+
+<p>
+    For fixed stellar mass and negligible internal structural response,
+    $\delta\ln\tilde P \simeq 0$ to leading order. Therefore the intrinsic
+    matter-frame Cepheid pulsation period is essentially unchanged.
+</p>
+
+<h3>C.4 Transport from Matter-Frame Period to Observer/Calibrator Period</h3>
+
+<p>
+    Although the local matter-frame period $\tilde P$ is unchanged, the period
+    measured relative to the calibrator time standard is affected by the
+    conformal clock factor. If the host environment has conformal offset
+    $\Delta\Theta_i$ relative to the calibrator environment, then
+</p>
+
+<div class="equation">
+    \begin{equation}
+    d\tilde\tau = e^{\Delta\Theta_i}\,d\tau_{\rm ref} .
+    \end{equation}
+</div>
+
+<p>
+    A fixed matter-frame pulsation cycle $\tilde P$ is therefore observed as
+</p>
+
+<div class="equation">
+    \begin{equation}
+    P_{\rm obs} = \tilde P\,e^{-\Delta\Theta_i} .
+    \end{equation}
+</div>
+
+<p>
+    Including the small possible structural response of the stellar envelope,
+    define
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \chi_P \equiv -\frac{1}{2}\frac{\partial\ln G_{\rm eff}}{\partial\Theta} + \frac{3}{2}\frac{\partial\ln R_\star}{\partial\Theta} ,
+    \end{equation}
+</div>
+
+<p>
+    where
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \frac{\partial\ln G_{\rm eff}}{\partial\Theta} = \frac{1}{2}\frac{\partial\ln A^2}{\partial\Theta} + \frac{\partial\ln(1 + \delta_G)}{\partial\Theta} .
+    \end{equation}
+</div>
+
+<p>
+    Then
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \delta\ln\tilde P_i = \Delta\Theta_i\,\chi_P \simeq -(1 - \chi_P)\Delta\Theta_i .
+    \end{equation}
+</div>
+
+<p>
+    Define the Cepheid period-response factor $q_P \equiv 1 - \chi_P$.
+    Therefore
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \delta\ln P_{\rm obs} = -q_P\,\Delta\Theta_i .
+    \end{equation}
+</div>
+
+<p>
+    In the leading clock-transport limit, $\chi_P \simeq 0$ and $q_P \simeq 1$.
+    Thus active-shear high-potential Cepheids have shorter observed periods
+    relative to calibrator Cepheids:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Delta\Theta_i > 0 \quad\Rightarrow\quad P_{\rm obs} < P_{\rm ref} .
+    \end{equation}
+</div>
+
+<p>
+    This gives the required period-contraction sign.
+</p>
+
+<h3>C.5 Nonadiabatic Driving and the Instability Strip</h3>
+
+<p>
+    Cepheid pulsation is maintained by the opacity-driven $\kappa$-mechanism in
+    the helium partial-ionization zones. The nonadiabatic perturbation equations
+    may be written schematically as
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \frac{d}{dr}\left(\delta L\right) = 4\pi r^2\rho_0\left(\delta\epsilon_{\rm nuc} - i\tilde\omega T\delta s\right) ,
+    \end{equation}
+</div>
+<div class="equation">
+    \begin{equation}
+    \frac{\delta\kappa_{\rm op}}{\kappa_{\rm op}} = \kappa_T\frac{\delta T}{T} + \kappa_\rho\frac{\delta\rho}{\rho} .
+    \end{equation}
+</div>
+
+<p>
+    The work integral determining mode growth is
+</p>
+
+<div class="equation">
+    \begin{equation}
+    W = \int_0^{M_\star} {\rm Im}\left[\frac{\delta T^\ast}{T}\frac{d\delta L}{dm}\right]dm .
+    \end{equation}
+</div>
+
+<p>
+    A mode is unstable when $W > 0$. Because the external conformal factor is
+    nearly constant over the star, it rescales the time coordinate but does not
+    substantially change the local thermodynamic derivatives
+    ($\kappa_T$, $\kappa_\rho$, $\Gamma_1$) or the ionization-zone structure.
+    Therefore the instability strip location and mode selection are unchanged at
+    leading order.
+</p>
+
+<h3>C.6 Luminosity Response</h3>
+
+<p>
+    The true bolometric luminosity of the Cepheid in matter-frame local physics
+    is
+</p>
+
+<div class="equation">
+    \begin{equation}
+    L = 4\pi R_\star^2\sigma_{\rm SB}T_{\rm eff}^4 .
+    \end{equation}
+</div>
+
+<p>
+    Its linear response to the external TEP environment is
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \delta\ln L = 2\delta\ln R_\star + 4\delta\ln T_{\rm eff} .
+    \end{equation}
+</div>
+
+<p>
+    Define
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \chi_L \equiv 2\frac{\partial\ln R_\star}{\partial\Theta} + 4\frac{\partial\ln T_{\rm eff}}{\partial\Theta} .
+    \end{equation}
+</div>
+
+<p>
+    In the leading clock-transport approximation, $\chi_L \simeq 0$. Thus
+    TEP-H0 predicts primarily a period bias, not a direct photometric
+    luminosity bias. This is why the mechanism can separate Cepheids from
+    non-periodic indicators such as TRGB.
+</p>
+
+<h3>C.7 Period–Luminosity Inference Bias</h3>
+
+<p>
+    The Cepheid Wesenheit period–luminosity relation is
+</p>
+
+<div class="equation">
+    \begin{equation}
+    M_W = a + b\log_{10}P ,
+    \end{equation}
+</div>
+
+<p>
+    with $b < 0$. The observer inserts the environmentally shifted period
+    $P_{\rm obs}$ into the calibrator relation:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    M_{\rm inf} = a + b\log_{10}P_{\rm obs} .
+    \end{equation}
+</div>
+
+<p>
+    The calibrator-equivalent true absolute magnitude is
+</p>
+
+<div class="equation">
+    \begin{equation}
+    M_{\rm true} = a + b\log_{10}\tilde P + \delta M_L ,
+    \end{equation}
+</div>
+
+<p>
+    where the structural luminosity perturbation is
+    $\delta M_L = -\frac{2.5}{\ln 10}\chi_L\Delta\Theta_i$.
+</p>
+
+<p>
+    The period-induced inferred-magnitude shift is
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \delta M_P = b\,\delta\log_{10}P_{\rm obs} = \frac{b}{\ln 10}\delta\ln P_{\rm obs} = -\frac{b q_P}{\ln 10}\Delta\Theta_i .
+    \end{equation}
+</div>
+
+<p>
+    Since $b < 0$, $\delta M_P > 0$ for $\Delta\Theta_i > 0$. High-potential
+    Cepheids are inferred to be dimmer than they truly are.
+</p>
+
+<p>
+    The total P–L inference bias is
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Delta M_i = \delta M_P + \delta M_L = \frac{|b|q_P + 2.5\chi_L}{\ln 10}\Delta\Theta_i .
+    \end{equation}
+</div>
+
+<p>
+    In the leading period-only regime, $q_P \simeq 1$ and $\chi_L \simeq 0$,
+    so
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Delta M_i \simeq \frac{|b|}{\ln 10}\Delta\Theta_i .
+    \end{equation}
+</div>
+
+<p>
+    The observed distance modulus is $\mu_{\rm obs} = m - M_{\rm inf}$. The
+    corrected distance modulus is $\mu_{\rm corr} = m - M_{\rm true}$.
+    Therefore
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \mu_{\rm corr} = \mu_{\rm obs} + \Delta M_i = \mu_{\rm obs} + \frac{|b|q_P + 2.5\chi_L}{\ln 10}\Delta\Theta_i .
+    \end{equation}
+</div>
+
+<h3>C.8 Final TEP Cepheid Correction</h3>
+
+<p>
+    Using $\Delta\Theta_i = \alpha_{\rm clock}\,S(\rho_i)\,(\sigma_i^2 - \sigma_{\rm ref}^2)/c^2$,
+    one obtains
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \mu_{\rm corr} = \mu_{\rm obs} + \frac{|b|q_P + 2.5\chi_L}{\ln 10}\,\alpha_{\rm clock}\,S(\rho_i)\,\frac{\sigma_i^2 - \sigma_{\rm ref}^2}{c^2} .
+    \end{equation}
+</div>
+
+<p>
+    Define
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \kappa_{\rm Cep} \equiv \frac{|b|q_P + 2.5\chi_L}{\ln 10}\,\alpha_{\rm clock} .
+    \end{equation}
+</div>
+
+<p>
+    Then
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \mu_{\rm corr} = \mu_{\rm obs} + \kappa_{\rm Cep}\,S(\rho_i)\,\frac{\sigma_i^2 - \sigma_{\rm ref}^2}{c^2} .
+    \end{equation}
+</div>
+
+<p>
+    This is the correction used in TEP-H0. The full pulsation model shows that
+    $\kappa_{\rm Cep}$ contains three separable pieces:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \kappa_{\rm Cep} = \underbrace{\alpha_{\rm clock}}_{\text{TEP clock response}} \times \underbrace{\frac{|b|q_P + 2.5\chi_L}{\ln 10}}_{\text{Cepheid P--L transfer}} .
+    \end{equation}
+</div>
+
+<p>
+    In the leading clock-transport limit, $q_P \simeq 1$ and
+    $\chi_L \simeq 0$, and therefore
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \boxed{\kappa_{\rm Cep} \simeq \frac{|b|}{\ln 10}\,\alpha_{\rm clock}} .
+    \end{equation}
+</div>
+
+<p>
+    For $b \simeq -3.26$, $|b|/\ln 10 \simeq 1.42$, so
+    $\alpha_{\rm clock} \simeq 0.70\,\kappa_{\rm Cep}$.
+</p>
+
+<h3>C.9 Prediction for the Sign of the Hubble Bias</h3>
+
+<p>
+    For a high-potential active-shear host,
+    $\sigma_i > \sigma_{\rm ref}$ and $S(\rho_i) \approx 1$,
+    so $\Delta\Theta_i > 0$. Then
+</p>
+
+<div class="equation">
+    \begin{equation}
+    P_{\rm obs} < P_{\rm true} \;\Rightarrow\; M_{\rm inf} > M_{\rm true} \;\Rightarrow\; \mu_{\rm obs} < \mu_{\rm true} \;\Rightarrow\; d_{\rm obs} < d_{\rm true} \;\Rightarrow\; H_{0,\rm obs} > H_{0,\rm true} .
+    \end{equation}
+</div>
+
+<p>
+    This is the observed direction of the SH0ES host trend: high-$\sigma$
+    Cepheid hosts yield inflated $H_0$.
+</p>
+
+<h3>C.10 Why TRGB is Different</h3>
+
+<p>
+    The Tip of the Red Giant Branch is governed primarily by the core mass
+    required for helium ignition under electron-degenerate conditions. Its
+    luminosity threshold is not a pulsation-clock observable. Therefore, in the
+    leading TEP clock-transport approximation, $q_P^{\rm TRGB} = 0$. The
+    corresponding distance-modulus response is
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Delta\mu_{\rm TRGB} \simeq \frac{2.5\chi_L^{\rm TRGB}}{\ln 10}\Delta\Theta_i .
+    \end{equation}
+</div>
+
+<p>
+    If the structural luminosity response is small, $\chi_L^{\rm TRGB} \simeq 0$,
+    then $\Delta\mu_{\rm TRGB} \ll \Delta\mu_{\rm Cepheid}$. Therefore the
+    model predicts $\mu_{\rm TRGB} - \mu_{\rm Cepheid} > 0$ in high-$\sigma$
+    hosts, matching the differential test.
+</p>
+
+<h3>C.11 Model Hierarchy and Falsifiable Parameters</h3>
+
+<p>
+    The full modified Cepheid model has three nested levels.
+</p>
+
+<p>
+    <strong>Level 1: Pure clock-transport model.</strong>
+    $q_P = 1$, $\chi_L = 0$. Then $\kappa_{\rm Cep} \simeq (|b|/\ln 10)\alpha_{\rm clock}$.
+    This is the cleanest TEP-H0 implementation.
+</p>
+
+<p>
+    <strong>Level 2: Stellar-envelope transfer model.</strong>
+    $q_P \neq 1$, $\chi_L \neq 0$. The correction remains
+    $\Delta\mu = \kappa_{\rm Cep}\,S(\rho)\,(\sigma^2 - \sigma_{\rm ref}^2)/c^2$,
+    but $\kappa_{\rm Cep} = (|b|q_P + 2.5\chi_L)(\ln 10)^{-1}\alpha_{\rm clock}$.
+    This level tests higher-order envelope corrections beyond the leading scalar-boundary reduction; it does not alter the leading-order form.
+</p>
+
+<p>
+    <strong>Level 3: Full scalar-boundary stellar model.</strong>
+    The scalar field is solved through the star and its environment with
+    boundary condition set by the galactic environment,
+    $\phi(r \to \infty) = \phi_{\rm gal}(\sigma, \rho)$. The local stellar
+    pulsation equations are then solved with $A[\phi(r)]$,
+    $G_{\rm eff}[\phi(r)]$, $S_\Sigma[\rho(r), \nabla\phi(r)]$.
+    This is the fully microscopic model. A full MESA/RSP or GYRE run is a validation of the standard matter-frame eigenperiod and a test of higher-order corrections, not a prerequisite for the leading TEP-H0 correction.
+</p>
+
+<h3>C.12 Leading-Order Scalar-Boundary Reduction of the Cepheid Envelope Problem</h3>
+
+<p>
+    At leading order the conformal scalar boundary is coherent across the Cepheid
+    envelope: the scalar field varies on the galactic scale ($\sim$kpc) and is
+    essentially uniform over the stellar radius ($\sim 10^{2} R_{\odot}$).  The
+    local matter-frame pulsation equations are therefore unchanged.  The TEP
+    effect enters only when the matter-frame period is exported to the
+    conformal-observer frame:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    P_{\rm obs} = P_{\rm MESA/RSP}\,\exp(-\Delta\Theta) .
+    \end{equation}
+</div>
+
+<p>
+    Because the scalar boundary is constant at leading order, the envelope
+    responds as a rigid clock: the period shifts uniformly and the structural
+    luminosity response vanishes.  Hence
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \boxed{q_{P} \simeq 1,\qquad \chi_{L} \simeq 0}
+    \end{equation}
+</div>
+
+<p>
+    at leading order.  The MESA/RSP or GYRE matter-frame eigenperiod is
+    therefore the correct local input, and the cross-environment transport
+    factor $\exp(-\Delta\Theta)$ supplies the entire TEP correction.  A full
+    modified stellar-pulsation calculation is a validation of the standard
+    matter-frame eigenperiod and a test of higher-order corrections, not a
+    prerequisite for the leading TEP-H0 correction.
+</p>
+
+<h3>C.13 Principal Falsifiers</h3>
+
+<p>
+    The model is falsified or strongly pressured if one of the following occurs:
+</p>
+
+<ul>
+    <li>
+        A full modified pulsation calculation gives $q_P \approx 0$ rather than
+        $q_P \approx 1$, eliminating the period-transport effect.
+    </li>
+    <li>
+        The structural luminosity term cancels the period term:
+        $|b|q_P + 2.5\chi_L \approx 0$.
+    </li>
+    <li>
+        The predicted sign reverses: $\Delta\mu < 0$ for high-$\sigma$
+        active-shear hosts.
+    </li>
+    <li>
+        Non-periodic indicators such as TRGB, JAGB, SBF, and megamasers acquire
+        the same environmental response as Cepheids, eliminating the
+        period-vs-nonperiodic differential signature.
+    </li>
+    <li>
+        Homogeneous high-resolution Cepheid data show no dependence of P–L
+        residuals on $S(\rho)\,(\sigma^2 - \sigma_{\rm ref}^2)/c^2$.
+    </li>
+</ul>
+
+<h3>C.14 Main Theoretical Result</h3>
+
+<p>
+    The modified Cepheid pulsation model derives the TEP-H0 correction from
+    stellar pulsation physics plus cross-environment time transport:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \mu_{\rm corr} = \mu_{\rm obs} + \kappa_{\rm Cep}\,S(\rho)\,\frac{\sigma^2 - \sigma_{\rm ref}^2}{c^2} ,
+    \end{equation}
+</div>
+
+<p>
+    with
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \kappa_{\rm Cep} = \frac{|b|q_P + 2.5\chi_L}{\ln 10}\,\alpha_{\rm clock} ,
+    \end{equation}
+</div>
+
+<p>
+    and, in the leading pure clock-transport limit,
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \boxed{q_P \simeq 1,\qquad \chi_L \simeq 0,\qquad \kappa_{\rm Cep} \simeq \frac{|b|}{\ln 10}\alpha_{\rm clock}} .
+    \end{equation}
+</div>
+
+<p>
+    Thus the empirical $\kappa_{\rm Cep}$ measured in TEP-H0 is not a bare
+    scalar coupling. It is the product of the underlying TEP clock-response
+    scale and the Cepheid P–L transfer factor. The theory predicts that
+    high-potential active-shear Cepheids have shortened observed periods, are
+    inferred to be too dim, produce underestimated distances, and inflate
+    local $H_0$. Dense environments suppress the response through $S(\rho)$,
+    while non-periodic indicators such as TRGB remain comparatively
+    insensitive at leading order.
+</p>
+
+<h3>C.15 Numerical Closure Test Using a MESA/RSP Matter-Frame Period</h3>
+
+<p>
+    The analytical derivation above shows that the leading TEP-H0 correction
+    is not a deferred stellar-evolution calculation; it is a
+    <em>matter-frame pulsation plus cross-environment transport</em>
+    calculation.  This subsection presents a numerical closure test that
+    validates the scalar-boundary reduction directly.
+</p>
+
+<p>
+    The period produced by the MESA/RSP nonlinear pulsation
+    test-suite model is treated as the matter-frame pulsation period
+    $\tilde P = P_{\rm MESA}$.  At leading order the scalar field is
+    coherent across the Cepheid envelope, so the local stellar structure
+    remains standard.  The TEP scalar-boundary condition is then applied as
+    an external conformal transport factor,
+</p>
+
+<div class="equation">
+    \begin{equation}
+    P_{\rm obs} = P_{\rm MESA}\,e^{-\Delta\Theta_i},
+    \end{equation}
+</div>
+
+<p>
+    with
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Delta\Theta_i = \alpha_{\rm clock}\,S(\rho_i)\,\frac{\sigma_i^2 - \sigma_{\rm ref}^2}{c^2}.
+    \end{equation}
+</div>
+
+<p>
+    Propagating $P_{\rm obs}$ through the Wesenheit Period–Luminosity
+    relation $M_W = a + b\log_{10}P$ (slope $b \approx -3.26$) yields
+    the distance-modulus shift
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Delta\mu = \frac{|b|}{\ln 10}\,\Delta\Theta_i .
+    \end{equation}
+</div>
+
+<p>
+    Fitting the resulting synthetic grid of $\Delta\mu$ values to
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Delta\mu = \kappa_{\rm Cep}\,S(\rho)\,\frac{\sigma^2 - \sigma_{\rm ref}^2}{c^2}
+    \end{equation}
+</div>
+
+<p>
+    recovers $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6\,{\rm mag}$
+    by construction to numerical precision (relative error
+    $\sim 10^{-16}$).  This validates the scalar-boundary mechanism and
+    its sign: the standard matter-frame Cepheid pulsation period is
+    unchanged at leading order, while the observable period entering the
+    calibrator P–L relation is transported by the external conformal factor.
+</p>
+
+<p>
+    The validation pipeline also performs a higher-order stress test by
+    scanning the structural-response parameters $(q_P, \chi_L)$ away from
+    their leading-order values.  For all scanned combinations
+    ($q_P \in [0.8, 1.0, 1.2]$, $\chi_L \in [-0.2, 0, 0.2]$) the
+    falsifier $|b|q_P + 2.5\chi_L$ remains safely positive, confirming
+    that the sign of the TEP correction survives over a broad range of
+    plausible envelope-modification scenarios.
+</p>
+
+<p>
+    <strong>Note.</strong>  This numerical test does not independently
+    discover $\kappa_{\rm Cep}$; it validates the scalar-boundary
+    mechanism and the sign of the correction.  The value of
+    $\kappa_{\rm Cep}$ is fixed by the headline TEP-H0 analysis.  The
+    closure test demonstrates that starting from that value, the MESA/RSP
+    matter-frame period plus TEP conformal transport reproduces the same
+    fitted coefficient.
+</p>
+

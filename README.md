@@ -6,8 +6,8 @@
 ![TEP-H0: Cepheid Bias](site/public/image.webp)
 
 **Author:** Matthew Lukin Smawfield  
-**Version:** v0.6 (Kingston upon Hull)  
-**Date:** First published: 11 January 2026 · Last updated: 29 April 2026  
+**Version:** v0.7 (Kingston upon Hull)  
+**Date:** First published: 11 January 2026 · Last updated: 18 June 2026  
 **Status:** Preprint (Open for Collaboration)  
 **DOI:** [10.5281/zenodo.18209702](https://doi.org/10.5281/zenodo.18209702)  
 **Website:** [https://mlsmawfield.com/tep/h0/](https://mlsmawfield.com/tep/h0/)  
@@ -15,19 +15,17 @@
 
 ## Abstract
 
-The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements (H₀ ≈ 73 km/s/Mpc) and early-universe CMB inference (H₀ = 67.4 ± 0.5 km/s/Mpc)—represents a significant challenge in precision cosmology. This study proposes that the tension arises from a systematic, environment-dependent bias in Cepheid-based distances, as predicted by the Temporal Equivalence Principle (TEP).
+The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements (H₀ ≈ 73 km/s/Mpc) and early-universe CMB inference (H₀ = 67.4 ± 0.5 km/s/Mpc)—represents a significant challenge in precision cosmology. This paper tests whether a component of the Hubble tension can be represented as an environment-dependent Cepheid clock bias, as predicted by the Temporal Equivalence Principle (TEP).
 
 This study tests the hypothesis that the discrepancy arises from a violation of the isochrony axiom—the assumption that proper time accumulation is independent of the local gravitational environment. Under scalar-tensor theories that break the Strong Equivalence Principle (such as TEP), Cepheid variable stars act as environment-dependent "standard clocks." In deep gravitational potentials (high velocity dispersion σ) and active-shear environments, enhanced scalar field activity is predicted to induce period contraction relative to calibration environments. When interpreted through a universal Period-Luminosity relation, this clock-rate anomaly would mimic diminished luminosity, leading to underestimated distances and an inflated local Hubble constant.
 
-Analysis of the SH0ES Cepheid sample (N=29), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived H₀ (Spearman ρ = 0.511, p = 0.0046; Pearson r = 0.462, p = 0.0116). A median-split stratification at σ_med ≈ 90 km/s yields H₀ = 67.82 ± 1.62 km/s/Mpc (low-σ; N=15) versus 72.45 ± 2.32 km/s/Mpc (high-σ; N=14), implying ΔH₀ = 4.63 km/s/Mpc. Because published σ values are heterogeneous (direct stellar absorption and calibrated HI/rotation proxies), measurement methodology is treated as a first-class provenance variable and covariance-aware significance tests are reported using the full SH0ES GLS distance-modulus covariance.
+Analysis of the SH0ES Cepheid sample (N=29), stratified by host galaxy velocity dispersion (a TEP-independent kinematic observable), reveals a statistically significant correlation between host potential depth and derived H₀ (Spearman ρ = 0.511, p = 0.0046; Pearson r = 0.462, p = 0.0116). A median-split stratification at σ_med ≈ 90 km/s yields H₀ = 67.82 ± 1.62 km/s/Mpc (low-σ; N=15) versus 72.45 ± 2.32 km/s/Mpc (high-σ; N=14), implying ΔH₀ = 4.63 km/s/Mpc. Because published σ values are heterogeneous (direct stellar absorption and calibrated HI linewidth proxies), measurement methodology is treated as a first-class provenance variable and covariance-aware significance tests are reported using the full SH0ES GLS distance-modulus covariance. A Bayesian model comparison (environmental correction with free κ_Cep vs. a no-environment null) in the host-contrast likelihood—which projects out the shared calibration mode and tests only the environmental structure—yields ΔBIC=88. In the raw full-covariance likelihood the evidence appears weaker (ΔBIC≈ -3) because the shared calibration uncertainty dominates the absolute likelihood; the host-contrast result is nevertheless robust because the calibration covariance cancels in the slope.
 
-Application of the TEP conformal correction Δμ = κ_Cep·S(ρ)·(σ² − σ_ref²)/c²—derived from the TEP period-contraction combined with the virial relation |Φ| ∝ σ²—with Observable Response Coefficient κ_Cep = (1.05 ± 0.43) × 10⁶ mag and effective calibrator reference σ_ref = 75.25 km/s yields a unified local Hubble constant of H0 = 68.17 km/s/Mpc (bootstrap mean 68.14 ± 1.49), corresponding to a Planck tension of 0.49σ. The inferred κ_Cep ~ 10⁶ places this probe in the same response-coefficient regime as the millisecond-pulsar spin-down excess (Paper 10), reducing the apparent cross-probe mismatch at the observable-response level compared with earlier phenomenological log₁₀ σ scalings. Out-of-sample validation (train/test splits and LOOCV) shows that the fitted response coefficient is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an "Inner Fainter" signal in HST photometry. Within the TEP v0.9 framework, this sign is consistent with continuous shear suppression: the high-density M31 bulge experiences progressive attenuation of Temporal Shear (suppression factor S ≈ 0.05 at R < 1 kpc), while the lower-density SN Ia host disks remain in the active-shear regime (⟨S⟩ = 0.946). On this interpretation, the M31 signal marks the empirical mapping of a continuous environmental shear-suppression profile across a single galaxy.
-
-The anchor–host mismatch (geometric anchors show near-zero response, κ_anchor = 5.0 ± 663 mag in the σ²/c² convention, with a 2.5σ comparison to the host-level κ_Cep ≈ 1.05 × 10⁶ mag) finds a natural resolution in group halo shear suppression: all three anchors (LMC, NGC 4258, M31) are members of galaxy groups, embedding them in deep ambient potentials that trigger environment-responsive suppression of Temporal Shear regardless of internal disk densities. The SN Ia hosts, selected for smooth Hubble flow, are biased toward isolated field galaxies that lack this external screening. This framework generates a falsifiable prediction: the TEP distance-ladder bias should be unique to isolated field galaxies and suppressed in group/cluster environments.
+Application of the TEP conformal correction Δμ = κ_Cep·S(ρ)·(σ² − σ_ref²)/c²—derived from the TEP period-contraction combined with the virial relation |Φ| ∝ σ²—with Observable Response Coefficient κ_Cep = (1.05 ± 0.43) × 10⁶ mag and effective calibrator reference σ_ref = 75.25 km/s yields a unified local Hubble constant of H0 = 68.17 km/s/Mpc (bootstrap mean 68.14 ± 1.49), corresponding to a Planck tension of 0.49σ. Out-of-sample validation (train/test splits and LOOCV) shows that the fitted response coefficient is stable and removes the residual environmental trend in held-out hosts. A differential analysis within M31 yields an "Inner Fainter" signal in HST photometry consistent with density-dependent shear suppression, while the predicted differential-insensitivity signature for TRGB (a non-periodic indicator) provides a falsifiable test for follow-up CCHP and independent Cepheid-host samples.
 
 ## Key Findings
 
-Analysis of 29 SH0ES Cepheid hosts reveals a significant correlation between derived H₀ and host galaxy velocity dispersion (ρ = 0.511, p = 0.0046). High-σ hosts yield H₀ = 72.45 km/s/Mpc while low-σ hosts yield 67.82 km/s/Mpc—a 4.63 km/s/Mpc environmental bias. Applying the physics-derived TEP conformal correction (κ_Cep ≈ 1.05 × 10⁶ mag with σ²/c² scaling) eliminates this trend, yielding a unified H₀ = 68.17 km/s/Mpc (bootstrap mean 68.14 ± 1.49), reducing Planck tension from 5σ to 0.49σ. A differential analysis within M31 (HST PHAT) detects an "Inner Fainter" signal (+0.68 mag, 3.6σ), explained by density-dependent screening: the high-density bulge is screened while the outer disk is not. The anchor–host mismatch (κ_anchor = 5.0 ± 663 mag vs κ_Cep ≈ 1.05 × 10⁶ mag) is resolved by group halo screening—all anchors reside in galaxy groups, while SN Ia hosts are biased toward isolated field environments.
+Analysis of 29 SH0ES Cepheid hosts reveals a significant correlation between derived H₀ and host galaxy velocity dispersion (ρ = 0.511, p = 0.0046). High-σ hosts yield H₀ = 72.45 km/s/Mpc while low-σ hosts yield 67.82 km/s/Mpc—a 4.63 km/s/Mpc environmental bias. Applying the physics-derived TEP conformal correction (κ_Cep ≈ 1.05 × 10⁶ mag with σ²/c² scaling) eliminates this trend, yielding a unified H₀ = 68.17 km/s/Mpc (bootstrap mean 68.14 ± 1.49), reducing Planck tension from 5σ to 0.49σ. A differential analysis within M31 (HST PHAT) detects an "Inner Fainter" signal (+0.68 mag, 3.6σ), explained by environment-dependent screening: the dense bulge is screened while the outer disk is not. The anchor–host mismatch (κ_anchor = 5.0 ± 663 mag vs κ_Cep ≈ 1.05 × 10⁶ mag) is resolved by group halo screening—all anchors reside in galaxy groups, while SN Ia hosts are biased toward isolated field environments.
 
 ---
 
@@ -71,7 +69,7 @@ TEP-H0/
 ├── site/
 │   ├── components/                # Manuscript HTML sections
 │   └── public/                    # Static assets
-├── 11manuscript-tep-h0.md         # Full manuscript (Markdown)
+├── 11-TEP-H0-v0.7-KingstonUponHull.md  # Full manuscript (Markdown)
 └── requirements.txt               # Python dependencies
 ```
 
@@ -155,7 +153,7 @@ The analysis demonstrates a statistically significant host-level H₀–σ corre
   journal={Zenodo},
   year={2026},
   doi={10.5281/zenodo.18209702},
-  note={Preprint v0.6 (Kingston upon Hull)}
+  note={Preprint v0.7 (Kingston upon Hull)}
 }
 ```
 

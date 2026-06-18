@@ -894,7 +894,7 @@ class Step7LMCReplication:
             from scripts.utils.plot_style import apply_tep_style
             colors = apply_tep_style()
         except ImportError:
-            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'dark': '#301E30', 'light_blue': '#4b6785'}
+            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'dark': '#301E30', 'light_blue': '#4b6785', 'green': '#4a2650'}
         
         plt.figure(figsize=(14, 9))
         

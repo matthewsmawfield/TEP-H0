@@ -1,0 +1,245 @@
+<h2>Appendix B: Cross-Domain Response-Coefficient Consistency</h2>
+
+<p>
+    This appendix summarises the cross-domain consistency between the Cepheid
+    response coefficient measured in this paper (Paper 11) and the effective
+    pulsar response coefficient measured in Paper 10 (TEP-COS). Paper 10's
+    empirical computation (step_5_55_kappa_msp_prior.json) derives the
+    effective screened coefficient from real cluster parameters and pulsar
+    counts; the full theoretical framework, sample selection, and screening
+    hierarchy are retained in Paper 10.
+</p>
+
+<h3>B.1 Empirical Residual from Globular-Cluster Millisecond Pulsars</h3>
+
+<p>
+    Paper 10 assembles a sample of <em>N</em> = 197 globular-cluster (GC)
+    millisecond pulsars (MSPs) and <em>N</em> = 346 field MSPs, cross-matched
+    between the Freire GC catalog and the ATNF field catalog. A hybrid
+    propensity-score analysis matches GC pulsars to field controls on
+    <em>log</em><sub>10</sub><em>P</em> (spin period) and a magnetic-field proxy,
+    then expands the field sample to maximise statistical power. The primary
+    empirical result is a mean excess in the logarithmic spin-down rate:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \langle \log_{10}|\dot{P}| \rangle_{\rm GC} - \langle \log_{10}|\dot{P}| \rangle_{\rm field,\,matched} = 0.40\ {\rm dex}
+    \end{equation}
+</div>
+
+<p>
+    The 95% confidence interval is [0.33, 0.48] dex; the two-sample
+    covariance-aware significance is <em>p</em> = 0.0002 by bootstrap/permutation test.
+    The signal is stable under leave-one-out cross validation (LOOCV scatter
+    3.8%), period-only matching (0.606 dex), period-plus-field matching
+    (0.604 dex), and a Newtonian density-scaling test that rejects the
+    standard-dynamics expectation (Γ = 0.39 ± 0.08 dex/dex observed vs.
+    0.72 ± 0.04 dex/dex predicted; $4.1\sigma$ tension). A field-binary
+    control (binaries vs. isolated field pulsars) shows no excess
+    (<em>p</em> = 0.70), confirming the signal is environmental, not
+    instrument-systematic.
+</p>
+
+<h3>B.2 Conformal Mapping: Pulsar Spin-Down to Cepheid Magnitude</h3>
+
+<p>
+    Under the Temporal Equivalence Principle, the same conformal factor
+    <em>A</em>(<em>φ</em>) that governs proper-time rescaling in all
+    astrophysical environments also governs the two channels. In the
+    non-relativistic, weak-field limit the proper-time increment is
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \frac{d\tau}{dt} \approx A(\phi) = 1 + \frac{\Phi}{c^2} + \kappa \cdot f(\Phi, \nabla\Phi)
+    \label{eq:proper_time}
+    \end{equation}
+</div>
+
+<p>
+    where <em>Φ</em> is the Newtonian potential, <em>κ</em> is the
+    domain-level Observable Response Coefficient, and <em>f</em>(<em>Φ</em>,
+    ∇<em>Φ</em>) absorbs the channel-specific mapping from field structure to
+    observable shift. The crucial point is that <em>κ</em> is not a bare
+    microscopic coupling; it is an empirical transfer coefficient that
+    includes virial proportionality, environmental activation, instrument
+    calibration, and screening geometry.
+</p>
+
+<p><strong>Pulsar channel.</strong>
+    For a pulsar in a globular cluster, the observed spin-down rate is
+    modified by both the enhanced clock rate (period contraction) and the
+    TEP-amplified line-of-sight acceleration:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \dot{P}_{\rm obs} = \dot{P}_{\rm int}\!\left(1 + \kappa_{\rm MSP}\,\frac{\Phi}{c^2}\right) + \frac{P\,a_\ell}{c}
+    \end{equation}
+</div>
+
+<p>
+    In cluster cores the acceleration term dominates; its variance broadens
+    the |<em>Ṗ</em>| distribution and shifts the mean upward. The 0.40 dex
+    residual is the net population-level shift after the intrinsic braking
+    (matched out by the control sample) has been removed. The nested-domain
+    model of Paper 10 predicts an <em>unshielded</em> cluster-bath amplitude
+    of ~0.58 dex prior to companion-shielding corrections; the observed
+    0.40 dex is the <em>shielded</em> residual.
+</p>
+
+<p><strong>Cepheid channel.</strong>
+    For Cepheid variable stars the conformal factor contracts the
+    pulsation period relative to the calibrator time standard. In the
+    leading clock-transport limit (Appendix C),
+</p>
+
+<div class="equation">
+    \begin{equation}
+    P_{\rm obs} = P_{\rm true}\,e^{-\Delta\Theta_i} \approx P_{\rm true}\!\left(1 - q_P\,\Delta\Theta_i\right) ,
+    \qquad \Delta\Theta_i = \alpha_{\rm clock}\,S(\rho_i)\,\frac{\sigma_i^2 - \sigma_{\rm ref}^2}{c^2} .
+    \end{equation}
+</div>
+
+<p>
+    Propagating this through the Wesenheit Period–Luminosity relation
+    <em>M</em><sub><em>W</em></sub> = <em>a</em> + <em>b</em> log<sub>10</sub><em>P</em>
+    (slope <em>b</em> ≈ –3.26) yields an apparent magnitude offset
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Delta\mu = \kappa_{\rm Cep} \cdot S(\rho) \cdot \frac{\sigma^2 - \sigma_{\rm ref}^2}{c^2}
+    \label{eq:magnitude_offset}
+    \end{equation}
+</div>
+
+<p>
+    where the virial relation $|\Phi| \propto \sigma^2$ has been
+    used and $S(\rho)$ is the continuous shear-suppression factor.
+    The Observable Response Coefficient $\kappa_{\rm Cep}$ is not a bare
+    scalar coupling; it is the product of the underlying clock-response scale
+    and the Cepheid P–L transfer factor:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \kappa_{\rm Cep} = \frac{|b|\,q_P + 2.5\chi_L}{\ln 10}\,\alpha_{\rm clock}\,T_{\rm disk} ,
+    \end{equation}
+</div>
+
+<p>
+    with <em>q</em><sub><em>P</em></sub> ≈ 1 and <em>χ</em><sub><em>L</em></sub> ≈ 0
+    in the leading clock-transport limit, and <em>T</em><sub>disk</sub> ∼ 1.
+</p>
+
+<p><strong>Cross-channel consistency.</strong>
+    Both channels probe the same conformal clock-rate sector, but they do not
+    assert direct equality of raw coefficients. The Cepheid coefficient
+    <em>κ</em><sub>Cep</sub> (units of magnitude) and the pulsar coefficient
+    <em>κ</em><sub>MSP</sub><sup>emp</sup> (effectively dimensionless)
+    are related through the shared underlying <em>α</em><sub>clock</sub> and
+    channel-specific transfer factors:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \kappa_{\rm Cep} = \frac{|b|\,q_P}{\ln 10}\,\alpha_{\rm clock}\,T_{\rm disk} , \qquad
+    \kappa_{\rm MSP}^{\rm emp} = \alpha_{\rm clock}\,T_{\rm GC} .
+    \end{equation}
+</div>
+
+<p>
+    With <em>T</em><sub>disk</sub> ∼ 1 and <em>T</em><sub>GC</sub> ∼ 10<sup>−2</sup>–10<sup>−1</sup>,
+    a Cepheid coefficient of order 10<sup>6</sup> and a pulsar coefficient of
+    order 10<sup>4</sup> are mutually consistent without being equal. The TEP
+    framework predicts they should sit in the same <em>response hierarchy</em>
+    after environmental transfer factors are included, because the underlying
+    scalar-field structure is universal.
+</p>
+
+<h3>B.3 Numerical Derivation and Uncertainty Budget</h3>
+
+<p>
+    Paper 10 determines <em>κ</em><sub>MSP</sub> from the data by requiring
+    consistency with three independent observables simultaneously:
+</p>
+
+<ul>
+    <li>
+        <strong>Primary residual:</strong> 0.40 dex requires a response
+        coefficient in the 10<sup>6</sup>–10<sup>7</sup> range for typical
+        globular-cluster potential depths (Δ<em>Φ</em>/<em>c</em><sup>2</sup>
+        ~ 5 × 10<sup>−8</sup>).
+    </li>
+    <li>
+        <strong>Density-scaling slope:</strong> The observed Γ = 0.39 dex/dex
+        is sub-Newtonian (0.72 dex/dex predicted), indicating Topological
+        suppression of the scalar-field gradient in dense cores. This
+        suppression reduces the effective response relative to the naive
+        unscreened estimate.
+    </li>
+    <li>
+        <strong>Binary inversion:</strong> Cluster binaries are
+        −0.32 dex <em>quieter</em> than isolated cluster pulsars, consistent
+        with companion-shielding of the scalar field. The shielding fraction
+        <em>S</em><sub>comp</sub> ≈ 0.7 maps the unshielded bath prediction
+        (~0.58 dex) onto the observed 0.40 dex.
+    </li>
+</ul>
+
+<p>
+    The TEP framework predicts a bare observable response coefficient
+    $\kappa \sim 10^6$–$10^7$ mag from the geometric factor
+    $c^2/(4\pi G \rho_0 R_c^2)$ (Appendix C of Paper 10). Paper 10's
+    empirical computation (step_5_55_kappa_msp_prior.json) uses the
+    observed 0.63 dex raw excess and real cluster parameters (core radii
+    0.1–0.5 pc, mean ~0.3 pc) to derive the <em>effective</em> screened
+    coefficient in dense globular clusters:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \kappa_{\rm MSP}^{\rm emp} = (2.9 \pm 4.5) \times 10^4\ {\rm (dimensionless)}
+    \end{equation}
+</div>
+
+<p>
+    The suppression relative to the bare $\sim10^6$ value arises from
+    the denser cluster environment (smaller $R_c$ → larger $\Phi/c^2$ and
+    larger $\delta\dot{P}_{\rm accel}/\dot{P}_{\rm int}$), not from
+    pulsar-specific self-screening. Paper 11 (this work) independently
+    calibrates the bare coefficient in the looser galactic-disk regime:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6\ {\rm mag}
+    \end{equation}
+</div>
+
+<p>
+    The two channels provide a cross-domain consistency check: the Cepheid
+    value matches the bare TEP geometric-factor estimate; the pulsar value
+    matches the same bare estimate after accounting for dense-cluster
+    geometric suppression. They do not constitute an independent measurement
+    of the same coefficient in the same environment.
+</p>
+
+<div class="key-finding">
+    <h4>Cross-Domain Consistency Check</h4>
+    <p>
+        The Cepheid channel, analysed in this paper with no reference to the
+        pulsar analysis, independently returns
+        <em>κ</em><sub>Cep</sub> = (1.05 ± 0.43) × 10<sup>6</sup> mag.
+        This is consistent with the TEP framework's bare geometric-factor
+        estimate. Paper 10's effective pulsar coefficient
+        (~3 × 10<sup>4</sup>) is consistent with the same bare value after
+        dense-cluster geometric suppression. The agreement across
+        independent probes spanning ~8 orders of magnitude in period
+        (millisecond pulsars vs. day-scale Cepheids) supports the TEP
+        framework's prediction of environment-dependent response coefficients.
+    </p>
+</div>
+

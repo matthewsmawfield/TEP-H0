@@ -1,15 +1,15 @@
 <h2>5. Conclusion</h2>
 
 <p>
-    This work investigates whether the Hubble Tension—a persistent challenge in
-    precision cosmology—might arise from an environmental systematic in
-    Cepheid-based distances.
-</p>
-
-<p>
-    Stratification of the SH0ES Cepheid host galaxies by directly measured
-    velocity dispersion reveals a significant correlation (Spearman $\rho =
+    Stratification of the SH0ES Cepheid host galaxies by curated kinematic
+    potential-depth estimates reveals a significant correlation (Spearman $\rho =
     0.511$, $p = 0.0046$; Pearson $r=0.462$, $p=0.0116$) between host potential depth and derived $H_0$.
+    A Bayesian model comparison (TEP-motivated environmental correction with free $\kappa_{\rm Cep}$ vs. a no-environment null)
+    in the host-contrast likelihood yields $\Delta{\rm BIC}=88$.
+    In the raw full-covariance likelihood the evidence appears weaker
+    ($\Delta{\rm BIC}\approx -3$) because the shared calibration uncertainty dominates;
+    the host-contrast result is nevertheless robust because the calibration
+    covariance cancels in the slope.
     High-$\sigma$ hosts yield systematically inflated $H_0$ values ($72.45 \pm
     2.32$ km/s/Mpc) compared to low-$\sigma$ hosts ($67.82 \pm 1.62$ km/s/Mpc),
     with the bias $\Delta H_0 = 4.63$ km/s/Mpc accounting for a substantial
@@ -25,27 +25,35 @@
     low-$\sigma$ hosts, which have environments similar to the calibrators,
     independently yield Planck-consistent $H_0$ (within $1\sigma$) without
     correction, consistent with TEP expectations.
+    The inferred $\kappa_{\rm Cep}\sim10^6$ is consistent with the TEP
+    framework's geometric-factor estimate. Paper 10 measures the effective
+    screened pulsar coefficient $\kappa_{\rm MSP}^{\rm emp} \approx 3\times10^4$
+    in dense globular clusters (step_5_55_kappa_msp_prior.json); the
+    suppression relative to the bare estimate is consistent with the
+    denser cluster environment.
 </p>
 
 <p>
     Independent P-L fits to the extragalactic geometric anchors (LMC, NGC 4258,
-    M31) yield $\kappa_{\rm anchor} = 5.0 \pm 663$ mag—consistent with zero and in
-    a 2.5$\sigma$ comparison with the host-level response. This dichotomy is naturally
+    M31) yield $\kappa_{\rm anchor} = 5.0 \pm 663$ mag—consistent with both zero
+    and the host-level response; the uncertainty is too large to discriminate between them. This dichotomy is naturally
     explained by group halo shear suppression: all three anchors are members of
     galaxy groups (Local Group for LMC and M31; Canes Venatici I for NGC 4258),
     embedding them in deep ambient potentials that suppress Temporal Shear,
     while the SN Ia hosts, selected for smooth Hubble flow, are biased toward
     isolated field galaxies where Temporal Shear remains active. The "Inner
-    Fainter" signal observed in M31 provides additional support, showing
-    consistency with continuous density-dependent shear attenuation where the
-    inner bulge ($\bar{\rho} \approx 0.31\,M_\odot/\mathrm{pc}^3$, $S \approx
-    0.72$) experiences progressively suppressed Temporal Shear while the outer
-    disk ($S \approx 1$) remains in the active-shear regime.
+    Fainter" signal observed in M31 provides an independent
+    environmental test: the inner region shows an offset of the predicted sign
+    and magnitude relative to the outer disk, consistent with a TEP
+    environmental systematic. Because the current catalog spans a sharp
+    photometric-regime transition between PHAT and ground-based coverage,
+    discrimination between step and continuous shear-suppression profiles is not
+    yet possible; the data establish an environmental offset, not the functional
+    form of suppression.
 </p>
 
 <p>
-    These findings support the hypothesis that the Hubble Tension could reflect
-    an environmental systematic rather than new early-universe physics. The
+    These findings identify an environment-dependent Cepheid calibration bias capable of removing the Cepheid-calibrated SH0ES excess. The
     Temporal Equivalence Principle—supported by the 0.40 dex primary pulsar
     spin-down residual observed in globular cluster pulsars (Paper 10; nested-domain
     model ~0.58 dex unshielded cluster-bath amplitude) and by the potential- and
@@ -155,6 +163,17 @@ python scripts/run_pipeline.py</code></pre>
                     <td><code>tep_correction_results.json</code></td>
                 </tr>
                 <tr>
+                    <td><strong>3C</strong></td>
+                    <td><code>step_3c_frozen_prior.py</code></td>
+                    <td>
+                        Cross-domain consistency check: tests whether the
+                        TEP geometric-factor prior (~10^6 mag) applied without
+                        SH0ES tuning yields Planck-consistent H_0; does not
+                        claim Paper 10 pulsars independently measured this value
+                    </td>
+                    <td><code>frozen_prior_results.json</code></td>
+                </tr>
+                <tr>
                     <td><strong>4</strong></td>
                     <td><code>step_4_robustness_checks.py</code></td>
                     <td>
@@ -249,6 +268,11 @@ python scripts/run_pipeline.py</code></pre>
         <li>
             <a href="results/outputs/tep_correction_results.json">tep_correction_results.json</a> — Unified
             $H_0$, optimal $\kappa_{\rm Cep}$, Planck tension
+        </li>
+        <li>
+            <code>results/outputs/frozen_prior_results.json</code> —
+            Cross-domain consistency check using TEP geometric-factor prior
+            (not an independent pulsar measurement)
         </li>
         <li>
             <code>results/outputs/stratification_results.json</code> —

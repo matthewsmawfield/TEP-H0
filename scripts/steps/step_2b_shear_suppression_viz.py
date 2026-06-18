@@ -5,7 +5,7 @@ Figure 8: Continuous Shear-Suppression Framework Visualization.
 This script creates a four-panel figure visualizing the TEP v0.8 continuous
 shear-suppression framework for the 29 SH0ES host galaxies. It demonstrates
 how local environmental density modulates the temporal response via
-the suppression factor S(rho), and how this density-dependent modulation
+the suppression factor S(rho), and how this environment-dependent modulation
 propagates into corrected distance moduli and H0 estimates.
 """
 
@@ -100,11 +100,13 @@ def main() -> None:
         row = df[df["normalized_name"] == name]
         if not row.empty:
             r = row.iloc[0]
+            # Move NGC 2442 label down to avoid clipping
+            offset = (8, -15) if name == "NGC 2442" else (8, 8)
             ax.annotate(
                 name,
                 (r["sigma_inferred"], r["rho_local"]),
                 textcoords="offset points",
-                xytext=(8, 8),
+                xytext=offset,
                 fontsize=9,
                 color=tep_dark,
             )
@@ -126,24 +128,25 @@ def main() -> None:
     rho_smooth = np.logspace(-3, np.log10(2.0), 500)
     s_smooth = 1.0 / (1.0 + (rho_smooth / rho_half) ** 2)
     ax.plot(
-        np.log10(rho_smooth),
+        rho_smooth,
         s_smooth,
         color=tep_dark,
         linewidth=2.0,
         zorder=3,
     )
 
-    ax.vlines(
-        np.log10(df["rho_local"]),
-        ymin=0.0,
-        ymax=df["shear_suppression"],
-        colors=df["shear_suppression"].apply(lambda s: cmap(s)),
-        alpha=0.7,
-        linewidth=1.5,
-        zorder=2,
+    # Rug plot at bottom instead of vertical lines to reduce clutter
+    ax.plot(
+        df["rho_local"],
+        np.zeros_like(df["rho_local"]) - 0.03,
+        '|',
+        color=tep_dark,
+        markersize=8,
+        alpha=0.5,
+        markeredgewidth=1.5,
     )
     ax.scatter(
-        np.log10(df["rho_local"]),
+        df["rho_local"],
         df["shear_suppression"],
         c=df["shear_suppression"],
         cmap=cmap,
@@ -157,7 +160,8 @@ def main() -> None:
 
     ax.axhspan(0.0, 0.2, color=tep_red, alpha=0.12, label="Strong suppression")
     ax.axhspan(0.8, 1.0, color=tep_blue, alpha=0.12, label="Active shear")
-    ax.set_xlabel(r"$\log_{10}(\rho)$")
+    ax.set_xlabel(r"Local Density $\rho$ (M$_\odot$/pc$^3$)")
+    ax.set_xscale("log")
     ax.set_ylabel(r"Shear Suppression $S(\rho)$")
     ax.set_ylim(-0.05, 1.05)
     ax.legend(loc="lower left")
@@ -175,7 +179,7 @@ def main() -> None:
     ax = axs[1, 0]
     ax.scatter(
         df["sigma_inferred"],
-        df["effective_coupling"],
+        df["effective_coupling"] / 1e6,
         c=df["shear_suppression"],
         cmap=cmap,
         vmin=0.0,
@@ -186,18 +190,18 @@ def main() -> None:
         zorder=3,
     )
     # Reference line for unscreened coupling (S=1)
-    kappa_mantissa = kappa_cep / 1e5
+    kappa_mantissa = kappa_cep / 1e6
     ax.axhline(
-        kappa_cep,
+        kappa_cep / 1e6,
         color=tep_dark,
         linestyle="--",
         linewidth=1.5,
-        label=rf"Unscreened coupling $\kappa_{{\rm Cep}} = {kappa_mantissa:.2f} \times 10^5$ mag",
+        label=rf"Unscreened coupling $\kappa_{{\rm Cep}} = {kappa_mantissa:.2f} \times 10^6$ mag",
     )
     ax.set_xlabel(r"Velocity Dispersion $\sigma$ (km/s)")
-    ax.set_ylabel(r"Effective Coupling $\kappa_{\rm Cep} \cdot S$ [mag]")
+    ax.set_ylabel(r"Effective Coupling $\kappa_{\rm Cep} \cdot S$ [$\times 10^6$ mag]")
     ax.legend(loc="upper right")
-    ax.set_ylim(top=kappa_cep * 1.15)  # Add 15% headroom for legend
+    ax.set_ylim(top=kappa_cep / 1e6 * 1.15)  # Add 15% headroom for legend
     ax.text(
         0.02,
         0.98,
@@ -226,16 +230,29 @@ def main() -> None:
         row = df[df["normalized_name"] == name]
         if not row.empty:
             r = row.iloc[0]
+            # Move NGC 2442 label down to avoid overlap
+            xytext = (8, -15) if name == "NGC 2442" else (8, 8)
             ax.annotate(
                 name,
                 (r["shear_suppression"], r["delta_mu"]),
                 textcoords="offset points",
-                xytext=(8, 8),
+                xytext=xytext,
                 fontsize=9,
                 color=tep_dark,
             )
+    # Label highest correction point
+    max_idx = df["delta_mu"].idxmax()
+    r = df.loc[max_idx]
+    ax.annotate(
+        r["normalized_name"],
+        (r["shear_suppression"], r["delta_mu"]),
+        textcoords="offset points",
+        xytext=(8, 12),
+        fontsize=9,
+        color=tep_dark,
+    )
     ax.set_xlabel(r"Shear Suppression $S$")
-    ax.set_ylabel(r"$|\Delta\mu| = \kappa_{\rm Cep} S \, (\sigma^2 - \sigma_{\rm ref}^2)/c^2$ [mag]")
+    ax.set_ylabel(r"Absolute Correction Magnitude $|\Delta\mu|$ [mag]")
     ax.text(
         0.02,
         0.98,
@@ -262,11 +279,11 @@ def main() -> None:
     # ------------------------------------------------------------------
     # Save
     # ------------------------------------------------------------------
-    save_path = fig_dir / "figure_08_shear_suppression.png"
+    save_path = fig_dir / "supplement_05_shear_suppression.png"
     fig.savefig(save_path, dpi=300)
     print(f"Saved figure to {save_path}")
 
-    public_path = public_dir / "figure_08_shear_suppression.png"
+    public_path = public_dir / "supplement_05_shear_suppression.png"
     shutil.copy(save_path, public_path)
     print(f"Copied figure to {public_path}")
 

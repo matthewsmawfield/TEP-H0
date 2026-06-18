@@ -1,10 +1,12 @@
 
+import json
+import shutil
+import sys
+from pathlib import Path
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from pathlib import Path
-import matplotlib.pyplot as plt
-import sys
-import json
 
 try:
     import statsmodels.api as sm
@@ -28,23 +30,23 @@ class Step6MultivariateAnalysis:
     ==========================================================
     
     This step performs a rigorous multivariate regression analysis to determine if the 
-    observed H0-Sigma correlation is driven by mundane astrophysical confounders.
+    observed H_0–σ correlation is driven by mundane astrophysical confounders.
     
     We test the following hypothesis:
-    H0 ~ Sigma + Age (Period) + Dust (Color) + Mass
+    H_0 ~ σ + Age (Period) + Dust (Color) + Mass
     
-    If Sigma remains significant while other factors are not, the TEP hypothesis (gravitational potential)
+    If σ remains significant while other factors are not, the TEP hypothesis (gravitational potential)
     is supported over astrophysical systematics.
     
     Inputs:
-        - results/outputs/stratified_h0.csv (H0 & Sigma)
+        - results/outputs/stratified_h0.csv (H_0 & σ)
         - data/interim/reconstructed_shoes_cepheids.csv (Periods)
         - data/raw/Pantheon+SH0ES.dat (SN Colors)
         
     Outputs:
         - results/outputs/multivariate_analysis_results.json
         - results/outputs/multivariate_analysis_summary.txt
-        - site/public/figures/multivariate_robustness.png
+        - results/figures/figure_12_multivariate_robustness.png
     """
     
     def __init__(self):
@@ -52,10 +54,12 @@ class Step6MultivariateAnalysis:
         self.data_dir = self.root_dir / "data"
         self.results_dir = self.root_dir / "results"
         self.outputs_dir = self.results_dir / "outputs"
-        self.figures_dir = self.root_dir / "site" / "public" / "figures"
+        self.figures_dir = self.results_dir / "figures"
+        self.public_figures_dir = self.root_dir / "site" / "public" / "figures"
         self.logs_dir = self.root_dir / "logs"
         
         self.figures_dir.mkdir(parents=True, exist_ok=True)
+        self.public_figures_dir.mkdir(parents=True, exist_ok=True)
         self.outputs_dir.mkdir(parents=True, exist_ok=True)
         self.logs_dir.mkdir(parents=True, exist_ok=True)
         
@@ -71,7 +75,7 @@ class Step6MultivariateAnalysis:
         # Outputs
         self.summary_path = self.outputs_dir / "multivariate_analysis_summary.txt"
         self.json_path = self.outputs_dir / "multivariate_analysis_results.json"
-        self.plot_path = self.figures_dir / "multivariate_robustness.png"
+        self.plot_path = self.figures_dir / "figure_12_multivariate_robustness.png"
 
     def load_and_merge_data(self):
         """Load stratified H0 data and merge with auxiliary astrophysical params."""
@@ -81,7 +85,7 @@ class Step6MultivariateAnalysis:
             print_status("Stratified H0 data not found. Run Step 2 first.", "ERROR")
             return None
             
-        # 1. Main H0 vs Sigma Data
+        # 1. Main H_0 vs σ data
         h0_data = pd.read_csv(self.h0_path)
         
         # 2. Cepheid Period Data (Aggregated per host)
@@ -255,7 +259,7 @@ class Step6MultivariateAnalysis:
             from scripts.utils.plot_style import apply_tep_style
             colors = apply_tep_style()
         except ImportError:
-            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'dark': '#301E30', 'green': '#4a2650'}
+            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'dark': '#301E30', 'light_blue': '#4b6785', 'green': '#4a2650'}
             
         data = []
         for name, model in models.items():
@@ -273,7 +277,7 @@ class Step6MultivariateAnalysis:
         res_df = pd.DataFrame(data)
         
         term_map = {
-            'sigma_inferred': 'Potential (σ)',
+            'sigma_inferred': 'Velocity Dispersion (σ) [Potential Proxy]',
             'mean_logP': 'Period (Age)',
             'c': 'Color (Dust)',
             'x1': 'Stretch',
@@ -301,27 +305,54 @@ class Step6MultivariateAnalysis:
             'FlowEnvironment': colors.get('light_blue', colors['blue'])
         }
         
+        model_labels = {
+            'Baseline': 'Baseline (σ only)',
+            'AgeControl': '+ Period/Age control',
+            'DustControl': '+ Color/Dust control',
+            'Full': '+ All astrophysical controls',
+            'FlowEnvironment': '+ Flow environment controls'
+        }
+        
         for i, model_name in enumerate(model_order):
             subset = res_df[res_df['Model'] == model_name]
             if subset.empty: continue
             
             ys = [y_map[t] + (i - 1.5) * offset_step for t in subset['Term']]
+            # Mute non-sigma covariates: smaller paler markers
+            ms = [10 if t == 'sigma_inferred' else 6 for t in subset['Term']]
+            lw = [2.5 if t == 'sigma_inferred' else 1.5 for t in subset['Term']]
             
-            plt.errorbar(subset['Coef'], ys, xerr=subset['Error'], 
-                         fmt='o', label=model_name, capsize=4, 
-                         color=model_colors.get(model_name, 'gray'),
-                         markersize=8, linewidth=2)
+            for j, (_, row) in enumerate(subset.iterrows()):
+                c = colors['accent'] if row['Term'] == 'sigma_inferred' else '#999999'
+                alpha = 1.0 if row['Term'] == 'sigma_inferred' else 0.45
+                plt.errorbar(row['Coef'], ys[j], xerr=row['Error'],
+                             fmt='o', capsize=3 if row['Term'] != 'sigma_inferred' else 4,
+                             color=c, alpha=alpha,
+                             markersize=ms[j], linewidth=lw[j])
+            # Dummy legend entry
+            plt.errorbar([], [], fmt='o', color=model_colors.get(model_name, 'gray'),
+                         markersize=8, linewidth=2, label=model_labels.get(model_name, model_name))
             
         plt.yticks(list(y_map.values()), [term_map.get(t, t) for t in term_order])
-        plt.axvline(0, color=colors['dark'], linestyle='--', alpha=0.5)
-        plt.xlabel('Standardized Coefficient (Impact on H0)')
-        plt.title('Robustness of Potential Dependence vs Astrophysical Confounders')
-        plt.legend()
-        plt.grid(True, axis='x', alpha=0.3, linestyle=':')
+        # Solid, prominent zero-effect line; faint grid behind it
+        plt.axvline(0, color='black', linestyle='-', linewidth=2.0, zorder=100)
+        plt.xlabel(r'Standardized Coefficient (Impact on $H_0$)')
+        plt.title('Multivariate Robustness of the Host-Potential Signal')
+        plt.legend(loc='upper right', fontsize=9)
+        plt.grid(True, axis='x', alpha=0.15, linestyle=':')
+        
+        # Highlight sigma row with background shading
+        sigma_y = y_map['sigma_inferred']
+        plt.axhspan(sigma_y - 0.6, sigma_y + 0.6, color=colors['accent'], alpha=0.1, zorder=0)
         
         plt.savefig(self.plot_path, dpi=300)
         print_status(f"Saved plot to {self.plot_path}", "SUCCESS")
         plt.close()
+
+        # Copy to public figures for site build
+        public_plot_path = self.public_figures_dir / "figure_12_multivariate_robustness.png"
+        shutil.copy(self.plot_path, public_plot_path)
+        print_status(f"Copied plot to {public_plot_path}", "SUCCESS")
 
     def run(self):
         print_status("Starting Step 6: Multivariate Analysis", "TITLE")

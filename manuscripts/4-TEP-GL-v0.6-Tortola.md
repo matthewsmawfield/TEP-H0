@@ -1,4 +1,4 @@
-# Temporal-Spatial Coupling in Gravitational Lensing
+# Temporal-Spatial Coupling in Gravitational Lensing: A Reinterpretation of Dark Matter Observations
 **Matthew Lukin Smawfield**
 Version: v0.6 (Tortola)
 05 June 2026
@@ -16,7 +16,7 @@ metric couplings, creating a "temporal composite" image. This projects
 temporal depth onto the spatial plane, generating a
 *Temporal Shear* contribution—arising from gradients in the
 scalar field's continuous spatial profile (*Temporal Topology*,
-TEP v0.8)—that is degenerate with gravitational shear in standard static lens reconstructions unless time-domain or variability-dependent observables are included.
+TEP)—that is degenerate with gravitational shear in standard static lens reconstructions unless time-domain or variability-dependent observables are included.
 This phenomenon is defined here as *Phantom Mass*. GW170817 primarily constrains differential propagation and disformal cone tilt; it does not directly test common-mode conformal clock-rate structure along a shared path, although conformal scalar sectors remain indirectly constrained by PPN, equivalence-principle, source-screening, and clock-comparison tests. Because photons and gravitational waves traverse the same path, conformal time dilation is common-mode and cancels in differential measurements. Screening operates
 via the continuous flattening of Temporal Topology in dense
 environments, suppressing local field gradients without invoking
@@ -130,7 +130,7 @@ second-order equations of motion. TEP inherits the theoretical
 consistency (no Ostrogradsky ghosts) of this framework.
 
 **Screening and Temporal Topology:** The core TEP
-framework (v0.8) formulates screening as a continuous spatial
+framework formulates screening as a continuous spatial
 profile governed by the non-linear superposition of field gradients
 (Temporal Shear), replacing discrete thin-shell boundaries. TEP-GL
 phenomenologically employs Vainshtein screening (from the Galileon
@@ -871,12 +871,12 @@ $\mathcal{L}_\phi = -\frac{1}{2}(\partial \phi)^2 -
 T$
 
 where \(\Lambda\) is the strong coupling scale and \(T\) is the trace of the
-energy-momentum tensor. In high-density environments (Solar System), the
+energy-momentum tensor. In dense environments (Solar System), the
 non-linear term \(\frac{1}{\Lambda^3}(\partial \phi)^2 \square \phi\)
 dominates, suppressing the spatial gradients of \(\phi\)—the
 *Temporal Shear*—and restoring General Relativity to high precision.
 This gradient suppression is a specific realization of the continuous
-geometric screening paradigm (Temporal Topology) introduced in TEP v0.8:
+geometric screening paradigm (Temporal Topology) introduced in TEP:
 rather than invoking discrete thin-shell boundaries, the field profile
 flattens continuously in deep potential wells, with the degree of
 suppression governed by the non-linear superposition of gradients. On
@@ -1253,7 +1253,7 @@ screening framework (Box 4.1) defines a narrow but viable parameter window:
 The requirement that \(\alpha(\phi) \propto \Psi\) (the scalar field tracks
 the Newtonian potential) is a non-trivial constraint on the
 TEP Lagrangian. It is satisfied in conformal coupling models where \(\phi\)
-is sourced by the trace of the stress-energy tensor, but represents a
+is sourced by the matter density (equivalently, by the stress-energy trace in the non-relativistic limit), but represents a
 theoretical prior that must be verified against N-body simulations. This is
 flagged as a key target for future numerical work.
 
@@ -1282,7 +1282,7 @@ Solar System (AU): \(\alpha < 10^{-15}\) (Microsecond residuals)
 
 **Mechanism:** The required suppression factor is
 \(10^{10}\). In the continuous geometric framework of Temporal Topology
-(TEP v0.8), the scalar field gradient is suppressed smoothly as a
+(TEP), the scalar field gradient is suppressed smoothly as a
 function of ambient density, without invoking discrete thin-shell
 boundaries. The non-linear kinetic term in the Galileon Lagrangian
 flattens the field profile continuously in deep potential wells; the
@@ -1699,7 +1699,7 @@ Smawfield, M. L. (2025). *Temporal-Spatial Coupling in Gravitational Lensing: A 
 
 Smawfield, M. L. (2025). *Global Time Echoes: Empirical Synthesis*. Preprint v0.4 (Singapore). Zenodo. DOI: [10.5281/zenodo.18004832](https://doi.org/10.5281/zenodo.18004832) (Paper 5)
 
-Smawfield, M. L. (2025). *Universal Critical Density: Cross-Scale Consistency of ρ_T*. Preprint v0.3 (New Delhi). Zenodo. DOI: [10.5281/zenodo.18064365](https://doi.org/10.5281/zenodo.18064365) (Paper 6)
+Smawfield, M. L. (2025). *Universal Critical Density: Cross-Scale Consistency of ρ_T*. Preprint v0.6 (New Delhi). Zenodo. DOI: [10.5281/zenodo.18064365](https://doi.org/10.5281/zenodo.18064365) (Paper 6)
 
 Smawfield, M. L. (2025). *The Soliton Wake: Exploring RBH-1 as a Temporal Topology Candidate*. Preprint v0.3 (Blantyre). Zenodo. DOI: [10.5281/zenodo.18059250](https://doi.org/10.5281/zenodo.18059250) (Paper 7)
 
@@ -1713,7 +1713,7 @@ Smawfield, M. L. (2026). *The Cepheid Bias: Resolving the Hubble Tension*. Prepr
 
 Smawfield, M. L. (2026). *Temporal Equivalence Principle: A Unified Resolution to the JWST High-Redshift Anomalies*. Preprint v0.4 (Kos). Zenodo. DOI: [10.5281/zenodo.19000827](https://doi.org/10.5281/zenodo.19000827) (Paper 12)
 
-Smawfield, M. L. (2026). *Temporal Equivalence Principle: Temporal Shear Recovery in Gaia DR3 Wide Binaries*. Preprint v0.3 (Kilifi). Zenodo. DOI: [10.5281/zenodo.19102061](https://doi.org/10.5281/zenodo.19102061) (Paper 13)
+Smawfield, M. L. (2026). *Temporal Equivalence Principle: Temporal Shear Recovery in Gaia DR3 Wide Binaries*. Preprint v0.4 (Kilifi). Zenodo. DOI: [10.5281/zenodo.19102061](https://doi.org/10.5281/zenodo.19102061) (Paper 13)
 
 Tie, S. S., & Kochanek, C. S. 2018, *MNRAS*, 473, 80
 (arXiv:1707.01908)

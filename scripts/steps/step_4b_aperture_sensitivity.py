@@ -9,11 +9,14 @@ import sys
 import shutil
 import json
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 # Import TEP Logger
 try:
     from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
 except ImportError:
-    sys.path.append(str(Path(__file__).resolve().parents[2]))
     from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
 
 class Step4bApertureSensitivity:
@@ -56,7 +59,7 @@ class Step4bApertureSensitivity:
         
         self.stratified_path = self.outputs_dir / "stratified_h0.csv"
         self.output_stats_path = self.outputs_dir / "aperture_sensitivity_stats.txt"
-        self.plot_path = self.figures_dir / "aperture_sensitivity.png"
+        self.plot_path = self.figures_dir / "supplement_06_aperture_sensitivity.png"
 
         self.sigma_compilation_path = self.root_dir / "data" / "raw" / "external" / "velocity_dispersions_literature.csv"
         self.sigma_compilation_regenerated_path = (
@@ -477,7 +480,7 @@ class Step4bApertureSensitivity:
             from scripts.utils.plot_style import apply_tep_style
             colors = apply_tep_style()
         except ImportError:
-            colors = {'blue': '#395d85', 'dark': '#301E30', 'accent': '#b43b4e', 'light_blue': '#4b6785'}
+            colors = {'blue': '#395d85', 'dark': '#301E30', 'accent': '#b43b4e', 'light_blue': '#4b6785', 'green': '#4a2650'}
         
         plt.figure(figsize=(14, 9))
         
@@ -488,7 +491,7 @@ class Step4bApertureSensitivity:
         if len(df) > 1:
             m, c = np.polyfit(df['sigma_measured'], df['h0_derived'], 1)
             x_range = np.linspace(df['sigma_measured'].min(), df['sigma_measured'].max(), 100)
-            plt.plot(x_range, m*x_range + c, color=colors['dark'], linestyle='--', linewidth=3, label=f'Fit (r={r_raw:.2f})')
+            plt.plot(x_range, m*x_range + c, color=colors['dark'], linestyle='--', linewidth=3, label=f'Pearson r={r_raw:.2f}')
         
         plt.xlabel(r'Raw Measured $\sigma$ (km/s)')
         plt.ylabel(r'$H_0$ (km/s/Mpc)')
@@ -502,31 +505,28 @@ class Step4bApertureSensitivity:
         if len(df) > 1:
             m2, c2 = np.polyfit(df['sigma_inferred'], df['h0_derived'], 1)
             x_range2 = np.linspace(df['sigma_inferred'].min(), df['sigma_inferred'].max(), 100)
-            plt.plot(x_range2, m2*x_range2 + c2, color=colors['blue'], linestyle='--', linewidth=3, label=f'Fit (r={r_corr:.2f})')
+            plt.plot(x_range2, m2*x_range2 + c2, color=colors['blue'], linestyle='--', linewidth=3, label=f'Pearson r={r_corr:.2f}')
         
         plt.xlabel(r'Aperture-Corrected $\sigma$ (km/s)')
         plt.ylabel(r'$H_0$ (km/s/Mpc)')
-        plt.title('Corrected Velocity Dispersion')
+        plt.title('Aperture-Corrected Velocity Dispersion')
         plt.legend(loc='upper left', frameon=True)
 
-        # Bottom-left: Heatmap of r(beta, re_scale)
+        # Bottom-left: Numeric annotation instead of heatmap
         plt.subplot(2, 2, 3)
         if grid_df is not None and len(grid_df) > 0:
-            pivot = grid_df.pivot(index='beta', columns='re_scale', values='r')
-            im = plt.imshow(
-                pivot.values,
-                aspect='auto',
-                origin='lower',
-                cmap='viridis',
-                extent=[pivot.columns.min(), pivot.columns.max(), pivot.index.min(), pivot.index.max()],
-                vmin=np.nanmin(pivot.values),
-                vmax=np.nanmax(pivot.values),
-            )
-            cbar = plt.colorbar(im, fraction=0.046, pad=0.04)
-            cbar.set_label('Pearson r')
-            plt.xlabel(r'$R_{\rm eff}$ Scale Factor')
+            r_min = grid_df['r'].min()
+            r_max = grid_df['r'].max()
+            r_mean = grid_df['r'].mean()
+            plt.text(0.5, 0.5, 
+                    f'Across (R/R_eff=0.7–1.3) and (β=0.00–0.08):\n'
+                    f'r = {r_min:.2f}–{r_max:.2f} (mean = {r_mean:.2f})',
+                    ha='center', va='center', fontsize=12,
+                    bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.3))
+            plt.xlabel(r'$R/R_{\rm eff}$ Scale Factor')
             plt.ylabel(r'Aperture Exponent $\beta$')
-            plt.title('Robustness Envelope: r(H0, σ)')
+            plt.title(r'Robustness Envelope: $r(H_0, \sigma)$')
+            plt.axis('off')
         else:
             plt.axis('off')
 
@@ -547,7 +547,7 @@ class Step4bApertureSensitivity:
 
             plt.axhline(r_corr, color=colors['blue'], linestyle='--', linewidth=1.5, alpha=0.7, label='Baseline corrected r')
             plt.axhline(r_raw, color=colors.get('light_blue', '#4b6785'), linestyle=':', linewidth=1.5, alpha=0.7, label='Raw r')
-            plt.xlabel('β  OR  R_eff scale')
+            plt.xlabel(r'Aperture Exponent $\beta$  or  $R/R_{\rm eff}$ Scale Factor')
             plt.ylabel('Pearson r')
             plt.title('Stability Slices')
             plt.grid(True, linestyle='--', alpha=0.4)
@@ -560,7 +560,7 @@ class Step4bApertureSensitivity:
         plt.close()
         
         # Copy to public
-        shutil.copy(self.plot_path, self.public_figures_dir / "aperture_sensitivity.png")
+        shutil.copy(self.plot_path, self.public_figures_dir / "supplement_06_aperture_sensitivity.png")
         print_status(f"Saved plot to {self.plot_path}", "SUCCESS")
 
 if __name__ == "__main__":

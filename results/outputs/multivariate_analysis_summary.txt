@@ -4,8 +4,8 @@ Model 1: H0 ~ Sigma
 Dep. Variable:             h0_derived   R-squared:                       0.214
 Model:                            OLS   Adj. R-squared:                  0.184
 Method:                 Least Squares   F-statistic:                     7.333
-Date:                Wed, 29 Apr 2026   Prob (F-statistic):             0.0116
-Time:                        06:53:47   Log-Likelihood:                -37.156
+Date:                Wed, 17 Jun 2026   Prob (F-statistic):             0.0116
+Time:                        18:47:47   Log-Likelihood:                -37.156
 No. Observations:                  29   AIC:                             78.31
 Df Residuals:                      27   BIC:                             81.05
 Df Model:                           1                                         
@@ -31,8 +31,8 @@ Model 2: H0 ~ Sigma + MeanLogP (Age Proxy)
 Dep. Variable:             h0_derived   R-squared:                       0.254
 Model:                            OLS   Adj. R-squared:                  0.196
 Method:                 Least Squares   F-statistic:                     4.421
-Date:                Wed, 29 Apr 2026   Prob (F-statistic):             0.0222
-Time:                        06:53:47   Log-Likelihood:                -36.396
+Date:                Wed, 17 Jun 2026   Prob (F-statistic):             0.0222
+Time:                        18:47:47   Log-Likelihood:                -36.396
 No. Observations:                  29   AIC:                             78.79
 Df Residuals:                      26   BIC:                             82.89
 Df Model:                           2                                         
@@ -59,8 +59,8 @@ Model 3: H0 ~ Sigma + Color + Stretch
 Dep. Variable:             h0_derived   R-squared:                       0.328
 Model:                            OLS   Adj. R-squared:                  0.247
 Method:                 Least Squares   F-statistic:                     4.067
-Date:                Wed, 29 Apr 2026   Prob (F-statistic):             0.0175
-Time:                        06:53:47   Log-Likelihood:                -34.877
+Date:                Wed, 17 Jun 2026   Prob (F-statistic):             0.0175
+Time:                        18:47:47   Log-Likelihood:                -34.877
 No. Observations:                  29   AIC:                             77.75
 Df Residuals:                      25   BIC:                             83.22
 Df Model:                           3                                         
@@ -88,8 +88,8 @@ Model 4: H0 ~ Sigma + Age + Dust + Mass
 Dep. Variable:             h0_derived   R-squared:                       0.396
 Model:                            OLS   Adj. R-squared:                  0.296
 Method:                 Least Squares   F-statistic:                     3.939
-Date:                Wed, 29 Apr 2026   Prob (F-statistic):             0.0135
-Time:                        06:53:47   Log-Likelihood:                -33.322
+Date:                Wed, 17 Jun 2026   Prob (F-statistic):             0.0135
+Time:                        18:47:47   Log-Likelihood:                -33.322
 No. Observations:                  29   AIC:                             76.64
 Df Residuals:                      24   BIC:                             83.48
 Df Model:                           4                                         
@@ -118,8 +118,8 @@ Model 5: H0 ~ Sigma + Age + Dust + Mass + zHD + Group Richness
 Dep. Variable:             h0_derived   R-squared:                       0.434
 Model:                            OLS   Adj. R-squared:                  0.279
 Method:                 Least Squares   F-statistic:                     2.808
-Date:                Wed, 29 Apr 2026   Prob (F-statistic):             0.0349
-Time:                        06:53:47   Log-Likelihood:                -32.396
+Date:                Wed, 17 Jun 2026   Prob (F-statistic):             0.0349
+Time:                        18:47:47   Log-Likelihood:                -32.396
 No. Observations:                  29   AIC:                             78.79
 Df Residuals:                      22   BIC:                             88.36
 Df Model:                           6                                         

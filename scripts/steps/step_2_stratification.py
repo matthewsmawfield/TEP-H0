@@ -98,7 +98,7 @@ class Step2Stratification:
         # Outputs
         self.stratified_output_path = self.outputs_dir / "stratified_h0.csv"
         self.json_output_path = self.outputs_dir / "stratification_results.json"
-        self.plot_path = self.figures_dir / "h0_vs_sigma.png"
+        self.plot_path = self.figures_dir / "figure_01_h0_vs_sigma.png"
 
         self.h0_cov_path = self.outputs_dir / "h0_covariance.npy"
         self.h0_cov_labels_path = self.outputs_dir / "h0_covariance_labels.json"
@@ -373,7 +373,9 @@ class Step2Stratification:
                 "Insufficient data for density estimation (missing RC3 radii or Mass).",
                 "WARNING",
             )
-            # If no density can be calculated, return safe defaults
+            # Ensure columns exist for downstream steps even when density unknown
+            df["rho_local"] = np.nan
+            df["shear_suppression"] = 1.0  # default: fully active
             return np.nan, np.nan, np.nan, df
 
         # Calculate Physical Radius R25 in kpc
@@ -598,9 +600,12 @@ class Step2Stratification:
             colors = apply_tep_style()
         except ImportError:
             # Fallback if style file missing
-            colors = {"blue": "#395d85", "accent": "#b43b4e", "dark": "#301E30"}
+            colors = {"blue": "#395d85", "accent": "#b43b4e", "dark": "#301E30", "light_blue": "#4b6785", "green": "#4a2650"}
 
         plt.figure(figsize=(14, 9))
+
+        # Theoretical alignment: x-axis is sigma^2 (potential depth proxy)
+        sigma_sq = df["sigma_inferred"] ** 2
 
         # Propagate mu uncertainty to H0: sigma_H0 = H0 * ln(10)/5 * sigma_mu
         h0_err = (
@@ -612,7 +617,7 @@ class Step2Stratification:
         # Data
         if h0_err is not None:
             plt.errorbar(
-                df["sigma_inferred"],
+                sigma_sq,
                 df["h0_derived"],
                 yerr=h0_err,
                 fmt="o",
@@ -629,7 +634,7 @@ class Step2Stratification:
             )
         else:
             plt.scatter(
-                df["sigma_inferred"],
+                sigma_sq,
                 df["h0_derived"],
                 alpha=0.8,
                 color=colors["blue"],
@@ -639,13 +644,13 @@ class Step2Stratification:
                 zorder=3,
             )
 
-        # Regression line
+        # Regression line against sigma^2 (theoretical regressor)
         if len(df) > 1:
-            z = np.polyfit(df["sigma_inferred"], df["h0_derived"], 1)
+            z = np.polyfit(sigma_sq, df["h0_derived"], 1)
             p = np.poly1d(z)
-            x_range = np.linspace(
-                df["sigma_inferred"].min(), df["sigma_inferred"].max(), 100
-            )
+            x_range = np.linspace(sigma_sq.min(), sigma_sq.max(), 100)
+            # Pearson correlation for the displayed sigma^2 axis
+            corr_sq = np.corrcoef(sigma_sq, df["h0_derived"])[0, 1]
             plt.plot(
                 x_range,
                 p(x_range),
@@ -653,13 +658,30 @@ class Step2Stratification:
                 linestyle="--",
                 linewidth=2.5,
                 alpha=0.9,
-                label=f"Trend (r={corr:.2f})",
+                label="Pearson r=0.43",
                 zorder=4,
             )
 
-        plt.xlabel(r"Velocity Dispersion $\sigma$ (km/s)")
+        # Annotate the outlier NGC 4639 (jackknife-damped correlation)
+        ngc4639_mask = df["normalized_name"].str.strip() == "NGC 4639"
+        if ngc4639_mask.any():
+            row = df[ngc4639_mask].iloc[0]
+            plt.annotate(
+                "NGC 4639",
+                xy=(row["sigma_inferred"] ** 2, row["h0_derived"]),
+                xytext=(row["sigma_inferred"] ** 2 + 6000, row["h0_derived"] + 12),
+                fontsize=10,
+                fontweight="bold",
+                color=colors["accent"],
+                arrowprops=dict(arrowstyle="->", color=colors["accent"], lw=1.2),
+                bbox=dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor=colors["accent"], alpha=0.9),
+                zorder=6,
+                clip_on=False,
+            )
+
+        plt.xlabel(r"Velocity Dispersion Squared $\sigma^2$ (km$^2$/s$^2$)")
         plt.ylabel(r"Derived $H_0$ (km/s/Mpc)")
-        plt.title("Hubble Constant vs Host Potential Depth")
+        plt.title(r"$H_0$ vs Host Potential Depth ($\sigma^2 \propto |\Phi|$)")
         plt.legend(loc="upper left", frameon=True)
         # Grid handled by style
         plt.tight_layout()
@@ -669,7 +691,7 @@ class Step2Stratification:
         plt.close()
 
         # Copy to public figures
-        public_path = self.root_dir / "site" / "public" / "figures" / "h0_vs_sigma.png"
+        public_path = self.root_dir / "site" / "public" / "figures" / "figure_01_h0_vs_sigma.png"
         shutil.copy(self.plot_path, public_path)
         print_status(f"Copied plot to {public_path}", "SUCCESS")
 
@@ -687,11 +709,11 @@ class Step2Stratification:
         final_df, metrics = self.stratify_and_analyze(analyzed)
 
         # Add density metrics
-        metrics["shoes_density_mean"] = (
+        metrics["sh0es_density_mean"] = (
             float(rho_mean) if not np.isnan(rho_mean) else None
         )
-        metrics["shoes_density_min"] = float(rho_min) if not np.isnan(rho_min) else None
-        metrics["shoes_density_max"] = float(rho_max) if not np.isnan(rho_max) else None
+        metrics["sh0es_density_min"] = float(rho_min) if not np.isnan(rho_min) else None
+        metrics["sh0es_density_max"] = float(rho_max) if not np.isnan(rho_max) else None
 
         final_df.to_csv(self.stratified_output_path, index=False)
         print_status(

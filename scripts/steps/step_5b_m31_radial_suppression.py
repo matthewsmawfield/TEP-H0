@@ -25,6 +25,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from scipy import stats
+from scipy.spatial import cKDTree
 
 try:
     from astroquery.vizier import Vizier
@@ -55,7 +56,7 @@ try:
 
     colors = apply_tep_style()
 except ImportError:
-    colors = {"blue": "#395d85", "accent": "#b43b4e", "dark": "#301E30"}
+    colors = {"blue": "#395d85", "accent": "#b43b4e", "dark": "#301E30", "light_blue": "#4b6785", "green": "#4a2650"}
 
 
 # =============================================================================
@@ -232,10 +233,47 @@ def main():
     df["rho_local"] = local_density(df["R_kpc"].values)
     df["S"] = shear_suppression(df["rho_local"].values)
 
+    # ------------------------------------------------------------------
+    # 2b. Cross-match with HST/PHAT catalog for source flag
+    # ------------------------------------------------------------------
+    print_status("Fetching HST/PHAT catalog for cross-match (J/ApJ/864/59)...", "PROCESS")
+    try:
+        hst_cats = Vizier.get_catalogs("J/ApJ/864/59")
+        hst_df = None
+        for key in hst_cats.keys():
+            cols = list(hst_cats[key].columns)
+            if "RAJ2000" in cols and "DEJ2000" in cols:
+                hst_df = hst_cats[key].to_pandas()
+                break
+        if hst_df is None:
+            raise ValueError("No HST table with coordinates found")
+        hst_ra = hst_df["RAJ2000"].values.astype(float)
+        hst_dec = hst_df["DEJ2000"].values.astype(float)
+        hst_coords = np.column_stack([
+            hst_ra * np.cos(np.radians(hst_dec)),
+            hst_dec,
+        ])
+        tree = cKDTree(hst_coords)
+        main_ra = df["RA"].astype(float).values
+        main_dec = df["DEC"].astype(float).values
+        main_coords = np.column_stack([
+            main_ra * np.cos(np.radians(main_dec)),
+            main_dec,
+        ])
+        tol_deg = 2.0 / 3600.0
+        dist, _ = tree.query(main_coords, k=1, distance_upper_bound=tol_deg)
+        df["is_hst"] = dist != np.inf
+        n_hst = int(df["is_hst"].sum())
+        print_status(f"Cross-matched {n_hst} HST Cepheids (2 arcsec tol).", "SUCCESS")
+    except Exception as e:
+        print_status(f"HST cross-match failed: {e}. Using R<5 kpc proxy.", "WARNING")
+        df["is_hst"] = df["R_kpc"] < 5.0
+
     logp = df["logP"].values.astype(float)
     w = df["Wmag"].values.astype(float)
     r = df["R_kpc"].values.astype(float)
     s = df["S"].values.astype(float)
+    hst_mask = df["is_hst"].values.astype(bool)
     n = len(df)
 
     print_status(f"Sample after cuts: N = {n}", "INFO")
@@ -307,22 +345,35 @@ def main():
 
     # Panel 1: Residuals vs Radius
     ax = axs[0]
-    sc = ax.scatter(
-        r,
-        residA,
-        c=s,
-        cmap="coolwarm",
-        vmin=0,
-        vmax=1,
-        s=15,
+    ax.scatter(
+        r[hst_mask],
+        residA[hst_mask],
+        color=tep_blue,
+        s=20,
         alpha=0.6,
         edgecolor="none",
+        label="HST/PHAT",
     )
-    # Sort for smooth line
-    order = np.argsort(r)
-    ax.plot(
-        r[order], residC[order], color=tep_dark, linewidth=2, label="Model C prediction"
+    ax.scatter(
+        r[~hst_mask],
+        residA[~hst_mask],
+        color="#e67e22",
+        s=15,
+        alpha=0.5,
+        edgecolor="none",
+        label="Ground-based",
     )
+    # Binned medians instead of connected line
+    bins = [0, 2, 5, 10, 15, 25, 50]
+    bin_centers = []
+    bin_medians = []
+    for i in range(len(bins) - 1):
+        mask = (r >= bins[i]) & (r < bins[i + 1])
+        if mask.sum() >= 5:
+            bin_centers.append((bins[i] + bins[i + 1]) / 2)
+            bin_medians.append(np.median(residA[mask]))
+    if bin_centers:
+        ax.plot(bin_centers, bin_medians, 's-', color=tep_dark, linewidth=2, markersize=8, label="Binned median")
     ax.axhline(0, color="gray", linestyle="--", linewidth=1)
     ax.axvline(
         5, color=tep_red, linestyle=":", linewidth=1.5, alpha=0.7, label="R = 5 kpc cut"
@@ -331,17 +382,33 @@ def main():
     ax.set_ylabel(r"P-L Residual $\Delta W$ (mag)")
     ax.set_title("(a) Residuals vs. Radius")
     ax.legend(fontsize=9)
-    fig.colorbar(sc, ax=ax, label=r"$S(\rho)$")
 
     # Panel 2: Residuals vs S
     ax = axs[1]
-    ax.scatter(s, residA, c=r, cmap="viridis", s=15, alpha=0.6, edgecolor="none")
+    ax.scatter(
+        s[hst_mask],
+        residA[hst_mask],
+        color=tep_blue,
+        s=20,
+        alpha=0.6,
+        edgecolor="none",
+        label="HST/PHAT",
+    )
+    ax.scatter(
+        s[~hst_mask],
+        residA[~hst_mask],
+        color="#e67e22",
+        s=15,
+        alpha=0.5,
+        edgecolor="none",
+        label="Ground-based",
+    )
     # Model C predicts linear trend in (1-S)
     s_smooth = np.linspace(0, 1, 200)
     pred_smooth = mC["delta_a"] * (1.0 - s_smooth)
     ax.plot(s_smooth, pred_smooth, color=tep_dark, linewidth=2, label="Model C trend")
     ax.axhline(0, color="gray", linestyle="--", linewidth=1)
-    ax.set_xlabel(r"Shear Suppression $S(\rho)$")
+    ax.set_xlabel(r"Shear suppression factor $S(\rho)$")
     ax.set_ylabel(r"P-L Residual $\Delta W$ (mag)")
     ax.set_title("(b) Residuals vs. Suppression")
     ax.legend(fontsize=9)
@@ -396,6 +463,23 @@ def main():
         label="Model C (binned)",
     )
 
+    # Overplot Model B binned predictions
+    predB_binned = []
+    for i in range(len(bins) - 1):
+        mask = (r >= bins[i]) & (r < bins[i + 1])
+        if mask.sum() < 5:
+            predB_binned.append(np.nan)
+        else:
+            predB_binned.append(float(np.mean(predB[mask] - predA[mask])))
+    ax.plot(
+        bin_centers,
+        np.array(predB_binned),
+        "D--",
+        color="gray",
+        markersize=6,
+        label="Model B (Step, AIC-preferred)",
+    )
+
     ax.axhline(0, color="gray", linestyle="--", linewidth=1)
     ax.set_xlabel(r"Galactocentric Radius $R$ (kpc)")
     ax.set_ylabel(r"Mean P-L Residual $\Delta W$ (mag)")
@@ -404,12 +488,12 @@ def main():
 
     plt.tight_layout()
 
-    fig_path = figures_dir / "m31_radial_suppression.png"
+    fig_path = figures_dir / "supplement_04_m31_radial_suppression.png"
     fig.savefig(fig_path, dpi=300)
     print_status(f"Saved figure to {fig_path}", "SUCCESS")
     plt.close(fig)
 
-    public_path = public_dir / "m31_radial_suppression.png"
+    public_path = public_dir / "supplement_04_m31_radial_suppression.png"
     shutil.copy(fig_path, public_path)
     print_status(f"Copied figure to {public_path}", "SUCCESS")
 

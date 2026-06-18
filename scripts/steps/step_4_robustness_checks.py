@@ -75,8 +75,8 @@ class Step4RobustnessChecks:
         self.stats_path = self.outputs_dir / "bivariate_stats.txt"
         self.covariance_results_path = self.outputs_dir / "covariance_robustness.json"
         self.oos_results_path = self.outputs_dir / "out_of_sample_validation.json"
-        self.plot_path = self.figures_dir / "bivariate_h0_sigma_metallicity.png"
-        self.jackknife_plot_path = self.figures_dir / "jackknife_influence.png"
+        self.plot_path = self.figures_dir / "figure_02_bivariate_h0_sigma_metallicity.png"
+        self.jackknife_plot_path = self.figures_dir / "supplement_02_jackknife_influence.png"
 
         self.flow_env_stats_path = self.outputs_dir / "flow_environment_robustness.txt"
         self.zcut_stats_path = self.outputs_dir / "redshift_cut_sensitivity.txt"
@@ -203,6 +203,246 @@ class Step4RobustnessChecks:
             "spearman_p_cov": p_rho_cov,
             "n_sims": int(n_sims),
         }
+
+    def _bayesian_model_comparison(self, df):
+        """Bayesian evidence: TEP model vs null using the H0 likelihood.
+
+        We compare two nested models for the uncorrected H0 data:
+
+        Null:     H0_i = H0_0 + ε_i                          (k=1)
+        TEP:      H0_i = H0_0 + β · x_i + ε_i               (k=2)
+                  where x_i = S_i · (σ_i² − σ_ref²) / c²
+
+        Primary calculation uses diagonal H0 uncertainties propagated from
+        the SH0ES distance-modulus errors (consistent with the stratified
+        analysis). A supplementary GLS-covariance calculation is reported
+        as a cross-check. The χ² is:
+            χ² = Σ_i (y_i − ŷ_i)² / σ_i²   (diagonal)
+            χ² = (y − Xβ)^T Σ^{-1} (y − Xβ)  (full covariance)
+
+        BIC = χ²_min + k · ln(n)
+        ΔBIC = BIC_null − BIC_TEP  (positive → evidence for TEP)
+        Bayes factor BF ≈ exp(ΔBIC / 2)
+
+        Jeffreys scale (approximate):
+            ΔBIC < 2 : not worth more than a bare mention
+            2–6      : positive evidence
+            6–10     : strong evidence
+            >10      : very strong evidence
+        """
+        sigma = df["sigma_inferred"].values.astype(float)
+        y = df["h0_derived"].values.astype(float)
+        mu = df["value"].values.astype(float)
+        mu_err = df["error"].values.astype(float)
+        S = (
+            df["shear_suppression"].values.astype(float)
+            if "shear_suppression" in df.columns
+            else np.ones(len(df))
+        )
+        n = len(y)
+
+        sigma_ref = self._load_sigma_ref()
+        if sigma_ref is None:
+            sigma_ref = 75.25
+            print_status(f"σ_ref missing; using fallback {sigma_ref}", "WARNING")
+
+        # TEP regressor: S * (sigma^2 - sigma_ref^2) / c^2
+        from scripts.utils.tep_correction import C_SQUARED_KM_S
+        x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
+
+        # --- Diagonal H0 uncertainties from distance-modulus errors ---
+        # σ_H0 = H0 * ln(10)/5 * σ_μ
+        h0_diag_err = y * (np.log(10) / 5.0) * mu_err
+        w = 1.0 / h0_diag_err**2
+        W = np.diag(w)
+
+        def _wls_fit(X, y, W):
+            XWX = X.T @ W @ X
+            XWy = X.T @ W @ y
+            try:
+                beta = np.linalg.solve(XWX, XWy)
+            except np.linalg.LinAlgError:
+                beta = np.linalg.lstsq(XWX, XWy, rcond=None)[0]
+            return beta
+
+        # Null model (intercept only)
+        X0 = np.ones((n, 1))
+        beta0 = _wls_fit(X0, y, W)
+        mu0 = float(beta0[0])
+        chi2_null_diag = float(np.sum(w * (y - mu0)**2))
+
+        # TEP model (intercept + regressor)
+        X = np.column_stack([np.ones(n), x])
+        beta = _wls_fit(X, y, W)
+        mu_tep = float(beta[0])
+        beta_x = float(beta[1])
+        chi2_tep_diag = float(np.sum(w * (y - (mu_tep + beta_x * x))**2))
+
+        k_null = 1
+        k_tep = 2
+        bic_null_diag = chi2_null_diag + k_null * np.log(n)
+        bic_tep_diag = chi2_tep_diag + k_tep * np.log(n)
+        delta_bic_diag = bic_null_diag - bic_tep_diag
+        bf_diag = float(np.exp(delta_bic_diag / 2.0))
+
+        # Implied κ_Cep from H0-space slope
+        dH_dmu = -(np.log(10) / 5.0) * mu_tep
+        kappa_wls = -beta_x / dH_dmu if abs(dH_dmu) > 1e-6 else float("nan")
+
+        # --- Full-covariance cross-check (GLS) ---
+        cov, cov_labels = self._load_h0_covariance()
+        cov_results = None
+        proj_results = None
+        if cov is not None and cov_labels is not None:
+            try:
+                target_labels = df["source_id"].astype(str).tolist()
+                cov_sub = self._subset_covariance(cov, cov_labels, target_labels)
+                beta0_gls, _ = self._gls_fit(X0, y, cov_sub)
+                beta_gls, _ = self._gls_fit(X, y, cov_sub)
+                if not np.isnan(beta0_gls[0]) and not np.isnan(beta_gls[0]):
+                    cov_inv = np.linalg.inv(
+                        cov_sub + np.eye(n) * (1e-12 * np.trace(cov_sub) / n)
+                    )
+                    resid0_gls = y - float(beta0_gls[0])
+                    chi2_null_gls = float(resid0_gls @ cov_inv @ resid0_gls)
+                    resid_tep_gls = y - (beta_gls[0] + beta_gls[1] * x)
+                    chi2_tep_gls = float(resid_tep_gls @ cov_inv @ resid_tep_gls)
+                    bic_null_gls = chi2_null_gls + k_null * np.log(n)
+                    bic_tep_gls = chi2_tep_gls + k_tep * np.log(n)
+                    delta_bic_gls = bic_null_gls - bic_tep_gls
+                    cov_results = {
+                        "null_chi2": float(chi2_null_gls),
+                        "tep_chi2": float(chi2_tep_gls),
+                        "null_bic": float(bic_null_gls),
+                        "tep_bic": float(bic_tep_gls),
+                        "delta_bic": float(delta_bic_gls),
+                    }
+            except Exception:
+                pass
+
+            # --- Projected / host-contrast likelihood (primary) ---
+            # P = I - (1^T C^{-1} 1)^{-1} * 1 * 1^T * C^{-1}
+            # Projects out the shared calibration mode. In projected space:
+            #   Null:  E[y_proj] = 0           (k=0)
+            #   TEP:   E[y_proj] = β * x_proj  (k=1)
+            # n_eff = n - 1. The environmental slope is tested after
+            # removing the common calibration zero-point.
+            try:
+                ones = np.ones(n)
+                denom = float(ones @ cov_inv @ ones)
+                Pmat = np.eye(n) - np.outer(ones, ones @ cov_inv) / denom
+
+                y_proj = Pmat @ y
+                x_proj = Pmat @ x
+
+                # Null in projected space (zero mean)
+                chi2_null_proj = float(y_proj @ cov_inv @ y_proj)
+
+                # TEP in projected space (slope only, no intercept)
+                xPx = float(x_proj @ cov_inv @ x_proj)
+                xPy = float(x_proj @ cov_inv @ y_proj)
+                beta_proj = xPy / xPx if abs(xPx) > 1e-12 else 0.0
+                chi2_tep_proj = chi2_null_proj - (xPy ** 2) / xPx
+
+                n_eff = n - 1
+                k_null_proj = 0
+                k_tep_proj = 1
+                bic_null_proj = chi2_null_proj + k_null_proj * np.log(n_eff)
+                bic_tep_proj = chi2_tep_proj + k_tep_proj * np.log(n_eff)
+                delta_bic_proj = bic_null_proj - bic_tep_proj
+                bf_proj = float(np.exp(delta_bic_proj / 2.0))
+
+                # Matched-parameter BIC for fair comparison with diagonal/full-covariance
+                # In original-space parameter count: null k=1, TEP k=2
+                bic_null_proj_matched = chi2_null_proj + k_null * np.log(n)
+                bic_tep_proj_matched = chi2_tep_proj + k_tep * np.log(n)
+                delta_bic_proj_matched = bic_null_proj_matched - bic_tep_proj_matched
+
+                if delta_bic_proj < 2:
+                    strength_proj = "not worth more than a bare mention"
+                elif delta_bic_proj < 6:
+                    strength_proj = "positive"
+                elif delta_bic_proj < 10:
+                    strength_proj = "strong"
+                else:
+                    strength_proj = "very strong"
+
+                proj_results = {
+                    "n_eff": int(n_eff),
+                    "null_chi2": float(chi2_null_proj),
+                    "tep_chi2": float(chi2_tep_proj),
+                    "delta_chi2": float(chi2_null_proj - chi2_tep_proj),
+                    "delta_bic": float(delta_bic_proj),
+                    "bayes_factor": float(bf_proj),
+                    "ln_bayes_factor": float(delta_bic_proj / 2.0),
+                    "evidence_strength": strength_proj,
+                    "beta_proj": float(beta_proj),
+                    "null_bic_matched": float(bic_null_proj_matched),
+                    "tep_bic_matched": float(bic_tep_proj_matched),
+                    "delta_bic_matched": float(delta_bic_proj_matched),
+                }
+            except Exception as e:
+                print_status(f"Projected-likelihood comparison failed: {e}", "WARNING")
+
+        # Jeffreys strength (primary diagonal result)
+        if delta_bic_diag < 2:
+            strength = "not worth more than a bare mention"
+        elif delta_bic_diag < 6:
+            strength = "positive"
+        elif delta_bic_diag < 10:
+            strength = "strong"
+        else:
+            strength = "very strong"
+
+        # Unified BIC comparison table: diagonal, full-covariance, projected contrast
+        print_status("Bayesian Model Comparison", "SECTION")
+        headers = ["Likelihood", "Null BIC", "TEP BIC", "ΔBIC", "Interpretation"]
+        rows = [
+            ["diagonal host scatter", f"{bic_null_diag:.1f}", f"{bic_tep_diag:.1f}", f"{delta_bic_diag:.1f}", "exploratory / host scatter"],
+        ]
+        if cov_results is not None:
+            rows.append(
+                ["full covariance absolute", f"{cov_results.get('null_bic', 'N/A')}", f"{cov_results.get('tep_bic', 'N/A')}", f"{cov_results['delta_bic']:.1f}", "dominated by common mode"]
+            )
+        if proj_results is not None:
+            rows.append(
+                ["projected contrast covariance", f"{proj_results['null_bic_matched']:.1f}", f"{proj_results['tep_bic_matched']:.1f}", f"{proj_results['delta_bic_matched']:.1f}", "primary environmental evidence"]
+            )
+        print_table(headers, rows, title="Model Comparison")
+        if proj_results is not None:
+            print_status(
+                f"Projected Δχ² = {proj_results['delta_chi2']:.2f}; ΔBIC = {proj_results['delta_bic_matched']:.2f} (headline)",
+                "RESULT",
+            )
+        else:
+            print_status(f"Δχ² (null − TEP) = {chi2_null_diag - chi2_tep_diag:.2f}", "INFO")
+            print_status(f"ΔBIC = {delta_bic_diag:.2f}  ({strength} evidence for TEP)", "RESULT")
+        print_status(
+            f"WLS-implied κ_Cep = {kappa_wls:.3e} mag (Step 3 fitted ~1.05e6)",
+            "INFO",
+        )
+
+        result = {
+            "n": int(n),
+            "sigma_ref": float(sigma_ref),
+            "null_chi2": float(chi2_null_diag),
+            "null_bic": float(bic_null_diag),
+            "tep_chi2": float(chi2_tep_diag),
+            "tep_bic": float(bic_tep_diag),
+            "delta_chi2": float(chi2_null_diag - chi2_tep_diag),
+            "delta_bic": float(delta_bic_diag),
+            "bayes_factor": float(bf_diag),
+            "ln_bayes_factor": float(delta_bic_diag / 2.0),
+            "evidence_strength": strength,
+            "kappa_wls_implied": float(kappa_wls),
+            "wls_beta_x": float(beta_x),
+            "wls_mu_tep": float(mu_tep),
+        }
+        if cov_results is not None:
+            result["gls_crosscheck"] = cov_results
+        if proj_results is not None:
+            result["projected"] = proj_results
+        return result
 
     def _load_sigma_ref(self):
         if not self.tep_results_path.exists():
@@ -773,6 +1013,21 @@ class Step4RobustnessChecks:
         except (KeyError, ValueError, np.linalg.LinAlgError) as e:
             print_status(f"Covariance-aware tests failed: {e}", "WARNING")
 
+        # Bayesian model comparison (TEP vs null)
+        bayes_results = None
+        try:
+            bayes_results = self._bayesian_model_comparison(df)
+            if bayes_results is not None and cov_results is not None:
+                cov_results["bayesian_comparison"] = bayes_results
+                rows.append([
+                    f"Bayes factor",
+                    f"{bayes_results['bayes_factor']:.1f}",
+                    f"ΔBIC={bayes_results['delta_bic']:.1f}",
+                    f"{bayes_results['evidence_strength']} evidence for TEP",
+                ])
+        except Exception as e:
+            print_status(f"Bayesian comparison failed: {e}", "WARNING")
+
         print_table(headers, rows, title="Correlation Tests (H0 vs Sigma)")
 
         if cov_results is not None:
@@ -833,18 +1088,19 @@ class Step4RobustnessChecks:
             from scripts.utils.plot_style import apply_tep_style
             colors = apply_tep_style()
         except ImportError:
-            colors = {'blue': '#395d85', 'dark': '#301E30'}
+            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'dark': '#301E30', 'light_blue': '#4b6785', 'green': '#4a2650'}
             
         plt.figure(figsize=(14, 9))
 
         # Sort by delta_r for cleaner plot
         jack_df = jack_df.sort_values('delta_r')
         
-        plt.bar(jack_df['Host'], jack_df['delta_r'], color=colors['blue'], alpha=0.8)
+        bar_colors = [colors['accent'] if d >= 0 else colors['blue'] for d in jack_df['delta_r']]
+        plt.bar(jack_df['Host'], jack_df['delta_r'], color=bar_colors, alpha=0.8)
         plt.axhline(0, color=colors['dark'], linewidth=1.5)
         plt.xticks(rotation=90, fontsize=10)
-        plt.ylabel(r"$\Delta r$ (Change in Correlation when removed)")
-        plt.title("Jackknife Influence Analysis")
+        plt.ylabel(r"$\Delta r = r_{\rm leave-one-out} - r_{\rm full}$")
+        plt.title("Jackknife Influence: No single host drives the correlation")
         plt.grid(axis='y', linestyle=':', alpha=0.5)
         plt.tight_layout()
         
@@ -853,7 +1109,7 @@ class Step4RobustnessChecks:
         plt.close()
         
         # Copy to public
-        public_jack = self.public_figures_dir / "jackknife_influence.png"
+        public_jack = self.public_figures_dir / "supplement_02_jackknife_influence.png"
         shutil.copy(self.jackknife_plot_path, public_jack)
         print_status(f"Copied Jackknife plot to {public_jack}", "SUCCESS")
 
@@ -866,7 +1122,7 @@ class Step4RobustnessChecks:
             from scripts.utils.plot_style import apply_tep_style
             colors = apply_tep_style()
         except ImportError:
-            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'dark': '#301E30'}
+            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'dark': '#301E30', 'light_blue': '#4b6785', 'green': '#4a2650'}
             
         if not self.stratified_path.exists():
             print_status("Stratified data missing. Run Step 2 first.", "ERROR")
@@ -955,19 +1211,36 @@ class Step4RobustnessChecks:
         resid_z_x = x2 - (slope_z_x * x1 + intercept_z_x)
         
         plt.figure(figsize=(14, 9))
-        
+
+        # Identify high-dispersion outlier for visual emphasis
+        outlier_mask = (
+            valid['normalized_name'].values == 'NGC 4639'
+            if 'normalized_name' in valid.columns
+            else np.zeros(len(valid), dtype=bool)
+        )
+
         # Plot 1
         plt.subplot(1, 2, 1)
-        plt.scatter(resid_x_z, resid_y_z, alpha=0.7, color=colors['blue'], s=60, edgecolor='white')
-        
+        plt.scatter(
+            resid_x_z[~outlier_mask], resid_y_z[~outlier_mask],
+            alpha=0.7, color=colors['blue'], s=60, edgecolor='white',
+            label='Other hosts',
+        )
+        if np.any(outlier_mask):
+            plt.scatter(
+                resid_x_z[outlier_mask], resid_y_z[outlier_mask],
+                color='#FF8C00', s=120, edgecolor='white', linewidth=1.5,
+                zorder=5, label='NGC 4639',
+            )
+
         # Fit line
         m, b = np.polyfit(resid_x_z, resid_y_z, 1)
         xp = np.linspace(resid_x_z.min(), resid_x_z.max(), 100)
-        plt.plot(xp, m*xp + b, color=colors['dark'], linestyle='--', linewidth=2, label=f'r={pr_y_x1_x2:.3f}')
-        
-        plt.xlabel(r'Residual $\sigma$ (controlling for $Z$)')
-        plt.ylabel(r'Residual $H_0$ (controlling for $Z$)')
-        plt.title('H0 vs Sigma (Partial)')
+        plt.plot(xp, m*xp + b, color=colors['dark'], linestyle='--', linewidth=2, label=f'Partial $r={pr_y_x1_x2:.3f}, p={p_y_x1_x2:.3f}$')
+
+        plt.xlabel(r'Residual $\sigma$ (controlling for metallicity $Z$)')
+        plt.ylabel(r'Residual $H_0$ (controlling for metallicity $Z$)')
+        plt.title(r'$H_0$ vs $\sigma$ (Partial Residuals)')
         plt.legend()
         plt.grid(True, linestyle=':', alpha=0.6)
         
@@ -978,13 +1251,21 @@ class Step4RobustnessChecks:
         # Fit line
         m2, b2 = np.polyfit(resid_z_x, resid_y_x, 1)
         xp2 = np.linspace(resid_z_x.min(), resid_z_x.max(), 100)
-        plt.plot(xp2, m2*xp2 + b2, color=colors['dark'], linestyle='--', linewidth=2, label=f'r={pr_y_x2_x1:.3f}')
+        plt.plot(xp2, m2*xp2 + b2, color=colors['dark'], linestyle='--', linewidth=2, label=f'Partial $r={pr_y_x2_x1:.3f}, p={p_y_x2_x1:.3f}$')
         
         plt.xlabel(r'Residual $Z$ (controlling for $\sigma$)')
         plt.ylabel(r'Residual $H_0$ (controlling for $\sigma$)')
-        plt.title('H0 vs Metallicity (Partial)')
+        plt.title(r'$H_0$ vs Metallicity (Partial Residuals)')
         plt.legend()
         plt.grid(True, linestyle=':', alpha=0.6)
+        
+        # Use same y-axis limits for both panels for fair visual comparison
+        y_min = min(resid_y_z.min(), resid_y_x.min())
+        y_max = max(resid_y_z.max(), resid_y_x.max())
+        plt.subplot(1, 2, 1)
+        plt.ylim(y_min - 1, y_max + 1)
+        plt.subplot(1, 2, 2)
+        plt.ylim(y_min - 1, y_max + 1)
         
         plt.tight_layout()
         plt.savefig(self.plot_path, dpi=300)
@@ -992,7 +1273,7 @@ class Step4RobustnessChecks:
         plt.close()
         
         # Copy to public
-        public_biv = self.public_figures_dir / "bivariate_h0_sigma_metallicity.png"
+        public_biv = self.public_figures_dir / "figure_02_bivariate_h0_sigma_metallicity.png"
         shutil.copy(self.plot_path, public_biv)
         print_status(f"Copied bivariate plot to {public_biv}", "SUCCESS")
 
@@ -1005,7 +1286,7 @@ class Step4RobustnessChecks:
             from scripts.utils.plot_style import apply_tep_style
             colors = apply_tep_style()
         except ImportError:
-            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'dark': '#301E30'}
+            colors = {'blue': '#395d85', 'accent': '#b43b4e', 'dark': '#301E30', 'light_blue': '#4b6785', 'green': '#4a2650'}
             
         fig, axes = plt.subplots(1, 2, figsize=(16, 9))
         
@@ -1059,7 +1340,201 @@ class Step4RobustnessChecks:
         print_status(f"Saved bivariate plot to {self.plot_path}", "SUCCESS")
         
         # Copy to public
-        shutil.copy(self.plot_path, self.public_figures_dir / "bivariate_h0_sigma_metallicity.png")
+        shutil.copy(self.plot_path, self.public_figures_dir / "figure_02_bivariate_h0_sigma_metallicity.png")
+
+    def _provenance_eiv_model(self, df):
+        """Provenance-aware errors-in-variables regression.
+
+        H0,i = β0 + β1 * X_TEP,i + γ_method[i] + ε_i
+
+        where method is: stellar absorption, HI linewidth, rotation proxy.
+        σ measurement uncertainty (especially for HI/rotation proxies) is
+        propagated into X_TEP error and included in the total variance.
+        """
+        print_status("Provenance-Aware Errors-in-Variables Model", "SECTION")
+
+        prov_path = self.outputs_dir / "sigma_provenance_table.csv"
+        if not prov_path.exists():
+            print_status("Sigma provenance table missing; skipping EIV model.", "WARNING")
+            return None
+
+        prov = pd.read_csv(prov_path)
+        df = df.copy()
+        df["normalized_name"] = df["normalized_name"].astype(str).str.strip()
+        prov["normalized_name"] = prov["normalized_name"].astype(str).str.strip()
+
+        merged = pd.merge(
+            df,
+            prov[
+                [
+                    "normalized_name",
+                    "sigma_method",
+                    "sigma_measured_error_total_kms",
+                ]
+            ],
+            on="normalized_name",
+            how="left",
+        )
+
+        def classify_method(m):
+            s = str(m).lower().strip()
+            if "stellar absorption" in s:
+                return "stellar_absorption"
+            if "hi proxy" in s or "hi linewidth" in s or "calibrated_vmax" in s:
+                return "HI_linewidth"
+            if "vrot" in s or "proxy" in s:
+                return "rotation_proxy"
+            return "other"
+
+        merged["method_class"] = merged["sigma_method"].apply(classify_method)
+
+        sigma = merged["sigma_inferred"].values.astype(float)
+        y = merged["h0_derived"].values.astype(float)
+        mu = merged["value"].values.astype(float)
+        mu_err = merged["error"].values.astype(float)
+        S = (
+            merged["shear_suppression"].values.astype(float)
+            if "shear_suppression" in merged.columns
+            else np.ones(len(merged))
+        )
+
+        sigma_ref = self._load_sigma_ref()
+        if sigma_ref is None:
+            sigma_ref = 75.25
+            print_status(f"σ_ref missing; using fallback {sigma_ref}", "WARNING")
+
+        from scripts.utils.tep_correction import C_SQUARED_KM_S
+        x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
+
+        is_hi = (merged["method_class"] == "HI_linewidth").astype(float).values
+        is_rot = (merged["method_class"] == "rotation_proxy").astype(float).values
+        X = np.column_stack([np.ones(len(y)), x, is_hi, is_rot])
+
+        # H0 measurement error from distance modulus
+        h0_err = y * (np.log(10) / 5.0) * mu_err
+
+        # σ measurement error from provenance
+        sigma_err = pd.to_numeric(
+            merged["sigma_measured_error_total_kms"], errors="coerce"
+        ).fillna(0.0).values
+
+        # Propagate σ error to X_TEP error: dX/dσ = S * 2σ / c^2
+        dx_dsigma = S * 2.0 * sigma / C_SQUARED_KM_S
+        x_err = np.abs(dx_dsigma * sigma_err)
+
+        # First fit with H0 errors only
+        w_base = 1.0 / (h0_err**2 + 1e-10)
+        W_base = np.diag(w_base)
+        XWX_base = X.T @ W_base @ X
+        XWy_base = X.T @ W_base @ y
+        try:
+            beta_base = np.linalg.solve(XWX_base, XWy_base)
+        except np.linalg.LinAlgError:
+            beta_base = np.linalg.lstsq(XWX_base, XWy_base, rcond=None)[0]
+        beta1_base = beta_base[1]
+
+        # Total variance including EIV contribution from σ uncertainty
+        total_var = h0_err**2 + (beta1_base * x_err) ** 2
+        w_total = 1.0 / (total_var + 1e-10)
+        W_total = np.diag(w_total)
+        XWX = X.T @ W_total @ X
+        XWy = X.T @ W_total @ y
+        try:
+            beta = np.linalg.solve(XWX, XWy)
+        except np.linalg.LinAlgError:
+            beta = np.linalg.lstsq(XWX, XWy, rcond=None)[0]
+
+        try:
+            beta_cov = np.linalg.inv(XWX)
+        except np.linalg.LinAlgError:
+            beta_cov = np.linalg.pinv(XWX)
+        beta_se = np.sqrt(np.diag(beta_cov))
+
+        t_beta1 = beta[1] / beta_se[1] if beta_se[1] > 0 else np.nan
+        df_resid = len(y) - X.shape[1]
+        p_beta1 = (
+            2 * (1 - stats.t.cdf(abs(t_beta1), df=df_resid))
+            if np.isfinite(t_beta1)
+            else np.nan
+        )
+
+        gamma_hi = beta[2]
+        gamma_rot = beta[3]
+        gamma_hi_se = beta_se[2]
+        gamma_rot_se = beta_se[3]
+
+        headers = ["Parameter", "Estimate", "SE", "t", "p"]
+        rows = [
+            ["β0 (intercept)", f"{beta[0]:.2f}", f"{beta_se[0]:.2f}", "-", "-"],
+            [
+                "β1 (X_TEP slope)",
+                f"{beta[1]:.3e}",
+                f"{beta_se[1]:.3e}",
+                f"{t_beta1:.2f}" if np.isfinite(t_beta1) else "-",
+                f"{p_beta1:.4f}" if np.isfinite(p_beta1) else "-",
+            ],
+            ["γ_HI (HI offset)", f"{gamma_hi:.2f}", f"{gamma_hi_se:.2f}", "-", "-"],
+            [
+                "γ_rot (rot offset)",
+                f"{gamma_rot:.2f}",
+                f"{gamma_rot_se:.2f}",
+                "-",
+                "-",
+            ],
+        ]
+        print_table(headers, rows)
+
+        # Proxy dilution summary
+        n_stellar = int((merged["method_class"] == "stellar_absorption").sum())
+        n_hi = int((merged["method_class"] == "HI_linewidth").sum())
+        n_rot = int((merged["method_class"] == "rotation_proxy").sum())
+        mean_x_err_stellar = float(
+            np.mean(x_err[merged["method_class"] == "stellar_absorption"])
+        ) if n_stellar > 0 else None
+        mean_x_err_hi = float(
+            np.mean(x_err[merged["method_class"] == "HI_linewidth"])
+        ) if n_hi > 0 else None
+        mean_x_err_rot = float(
+            np.mean(x_err[merged["method_class"] == "rotation_proxy"])
+        ) if n_rot > 0 else None
+
+        print_status(
+            f"Method counts: stellar={n_stellar}, HI={n_hi}, rot={n_rot}",
+            "INFO",
+        )
+        if mean_x_err_hi is not None:
+            print_status(
+                f"Mean X_TEP uncertainty from σ error: HI={mean_x_err_hi:.2e}, rot={mean_x_err_rot:.2e}",
+                "INFO",
+            )
+
+        result = {
+            "beta": [float(v) for v in beta],
+            "beta_se": [float(v) for v in beta_se],
+            "beta1_t": float(t_beta1) if np.isfinite(t_beta1) else None,
+            "beta1_p": float(p_beta1) if np.isfinite(p_beta1) else None,
+            "gamma_HI": float(gamma_hi),
+            "gamma_HI_se": float(gamma_hi_se),
+            "gamma_rotation": float(gamma_rot),
+            "gamma_rotation_se": float(gamma_rot_se),
+            "n_stellar": n_stellar,
+            "n_hi": n_hi,
+            "n_rot": n_rot,
+            "mean_x_err_stellar": mean_x_err_stellar,
+            "mean_x_err_hi": mean_x_err_hi,
+            "mean_x_err_rot": mean_x_err_rot,
+        }
+
+        # Save to the same covariance_robustness JSON for synthesis access
+        cov_path = self.covariance_results_path
+        if cov_path.exists():
+            with open(cov_path, "r") as f:
+                cov_data = json.load(f)
+            cov_data["provenance_eiv"] = result
+            with open(cov_path, "w") as f:
+                json.dump(cov_data, f, indent=2)
+
+        return result
 
     def run(self):
         print_status("Starting Step 4: Robustness Checks", "TITLE")
@@ -1068,6 +1543,9 @@ class Step4RobustnessChecks:
         self.perform_bivariate_analysis()
         self.perform_redshift_cut_sensitivity()
         self.perform_flow_environment_robustness()
+        if self.stratified_path.exists():
+            df = pd.read_csv(self.stratified_path)
+            self._provenance_eiv_model(df)
         print_status("Step 4 Complete.", "SUCCESS")
 
 if __name__ == "__main__":

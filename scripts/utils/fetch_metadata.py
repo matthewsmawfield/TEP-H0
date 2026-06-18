@@ -56,13 +56,19 @@ def fetch_galaxy_metadata():
     
     for i, row in df.iterrows():
         name = row['normalized_name']
-        
+        ra = row.get('ra')
+        dec = row.get('dec')
+
+        if pd.isna(ra) or pd.isna(dec):
+            continue
+
         try:
-            # Query by name
-            cats = Vizier.query_object(name, catalog='VII/155')
+            # Query by coordinates (name-based query_object is unreliable)
+            coord = SkyCoord(ra=ra, dec=dec, unit=(u.deg, u.deg))
+            cats = Vizier.query_region(coord, catalog='VII/155', radius=5*u.arcmin)
             if cats and len(cats) > 0:
                 cat = cats[0]
-                if 'D25' in cat.columns:
+                if len(cat) > 0 and 'D25' in cat.columns:
                     val = cat['D25'][0]
                     if isinstance(val, (float, np.float32, np.float64)) and not np.isnan(val):
                         df.at[i, 'log_d25'] = val
@@ -104,9 +110,18 @@ def fetch_galaxy_metadata():
         ])
     print_table(headers, rows, title="Sample Galaxy Metadata (RC3)")
     
-    # Save
-    df.to_csv(output_path, index=False)
-    print_status(f"Saved enriched metadata to {output_path}", "SUCCESS")
+    # Save only if we found data; otherwise preserve existing cache
+    if found_count > 0:
+        df.to_csv(output_path, index=False)
+        print_status(f"Saved enriched metadata to {output_path}", "SUCCESS")
+    elif output_path.exists():
+        print_status(
+            f"Vizier returned no RC3 data; preserving existing cache at {output_path}.",
+            "WARNING",
+        )
+    else:
+        df.to_csv(output_path, index=False)
+        print_status(f"Saved enriched metadata (empty) to {output_path}", "WARNING")
 
 if __name__ == "__main__":
     # Create a local logger if running directly

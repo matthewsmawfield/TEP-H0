@@ -1,13 +1,15 @@
 
+import shutil
+import sys
+from pathlib import Path
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
-from pathlib import Path
-import matplotlib.pyplot as plt
 
 # Setup paths
 ROOT_DIR = Path(__file__).resolve().parents[2]
-import sys
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
@@ -21,7 +23,8 @@ except ImportError:
 DATA_DIR = ROOT_DIR / "data"
 RESULTS_DIR = ROOT_DIR / "results"
 OUTPUTS_DIR = RESULTS_DIR / "outputs"
-FIGURES_DIR = ROOT_DIR / "site/public/figures"
+FIGURES_DIR = RESULTS_DIR / "figures"
+PUBLIC_FIGURES_DIR = ROOT_DIR / "site" / "public" / "figures"
 
 def load_and_merge_data():
     """Load stratified H0 data and merge with auxiliary astrophysical params."""
@@ -213,10 +216,15 @@ def plot_coefficients(models):
     plt.legend()
     plt.grid(True, axis='x', alpha=0.3, linestyle=':')
     
-    out_path = FIGURES_DIR / "multivariate_robustness.png"
+    out_path = FIGURES_DIR / "figure_12_multivariate_robustness.png"
     plt.savefig(out_path, dpi=300)
     print(f"Saved coefficient plot to {out_path}")
     plt.close()
+
+    # Copy to public figures for site build
+    public_path = PUBLIC_FIGURES_DIR / "figure_12_multivariate_robustness.png"
+    shutil.copy(out_path, public_path)
+    print(f"Copied coefficient plot to {public_path}")
 
 def main():
     df = load_and_merge_data()

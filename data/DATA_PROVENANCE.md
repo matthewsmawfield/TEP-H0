@@ -32,9 +32,13 @@ This document provides complete provenance information for all external data use
 
 ---
 
-## 3. Velocity Dispersions (σ)
+## 3. Velocity Dispersions (σ) — CANONICAL DATA
 
-**File:** `data/raw/external/velocity_dispersions_literature.csv`
+**Status:** These values are pinned/committed. The pipeline uses the committed file by default.
+
+**Primary File:** `data/raw/external/velocity_dispersions_literature_regenerated.csv` (canonical, committed to git)
+
+**Fallback File:** `data/raw/external/velocity_dispersions_literature.csv` (legacy)
 
 ### Sources:
 
@@ -50,12 +54,51 @@ This document provides complete provenance information for all external data use
 - **HI linewidth proxy:** σ ≈ 0.7 × W50/2 (for galaxies without direct σ measurements)
 - **Aperture correction:** Jorgensen et al. (1995) power-law normalized to R_eff/8
 
-### Verification:
-Run `python scripts/utils/verify_hyperleda.py` to cross-check values against HyperLEDA database.
+### Reproducibility Note
+The velocity dispersion catalog is **committed to git as canonical data** to ensure exact reproducibility. External databases (HyperLEDA, VizieR) are updated over time; re-querying them may return different values. To force a fresh download from live databases:
+
+```bash
+python scripts/run_pipeline.py --rebuild-sigma
+```
+
+To verify the committed values against HyperLEDA:
+```bash
+python scripts/utils/verify_hyperleda.py
+```
 
 ---
 
-## 4. TRGB Distances
+## 4. Galaxy Metadata (RC3 Sizes) — CANONICAL DATA
+
+**File:** `data/processed/hosts_metadata_enriched.csv`
+
+**"Enriched" meaning:** This file contains the base galaxy metadata *plus* structural parameters from the **Third Reference Catalog of Bright Galaxies (RC3, de Vaucouleurs et al., VizieR VII/155)**:
+- `log_d25` — Logarithm of isophotal diameter at 25 mag/arcsec² (in 0.1 arcmin)
+- `r25_arcsec` — Isophotal radius derived from D25 (arcsec)
+- `r_eff_arcsec` — Effective (half-light) radius, estimated as 0.5 × R25 (arcsec)
+
+These are **published catalog values**, not manual tweaks. They are required for the Jorgensen et al. (1995) aperture correction applied in Step 1b.
+
+**Reproducibility:** The RC3 metadata is committed to git as canonical data. The `fetch_galaxy_metadata.py` utility can re-query Vizier VII/155, but the pipeline preserves the committed file by default. Re-querying requires:
+
+```bash
+rm data/processed/hosts_metadata_enriched.csv
+python scripts/utils/fetch_metadata.py
+```
+
+---
+
+## 5. Hosts Processed Data — CANONICAL DATA
+
+**File:** `data/processed/hosts_processed.csv`
+
+This file contains the merged SH0ES host data (coordinates, redshifts, Pantheon+ properties) combined with the measured velocity dispersions and aperture-corrected sigma values. It is the primary input to Step 2 (Stratification).
+
+**Reproducibility:** This file is committed to git. The pipeline preserves it by default to prevent external database drift from changing the analysis inputs. Step 1 will only overwrite it if the file does not already exist.
+
+---
+
+## 6. TRGB Distances
 
 **Source:** Chicago-Carnegie Hubble Program (CCHP)  
 **Reference:** Freedman, W. L., et al. 2024, arXiv:2408.06153  
@@ -68,7 +111,7 @@ Run `python scripts/utils/verify_hyperleda.py` to cross-check values against Hyp
 
 ---
 
-## 5. M31 Cepheid Catalog
+## 7. M31 Cepheid Catalog
 
 **Source:** Kodric et al. (2018)  
 **Reference:** Kodric, M., et al. 2018, AJ, 156, 130  
@@ -78,7 +121,7 @@ Run `python scripts/utils/verify_hyperleda.py` to cross-check values against Hyp
 
 ---
 
-## 6. LMC Cepheid Catalog
+## 8. LMC Cepheid Catalog
 
 **Source:** OGLE-IV Survey  
 **Reference:** Soszyński, I., et al. 2015, Acta Astronomica, 65, 297  
@@ -88,7 +131,7 @@ Run `python scripts/utils/verify_hyperleda.py` to cross-check values against Hyp
 
 ---
 
-## 7. Tully Group Catalog (Large-Scale Environment)
+## 9. Tully Group Catalog (Large-Scale Environment)
 
 **Source:** Tully (2015)  
 **Reference:** Tully, R. B. 2015, AJ, 149, 171  
@@ -104,8 +147,11 @@ Run `python scripts/utils/verify_hyperleda.py` to cross-check values against Hyp
 # Verify velocity dispersions against HyperLEDA
 python scripts/utils/verify_hyperleda.py
 
-# Run full pipeline with data regeneration
-python scripts/run_pipeline.py --regenerate
+# Run full pipeline (uses committed canonical data)
+python scripts/run_pipeline.py
+
+# Force full data rebuild from live databases
+python scripts/run_pipeline.py --rebuild-sigma
 
 # Check TRGB data source
 python -c "from scripts.steps.step_7_trgb_comparison import FREEDMAN_2024_TRGB; print(FREEDMAN_2024_TRGB)"
@@ -115,15 +161,17 @@ python -c "from scripts.steps.step_7_trgb_comparison import FREEDMAN_2024_TRGB; 
 
 ## Data Quality Flags
 
-| Dataset | Automated Download | VizieR Query | Manual Transcription | Verified |
-|---------|-------------------|--------------|---------------------|----------|
-| SH0ES | ✓ | - | - | ✓ |
-| Pantheon+ | ✓ | - | - | ✓ |
-| Velocity Dispersions | - | Partial | ✓ | Pending |
-| TRGB Distances | - | - | ✓ | ✓ |
-| M31 Cepheids | - | ✓ | - | ✓ |
-| LMC Cepheids | - | ✓ | - | ✓ |
+| Dataset | Automated Download | VizieR Query | Manual Transcription | Verified | Canonical / Pinned |
+|---------|-------------------|--------------|---------------------|----------|-------------------|
+| SH0ES | ✓ | - | - | ✓ | ✓ (committed R22 matrices) |
+| Pantheon+ | ✓ | - | - | ✓ | ✓ (committed .dat file) |
+| Velocity Dispersions | - | Partial | ✓ | ✓ | ✓ (committed regenerated CSV) |
+| RC3 Metadata (D25, R_eff) | - | ✓ | - | ✓ | ✓ (committed enriched CSV) |
+| TRGB Distances | - | - | ✓ | ✓ | ✓ (hardcoded in script) |
+| M31 Cepheids | - | ✓ | - | ✓ | - (live query) |
+| LMC Cepheids | - | ✓ | - | ✓ | - (live query) |
 
 ---
 
-*Last updated: 2026-01-11*
+*Last updated: 2026-06-18*
+*Pipeline version: v0.7*

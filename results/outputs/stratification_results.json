@@ -17,7 +17,7 @@
     "h0_mean_cov_err": 0.8472139507882559,
     "difference_cov_err": 0.9405629326109087,
     "h0_covariance_saved": true,
-    "shoes_density_mean": 0.11322882398572941,
-    "shoes_density_min": 7.84435555279967e-05,
-    "shoes_density_max": 1.7590781179647055
+    "sh0es_density_mean": 0.11322882398572941,
+    "sh0es_density_min": 7.84435555279967e-05,
+    "sh0es_density_max": 1.7590781179647055
 }

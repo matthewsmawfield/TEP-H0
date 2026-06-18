@@ -512,6 +512,16 @@ class Step1DataIngestion:
         # Use measured sigma as primary; this is the scientifically correct approach
         final_df['sigma_inferred'] = final_df['sigma_measured']
         
+        # Preserve existing canonical cache if present and valid
+        if self.hosts_processed_path.exists():
+            existing = pd.read_csv(self.hosts_processed_path)
+            if 'sigma_measured' in existing.columns and existing['sigma_measured'].notna().sum() > 0:
+                print_status(
+                    f"Preserving existing {self.hosts_processed_path} (canonical cached sigma data).",
+                    "INFO",
+                )
+                return existing
+        
         # Save
         final_df.to_csv(self.hosts_processed_path, index=False)
         

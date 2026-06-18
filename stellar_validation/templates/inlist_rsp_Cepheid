@@ -1,0 +1,29 @@
+! inlist_rsp_Cepheid
+! ==================
+! MESA inlist template for the rsp_Cepheid test-suite model.
+! This is a reproduction of the canonical MESA nonlinear-pulsation
+! test case, suitable for the TEP-H0 scalar-boundary validation.
+!
+! Model parameters (MESA r22.05.1 documentation):
+!   Mass   = 4.165  M_sun
+!   T_eff  = 6050   K
+!   L      = 1438.8 L_sun
+!   Z      = 0.007
+!
+! When this inlist is used, the expected output is a converged
+! pulsation period in LOGS/history.data.
+
+&star_job
+  ! Load a pre-computed initial model or start from scratch.
+  ! The canonical rsp_Cepheid test case provides its own setup.
+/
+
+&controls
+  ! RSP (Radial Stellar Pulsation) controls
+  ! Mass, T_eff, L, X, and Z are the key stellar parameters.
+  ! Exact control names vary by MESA version; consult
+  !   https://docs.mesastar.org/en/release-r22.05.1/test_suite/rsp_Cepheid.html
+/
+
+&pgstar
+/
