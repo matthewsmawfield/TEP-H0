@@ -1,23 +1,23 @@
 {
-    "median_sigma": 89.53951311106145,
+    "median_sigma": 84.63771282593834,
     "low_density": {
         "n": 15,
-        "mean_h0": 67.82424631620049,
-        "std_err": 1.6164433035410595,
-        "cov_err": 0.8990353137055453
+        "mean_h0": 68.92340095005429,
+        "std_err": 1.7803285647247367,
+        "cov_err": 0.9441696037677171
     },
     "high_density": {
         "n": 14,
-        "mean_h0": 72.45240454231646,
-        "std_err": 2.319130087431726,
-        "cov_err": 1.0384588218678676
+        "mean_h0": 71.27473886318738,
+        "std_err": 2.316961490006155,
+        "cov_err": 0.9916753045290531
     },
-    "difference": 4.628158226115971,
-    "correlation_r": 0.4621612433960245,
+    "difference": 2.3513379131330936,
+    "correlation_r": 0.3296732828583555,
     "h0_mean_cov_err": 0.8472139507882559,
-    "difference_cov_err": 0.9405629326109087,
+    "difference_cov_err": 0.934538680834898,
     "h0_covariance_saved": true,
-    "sh0es_density_mean": 0.11322882398572941,
+    "sh0es_density_mean": 0.17903632916720133,
     "sh0es_density_min": 7.84435555279967e-05,
     "sh0es_density_max": 1.7590781179647055
 }

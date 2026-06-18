@@ -36,15 +36,6 @@ import numpy as np
 C_KM_S: float = 299792.458
 C_SQUARED_KM_S: float = C_KM_S**2
 
-# TEP geometric-factor prior for cross-domain consistency check.
-# The bare observable response coefficient ~10⁶ mag is consistent
-# with the TEP framework's geometric compactness estimate and with
-# Paper 11's Cepheid fit (1.05 ± 0.43) × 10⁶ mag. Paper 10's
-# pulsar channel measures the effective screened coefficient
-# ~3 × 10⁴ in dense clusters. This prior tests whether applying
-# the bare estimate without SH0ES tuning yields Planck-consistent H₀.
-KAPPA_CEP_PAPER10: float = 1.05e6
-
 
 def tep_correction(
     sigma: np.ndarray | float,

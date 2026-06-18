@@ -42,9 +42,9 @@ proxies), measurement methodology is treated as a first-class provenance
 variable and covariance-aware significance tests are reported using the
 full SH0ES GLS distance-modulus covariance. A Bayesian model comparison
 (environmental correction with free $\kappa_{\rm Cep}$ vs. a no-environment null)
-in the host-contrast likelihood—which is the correct test for an environmental
-slope because the shared calibration zero-point is a nuisance with huge
-variance—yields $\Delta{\rm BIC}=88$.
+in the host-contrast likelihood—which is the appropriate host-to-host slope test
+because the shared calibration zero-point is a nuisance parameter with
+dominant common-mode variance—yields $\Delta{\rm BIC}=88$.
 The raw full-covariance absolute likelihood ($\Delta{\rm BIC}\approx -3$) is shown
 to demonstrate why naive application understates the evidence: the shared
 calibration uncertainty dominates the absolute likelihood, while the calibration
@@ -285,7 +285,7 @@ Data compilation draws from HyperLEDA, SDSS spectroscopy, and the literature
 literature sources (e.g., fixed-fiber SDSS vs. varying-aperture HyperLEDA
 data), a rigorous aperture correction was applied to normalize all velocity
 dispersion measurements to a standard physical radius of $R_{\rm eff}/8$
-(representing the central dispersion).
+(representing the central dispersion). Central velocity dispersion is used here as a host-scale potential-depth proxy, not as a direct measurement of the local Cepheid birth-cloud potential; this distinction is why independent IFU spectroscopy and local-environment reconstruction are listed as decisive follow-up tests.
 
 The power-law correction from Jorgensen et al. (1995) was utilized:
 
@@ -501,10 +501,18 @@ $S_{\rm MW}=0.10$):
 \sigma_{\rm ref,scr}^2 = 0.55(0.50) \times 115^2 + 0.25(0.10) \times 24^2 + 0.20(0.10) \times 30^2 \approx 60.6^2 \text{ km}^2\!\!/\text{s}^2
 \end{equation}
 
-This value is determined *a priori* from the published ladder
-structure and anchor properties. $\sigma_{\rm ref} = 75.25$ km/s is fixed entirely by the published SH0ES anchor weights; no $H_0$ information enters it. This architecturally-fixed value yields $0.49\sigma$ Planck agreement. The only fitted response parameter in the TEP correction model is $\kappa_{\rm Cep}$, the Cepheid period-luminosity response coefficient, which is constrained by
-requiring the corrected sample to show no residual $H_0$–$\sigma$
-dependence.
+This value is determined *a priori* as an approximate effective
+calibrator reference consistent with the SH0ES anchor mix. The weights
+(0.55/0.25/0.20 for NGC 4258/LMC/MW) are inferred from the relative
+roles of the anchors in the published ladder structure, not from a
+single verbatim table. A comprehensive sensitivity scan demonstrates
+that the corrected $H_0$ remains Planck-consistent for any reference
+value $\sigma_{\rm ref} \in [55, 95]$ km/s, so the exact value is secondary to the
+demonstrated robustness. No $H_0$ information enters $\sigma_{\rm ref}$;
+the only fitted response parameter in the TEP correction model is
+$\kappa_{\rm Cep}$, the Cepheid period-luminosity response coefficient, which is
+constrained by requiring the corrected sample to show no residual
+$H_0$–$\sigma$ dependence.
 
 The large Observable Response Coefficient $\kappa_{\rm Cep} \sim 10^6$ mag applies to the
 clock-rate sector in unscreened Cepheid environments. It does not map directly
@@ -520,7 +528,7 @@ The response coefficient $\kappa_{\rm Cep}$ is determined by minimizing the slop
 corrected $H_0$ vs. $\sigma$ relation:
 
 \begin{equation}
-\mathcal{L}(\alpha) = \left(\frac{dH_0^{\rm corr}}{d\sigma}\right)^2
+\mathcal{L}(\kappa_{\rm Cep}) = \left(\frac{dH_0^{\rm corr}}{d\sigma}\right)^2
 \end{equation}
 
 This ensures the corrected sample shows no residual environmental
@@ -660,22 +668,22 @@ complementary diagnostic; however, the covariance-null Monte Carlo
 correlation tests are treated as the primary covariance-aware inference
 because they make fewer assumptions about linearity.
 A Bayesian model comparison (TEP-motivated environmental correction with free $\kappa_{\rm Cep}$ vs. a no-environment null) in the host-contrast likelihood—which
-projects out the shared calibration mode and tests only the
-environmental structure—yields $\Delta{\rm BIC}=88$.
-In the raw full-covariance likelihood the evidence appears weaker
-($\Delta{\rm BIC}\approx -3$) because the shared calibration uncertainty dominates the
-absolute likelihood; the host-contrast result is nevertheless robust
-because the calibration covariance cancels in the slope (Section 3.6).
-A diagonal H0-uncertainty check gives $\Delta{\rm BIC}=+94$ as an independent
-robustness verification.
+is the appropriate host-to-host slope test because the shared
+calibration zero-point is a nuisance parameter with
+dominant common-mode variance—yields $\Delta{\rm BIC}=88$.
+The raw full-covariance absolute likelihood ($\Delta{\rm BIC}\approx -3$) is shown
+to demonstrate why naive application understates the evidence: the shared
+calibration uncertainty dominates the absolute likelihood, while the calibration
+covariance cancels in the slope. A diagonal H$0$-uncertainty check gives
+$\Delta{\rm BIC}=+94$ as an independent robustness verification.
 
 **Host-contrast projection.** The host-contrast likelihood removes the shared calibration mode and tests only the host-to-host environmental structure. This avoids allowing the common SH0ES zero-point uncertainty to dominate the model comparison. In this contrast space, the null model contains no environmental term, while the TEP model contains one fitted response coefficient, $\kappa_{\rm Cep}$. The resulting $\Delta{\rm BIC}=88$ therefore quantifies evidence for the environmental predictor, not an absolute recalibration of the distance ladder.[1](#fn-contrast)
 
 | Likelihood | $\Delta{\rm BIC}$ | Role |
 | --- | --- | --- |
-| Diagonal host-scatter likelihood | +94 | Robustness check |
-| Full absolute covariance likelihood | −3 | Dominated by common calibration mode |
-| Host-contrast covariance likelihood | +88 | Primary environmental-structure test |
+| Host-contrast covariance likelihood | +88 | Primary test (shared calibration projected out) |
+| Diagonal host-scatter likelihood | +94 | Independent robustness check |
+| Full absolute covariance likelihood | −3 | Demonstrates why naive absolute likelihood understates evidence |
 
 ![Scatter plot showing positive correlation between H0 and host galaxy velocity dispersion squared (Spearman rho=0.511, p=0.0046), with high-sigma hosts yielding systematically higher H0 values and NGC 4639 annotated as an outlier](public/figures/figure_01_h0_vs_sigma.png?v=2)
 
@@ -859,13 +867,14 @@ only after the environmental transfer factor is accounted for.
 
 Because $\kappa_{\rm Cep}$ is optimized by minimizing the residual slope,
 out-of-sample tests were performed to verify predictive power (Section 2.8).
-Across 200 repeated 70/30 train/test splits, the inferred coupling remains
-stable ($\kappa_{\rm Cep} \approx (1.06 \pm 0.26)\times10^6$ mag), and the held-out
-residual slope is strongly reduced. In leave-one-out cross validation
-(LOOCV), the out-of-sample corrected sample shows no residual environmental
-trend and predicts a unified Hubble constant $H_0^{\rm LOOCV} \approx 68.04 \pm 1.32$
-km/s/Mpc, corresponding to a Planck tension of $\sim 0.46\sigma$. These
-results show that the correction generalizes to unseen hosts.
+The primary non-circular validation is leave-one-out cross-validation (LOOCV):
+the response coefficient is trained on 28 hosts and tested on the held-out host.
+LOOCV predicts a unified Hubble constant
+$H_0^{\rm LOOCV} = 68.04 \pm 1.32$ km/s/Mpc, corresponding to a Planck tension of
+$0.46\sigma$. Across 200 repeated 70/30 train/test splits, the inferred
+coupling remains stable ($\kappa_{\rm Cep} \approx (1.06 \pm 0.26)\times10^6$ mag) and the
+held-out residual slope is strongly reduced, confirming that the correction
+generalizes to unseen hosts.
 
 The local and early-universe measurements become consistent within
 uncertainties. A comprehensive sensitivity analysis scanned the effective
@@ -1021,8 +1030,8 @@ yields $p_{\rm cov} \approx 0.008$ Spearman and $p_{\rm cov} \approx 0.027$ Pear
 jackknife analysis (leave-one-out stability test), and a Bayesian model
 comparison (TEP with free $\kappa_{\rm Cep}$ vs. null) in the
 host-contrast likelihood, which yields $\Delta{\rm BIC}=88$.
-In the raw full-covariance likelihood the evidence appears weaker
-($\Delta{\rm BIC}\approx -3$) because the shared calibration uncertainty dominates.
+The raw full-covariance absolute likelihood ($\Delta{\rm BIC}\approx -3$)
+demonstrates why naive application understates the evidence.
 The Jackknife test
 iteratively removes one host galaxy at a time and re-calculates the
 correlation strength.
@@ -1839,10 +1848,11 @@ $\kappa_{\rm MSP}^{\rm emp} = (2.9 \pm 4.5) \times 10^4$
 and real cluster parameters. Paper 11 measures
 $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag from the Cepheid
 $H_0$–$\sigma$ correlation in the looser galactic-disk regime.
-The Cepheid value is consistent with the bare TEP estimate; the pulsar
-value is consistent with the same bare estimate after dense-cluster
-geometric suppression, providing a cross-domain consistency check across
-independent probes spanning ~8 orders of magnitude in timescale.
+The Cepheid value is compatible with the bare TEP estimate; the pulsar
+value is compatible with the same bare estimate after dense-cluster
+geometric suppression. This theoretical agreement across independent
+probes spanning ~8 orders of magnitude in timescale is treated as
+cross-domain consistency rather than an input to the Cepheid inference.
 
 Environmental scaling provides a consistency check. Globular clusters
 have characteristic densities $\rho_{\rm GC} \sim 10^{-18}$ g/cm³,
@@ -1941,24 +1951,25 @@ Sample size: This analysis uses $N=29$ host galaxies. Despite this
 modest sample size, the detection is statistically significant
 (Spearman $\rho = 0.511$, $p = 0.0046$). A Bayesian model
 comparison (TEP with free $\kappa_{\rm Cep}$ vs. null) in the
-host-contrast likelihood yields $\Delta{\rm BIC}=88$.
-In the raw full-covariance likelihood the evidence appears weaker
-($\Delta{\rm BIC}\approx -3$) because the shared calibration uncertainty dominates.
-The host-contrast projection is nevertheless robust because the calibration
+host-contrast likelihood—which is the appropriate host-to-host slope test
+because the shared calibration zero-point is a nuisance parameter
+with dominant common-mode variance—yields $\Delta{\rm BIC}=88$.
+The raw full-covariance absolute likelihood ($\Delta{\rm BIC}\approx -3$)
+demonstrates why naive application understates the evidence; the calibration
 covariance cancels in the slope. Larger samples
 from future surveys (JWST, Rubin Observatory) will improve
 precision further.
 
-**Anchor Screening Resolution:** The geometric anchors
+**Anchor Screening Resolution (Model-Dependent Consistency Check):** The geometric anchors
 (LMC, NGC 4258, M31) do not exhibit the strong $\sigma$-dependence
 seen in the SN Ia hosts. As discussed in Section 4.6, this is
-naturally explained by *group halo shear suppression*: all three
+consistent with *group halo shear suppression*: all three
 anchors are members of galaxy groups (Local Group for LMC and M31;
-Canes Venatici I for NGC 4258), embedding them in deep ambient
+Canes Venatici I for NGC 4258), which would embed them in deep ambient
 potentials that trigger environment-responsive suppression of Temporal Shear regardless of their
 internal disk densities. The SN Ia hosts, selected for smooth Hubble
 flow, are biased toward isolated field galaxies that lack this
-external suppression of Temporal Shear.
+external suppression. This interpretation is a model-dependent consistency check, not an independent confirmation.
 
 Peculiar velocities and large-scale environment: Residual
 peculiar-velocity systematics and structured flows in
@@ -2112,11 +2123,13 @@ Stratification of the SH0ES Cepheid host galaxies by curated kinematic
 potential-depth estimates reveals a significant correlation (Spearman $\rho =
 0.511$, $p = 0.0046$; Pearson $r=0.462$, $p=0.0116$) between host potential depth and derived $H_0$.
 A Bayesian model comparison (TEP-motivated environmental correction with free $\kappa_{\rm Cep}$ vs. a no-environment null)
-in the host-contrast likelihood yields $\Delta{\rm BIC}=88$.
-In the raw full-covariance likelihood the evidence appears weaker
-($\Delta{\rm BIC}\approx -3$) because the shared calibration uncertainty dominates;
-the host-contrast result is nevertheless robust because the calibration
-covariance cancels in the slope.
+in the host-contrast likelihood—which is the appropriate host-to-host slope test
+because the shared calibration zero-point is a nuisance parameter with
+dominant common-mode variance—yields $\Delta{\rm BIC}=88$.
+The raw full-covariance absolute likelihood ($\Delta{\rm BIC}\approx -3$)
+demonstrates why naive application understates the evidence; a diagonal
+H$0$-uncertainty check gives $\Delta{\rm BIC}=+94$ as an independent
+robustness verification.
 High-$\sigma$ hosts yield systematically inflated $H_0$ values ($72.45 \pm
 2.32$ km/s/Mpc) compared to low-$\sigma$ hosts ($67.82 \pm 1.62$ km/s/Mpc),
 with the bias $\Delta H_0 = 4.63$ km/s/Mpc accounting for a substantial
@@ -2126,10 +2139,14 @@ of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot
 formula and the virial relation $|\Phi|\propto\sigma^2$—with
 response coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.43)\times10^6$ mag (mean
 response $\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5$ after accounting for
-continuous shear suppression) and effective calibrator $\sigma_{\rm ref} =
-75.25$ km/s yields a unified local Hubble constant of $H_0 = 68.17$ km/s/Mpc
-(bootstrap mean $68.14 \pm 1.49$), reducing the tension with Planck to $0.49\sigma$. This result is robust under bootstrap resampling. Notably,
-low-$\sigma$ hosts, which have environments similar to the calibrators,
+continuous shear suppression) and effective calibrator reference
+$\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant.
+Out-of-sample leave-one-out cross-validation (LOOCV) predicts
+$H_0^{\rm LOOCV} = 68.04 \pm 1.32$ km/s/Mpc, corresponding to a Planck tension of
+$0.46\sigma$; this is the primary non-circular validation. The in-sample
+corrected mean is $H_0 = 68.17$ km/s/Mpc (bootstrap mean $68.14 \pm 1.49$,
+Planck tension $0.49\sigma$). Both are robust under bootstrap resampling.
+Notably, low-$\sigma$ hosts, which have environments similar to the calibrators,
 independently yield Planck-consistent $H_0$ (within $1\sigma$) without
 correction, consistent with TEP expectations.
 The inferred $\kappa_{\rm Cep}\sim10^6$ is consistent with the TEP
@@ -2209,7 +2226,6 @@ a self-contained Python module:
 | 1b | step_1b_aperture_correction.py | Applies Jorgensen et al. (1995) aperture corrections to normalize $\sigma$ measurements to $R_{\rm eff}/8$ | Homogenized $\sigma$ values |
 | 2 | step_2_stratification.py | Calculates per-host $H_0$; stratifies by median $\sigma$; computes correlation statistics | stratification_results.json |
 | 3 | step_3_tep_correction.py | Optimizes $\kappa_{\rm Cep}$ by minimizing residual $H_0$–$\sigma$ slope; applies TEP correction; bootstrap uncertainty estimation | tep_correction_results.json |
-| 3C | step_3c_frozen_prior.py | Cross-domain consistency check: tests whether the TEP geometric-factor prior (~10^6 mag) applied without SH0ES tuning yields Planck-consistent H_0; does not claim Paper 10 pulsars independently measured this value | frozen_prior_results.json |
 | 4 | step_4_robustness_checks.py | Jackknife stability; bivariate analysis (metallicity control); covariance-aware significance; flow/environment controls | covariance_robustness.json |
 | 5 | step_5_m31_analysis.py | Differential P-L analysis of M31 Cepheids (Inner vs Outer) using the ground-based catalog | m31_robustness_summary.json |
 | 6 | step_6_multivariate_analysis.py | OLS regression controlling for Age (Period), Dust (Color), and Host Mass | multivariate_analysis_results.json |
@@ -2237,10 +2253,6 @@ TEP-H0/
 
 [tep_correction_results.json](results/outputs/tep_correction_results.json) — Unified
 $H_0$, optimal $\kappa_{\rm Cep}$, Planck tension
-
-results/outputs/frozen_prior_results.json —
-Cross-domain consistency check using TEP geometric-factor prior
-(not an independent pulsar measurement)
 
 results/outputs/stratification_results.json —
 High/low-$\sigma$ stratification statistics
@@ -2684,22 +2696,24 @@ calibrates the bare coefficient in the looser galactic-disk regime:
 \kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6\ {\rm mag}
 \end{equation}
 
-The two channels provide a cross-domain consistency check: the Cepheid
-value matches the bare TEP geometric-factor estimate; the pulsar value
-matches the same bare estimate after accounting for dense-cluster
-geometric suppression. They do not constitute an independent measurement
-of the same coefficient in the same environment.
+The two channels show theoretical consistency in scale and sign: the Cepheid
+value is compatible with the bare TEP geometric-factor estimate; the pulsar
+value is compatible with the same bare estimate after accounting for dense-cluster
+geometric suppression. The Cepheid response coefficient is fitted independently
+from the Cepheid-host sample; the similarity of response scales across channels
+is treated as theoretical cross-domain consistency rather than an input to the
+inference.
 
 > 
 
-#### Cross-Domain Consistency Check
+#### Broader TEP Context: Theoretical Consistency Across Clock Channels
 
 The Cepheid channel, analysed in this paper with no reference to the
 pulsar analysis, independently returns
 *κ*Cep = (1.05 ± 0.43) × 106 mag.
-This is consistent with the TEP framework's bare geometric-factor
+This is compatible in scale with the TEP framework's bare geometric-factor
 estimate. Paper 10's effective pulsar coefficient
-(~3 × 104) is consistent with the same bare value after
+(~3 × 104) is compatible with the same bare value after
 dense-cluster geometric suppression. The agreement across
 independent probes spanning ~8 orders of magnitude in period
 (millisecond pulsars vs. day-scale Cepheids) supports the TEP

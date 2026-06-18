@@ -45,7 +45,6 @@ from scripts.steps.step_1b_aperture_correction import Step1bApertureCorrection
 from scripts.steps.step_2_stratification import Step2Stratification
 from scripts.steps.step_2b_shear_suppression_viz import main as step2b_viz
 from scripts.steps.step_3_tep_correction import Step3TEPCorrection
-from scripts.steps.step_3c_frozen_prior import Step3CFrozenPrior
 from scripts.steps.step_4_robustness_checks import Step4RobustnessChecks
 from scripts.steps.step_4b_aperture_sensitivity import Step4bApertureSensitivity
 from scripts.steps.step_5_m31_analysis import Step5M31Analysis
@@ -155,15 +154,6 @@ def run_pipeline():
         
         set_step_logger(pipeline_logger)
         print_status("Step 3 (Optimization) completed successfully.", "SUCCESS")
-
-        # --- Step 3C: Cross-Domain Consistency Check ---
-        print_status(">>> STEP 3C: CROSS-DOMAIN CONSISTENCY CHECK", "TITLE")
-        t0 = time.time()
-        Step3CFrozenPrior().run()
-        step_times['Step 3C'] = time.time() - t0
-
-        set_step_logger(pipeline_logger)
-        print_status("Step 3C (Cross-Domain Consistency) completed successfully.", "SUCCESS")
 
         # --- Step 3b: Shear Suppression Visualization ---
         # Must run after Step 3 because it uses tep_corrected_h0.csv

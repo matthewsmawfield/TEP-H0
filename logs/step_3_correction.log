@@ -1,181 +1,181 @@
-[12:00:37] [INFO] 
-[12:00:37] [INFO] ================================================================================
-[12:00:37] [INFO]    Starting Step 3: TEP Correction
-[12:00:37] [INFO] ================================================================================
-[12:00:37] [INFO] 
-[12:00:37] [INFO] Loading Data...
-[12:00:37] [INFO] Loaded 29 hosts for correction.
-[12:00:37] [INFO] Calculating Effective Calibrator Sigma...
-[12:00:37] [INFO] Using SH0ES-motivated weights (based on P-L contribution).
-[12:00:37] [INFO] Geometric Anchor Sample
-[12:00:37] [INFO] +--------+--------------+------+--------+----------------------------+
-[12:00:37] [INFO] | Anchor | Sigma (km/s) | S    | Weight | Description                |
-[12:00:37] [INFO] +--------+--------------+------+--------+----------------------------+
-[12:00:37] [INFO] | MW     | 30.0         | 0.10 | 0.20   | Milky Way Disk (Bovy+2012) |
-[12:00:37] [INFO] | LMC    | 24.0         | 0.10 | 0.25   | LMC Disk (vdMarel+2002)    |
-[12:00:37] [INFO] | N4258  | 115.0        | 1.00 | 0.55   | NGC 4258 Disk (K&H2013)    |
-[12:00:37] [INFO] +--------+--------------+------+--------+----------------------------+
-[12:00:37] [SUCCESS] Standard Reference Sigma (σ_ref):       75.25 km/s
-[12:00:37] [SUCCESS] Screened-Effective Sigma (σ_ref,scr):   85.48 km/s  (NGC 4258 contribution down-weighted by S=0.50)
-[12:00:37] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:37] [INFO] Optimization converged: True
-[12:00:37] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.050e+06 mag
-[12:00:37] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.932e+05
-[12:00:37] [INFO] Applying Conformal Correction...
-[12:00:37] [INFO] Sample Corrections (Suppression-Aware)
-[12:00:37] [INFO] +----------+-------+--------+----------+------------+----------+
-[12:00:37] [INFO] | Host     | Sigma | S(rho) | H0 (Raw) | Corr (mag) | H0 (TEP) |
-[12:00:37] [INFO] +----------+-------+--------+----------+------------+----------+
-[12:00:37] [INFO] | NGC 5917 | 53.1  | 0.998  | 72.56    | -0.0331    | 73.68    |
-[12:00:37] [INFO] | NGC 2608 | 83.0  | 0.971  | 76.42    | +0.0140    | 75.93    |
-[12:00:37] [INFO] | NGC 3370 | 89.5  | 0.995  | 65.72    | +0.0274    | 64.90    |
-[12:00:37] [INFO] | NGC 4639 | 91.4  | 0.995  | 47.25    | +0.0312    | 46.58    |
-[12:00:37] [INFO] | NGC 976  | 212.4 | 0.824  | 76.91    | +0.3793    | 64.58    |
-[12:00:37] [INFO] +----------+-------+--------+----------+------------+----------+
-[12:00:37] [INFO] ------------------------------------------------------------
-[12:00:37] [SUCCESS] UNIFIED H0 (Statistical): 68.17 +/- 1.30 km/s/Mpc
-[12:00:37] [INFO] Note: This error (SEM) assumes κ_Cep is fixed/known perfectly.
-[12:00:37] [INFO] ------------------------------------------------------------
-[12:00:37] [INFO] Slope Convention Audit
-[12:00:37] [INFO] +----------------------+-------------+--------+
-[12:00:37] [INFO] | Check                | Value       | Status |
-[12:00:37] [INFO] +----------------------+-------------+--------+
-[12:00:37] [INFO] | raw slope H0–σ > 0   | +0.0851     | PASS   |
-[12:00:37] [INFO] | correction slope < 0 | -0.0851     | PASS   |
-[12:00:37] [INFO] | Δμ(high σ) > 0       | +0.0985 mag | PASS   |
-[12:00:37] [INFO] +----------------------+-------------+--------+
-[12:00:37] [SUCCESS] Slope convention audit PASSED.
-[12:00:37] [PROCESS] Generating Comparison Plots...
-[12:00:37] [SUCCESS] Saved comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/figure_03_tep_correction_comparison.png
-[12:00:37] [SUCCESS] Copied comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/figure_03_tep_correction_comparison.png
-[12:00:37] [INFO] Joint Bootstrap (kappa refit + H0): N=1000...
-[12:00:38] [INFO] Joint Bootstrap Results:
-[12:00:38] [INFO] Bootstrap (kappa refit per sample)
-[12:00:38] [INFO] +--------------+-----------+-------------------+------------------------+
-[12:00:38] [INFO] | Parameter    | Mean      | Std (Uncertainty) | 95% CI                 |
-[12:00:38] [INFO] +--------------+-----------+-------------------+------------------------+
-[12:00:38] [INFO] | H0 (Unified) | 68.14     | 1.49              | [65.07, 70.93]         |
-[12:00:38] [INFO] | kappa_Cep    | 1.158e+06 | 4.273e+05 (36.9%) | [6.320e+05, 2.408e+06] |
-[12:00:38] [INFO] +--------------+-----------+-------------------+------------------------+
-[12:00:38] [INFO] Converged: 1000/1000, residual |slope| = 1.78e-06
-[12:00:38] [INFO] Bootstrap H0 std combines host scatter AND kappa uncertainty.
-[12:00:38] [PROCESS] Sensitivity Analysis (Sigma Ref Scan)...
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.072e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.014e+06
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.070e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.013e+06
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.068e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.011e+06
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.066e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.009e+06
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.064e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.007e+06
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.061e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.004e+06
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.058e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 1.001e+06
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.055e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.983e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.052e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.952e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.048e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.918e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.044e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.882e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.040e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.844e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.036e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.804e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.032e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.763e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.027e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.720e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.022e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.675e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.017e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.628e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.012e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.580e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.007e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.531e+05
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.002e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.480e+05
-[12:00:38] [SUCCESS] Saved sensitivity plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/supplement_01_sensitivity_h0_vs_sigmaref.png
-[12:00:38] [SUCCESS] Copied sensitivity plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/supplement_01_sensitivity_h0_vs_sigmaref.png
-[12:00:38] [SUCCESS] Saved sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sensitivity_h0_vs_sigmaref.csv
-[12:00:38] [INFO] Screened-Effective Variant (σ_ref,scr = 85.48 km/s)...
-[12:00:38] [INFO] Optimizing TEP Coupling (κ_Cep)...
-[12:00:38] [INFO] Optimization converged: True
-[12:00:38] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.042e+06 mag
-[12:00:38] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 9.862e+05
-[12:00:38] [INFO] Applying Conformal Correction...
-[12:00:38] [INFO] Sample Corrections (Suppression-Aware)
-[12:00:38] [INFO] +----------+-------+--------+----------+------------+----------+
-[12:00:38] [INFO] | Host     | Sigma | S(rho) | H0 (Raw) | Corr (mag) | H0 (TEP) |
-[12:00:38] [INFO] +----------+-------+--------+----------+------------+----------+
-[12:00:38] [INFO] | NGC 5917 | 53.1  | 0.998  | 72.56    | -0.0519    | 74.32    |
-[12:00:38] [INFO] | NGC 2608 | 83.0  | 0.971  | 76.42    | -0.0046    | 76.59    |
-[12:00:38] [INFO] | NGC 3370 | 89.5  | 0.995  | 65.72    | +0.0082    | 65.47    |
-[12:00:38] [INFO] | NGC 4639 | 91.4  | 0.995  | 47.25    | +0.0120    | 46.99    |
-[12:00:38] [INFO] | NGC 976  | 212.4 | 0.824  | 76.91    | +0.3610    | 65.13    |
-[12:00:38] [INFO] +----------+-------+--------+----------+------------+----------+
-[12:00:38] [INFO] ------------------------------------------------------------
-[12:00:38] [SUCCESS] UNIFIED H0 (Statistical): 68.75 +/- 1.30 km/s/Mpc
-[12:00:38] [INFO] Note: This error (SEM) assumes κ_Cep is fixed/known perfectly.
-[12:00:38] [INFO] ------------------------------------------------------------
-[12:00:38] [INFO] Screened Variant: κ_Cep = 1.042e+06 mag, H0 = 68.75 km/s/Mpc
-[12:00:38] [SUCCESS] Screened-Reference Stability: ΔH0 = 0.58 km/s/Mpc (standard 68.17 vs screened 68.75)
-[12:00:38] [INFO] Final Tension Analysis
-[12:00:38] [INFO] Planck 2018 Value: 67.4 +/- 0.5
-[12:00:38] [INFO] ------------------------------------------------------------
-[12:00:38] [INFO] TEP Unified Value: 68.17
-[12:00:38] [INFO]   +/- 1.30 (Statistical SEM, kappa fixed)
-[12:00:38] [INFO]   +/- 1.49 (Joint Bootstrap: host scatter + kappa)
-[12:00:38] [INFO]   kappa_Cep = (1.16e+06) +/- (4.27e+05)  [37%]
-[12:00:38] [INFO] ------------------------------------------------------------
-[12:00:38] [INFO] Tension (Statistical):     0.55 sigma
-[12:00:38] [INFO] Tension (Joint Bootstrap): 0.49 sigma
-[12:00:38] [SUCCESS] CONCLUSION (Cepheid channel, unscreened Hubble-flow regime): H0 consistent with Planck CMB after κ_Cep correction.
-[12:00:38] [INFO] Note: Universal-TEP validation requires CROSS-CHANNEL consistency (κ_Cep vs κ_TRGB vs κ_SN vs κ_pulsar). Single-channel significance of κ_Cep from zero is NOT the TEP test (Jakarta §7; Istanbul §1.3).
-[12:00:38] [SUCCESS] Saved results JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/tep_correction_results.json
-[12:00:38] [SUCCESS] Saved corrected data to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/tep_corrected_h0.csv
+[14:10:47] [INFO] 
+[14:10:47] [INFO] ================================================================================
+[14:10:47] [INFO]    Starting Step 3: TEP Correction
+[14:10:47] [INFO] ================================================================================
+[14:10:47] [INFO] 
+[14:10:47] [INFO] Loading Data...
+[14:10:47] [INFO] Loaded 29 hosts for correction.
+[14:10:47] [INFO] Calculating Effective Calibrator Sigma...
+[14:10:47] [INFO] Using SH0ES-motivated weights (based on P-L contribution).
+[14:10:47] [INFO] Geometric Anchor Sample
+[14:10:47] [INFO] +--------+--------------+------+--------+----------------------------+
+[14:10:47] [INFO] | Anchor | Sigma (km/s) | S    | Weight | Description                |
+[14:10:47] [INFO] +--------+--------------+------+--------+----------------------------+
+[14:10:47] [INFO] | MW     | 30.0         | 0.10 | 0.20   | Milky Way Disk (Bovy+2012) |
+[14:10:47] [INFO] | LMC    | 24.0         | 0.10 | 0.25   | LMC Disk (vdMarel+2002)    |
+[14:10:47] [INFO] | N4258  | 115.0        | 1.00 | 0.55   | NGC 4258 Disk (K&H2013)    |
+[14:10:47] [INFO] +--------+--------------+------+--------+----------------------------+
+[14:10:47] [SUCCESS] Standard Reference Sigma (σ_ref):       75.25 km/s
+[14:10:47] [SUCCESS] Screened-Effective Sigma (σ_ref,scr):   85.48 km/s  (NGC 4258 contribution down-weighted by S=0.50)
+[14:10:47] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:47] [INFO] Optimization converged: True
+[14:10:47] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.140e+05 mag
+[14:10:47] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.564e+05
+[14:10:47] [INFO] Applying Conformal Correction...
+[14:10:47] [INFO] Sample Corrections (Suppression-Aware)
+[14:10:47] [INFO] +----------+-------+--------+----------+------------+----------+
+[14:10:47] [INFO] | Host     | Sigma | S(rho) | H0 (Raw) | Corr (mag) | H0 (TEP) |
+[14:10:47] [INFO] +----------+-------+--------+----------+------------+----------+
+[14:10:47] [INFO] | NGC 3370 | 45.4  | 0.995  | 65.72    | -0.0245    | 66.46    |
+[14:10:47] [INFO] | NGC 5917 | 53.1  | 0.998  | 72.56    | -0.0194    | 73.21    |
+[14:10:47] [INFO] | NGC 2608 | 58.8  | 0.971  | 76.42    | -0.0146    | 76.94    |
+[14:10:47] [INFO] | NGC 4639 | 87.2  | 0.078  | 47.25    | +0.0010    | 47.23    |
+[14:10:47] [INFO] | NGC 976  | 212.4 | 0.824  | 76.91    | +0.2219    | 69.44    |
+[14:10:47] [INFO] +----------+-------+--------+----------+------------+----------+
+[14:10:47] [INFO] ------------------------------------------------------------
+[14:10:47] [SUCCESS] UNIFIED H0 (Statistical): 68.90 +/- 1.36 km/s/Mpc
+[14:10:47] [INFO] Note: This error (SEM) assumes κ_Cep is fixed/known perfectly.
+[14:10:47] [INFO] ------------------------------------------------------------
+[14:10:47] [INFO] Slope Convention Audit
+[14:10:47] [INFO] +----------------------+-------------+--------+
+[14:10:47] [INFO] | Check                | Value       | Status |
+[14:10:47] [INFO] +----------------------+-------------+--------+
+[14:10:47] [INFO] | raw slope H0–σ > 0   | +0.0519     | PASS   |
+[14:10:47] [INFO] | correction slope < 0 | -0.0519     | PASS   |
+[14:10:47] [INFO] | Δμ(high σ) > 0       | +0.0757 mag | PASS   |
+[14:10:47] [INFO] +----------------------+-------------+--------+
+[14:10:47] [SUCCESS] Slope convention audit PASSED.
+[14:10:47] [PROCESS] Generating Comparison Plots...
+[14:10:47] [SUCCESS] Saved comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/figure_03_tep_correction_comparison.png
+[14:10:47] [SUCCESS] Copied comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/figure_03_tep_correction_comparison.png
+[14:10:47] [INFO] Joint Bootstrap (kappa refit + H0): N=1000...
+[14:10:48] [INFO] Joint Bootstrap Results:
+[14:10:48] [INFO] Bootstrap (kappa refit per sample)
+[14:10:48] [INFO] +--------------+-----------+-------------------+-------------------------+
+[14:10:48] [INFO] | Parameter    | Mean      | Std (Uncertainty) | 95% CI                  |
+[14:10:48] [INFO] +--------------+-----------+-------------------+-------------------------+
+[14:10:48] [INFO] | H0 (Unified) | 68.90     | 1.62              | [65.56, 71.95]          |
+[14:10:48] [INFO] | kappa_Cep    | 6.220e+05 | 3.367e+05 (54.1%) | [-3.031e+04, 1.311e+06] |
+[14:10:48] [INFO] +--------------+-----------+-------------------+-------------------------+
+[14:10:48] [INFO] Converged: 1000/1000, residual |slope| = 1.90e-06
+[14:10:48] [INFO] Bootstrap H0 std combines host scatter AND kappa uncertainty.
+[14:10:48] [PROCESS] Sensitivity Analysis (Sigma Ref Scan)...
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.187e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.607e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.184e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.604e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.180e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.600e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.175e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.596e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.170e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.592e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.165e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.587e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.158e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.581e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.152e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.575e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.144e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.568e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.137e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.561e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.128e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.554e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.120e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.546e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.110e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.537e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.101e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.529e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.090e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.519e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.080e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.510e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.069e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.500e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.057e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.489e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.045e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.478e+05
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.033e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.467e+05
+[14:10:48] [SUCCESS] Saved sensitivity plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/supplement_01_sensitivity_h0_vs_sigmaref.png
+[14:10:48] [SUCCESS] Copied sensitivity plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/supplement_01_sensitivity_h0_vs_sigmaref.png
+[14:10:48] [SUCCESS] Saved sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sensitivity_h0_vs_sigmaref.csv
+[14:10:48] [INFO] Screened-Effective Variant (σ_ref,scr = 85.48 km/s)...
+[14:10:48] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[14:10:48] [INFO] Optimization converged: True
+[14:10:48] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 6.124e+05 mag
+[14:10:48] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 5.549e+05
+[14:10:48] [INFO] Applying Conformal Correction...
+[14:10:48] [INFO] Sample Corrections (Suppression-Aware)
+[14:10:48] [INFO] +----------+-------+--------+----------+------------+----------+
+[14:10:48] [INFO] | Host     | Sigma | S(rho) | H0 (Raw) | Corr (mag) | H0 (TEP) |
+[14:10:48] [INFO] +----------+-------+--------+----------+------------+----------+
+[14:10:48] [INFO] | NGC 3370 | 45.4  | 0.995  | 65.72    | -0.0355    | 66.80    |
+[14:10:48] [INFO] | NGC 5917 | 53.1  | 0.998  | 72.56    | -0.0305    | 73.59    |
+[14:10:48] [INFO] | NGC 2608 | 58.8  | 0.971  | 76.42    | -0.0254    | 77.32    |
+[14:10:48] [INFO] | NGC 4639 | 87.2  | 0.078  | 47.25    | +0.0002    | 47.25    |
+[14:10:48] [INFO] | NGC 976  | 212.4 | 0.824  | 76.91    | +0.2121    | 69.75    |
+[14:10:48] [INFO] +----------+-------+--------+----------+------------+----------+
+[14:10:48] [INFO] ------------------------------------------------------------
+[14:10:48] [SUCCESS] UNIFIED H0 (Statistical): 69.22 +/- 1.37 km/s/Mpc
+[14:10:48] [INFO] Note: This error (SEM) assumes κ_Cep is fixed/known perfectly.
+[14:10:48] [INFO] ------------------------------------------------------------
+[14:10:48] [INFO] Screened Variant: κ_Cep = 6.124e+05 mag, H0 = 69.22 km/s/Mpc
+[14:10:48] [SUCCESS] Screened-Reference Stability: ΔH0 = 0.33 km/s/Mpc (standard 68.90 vs screened 69.22)
+[14:10:48] [INFO] Final Tension Analysis
+[14:10:48] [INFO] Planck 2018 Value: 67.4 +/- 0.5
+[14:10:48] [INFO] ------------------------------------------------------------
+[14:10:48] [INFO] TEP Unified Value: 68.90
+[14:10:48] [INFO]   +/- 1.36 (Statistical SEM, kappa fixed)
+[14:10:48] [INFO]   +/- 1.62 (Joint Bootstrap: host scatter + kappa)
+[14:10:48] [INFO]   kappa_Cep = (6.22e+05) +/- (3.37e+05)  [54%]
+[14:10:48] [INFO] ------------------------------------------------------------
+[14:10:48] [INFO] Tension (Statistical):     1.03 sigma
+[14:10:48] [INFO] Tension (Joint Bootstrap): 0.88 sigma
+[14:10:48] [SUCCESS] CONCLUSION (Cepheid channel, unscreened Hubble-flow regime): H0 consistent with Planck CMB after κ_Cep correction.
+[14:10:48] [INFO] Note: Universal-TEP validation requires CROSS-CHANNEL consistency (κ_Cep vs κ_TRGB vs κ_SN vs κ_pulsar). Single-channel significance of κ_Cep from zero is NOT the TEP test (Jakarta §7; Istanbul §1.3).
+[14:10:48] [SUCCESS] Saved results JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/tep_correction_results.json
+[14:10:48] [SUCCESS] Saved corrected data to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/tep_corrected_h0.csv

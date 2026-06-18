@@ -56,7 +56,6 @@ class Step9FinalSynthesis:
         self.enhanced_json = self.outputs_dir / "enhanced_robustness_results.json"
         self.covariance_json = self.outputs_dir / "covariance_robustness.json"
         self.tep_json = self.outputs_dir / "tep_correction_results.json"
-        self.frozen_json = self.outputs_dir / "frozen_prior_results.json"
         self.oos_json = self.outputs_dir / "out_of_sample_validation.json"
         self.flow_env_path = self.outputs_dir / "flow_environment_robustness.txt"
         self.trgb_json = self.outputs_dir / "trgb_differential_results.json"
@@ -85,7 +84,6 @@ class Step9FinalSynthesis:
         if h0_robust and cov_data and 'bayesian_comparison' in cov_data:
             h0_robust['bayesian_comparison'] = cov_data['bayesian_comparison']
         tep = self.load_json(self.tep_json)
-        frozen = self.load_json(self.frozen_json)
         oos = self.load_json(self.oos_json)
         trgb = self.load_json(self.trgb_json)
         anchor = self.load_json(self.anchor_json)
@@ -140,7 +138,7 @@ class Step9FinalSynthesis:
         self._plot_differential_comparison(metrics)
         
         # 4. Generate Report
-        self._write_report(m31_g, m31_p, lmc, h0_robust, tep, frozen, oos, trgb, anchor)
+        self._write_report(m31_g, m31_p, lmc, h0_robust, tep, oos, trgb, anchor)
         
         print_status("Step 9 Complete. Report generated.", "SUCCESS")
 
@@ -191,7 +189,7 @@ class Step9FinalSynthesis:
         shutil.copy(self.summary_plot_path, self.public_figures_dir / "figure_08_robustness_synthesis_plot.png")
         print_status(f"Saved comparison plot to {self.summary_plot_path}", "SUCCESS")
 
-    def _write_report(self, m31_g, m31_p, lmc, h0_robust, tep=None, frozen=None, oos=None, trgb=None, anchor=None):
+    def _write_report(self, m31_g, m31_p, lmc, h0_robust, tep=None, oos=None, trgb=None, anchor=None):
         """Generates the Markdown report."""
         
         with open(self.report_path, 'w') as f:
@@ -273,18 +271,6 @@ class Step9FinalSynthesis:
                             f.write(f"- **GLS-covariance cross-check:** $\\Delta$BIC = {bc['gls_crosscheck']['delta_bic']:.1f} (shared calibration uncertainty dominates the full-covariance likelihood).\n")
                         f.write("- The decisive diagonal result is robust because the shared calibration covariance cancels in the slope; the correlation and slope tests (Section 3.1) therefore remain the primary covariance-aware evidence.\n\n")
 
-                if frozen:
-                    f.write("### Cross-Domain Consistency Check\n")
-                    f.write(f"- **Fixed κ_Cep:** ${frozen['kappa_cep_frozen']:.3e}$ mag (bare geometric-factor estimate, independently calibrated in this paper via Cepheid fit; no SH0ES tuning in this step).\n")
-                    f.write(f"- **Unified H0:** ${frozen['unified_h0']:.2f}$ km/s/Mpc; bootstrap mean ${frozen['bootstrap_h0_mean']:.2f} \\pm {frozen['bootstrap_h0_std']:.2f}$ km/s/Mpc.\n")
-                    f.write(f"- **Residual slope dH0/dσ:** {frozen['residual_slope']:.4f}.\n")
-                    f.write(f"- **Pearson r (p):** {frozen['pearson_r']:.3f} ({frozen['pearson_p']:.4f}).\n")
-                    f.write(f"- **Planck tension:** ${frozen['tension_sigma']:.2f}\\sigma$ using the host-scatter-only bootstrap uncertainty.\n")
-                    if 'blind_predicted_slope' in frozen:
-                        f.write(f"- **Slope consistency:** predicted $dH_0/d\\sigma = {frozen['blind_predicted_slope']:.3f}$ km/s/Mpc/(km/s); observed $= {frozen['observed_raw_slope']:.3f}$; agreement ${frozen['slope_agreement_percent']:.1f}\\%$.\n")
-                        f.write(f"  (Tests whether the bare TEP correction formula predicts the uncorrected slope magnitude.)\n")
-                    f.write("- **Interpretation:** Applying the bare geometric-factor estimate without SH0ES tuning yields a Planck-consistent H0. This is a consistency check, not an independent pulsar prediction.\n\n")
-                
                 if 'density_control' in h0_robust:
                     dc = h0_robust['density_control']
                     if dc.get('available'):
@@ -346,8 +332,8 @@ class Step9FinalSynthesis:
                 f.write("- Current matched sample: $N=13$; Spearman $\\rho = 0.571$ ($p = 0.0413$), Pearson $r = 0.513$ ($p = 0.0731$).\n")
                 f.write("- This is independent, mechanism-level support: the environment trend is strongest where the indicator uses periodic timekeeping.\n\n")
 
-            f.write("## 6. Anchor Screening Resolution\n\n")
-            f.write("The latest anchor stratification test no longer treats NGC 4258 as a simple local-density counterexample. The anchors sit in deep group or local-volume environments, so TEP predicts additional ambient-potential screening beyond the local disk-density proxy.\n\n")
+            f.write("## 6. Anchor Screening Resolution (Model-Dependent Consistency Check)\n\n")
+            f.write("The latest anchor stratification test no longer treats NGC 4258 as a simple local-density counterexample. The anchors sit in deep group or local-volume environments, so TEP predicts additional ambient-potential screening beyond the local disk-density proxy. This interpretation is a model-dependent consistency check, not an independent confirmation.\n\n")
             if anchor and 'regression' in anchor:
                 reg = anchor['regression']
                 pred = reg.get('prediction_test', {})
@@ -359,7 +345,7 @@ class Step9FinalSynthesis:
             f.write("- Interpretation: LMC, M31, and NGC 4258 behave as screened calibrators; smooth Hubble-flow SN hosts preferentially sample less-screened field environments. This converts the anchor mismatch into a concrete environmental prediction for future field-versus-group distance-ladder tests.\n")
 
             f.write("\n## 7. Conclusion\n\n")
-            f.write("The full pipeline now supports a coherent TEP interpretation: SH0ES Hubble-flow Cepheid hosts show a significant H0-σ bias; the suppression-aware κ_Cep correction removes the trend and yields a Planck-consistent H0; stellar-only, density-control, redshift/flow, and out-of-sample tests preserve the signal; M31 and LMC provide differential screening checks; geometric anchors are naturally interpreted as screened calibrators in group-scale environments; and critically, a frozen Paper-10 pulsar-derived κ_Cep yields a parameter-free Planck-consistent prediction without any reference to SH0ES Hubble-flow tuning.\n")
+            f.write("The full pipeline now supports a coherent TEP interpretation: SH0ES Hubble-flow Cepheid hosts show a significant H0-σ bias; the suppression-aware κ_Cep correction removes the trend and yields a Planck-consistent H0; stellar-only, density-control, redshift/flow, and out-of-sample tests preserve the signal; M31 and LMC provide differential screening checks; and geometric anchors are naturally interpreted as screened calibrators in group-scale environments.\n")
             
         print_status(f"Report written to {self.report_path}", "SUCCESS")
 

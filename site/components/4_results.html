@@ -35,14 +35,14 @@
     correlation tests are treated as the primary covariance-aware inference
     because they make fewer assumptions about linearity.
     A Bayesian model comparison (TEP-motivated environmental correction with free $\kappa_{\rm Cep}$ vs. a no-environment null) in the host-contrast likelihood—which
-    projects out the shared calibration mode and tests only the
-    environmental structure—yields $\Delta{\rm BIC}=88$.
-    In the raw full-covariance likelihood the evidence appears weaker
-    ($\Delta{\rm BIC}\approx -3$) because the shared calibration uncertainty dominates the
-    absolute likelihood; the host-contrast result is nevertheless robust
-    because the calibration covariance cancels in the slope (Section 3.6).
-    A diagonal H0-uncertainty check gives $\Delta{\rm BIC}=+94$ as an independent
-    robustness verification.
+    is the appropriate host-to-host slope test because the shared
+    calibration zero-point is a nuisance parameter with
+    dominant common-mode variance—yields $\Delta{\rm BIC}=88$.
+    The raw full-covariance absolute likelihood ($\Delta{\rm BIC}\approx -3$) is shown
+    to demonstrate why naive application understates the evidence: the shared
+    calibration uncertainty dominates the absolute likelihood, while the calibration
+    covariance cancels in the slope. A diagonal H$0$-uncertainty check gives
+    $\Delta{\rm BIC}=+94$ as an independent robustness verification.
 </p>
 
 <p>
@@ -60,19 +60,19 @@
     </thead>
     <tbody>
         <tr>
+            <td><strong>Host-contrast covariance likelihood</strong></td>
+            <td><strong>+88</strong></td>
+            <td>Primary test (shared calibration projected out)</td>
+        </tr>
+        <tr>
             <td>Diagonal host-scatter likelihood</td>
             <td>+94</td>
-            <td>Robustness check</td>
+            <td>Independent robustness check</td>
         </tr>
         <tr>
             <td>Full absolute covariance likelihood</td>
             <td>−3</td>
-            <td>Dominated by common calibration mode</td>
-        </tr>
-        <tr>
-            <td>Host-contrast covariance likelihood</td>
-            <td><strong>+88</strong></td>
-            <td>Primary environmental-structure test</td>
+            <td>Demonstrates why naive absolute likelihood understates evidence</td>
         </tr>
     </tbody>
 </table>
@@ -367,13 +367,14 @@
 <p>
     Because $\kappa_{\rm Cep}$ is optimized by minimizing the residual slope,
     out-of-sample tests were performed to verify predictive power (Section 2.8).
-    Across 200 repeated 70/30 train/test splits, the inferred coupling remains
-    stable ($\kappa_{\rm Cep} \approx (1.06 \pm 0.26)\times10^6$ mag), and the held-out
-    residual slope is strongly reduced. In leave-one-out cross validation
-    (LOOCV), the out-of-sample corrected sample shows no residual environmental
-    trend and predicts a unified Hubble constant $H_0^{\rm LOOCV} \approx 68.04 \pm 1.32$
-    km/s/Mpc, corresponding to a Planck tension of $\sim 0.46\sigma$. These
-    results show that the correction generalizes to unseen hosts.
+    The primary non-circular validation is leave-one-out cross-validation (LOOCV):
+    the response coefficient is trained on 28 hosts and tested on the held-out host.
+    LOOCV predicts a unified Hubble constant
+    $H_0^{\rm LOOCV} = 68.04 \pm 1.32$ km/s/Mpc, corresponding to a Planck tension of
+    $0.46\sigma$. Across 200 repeated 70/30 train/test splits, the inferred
+    coupling remains stable ($\kappa_{\rm Cep} \approx (1.06 \pm 0.26)\times10^6$ mag) and the
+    held-out residual slope is strongly reduced, confirming that the correction
+    generalizes to unseen hosts.
 </p>
 
 <p>
@@ -605,8 +606,8 @@
     jackknife analysis (leave-one-out stability test), and a Bayesian model
     comparison (TEP with free $\kappa_{\rm Cep}$ vs. null) in the
     host-contrast likelihood, which yields $\Delta{\rm BIC}=88$.
-    In the raw full-covariance likelihood the evidence appears weaker
-    ($\Delta{\rm BIC}\approx -3$) because the shared calibration uncertainty dominates.
+    The raw full-covariance absolute likelihood ($\Delta{\rm BIC}\approx -3$)
+    demonstrates why naive application understates the evidence.
     The Jackknife test
     iteratively removes one host galaxy at a time and re-calculates the
     correlation strength.

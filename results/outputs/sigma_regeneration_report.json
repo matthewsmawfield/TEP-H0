@@ -1,9 +1,0 @@
-{
-  "mode": "canonical",
-  "note": "Used committed canonical data; no live rebuild performed.",
-  "counts": {
-    "n_hosts": 41,
-    "n_with_sigma": 41,
-    "n_missing_sigma": 0
-  }
-}

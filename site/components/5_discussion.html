@@ -408,10 +408,11 @@
         and real cluster parameters. Paper 11 measures
         $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag from the Cepheid
         $H_0$–$\sigma$ correlation in the looser galactic-disk regime.
-        The Cepheid value is consistent with the bare TEP estimate; the pulsar
-        value is consistent with the same bare estimate after dense-cluster
-        geometric suppression, providing a cross-domain consistency check across
-        independent probes spanning ~8 orders of magnitude in timescale.
+        The Cepheid value is compatible with the bare TEP estimate; the pulsar
+        value is compatible with the same bare estimate after dense-cluster
+        geometric suppression. This theoretical agreement across independent
+        probes spanning ~8 orders of magnitude in timescale is treated as
+        cross-domain consistency rather than an input to the Cepheid inference.
     </p>
 
     <p>
@@ -551,25 +552,26 @@
             modest sample size, the detection is statistically significant
             (Spearman $\rho = 0.511$, $p = 0.0046$). A Bayesian model
             comparison (TEP with free $\kappa_{\rm Cep}$ vs. null) in the
-            host-contrast likelihood yields $\Delta{\rm BIC}=88$.
-            In the raw full-covariance likelihood the evidence appears weaker
-            ($\Delta{\rm BIC}\approx -3$) because the shared calibration uncertainty dominates.
-            The host-contrast projection is nevertheless robust because the calibration
+            host-contrast likelihood—which is the appropriate host-to-host slope test
+            because the shared calibration zero-point is a nuisance parameter
+            with dominant common-mode variance—yields $\Delta{\rm BIC}=88$.
+            The raw full-covariance absolute likelihood ($\Delta{\rm BIC}\approx -3$)
+            demonstrates why naive application understates the evidence; the calibration
             covariance cancels in the slope. Larger samples
             from future surveys (JWST, Rubin Observatory) will improve
             precision further.
         </li>
         <li>
-            <strong>Anchor Screening Resolution:</strong> The geometric anchors
+            <strong>Anchor Screening Resolution (Model-Dependent Consistency Check):</strong> The geometric anchors
             (LMC, NGC 4258, M31) do not exhibit the strong $\sigma$-dependence
             seen in the SN Ia hosts. As discussed in Section 4.6, this is
-            naturally explained by <em>group halo shear suppression</em>: all three
+            consistent with <em>group halo shear suppression</em>: all three
             anchors are members of galaxy groups (Local Group for LMC and M31;
-            Canes Venatici I for NGC 4258), embedding them in deep ambient
+            Canes Venatici I for NGC 4258), which would embed them in deep ambient
             potentials that trigger environment-responsive suppression of Temporal Shear regardless of their
             internal disk densities. The SN Ia hosts, selected for smooth Hubble
             flow, are biased toward isolated field galaxies that lack this
-            external suppression of Temporal Shear.
+            external suppression. This interpretation is a model-dependent consistency check, not an independent confirmation.
         </li>
         <li>
             Peculiar velocities and large-scale environment: Residual

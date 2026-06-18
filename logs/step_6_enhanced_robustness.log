@@ -1,79 +1,79 @@
-[13:50:39] [INFO] ============================================================
-[13:50:39] [INFO] STEP 6: ENHANCED ROBUSTNESS ANALYSIS
-[13:50:39] [INFO] Addressing referee concerns on σ heterogeneity and environment
-[13:50:39] [INFO] ============================================================
-[13:50:39] [INFO] Loaded 29 hosts from stratified analysis
-[13:50:39] [INFO] Loaded 29 entries from σ provenance table
-[13:50:39] [INFO] 
+[14:12:18] [INFO] ============================================================
+[14:12:18] [INFO] STEP 6: ENHANCED ROBUSTNESS ANALYSIS
+[14:12:18] [INFO] Addressing referee concerns on σ heterogeneity and environment
+[14:12:18] [INFO] ============================================================
+[14:12:18] [INFO] Loaded 29 hosts from stratified analysis
+[14:12:18] [INFO] Loaded 29 entries from σ provenance table
+[14:12:18] [INFO] 
 --- STELLAR ABSORPTION SUBSAMPLE ---
-[13:50:39] [INFO] Stellar absorption hosts: 17
-[13:50:39] [INFO] HI linewidth proxy hosts: 12
-[13:50:39] [INFO] 
+[14:12:18] [INFO] Stellar absorption hosts: 17
+[14:12:18] [INFO] HI linewidth proxy hosts: 12
+[14:12:18] [INFO] 
 Subsample Comparison:
-[13:50:39] [INFO] +-------------------------+----+-----------+---------+------------+---------+
-[13:50:39] [INFO] | Subsample               | N  | Pearson r | p-value | Spearman ρ | p-value |
-[13:50:39] [INFO] +-------------------------+----+-----------+---------+------------+---------+
-[13:50:39] [INFO] | Full Sample             | 29 | 0.462     | 0.0116  | 0.511      | 0.0046  |
-[13:50:39] [INFO] | Stellar Absorption Only | 17 | 0.472     | 0.0555  | 0.461      | 0.0627  |
-[13:50:39] [INFO] +-------------------------+----+-----------+---------+------------+---------+
-[13:50:39] [INFO] 
+[14:12:18] [INFO] +-------------------------+----+-----------+---------+------------+---------+
+[14:12:18] [INFO] | Subsample               | N  | Pearson r | p-value | Spearman ρ | p-value |
+[14:12:18] [INFO] +-------------------------+----+-----------+---------+------------+---------+
+[14:12:18] [INFO] | Full Sample             | 29 | 0.330     | 0.0807  | 0.272      | 0.1536  |
+[14:12:18] [INFO] | Stellar Absorption Only | 17 | 0.444     | 0.0742  | 0.385      | 0.1272  |
+[14:12:18] [INFO] +-------------------------+----+-----------+---------+------------+---------+
+[14:12:18] [INFO] 
 Stellar-only stratification: ΔH0 = 7.53 km/s/Mpc (high - low σ)
-[13:50:39] [INFO] 
+[14:12:18] [INFO] 
 --- GOLD STANDARD σ SUBSAMPLE ---
-[13:50:39] [INFO] Gold standard hosts (K&H13 + SDSS + Ho09): 3
-[13:50:39] [INFO]   - Kormendy&Ho2013: 0 hosts
-[13:50:39] [INFO]   - SDSS DR7: 3 hosts
-[13:50:39] [INFO]   - Ho+2009: 0 hosts
-[13:50:39] [INFO] 
+[14:12:18] [INFO] Gold standard hosts (K&H13 + SDSS + Ho09): 3
+[14:12:18] [INFO]   - Kormendy&Ho2013: 0 hosts
+[14:12:18] [INFO]   - SDSS DR7: 3 hosts
+[14:12:18] [INFO]   - Ho+2009: 0 hosts
+[14:12:18] [INFO] 
 --- LOCAL DENSITY CONTROL ---
-[13:50:39] [INFO] Hosts with valid local density: 29/29
-[13:50:39] [INFO] 
+[14:12:18] [INFO] Hosts with valid local density: 29/29
+[14:12:18] [INFO] 
 Density Control Results:
-[13:50:39] [INFO] +--------------------------+---------------------+
-[13:50:39] [INFO] | Metric                   | Value               |
-[13:50:39] [INFO] +--------------------------+---------------------+
-[13:50:39] [INFO] | Baseline r(H0, σ)        | 0.462 (p = 0.0116)  |
-[13:50:39] [INFO] | Partial r(H0, σ | log ρ) | 0.493 (p = 0.0066)  |
-[13:50:39] [INFO] | r(H0, log ρ)             | 0.104 (p = 0.5904)  |
-[13:50:39] [INFO] | r(σ, log ρ)              | -0.185 (p = 0.3357) |
-[13:50:39] [INFO] +--------------------------+---------------------+
-[13:50:39] [INFO] 
-Signal after density control: r = 0.493 (p = 0.0066)
-[13:50:39] [INFO] 
+[14:12:18] [INFO] +--------------------------+---------------------+
+[14:12:18] [INFO] | Metric                   | Value               |
+[14:12:18] [INFO] +--------------------------+---------------------+
+[14:12:18] [INFO] | Baseline r(H0, σ)        | 0.330 (p = 0.0807)  |
+[14:12:18] [INFO] | Partial r(H0, σ | log ρ) | 0.312 (p = 0.0994)  |
+[14:12:18] [INFO] | r(H0, log ρ)             | -0.115 (p = 0.5537) |
+[14:12:18] [INFO] | r(σ, log ρ)              | -0.280 (p = 0.1413) |
+[14:12:18] [INFO] +--------------------------+---------------------+
+[14:12:18] [INFO] 
+Signal after density control: r = 0.312 (p = 0.0994)
+[14:12:18] [INFO] 
 --- TEP CORRECTION ON SUBSAMPLES ---
-[13:50:39] [INFO] 
+[14:12:18] [INFO] 
 TEP Correction Comparison:
-[13:50:39] [INFO] +---------------+----+-------------+-----------------------+
-[13:50:39] [INFO] | Subsample     | N  | κ_Cep       | Unified H0 (km/s/Mpc) |
-[13:50:39] [INFO] +---------------+----+-------------+-----------------------+
-[13:50:39] [INFO] | Full Sample   | 29 | 1049548.340 | 68.17 ± 1.27          |
-[13:50:39] [INFO] | Stellar Only  | 17 | 894232.178  | 67.25 ± 1.67          |
-[13:50:39] [INFO] | Gold Standard | 3  | N/A         | N/A                   |
-[13:50:39] [INFO] +---------------+----+-------------+-----------------------+
-[13:50:39] [INFO] 
+[14:12:18] [INFO] +---------------+----+------------+-----------------------+
+[14:12:18] [INFO] | Subsample     | N  | κ_Cep      | Unified H0 (km/s/Mpc) |
+[14:12:18] [INFO] +---------------+----+------------+-----------------------+
+[14:12:18] [INFO] | Full Sample   | 29 | 613989.258 | 68.90 ± 1.33          |
+[14:12:18] [INFO] | Stellar Only  | 17 | 710443.115 | 67.70 ± 1.69          |
+[14:12:18] [INFO] | Gold Standard | 3  | N/A        | N/A                   |
+[14:12:18] [INFO] +---------------+----+------------+-----------------------+
+[14:12:18] [INFO] 
 --- σ-QUALITY CONVERGENCE TEST ---
-[13:50:39] [INFO] Convergence (uniform κ)
-[13:50:39] [INFO] +---------------+----+--------+---------+-------+-----------+-----------+
-[13:50:39] [INFO] | Tier          | N  | Raw H0 | Corr H0 | Corr. | κ Planck  | κ < (1σ)  |
-[13:50:39] [INFO] +---------------+----+--------+---------+-------+-----------+-----------+
-[13:50:39] [INFO] | Full sample   | 29 | 70.06  | 68.17   | 1.89  | 1.477e+06 | 2.277e+06 |
-[13:50:39] [INFO] | Stellar only  | 17 | 69.75  | 66.85   | 2.90  | 8.488e+05 | 1.572e+06 |
-[13:50:39] [INFO] | Gold standard | 3  | 70.41  | 70.44   | -0.03 | N/A       | N/A       |
-[13:50:39] [INFO] +---------------+----+--------+---------+-------+-----------+-----------+
-[13:50:39] [INFO] Tightest 1σ upper bound: κ_Cep < 1.572e+06 (Stellar only).
-[13:50:39] [INFO] 
+[14:12:18] [INFO] Convergence (uniform κ)
+[14:12:18] [INFO] +---------------+----+--------+---------+-------+-----------+-----------+
+[14:12:18] [INFO] | Tier          | N  | Raw H0 | Corr H0 | Corr. | κ Planck  | κ < (1σ)  |
+[14:12:18] [INFO] +---------------+----+--------+---------+-------+-----------+-----------+
+[14:12:18] [INFO] | Full sample   | 29 | 70.06  | 68.90   | 1.16  | 1.405e+06 | 2.166e+06 |
+[14:12:18] [INFO] | Stellar only  | 17 | 69.75  | 67.96   | 1.78  | 8.075e+05 | 1.495e+06 |
+[14:12:18] [INFO] | Gold standard | 3  | 70.41  | 70.71   | -0.30 | N/A       | N/A       |
+[14:12:18] [INFO] +---------------+----+--------+---------+-------+-----------+-----------+
+[14:12:18] [INFO] Tightest 1σ upper bound: κ_Cep < 1.495e+06 (Stellar only).
+[14:12:18] [INFO] 
 --- SUBSET COMPOSITION TABLE ---
-[13:50:39] [INFO] Subset Composition
-[13:50:39] [INFO] +---------------+----+--------+----------+--------+----------------+----------+---------+-----------+------------------+-------------------+
-[13:50:39] [INFO] | Tier          | N  | Mean σ | Median σ | Mean z | Group Richness | N high-σ | N low-σ | Raw slope | Corr H0 (full κ) | Corr H0 (refit κ) |
-[13:50:39] [INFO] +---------------+----+--------+----------+--------+----------------+----------+---------+-----------+------------------+-------------------+
-[13:50:39] [INFO] | Full sample   | 29 | 97.5   | 89.5     | 0.0077 | 4.0            | 14       | 15      | 0.09      | 68.17            | 68.17             |
-[13:50:39] [INFO] | Stellar only  | 17 | 107.5  | 91.4     | 0.0077 | 5.1            | 9        | 8       | 0.08      | 66.85            | 67.25             |
-[13:50:39] [INFO] | Gold standard | 3  | 74.5   | 73.6     | 0.0081 | 1.0            | 0        | 3       | 3.22      | 70.44            | N/A               |
-[13:50:39] [INFO] +---------------+----+--------+----------+--------+----------------+----------+---------+-----------+------------------+-------------------+
-[13:50:39] [SUCCESS] Saved composition table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/subset_composition_table.json
-[13:50:39] [INFO] 
+[14:12:18] [INFO] Subset Composition
+[14:12:18] [INFO] +---------------+----+--------+----------+--------+----------------+----------+---------+-----------+------------------+-------------------+
+[14:12:18] [INFO] | Tier          | N  | Mean σ | Median σ | Mean z | Group Richness | N high-σ | N low-σ | Raw slope | Corr H0 (full κ) | Corr H0 (refit κ) |
+[14:12:18] [INFO] +---------------+----+--------+----------+--------+----------------+----------+---------+-----------+------------------+-------------------+
+[14:12:18] [INFO] | Full sample   | 29 | 95.1   | 84.6     | 0.0077 | 4.0            | 14       | 15      | 0.05      | 68.90            | 68.90             |
+[14:12:18] [INFO] | Stellar only  | 17 | 105.3  | 87.2     | 0.0077 | 5.1            | 9        | 8       | 0.07      | 67.96            | 67.70             |
+[14:12:18] [INFO] | Gold standard | 3  | 65.7   | 72.4     | 0.0081 | 1.0            | 0        | 3       | -0.59     | 70.71            | N/A               |
+[14:12:18] [INFO] +---------------+----+--------+----------+--------+----------------+----------+---------+-----------+------------------+-------------------+
+[14:12:18] [SUCCESS] Saved composition table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/subset_composition_table.json
+[14:12:18] [INFO] 
 Summary written to: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/subsample_sensitivity.txt
-[13:50:39] [INFO] ============================================================
-[13:50:39] [INFO] ENHANCED ROBUSTNESS ANALYSIS COMPLETE
-[13:50:39] [INFO] ============================================================
+[14:12:18] [INFO] ============================================================
+[14:12:18] [INFO] ENHANCED ROBUSTNESS ANALYSIS COMPLETE
+[14:12:18] [INFO] ============================================================

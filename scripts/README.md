@@ -21,7 +21,6 @@ This executes the full pipeline and populates `results/figures/` and `results/ou
 | 2 | `step_2_stratification.py` | Calculates H₀, stratifies by σ, and detects environmental bias. |
 | 2b | `step_2b_shear_suppression_viz.py` | Generates shear-suppression visualization. |
 | 3 | `step_3_tep_correction.py` | Optimizes κ_Cep, applies the TEP correction, and unifies H₀. |
-| 3c | `step_3c_frozen_prior.py` | Frozen-prior out-of-sample validation (train/test split). |
 | 4 | `step_4_robustness_checks.py` | Jackknife, Bootstrap, and Peculiar Velocity Monte Carlo tests. |
 | 4b | `step_4b_aperture_sensitivity.py` | Tests stability against aperture size and correction parameters. |
 | 5 | `step_5_m31_analysis.py` | Analyzes Inner vs Outer Cepheids in M31 (ground-based). |

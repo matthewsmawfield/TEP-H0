@@ -733,7 +733,7 @@ Posterior Results:
 
 Hypothesis Testing:
 
-- P(Γ > 0.72 | data) = 1.4×10⁻⁵ → Newtonian excluded at >99.99% confidence
+- P($\Gamma$ > 0.72 | data) = 1.4×10⁻⁵ → Newtonian excluded at >99.99% confidence
 
 - P(Δ > 0 | data) ≈ 1.0 → Null hypothesis excluded at >99.9999% confidence
 
@@ -1859,9 +1859,9 @@ To address potential methodological concerns, five formal validation tests were 
 | Power Analysis | 98.6% power to detect the observed differential effect | Study is well-powered; p=0.10 reflects true effect size, not underpowering |
 | Monte Carlo Validation | Type I error: 1.9% (conservative); Power: 100%; Bias: −0.2% | Methods validated, conservative, unbiased |
 | Hybrid Sample Expansion | 543 MSPs total; 0.63 dex raw excess; 0.40 dex controlled residual | Signal strengthens in the expanded sample |
-| Bayesian Posterior Analysis | P(Γ > 0.72 | data) = 1.4×10⁻⁵; 95% CI: [0.25, 0.55] | Confirms frequentist 4.1σ exclusion at >99.99% confidence |
+| Bayesian Posterior Analysis | P($\Gamma$ > 0.72 | data) = 1.4×10⁻⁵; 95% CI: [0.25, 0.55] | Confirms frequentist 4.1σ exclusion at >99.99% confidence |
 
-These validations confirm that the ≈5.8σ covariance-aware GC vs Field difference (base sample, N=394) and 4.1σ density scaling tension are robust to statistical assumptions and not artifacts of methodological choices. The hybrid maximum analysis reduces the controlled residual from ~0.61 dex to 0.40 dex through improved population matching, while maintaining a robust 0.63 dex raw offset. Bayesian posterior analysis independently confirms the frequentist conclusions, with P(Γ > 0.72 | data) = 1.4×10⁻⁵ (>99.99% confidence) and 95% credible interval [0.25, 0.55] dex/dex that excludes the Newtonian prediction.
+These validations confirm that the ≈5.8σ covariance-aware GC vs Field difference (base sample, N=394) and 4.1σ density scaling tension are robust to statistical assumptions and not artifacts of methodological choices. The hybrid maximum analysis reduces the controlled residual from ~0.61 dex to 0.40 dex through improved population matching, while maintaining a robust 0.63 dex raw offset. Bayesian posterior analysis independently confirms the frequentist conclusions, with P($\Gamma$ > 0.72 | data) = 1.4×10⁻⁵ (>99.99% confidence) and 95% credible interval [0.25, 0.55] dex/dex that excludes the Newtonian prediction.
 
 ## 5.7 Data and Code Availability
 

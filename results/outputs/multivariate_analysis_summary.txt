@@ -1,25 +1,25 @@
 Model 1: H0 ~ Sigma
                             OLS Regression Results                            
 ==============================================================================
-Dep. Variable:             h0_derived   R-squared:                       0.214
-Model:                            OLS   Adj. R-squared:                  0.184
-Method:                 Least Squares   F-statistic:                     7.333
-Date:                Wed, 17 Jun 2026   Prob (F-statistic):             0.0116
-Time:                        18:47:47   Log-Likelihood:                -37.156
-No. Observations:                  29   AIC:                             78.31
-Df Residuals:                      27   BIC:                             81.05
+Dep. Variable:             h0_derived   R-squared:                       0.109
+Model:                            OLS   Adj. R-squared:                  0.076
+Method:                 Least Squares   F-statistic:                     3.292
+Date:                Thu, 18 Jun 2026   Prob (F-statistic):             0.0807
+Time:                        14:12:18   Log-Likelihood:                -38.972
+No. Observations:                  29   AIC:                             81.94
+Df Residuals:                      27   BIC:                             84.68
 Df Model:                           1                                         
 Covariance Type:            nonrobust                                         
 ==================================================================================
                      coef    std err          t      P>|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-const          -7.999e-16      0.168  -4.77e-15      1.000      -0.344       0.344
-sigma_inferred     0.4622      0.171      2.708      0.012       0.112       0.812
+const          -7.999e-16      0.179  -4.48e-15      1.000      -0.366       0.366
+sigma_inferred     0.3297      0.182      1.814      0.081      -0.043       0.702
 ==============================================================================
-Omnibus:                        9.989   Durbin-Watson:                   2.548
-Prob(Omnibus):                  0.007   Jarque-Bera (JB):                9.554
-Skew:                          -0.933   Prob(JB):                      0.00842
-Kurtosis:                       5.104   Cond. No.                         1.02
+Omnibus:                        6.491   Durbin-Watson:                   2.734
+Prob(Omnibus):                  0.039   Jarque-Bera (JB):                4.805
+Skew:                          -0.743   Prob(JB):                       0.0905
+Kurtosis:                       4.330   Cond. No.                         1.02
 ==============================================================================
 
 Notes:
@@ -28,26 +28,26 @@ Notes:
 Model 2: H0 ~ Sigma + MeanLogP (Age Proxy)
                             OLS Regression Results                            
 ==============================================================================
-Dep. Variable:             h0_derived   R-squared:                       0.254
-Model:                            OLS   Adj. R-squared:                  0.196
-Method:                 Least Squares   F-statistic:                     4.421
-Date:                Wed, 17 Jun 2026   Prob (F-statistic):             0.0222
-Time:                        18:47:47   Log-Likelihood:                -36.396
-No. Observations:                  29   AIC:                             78.79
-Df Residuals:                      26   BIC:                             82.89
+Dep. Variable:             h0_derived   R-squared:                       0.154
+Model:                            OLS   Adj. R-squared:                  0.089
+Method:                 Least Squares   F-statistic:                     2.367
+Date:                Thu, 18 Jun 2026   Prob (F-statistic):              0.114
+Time:                        14:12:18   Log-Likelihood:                -38.214
+No. Observations:                  29   AIC:                             82.43
+Df Residuals:                      26   BIC:                             86.53
 Df Model:                           2                                         
 Covariance Type:            nonrobust                                         
 ==================================================================================
                      coef    std err          t      P>|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-const          -7.999e-16      0.166  -4.81e-15      1.000      -0.342       0.342
-sigma_inferred     0.4262      0.172      2.476      0.020       0.072       0.780
-mean_logP          0.2037      0.172      1.183      0.247      -0.150       0.557
+const          -7.999e-16      0.177  -4.51e-15      1.000      -0.364       0.364
+sigma_inferred     0.2827      0.185      1.531      0.138      -0.097       0.662
+mean_logP          0.2181      0.185      1.181      0.248      -0.162       0.598
 ==============================================================================
-Omnibus:                        8.645   Durbin-Watson:                   2.509
-Prob(Omnibus):                  0.013   Jarque-Bera (JB):                7.779
-Skew:                          -0.826   Prob(JB):                       0.0205
-Kurtosis:                       4.926   Cond. No.                         1.20
+Omnibus:                        5.505   Durbin-Watson:                   2.632
+Prob(Omnibus):                  0.064   Jarque-Bera (JB):                3.780
+Skew:                          -0.673   Prob(JB):                        0.151
+Kurtosis:                       4.146   Cond. No.                         1.24
 ==============================================================================
 
 Notes:
@@ -56,27 +56,27 @@ Notes:
 Model 3: H0 ~ Sigma + Color + Stretch
                             OLS Regression Results                            
 ==============================================================================
-Dep. Variable:             h0_derived   R-squared:                       0.328
-Model:                            OLS   Adj. R-squared:                  0.247
-Method:                 Least Squares   F-statistic:                     4.067
-Date:                Wed, 17 Jun 2026   Prob (F-statistic):             0.0175
-Time:                        18:47:47   Log-Likelihood:                -34.877
-No. Observations:                  29   AIC:                             77.75
-Df Residuals:                      25   BIC:                             83.22
+Dep. Variable:             h0_derived   R-squared:                       0.241
+Model:                            OLS   Adj. R-squared:                  0.150
+Method:                 Least Squares   F-statistic:                     2.652
+Date:                Thu, 18 Jun 2026   Prob (F-statistic):             0.0707
+Time:                        14:12:18   Log-Likelihood:                -36.635
+No. Observations:                  29   AIC:                             81.27
+Df Residuals:                      25   BIC:                             86.74
 Df Model:                           3                                         
 Covariance Type:            nonrobust                                         
 ==================================================================================
                      coef    std err          t      P>|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-const          -7.999e-16      0.161  -4.97e-15      1.000      -0.332       0.332
-sigma_inferred     0.3980      0.169      2.357      0.027       0.050       0.746
-c                  0.3473      0.172      2.024      0.054      -0.006       0.701
-x1                -0.1307      0.168     -0.777      0.444      -0.477       0.216
+const          -7.999e-16      0.171  -4.67e-15      1.000      -0.353       0.353
+sigma_inferred     0.2602      0.181      1.438      0.163      -0.113       0.633
+c                  0.3753      0.183      2.056      0.050      -0.001       0.751
+x1                -0.1336      0.180     -0.744      0.464      -0.503       0.236
 ==============================================================================
-Omnibus:                       13.269   Durbin-Watson:                   2.620
-Prob(Omnibus):                  0.001   Jarque-Bera (JB):               14.963
-Skew:                          -1.145   Prob(JB):                     0.000564
-Kurtosis:                       5.671   Cond. No.                         1.36
+Omnibus:                       10.655   Durbin-Watson:                   2.772
+Prob(Omnibus):                  0.005   Jarque-Bera (JB):                9.727
+Skew:                          -1.075   Prob(JB):                      0.00772
+Kurtosis:                       4.851   Cond. No.                         1.38
 ==============================================================================
 
 Notes:
@@ -85,28 +85,28 @@ Notes:
 Model 4: H0 ~ Sigma + Age + Dust + Mass
                             OLS Regression Results                            
 ==============================================================================
-Dep. Variable:             h0_derived   R-squared:                       0.396
-Model:                            OLS   Adj. R-squared:                  0.296
-Method:                 Least Squares   F-statistic:                     3.939
-Date:                Wed, 17 Jun 2026   Prob (F-statistic):             0.0135
-Time:                        18:47:47   Log-Likelihood:                -33.322
-No. Observations:                  29   AIC:                             76.64
-Df Residuals:                      24   BIC:                             83.48
+Dep. Variable:             h0_derived   R-squared:                       0.333
+Model:                            OLS   Adj. R-squared:                  0.222
+Method:                 Least Squares   F-statistic:                     2.995
+Date:                Thu, 18 Jun 2026   Prob (F-statistic):             0.0387
+Time:                        14:12:18   Log-Likelihood:                -34.768
+No. Observations:                  29   AIC:                             79.54
+Df Residuals:                      24   BIC:                             86.37
 Df Model:                           4                                         
 Covariance Type:            nonrobust                                         
 ==================================================================================
                      coef    std err          t      P>|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-const          -7.999e-16      0.156  -5.13e-15      1.000      -0.322       0.322
-sigma_inferred     0.3128      0.168      1.861      0.075      -0.034       0.660
-mean_logP          0.1952      0.162      1.205      0.240      -0.139       0.530
-c                  0.3056      0.163      1.870      0.074      -0.032       0.643
-host_logmass       0.2361      0.162      1.458      0.158      -0.098       0.570
+const          -7.999e-16      0.164  -4.88e-15      1.000      -0.338       0.338
+sigma_inferred     0.1639      0.177      0.925      0.364      -0.202       0.529
+mean_logP          0.2131      0.171      1.243      0.226      -0.141       0.567
+c                  0.3333      0.172      1.934      0.065      -0.022       0.689
+host_logmass       0.2717      0.169      1.610      0.120      -0.077       0.620
 ==============================================================================
-Omnibus:                       12.422   Durbin-Watson:                   2.626
-Prob(Omnibus):                  0.002   Jarque-Bera (JB):               15.940
-Skew:                          -0.948   Prob(JB):                     0.000346
-Kurtosis:                       6.097   Cond. No.                         1.42
+Omnibus:                        9.936   Durbin-Watson:                   2.711
+Prob(Omnibus):                  0.007   Jarque-Bera (JB):                9.719
+Skew:                          -0.904   Prob(JB):                      0.00775
+Kurtosis:                       5.185   Cond. No.                         1.43
 ==============================================================================
 
 Notes:
@@ -115,30 +115,30 @@ Notes:
 Model 5: H0 ~ Sigma + Age + Dust + Mass + zHD + Group Richness
                             OLS Regression Results                            
 ==============================================================================
-Dep. Variable:             h0_derived   R-squared:                       0.434
-Model:                            OLS   Adj. R-squared:                  0.279
-Method:                 Least Squares   F-statistic:                     2.808
-Date:                Wed, 17 Jun 2026   Prob (F-statistic):             0.0349
-Time:                        18:47:47   Log-Likelihood:                -32.396
-No. Observations:                  29   AIC:                             78.79
-Df Residuals:                      22   BIC:                             88.36
+Dep. Variable:             h0_derived   R-squared:                       0.389
+Model:                            OLS   Adj. R-squared:                  0.222
+Method:                 Least Squares   F-statistic:                     2.332
+Date:                Thu, 18 Jun 2026   Prob (F-statistic):             0.0679
+Time:                        14:12:18   Log-Likelihood:                -33.503
+No. Observations:                  29   AIC:                             81.01
+Df Residuals:                      22   BIC:                             90.58
 Df Model:                           6                                         
 Covariance Type:            nonrobust                                         
 ==================================================================================
                      coef    std err          t      P>|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-const          -7.999e-16      0.158  -5.07e-15      1.000      -0.327       0.327
-sigma_inferred     0.2551      0.182      1.402      0.175      -0.122       0.633
-mean_logP          0.3030      0.197      1.540      0.138      -0.105       0.711
-c                  0.3111      0.172      1.808      0.084      -0.046       0.668
-host_logmass       0.2094      0.166      1.264      0.219      -0.134       0.553
-z_hd              -0.0252      0.197     -0.128      0.900      -0.434       0.384
-tully_nmb          0.2332      0.199      1.170      0.255      -0.180       0.647
+const          -7.999e-16      0.164  -4.88e-15      1.000      -0.340       0.340
+sigma_inferred     0.0983      0.218      0.451      0.656      -0.354       0.551
+mean_logP          0.3426      0.202      1.695      0.104      -0.077       0.762
+c                  0.3378      0.178      1.902      0.070      -0.030       0.706
+host_logmass       0.2347      0.171      1.373      0.184      -0.120       0.589
+z_hd              -0.0227      0.236     -0.096      0.924      -0.512       0.466
+tully_nmb          0.2847      0.212      1.341      0.194      -0.155       0.725
 ==============================================================================
-Omnibus:                       13.764   Durbin-Watson:                   2.555
-Prob(Omnibus):                  0.001   Jarque-Bera (JB):               20.617
-Skew:                          -0.967   Prob(JB):                     3.34e-05
-Kurtosis:                       6.649   Cond. No.                         2.10
+Omnibus:                       11.143   Durbin-Watson:                   2.575
+Prob(Omnibus):                  0.004   Jarque-Bera (JB):               12.527
+Skew:                          -0.919   Prob(JB):                      0.00190
+Kurtosis:                       5.644   Cond. No.                         2.58
 ==============================================================================
 
 Notes:

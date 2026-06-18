@@ -4,17 +4,17 @@
     "n_hi": 12,
     "n_total": 29,
     "full_sample": {
-      "pearson_r": 0.4621612433960245,
-      "pearson_p": 0.0116001769116666,
-      "spearman_rho": 0.5113300492610836,
-      "spearman_p": 0.0045836144004947985
+      "pearson_r": 0.3296732828583555,
+      "pearson_p": 0.08073226088132208,
+      "spearman_rho": 0.27192118226600975,
+      "spearman_p": 0.15358578193911646
     },
     "stellar_only": {
-      "pearson_r": 0.4724797037153029,
-      "pearson_p": 0.05547293718317806,
-      "spearman_rho": 0.4607843137254902,
-      "spearman_p": 0.06267762211132862,
-      "median_sigma": 91.36814985353718,
+      "pearson_r": 0.44403868550698733,
+      "pearson_p": 0.07416820382572899,
+      "spearman_rho": 0.38480392156862747,
+      "spearman_p": 0.1272159953159875,
+      "median_sigma": 87.18521673375926,
       "h0_low_sigma": 66.20266621632842,
       "h0_high_sigma": 73.73025465054553,
       "delta_h0": 7.527588434217108
@@ -73,27 +73,27 @@
   "density_control": {
     "available": true,
     "n_valid": 29,
-    "baseline_r": 0.4621612433960245,
-    "baseline_p": 0.0116001769116666,
-    "partial_r_h0_sigma_given_rho": 0.4926698158523865,
-    "partial_p": 0.0066238448918061734,
-    "r_h0_rho": 0.10426814897368744,
-    "p_h0_rho": 0.5903884777568528,
-    "r_sigma_rho": -0.18538490712650604,
-    "p_sigma_rho": 0.3356504053384904
+    "baseline_r": 0.3296732828583555,
+    "baseline_p": 0.08073226088132208,
+    "partial_r_h0_sigma_given_rho": 0.31202954101056773,
+    "partial_p": 0.09938248722632456,
+    "r_h0_rho": -0.11464630363067177,
+    "p_h0_rho": 0.5537233643153526,
+    "r_sigma_rho": -0.2799615643640838,
+    "p_sigma_rho": 0.1413124549252506
   },
   "subsample_tep": {
     "full_sample": {
       "n": 29,
-      "kappa_cep": 1049548.33984375,
-      "unified_h0": 68.1693702237083,
-      "h0_error": 1.2739611240484576
+      "kappa_cep": 613989.2578125,
+      "unified_h0": 68.89661227441806,
+      "h0_error": 1.3333031936206645
     },
     "stellar_only": {
       "n": 17,
-      "kappa_cep": 894232.177734375,
-      "unified_h0": 67.25019822325487,
-      "h0_error": 1.671965875672109
+      "kappa_cep": 710443.115234375,
+      "unified_h0": 67.69793780454863,
+      "h0_error": 1.689945974451098
     },
     "gold_standard": {
       "n": 3,
@@ -109,88 +109,88 @@
         "n": 29,
         "h0_raw": 70.05852959777373,
         "h0_raw_sem": 1.4395359826617715,
-        "h0_corrected": 68.1693702237083,
-        "h0_corrected_sem": 1.296510859163623,
-        "correction_kms": 1.8891593740654287,
-        "dH_dkappa": -1.799973667098244e-06,
-        "kappa_for_planck": 1476982.4950048102,
-        "kappa_bound_1sigma": 2276736.4075064617,
-        "delta_planck": 0.7693702237082931,
-        "tension_sigma_planck": 0.5934159504106372
+        "h0_corrected": 68.89661776706522,
+        "h0_corrected_sem": 1.3569032802853809,
+        "correction_kms": 1.1619118307085046,
+        "dH_dkappa": -1.8924070593941219e-06,
+        "kappa_for_planck": 1404840.2454305384,
+        "kappa_bound_1sigma": 2165530.698108649,
+        "delta_planck": 1.4966177670652172,
+        "tension_sigma_planck": 1.1029656931409673
       },
       {
         "tier": "Stellar only",
         "n": 17,
         "h0_raw": 69.74506077360707,
         "h0_raw_sem": 1.9973274915096089,
-        "h0_corrected": 66.84552936978037,
-        "h0_corrected_sem": 1.724965573096282,
-        "correction_kms": 2.8995314038266997,
-        "dH_dkappa": -2.762646839361742e-06,
-        "kappa_for_planck": 848845.6577927426,
-        "kappa_bound_1sigma": 1571821.7049124872,
-        "delta_planck": -0.5544706302196403,
-        "tension_sigma_planck": 0.3214386645551282
+        "h0_corrected": 67.96198802258736,
+        "h0_corrected_sem": 1.7509669844605629,
+        "correction_kms": 1.7830727510197022,
+        "dH_dkappa": -2.9040925242885416e-06,
+        "kappa_for_planck": 807502.0867944156,
+        "kappa_bound_1sigma": 1495265.122856403,
+        "delta_planck": 0.5619880225873572,
+        "tension_sigma_planck": 0.32095866317005073
       },
       {
         "tier": "Gold standard",
         "n": 3,
         "h0_raw": 70.4142502490952,
         "h0_raw_sem": 5.235480108240313,
-        "h0_corrected": 70.44235400767027,
-        "h0_corrected_sem": 5.153933408116743,
-        "correction_kms": -0.02810375857507097,
-        "dH_dkappa": 2.677700255259789e-08,
+        "h0_corrected": 70.710450268456,
+        "h0_corrected_sem": 5.428166407771615,
+        "correction_kms": -0.2962000193607963,
+        "dH_dkappa": 4.824212929213819e-07,
         "kappa_for_planck": null,
         "kappa_bound_1sigma": null,
-        "delta_planck": 3.0423540076702693,
-        "tension_sigma_planck": 0.5902975003283853
+        "delta_planck": 3.3104502684559947,
+        "tension_sigma_planck": 0.6098652877915379
       }
     ],
-    "tightest_bound": 1571821.7049124872,
+    "tightest_bound": 1495265.122856403,
     "tightest_bound_tier": "Stellar only",
-    "uniform_kappa": 1049548.33984375
+    "uniform_kappa": 613986.2060546875
   },
   "composition": [
     {
       "tier": "Full sample",
       "n": 29,
-      "mean_sigma": 97.45841387695226,
-      "median_sigma": 89.53951311106145,
+      "mean_sigma": 95.06922706052526,
+      "median_sigma": 84.63771282593834,
       "mean_redshift": 0.007712413793103449,
       "group_richness_mean": 3.9615384615384617,
       "n_high_sigma": 14,
       "n_low_sigma": 15,
-      "raw_slope": 0.08511786648710828,
-      "corrected_mean_full_kappa": 68.1693702237083,
-      "corrected_mean_refit_kappa": 68.1693702237083,
-      "refit_kappa": 1049548.33984375
+      "raw_slope": 0.051870814790717826,
+      "corrected_mean_full_kappa": 68.89661776706522,
+      "corrected_mean_refit_kappa": 68.89661227441806,
+      "refit_kappa": 613989.2578125
     },
     {
       "tier": "Stellar only",
       "n": 17,
-      "mean_sigma": 107.49719066898506,
-      "median_sigma": 91.36814985353718,
+      "mean_sigma": 105.29642410576987,
+      "median_sigma": 87.18521673375926,
       "mean_redshift": 0.007669411764705882,
       "group_richness_mean": 5.125,
       "n_high_sigma": 9,
       "n_low_sigma": 8,
-      "raw_slope": 0.08139686578841943,
-      "corrected_mean_full_kappa": 66.84552936978037,
-      "corrected_mean_refit_kappa": 67.25019822325487,
-      "refit_kappa": 894232.177734375
+      "raw_slope": 0.0663983441643818,
+      "corrected_mean_full_kappa": 67.96198802258736,
+      "corrected_mean_refit_kappa": 67.69793780454863,
+      "refit_kappa": 710443.115234375
     },
     {
       "tier": "Gold standard",
       "n": 3,
-      "mean_sigma": 74.51299076319982,
-      "median_sigma": 73.6325721323864,
+      "mean_sigma": 65.72056802801082,
+      "median_sigma": 72.38331363393829,
       "mean_redshift": 0.008110000000000001,
       "group_richness_mean": 1.0,
       "n_high_sigma": 0,
       "n_low_sigma": 3,
-      "raw_slope": 3.2199151651324756,
-      "corrected_mean_full_kappa": 70.44235400767027,
+      "raw_slope": -0.5937328329767666,
+      "corrected_mean_full_kappa": 70.710450268456,
       "corrected_mean_refit_kappa": null,
       "refit_kappa": null
     }

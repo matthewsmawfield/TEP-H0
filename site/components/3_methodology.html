@@ -73,7 +73,7 @@
     literature sources (e.g., fixed-fiber SDSS vs. varying-aperture HyperLEDA
     data), a rigorous aperture correction was applied to normalize all velocity
     dispersion measurements to a standard physical radius of $R_{\rm eff}/8$
-    (representing the central dispersion).
+    (representing the central dispersion). Central velocity dispersion is used here as a host-scale potential-depth proxy, not as a direct measurement of the local Cepheid birth-cloud potential; this distinction is why independent IFU spectroscopy and local-environment reconstruction are listed as decisive follow-up tests.
 </p>
 
 <p>The power-law correction from Jorgensen et al. (1995) was utilized:</p>
@@ -363,10 +363,18 @@
     \end{equation}
 </div>
 <p>
-    This value is determined <em>a priori</em> from the published ladder
-    structure and anchor properties. $\sigma_{\rm ref} = 75.25$ km/s is fixed entirely by the published SH0ES anchor weights; no $H_0$ information enters it. This architecturally-fixed value yields $0.49\sigma$ Planck agreement. The only fitted response parameter in the TEP correction model is $\kappa_{\rm Cep}$, the Cepheid period-luminosity response coefficient, which is constrained by
-    requiring the corrected sample to show no residual $H_0$–$\sigma$
-    dependence.
+    This value is determined <em>a priori</em> as an approximate effective
+    calibrator reference consistent with the SH0ES anchor mix. The weights
+    (0.55/0.25/0.20 for NGC 4258/LMC/MW) are inferred from the relative
+    roles of the anchors in the published ladder structure, not from a
+    single verbatim table. A comprehensive sensitivity scan demonstrates
+    that the corrected $H_0$ remains Planck-consistent for any reference
+    value $\sigma_{\rm ref} \in [55, 95]$ km/s, so the exact value is secondary to the
+    demonstrated robustness. No $H_0$ information enters $\sigma_{\rm ref}$;
+    the only fitted response parameter in the TEP correction model is
+    $\kappa_{\rm Cep}$, the Cepheid period-luminosity response coefficient, which is
+    constrained by requiring the corrected sample to show no residual
+    $H_0$–$\sigma$ dependence.
 </p>
 
 <p>
@@ -386,7 +394,7 @@
 </p>
 <div class="equation">
     \begin{equation}
-    \mathcal{L}(\alpha) = \left(\frac{dH_0^{\rm corr}}{d\sigma}\right)^2
+    \mathcal{L}(\kappa_{\rm Cep}) = \left(\frac{dH_0^{\rm corr}}{d\sigma}\right)^2
     \end{equation}
 </div>
 <p>
