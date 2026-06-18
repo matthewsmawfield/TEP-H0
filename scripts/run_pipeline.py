@@ -95,15 +95,7 @@ def run_pipeline():
         if not args.skip_sigma_step:
             print_status(">>> STEP 0: SIGMA CATALOG (PROVENANCE BUILD)", "TITLE")
             t0 = time.time()
-            Step0SigmaCatalog().run(
-                rebuild=bool(args.rebuild_sigma),
-                use_ledacat=True,
-                use_ho2007=True,
-                use_bassdr2=True,
-                use_apj929=True,
-                use_mnras482=True,
-                use_lit_overrides=bool(args.use_lit_overrides),
-            )
+            Step0SigmaCatalog().run(rebuild=bool(args.rebuild_sigma))
             step_times['Step 0'] = time.time() - t0
             set_step_logger(pipeline_logger)
             print_status("Step 0 (Sigma Catalog) completed successfully.", "SUCCESS")

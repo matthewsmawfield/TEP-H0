@@ -60,6 +60,7 @@ class Step9FinalSynthesis:
         self.flow_env_path = self.outputs_dir / "flow_environment_robustness.txt"
         self.trgb_json = self.outputs_dir / "trgb_differential_results.json"
         self.anchor_json = self.outputs_dir / "anchor_stratification_test.json"
+        self.stratification_json = self.outputs_dir / "stratification_results.json"
         
         # Output Files
         self.report_path = self.outputs_dir / "TEP_FINAL_ROBUSTNESS_REPORT.md"
@@ -87,6 +88,7 @@ class Step9FinalSynthesis:
         oos = self.load_json(self.oos_json)
         trgb = self.load_json(self.trgb_json)
         anchor = self.load_json(self.anchor_json)
+        strat = self.load_json(self.stratification_json)
         
         if not all([m31_g, m31_p, lmc]):
             print_status("Critical input files missing. Cannot proceed with full synthesis.", "ERROR")
@@ -138,7 +140,7 @@ class Step9FinalSynthesis:
         self._plot_differential_comparison(metrics)
         
         # 4. Generate Report
-        self._write_report(m31_g, m31_p, lmc, h0_robust, tep, oos, trgb, anchor)
+        self._write_report(m31_g, m31_p, lmc, h0_robust, tep, oos, trgb, anchor, strat)
         
         print_status("Step 9 Complete. Report generated.", "SUCCESS")
 
@@ -189,7 +191,7 @@ class Step9FinalSynthesis:
         shutil.copy(self.summary_plot_path, self.public_figures_dir / "figure_08_robustness_synthesis_plot.png")
         print_status(f"Saved comparison plot to {self.summary_plot_path}", "SUCCESS")
 
-    def _write_report(self, m31_g, m31_p, lmc, h0_robust, tep=None, oos=None, trgb=None, anchor=None):
+    def _write_report(self, m31_g, m31_p, lmc, h0_robust, tep=None, oos=None, trgb=None, anchor=None, strat=None):
         """Generates the Markdown report."""
         
         with open(self.report_path, 'w') as f:
@@ -239,7 +241,14 @@ class Step9FinalSynthesis:
 
                 if tep:
                     f.write("### Primary H0 Result (Fitted κ_Cep)\n")
-                    f.write(f"- **Uncorrected correlation:** Spearman $\\rho = 0.511$ ($p = 0.0046$); Pearson $r = 0.462$ ($p = 0.0116$).\n")
+                    # Read correlation from stratification results
+                    if strat:
+                        corr_r = strat.get('correlation_r', 0.0)
+                        median_sigma = strat.get('median_sigma', 0.0)
+                        delta_h0 = strat.get('difference', 0.0)
+                        f.write(f"- **Uncorrected correlation:** Pearson $r = {corr_r:.3f}$; median $\\sigma = {median_sigma:.1f}$ km/s; $\\Delta H_0 = {delta_h0:.2f}$ km/s/Mpc.\n")
+                    else:
+                        f.write("- **Uncorrected correlation:** [Stratification results not available]\n")
                     f.write(f"- **TEP response coefficient:** $\\kappa_{{\\rm Cep}} = {tep['optimal_kappa_cep']:.3e}$ mag.\n")
                     f.write(f"- **Unified H0:** ${tep['unified_h0']:.2f}$ km/s/Mpc; bootstrap mean ${tep['bootstrap_h0_mean']:.2f} \\pm {tep['bootstrap_h0_std']:.2f}$ km/s/Mpc.\n")
                     f.write(f"- **Planck tension:** ${tep['tension_sigma']:.2f}\\sigma$ using the joint bootstrap uncertainty.\n\n")

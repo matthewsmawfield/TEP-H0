@@ -62,9 +62,6 @@ class Step4bApertureSensitivity:
         self.plot_path = self.figures_dir / "supplement_06_aperture_sensitivity.png"
 
         self.sigma_compilation_path = self.root_dir / "data" / "raw" / "external" / "velocity_dispersions_literature.csv"
-        self.sigma_compilation_regenerated_path = (
-            self.root_dir / "data" / "raw" / "external" / "velocity_dispersions_literature_regenerated.csv"
-        )
         self.provenance_output_path = self.outputs_dir / "sigma_provenance_table.csv"
         self.grid_output_path = self.outputs_dir / "aperture_sensitivity_grid.csv"
         self.summary_json_path = self.outputs_dir / "aperture_sensitivity_summary.json"
@@ -160,22 +157,15 @@ class Step4bApertureSensitivity:
         print_status("Step 4b Complete.", "SUCCESS")
 
     def _load_sigma_compilation(self) -> pd.DataFrame:
-        sigma_path = (
-            self.sigma_compilation_regenerated_path
-            if self.sigma_compilation_regenerated_path.exists()
-            else self.sigma_compilation_path
-        )
+        sigma_path = self.sigma_compilation_path
 
         if not sigma_path.exists():
-            print_status(f"Sigma compilation CSV missing: {sigma_path}", "WARNING")
-            return pd.DataFrame(columns=[
-                'galaxy', 'sigma_kms', 'error_kms', 'source', 'method', 'notes'
-            ])
+            raise FileNotFoundError(
+                f"Literature velocity dispersion CSV not found at {sigma_path}. "
+                "Pipeline cannot proceed without traceable data."
+            )
 
-        if sigma_path == self.sigma_compilation_regenerated_path:
-            print_status(f"Using regenerated sigma catalog for provenance: {sigma_path}", "INFO")
-        else:
-            print_status(f"Using legacy sigma catalog for provenance: {sigma_path}", "WARNING")
+        print_status(f"Using master sigma catalog for provenance: {sigma_path}", "INFO")
 
         sigma_df = pd.read_csv(sigma_path, comment="#")
         for col in ['galaxy', 'source', 'method', 'notes']:

@@ -1502,11 +1502,12 @@ class Step4RobustnessChecks:
             f"Method counts: stellar={n_stellar}, HI={n_hi}, rot={n_rot}",
             "INFO",
         )
-        if mean_x_err_hi is not None:
-            print_status(
-                f"Mean X_TEP uncertainty from σ error: HI={mean_x_err_hi:.2e}, rot={mean_x_err_rot:.2e}",
-                "INFO",
-            )
+        hi_str = f"HI={mean_x_err_hi:.2e}" if mean_x_err_hi is not None else "HI=N/A"
+        rot_str = f"rot={mean_x_err_rot:.2e}" if mean_x_err_rot is not None else "rot=N/A"
+        print_status(
+            f"Mean X_TEP uncertainty from σ error: {hi_str}, {rot_str}",
+            "INFO",
+        )
 
         result = {
             "beta": [float(v) for v in beta],

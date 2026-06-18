@@ -1,23 +1,23 @@
 {
   "stellar_absorption": {
-    "n_stellar": 17,
-    "n_hi": 12,
+    "n_stellar": 16,
+    "n_hi": 13,
     "n_total": 29,
     "full_sample": {
-      "pearson_r": 0.3296732828583555,
-      "pearson_p": 0.08073226088132208,
-      "spearman_rho": 0.27192118226600975,
-      "spearman_p": 0.15358578193911646
+      "pearson_r": 0.4659178889421861,
+      "pearson_p": 0.010855420330146038,
+      "spearman_rho": 0.5172413793103448,
+      "spearman_p": 0.004061456506390692
     },
     "stellar_only": {
-      "pearson_r": 0.44403868550698733,
-      "pearson_p": 0.07416820382572899,
-      "spearman_rho": 0.38480392156862747,
-      "spearman_p": 0.1272159953159875,
-      "median_sigma": 87.18521673375926,
-      "h0_low_sigma": 66.20266621632842,
-      "h0_high_sigma": 73.73025465054553,
-      "delta_h0": 7.527588434217108
+      "pearson_r": 0.5486822802914199,
+      "pearson_p": 0.027741737572815645,
+      "spearman_rho": 0.6176470588235293,
+      "spearman_p": 0.010787984601948835,
+      "median_sigma": 101.69761062572539,
+      "h0_low_sigma": 64.87429978450248,
+      "h0_high_sigma": 73.414156189467,
+      "delta_h0": 8.53985640496451
     },
     "stellar_hosts": [
       "NGC 0691",
@@ -31,7 +31,6 @@
       "NGC 3370",
       "NGC 3583",
       "NGC 4639",
-      "NGC 5584",
       "NGC 5728",
       "NGC 7541",
       "NGC 7678",
@@ -47,6 +46,7 @@
       "NGC 4038",
       "NGC 4680",
       "NGC 5468",
+      "NGC 5584",
       "NGC 5861",
       "NGC 5917",
       "NGC 7250",
@@ -54,17 +54,13 @@
     ]
   },
   "gold_standard": {
-    "n_gold": 3,
+    "n_gold": 0,
     "gold_sources": [
       "Kormendy&Ho2013",
       "SDSS DR7",
       "Ho+2009"
     ],
-    "gold_hosts": [
-      "NGC 5584",
-      "NGC 7678",
-      "UGC 9391"
-    ],
+    "gold_hosts": [],
     "pearson_r": null,
     "pearson_p": null,
     "spearman_rho": null,
@@ -73,30 +69,30 @@
   "density_control": {
     "available": true,
     "n_valid": 29,
-    "baseline_r": 0.3296732828583555,
-    "baseline_p": 0.08073226088132208,
-    "partial_r_h0_sigma_given_rho": 0.31202954101056773,
-    "partial_p": 0.09938248722632456,
+    "baseline_r": 0.4659178889421861,
+    "baseline_p": 0.010855420330146038,
+    "partial_r_h0_sigma_given_rho": 0.45459198294135333,
+    "partial_p": 0.013231018271231406,
     "r_h0_rho": -0.11464630363067177,
     "p_h0_rho": 0.5537233643153526,
-    "r_sigma_rho": -0.2799615643640838,
-    "p_sigma_rho": 0.1413124549252506
+    "r_sigma_rho": -0.24315478404793223,
+    "p_sigma_rho": 0.20372559118291386
   },
   "subsample_tep": {
     "full_sample": {
       "n": 29,
-      "kappa_cep": 613989.2578125,
-      "unified_h0": 68.89661227441806,
-      "h0_error": 1.3333031936206645
+      "kappa_cep": 991381.8359375,
+      "unified_h0": 68.13221878667224,
+      "h0_error": 1.2611106665210776
     },
     "stellar_only": {
-      "n": 17,
-      "kappa_cep": 710443.115234375,
-      "unified_h0": 67.69793780454863,
-      "h0_error": 1.689945974451098
+      "n": 16,
+      "kappa_cep": 933575.439453125,
+      "unified_h0": 66.27216913718296,
+      "h0_error": 1.5710652400343095
     },
     "gold_standard": {
-      "n": 3,
+      "n": 0,
       "kappa_cep": null,
       "unified_h0": null,
       "h0_error": null
@@ -109,90 +105,62 @@
         "n": 29,
         "h0_raw": 70.05852959777373,
         "h0_raw_sem": 1.4395359826617715,
-        "h0_corrected": 68.89661776706522,
-        "h0_corrected_sem": 1.3569032802853809,
-        "correction_kms": 1.1619118307085046,
-        "dH_dkappa": -1.8924070593941219e-06,
-        "kappa_for_planck": 1404840.2454305384,
-        "kappa_bound_1sigma": 2165530.698108649,
-        "delta_planck": 1.4966177670652172,
-        "tension_sigma_planck": 1.1029656931409673
+        "h0_corrected": 68.13222017543657,
+        "h0_corrected_sem": 1.2834329272507823,
+        "correction_kms": 1.9263094223371553,
+        "dH_dkappa": -1.943056484336322e-06,
+        "kappa_for_planck": 1368220.4399126256,
+        "kappa_bound_1sigma": 2109082.0639911764,
+        "delta_planck": 0.7322201754365665,
+        "tension_sigma_planck": 0.5705169003299936
       },
       {
         "tier": "Stellar only",
-        "n": 17,
-        "h0_raw": 69.74506077360707,
-        "h0_raw_sem": 1.9973274915096089,
-        "h0_corrected": 67.96198802258736,
-        "h0_corrected_sem": 1.7509669844605629,
-        "correction_kms": 1.7830727510197022,
-        "dH_dkappa": -2.9040925242885416e-06,
-        "kappa_for_planck": 807502.0867944156,
-        "kappa_bound_1sigma": 1495265.122856403,
-        "delta_planck": 0.5619880225873572,
-        "tension_sigma_planck": 0.32095866317005073
-      },
-      {
-        "tier": "Gold standard",
-        "n": 3,
-        "h0_raw": 70.4142502490952,
-        "h0_raw_sem": 5.235480108240313,
-        "h0_corrected": 70.710450268456,
-        "h0_corrected_sem": 5.428166407771615,
-        "correction_kms": -0.2962000193607963,
-        "dH_dkappa": 4.824212929213819e-07,
-        "kappa_for_planck": null,
-        "kappa_bound_1sigma": null,
-        "delta_planck": 3.3104502684559947,
-        "tension_sigma_planck": 0.6098652877915379
+        "n": 16,
+        "h0_raw": 69.14422798698475,
+        "h0_raw_sem": 2.027829549125786,
+        "h0_corrected": 66.10667945781988,
+        "h0_corrected_sem": 1.6198259376413433,
+        "correction_kms": 3.037548529164866,
+        "dH_dkappa": -3.0639565469804465e-06,
+        "kappa_for_planck": 569273.0821211189,
+        "kappa_bound_1sigma": 1231106.7334906938,
+        "delta_planck": -1.2933205421801262,
+        "tension_sigma_planck": 0.7984318019153049
       }
     ],
-    "tightest_bound": 1495265.122856403,
+    "tightest_bound": 1231106.7334906938,
     "tightest_bound_tier": "Stellar only",
-    "uniform_kappa": 613986.2060546875
+    "uniform_kappa": 991381.0729980469
   },
   "composition": [
     {
       "tier": "Full sample",
       "n": 29,
-      "mean_sigma": 95.06922706052526,
-      "median_sigma": 84.63771282593834,
+      "mean_sigma": 99.64964551007937,
+      "median_sigma": 96.40480287112231,
       "mean_redshift": 0.007712413793103449,
       "group_richness_mean": 3.9615384615384617,
       "n_high_sigma": 14,
       "n_low_sigma": 15,
-      "raw_slope": 0.051870814790717826,
-      "corrected_mean_full_kappa": 68.89661776706522,
-      "corrected_mean_refit_kappa": 68.89661227441806,
-      "refit_kappa": 613989.2578125
+      "raw_slope": 0.08511851500604518,
+      "corrected_mean_full_kappa": 68.13222017543657,
+      "corrected_mean_refit_kappa": 68.13221878667224,
+      "refit_kappa": 991381.8359375
     },
     {
       "tier": "Stellar only",
-      "n": 17,
-      "mean_sigma": 105.29642410576987,
-      "median_sigma": 87.18521673375926,
-      "mean_redshift": 0.007669411764705882,
-      "group_richness_mean": 5.125,
+      "n": 16,
+      "mean_sigma": 111.04982215576244,
+      "median_sigma": 101.69761062572539,
+      "mean_redshift": 0.007758124999999999,
+      "group_richness_mean": 5.4,
       "n_high_sigma": 9,
-      "n_low_sigma": 8,
-      "raw_slope": 0.0663983441643818,
-      "corrected_mean_full_kappa": 67.96198802258736,
-      "corrected_mean_refit_kappa": 67.69793780454863,
-      "refit_kappa": 710443.115234375
-    },
-    {
-      "tier": "Gold standard",
-      "n": 3,
-      "mean_sigma": 65.72056802801082,
-      "median_sigma": 72.38331363393829,
-      "mean_redshift": 0.008110000000000001,
-      "group_richness_mean": 1.0,
-      "n_high_sigma": 0,
-      "n_low_sigma": 3,
-      "raw_slope": -0.5937328329767666,
-      "corrected_mean_full_kappa": 70.710450268456,
-      "corrected_mean_refit_kappa": null,
-      "refit_kappa": null
+      "n_low_sigma": 7,
+      "raw_slope": 0.08877575299392189,
+      "corrected_mean_full_kappa": 66.10667945781988,
+      "corrected_mean_refit_kappa": 66.27216913718296,
+      "refit_kappa": 933575.439453125
     }
   ]
 }

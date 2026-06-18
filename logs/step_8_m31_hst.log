@@ -1,34 +1,34 @@
-[14:12:48] [INFO] 
-[14:12:48] [INFO] ================================================================================
-[14:12:48] [INFO]    Starting Step 8: M31 HST Differential Analysis
-[14:12:48] [INFO] ================================================================================
-[14:12:48] [INFO] 
-[14:12:48] [PROCESS] Fetching Kodric 2018 HST J/H catalog (J/ApJ/864/59)...
-[14:12:48] [SUCCESS] Downloaded 1113 Cepheids with HST J/H photometry
-[14:12:48] [INFO] After quality cuts: 391 classical Cepheids (P=10-60d)
-[14:12:48] [INFO] M31 HST Sample
-[14:12:48] [INFO] +--------+--------------+----+----------+----------+
-[14:12:48] [INFO] | Region | Cut          | N  | Mean W_H | Mean J-H |
-[14:12:48] [INFO] +--------+--------------+----+----------+----------+
-[14:12:48] [INFO] | Inner  | R < 5.0 kpc  | 78 | 18.31    | 0.680    |
-[14:12:48] [INFO] | Outer  | R > 15.0 kpc | 69 | 18.00    | 0.544    |
-[14:12:48] [INFO] +--------+--------------+----+----------+----------+
-[14:12:48] [INFO] === BASELINE ANALYSIS (No Color Matching) ===
-[14:12:48] [INFO] Baseline: ΔW = +0.681 ± 0.187 mag (3.6σ) [INNER FAINTER]
-[14:12:48] [INFO] === COLOR-MATCHED ANALYSIS (Metallicity Control) ===
-[14:12:49] [INFO] Color-matched (N=73): ΔW = +0.620 ± 0.154 mag (4.0σ) [INNER FAINTER]
-[14:12:49] [INFO] ============================================================
-[14:12:49] [INFO] 
-[14:12:49] [INFO] ================================================================================
-[14:12:49] [INFO]    SUMMARY
-[14:12:49] [INFO] ================================================================================
-[14:12:49] [INFO] 
-[14:12:49] [INFO] Baseline:      ΔW = +0.681 ± 0.187 mag [INNER FAINTER]
-[14:12:49] [INFO] Color-matched: ΔW = +0.620 ± 0.154 mag [INNER FAINTER]
-[14:12:49] [INFO] 
-[14:12:49] [SUCCESS] *** M31 HST shows INNER FAINTER - CONSISTENT WITH SCREENED TEP ***
-[14:12:49] [INFO] Inner region (high density) is SCREENED (Standard); Outer is ACTIVE (Brighter).
-[14:12:49] [INFO] Relative to Outer (Brighter), Inner appears Fainter. Matches Screening Inversion.
-[14:12:49] [SUCCESS] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_phat_robustness_summary.json
-[14:12:49] [SUCCESS] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/m31_phat_differential_pl.png
-[14:12:49] [SUCCESS] Step 8 complete.
+[18:50:55] [INFO] 
+[18:50:55] [INFO] ================================================================================
+[18:50:55] [INFO]    Starting Step 8: M31 HST Differential Analysis
+[18:50:55] [INFO] ================================================================================
+[18:50:55] [INFO] 
+[18:50:55] [PROCESS] Fetching Kodric 2018 HST J/H catalog (J/ApJ/864/59)...
+[18:50:55] [SUCCESS] Downloaded 1113 Cepheids with HST J/H photometry
+[18:50:55] [INFO] After quality cuts: 391 classical Cepheids (P=10-60d)
+[18:50:55] [INFO] M31 HST Sample
+[18:50:55] [INFO] +--------+--------------+----+----------+----------+
+[18:50:55] [INFO] | Region | Cut          | N  | Mean W_H | Mean J-H |
+[18:50:55] [INFO] +--------+--------------+----+----------+----------+
+[18:50:55] [INFO] | Inner  | R < 5.0 kpc  | 78 | 18.31    | 0.680    |
+[18:50:55] [INFO] | Outer  | R > 15.0 kpc | 69 | 18.00    | 0.544    |
+[18:50:55] [INFO] +--------+--------------+----+----------+----------+
+[18:50:55] [INFO] === BASELINE ANALYSIS (No Color Matching) ===
+[18:50:55] [INFO] Baseline: ΔW = +0.681 ± 0.187 mag (3.6σ) [INNER FAINTER]
+[18:50:55] [INFO] === COLOR-MATCHED ANALYSIS (Metallicity Control) ===
+[18:50:56] [INFO] Color-matched (N=73): ΔW = +0.620 ± 0.154 mag (4.0σ) [INNER FAINTER]
+[18:50:56] [INFO] ============================================================
+[18:50:56] [INFO] 
+[18:50:56] [INFO] ================================================================================
+[18:50:56] [INFO]    SUMMARY
+[18:50:56] [INFO] ================================================================================
+[18:50:56] [INFO] 
+[18:50:56] [INFO] Baseline:      ΔW = +0.681 ± 0.187 mag [INNER FAINTER]
+[18:50:56] [INFO] Color-matched: ΔW = +0.620 ± 0.154 mag [INNER FAINTER]
+[18:50:56] [INFO] 
+[18:50:56] [SUCCESS] *** M31 HST shows INNER FAINTER - CONSISTENT WITH SCREENED TEP ***
+[18:50:56] [INFO] Inner region (high density) is SCREENED (Standard); Outer is ACTIVE (Brighter).
+[18:50:56] [INFO] Relative to Outer (Brighter), Inner appears Fainter. Matches Screening Inversion.
+[18:50:56] [SUCCESS] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_phat_robustness_summary.json
+[18:50:56] [SUCCESS] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/m31_phat_differential_pl.png
+[18:50:56] [SUCCESS] Step 8 complete.

@@ -70,7 +70,7 @@ class HyperLEDAVerifier:
         self.root_dir = Path(__file__).resolve().parents[2]
         self.data_dir = self.root_dir / "data"
         self.lit_csv_path = self.data_dir / "raw" / "external" / "velocity_dispersions_literature.csv"
-        self.output_path = self.data_dir / "raw" / "external" / "velocity_dispersions_verified.csv"
+        self.output_path = self.root_dir / "results" / "outputs" / "hyperleda_crosscheck.csv"
         self.report_path = self.root_dir / "results" / "outputs" / "hyperleda_verification_report.json"
 
     def _resolve_pgc_vizier(self, galaxy_name):

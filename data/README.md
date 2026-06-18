@@ -11,3 +11,4 @@ This directory stores input data for the Cepheid analysis (Paper 11).
 
 - `shoes/`: Raw SH0ES data tables (e.g., `Table4.txt`).
 - `hosts/`: Galaxy property catalogs.
+- `raw/external/`: External literature compilations. See `raw/external/README.md` for the velocity dispersion single-source-of-truth structure.

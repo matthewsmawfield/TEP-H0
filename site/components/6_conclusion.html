@@ -3,7 +3,7 @@
 <p>
     Stratification of the SH0ES Cepheid host galaxies by curated kinematic
     potential-depth estimates reveals a significant correlation (Spearman $\rho =
-    0.511$, $p = 0.0046$; Pearson $r=0.462$, $p=0.0116$) between host potential depth and derived $H_0$.
+    0.517$, $p = 0.0041$; Pearson $r=0.466$, $p=0.0109$) between host potential depth and derived $H_0$.
     A Bayesian model comparison (TEP-motivated environmental correction with free $\kappa_{\rm Cep}$ vs. a no-environment null)
     in the host-contrast likelihood—which is the appropriate host-to-host slope test
     because the shared calibration zero-point is a nuisance parameter with
@@ -13,21 +13,21 @@
     H$0$-uncertainty check gives $\Delta{\rm BIC}=+94$ as an independent
     robustness verification.
     High-$\sigma$ hosts yield systematically inflated $H_0$ values ($72.45 \pm
-    2.32$ km/s/Mpc) compared to low-$\sigma$ hosts ($67.82 \pm 1.62$ km/s/Mpc),
-    with the bias $\Delta H_0 = 4.63$ km/s/Mpc accounting for a substantial
+    2.32$ km/s/Mpc) compared to low-$\sigma$ hosts ($68.13 \pm 1.49$ km/s/Mpc),
+    with the bias $\Delta H_0 = 7.86$ km/s/Mpc accounting for a substantial
     fraction of the discrepancy between local and CMB measurements. Application
     of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot
     (\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction
     formula and the virial relation $|\Phi|\propto\sigma^2$—with
-    response coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.43)\times10^6$ mag (mean
-    response $\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5$ after accounting for
+    response coefficient $\kappa_{\rm Cep} = (0.99 \pm 0.56)\times10^6$ mag (mean
+    response $\langle \kappa_{\rm Cep} \cdot S \rangle = 0.99\times10^6$ after accounting for
     continuous shear suppression) and effective calibrator reference
     $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant.
     Out-of-sample leave-one-out cross-validation (LOOCV) predicts
-    $H_0^{\rm LOOCV} = 68.04 \pm 1.32$ km/s/Mpc, corresponding to a Planck tension of
-    $0.46\sigma$; this is the primary non-circular validation. The in-sample
-    corrected mean is $H_0 = 68.17$ km/s/Mpc (bootstrap mean $68.14 \pm 1.49$,
-    Planck tension $0.49\sigma$). Both are robust under bootstrap resampling.
+    $H_0^{\rm LOOCV} = 68.13 \pm 1.49$ km/s/Mpc, corresponding to a Planck tension of
+    $0.47\sigma$; this is the primary non-circular validation. The in-sample
+    corrected mean is $H_0 = 68.13$ km/s/Mpc (bootstrap mean $68.06 \pm 1.49$,
+    Planck tension $0.47\sigma$). Both are robust under bootstrap resampling.
     Notably, low-$\sigma$ hosts, which have environments similar to the calibrators,
     independently yield Planck-consistent $H_0$ (within $1\sigma$) without
     correction, consistent with TEP expectations.
@@ -108,9 +108,16 @@ pip install -r requirements.txt
 python scripts/run_pipeline.py</code></pre>
 
     <p>
-        The pipeline automatically downloads all required data from public
-        archives (SH0ES, Pantheon+, HyperLEDA, Vizier) and generates all
-        outputs.
+        <strong>Primary data sources:</strong>
+    </p>
+    <ul>
+        <li><strong>SN Ia distances:</strong> Pantheon+SH0ES compilation (Scolnic et al. 2022, ApJ, 938, 113; <a href="https://github.com/PantheonPlusSH0ES/DataRelease">GitHub</a>), committed as <code>data/raw/Pantheon+SH0ES.dat</code>.</li>
+        <li><strong>Cepheid P-L data:</strong> SH0ES2022 release (Riess et al. 2022, ApJ, 934, L7; <a href="https://github.com/marcushogas/Cepheid-Distance-Ladder-Data">GitHub</a>), included as Git submodule <code>data/raw/external/Cepheid-Distance-Ladder-Data/</code>.</li>
+        <li><strong>Velocity dispersions:</strong> Manually curated master file (<code>data/raw/external/velocity_dispersions_literature.csv</code>) with every value traceable to a peer-reviewed publication via ADS bibcode. See <code>DATA_PROVENANCE_CERTIFICATE.md</code> for the complete source inventory.</li>
+        <li><strong>Host coordinates:</strong> Resolved from SIMBAD/HyperLEDA via VizieR queries, stored in <code>data/interim/hosts_coords.csv</code>.</li>
+    </ul>
+    <p>
+        The pipeline downloads Pantheon+SH0ES and queries VizieR for coordinates. Velocity dispersions are read from the committed master file, not auto-downloaded, to ensure traceability and reproducibility.
     </p>
 
     <h4>Pipeline Architecture</h4>

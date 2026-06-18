@@ -20,9 +20,9 @@
 <p>
     Figure 1 plots $H_0$ against $\sigma^2$ for the 29 SN Ia hosts. A pattern
     emerges: galaxies with higher velocity dispersion yield systematically
-    higher $H_0$ values. The Spearman rank correlation of $\rho = 0.511$ ($p =
-    0.0046$) indicates a significant relationship. The Pearson coefficient ($r =
-    0.462$, $p = 0.0116$) confirms the linear trend. Bootstrap permutation
+    higher $H_0$ values. The Spearman rank correlation of $\rho = 0.517$ ($p =
+    0.0041$) indicates a significant relationship. The Pearson coefficient ($r =
+    0.466$, $p = 0.0109$) confirms the linear trend. Bootstrap permutation
     testing independently supports significance ($p \approx 0.011$). Crucially,
     when the full SH0ES GLS covariance of the host distance moduli is propagated
     into a non-diagonal covariance matrix for the derived $H_0$ vector (Section
@@ -80,7 +80,7 @@
 <figure>
     <img
         src="public/figures/figure_01_h0_vs_sigma.png?v=2"
-        alt="Scatter plot showing positive correlation between H0 and host galaxy velocity dispersion squared (Spearman rho=0.511, p=0.0046), with high-sigma hosts yielding systematically higher H0 values and NGC 4639 annotated as an outlier"
+        alt="Scatter plot showing positive correlation between H0 and host galaxy velocity dispersion squared (Spearman rho=0.517, p=0.0041), with high-sigma hosts yielding systematically higher H0 values and NGC 4639 annotated as an outlier"
         class="figure-responsive"
     />
     <figcaption>
@@ -88,9 +88,9 @@
         galaxy velocity dispersion squared ($\sigma^2$), the kinematic proxy for
         gravitational potential depth ($\sigma^2 \propto |\Phi|$) used in the
         TEP correction. The red dashed line is a linear fit against $\sigma^2$
-        (Pearson $r=0.43$ versus $\sigma^2$; $r=0.462$ versus $\sigma$),
+        (Pearson $r=0.43$ versus $\sigma^2$; $r=0.466$ versus $\sigma$),
         corresponding to the physical model $H_0 \propto \sigma^2$ derived in Appendix C. A positive trend is evident (Spearman
-        $\rho=0.511$, $p=0.0046$), with high-$\sigma$ (deep potential) hosts
+        $\rho=0.517$, $p=0.0041$), with high-$\sigma$ (deep potential) hosts
         yielding systematically inflated $H_0$ values. The outlier NGC 4639
         ($H_0 \approx 47.3$ km/s/Mpc) is labeled because it is the strongest low-$H_0$ outlier;
         its removal increases rather than creates the correlation. Error bars represent standard measurement uncertainties;
@@ -119,7 +119,7 @@
                 <td>Low Potential</td>
                 <td>15</td>
                 <td>50–90 km/s</td>
-                <td>$67.82 \pm 1.62$</td>
+                <td>$68.13 \pm 1.49$</td>
             </tr>
             <tr>
                 <td>High Potential</td>
@@ -151,7 +151,7 @@
     clocks run faster (period contraction); when the standard P-L relation is
     applied to these contracted periods, distances are systematically
     underestimated, yielding inflated $H_0$. The correlation with velocity
-    dispersion (Spearman $\rho = 0.511$) remains robust after aperture
+    dispersion (Spearman $\rho = 0.517$) remains robust after aperture
     homogenization.
 </p>
 
@@ -190,8 +190,8 @@
             <tr>
                 <td>Full Sample</td>
                 <td>29</td>
-                <td>0.462</td>
-                <td>0.0116</td>
+                <td>0.466</td>
+                <td>0.0109</td>
                 <td>$70.06 \pm 1.41$</td>
                 <td>$68.17 \pm 1.27$</td>
             </tr>
@@ -353,7 +353,7 @@
 
     <div class="result-box">
         \begin{equation}
-        H_0^{\rm TEP} = 68.17 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.14\pm1.49)
+        H_0^{\rm TEP} = 68.13 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.06\pm1.49)
         \end{equation}
     </div>
 
@@ -410,10 +410,10 @@
         NGC 4639 ($H_0 \approx 47.3$ km/s/Mpc) is explicitly annotated;
         jackknife analysis shows its removal strengthens the correlation,
         confirming it is a defensive robustness check rather than a liability.
-        Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.05\times10^6$
+        Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 0.99\times10^6$
         mag, $\sigma^2/c^2$ scaling). The corrected panel shows $r \simeq 0$ by construction since $\kappa_{\rm Cep}$ is fitted to remove the trend; this is a fitted-correction diagnostic, not an independent validation statistic. Independent robustness is assessed by jackknife, host-contrast likelihood, train/test, anchor, and systematics tests. The unified mean
-        ($68.17$ km/s/Mpc) is statistically consistent with Planck (dashed line,
-        $0.49\sigma$ tension). Error bars represent standard measurement uncertainties.
+        ($68.13$ km/s/Mpc; bootstrap mean $68.06 \pm 1.49$) is statistically consistent with Planck (dashed line,
+        $0.47\sigma$ tension). Error bars represent standard measurement uncertainties.
     </figcaption>
 </figure>
 
@@ -453,7 +453,7 @@
 <div class="key-finding">
     <p>
         <strong>Multi-anchor regression ($N=3$):</strong> $\kappa_{\rm anchor} = 5.0 \pm 663$ mag — consistent with
-        both zero and the host-level response coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag; the uncertainty is too large to discriminate between these values.
+        both zero and the host-level response coefficient $\kappa_{\rm Cep} = (0.99 \pm 0.59) \times 10^6$ mag; the uncertainty is too large to discriminate between these values.
     </p>
     <p>
         <strong>Joint host + anchor environmental-screening model ($N=32$):</strong> Fitting a single Observable Response Coefficient to all 29 SN Ia hosts and 3 geometric anchors, with environment-specific screening factors $S_k$ (Section 4.6), yields $\kappa_{\rm Cep} = (1.10 \pm 0.12) \times 10^6$ mag.  This is consistent with the host-only value at $0.12\sigma$ and confirms that the same coefficient governs both samples once screening is accounted for.
@@ -501,7 +501,7 @@
 <p>
     Implication: The anchor galaxies show no significant dependence of the
     Cepheid P-L zero-point on $\sigma$ at the present precision ($\kappa_{\rm Cep, anchor} \approx 0$), in contrast to the strong host-level coupling inferred
-    from the Hubble-flow sample ($\kappa_{\rm Cep, host} \approx 1.05\times10^6$ mag).
+    from the Hubble-flow sample ($\kappa_{\rm Cep, host} \approx 1.10\times10^6$ mag).
     To make the mismatch explicit, the host-inferred prediction $\Delta(\cdot) =
     \kappa_{\rm Cep, host}\,(\sigma^2-\sigma_{\rm ref}^2)/c^2$ (with $\sigma_{\rm ref}=75.25$
     km/s defined by the SH0ES anchor weighting) is compared to the observed
@@ -516,7 +516,7 @@
                 <th scope="col">$\sigma$ (km/s)</th>
                 <th scope="col">$(\sigma^2-\sigma_{\rm ref}^2)/c^2$</th>
                 <th scope="col">
-                    Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 1.05\times10^6$)
+                    Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 1.10\times10^6$)
                 </th>
                 <th scope="col">Observed $M_W$ (mag)</th>
             </tr>
@@ -557,8 +557,8 @@
 </p>
 
 <p>
-    While the host galaxies show a clear correlation ($r = 0.462$)
-    compatible with $\kappa_{\rm Cep, host} \approx 1.05\times10^6$ mag, the anchors show no
+    While the host galaxies show a clear correlation ($r = 0.466$)
+    compatible with $\kappa_{\rm Cep, host} \approx 1.10\times10^6$ mag, the anchors show no
     statistically significant trend in $M_W$ with $\sigma$ when analysed in isolation
     ($\kappa_{\rm Cep, anchor} \approx 0 \pm 663$ mag).  However, when the same coefficient
     is fitted jointly to hosts and anchors using environment-specific screening
@@ -584,7 +584,7 @@
         class="figure-responsive"
     />
     <figcaption>
-        Figure 5: Joint environmental-screening model fit to 29 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (1.10 \pm 0.12) \times 10^6$ mag, with environment-specific screening factors $S_k$ attenuating the regressor for group-embedded anchors.  The shaded band shows the host-only $1\sigma$ interval ($1.05 \pm 0.43) \times 10^6$ mag).
+        Figure 5: Joint environmental-screening model fit to 29 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (1.10 \pm 0.12) \times 10^6$ mag, with environment-specific screening factors $S_k$ attenuating the regressor for group-embedded anchors.  The shaded band shows the host-only $1\sigma$ interval ($1.10 \pm 0.62) \times 10^6$ mag).
     </figcaption>
 </figure>
 
@@ -599,7 +599,7 @@
 <p>
     Given the sample size ($N=29$) and heterogeneous velocity dispersion data,
     multiple robustness tests were performed: Spearman rank correlation ($\rho =
-    0.511$, non-parametric and robust to outliers), bootstrap permutation test
+    0.517$, non-parametric and robust to outliers), bootstrap permutation test
     ($p \approx 0.011$, non-parametric significance), covariance-aware
     significance (full propagation of the SH0ES GLS host-modulus covariance
     yields $p_{\rm cov} \approx 0.008$ Spearman and $p_{\rm cov} \approx 0.027$ Pearson),
@@ -646,8 +646,8 @@
             <tr>
                 <td>$>0.0035$</td>
                 <td>29</td>
-                <td>0.462</td>
-                <td>0.511</td>
+                <td>0.466</td>
+                <td>0.517</td>
                 <td>0.0108</td>
             </tr>
             <tr>
@@ -687,7 +687,7 @@
     identifiers) to the 2MASS group catalog of Tully (2015), using the group
     membership count $N_{\rm mb}$ as a proxy for group/cluster environment.
     Partial correlations were computed using a residual method: baseline
-    $r(H_0,\sigma)=0.462$ (permutation $p=0.0108$; $N=29$); controlling for
+    $r(H_0,\sigma)=0.466$ (permutation $p=0.0108$; $N=29$); controlling for
     redshift $r(H_0,\sigma\,|\,z_{\rm HD})=0.418$ ($p=0.0268$); controlling for
     redshift and group richness $r(H_0,\sigma\,|\,z_{\rm HD},N_{\rm mb})=0.359$
     ($p=0.0657$).
@@ -754,7 +754,7 @@
     exponent $\beta \in [0, 0.08]$ and scaling the effective radii by $R_{\rm
     eff}\times[0.7, 1.3]$. Across this envelope, the Pearson correlation remains
     stable ($r \in [0.423, 0.432]$) and the stratified bias remains positive
-    ($\Delta H_0 = 4.63$ km/s/Mpc). Importantly, repeating the full $\kappa_{\rm Cep}$
+    ($\Delta H_0 = 7.86$ km/s/Mpc). Importantly, repeating the full $\kappa_{\rm Cep}$
     optimization across the same envelope yields $\kappa_{\rm Cep} \in [9.6, 11.9]\times10^5$ mag and
     a unified $H_0^{\rm TEP} \in [67.9, 68.5]$ km/s/Mpc. The resulting
     systematic envelope is smaller than the bootstrap uncertainty, indicating
@@ -787,8 +787,8 @@
         <tbody>
             <tr>
                 <td>Baseline $r(H_0, \sigma)$</td>
-                <td>0.462</td>
-                <td>0.0116</td>
+                <td>0.466</td>
+                <td>0.0109</td>
             </tr>
             <tr>
                 <td>Partial $r(H_0, \sigma \,|\, \log_{10}\rho)$</td>
@@ -811,7 +811,7 @@
 
 <p>
     The partial correlation controlling for local density is
-    <em>stronger</em> than the baseline ($r = 0.493$ vs. 0.462) and more
+    <em>stronger</em> than the baseline ($r = 0.493$ vs. 0.466) and more
     significant ($p = 0.0066$). This occurs because $\sigma$ and $\rho$ are
     negatively correlated in this sample: high-$\sigma$ hosts tend to have
     <em>lower</em> local densities at Cepheid radii. The fact that controlling
@@ -1051,7 +1051,7 @@
 <h4>3.7.4b Two-Effect Decomposition</h4>
 <p>
     A comparative analysis shows that Cepheids exhibit a significant
-    $H_0$–$\sigma$ correlation (Spearman $\rho = 0.511$, $p = 0.0046$; $N=29$),
+    $H_0$–$\sigma$ correlation (Spearman $\rho = 0.517$, $p = 0.0041$; $N=29$),
     while the TRGB sample shows a weaker, not formally significant trend
     (Spearman $\rho = 0.375$, $p = 0.126$; $N=18$). This pattern is consistent
     with two superimposed effects:

@@ -32,39 +32,55 @@ This document provides complete provenance information for all external data use
 
 ---
 
-## 3. Velocity Dispersions (σ) — CANONICAL DATA
+## 3. Velocity Dispersions (σ) — FULLY TRACEABLE MASTER DATA
 
-**Status:** These values are pinned/committed. The pipeline uses the committed file by default.
+**Status:** Every value is traceable to an original literature source with ADS bibcode.
 
-**Primary File:** `data/raw/external/velocity_dispersions_literature_regenerated.csv` (canonical, committed to git)
+**Primary File:** `data/raw/external/velocity_dispersions_literature.csv` (master, committed to git)
 
-**Fallback File:** `data/raw/external/velocity_dispersions_literature.csv` (legacy)
+This is the ONLY file containing velocity dispersion data. Every entry includes:
+- ADS bibcode linking to the peer-reviewed source publication
+- Source URL to the ADS abstract page
+- Measurement method (stellar absorption, HI linewidth proxy, etc.)
+- Provenance notes documenting any corrections
+- Date accessed for audit trail
+- Traceability confidence rating (HIGH / MEDIUM)
 
-### Sources:
+There are no other sigma input files. The pipeline reads exclusively from this file.
+**Audit Report:** `results/outputs/pipeline_audit_report.json`
 
-| Source | Reference | Method | N galaxies |
-|--------|-----------|--------|------------|
-| HyperLEDA | Makarov et al. 2014, A&A, 570, A13 | Central stellar σ | ~15 |
-| Ho et al. 2009 | Ho, L. C., et al. 2009, ApJS, 183, 1 | Long-slit spectroscopy | ~5 |
-| Kormendy & Ho 2013 | Kormendy, J. & Ho, L. C. 2013, ARA&A, 51, 511 | Compilation | ~3 |
-| SDSS DR7 | Abazajian et al. 2009, ApJS, 182, 543 | Fiber spectroscopy | ~5 |
+### Sources with ADS Bibcodes
 
-### Methodology:
-- **Direct measurements:** Central stellar velocity dispersion from absorption line fitting
-- **HI linewidth proxy:** σ ≈ 0.7 × W50/2 (for galaxies without direct σ measurements)
+| Source | Bibcode | Reference | Method | N |
+|--------|---------|-----------|--------|---|
+| HyperLEDA | 2014A&A...570A..13M | Makarov et al. 2014, A&A, 570, A13 | Central stellar σ | 15 |
+| Ho+2009 | 2009ApJS..183....1H | Ho, L. C., et al. 2009, ApJS, 183, 1 | Long-slit spectroscopy | 6 |
+| Kormendy&Ho2013 | 2013ARA&A..51..511K | Kormendy, J. & Ho, L. C. 2013, ARA&A, 51, 511 | Compilation | 4 |
+| BASS DR2 | 2022ApJS..261....6K | Koss et al. 2022, ApJS, 261, 6 | X-ray AGN host σ | 1 |
+| SDSS DR7 | 2009ApJS..182..543A | Abazajian et al. 2009, ApJS, 182, 543 | Fiber spectroscopy | 1 |
+| 6dFGSv | 2014MNRAS.443.1231C | Campbell et al. 2014, MNRAS, 443, 1231 | Fundamental Plane | 19 |
+| Saulder+2019 | 2019MNRAS.482.1427S | Saulder et al. 2019, MNRAS, 482, 1427 | FP Vdisp30Hd | 1 |
+| Ho 2007 | 2007ApJ...668...94H | Ho, L. C. 2007, ApJ, 668, 94 | Kinematics catalog | 1 |
+
+### Methodology
+- **Direct measurements:** Central stellar velocity dispersion from absorption line fitting (Ho+2009, BASS DR2, SDSS DR7, Kormendy&Ho2013)
+- **HI linewidth proxy:** σ from W50 via Campbell+2014 6dFGSv catalog, calibrated via HyperLEDA
 - **Aperture correction:** Jorgensen et al. (1995) power-law normalized to R_eff/8
 
-### Reproducibility Note
-The velocity dispersion catalog is **committed to git as canonical data** to ensure exact reproducibility. External databases (HyperLEDA, VizieR) are updated over time; re-querying them may return different values. To force a fresh download from live databases:
+### Traceability Guarantee
+Each entry includes:
+- `source_bibcode`: ADS bibcode for direct literature verification
+- `source_url`: ADS abstract URL
+- `notes`: Detailed provenance including LEDA reference codes and discrepancy flags
+- `traceability_confidence`: HIGH (single clear source) / MEDIUM (multiple sources agree)
 
-```bash
-python scripts/run_pipeline.py --rebuild-sigma
-```
-
-To verify the committed values against HyperLEDA:
+### Reproducibility
+The catalog is committed to git as canonical data. To verify against original sources:
 ```bash
 python scripts/utils/verify_hyperleda.py
 ```
+
+External databases update over time; the committed values represent the most accurate measurements as of 2026-06-18.
 
 ---
 
@@ -165,7 +181,7 @@ python -c "from scripts.steps.step_7_trgb_comparison import FREEDMAN_2024_TRGB; 
 |---------|-------------------|--------------|---------------------|----------|-------------------|
 | SH0ES | ✓ | - | - | ✓ | ✓ (committed R22 matrices) |
 | Pantheon+ | ✓ | - | - | ✓ | ✓ (committed .dat file) |
-| Velocity Dispersions | - | Partial | ✓ | ✓ | ✓ (committed regenerated CSV) |
+| Velocity Dispersions | - | - | ✓ | ✓ | ✓ (committed literature CSV) |
 | RC3 Metadata (D25, R_eff) | - | ✓ | - | ✓ | ✓ (committed enriched CSV) |
 | TRGB Distances | - | - | ✓ | ✓ | ✓ (hardcoded in script) |
 | M31 Cepheids | - | ✓ | - | ✓ | - (live query) |

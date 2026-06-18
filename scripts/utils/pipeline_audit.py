@@ -220,18 +220,12 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
             {"n": int(len(prov)), "expected_n": derived['n'], "duplicates": dup_prov},
         ))
 
-        # Ensure provenance is from regenerated catalog when it exists
-        regen_path = data_raw_ext / "velocity_dispersions_literature_regenerated.csv"
-        legacy_path = data_raw_ext / "velocity_dispersions_literature.csv"
+        # SINGLE SOURCE OF TRUTH: canonical traceable literature CSV
+        master_path = data_raw_ext / "velocity_dispersions_literature.csv"
         report["checks"].append(_check(
-            "regenerated_sigma_catalog_present",
-            regen_path.exists(),
-            {"path": str(regen_path)},
-        ))
-        report["checks"].append(_check(
-            "legacy_sigma_catalog_present",
-            legacy_path.exists(),
-            {"path": str(legacy_path)},
+            "master_sigma_catalog_present",
+            master_path.exists(),
+            {"path": str(master_path)},
         ))
 
     # Enhanced robustness should align with recomputed full-sample stats

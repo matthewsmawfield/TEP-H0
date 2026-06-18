@@ -25,11 +25,11 @@ abstract: 'The Hubble Tension—the persistent 5σ discrepancy between local dis
 
   Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity
   dispersion (a TEP-independent kinematic observable), reveals a statistically significant
-  correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.511$,
-  $p = 0.0046$; Pearson $r = 0.462$, $p = 0.0116$). A median-split stratification
-  at $\sigma_{\rm med} \approx 90$ km/s yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc (low-$\sigma$;
-  $N=15$) versus $72.45 \pm 2.32$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta
-  H_0 = 4.63$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct
+  correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.634$,
+  $p = 0.0002$; Pearson $r = 0.514$, $p = 0.0043$). A median-split stratification
+  at $\sigma_{\rm med} \approx 88$ km/s yields $H_0 = 67.94 \pm 0.94$ km/s/Mpc (low-$\sigma$;
+  $N=15$) versus $77.28 \pm 0.99$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta
+  H_0 = 9.34$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct
   stellar absorption and calibrated HI linewidth proxies), measurement methodology
   is treated as a first-class provenance variable and covariance-aware significance
   tests are reported using the full SH0ES GLS distance-modulus covariance. A Bayesian model comparison

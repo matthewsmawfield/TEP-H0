@@ -1,0 +1,10 @@
+{
+  "mode": "master_literature",
+  "source_file": "velocity_dispersions_literature.csv",
+  "note": "Using manually curated master file with full ADS bibcode traceability.",
+  "counts": {
+    "n_hosts": 43,
+    "n_with_sigma": 43,
+    "n_missing_sigma": 0
+  }
+}

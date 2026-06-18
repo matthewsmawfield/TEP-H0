@@ -450,16 +450,15 @@ class Step1DataIngestion:
         # These come from spectroscopic measurements of stellar absorption line widths.
         # Kinematics are TEP-independent: Doppler shift measures velocity, not time.
         #
-        # DATA SOURCE: data/raw/external/velocity_dispersions_literature.csv
+        # DATA SOURCE: data/raw/external/velocity_dispersions_literature.csv (master)
         # Full per-galaxy citations available in that file.
         # Primary sources: HyperLEDA (Makarov+2014), Ho+2009, Kormendy & Ho 2013, SDSS DR7
         # For late-type spirals without direct σ: HI linewidth proxy σ ≈ 0.7 × W50/2
         # Aperture-corrected to Re/8 using Jorgensen+1995 prescription.
         #
         # Load from external reference file for auditability
-        sigma_csv_path = self.raw_dir / "external" / "velocity_dispersions_literature_regenerated.csv"
-        if not sigma_csv_path.exists():
-            sigma_csv_path = self.raw_dir / "external" / "velocity_dispersions_literature.csv"
+        # SINGLE SOURCE OF TRUTH: master literature CSV with full provenance
+        sigma_csv_path = self.raw_dir / "external" / "velocity_dispersions_literature.csv"
         MEASURED_SIGMA = {}
         if sigma_csv_path.exists():
             sigma_df = pd.read_csv(sigma_csv_path, comment='#')
@@ -467,20 +466,10 @@ class Step1DataIngestion:
                 MEASURED_SIGMA[row['galaxy']] = row['sigma_kms']
             print_status(f"Loaded {len(MEASURED_SIGMA)} velocity dispersions from literature CSV: {sigma_csv_path}", "INFO")
         else:
-            # Fallback hardcoded values (should not be needed)
-            print_status("Warning: Literature CSV not found, using fallback values.", "WARNING")
-            MEASURED_SIGMA = {
-                "NGC 0691": 89, "NGC 1015": 78, "NGC 1309": 85, "NGC 1365": 151,
-                "NGC 1448": 95, "NGC 1559": 72, "NGC 2442": 110, "NGC 2525": 82,
-                "NGC 2608": 92, "NGC 3021": 88, "NGC 3147": 238, "NGC 3254": 95,
-                "NGC 3370": 85, "NGC 3447": 55, "NGC 3583": 108, "NGC 3972": 78,
-                "NGC 3982": 82, "NGC 4424": 65, "NGC 4536": 95, "NGC 4639": 88,
-                "NGC 4680": 92, "NGC 5468": 110, "NGC 5584": 98, "NGC 5643": 107,
-                "NGC 5728": 175, "NGC 5861": 102, "NGC 5917": 88, "NGC 7250": 52,
-                "NGC 7329": 165, "NGC 7541": 125, "NGC 7678": 138, "UGC 9391": 68,
-                "NGC 0976": 110, "NGC 1337": 94, "NGC 4038": 107, "NGC 4039": 107,
-                "NGC 4258": 115, "M 31": 160, "M 101": 28, "LMC": 24, "SMC": 22,
-            }
+            raise FileNotFoundError(
+                f"Literature velocity dispersion CSV not found at {sigma_csv_path}. "
+                "Pipeline cannot proceed without traceable data."
+            )
         
         def get_measured_sigma(name):
             """Get measured velocity dispersion from literature."""
@@ -511,16 +500,6 @@ class Step1DataIngestion:
         
         # Use measured sigma as primary; this is the scientifically correct approach
         final_df['sigma_inferred'] = final_df['sigma_measured']
-        
-        # Preserve existing canonical cache if present and valid
-        if self.hosts_processed_path.exists():
-            existing = pd.read_csv(self.hosts_processed_path)
-            if 'sigma_measured' in existing.columns and existing['sigma_measured'].notna().sum() > 0:
-                print_status(
-                    f"Preserving existing {self.hosts_processed_path} (canonical cached sigma data).",
-                    "INFO",
-                )
-                return existing
         
         # Save
         final_df.to_csv(self.hosts_processed_path, index=False)
