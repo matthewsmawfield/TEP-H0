@@ -51,3 +51,8 @@
 [22:16:23] [INFO]      → Period contraction in high-σ environments
 [22:16:23] [INFO]      → Isolated by DIFFERENTIAL test: Δμ = μ_TRGB - μ_Ceph
 [22:16:23] [INFO]      → See step_7_trgb_reanalysis.py for differential analysis
+[22:16:23] [INFO] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/trgb_figure_01_h0_vs_sigma.png
+[22:16:23] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_comparison_results.json
+[22:16:23] [INFO] ============================================================
+[22:16:23] [INFO] TRGB-CEPHEID COMPARISON COMPLETE
+[22:16:23] [INFO] ============================================================

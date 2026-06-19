@@ -1,18 +1,15 @@
-[20:40:34] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
-[20:40:34] [INFO] Matched 18 hosts for differential analysis
-[20:40:34] [INFO] 
+[22:16:23] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
+[22:16:23] [INFO] Matched 18 hosts for differential analysis
+[22:16:23] [INFO] 
 Differential Modulus (TRGB - Cepheid) vs Sigma:
-[20:40:34] [INFO] +-----------------+---------------+--------------+
-[20:40:34] [INFO] | Metric          | Value         | Significance |
-[20:40:34] [INFO] +-----------------+---------------+--------------+
-[20:40:34] [INFO] | Pearson r       | 0.088         | p=0.3637     |
-[20:40:34] [INFO] | Spearman ρ      | 0.321         | p=0.0970     |
-[20:40:34] [INFO] | Slope (mag/dex) | 0.056 ± 0.147 | p=0.3542     |
-[20:40:34] [INFO] +-----------------+---------------+--------------+
-[20:40:34] [INFO] 
+[22:16:23] [INFO] +-----------------+---------------+--------------+
+[22:16:23] [INFO] | Metric          | Value         | Significance |
+[22:16:23] [INFO] +-----------------+---------------+--------------+
+[22:16:23] [INFO] | Pearson r       | 0.088         | p=0.3637     |
+[22:16:23] [INFO] | Spearman ρ      | 0.321         | p=0.0970     |
+[22:16:23] [INFO] | Slope (mag/dex) | 0.056 ± 0.147 | p=0.3542     |
+[22:16:23] [INFO] +-----------------+---------------+--------------+
+[22:16:23] [INFO] 
 Interpretation Check:
-[20:40:34] [INFO]   No significant positive correlation.
-[20:40:34] [WARNING]   → INCONCLUSIVE / TENSION.
-[20:40:34] [INFO] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/supplement_03_trgb_cepheid_residual.png
-[20:40:34] [INFO] Copied plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/supplement_03_trgb_cepheid_residual.png
-[20:40:34] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json
+[22:16:23] [INFO]   No significant positive correlation.
+[22:16:23] [WARNING]   → INCONCLUSIVE / TENSION.
