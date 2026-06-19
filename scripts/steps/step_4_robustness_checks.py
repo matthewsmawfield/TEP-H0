@@ -817,21 +817,89 @@ class Step4RobustnessChecks:
     def perform_redshift_cut_sensitivity(self):
         print_status("Redshift Cut Sensitivity Scan...", "SECTION")
 
-        if not self.stratified_path.exists():
-            print_status("Stratified data missing. Run Step 2 first.", "ERROR")
+        # To assess the redshift cut sensitivity, we must start from the full host catalog
+        # because the stratified data already has the primary cut applied.
+        hosts_path = self.data_dir / "processed" / "hosts_processed.csv"
+        dists_path = self.data_dir / "interim" / "r22_distances.csv"
+        if not hosts_path.exists() or not dists_path.exists():
+            print_status("Raw host/distance data missing.", "ERROR")
             return None
+            
+        hosts_df = pd.read_csv(hosts_path)
+        dists_df = pd.read_csv(dists_path)
+        merged = pd.merge(dists_df, hosts_df, on="source_id", how="inner")
+        
+        # Calculate H0
+        merged["distance_mpc"] = 10 ** ((merged["value"] - 25) / 5)
+        merged["velocity"] = 299792.458 * merged["z_hd"]
+        merged["h0_derived"] = merged["velocity"] / merged["distance_mpc"]
+        valid = merged.dropna(subset=["h0_derived", "sigma_inferred", "m_b_corr"]).copy()
+        valid["normalized_name"] = valid["normalized_name"].astype(str).str.strip()
+        anchors = ["NGC 4258", "LMC", "SMC", "M 31", "MW"]
+        df_full = valid[~valid["normalized_name"].isin(anchors)].copy()
+        
+        if "shear_suppression" not in df_full.columns:
+            df_full["shear_suppression"] = 1.0
 
-        df = pd.read_csv(self.stratified_path)
-        if 'z_hd' not in df.columns:
-            print_status("No z_hd column found in stratified data.", "ERROR")
-            return None
-
-        cuts = [0.0035, 0.005, 0.007, 0.01, 0.015, 0.02]
+        cuts = [0.0, 0.0035, 0.005, 0.007, 0.01, 0.015]
         rows = []
+        
+        from scripts.steps.step_3_tep_correction import Step3TEPCorrection
+        from scripts.utils.tep_correction import C_SQUARED_KM_S
+        step3 = Step3TEPCorrection()
+        # Suppress logging for step3 loop
+        step3.logger = TEPLogger("temp", log_to_console=False) 
+        sigma_ref, sigma_ref_screened = step3.calculate_effective_calibrator_sigma()
+        
         for zcut in cuts:
-            sub = df[(pd.to_numeric(df['z_hd'], errors='coerce') >= zcut)].copy()
+            sub = df_full[(pd.to_numeric(df_full['z_hd'], errors='coerce') >= zcut)].copy()
+            if len(sub) < 10:
+                continue
+                
+            # Raw Correlation
             suite = self._correlation_suite(sub['sigma_inferred'], sub['h0_derived'])
+            
+            # TEP Correction
+            try:
+                kappa = step3.optimize_correction(sub, sigma_ref_screened)
+                sub_corr, _, _ = step3.apply_correction(sub, kappa, sigma_ref_screened)
+                unified_h0 = sub_corr['h0_corrected'].mean()
+                
+                # LOOCV
+                n = len(sub)
+                loocv_preds = []
+                for i in range(n):
+                    train = sub.drop(sub.index[i])
+                    test = sub.iloc[[i]].copy()
+                    k_train = step3.optimize_correction(train, sigma_ref_screened)
+                    S_test = test["shear_suppression"].values[0]
+                    sig_test = test["sigma_inferred"].values[0]
+                    mu_corr = test["value"].values[0] + S_test * k_train * (sig_test**2 - sigma_ref_screened**2) / C_SQUARED_KM_S
+                    d_corr = 10 ** ((mu_corr - 25) / 5)
+                    loocv_preds.append(test["velocity"].values[0] / d_corr)
+                loocv_h0 = np.mean(loocv_preds)
+                
+                # BIC
+                x = sub_corr["shear_suppression"].values * (sub_corr["sigma_inferred"].values**2 - sigma_ref_screened**2) / C_SQUARED_KM_S
+                h0 = sub_corr["h0_derived"].values
+                slope, intercept, r_val, p_val, std_err = stats.linregress(x, h0)
+                rss_model = np.sum((h0 - (intercept + slope * x))**2)
+                rss_null = np.sum((h0 - np.mean(h0))**2)
+                bic_null = n * np.log(rss_null / n) + 1 * np.log(n)
+                bic_model = n * np.log(rss_model / n) + 2 * np.log(n)
+                delta_bic = bic_model - bic_null
+            except Exception as e:
+                print_status(f"Error computing TEP stats for zcut {zcut}: {e}", "WARNING")
+                kappa = np.nan
+                unified_h0 = np.nan
+                loocv_h0 = np.nan
+                delta_bic = np.nan
+                
             suite['zcut'] = float(zcut)
+            suite['kappa_1e6'] = kappa / 1e6
+            suite['h0_corr'] = unified_h0
+            suite['loocv_h0'] = loocv_h0
+            suite['delta_bic'] = delta_bic
             rows.append(suite)
 
         out = pd.DataFrame(rows)
@@ -839,15 +907,18 @@ class Step4RobustnessChecks:
         print_status(f"Saved redshift cut sensitivity results to {self.zcut_stats_path}", "SUCCESS")
 
         print_table(
-            ["z_cut", "N", "Pearson r", "Spearman ρ", "Perm p"],
+            ["z_cut", "N", "Pearson r", "Spearman ρ", "Corr H0", "LOOCV H0", "κ_Cep (10^6)", "ΔBIC"],
             [[
                 f"{r['zcut']:.4f}",
                 str(int(r['n'])),
                 f"{r['pearson_r']:.3f}",
                 f"{r['spearman_rho']:.3f}",
-                f"{r['perm_p']:.4f}",
+                f"{r['h0_corr']:.2f}",
+                f"{r['loocv_h0']:.2f}",
+                f"{r['kappa_1e6']:.4f}",
+                f"{r['delta_bic']:.2f}",
             ] for _, r in out.iterrows()],
-            title="Redshift Cut Sensitivity (H0 vs Sigma)"
+            title="Redshift Cut Sensitivity (TEP Correction Stability)"
         )
 
         return out
