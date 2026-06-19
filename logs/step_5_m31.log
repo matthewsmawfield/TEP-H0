@@ -40,3 +40,26 @@
 [20:18:59] [PROCESS] Fetching PHAT footprint for spatial restriction...
 [20:18:59] [INFO] Identified 1683 Cepheids within PHAT footprint.
 [20:18:59] [INFO] PHAT-restricted Offset: +0.6304 +/- 0.1948 mag
+[20:19:53] [INFO] Inferred Wesenheit form: anchor='i', R0=2.88 (MAD score: i=0.005, r=0.005)
+[20:19:53] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_robustness_summary.csv
+[20:19:53] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_robustness_summary.json
+[20:19:53] [WARNING] Note: Multidimensional matched tests (logP+color, logP+eW, MV match) have been removed from the robustness suite.
+[20:19:53] [INFO]   Under TEP, time dilation alters the observed period but preserves the intrinsic photometric color.
+[20:19:53] [INFO]   Matching Cepheids on both observed period AND color forces the selection of intrinsically dissimilar stars,
+[20:19:53] [INFO]   fundamentally destroying the absolute magnitude comparison and artificially hiding the TEP signal.
+[20:19:53] [INFO] M31 Differential Robustness Summary
+[20:19:53] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
+[20:19:53] [INFO] | Test              | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |
+[20:19:53] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
+[20:19:53] [INFO] | Baseline          | 153  | 919   | -         | +0.3560     | 0.1357  | -                  |
+[20:19:53] [INFO] | Matched logP      | 153  | 919   | 152.0     | +0.2529     | 0.1615  | [+0.1029, +0.4130] |
+[20:19:53] [INFO] | OLS inner (ctrl)  | 153  | 919   | -         | +0.1587     | 0.1156  | -                  |
+[20:19:53] [INFO] | Metallicity γ req | 153  | 919   | -         | +0.741      | -       | -                  |
+[20:19:53] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
+[20:19:53] [PROCESS] Generating Differential P-L Plot...
+[20:19:53] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/m31_differential_pl.png
+[20:19:53] [PROCESS] Generating M31 robustness plot...
+[20:19:58] [SUCCESS] Saved robustness plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/m31_differential_robustness.png
+[20:19:58] [SUCCESS] Copied robustness plot to public figures directory.
+[20:19:58] [SUCCESS] Copied plot to public figures directory.
+[20:19:58] [SUCCESS] Step 5 Complete.

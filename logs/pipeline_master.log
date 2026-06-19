@@ -1,71 +1,12 @@
-[20:18:31] [INFO] 
-[20:18:31] [INFO] ================================================================================
-[20:18:31] [INFO]    TEP-H0 ANALYSIS PIPELINE INITIATED
-[20:18:31] [INFO] ================================================================================
-[20:18:31] [INFO] 
-[20:18:31] [INFO] Project Root: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0
-[20:18:31] [INFO] Starting execution sequence...
-[20:18:31] [INFO] 
-[20:18:31] [INFO] ================================================================================
-[20:18:31] [INFO]    >>> STEP 1 (PRE-FLIGHT): COORDINATE PREPARATION
-[20:18:31] [INFO] ================================================================================
-[20:18:31] [INFO] 
-[20:18:31] [SUCCESS] Step 0 (Sigma Catalog) completed successfully.
-[20:18:31] [INFO] 
-[20:18:31] [INFO] ================================================================================
-[20:18:31] [INFO]    >>> STEP 1: DATA INGESTION
-[20:18:31] [INFO] ================================================================================
-[20:18:31] [INFO] 
-[20:18:32] [SUCCESS] Step 1 (Ingestion) completed successfully.
-[20:18:32] [INFO] 
-[20:18:32] [INFO] ================================================================================
-[20:18:32] [INFO]    >>> STEP 1b: APERTURE CORRECTION
-[20:18:32] [INFO] ================================================================================
-[20:18:32] [INFO] 
-[20:18:32] [PROCESS] Fetching host metadata (RC3) for aperture normalization...
-[20:18:32] [INFO] Fetching Galaxy Metadata (RC3)
-[20:18:32] [INFO] Loaded 42 hosts for metadata enrichment.
-[20:18:32] [PROCESS] Querying Vizier (Catalog VII/155)...
-[20:18:32] [SUCCESS] Metadata Retrieval Complete. Found RC3 data for 42/42 hosts.
-[20:18:32] [INFO] Sample Galaxy Metadata (RC3)
-[20:18:32] [INFO] +----------+----------+----------+------------+
-[20:18:32] [INFO] | Host     | log(D25) | R25 ('') | R_eff ('') |
-[20:18:32] [INFO] +----------+----------+----------+------------+
-[20:18:32] [INFO] | LMC      | 3.81     | 19369.6  | 9684.8     |
-[20:18:32] [INFO] | LMC      | 3.81     | 19369.6  | 9684.8     |
-[20:18:32] [INFO] | M 101    | 2.46     | 865.2    | 432.6      |
-[20:18:32] [INFO] | NGC 1337 | 1.76     | 172.6    | 86.3       |
-[20:18:32] [INFO] | M 31     | 3.28     | 5716.4   | 2858.2     |
-[20:18:32] [INFO] +----------+----------+----------+------------+
-[20:18:32] [SUCCESS] Saved enriched metadata to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_metadata_enriched.csv
-[20:18:32] [SUCCESS] Step 1b (Aperture Correction) completed successfully.
-[20:18:32] [INFO] 
-[20:18:32] [INFO] ================================================================================
-[20:18:32] [INFO]    >>> STEP 2: STRATIFICATION
-[20:18:32] [INFO] ================================================================================
-[20:18:32] [INFO] 
-[20:18:33] [SUCCESS] Step 2 (Stratification) completed successfully.
-[20:18:33] [INFO] 
-[20:18:33] [INFO] ================================================================================
-[20:18:33] [INFO]    >>> STEP 3: TEP CORRECTION
-[20:18:33] [INFO] ================================================================================
-[20:18:33] [INFO] 
-[20:18:34] [SUCCESS] Step 3 (Optimization) completed successfully.
-[20:18:34] [INFO] 
-[20:18:34] [INFO] ================================================================================
-[20:18:34] [INFO]    >>> STEP 3B: SHEAR SUPPRESSION VISUALIZATION
-[20:18:34] [INFO] ================================================================================
-[20:18:34] [INFO] 
-[20:18:35] [SUCCESS] Step 3b (Shear Suppression Viz) completed successfully.
-[20:18:35] [INFO] 
-[20:18:35] [INFO] ================================================================================
-[20:18:35] [INFO]    >>> STEP 4: ROBUSTNESS CHECKS
-[20:18:35] [INFO] ================================================================================
-[20:18:35] [INFO] 
-[20:18:35] [PROCESS] Running Aperture Sensitivity Analysis...
-[20:18:59] [SUCCESS] Step 4 (Robustness) completed successfully.
-[20:18:59] [INFO] 
-[20:18:59] [INFO] ================================================================================
-[20:18:59] [INFO]    >>> STEP 5: M31 ANALYSIS
-[20:18:59] [INFO] ================================================================================
-[20:18:59] [INFO] 
+[20:23:03] [INFO] 
+[20:23:03] [INFO] ================================================================================
+[20:23:03] [INFO]    TEP-H0 ANALYSIS PIPELINE INITIATED
+[20:23:03] [INFO] ================================================================================
+[20:23:03] [INFO] 
+[20:23:03] [INFO] Project Root: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0
+[20:23:03] [INFO] Starting execution sequence...
+[20:23:03] [INFO] 
+[20:23:03] [INFO] ================================================================================
+[20:23:03] [INFO]    >>> STEP 1 (PRE-FLIGHT): COORDINATE PREPARATION
+[20:23:03] [INFO] ================================================================================
+[20:23:03] [INFO] 

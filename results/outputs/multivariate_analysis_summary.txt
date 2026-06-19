@@ -5,7 +5,7 @@ Dep. Variable:             h0_derived   R-squared:                       0.250
 Model:                            OLS   Adj. R-squared:                  0.228
 Method:                 Least Squares   F-statistic:                     11.32
 Date:                Fri, 19 Jun 2026   Prob (F-statistic):            0.00191
-Time:                        20:15:43   Log-Likelihood:                -45.401
+Time:                        20:19:58   Log-Likelihood:                -45.401
 No. Observations:                  36   AIC:                             94.80
 Df Residuals:                      34   BIC:                             97.97
 Df Model:                           1                                         
@@ -32,7 +32,7 @@ Dep. Variable:             h0_derived   R-squared:                       0.359
 Model:                            OLS   Adj. R-squared:                  0.320
 Method:                 Least Squares   F-statistic:                     9.242
 Date:                Fri, 19 Jun 2026   Prob (F-statistic):           0.000650
-Time:                        20:15:43   Log-Likelihood:                -42.569
+Time:                        20:19:58   Log-Likelihood:                -42.569
 No. Observations:                  36   AIC:                             91.14
 Df Residuals:                      33   BIC:                             95.89
 Df Model:                           2                                         
@@ -60,7 +60,7 @@ Dep. Variable:             h0_derived   R-squared:                       0.256
 Model:                            OLS   Adj. R-squared:                  0.187
 Method:                 Least Squares   F-statistic:                     3.680
 Date:                Fri, 19 Jun 2026   Prob (F-statistic):             0.0220
-Time:                        20:15:43   Log-Likelihood:                -45.240
+Time:                        20:19:58   Log-Likelihood:                -45.240
 No. Observations:                  36   AIC:                             98.48
 Df Residuals:                      32   BIC:                             104.8
 Df Model:                           3                                         
@@ -89,7 +89,7 @@ Dep. Variable:             h0_derived   R-squared:                       0.388
 Model:                            OLS   Adj. R-squared:                  0.309
 Method:                 Least Squares   F-statistic:                     4.913
 Date:                Fri, 19 Jun 2026   Prob (F-statistic):            0.00347
-Time:                        20:15:43   Log-Likelihood:                -41.737
+Time:                        20:19:58   Log-Likelihood:                -41.737
 No. Observations:                  36   AIC:                             93.47
 Df Residuals:                      31   BIC:                             101.4
 Df Model:                           4                                         
@@ -119,7 +119,7 @@ Dep. Variable:             h0_derived   R-squared:                       0.461
 Model:                            OLS   Adj. R-squared:                  0.349
 Method:                 Least Squares   F-statistic:                     4.133
 Date:                Fri, 19 Jun 2026   Prob (F-statistic):            0.00405
-Time:                        20:15:43   Log-Likelihood:                -39.452
+Time:                        20:19:58   Log-Likelihood:                -39.452
 No. Observations:                  36   AIC:                             92.90
 Df Residuals:                      29   BIC:                             104.0
 Df Model:                           6                                         

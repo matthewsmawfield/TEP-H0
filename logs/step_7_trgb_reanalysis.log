@@ -1,18 +1,18 @@
-[20:16:13] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
-[20:16:13] [INFO] Matched 18 hosts for differential analysis
-[20:16:13] [INFO] 
+[20:20:26] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
+[20:20:26] [INFO] Matched 18 hosts for differential analysis
+[20:20:26] [INFO] 
 Differential Modulus (TRGB - Cepheid) vs Sigma:
-[20:16:13] [INFO] +-----------------+---------------+--------------+
-[20:16:13] [INFO] | Metric          | Value         | Significance |
-[20:16:13] [INFO] +-----------------+---------------+--------------+
-[20:16:13] [INFO] | Pearson r       | 0.088         | p=0.3637     |
-[20:16:13] [INFO] | Spearman ρ      | 0.321         | p=0.0970     |
-[20:16:13] [INFO] | Slope (mag/dex) | 0.056 ± 0.147 | p=0.3542     |
-[20:16:13] [INFO] +-----------------+---------------+--------------+
-[20:16:13] [INFO] 
+[20:20:26] [INFO] +-----------------+---------------+--------------+
+[20:20:26] [INFO] | Metric          | Value         | Significance |
+[20:20:26] [INFO] +-----------------+---------------+--------------+
+[20:20:26] [INFO] | Pearson r       | 0.088         | p=0.3637     |
+[20:20:26] [INFO] | Spearman ρ      | 0.321         | p=0.0970     |
+[20:20:26] [INFO] | Slope (mag/dex) | 0.056 ± 0.147 | p=0.3542     |
+[20:20:26] [INFO] +-----------------+---------------+--------------+
+[20:20:26] [INFO] 
 Interpretation Check:
-[20:16:13] [INFO]   No significant positive correlation.
-[20:16:13] [WARNING]   → INCONCLUSIVE / TENSION.
-[20:16:13] [INFO] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/supplement_03_trgb_cepheid_residual.png
-[20:16:13] [INFO] Copied plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/supplement_03_trgb_cepheid_residual.png
-[20:16:13] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json
+[20:20:26] [INFO]   No significant positive correlation.
+[20:20:26] [WARNING]   → INCONCLUSIVE / TENSION.
+[20:20:26] [INFO] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/supplement_03_trgb_cepheid_residual.png
+[20:20:26] [INFO] Copied plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/supplement_03_trgb_cepheid_residual.png
+[20:20:26] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json
