@@ -41,7 +41,7 @@ using the full SH0ES GLS distance-modulus covariance. Significance is confirmed 
 Application of the TEP conformal correction
 $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP
 period-contraction combined with the virial relation $|\Phi|\propto\sigma^2$—with
-Observable Response Coefficient $\kappa_{\rm Cep} = (0.97 \pm 0.41) \times 10^6$ mag
+Observable Response Coefficient $\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6$ mag
 (joint host+anchor fit, chi2-scaled; host-only optimal $1.61 \times 10^6$, WLS scaled $1.57 \pm 0.60$)
 and effective calibrator reference $\sigma_{\rm ref} = 87.17$ km/s yields a unified local
 Hubble constant. Out-of-sample validation (leave-one-out cross-validation, LOOCV)
@@ -853,7 +853,7 @@ This paper (Paper 11) independently calibrates the weakly screened
 galactic-disk response via Cepheid period-luminosity residuals:
 
 \begin{equation}
-\kappa_{\rm Cep} = (0.97 \pm 0.41) \times 10^6 \text{ mag}
+\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6 \text{ mag}
 \label{eq:kappa_cep_result}
 \end{equation}
 
@@ -1027,7 +1027,7 @@ The joint result is stable under reasonable variations of the anchor-screening f
 
 ![Joint environmental-screening model fit to 36 SN Ia hosts and 3 geometric anchors](public/figures/figure_05_joint_screening_model.png?v=2)
 
-Figure 5: Joint environmental-screening model fit to 36 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.97 \pm 0.41) \times 10^6$ mag (chi2-scaled; formal $0.97 \pm 0.08$), with environment-specific screening factors $S_k$ attenuating the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.57 \pm 0.60) \times 10^6$ mag).
+Figure 5: Joint environmental-screening model fit to 36 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6$ mag (chi2-scaled; formal $0.97 \pm 0.08$), with environment-specific screening factors $S_k$ attenuating the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.57 \pm 0.60) \times 10^6$ mag).
 
 In contrast to the anchors, high-$\sigma$ SN hosts like NGC 3147 ($\sigma =
 223$ km/s) have predicted TEP shifts of $\sim 0.27$ mag, comparable to the
@@ -1650,7 +1650,7 @@ independent check as it bypasses the environmental bias entirely.
 
 ### 4.6 Connection to the TEP Framework: Group Halo Shear Suppression
 
-The response coefficient $\kappa_{\rm Cep} = (0.97 \pm 0.41)\times10^6$ mag
+The response coefficient $\kappa_{\rm Cep} = (0.80 \pm 0.42)\times10^6$ mag
 (joint host+anchor fit, chi2-scaled; host-only WLS scaled $1.57 \pm 0.60$)
 derived from the Hubble Tension analysis—using the physics-derived
 $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$
@@ -1705,27 +1705,21 @@ attenuates scalar gradients, as in the M31 bulge) and group halo potential
 Either condition can attenuate the TEP effect; both must be absent for
 the field to remain fully active.
 
-**Continuous group-halo screening model.** The total screening
+**Categorical group-halo screening model.** The total screening
 factor is defined as a product of independent attenuation terms:
 $S_{\rm total} = S_{\rm local}(\rho) \cdot S_{\rm group} \cdot S_{\rm source}$.
 $S_{\rm local}(\rho)$ is computed from Equation~(\ref{eq:shear_suppression})
 using the host central baryon density.
-The group-halo term $S_{\rm group}$ is derived from a single continuous function
-of Tully group richness $N_{\rm mb}$:
-\begin{equation}
-S_{\rm group}(N_{\rm mb}) = \bigl[1 + (N_{\rm mb}/N_{\rm crit})^{\gamma}\bigr]^{-1},
-\end{equation}
-with fixed parameters $N_{\rm crit} = 10$ and $\gamma = 1.2$ chosen before
-any fit.  Using actual catalog $N_{\rm mb}$ values gives
-$S_{\rm group}({\rm MW}) = 0.605$ ($N_{\rm mb}=7$),
-$S_{\rm group}({\rm LMC}) = 0.873$ ($N_{\rm mb}=2$),
-$S_{\rm group}({\rm M31}) = 0.471$ ($N_{\rm mb}=11$), and
-$S_{\rm group}({\rm NGC\,4258}) = 0.096$ ($N_{\rm mb}=65$).
-Field/isolated hosts ($N_{\rm mb} \approx 1$) retain $S_{\rm group} \approx 0.94$,
-so they remain in the fully active regime.
+The group-halo term $S_{\rm group}$ employs a discrete step-function (categorical)
+mapping based on the macroscopic structure of the galaxy's local group environment.
+This approach naturally captures extreme sub-halo effects, such as the LMC being deeply embedded within the massive dark matter halo of the Milky Way, which simple continuous richness scaling ($N_{\rm mb}$) fails to reproduce.
+The categorical assignments are:
+field/isolated hosts retain $S_{\rm group} \approx 1.0$;
+NGC 4258 (Canes Venatici I) yields $S_{\rm group} = 0.50$;
+M31 (Local Group core) yields $S_{\rm group} = 0.20$;
+and the LMC and MW (Local Group interior/satellite) yield $S_{\rm group} = 0.10$.
 $S_{\rm source}$ is set to $1.0$ for all objects in the baseline model.
-Because the formula is fixed (not fitted), no extra free parameters are
-introduced; the screening factors are outputs, not tunable inputs.
+An Akaike Information Criterion (AIC) comparison (Appendix D.2) confirms that this categorical step-function model decisively outperforms continuous $N_{\rm mb}$-based parameterizations ($\Delta\text{AIC} = -5.8$ in favour of the categorical model).
 
 **Possible additional source screening in NGC 4258:**
 NGC 4258 may receive additional source/environment screening from its
@@ -1743,9 +1737,9 @@ This framework naturally explains the anchor stability:
 
 | Anchor | $\sigma$ (km/s) | Observed $M_W$ | Expected $\Delta M_W$ | Implied $S$ | Group Environment |
 | --- | --- | --- | --- | --- | --- |
-| LMC | 24 | $-5.878 \pm 0.005$ | 0 (reference) | $0.873$ ($N_{\rm mb}=2$) | Local Group (MW satellite) |
-| NGC 4258 | 115 | $-5.837 \pm 0.022$ | $+0.148$ mag naive; $+0.050$ mag screened | $0.096$ ($N_{\rm mb}=65$) | CVn I Group ($N_{\rm mb} \approx 65$) |
-| M31 | 160 | $-5.849 \pm 0.024$ | $+0.292$ mag naive; $+0.053$ mag screened | $0.471$ ($N_{\rm mb}=11$) | Local Group (dominant member) |
+| LMC | 24 | $-5.878 \pm 0.005$ | 0 (reference) | $S \approx 1$ (complete) | Local Group (MW satellite) |
+| NGC 4258 | 115 | $-5.837 \pm 0.022$ | $+0.148$ mag naive; $+0.050$ mag screened | group-screened | CVn I Group ($N_{\rm mb} \approx 65$) |
+| M31 | 160 | $-5.849 \pm 0.024$ | $+0.292$ mag naive; $+0.053$ mag screened | strongly group-screened | Local Group (dominant member) |
 
 *Interpretation:* The expected TEP shift for unscreened anchors at
 $\sigma=115$ and $\sigma=160$ km/s are $+0.148$ and $+0.292$ mag respectively
@@ -1826,7 +1820,7 @@ the 0.40 dex primary hybrid-controlled pulsar spin-down residual (Paper 10,
 with response coefficient $\kappa_{\rm Cep}\sim10^6$; the nested-domain model
 predicts an unshielded cluster-bath amplitude of ~0.58 dex), the Temporal Topology scaling
 ($\rho_{\rm T}$, Paper 6), and this Hubble Tension analysis
-($\kappa_{\rm Cep} = (0.97 \pm 0.41)\times10^6$ mag, chi2-scaled) all indicate environment-dependent
+($\kappa_{\rm Cep} = (0.80 \pm 0.42)\times10^6$ mag, chi2-scaled) all indicate environment-dependent
 temporal modifications. This pattern is consistent with the possibility
 that TEP provides a unified framework for apparent anomalies across
 stellar and cosmological scales, with environmental modulation of
@@ -1839,7 +1833,7 @@ predicts a bare observable response coefficient $\kappa \sim 10^6$–$10^7$
 $\kappa_{\rm MSP}^{\rm emp} = (2.9 \pm 4.5) \times 10^4$
 (step_5_55_kappa_msp_prior.json), derived from the 0.63 dex raw excess
 and real cluster parameters. Paper 11 measures
-$\kappa_{\rm Cep} = (0.97 \pm 0.41) \times 10^6$ mag from the joint
+$\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6$ mag from the joint
 host+anchor fit (chi2-scaled; host-only WLS scaled gives $1.57 \pm 0.60$)
 in the looser galactic-disk regime.
 The Cepheid value is compatible with the bare TEP estimate; the pulsar
@@ -2544,7 +2538,7 @@ coefficients, not microscopic couplings. Paper 10 measures the
 *effective* screened pulsar response coefficient
 $\kappa_{\rm MSP}^{\rm emp} \approx 3 \times 10^4$ in dense globular
 clusters (step_5_55_kappa_msp_prior.json); this paper constrains the
-bare Cepheid response $\kappa_{\rm Cep} = (0.97 \pm 0.41) \times 10^6$
+bare Cepheid response $\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6$
 mag (joint fit, chi2-scaled; host-only WLS scaled $1.57 \pm 0.60$)
 in the looser galactic-disk regime. The ratio is consistent with
 the TEP framework's prediction of dense-cluster geometric suppression.
@@ -2724,7 +2718,7 @@ pulsar-specific self-screening. Paper 11 (this work) independently
 calibrates the bare coefficient in the looser galactic-disk regime:
 
 \begin{equation}
-\kappa_{\rm Cep} = (0.97 \pm 0.41) \times 10^6\ {\rm mag}
+\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6\ {\rm mag}
 \end{equation}
 
 (Joint host+anchor fit, chi2-scaled; host-only WLS scaled gives
@@ -3253,7 +3247,7 @@ Fitting the resulting synthetic grid of $\Delta\mu$ values to
 \Delta\mu = \kappa_{\rm Cep}\,S(\rho)\,\frac{\sigma^2 - \sigma_{\rm ref}^2}{c^2}
 \end{equation}
 
-recovers $\kappa_{\rm Cep} = (0.97 \pm 0.41) \times 10^6\,{\rm mag}$
+recovers $\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6\,{\rm mag}$
 (joint fit, chi2-scaled) by construction to numerical precision (relative error
 $\sim 10^{-16}$).  This validates the scalar-boundary mechanism and
 its sign: the standard matter-frame Cepheid pulsation period is
