@@ -42,7 +42,7 @@ Application of the TEP conformal correction
 $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP
 period-contraction combined with the virial relation $|\Phi|\propto\sigma^2$—with
 Observable Response Coefficient $\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6$ mag
-(joint host+anchor fit, chi2-scaled; host-only optimal $1.61 \times 10^6$, WLS scaled $1.57 \pm 0.60$)
+(joint host+anchor fit, chi2-scaled; host-only optimal $1.61 \times 10^6$, WLS scaled $1.81 \pm 0.61$)
 and effective calibrator reference $\sigma_{\rm ref} = 87.17$ km/s yields a unified local
 Hubble constant. Out-of-sample validation (leave-one-out cross-validation, LOOCV)
 predicts $H_0^{\rm LOOCV} = 65.92 \pm 1.52$ km/s/Mpc, corresponding to a Planck
@@ -858,7 +858,7 @@ galactic-disk response via Cepheid period-luminosity residuals:
 \end{equation}
 
 Joint host+anchor fit, chi2-scaled (formal $0.97 \pm 0.08$;
-host-only WLS scaled $1.57 \pm 0.60$; bootstrap robust $1.64 \pm 0.63$).
+host-only WLS scaled $1.81 \pm 0.61$; bootstrap robust $1.64 \pm 0.63$).
 
 The Cepheid value is consistent with the bare TEP geometric-factor
 estimate ($T_{\rm disk} \sim 1$); the pulsar value is consistent with
@@ -1027,7 +1027,7 @@ The joint result is stable under reasonable variations of the anchor-screening f
 
 ![Joint environmental-screening model fit to 36 SN Ia hosts and 3 geometric anchors](public/figures/figure_05_joint_screening_model.png?v=2)
 
-Figure 5: Joint environmental-screening model fit to 36 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6$ mag (chi2-scaled; formal $0.97 \pm 0.08$), with environment-specific screening factors $S_k$ attenuating the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.57 \pm 0.60) \times 10^6$ mag).
+Figure 5: Joint environmental-screening model fit to 36 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6$ mag (chi2-scaled; formal $0.97 \pm 0.08$), with environment-specific screening factors $S_k$ attenuating the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.81 \pm 0.61) \times 10^6$ mag).
 
 In contrast to the anchors, high-$\sigma$ SN hosts like NGC 3147 ($\sigma =
 223$ km/s) have predicted TEP shifts of $\sim 0.27$ mag, comparable to the
@@ -1651,7 +1651,7 @@ independent check as it bypasses the environmental bias entirely.
 ### 4.6 Connection to the TEP Framework: Group Halo Shear Suppression
 
 The response coefficient $\kappa_{\rm Cep} = (0.80 \pm 0.42)\times10^6$ mag
-(joint host+anchor fit, chi2-scaled; host-only WLS scaled $1.57 \pm 0.60$)
+(joint host+anchor fit, chi2-scaled; host-only WLS scaled $1.81 \pm 0.61$)
 derived from the Hubble Tension analysis—using the physics-derived
 $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$
 regressor—provides an independent calibration of the TEP conformal factor.
@@ -1834,7 +1834,7 @@ $\kappa_{\rm MSP}^{\rm emp} = (2.9 \pm 4.5) \times 10^4$
 (step_5_55_kappa_msp_prior.json), derived from the 0.63 dex raw excess
 and real cluster parameters. Paper 11 measures
 $\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6$ mag from the joint
-host+anchor fit (chi2-scaled; host-only WLS scaled gives $1.57 \pm 0.60$)
+host+anchor fit (chi2-scaled; host-only WLS scaled gives $1.81 \pm 0.61$)
 in the looser galactic-disk regime.
 The Cepheid value is compatible with the bare TEP estimate; the pulsar
 value is compatible with the same bare estimate after dense-cluster
@@ -2539,7 +2539,7 @@ coefficients, not microscopic couplings. Paper 10 measures the
 $\kappa_{\rm MSP}^{\rm emp} \approx 3 \times 10^4$ in dense globular
 clusters (step_5_55_kappa_msp_prior.json); this paper constrains the
 bare Cepheid response $\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6$
-mag (joint fit, chi2-scaled; host-only WLS scaled $1.57 \pm 0.60$)
+mag (joint fit, chi2-scaled; host-only WLS scaled $1.81 \pm 0.61$)
 in the looser galactic-disk regime. The ratio is consistent with
 the TEP framework's prediction of dense-cluster geometric suppression.
 The microscopic unification of these coefficients requires the full
@@ -2722,7 +2722,7 @@ calibrates the bare coefficient in the looser galactic-disk regime:
 \end{equation}
 
 (Joint host+anchor fit, chi2-scaled; host-only WLS scaled gives
-$1.57 \pm 0.60 \times 10^6$ mag, consistent at $0.66\sigma$.)
+$1.81 \pm 0.61 \times 10^6$ mag, consistent at $0.9\sigma$.)
 The two channels show theoretical consistency in scale and sign: the Cepheid
 value is compatible with the bare TEP geometric-factor estimate; the pulsar
 value is compatible with the same bare estimate after accounting for dense-cluster

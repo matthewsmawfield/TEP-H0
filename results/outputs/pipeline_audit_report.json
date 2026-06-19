@@ -248,11 +248,11 @@
           "tension_statistical": 0.8151578055582945,
           "unified_h0": 66.14245739416327,
           "unified_h0_screened": 62.97526127205045,
-          "wls_chi2": 803.3572625499334,
+          "wls_chi2": 821.0616120267814,
           "wls_dof": 35,
-          "wls_kappa": 1870983.4343938644,
-          "wls_kappa_err": 124712.99699748929,
-          "wls_kappa_err_scaled": 597491.9464813243
+          "wls_kappa": 1814468.9508441053,
+          "wls_kappa_err": 126003.25385299264,
+          "wls_kappa_err_scaled": 610289.0979551914
         },
         "recomputed_tension_bootstrap": 0.6974267891857233,
         "recomputed_tension_sem": 0.8151578055582945
@@ -494,119 +494,39 @@
     {
       "details": {
         "anchor": {
-          "chi2": 2.8970077404243786,
+          "chi2": 3.3550362539980783,
           "dof": 1,
-          "intercept": -5.874926374182812,
-          "intercept_err": 0.004690844357260576,
-          "kappa_anchor": 232119.89763634533,
-          "kappa_anchor_err": 193678.93842636046,
-          "kappa_host": 1621758.2702636719,
-          "kappa_host_err": 889992.842193259,
+          "intercept": -5.875784450664815,
+          "intercept_err": 0.0046903430458121315,
+          "kappa_anchor": 5.04733256828341,
+          "kappa_anchor_err": 663.2809830949317,
+          "kappa_host": 1611136.6271972656,
+          "kappa_host_err": 619064.453125,
           "n_anchors": 3,
-          "p_pearson": 0.8018959043120335,
-          "prediction_test": {
-            "chi2": 5.0865254129224144,
-            "dof": 2,
-            "mean_abs_tension_sigma": 1.5911530110857837,
-            "naive_chi2": 5.0865254129224144,
-            "naive_mean_abs_tension_sigma": 1.5911530110857837,
-            "naive_predictions": [
-              {
-                "M_W_obs": -5.8382610325460895,
-                "M_W_pred": -5.649513954125045,
-                "anchor": "NGC 4258",
-                "d_mu_err": 0.12525679659197908,
-                "d_mu_pred": 0.22824480844045505,
-                "residual": -0.1887470784210441,
-                "sigma": 115.0,
-                "tension_sigma": -1.4839391977320397
-              },
-              {
-                "M_W_obs": -5.8491945771974265,
-                "M_W_pred": -5.426213337123651,
-                "anchor": "M31",
-                "d_mu_err": 0.24780030657899313,
-                "d_mu_pred": 0.45154542544184895,
-                "residual": -0.42298124007377513,
-                "sigma": 160.0,
-                "tension_sigma": -1.6983668244395276
-              }
-            ],
-            "predictions": [
-              {
-                "M_W_obs": -5.8382610325460895,
-                "M_W_pred": -5.649513954125045,
-                "anchor": "NGC 4258",
-                "d_mu_err": 0.12525679659197908,
-                "d_mu_pred": 0.22824480844045505,
-                "residual": -0.1887470784210441,
-                "sigma": 115.0,
-                "tension_sigma": -1.4839391977320397
-              },
-              {
-                "M_W_obs": -5.8491945771974265,
-                "M_W_pred": -5.426213337123651,
-                "anchor": "M31",
-                "d_mu_err": 0.24780030657899313,
-                "d_mu_pred": 0.45154542544184895,
-                "residual": -0.42298124007377513,
-                "sigma": 160.0,
-                "tension_sigma": -1.6983668244395276
-              }
-            ],
-            "reference_S_assumed": 0.8733960595416025,
-            "reference_anchor": "LMC",
-            "tep_screened_chi2": 3.575798159308751,
-            "tep_screened_mean_abs_tension_sigma": 1.319316678848585,
-            "tep_screened_predictions": [
-              {
-                "M_W_obs": -5.8382610325460895,
-                "M_W_pred": -5.8640033563370215,
-                "S_anchor_assumed": 0.09568098445277634,
-                "anchor": "NGC 4258",
-                "d_mu_err": 0.007548728629462276,
-                "d_mu_pred": 0.013755406228478682,
-                "residual": 0.025742323790931998,
-                "sigma": 115.0,
-                "tension_sigma": 1.1018251144919071
-              },
-              {
-                "M_W_obs": -5.8491945771974265,
-                "M_W_pred": -5.66906085885946,
-                "S_anchor_assumed": 0.4714380741611139,
-                "anchor": "M31",
-                "d_mu_err": 0.11452979391861892,
-                "d_mu_pred": 0.20869790370604072,
-                "residual": -0.18013371833796654,
-                "sigma": 160.0,
-                "tension_sigma": -1.536808243205263
-              }
-            ]
-          },
-          "r_pearson": 0.306183306290876,
-          "sigma_ref_screened": 30.50738103825078,
-          "tension_with_host": 1.5256950699719207
+          "p_pearson": 0.9742700749692184,
+          "r_pearson": 0.04040546930065503,
+          "tension_with_host": 2.6025249018620533
         },
         "host_comparison": {}
       },
       "name": "anchor_screening_result_is_current",
-      "ok": true
+      "ok": false
     },
     {
       "details": {
         "local_gravity": {
           "closure": {
-            "alpha_clock": 1145471.2937266687,
-            "alpha_clock_err": 628614.801013988,
+            "alpha_clock": 1137969.0737917577,
+            "alpha_clock_err": 437254.1660638455,
             "cassini_gamma_minus_one_limit": 2.3e-05,
-            "cassini_gamma_minus_one_predicted": 1.707201116721084e-10,
-            "cassini_margin": 134723.43577290227,
+            "cassini_gamma_minus_one_predicted": 1.6849118525029977e-10,
+            "cassini_margin": 136505.65734838095,
             "earth_source_charge_ratio": 1.578651683697185e-15,
-            "kappa_cep": 1621758.2702636719,
-            "kappa_cep_err": 889992.842193259,
+            "kappa_cep": 1611136.6271972656,
+            "kappa_cep_err": 619064.453125,
             "microscope_eta_limit": 1e-14,
-            "microscope_eta_predicted": 3.0135855185341228e-21,
-            "microscope_margin": 3318306.3624702543,
+            "microscope_eta_predicted": 2.9742400640272305e-21,
+            "microscope_margin": 3362203.3812763696,
             "passes_cassini": true,
             "passes_microscope": true,
             "passes_source_charge_closure": true,
@@ -644,7 +564,7 @@
       "spearman_rho": 0.5485199485199486
     },
     "n_checks": 20,
-    "n_failed": 0,
-    "ok": true
+    "n_failed": 1,
+    "ok": false
   }
 }

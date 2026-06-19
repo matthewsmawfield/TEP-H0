@@ -145,10 +145,15 @@ class Step2Stratification:
         anchors = ["NGC 4258", "LMC", "SMC", "M 31", "MW"]
 
         valid = valid[~valid["normalized_name"].isin(anchors)].copy()
-
+        
+        # Enforce strict Hubble-flow redshift cut (z > 0.0035) to exclude
+        # local-flow and peculiar-velocity dominated hosts.
+        # This restores the physically motivated N=29 primary sample.
         n_before = len(valid)
+        valid = valid[pd.to_numeric(valid['z_hd'], errors='coerce') > 0.0035].copy()
+        n_removed = n_before - len(valid)
 
-        print_status(f"Final Sample Size: {len(valid)} SN Ia Hosts (no redshift cuts applied)", "SUCCESS")
+        print_status(f"Final Sample Size: {len(valid)} SN Ia Hosts ({n_removed} removed by z_HD > 0.0035 cut)", "SUCCESS")
 
         # Display Sample
         headers = ["Host", "z_HD", "mu (mag)", "D (Mpc)", "H0 (km/s/Mpc)"]
