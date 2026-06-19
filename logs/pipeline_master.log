@@ -16,3 +16,13 @@
 [00:37:59] [INFO]    >>> STEP 1: DATA INGESTION
 [00:37:59] [INFO] ================================================================================
 [00:37:59] [INFO] 
+[00:38:00] [SUCCESS] Step 1 (Ingestion) completed successfully.
+[00:38:00] [INFO] 
+[00:38:00] [INFO] ================================================================================
+[00:38:00] [INFO]    >>> STEP 1b: APERTURE CORRECTION
+[00:38:00] [INFO] ================================================================================
+[00:38:00] [INFO] 
+[00:38:00] [PROCESS] Fetching host metadata (RC3) for aperture normalization...
+[00:38:00] [INFO] Fetching Galaxy Metadata (RC3)
+[00:38:00] [INFO] Loaded 42 hosts for metadata enrichment.
+[00:38:00] [PROCESS] Querying Vizier (Catalog VII/155)...
