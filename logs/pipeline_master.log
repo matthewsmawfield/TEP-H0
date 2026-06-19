@@ -105,3 +105,50 @@
 [22:16:23] [INFO]    >>> STEP 8: M31 PHAT ANALYSIS
 [22:16:23] [INFO] ================================================================================
 [22:16:23] [INFO] 
+[22:16:24] [SUCCESS] Step 8 (M31 PHAT Analysis) completed successfully.
+[22:16:24] [INFO] 
+[22:16:24] [INFO] ================================================================================
+[22:16:24] [INFO]    >>> STEP 10: ANCHOR STRATIFICATION TEST
+[22:16:24] [INFO] ================================================================================
+[22:16:24] [INFO] 
+[22:16:24] [INFO] ======================================================================
+[22:16:24] [INFO] STEP 10: ANCHOR STRATIFICATION TEST
+[22:16:24] [INFO] Testing for internal P-L tension in geometric anchors
+[22:16:24] [INFO] ======================================================================
+[22:16:24] [INFO] Anchor Screening from Continuous Nmb Formula:
+[22:16:24] [INFO]   S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}
+[22:16:24] [INFO]   N_crit = 10.0, gamma = 1.2 (fixed before any fit)
+[22:16:24] [INFO]   S_{MW} = 0.605  (N_mb = 7)
+[22:16:24] [INFO]   S_{LMC} = 0.873  (N_mb = 2)
+[22:16:24] [INFO]   S_{M31} = 0.471  (N_mb = 11)
+[22:16:24] [INFO]   S_{NGC 4258} = 0.096  (N_mb = 65)
+[22:16:24] [INFO] Loaded 3130 Cepheid measurements
+[22:16:24] [INFO] Anchor Sample Sizes:
+[22:16:24] [INFO] +----------+-----+----------+--------+
+[22:16:24] [INFO] | Anchor   | N   | σ (km/s) | μ_geo  |
+[22:16:24] [INFO] +----------+-----+----------+--------+
+[22:16:24] [INFO] | NGC 4258 | 443 | 115      | 29.398 |
+[22:16:24] [INFO] | LMC      | 339 | 24       | 18.477 |
+[22:16:24] [INFO] | M31      | 55  | 160      | 24.380 |
+[22:16:24] [INFO] +----------+-----+----------+--------+
+[22:16:24] [INFO] Independent P-L Fit Results:
+[22:16:24] [INFO] +----------+-----+-----+-----------+-------+--------+-------+
+[22:16:24] [INFO] | Anchor   | N   | σ   | M_W (abs) | ± err | b_W    | ± err |
+[22:16:24] [INFO] +----------+-----+-----+-----------+-------+--------+-------+
+[22:16:24] [INFO] | NGC 4258 | 443 | 115 | -5.838    | 0.022 | -3.288 | 0.078 |
+[22:16:24] [INFO] | LMC      | 339 | 24  | -5.878    | 0.005 | -3.291 | 0.019 |
+[22:16:24] [INFO] | M31      | 55  | 160 | -5.849    | 0.024 | -3.313 | 0.077 |
+[22:16:24] [INFO] +----------+-----+-----+-----------+-------+--------+-------+
+[22:16:24] [INFO] Multi-Anchor Regression (sigma^2/c^2 form):
+[22:16:24] [INFO]   κ_anchor = 2.321e+05 ± 1.937e+05 mag
+[22:16:24] [INFO]   Significance: 1.2σ
+[22:16:24] [INFO]   Pearson r = 0.306 (p = 0.8019)
+[22:16:24] [INFO]   κ comparison (3-anchor fit, error dominated by κ_host): 1.5σ
+[22:16:24] [INFO] Prediction Test A (NAIVE, S=1 for anchors — standard-GR-style):
+[22:16:24] [INFO]   NGC 4258 σ=   115  Δμ_pred=+0.228  M_W obs=-5.838  pred=-5.650  resid=-0.189 (-1.5σ)
+[22:16:24] [INFO]   M31      σ=   160  Δμ_pred=+0.452  M_W obs=-5.849  pred=-5.426  resid=-0.423 (-1.7σ)
+[22:16:24] [INFO]   Mean |residual| = 1.6σ; chi2 = 5.09 / 2 dof
+[22:16:24] [INFO] Prediction Test B (TEP-AWARE, S_anchor from cosmological environment, ref=LMC with S=0.87):
+[22:16:24] [INFO]   NGC 4258 S=0.10  Δμ_TEP=+0.014  M_W obs=-5.838  pred=-5.864  resid=+0.026 (+1.1σ)
+[22:16:24] [INFO]   M31      S=0.47  Δμ_TEP=+0.209  M_W obs=-5.849  pred=-5.669  resid=-0.180 (-1.5σ)
+[22:16:24] [INFO]   Mean |residual| = 1.3σ; chi2 = 3.58 / 2 dof
