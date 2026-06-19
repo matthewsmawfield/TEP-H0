@@ -173,21 +173,21 @@ class Step6EnhancedRobustness:
         df_hi = df[df['normalized_name'].isin(hi_hosts)].copy()
         
         # Full sample statistics
-        full_r, full_p = stats.pearsonr(df['sigma_corrected'], df['h0_derived'])
-        full_rho, full_rho_p = stats.spearmanr(df['sigma_corrected'], df['h0_derived'])
+        full_r, full_p = stats.pearsonr(df['sigma_inferred'], df['h0_derived'])
+        full_rho, full_rho_p = stats.spearmanr(df['sigma_inferred'], df['h0_derived'])
         
         # Stellar-only statistics
         if len(df_stellar) >= 5:
-            stellar_r, stellar_p = stats.pearsonr(df_stellar['sigma_corrected'], df_stellar['h0_derived'])
-            stellar_rho, stellar_rho_p = stats.spearmanr(df_stellar['sigma_corrected'], df_stellar['h0_derived'])
+            stellar_r, stellar_p = stats.pearsonr(df_stellar['sigma_inferred'], df_stellar['h0_derived'])
+            stellar_rho, stellar_rho_p = stats.spearmanr(df_stellar['sigma_inferred'], df_stellar['h0_derived'])
         else:
             stellar_r, stellar_p, stellar_rho, stellar_rho_p = np.nan, np.nan, np.nan, np.nan
         
         # Stratification in stellar-only
         if len(df_stellar) >= 5:
-            median_sigma = df_stellar['sigma_corrected'].median()
-            low_sigma = df_stellar[df_stellar['sigma_corrected'] <= median_sigma]
-            high_sigma = df_stellar[df_stellar['sigma_corrected'] > median_sigma]
+            median_sigma = df_stellar['sigma_inferred'].median()
+            low_sigma = df_stellar[df_stellar['sigma_inferred'] <= median_sigma]
+            high_sigma = df_stellar[df_stellar['sigma_inferred'] > median_sigma]
             
             h0_low = low_sigma['h0_derived'].mean()
             h0_high = high_sigma['h0_derived'].mean()
@@ -256,8 +256,8 @@ class Step6EnhancedRobustness:
         df_gold = df[df['normalized_name'].isin(gold_hosts)].copy()
         
         if len(df_gold) >= 5:
-            gold_r, gold_p = stats.pearsonr(df_gold['sigma_corrected'], df_gold['h0_derived'])
-            gold_rho, gold_rho_p = stats.spearmanr(df_gold['sigma_corrected'], df_gold['h0_derived'])
+            gold_r, gold_p = stats.pearsonr(df_gold['sigma_inferred'], df_gold['h0_derived'])
+            gold_rho, gold_rho_p = stats.spearmanr(df_gold['sigma_inferred'], df_gold['h0_derived'])
         else:
             gold_r, gold_p, gold_rho, gold_rho_p = np.nan, np.nan, np.nan, np.nan
         
@@ -298,7 +298,7 @@ class Step6EnhancedRobustness:
         
         # Compute partial correlation: r(H0, σ | log_rho)
         h0 = df_valid['h0_derived'].values
-        sigma = df_valid['sigma_corrected'].values
+        sigma = df_valid['sigma_inferred'].values
         log_rho = df_valid['log_rho'].values
         
         # Residual method for partial correlation
@@ -358,16 +358,14 @@ class Step6EnhancedRobustness:
         print_status("\n--- TEP CORRECTION ON SUBSAMPLES ---", "SECTION")
         
         from scripts.utils.tep_correction import tep_correction
-        # Load sigma_ref dynamically from step 3 to keep subsample tests consistent
-        # with the main TEP correction.
-        sigma_ref = 75.25  # Fallback if tep_correction_results.json is missing
+        sigma_ref_screened = 30.51  # Fallback if tep_correction_results.json is missing
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     _tep = json.load(f)
-                if isinstance(_tep, dict) and 'sigma_ref' in _tep:
-                    sigma_ref = float(_tep['sigma_ref'])
+                if isinstance(_tep, dict) and 'sigma_ref_screened' in _tep:
+                    sigma_ref_screened = float(_tep['sigma_ref_screened'])
         except Exception:
             pass
         
@@ -376,7 +374,7 @@ class Step6EnhancedRobustness:
             if len(subset_df) < 5:
                 return np.nan, np.nan, np.nan
             
-            sigma_col = 'sigma_inferred' if 'sigma_inferred' in subset_df.columns else 'sigma_corrected'
+            sigma_col = 'sigma_inferred' if 'sigma_inferred' in subset_df.columns else 'sigma'
             sigma_arr = subset_df[sigma_col].values
             mu_arr = subset_df['value'].values
             z_arr = subset_df['z_hd'].values
@@ -384,7 +382,7 @@ class Step6EnhancedRobustness:
             
             def objective(kappa):
                 k = float(kappa[0]) if hasattr(kappa, '__len__') else float(kappa)
-                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, k, S_arr)
+                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref_screened, k, S_arr)
                 d_corr = 10 ** ((mu_corr - 25) / 5)
                 h0_corr = 299792.458 * z_arr / d_corr
                 slope, _, _, _, _ = stats.linregress(sigma_arr, h0_corr)
@@ -399,7 +397,7 @@ class Step6EnhancedRobustness:
             kappa_cep_opt = float(result.x[0])
             
             # Compute unified H0
-            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, kappa_cep_opt, S_arr)
+            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref_screened, kappa_cep_opt, S_arr)
             d_corr = 10 ** ((mu_corr - 25) / 5)
             h0_corr = 299792.458 * z_arr / d_corr
             unified_h0 = np.mean(h0_corr)
@@ -476,19 +474,19 @@ class Step6EnhancedRobustness:
         print_status("\n--- σ-QUALITY CONVERGENCE TEST ---", "SECTION")
         from scripts.utils.tep_correction import tep_correction
 
-        sigma_ref = 75.25
+        sigma_ref_screened = 30.51
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     _tep = json.load(f)
-                if isinstance(_tep, dict) and 'sigma_ref' in _tep:
-                    sigma_ref = float(_tep['sigma_ref'])
+                if isinstance(_tep, dict) and 'sigma_ref_screened' in _tep:
+                    sigma_ref_screened = float(_tep['sigma_ref_screened'])
         except Exception:
             pass
 
         # Use the FULL-SAMPLE fitted kappa (uniform across subsamples)
-        kappa_full = 1.05e6
+        kappa_full = 0.99e6
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
@@ -539,7 +537,7 @@ class Step6EnhancedRobustness:
             h0_raw_sem = float(np.std(h0_raw, ddof=1) / np.sqrt(len(h0_raw)))
 
             # Corrected H0 with FULL-SAMPLE kappa
-            dmu = tep_correction(sigma, sigma_ref, kappa_full, S)
+            dmu = tep_correction(sigma, sigma_ref_screened, kappa_full, S)
             mu_corr = mu + dmu
             d_corr = 10 ** ((mu_corr - 25) / 5)
             h0_corr = 299792.458 * z / d_corr
@@ -633,15 +631,15 @@ class Step6EnhancedRobustness:
         print_status("\n--- SUBSET COMPOSITION TABLE ---", "SECTION")
         from scripts.utils.tep_correction import tep_correction
 
-        sigma_ref = 75.25
-        kappa_full = 1.05e6
+        sigma_ref_screened = 30.51
+        kappa_full = 0.99e6
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     _tep = json.load(f)
                 if isinstance(_tep, dict):
-                    sigma_ref = float(_tep.get("sigma_ref", sigma_ref))
+                    sigma_ref_screened = float(_tep.get("sigma_ref_screened", 30.51))
                     kappa_full = float(_tep.get("optimal_kappa_cep", kappa_full))
         except Exception:
             pass
@@ -675,7 +673,7 @@ class Step6EnhancedRobustness:
 
             def objective(kappa):
                 k = float(kappa[0]) if hasattr(kappa, "__len__") else float(kappa)
-                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, k, S_arr)
+                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref_screened, k, S_arr)
                 d_corr = 10 ** ((mu_corr - 25) / 5)
                 h0_corr = 299792.458 * z_arr / d_corr
                 slope, _, _, _, _ = stats.linregress(sigma_arr, h0_corr)
@@ -688,7 +686,7 @@ class Step6EnhancedRobustness:
                 options={"xatol": 10.0, "fatol": 1e-6, "maxiter": 500},
             )
             kappa_opt = float(result.x[0])
-            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, kappa_opt, S_arr)
+            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref_screened, kappa_opt, S_arr)
             d_corr = 10 ** ((mu_corr - 25) / 5)
             h0_corr = 299792.458 * z_arr / d_corr
             unified_h0 = float(np.mean(h0_corr))
@@ -721,7 +719,7 @@ class Step6EnhancedRobustness:
             raw_slope, _, _, _, _ = stats.linregress(sigma, h0_raw)
 
             # Corrected with full-sample κ
-            dmu_full = tep_correction(sigma, sigma_ref, kappa_full, S)
+            dmu_full = tep_correction(sigma, sigma_ref_screened, kappa_full, S)
             mu_corr_full = mu + dmu_full
             d_corr_full = 10 ** ((mu_corr_full - 25) / 5)
             h0_corr_full = 299792.458 * z / d_corr_full

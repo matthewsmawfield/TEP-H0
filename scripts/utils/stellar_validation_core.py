@@ -41,10 +41,37 @@ from scripts.utils.tep_correction import C_KM_S, C_SQUARED_KM_S
 # CANONICAL TEP-H0 PARAMETERS (Paper 11)
 # =============================================================================
 
-KAPPA_CEP: float = 1.05e6          # mag
-KAPPA_CEP_ERR: float = 0.43e6      # mag
-B_PL: float = -3.26                # Wesenheit Period-Luminosity slope
-SIGMA_REF: float = 75.25           # km/s (weighted anchor dispersion)
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]
+_DEFAULT_KAPPA_CEP = 0.991381e6
+_DEFAULT_KAPPA_CEP_ERR = 0.560033e6
+_DEFAULT_SIGMA_REF = 75.25
+
+
+def _load_headline_tep_parameters() -> Dict[str, float]:
+    values = {
+        "kappa_cep": _DEFAULT_KAPPA_CEP,
+        "kappa_cep_err": _DEFAULT_KAPPA_CEP_ERR,
+        "sigma_ref": _DEFAULT_SIGMA_REF,
+    }
+    tep_path = _PROJECT_ROOT / "results" / "outputs" / "tep_correction_results.json"
+    try:
+        with open(tep_path, "r") as f:
+            tep = json.load(f)
+        values["kappa_cep"] = float(tep.get("optimal_kappa_cep", values["kappa_cep"]))
+        values["kappa_cep_err"] = float(tep.get("bootstrap_kappa_std", values["kappa_cep_err"]))
+        values["sigma_ref_screened_sq"] = float(tep.get("sigma_ref_screened", 30.51))**2
+    except (OSError, TypeError, ValueError, json.JSONDecodeError):
+        pass
+    return values
+
+
+_TEP_HEADLINES = _load_headline_tep_parameters()
+
+KAPPA_CEP: float = _TEP_HEADLINES["kappa_cep"]          # mag
+KAPPA_CEP_ERR: float = _TEP_HEADLINES["kappa_cep_err"]  # mag
+SIGMA_REF: float = _TEP_HEADLINES["sigma_ref"]
+B_PL: float = -3.26                                     # Wesenheit Period-Luminosity slope
+SIGMA_REF_SCREENED_SQ: float = _TEP_HEADLINES.get("sigma_ref_screened_sq", 30.51**2) # km^2/s^2
 
 # Derived clock-sector coupling
 #   kappa_Cep = |b| / ln(10) * alpha_clock
@@ -105,7 +132,7 @@ def delta_theta(
     """
     S = S_rho(rho_over_rhohalf)
     sigma_sq = np.asarray(sigma_km_s) ** 2
-    return ALPHA_CLOCK * S * (sigma_sq - SIGMA_REF**2) / C_SQUARED_KM_S
+    return ALPHA_CLOCK * (S * sigma_sq - SIGMA_REF_SCREENED_SQ) / C_SQUARED_KM_S
 
 
 def transport_period(
@@ -189,7 +216,7 @@ def delta_mu_direct(
     """
     S = S_rho(rho_over_rhohalf)
     sigma_sq = np.asarray(sigma_km_s) ** 2
-    return KAPPA_CEP * S * (sigma_sq - SIGMA_REF**2) / C_SQUARED_KM_S
+    return KAPPA_CEP * (S * sigma_sq - SIGMA_REF_SCREENED_SQ) / C_SQUARED_KM_S
 
 
 def delta_mu_general(
@@ -299,7 +326,7 @@ def fit_kappa_from_grid(df: pd.DataFrame) -> Tuple[float, float, float]:
         rms_residual : root-mean-square residual (mag)
         max_abs_diff : max |DeltaMu_transport - DeltaMu_direct| (mag)
     """
-    x = df["S_rho"].values * ((df["sigma_km_s"].values ** 2 - SIGMA_REF**2) / C_SQUARED_KM_S)
+    x = (df["S_rho"].values * df["sigma_km_s"].values ** 2 - SIGMA_REF_SCREENED_SQ) / C_SQUARED_KM_S
     y = df["DeltaMu_transport"].values
 
     # Least-squares through origin: y = kappa * x
@@ -462,7 +489,7 @@ def save_validation_json(
             "KAPPA_CEP": KAPPA_CEP,
             "KAPPA_CEP_ERR": KAPPA_CEP_ERR,
             "B_PL": B_PL,
-            "SIGMA_REF_km_s": SIGMA_REF,
+            "SIGMA_REF_SCREENED_SQ": SIGMA_REF_SCREENED_SQ,
             "ALPHA_CLOCK": float(alpha_clock),
             "P_mesa_days": float(P_mesa_days),
         },
@@ -485,7 +512,7 @@ __all__ = [
     "KAPPA_CEP",
     "KAPPA_CEP_ERR",
     "B_PL",
-    "SIGMA_REF",
+    "SIGMA_REF_SCREENED_SQ",
     "ALPHA_CLOCK",
     "P_MESA_CANONICAL_DAYS",
     "S_rho",

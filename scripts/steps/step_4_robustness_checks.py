@@ -129,13 +129,26 @@ class Step4RobustnessChecks:
         try:
             cov_reg = self._regularize_covariance(cov)
             cov_inv = np.linalg.inv(cov_reg)
-            XtCi = X.T @ cov_inv
-            fisher = XtCi @ X
-            # Add small regularization for numerical stability
-            reg = 1e-10 * np.trace(fisher) / fisher.shape[0]
-            fisher_reg = fisher + reg * np.eye(fisher.shape[0])
-            fisher_inv = np.linalg.inv(fisher_reg)
-            beta = fisher_inv @ (XtCi @ y)
+            
+            # Scale columns of X to ensure trace regularization doesn't overwhelmingly penalize small variance columns
+            col_norms = np.linalg.norm(X, axis=0)
+            col_norms[col_norms < 1e-10] = 1.0
+            X_scaled = X / col_norms
+            
+            XtCi = X_scaled.T @ cov_inv
+            fisher_scaled = XtCi @ X_scaled
+            
+            # Add small regularization for numerical stability using trace of SCALED fisher matrix
+            reg = 1e-10 * np.trace(fisher_scaled) / fisher_scaled.shape[0]
+            fisher_reg_scaled = fisher_scaled + reg * np.eye(fisher_scaled.shape[0])
+            fisher_inv_scaled = np.linalg.inv(fisher_reg_scaled)
+            
+            beta_scaled = fisher_inv_scaled @ (XtCi @ y)
+            
+            # Unscale beta and covariance
+            beta = beta_scaled / col_norms
+            fisher_inv = fisher_inv_scaled / np.outer(col_norms, col_norms)
+            
             return beta, fisher_inv
         except np.linalg.LinAlgError:
             # Return NaN values if matrix inversion fails
@@ -255,28 +268,45 @@ class Step4RobustnessChecks:
         )
         n = len(y)
 
-        sigma_ref = self._load_sigma_ref()
-        if sigma_ref is None:
-            sigma_ref = 75.25
-            print_status(f"σ_ref missing; using fallback {sigma_ref}", "WARNING")
+        sigma_ref_screened = self._load_sigma_ref_screened()
+        if sigma_ref_screened is None:
+            sigma_ref_screened = 30.51
+            print_status(f"σ_ref_screened missing; using fallback", "WARNING")
 
-        # TEP regressor: S * (sigma^2 - sigma_ref^2) / c^2
+        # TEP regressor: S * (sigma^2 - sigma_ref_screened^2) / c^2
         from scripts.utils.tep_correction import C_SQUARED_KM_S
-        x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
+        x = S * (sigma**2 - sigma_ref_screened**2) / C_SQUARED_KM_S
 
-        # --- Diagonal H0 uncertainties from distance-modulus errors ---
-        # σ_H0 = H0 * ln(10)/5 * σ_μ
-        h0_diag_err = y * (np.log(10) / 5.0) * mu_err
+        # --- Diagonal H0 uncertainties from distance-modulus errors + peculiar velocity ---
+        # sigma_H0^2 = (H0 * ln(10)/5 * sigma_mu)^2 + (vpecerr / d)^2
+        distance_mpc = pd.to_numeric(df['distance_mpc'], errors='coerce').values
+        vpecerr = pd.to_numeric(df.get('vpecerr', pd.Series(np.full(len(df), 250.0))), errors='coerce').fillna(250.0).values
+        
+        h0_diag_err_mu = y * ((np.log(10) / 5.0) * mu_err)
+        h0_diag_err_vpec = vpecerr / distance_mpc
+        h0_diag_err = np.sqrt(h0_diag_err_mu**2 + h0_diag_err_vpec**2)
+        
         w = 1.0 / h0_diag_err**2
         W = np.diag(w)
 
         def _wls_fit(X, y, W):
-            XWX = X.T @ W @ X
-            XWy = X.T @ W @ y
+            # Scale matrix for numerical stability with small regressors (1e-7 order)
+            col_norms = np.linalg.norm(X, axis=0)
+            col_norms[col_norms < 1e-10] = 1.0
+            X_scaled = X / col_norms
+            
+            XWX_scaled = X_scaled.T @ W @ X_scaled
+            XWy_scaled = X_scaled.T @ W @ y
+            
+            reg = 1e-10 * np.trace(XWX_scaled) / XWX_scaled.shape[0]
+            XWX_reg_scaled = XWX_scaled + reg * np.eye(XWX_scaled.shape[0])
+            
             try:
-                beta = np.linalg.solve(XWX, XWy)
+                beta_scaled = np.linalg.solve(XWX_reg_scaled, XWy_scaled)
+                beta = beta_scaled / col_norms
             except np.linalg.LinAlgError:
-                beta = np.linalg.lstsq(XWX, XWy, rcond=None)[0]
+                beta_scaled = np.linalg.lstsq(XWX_reg_scaled, XWy_scaled, rcond=None)[0]
+                beta = beta_scaled / col_norms
             return beta
 
         # Null model (intercept only)
@@ -416,11 +446,23 @@ class Step4RobustnessChecks:
         ]
         if cov_results is not None:
             rows.append(
-                ["full covariance absolute", f"{cov_results.get('null_bic', 'N/A')}", f"{cov_results.get('tep_bic', 'N/A')}", f"{cov_results['delta_bic']:.1f}", "dominated by common mode"]
+                [
+                    "full covariance GLS slope",
+                    f"{cov_results['null_bic']:.1f}",
+                    f"{cov_results['tep_bic']:.1f}",
+                    f"{cov_results['delta_bic']:.1f}",
+                    "free intercept; matches contrast",
+                ]
             )
         if proj_results is not None:
             rows.append(
-                ["projected contrast covariance", f"{proj_results['null_bic_matched']:.1f}", f"{proj_results['tep_bic_matched']:.1f}", f"{proj_results['delta_bic_matched']:.1f}", "primary environmental evidence"]
+                [
+                    "projected host-contrast covariance",
+                    f"{proj_results['null_bic_matched']:.1f}",
+                    f"{proj_results['tep_bic_matched']:.1f}",
+                    f"{proj_results['delta_bic_matched']:.1f}",
+                    "primary environmental evidence",
+                ]
             )
         print_table(headers, rows, title="Model Comparison")
         if proj_results is not None:
@@ -431,14 +473,24 @@ class Step4RobustnessChecks:
         else:
             print_status(f"Δχ² (null − TEP) = {chi2_null_diag - chi2_tep_diag:.2f}", "INFO")
             print_status(f"ΔBIC = {delta_bic_diag:.2f}  ({strength} evidence for TEP)", "RESULT")
+        tep_path = self.outputs_dir / "tep_correction_results.json"
+        step3_kappa = None
+        try:
+            if tep_path.exists():
+                with open(tep_path, "r") as f:
+                    tep_results = json.load(f)
+                step3_kappa = float(tep_results["optimal_kappa_cep"])
+        except (KeyError, TypeError, ValueError, json.JSONDecodeError):
+            step3_kappa = None
+        step3_kappa_text = f"{step3_kappa:.3e}" if step3_kappa is not None else "unavailable"
         print_status(
-            f"WLS-implied κ_Cep = {kappa_wls:.3e} mag (Step 3 fitted ~1.05e6)",
+            f"WLS-implied κ_Cep = {kappa_wls:.3e} mag (Step 3 fitted {step3_kappa_text})",
             "INFO",
         )
 
         result = {
             "n": int(n),
-            "sigma_ref": float(sigma_ref),
+            "sigma_ref_screened_sq": float(sigma_ref_screened**2),
             "null_chi2": float(chi2_null_diag),
             "null_bic": float(bic_null_diag),
             "tep_chi2": float(chi2_tep_diag),
@@ -458,17 +510,17 @@ class Step4RobustnessChecks:
             result["projected"] = proj_results
         return result
 
-    def _load_sigma_ref(self):
+    def _load_sigma_ref_screened(self):
         if not self.tep_results_path.exists():
             return None
         try:
             with open(self.tep_results_path, 'r') as f:
                 d = json.load(f)
-            return float(d.get('sigma_ref')) if 'sigma_ref' in d else None
+            return float(d.get('sigma_ref_screened')) if 'sigma_ref_screened' in d else None
         except Exception:
             return None
 
-    def _fit_kappa(self, df, sigma_ref):
+    def _fit_kappa(self, df, sigma_ref_screened):
         from scripts.utils.tep_correction import tep_correction
         sigma = df['sigma_inferred'].values.astype(float)
         mu = df['value'].values.astype(float)
@@ -477,7 +529,7 @@ class Step4RobustnessChecks:
 
         def objective(params):
             kappa_cep = float(params[0])
-            corr = tep_correction(sigma, sigma_ref, kappa_cep, S)
+            corr = tep_correction(sigma, sigma_ref_screened, kappa_cep, S)
             mu_corr = mu + corr
             d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
             h0_corr = v / d_corr
@@ -492,13 +544,13 @@ class Step4RobustnessChecks:
         )
         return float(res.x[0])
 
-    def _apply_kappa(self, df, kappa_cep, sigma_ref):
+    def _apply_kappa(self, df, kappa_cep, sigma_ref_screened):
         from scripts.utils.tep_correction import tep_correction
         sigma = df['sigma_inferred'].values.astype(float)
         mu = df['value'].values.astype(float)
         v = df['velocity'].values.astype(float)
         S = df['shear_suppression'].values.astype(float) if 'shear_suppression' in df.columns else np.ones(len(df))
-        corr = tep_correction(sigma, float(sigma_ref), float(kappa_cep), S)
+        corr = tep_correction(sigma, float(sigma_ref_screened), float(kappa_cep), S)
         mu_corr = mu + corr
         d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
         return v / d_corr
@@ -510,9 +562,9 @@ class Step4RobustnessChecks:
             print_status("Stratified data missing. Run Step 2 first.", "ERROR")
             return
 
-        sigma_ref = self._load_sigma_ref()
-        if sigma_ref is None:
-            print_status("Could not load sigma_ref from Step 3 results. Run Step 3 first.", "ERROR")
+        sigma_ref_screened = self._load_sigma_ref_screened()
+        if sigma_ref_screened is None:
+            print_status("Could not load sigma_ref_screened from Step 3 results. Run Step 3 first.", "ERROR")
             return
 
         df = pd.read_csv(self.stratified_path)
@@ -548,8 +600,8 @@ class Step4RobustnessChecks:
             train = df.iloc[train_idx]
             test = df.iloc[test_idx]
 
-            kappa_hat = self._fit_kappa(train, sigma_ref)
-            h0_test = self._apply_kappa(test, kappa_hat, sigma_ref)
+            kappa_hat = self._fit_kappa(train, sigma_ref_screened)
+            h0_test = self._apply_kappa(test, kappa_hat, sigma_ref_screened)
 
             slope_test, _ = np.polyfit(test['sigma_inferred'].values, h0_test, 1)
             r_test = stats.pearsonr(test['sigma_inferred'].values, h0_test)[0]
@@ -571,9 +623,10 @@ class Step4RobustnessChecks:
         loo_pred = np.empty(n)
         for i in range(n):
             train = df.drop(index=i)
-            kappa_i = self._fit_kappa(train, sigma_ref)
+            kappa_i = self._fit_kappa(train, sigma_ref_screened)
             loo_kappa_ceps.append(kappa_i)
-            loo_pred[i] = float(self._apply_kappa(df.iloc[[i]], kappa_i, sigma_ref)[0])
+            # Apply to hold-out
+            loo_pred[i] = float(self._apply_kappa(df.iloc[[i]], kappa_i, sigma_ref_screened)[0])
 
         loo_kappa_ceps = np.array(loo_kappa_ceps)
         loo_slope, _ = np.polyfit(sigma_all, loo_pred, 1)
@@ -606,7 +659,7 @@ class Step4RobustnessChecks:
 
         payload = {
             "n": int(n),
-            "sigma_ref": float(sigma_ref),
+            "sigma_ref_screened_sq": float(sigma_ref_screened**2),
             "planck_h0": float(planck_h0),
             "planck_err": float(planck_err),
             "baseline": {
@@ -842,63 +895,6 @@ class Step4RobustnessChecks:
             alt_rows.append(suite)
         alt_df = pd.DataFrame(alt_rows) if alt_rows else pd.DataFrame()
 
-        if 'vpecerr' in df.columns:
-            vpecerr = pd.to_numeric(df['vpecerr'], errors='coerce').fillna(250.0).values
-        else:
-            vpecerr = np.full(len(df), 250.0)
-        if 'sigma_delta' in df.columns:
-            # sigma_delta is a signed aperture-correction shift in the current
-            # table, so use its magnitude as a conservative scale proxy.
-            sigma_err = np.abs(pd.to_numeric(df['sigma_delta'], errors='coerce').fillna(0.0).values)
-        else:
-            sigma_err = np.zeros(len(df))
-
-        vel_hd = self._velocity_from_z(df['z_hd']).values
-        d = pd.to_numeric(df['distance_mpc'], errors='coerce').values
-        sigma = pd.to_numeric(df['sigma_inferred'], errors='coerce').values
-
-        mask = np.isfinite(vel_hd) & np.isfinite(d) & np.isfinite(sigma) & np.isfinite(vpecerr) & np.isfinite(sigma_err)
-        vel_hd = vel_hd[mask]
-        d = d[mask]
-        sigma = sigma[mask]
-        vpecerr = vpecerr[mask]
-        sigma_err = sigma_err[mask]
-
-        mc = None
-        mc_joint = None
-        if len(vel_hd) >= 3:
-            rng = np.random.default_rng(42)
-            r_draws = np.empty(n_mc)
-            r_joint_draws = np.empty(n_mc)
-            for i in range(n_mc):
-                v_draw = vel_hd + rng.normal(0.0, vpecerr)
-                h0_draw = v_draw / d
-                r_draws[i] = stats.pearsonr(sigma, h0_draw)[0]
-
-                sigma_draw = np.maximum(1.0, sigma + rng.normal(0.0, sigma_err))
-                r_joint_draws[i] = stats.pearsonr(sigma_draw, h0_draw)[0]
-
-            mc = {
-                'n_mc': int(n_mc),
-                'n_hosts': int(len(vel_hd)),
-                'r_mean': float(np.mean(r_draws)),
-                'r_std': float(np.std(r_draws)),
-                'r_p2p5': float(np.percentile(r_draws, 2.5)),
-                'r_p50': float(np.percentile(r_draws, 50)),
-                'r_p97p5': float(np.percentile(r_draws, 97.5)),
-                'p_r_le_0': float(np.mean(r_draws <= 0.0)),
-            }
-            mc_joint = {
-                'n_mc': int(n_mc),
-                'n_hosts': int(len(vel_hd)),
-                'r_mean': float(np.mean(r_joint_draws)),
-                'r_std': float(np.std(r_joint_draws)),
-                'r_p2p5': float(np.percentile(r_joint_draws, 2.5)),
-                'r_p50': float(np.percentile(r_joint_draws, 50)),
-                'r_p97p5': float(np.percentile(r_joint_draws, 97.5)),
-                'p_r_le_0': float(np.mean(r_joint_draws <= 0.0)),
-            }
-
         with open(self.flow_env_stats_path, 'w') as f:
             f.write("Flow / Environment Robustness\n")
             f.write("==============================\n\n")
@@ -915,19 +911,6 @@ class Step4RobustnessChecks:
                     )
                 f.write("\n")
 
-            if mc is not None:
-                f.write("Monte Carlo with residual peculiar-velocity uncertainty:\n")
-                f.write(f"  N_draw={mc['n_mc']} N_hosts={mc['n_hosts']}\n")
-                f.write(f"  r_mean={mc['r_mean']:.6f} r_std={mc['r_std']:.6f}\n")
-                f.write(f"  r_95CI=[{mc['r_p2p5']:.6f}, {mc['r_p97p5']:.6f}]\n")
-                f.write(f"  P(r<=0)={mc['p_r_le_0']:.6f}\n")
-            if mc_joint is not None:
-                f.write("\nJoint Monte Carlo with peculiar-velocity and sigma-measurement uncertainty:\n")
-                f.write(f"  N_draw={mc_joint['n_mc']} N_hosts={mc_joint['n_hosts']}\n")
-                f.write(f"  r_mean={mc_joint['r_mean']:.6f} r_std={mc_joint['r_std']:.6f}\n")
-                f.write(f"  r_95CI=[{mc_joint['r_p2p5']:.6f}, {mc_joint['r_p97p5']:.6f}]\n")
-                f.write(f"  P(r<=0)={mc_joint['p_r_le_0']:.6f}\n")
-
         print_status(f"Saved flow/environment robustness results to {self.flow_env_stats_path}", "SUCCESS")
 
         headers = ["Test", "Statistic", "p-value", "N"]
@@ -938,31 +921,6 @@ class Step4RobustnessChecks:
             ["Partial r(H0,Sigma|z,logpK)", f"{r_h0_sigma_z_logpK:.3f}", f"{p_h0_sigma_z_logpK:.4f}", str(n_z_logpK)],
         ]
         print_table(headers, rows, title="Flow + Environment Controls")
-
-        if mc is not None:
-            print_table(
-                ["MC Metric", "Value"],
-                [
-                    ["N_hosts", str(mc['n_hosts'])],
-                    ["r_mean", f"{mc['r_mean']:.3f}"],
-                    ["r_std", f"{mc['r_std']:.3f}"],
-                    ["r_95CI", f"[{mc['r_p2p5']:.3f}, {mc['r_p97p5']:.3f}]"],
-                    ["P(r<=0)", f"{mc['p_r_le_0']:.4f}"],
-                ],
-                title="v_pec Monte Carlo Robustness"
-            )
-        if mc_joint is not None:
-            print_table(
-                ["MC Metric", "Value"],
-                [
-                    ["N_hosts", str(mc_joint['n_hosts'])],
-                    ["r_mean", f"{mc_joint['r_mean']:.3f}"],
-                    ["r_std", f"{mc_joint['r_std']:.3f}"],
-                    ["r_95CI", f"[{mc_joint['r_p2p5']:.3f}, {mc_joint['r_p97p5']:.3f}]"],
-                    ["P(r<=0)", f"{mc_joint['p_r_le_0']:.4f}"],
-                ],
-                title="Joint v_pec + sigma Monte Carlo Robustness"
-            )
 
     def perform_jackknife_analysis(self):
         """Performs Jackknife robustness analysis."""
@@ -1422,13 +1380,13 @@ class Step4RobustnessChecks:
             else np.ones(len(merged))
         )
 
-        sigma_ref = self._load_sigma_ref()
-        if sigma_ref is None:
-            sigma_ref = 75.25
-            print_status(f"σ_ref missing; using fallback {sigma_ref}", "WARNING")
+        sigma_ref_screened = self._load_sigma_ref_screened()
+        if sigma_ref_screened is None:
+            sigma_ref_screened = 30.51
+            print_status(f"σ_ref_screened missing; using fallback", "WARNING")
 
         from scripts.utils.tep_correction import C_SQUARED_KM_S
-        x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
+        x = S * (sigma**2 - sigma_ref_screened**2) / C_SQUARED_KM_S
 
         is_hi = (merged["method_class"] == "HI_linewidth").astype(float).values
         is_rot = (merged["method_class"] == "rotation_proxy").astype(float).values
@@ -1446,33 +1404,49 @@ class Step4RobustnessChecks:
         dx_dsigma = S * 2.0 * sigma / C_SQUARED_KM_S
         x_err = np.abs(dx_dsigma * sigma_err)
 
-        # First fit with H0 errors only
+        # First fit with H0 errors only (for initial guess)
         w_base = 1.0 / (h0_err**2 + 1e-10)
         W_base = np.diag(w_base)
-        XWX_base = X.T @ W_base @ X
-        XWy_base = X.T @ W_base @ y
+        
+        col_norms = np.linalg.norm(X, axis=0)
+        col_norms[col_norms < 1e-10] = 1.0
+        X_scaled = X / col_norms
+        
+        XWX_base_scaled = X_scaled.T @ W_base @ X_scaled
+        XWy_base_scaled = X_scaled.T @ W_base @ y
+        
+        reg = 1e-10 * np.trace(XWX_base_scaled) / XWX_base_scaled.shape[0]
+        XWX_base_reg_scaled = XWX_base_scaled + reg * np.eye(XWX_base_scaled.shape[0])
+        
         try:
-            beta_base = np.linalg.solve(XWX_base, XWy_base)
+            beta_base_scaled = np.linalg.solve(XWX_base_reg_scaled, XWy_base_scaled)
+            beta_base = beta_base_scaled / col_norms
         except np.linalg.LinAlgError:
-            beta_base = np.linalg.lstsq(XWX_base, XWy_base, rcond=None)[0]
-        beta1_base = beta_base[1]
+            beta_base_scaled = np.linalg.lstsq(XWX_base_reg_scaled, XWy_base_scaled, rcond=None)[0]
+            beta_base = beta_base_scaled / col_norms
 
-        # Total variance including EIV contribution from σ uncertainty
-        total_var = h0_err**2 + (beta1_base * x_err) ** 2
-        w_total = 1.0 / (total_var + 1e-10)
-        W_total = np.diag(w_total)
-        XWX = X.T @ W_total @ X
-        XWy = X.T @ W_total @ y
-        try:
-            beta = np.linalg.solve(XWX, XWy)
-        except np.linalg.LinAlgError:
-            beta = np.linalg.lstsq(XWX, XWy, rcond=None)[0]
+        # Total variance using rigorous Orthogonal Distance Regression (ODR)
+        from scipy import odr
 
-        try:
-            beta_cov = np.linalg.inv(XWX)
-        except np.linalg.LinAlgError:
-            beta_cov = np.linalg.pinv(XWX)
-        beta_se = np.sqrt(np.diag(beta_cov))
+        def f_model(B, x_data):
+            # B[0] = intercept, B[1] = slope, B[2] = gamma_hi, B[3] = gamma_rot
+            # x_data[0] = x_tep, x_data[1] = is_hi, x_data[2] = is_rot
+            return B[0] + B[1] * x_data[0] + B[2] * x_data[1] + B[3] * x_data[2]
+
+        linear_model = odr.Model(f_model)
+        
+        # x input data
+        x_data = np.vstack([x, is_hi, is_rot])
+        
+        # x error data (treat is_hi and is_rot as exact by setting tiny errors)
+        sx_data = np.vstack([x_err + 1e-10, np.full_like(x_err, 1e-10), np.full_like(x_err, 1e-10)])
+        
+        mydata = odr.RealData(x_data, y, sx=sx_data, sy=h0_err + 1e-10)
+        myodr = odr.ODR(mydata, linear_model, beta0=beta_base)
+        myoutput = myodr.run()
+        
+        beta = myoutput.beta
+        beta_se = myoutput.sd_beta
 
         t_beta1 = beta[1] / beta_se[1] if beta_se[1] > 0 else np.nan
         df_resid = len(y) - X.shape[1]

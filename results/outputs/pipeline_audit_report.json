@@ -17,40 +17,40 @@
     {
       "details": {
         "expected": {
-          "delta_h0": 7.860052734143736,
-          "high_mean_h0": 74.12407411543427,
-          "high_n": 14,
-          "low_mean_h0": 66.26402138129053,
-          "low_n": 15,
-          "median_sigma": 96.40480287112231,
-          "n": 29,
-          "pearson_p": 0.010855420330146038,
-          "pearson_r": 0.4659178889421861,
-          "spearman_p": 0.004061456506390692,
-          "spearman_rho": 0.5172413793103448
+          "delta_h0": 10.109375342032507,
+          "high_mean_h0": 72.64158656088135,
+          "high_n": 18,
+          "low_mean_h0": 62.53221121884884,
+          "low_n": 18,
+          "median_sigma": 89.66358706862846,
+          "n": 36,
+          "pearson_p": 0.001911342417432097,
+          "pearson_r": 0.4997968790065317,
+          "spearman_p": 0.0005328248427797342,
+          "spearman_rho": 0.5485199485199486
         },
         "got": {
-          "correlation_r": 0.4659178889421861,
-          "difference": 7.860052734143736,
-          "difference_cov_err": 0.9500121773014382,
+          "correlation_r": 0.49979687900653164,
+          "difference": 10.109375342032507,
+          "difference_cov_err": 4.0193644616078315,
           "h0_covariance_saved": true,
-          "h0_mean_cov_err": 0.8472139507882559,
+          "h0_mean_cov_err": 2.1179282526716765,
           "high_density": {
-            "cov_err": 1.0693352823050717,
-            "mean_h0": 74.12407411543427,
-            "n": 14,
-            "std_err": 1.3008872175379496
+            "cov_err": 2.6151662498720816,
+            "mean_h0": 72.64158656088135,
+            "n": 18,
+            "std_err": 1.918524273002335
           },
           "low_density": {
-            "cov_err": 0.8695667120918744,
-            "mean_h0": 66.26402138129053,
-            "n": 15,
-            "std_err": 2.101363216966635
+            "cov_err": 3.1952763558224184,
+            "mean_h0": 62.53221121884884,
+            "n": 18,
+            "std_err": 2.021756286182302
           },
-          "median_sigma": 96.40480287112231,
-          "sh0es_density_max": 1.7590781179647055,
-          "sh0es_density_mean": 0.17903632916720133,
-          "sh0es_density_min": 7.84435555279967e-05
+          "median_sigma": 89.66358706862846,
+          "sh0es_density_max": 1.759078117964844,
+          "sh0es_density_mean": 0.16084058661657089,
+          "sh0es_density_min": 7.844355552799971e-05
         }
       },
       "name": "stratification_results_matches_recomputed",
@@ -59,86 +59,86 @@
     {
       "details": {
         "expected": {
-          "n": 29,
-          "pearson_r": 0.4659178889421861,
-          "spearman_rho": 0.5172413793103448
+          "n": 36,
+          "pearson_r": 0.4997968790065317,
+          "spearman_rho": 0.5485199485199486
         },
         "got": {
-          "avg_offdiag_corr": 0.10303131702926788,
+          "avg_offdiag_corr": 0.005817179782167181,
           "bayesian_comparison": {
-            "bayes_factor": 6.768418966739918e+28,
-            "delta_bic": 132.76930025658072,
-            "delta_chi2": 136.13659608656718,
-            "evidence_strength": "very strong",
+            "bayes_factor": 7.700274329924244,
+            "delta_bic": 4.082511910975782,
+            "delta_chi2": 7.666030849431891,
+            "evidence_strength": "positive",
             "gls_crosscheck": {
-              "delta_bic": -3.226131606299532,
-              "null_bic": 578.4962709476426,
-              "null_chi2": 575.1289751176562,
-              "tep_bic": 581.7224025539422,
-              "tep_chi2": 574.9878108939693
+              "delta_bic": 4.046952209814542,
+              "null_bic": 32.54123514041121,
+              "null_chi2": 28.9577162019551,
+              "tep_bic": 28.49428293059667,
+              "tep_chi2": 21.32724505368445
             },
-            "kappa_wls_implied": 1668680.711734776,
-            "ln_bayes_factor": 66.38465012829036,
-            "n": 29,
-            "null_bic": 544.1580379583424,
-            "null_chi2": 540.790742128356,
+            "kappa_wls_implied": 1056177.3866891968,
+            "ln_bayes_factor": 2.041255955487891,
+            "n": 36,
+            "null_bic": 32.52983050189357,
+            "null_chi2": 28.946311563437458,
             "projected": {
-              "bayes_factor": 5.961361753180816e+27,
+              "bayes_factor": 7.671878827927261,
               "beta_proj": 0.0,
-              "delta_bic": 127.91019289579151,
-              "delta_bic_matched": 127.87510157598024,
-              "delta_chi2": 131.2423974059667,
-              "evidence_strength": "very strong",
-              "ln_bayes_factor": 63.955096447895755,
-              "n_eff": 28,
-              "null_bic_matched": 578.4962709476422,
-              "null_chi2": 575.1289751176557,
-              "tep_bic_matched": 450.62116937166195,
-              "tep_chi2": 443.88657771168903
+              "delta_bic": 4.07512308678124,
+              "delta_bic_matched": 4.046952209814549,
+              "delta_chi2": 7.630471148270654,
+              "evidence_strength": "positive",
+              "ln_bayes_factor": 2.03756154339062,
+              "n_eff": 35,
+              "null_bic_matched": 32.541235140411224,
+              "null_chi2": 28.95771620195511,
+              "tep_bic_matched": 28.494282930596675,
+              "tep_chi2": 21.327245053684457
             },
-            "sigma_ref": 75.25,
-            "tep_bic": 411.3887377017617,
-            "tep_chi2": 404.6541460417888,
-            "wls_beta_x": 49894950.85362489,
-            "wls_mu_tep": 64.92884372120486
+            "sigma_ref_screened_sq": 930.7002978130233,
+            "tep_bic": 28.44731859091779,
+            "tep_chi2": 21.280280714005567,
+            "wls_beta_x": 31753969.881801065,
+            "wls_mu_tep": 65.28531131222955
           },
-          "gls_slope_p": 7.329692408575283e-13,
-          "gls_slope_per_kms": 0.12725571208199307,
-          "gls_slope_se": 0.010058344681259337,
-          "gls_slope_t": 12.651754947222612,
-          "n": 29,
-          "n_eff_equicorr": 7.46484403998459,
+          "gls_slope_p": 0.008141855072580029,
+          "gls_slope_per_kms": 0.08671862230831434,
+          "gls_slope_se": 0.030852101056852287,
+          "gls_slope_t": 2.8107849818239212,
+          "n": 36,
+          "n_eff_equicorr": 29.910237076048432,
           "n_sims": 20000,
-          "pearson_p_cov": 0.02315,
-          "pearson_r": 0.4659178889421861,
+          "pearson_p_cov": 0.0003,
+          "pearson_r": 0.4997968790065317,
           "provenance_eiv": {
             "beta": [
-              61.318114446306105,
-              78884974.90337063,
-              5.551959052681923,
+              43.1452073963651,
+              346853682.7308718,
+              13.357872680137811,
               0.0
             ],
-            "beta1_p": 2.2892576723165803e-10,
-            "beta1_t": 10.167807912945674,
+            "beta1_p": 3.138442000283348e-05,
+            "beta1_t": 4.842585518728312,
             "beta_se": [
-              0.7145343005724771,
-              7758306.960434817,
-              0.9567992625731903,
+              3.556326711366697,
+              71625721.7119745,
+              3.8154194258672196,
               0.0
             ],
-            "gamma_HI": 5.551959052681923,
-            "gamma_HI_se": 0.9567992625731903,
+            "gamma_HI": 13.357872680137811,
+            "gamma_HI_se": 3.8154194258672196,
             "gamma_rotation": 0.0,
             "gamma_rotation_se": 0.0,
-            "mean_x_err_hi": 2.0731315110010134e-08,
+            "mean_x_err_hi": 1.9253254709858577e-08,
             "mean_x_err_rot": null,
-            "mean_x_err_stellar": 4.4455487815163574e-08,
-            "n_hi": 13,
+            "mean_x_err_stellar": 3.91022545965547e-08,
+            "n_hi": 18,
             "n_rot": 0,
-            "n_stellar": 16
+            "n_stellar": 18
           },
-          "spearman_p_cov": 0.0045,
-          "spearman_rho": 0.5172413793103448
+          "spearman_p_cov": 0.0006,
+          "spearman_rho": 0.5485199485199486
         }
       },
       "name": "covariance_robustness_matches_recomputed",
@@ -147,21 +147,48 @@
     {
       "details": {
         "projected": {
-          "bayes_factor": 5.961361753180816e+27,
+          "bayes_factor": 7.671878827927261,
           "beta_proj": 0.0,
-          "delta_bic": 127.91019289579151,
-          "delta_bic_matched": 127.87510157598024,
-          "delta_chi2": 131.2423974059667,
-          "evidence_strength": "very strong",
-          "ln_bayes_factor": 63.955096447895755,
-          "n_eff": 28,
-          "null_bic_matched": 578.4962709476422,
-          "null_chi2": 575.1289751176557,
-          "tep_bic_matched": 450.62116937166195,
-          "tep_chi2": 443.88657771168903
+          "delta_bic": 4.07512308678124,
+          "delta_bic_matched": 4.046952209814549,
+          "delta_chi2": 7.630471148270654,
+          "evidence_strength": "positive",
+          "ln_bayes_factor": 2.03756154339062,
+          "n_eff": 35,
+          "null_bic_matched": 32.541235140411224,
+          "null_chi2": 28.95771620195511,
+          "tep_bic_matched": 28.494282930596675,
+          "tep_chi2": 21.327245053684457
         }
       },
       "name": "covariance_projected_bic_retains_strong_evidence",
+      "ok": true
+    },
+    {
+      "details": {
+        "gls_crosscheck": {
+          "delta_bic": 4.046952209814542,
+          "null_bic": 32.54123514041121,
+          "null_chi2": 28.9577162019551,
+          "tep_bic": 28.49428293059667,
+          "tep_chi2": 21.32724505368445
+        },
+        "projected": {
+          "bayes_factor": 7.671878827927261,
+          "beta_proj": 0.0,
+          "delta_bic": 4.07512308678124,
+          "delta_bic_matched": 4.046952209814549,
+          "delta_chi2": 7.630471148270654,
+          "evidence_strength": "positive",
+          "ln_bayes_factor": 2.03756154339062,
+          "n_eff": 35,
+          "null_bic_matched": 32.541235140411224,
+          "null_chi2": 28.95771620195511,
+          "tep_bic_matched": 28.494282930596675,
+          "tep_chi2": 21.327245053684457
+        }
+      },
+      "name": "covariance_gls_slope_matches_projected_contrast",
       "ok": true
     },
     {
@@ -179,30 +206,30 @@
             "MW": 0.6053983587536133,
             "NGC 4258": 0.09568098445277634
           },
-          "bootstrap_h0_ci_lower": 65.06224936018195,
-          "bootstrap_h0_ci_upper": 70.87436534580853,
-          "bootstrap_h0_mean": 68.060424535311,
-          "bootstrap_h0_median": 68.0438356361133,
-          "bootstrap_h0_robust_std": 1.4662502811842444,
-          "bootstrap_h0_std": 1.4858318656526661,
-          "bootstrap_kappa_ci_lower": 600676.26953125,
-          "bootstrap_kappa_ci_upper": 2879611.8164062495,
-          "bootstrap_kappa_mean": 1163178.41796875,
-          "bootstrap_kappa_median": 1019189.453125,
+          "bootstrap_h0_ci_lower": 61.846053253319106,
+          "bootstrap_h0_ci_upper": 68.67132992418443,
+          "bootstrap_h0_mean": 65.09241487030852,
+          "bootstrap_h0_median": 65.06627364741111,
+          "bootstrap_h0_robust_std": 1.6312841973219676,
+          "bootstrap_h0_std": 1.699755276174819,
+          "bootstrap_kappa_ci_lower": 946354.98046875,
+          "bootstrap_kappa_ci_upper": 4521899.4140625,
+          "bootstrap_kappa_mean": 1877695.5078125,
+          "bootstrap_kappa_median": 1637060.546875,
           "bootstrap_kappa_n_negative": 0,
-          "bootstrap_kappa_robust_std": 357382.8125,
-          "bootstrap_kappa_skewness": 2.4695935530111086,
-          "bootstrap_kappa_std": 560032.5489648851,
+          "bootstrap_kappa_robust_std": 632318.359375,
+          "bootstrap_kappa_skewness": 2.239536172407191,
+          "bootstrap_kappa_std": 889992.842193259,
           "bootstrap_n_converged": 1000,
           "bootstrap_n_failed": 0,
-          "bootstrap_residual_slope_mean": 1.8689667195284316e-06,
-          "delta_h0_screened": 1.5170944546374443,
-          "h0_screened_sem": 1.2469659181251826,
-          "h0_sem": 1.2834329272507825,
+          "bootstrap_residual_slope_mean": 1.5827336642049352e-06,
+          "delta_h0_screened": 2.2464558569741726,
+          "h0_screened_sem": 1.3901876020320028,
+          "h0_sem": 1.4382560736081482,
           "is_consistent": true,
-          "n_hosts": 29,
-          "optimal_kappa_cep": 991381.0729980469,
-          "optimal_kappa_cep_screened": 1003867.3400878906,
+          "n_hosts": 36,
+          "optimal_kappa_cep": 1621758.2702636719,
+          "optimal_kappa_cep_screened": 1648976.1352539062,
           "planck_h0": 67.4,
           "screening_formula": "S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}",
           "screening_gamma": 1.2,
@@ -210,28 +237,28 @@
           "sigma_ref": 75.25,
           "sigma_ref_screened": 30.50738103825078,
           "slope_audit": {
-            "correction_delta_slope_value": -0.08511851145536725,
+            "correction_delta_slope_value": -0.11927977591957459,
             "correction_slope_H0_sigma_negative": true,
             "distance_modulus_correction_high_sigma_positive": true,
-            "dmu_high_sigma_mean": 0.08827322817544211,
+            "dmu_high_sigma_mean": 0.12087595697845918,
             "raw_slope_H0_sigma_positive": true,
-            "raw_slope_value": 0.08511851500604478
+            "raw_slope_value": 0.11927979259557504
           },
-          "tension_sigma": 0.4670652755556426,
-          "tension_statistical": 0.531600185924667,
-          "unified_h0": 68.13222017543657,
-          "unified_h0_screened": 66.61512572079913
+          "tension_sigma": 1.2294390327380373,
+          "tension_statistical": 1.4305504680576153,
+          "unified_h0": 65.22171712902463,
+          "unified_h0_screened": 62.97526127205045
         },
-        "recomputed_tension_bootstrap": 0.4670652755556426,
-        "recomputed_tension_sem": 0.531600185924667
+        "recomputed_tension_bootstrap": 1.2294390327380373,
+        "recomputed_tension_sem": 1.4305504680576153
       },
       "name": "tep_correction_internal_consistency",
       "ok": true
     },
     {
       "details": {
-        "csv_mean": 68.13222017543657,
-        "json_unified_h0": 68.13222017543657
+        "csv_mean": 65.22171712902463,
+        "json_unified_h0": 65.22171712902463
       },
       "name": "tep_corrected_csv_matches_primary_headline",
       "ok": true
@@ -270,8 +297,8 @@
     {
       "details": {
         "duplicates": [],
-        "expected_n": 29,
-        "n": 29
+        "expected_n": 36,
+        "n": 36
       },
       "name": "sigma_provenance_unique",
       "ok": true
@@ -286,35 +313,40 @@
     {
       "details": {
         "expected": {
-          "n": 29,
-          "pearson_r": 0.4659178889421861,
-          "spearman_rho": 0.5172413793103448
+          "n": 36,
+          "pearson_r": 0.4997968790065317,
+          "spearman_rho": 0.5485199485199486
         },
         "got": {
           "full_sample": {
-            "pearson_p": 0.010855420330146038,
-            "pearson_r": 0.4659178889421861,
-            "spearman_p": 0.004061456506390692,
-            "spearman_rho": 0.5172413793103448
+            "pearson_p": 0.001911342417432097,
+            "pearson_r": 0.4997968790065317,
+            "spearman_p": 0.0005328248427797342,
+            "spearman_rho": 0.5485199485199486
           },
           "hi_hosts": [
+            "M 101",
             "NGC 105",
+            "NGC 1448",
             "NGC 2442",
             "NGC 2525",
             "NGC 2608",
             "NGC 3447",
+            "NGC 3972",
             "NGC 4038",
+            "NGC 4424",
             "NGC 4680",
             "NGC 5468",
             "NGC 5584",
+            "NGC 5643",
             "NGC 5861",
             "NGC 5917",
             "NGC 7250",
             "NGC 7329"
           ],
-          "n_hi": 13,
-          "n_stellar": 16,
-          "n_total": 29,
+          "n_hi": 18,
+          "n_stellar": 18,
+          "n_total": 36,
           "stellar_hosts": [
             "NGC 0691",
             "NGC 1015",
@@ -326,6 +358,8 @@
             "NGC 3254",
             "NGC 3370",
             "NGC 3583",
+            "NGC 3982",
+            "NGC 4536",
             "NGC 4639",
             "NGC 5728",
             "NGC 7541",
@@ -334,14 +368,14 @@
             "UGC 9391"
           ],
           "stellar_only": {
-            "delta_h0": 8.53985640496451,
-            "h0_high_sigma": 73.414156189467,
-            "h0_low_sigma": 64.87429978450248,
-            "median_sigma": 101.69761062572539,
-            "pearson_p": 0.027741737572815645,
-            "pearson_r": 0.5486822802914199,
-            "spearman_p": 0.010787984601948835,
-            "spearman_rho": 0.6176470588235293
+            "delta_h0": 11.200494898037725,
+            "h0_high_sigma": 73.38881830864982,
+            "h0_low_sigma": 62.18832341061209,
+            "median_sigma": 98.97661583959075,
+            "pearson_p": 0.02158354439514472,
+            "pearson_r": 0.536934905663976,
+            "spearman_p": 0.010070753912334262,
+            "spearman_rho": 0.5892672858617131
           }
         }
       },
@@ -351,19 +385,19 @@
     {
       "details": {
         "expected": {
-          "cepheid_delta_h0": 7.860052734143736,
-          "cepheid_n": 29,
-          "cepheid_spearman": 0.5172413793103448
+          "cepheid_delta_h0": 10.109375342032507,
+          "cepheid_n": 36,
+          "cepheid_spearman": 0.5485199485199486
         },
         "got": {
-          "cepheid_delta_h0": 7.860052734143736,
-          "cepheid_n": 29,
-          "cepheid_p": 0.004061456506390692,
-          "cepheid_spearman": 0.5172413793103448,
-          "trgb_delta_h0": 21.68006183113794,
+          "cepheid_delta_h0": 10.109375342032507,
+          "cepheid_n": 36,
+          "cepheid_p": 0.0005328248427797342,
+          "cepheid_spearman": 0.5485199485199486,
+          "trgb_delta_h0": 10.308622630688085,
           "trgb_n": 18,
-          "trgb_p": 0.0015160249841227721,
-          "trgb_spearman": 0.6904024767801857
+          "trgb_p": 0.05043751945104438,
+          "trgb_spearman": 0.4674922600619195
         }
       },
       "name": "trgb_comparison_uses_current_cepheid_stats",
@@ -386,26 +420,30 @@
         "paths": [
           "README.md",
           "zenodo.txt",
+          "manuscripts/11-TEP-H0-v0.7-KingstonUponHull.md",
+          "11-TEP-H0-v0.7-KingstonUponHull.md",
           "site/components/1_abstract.html",
           "site/components/4_results.html",
           "site/components/5_discussion.html",
           "site/components/6_conclusion.html",
+          "site/CITATION.cff",
           "site/dist/index.html",
+          "site/dist/CITATION.cff",
           "site/codemeta.json",
           "site/index.html",
           "results/outputs/TEP_FINAL_ROBUSTNESS_REPORT.md"
         ],
         "required_tokens": [
-          "0.517",
-          "0.0041",
-          "0.466",
-          "0.0109",
-          "68.13",
-          "68.06",
-          "1.49",
-          "0.47",
-          "0.99",
-          "0.56"
+          "0.549",
+          "0.0005",
+          "0.500",
+          "0.0019",
+          "65.22",
+          "65.09",
+          "1.70",
+          "1.23",
+          "1.62",
+          "0.89"
         ]
       },
       "name": "narrative_surfaces_include_current_headline_numbers",
@@ -417,11 +455,15 @@
         "paths": [
           "README.md",
           "zenodo.txt",
+          "manuscripts/11-TEP-H0-v0.7-KingstonUponHull.md",
+          "11-TEP-H0-v0.7-KingstonUponHull.md",
           "site/components/1_abstract.html",
           "site/components/4_results.html",
           "site/components/5_discussion.html",
           "site/components/6_conclusion.html",
+          "site/CITATION.cff",
           "site/dist/index.html",
+          "site/dist/CITATION.cff",
           "site/codemeta.json",
           "site/index.html",
           "results/outputs/TEP_FINAL_ROBUSTNESS_REPORT.md"
@@ -435,10 +477,10 @@
         "interpretation": {
           "primary_model": "Full",
           "primary_reason": "Controls age, SN color, and stellar mass. This is the primary astrophysical-confound model.",
-          "primary_sigma_hc3_p": 0.012529035552566948,
+          "primary_sigma_hc3_p": 0.006084030245470266,
           "stress_model": "FlowEnvironment",
           "stress_reason": "Adds redshift and group richness. This is a conservative stress test because group richness can mediate TEP screening rather than act as a pure nuisance covariate.",
-          "stress_sigma_hc3_p": 0.2783022389114874
+          "stress_sigma_hc3_p": 0.06046043565401104
         }
       },
       "name": "multivariate_primary_interpretation_is_defensible",
@@ -447,102 +489,136 @@
     {
       "details": {
         "anchor": {
-          "chi2": 4.33289044803653,
+          "chi2": 2.8970077404243786,
           "dof": 1,
-          "intercept": -5.874837936073542,
-          "intercept_err": 0.0046903430458121315,
-          "kappa_anchor": 10.126942820084631,
-          "kappa_anchor_err": 663.2809830949317,
-          "kappa_host": 991381.0729980469,
-          "kappa_host_err": 560032.5489648851,
+          "intercept": -5.874926374182812,
+          "intercept_err": 0.004690844357260576,
+          "kappa_anchor": 232119.89763634533,
+          "kappa_anchor_err": 193678.93842636046,
+          "kappa_host": 1621758.2702636719,
+          "kappa_host_err": 889992.842193259,
           "n_anchors": 3,
-          "p_pearson": 0.5020713416616183,
+          "p_pearson": 0.8018959043120335,
           "prediction_test": {
-            "chi2": 3.9489857824377594,
+            "chi2": 5.0865254129224144,
             "dof": 2,
-            "mean_abs_tension_sigma": 1.3945262410020804,
-            "naive_chi2": 3.9489857824377594,
-            "naive_mean_abs_tension_sigma": 1.3945262410020804,
+            "mean_abs_tension_sigma": 1.5911530110857837,
+            "naive_chi2": 5.0865254129224144,
+            "naive_mean_abs_tension_sigma": 1.5911530110857837,
             "naive_predictions": [
               {
                 "M_W_obs": -5.8382610325460895,
-                "M_W_pred": -5.738232677052681,
+                "M_W_pred": -5.649513954125045,
                 "anchor": "NGC 4258",
-                "d_mu_err": 0.07881848004273026,
-                "d_mu_pred": 0.13952608551281992,
-                "residual": -0.10002835549340894,
+                "d_mu_err": 0.12525679659197908,
+                "d_mu_pred": 0.22824480844045505,
+                "residual": -0.1887470784210441,
                 "sigma": 115.0,
-                "tension_sigma": -1.2219300232698056
+                "tension_sigma": -1.4839391977320397
               },
               {
                 "M_W_obs": -5.8491945771974265,
-                "M_W_pred": -5.601728976505511,
+                "M_W_pred": -5.426213337123651,
                 "anchor": "M31",
-                "d_mu_err": 0.15592961060868699,
-                "d_mu_pred": 0.2760297860599894,
-                "residual": -0.2474656006919158,
+                "d_mu_err": 0.24780030657899313,
+                "d_mu_pred": 0.45154542544184895,
+                "residual": -0.42298124007377513,
                 "sigma": 160.0,
-                "tension_sigma": -1.5671224587343555
+                "tension_sigma": -1.6983668244395276
               }
             ],
             "predictions": [
               {
                 "M_W_obs": -5.8382610325460895,
-                "M_W_pred": -5.738232677052681,
+                "M_W_pred": -5.649513954125045,
                 "anchor": "NGC 4258",
-                "d_mu_err": 0.07881848004273026,
-                "d_mu_pred": 0.13952608551281992,
-                "residual": -0.10002835549340894,
+                "d_mu_err": 0.12525679659197908,
+                "d_mu_pred": 0.22824480844045505,
+                "residual": -0.1887470784210441,
                 "sigma": 115.0,
-                "tension_sigma": -1.2219300232698056
+                "tension_sigma": -1.4839391977320397
               },
               {
                 "M_W_obs": -5.8491945771974265,
-                "M_W_pred": -5.601728976505511,
+                "M_W_pred": -5.426213337123651,
                 "anchor": "M31",
-                "d_mu_err": 0.15592961060868699,
-                "d_mu_pred": 0.2760297860599894,
-                "residual": -0.2474656006919158,
+                "d_mu_err": 0.24780030657899313,
+                "d_mu_pred": 0.45154542544184895,
+                "residual": -0.42298124007377513,
                 "sigma": 160.0,
-                "tension_sigma": -1.5671224587343555
+                "tension_sigma": -1.6983668244395276
               }
             ],
             "reference_S_assumed": 0.8733960595416025,
             "reference_anchor": "LMC",
-            "tep_screened_chi2": 2.111650595061243,
-            "tep_screened_mean_abs_tension_sigma": 0.9151188376433989,
+            "tep_screened_chi2": 3.575798159308751,
+            "tep_screened_mean_abs_tension_sigma": 1.319316678848585,
             "tep_screened_predictions": [
               {
                 "M_W_obs": -5.8382610325460895,
-                "M_W_pred": -5.8207728510493215,
+                "M_W_pred": -5.8640033563370215,
                 "S_anchor_assumed": 0.09568098445277634,
                 "anchor": "NGC 4258",
-                "d_mu_err": 0.03219142078734839,
-                "d_mu_pred": 0.056985911516178926,
-                "residual": -0.017488181496768007,
+                "d_mu_err": 0.007548728629462276,
+                "d_mu_pred": 0.013755406228478682,
+                "residual": 0.025742323790931998,
                 "sigma": 115.0,
-                "tension_sigma": -0.44780437122831324
+                "tension_sigma": 1.1018251144919071
               },
               {
                 "M_W_obs": -5.8491945771974265,
-                "M_W_pred": -5.7250748147451676,
+                "M_W_pred": -5.66906085885946,
                 "S_anchor_assumed": 0.4714380741611139,
                 "anchor": "M31",
-                "d_mu_err": 0.08625137478694926,
-                "d_mu_pred": 0.15268394782033273,
-                "residual": -0.12411976245225897,
+                "d_mu_err": 0.11452979391861892,
+                "d_mu_pred": 0.20869790370604072,
+                "residual": -0.18013371833796654,
                 "sigma": 160.0,
-                "tension_sigma": -1.3824333040584844
+                "tension_sigma": -1.536808243205263
               }
             ]
           },
-          "r_pearson": 0.7048023603032825,
-          "sigma_ref": 75.25,
-          "tension_with_host": 1.770201129531296
+          "r_pearson": 0.306183306290876,
+          "sigma_ref_screened_sq": 930.7002978130233,
+          "tension_with_host": 1.5256950699719207
         },
         "host_comparison": {}
       },
       "name": "anchor_screening_result_is_current",
+      "ok": true
+    },
+    {
+      "details": {
+        "local_gravity": {
+          "closure": {
+            "alpha_clock": 1145471.2937266687,
+            "alpha_clock_err": 628614.801013988,
+            "cassini_gamma_minus_one_limit": 2.3e-05,
+            "cassini_gamma_minus_one_predicted": 1.707201116721084e-10,
+            "cassini_margin": 134723.43577290227,
+            "earth_source_charge_ratio": 1.578651683697185e-15,
+            "kappa_cep": 1621758.2702636719,
+            "kappa_cep_err": 889992.842193259,
+            "microscope_eta_limit": 1e-14,
+            "microscope_eta_predicted": 3.0135855185341228e-21,
+            "microscope_margin": 3318306.3624702543,
+            "passes_cassini": true,
+            "passes_microscope": true,
+            "passes_source_charge_closure": true,
+            "solar_neighborhood_screening": 0.96,
+            "solar_source_charge_ratio": 8.401791547411366e-12
+          },
+          "description": "Quantitative source-charge closure mapping the fitted Cepheid clock-response coefficient to local solar-system scalar charge.",
+          "inputs": {
+            "cassini_reference": "Bertotti, Iess & Tortora 2003, Nature 425, 374",
+            "microscope_reference": "Touboul et al. 2022, Physical Review Letters 129, 121102",
+            "source_charge_definition": "alpha_local = alpha_clock * S_solar * q_source, with q_source fixed before checking precision-gravity bounds.",
+            "tep_correction_results": "results/outputs/tep_correction_results.json"
+          },
+          "passes": true
+        }
+      },
+      "name": "local_gravity_closure_passes_precision_bounds",
       "ok": true
     }
   ],
@@ -550,19 +626,19 @@
   "project_root": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0",
   "summary": {
     "derived_from_stratified_h0": {
-      "delta_h0": 7.860052734143736,
-      "high_mean_h0": 74.12407411543427,
-      "high_n": 14,
-      "low_mean_h0": 66.26402138129053,
-      "low_n": 15,
-      "median_sigma": 96.40480287112231,
-      "n": 29,
-      "pearson_p": 0.010855420330146038,
-      "pearson_r": 0.4659178889421861,
-      "spearman_p": 0.004061456506390692,
-      "spearman_rho": 0.5172413793103448
+      "delta_h0": 10.109375342032507,
+      "high_mean_h0": 72.64158656088135,
+      "high_n": 18,
+      "low_mean_h0": 62.53221121884884,
+      "low_n": 18,
+      "median_sigma": 89.66358706862846,
+      "n": 36,
+      "pearson_p": 0.001911342417432097,
+      "pearson_r": 0.4997968790065317,
+      "spearman_p": 0.0005328248427797342,
+      "spearman_rho": 0.5485199485199486
     },
-    "n_checks": 18,
+    "n_checks": 20,
     "n_failed": 0,
     "ok": true
   }

@@ -56,6 +56,7 @@ from scripts.steps.step_7_trgb_reanalysis import Step7TRGBReanalysis
 from scripts.steps.step_8_m31_phat_analysis import Step8M31PHATAnalysis
 from scripts.steps.step_9_final_synthesis import Step9FinalSynthesis
 from scripts.steps.step_10_anchor_stratification import AnchorStratificationStep
+from scripts.steps.step_10b_local_gravity_closure import Step10bLocalGravityClosure
 from scripts.steps.step_13_stellar_validation import Step13StellarValidation
 from scripts.utils.pipeline_audit import audit
 
@@ -250,6 +251,17 @@ def run_pipeline():
 
         set_step_logger(pipeline_logger)
         print_status("Step 10 (Anchor Stratification) completed successfully.", "SUCCESS")
+
+        # --- Step 10b: Local Gravity Closure ---
+        # Converts the fitted Cepheid clock response into an explicit local
+        # source-charge prediction and checks Cassini/MICROSCOPE margins.
+        print_status(">>> STEP 10b: LOCAL GRAVITY CLOSURE", "TITLE")
+        t0 = time.time()
+        Step10bLocalGravityClosure().run()
+        step_times['Step 10b'] = time.time() - t0
+
+        set_step_logger(pipeline_logger)
+        print_status("Step 10b (Local Gravity Closure) completed successfully.", "SUCCESS")
 
         # --- Step 9: Final Synthesis ---
         print_status(">>> STEP 9: FINAL SYNTHESIS", "TITLE")

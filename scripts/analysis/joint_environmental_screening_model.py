@@ -58,7 +58,7 @@ def load_anchor_data():
     return data
 
 
-def build_joint_dataset(host_df, anchor_json, sigma_ref=75.25):
+def build_joint_dataset(host_df, anchor_json, sigma_ref_screened_sq=30.51**2):
     """Build unified dataset in the common Δμ frame."""
     c2 = C_SQUARED_KM_S
     h0_tep = anchor_json["regression"].get("kappa_host", 1.049548e6)
@@ -80,8 +80,8 @@ def build_joint_dataset(host_df, anchor_json, sigma_ref=75.25):
     sigma_mu = host_df["error"].values
     sigma_delta_mu_host = sigma_mu.copy()
 
-    # Regressor x = S·(σ² - σ_ref²)/c²
-    x_host = S_host * (sigma_host**2 - sigma_ref**2) / c2
+    # Regressor x = (S·σ² - σ_ref_screened_sq)/c²
+    x_host = (S_host * sigma_host**2 - sigma_ref_screened_sq) / c2
 
     # ---------- ANCHORS ----------
     anchor_names = ["LMC", "NGC 4258", "M31"]
@@ -98,10 +98,10 @@ def build_joint_dataset(host_df, anchor_json, sigma_ref=75.25):
     sigma_delta_mu_anchor[ref_idx] = 1e-6
 
     # For anchors, use reference-subtracted regressor to match step_10
-    # x_j = S_j·(σ_j² - σ_ref²)/c² - S_ref·(σ_ref_anchor² - σ_ref²)/c²
+    # x_j = (S_j·σ_j² - S_ref·σ_ref_anchor²)/c²  (sigma_ref_screened_sq cancels)
     x_anchor = (
-        S_anchor * (sigma_anchor**2 - sigma_ref**2)
-        - S_anchor[ref_idx] * (sigma_anchor[ref_idx]**2 - sigma_ref**2)
+        S_anchor * sigma_anchor**2
+        - S_anchor[ref_idx] * sigma_anchor[ref_idx]**2
     ) / c2
 
     # ---------- COMBINE ----------
@@ -179,7 +179,7 @@ def fit_screened_vs_unscreened(data):
     """Compare joint fit with S_host=1, S_anchor=1 (naive) vs screened."""
     # Naive: all S = 1
     c2 = C_SQUARED_KM_S
-    sigma_ref = data["sigma_ref"]
+    # sigma_ref_screened_sq = data["sigma_ref_screened_sq"]
 
     x_host_naive = (data["x_host"] / data.get("S_host", np.ones_like(data["x_host"])))
     # Reconstruct: x_host = S·(σ²-σ_ref²)/c², so naive x = (σ²-σ_ref²)/c²

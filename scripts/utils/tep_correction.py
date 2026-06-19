@@ -60,6 +60,8 @@ def group_screening_factor(n_mb: float, n_crit: float = N_CRIT, gamma: float = G
     float
         Screening factor in [0, 1].
     """
+    if np.isnan(n_mb) or n_mb < 1:
+        n_mb = 1.0
     return 1.0 / (1.0 + (n_mb / n_crit) ** gamma)
 
 
@@ -81,6 +83,27 @@ ANCHOR_SCREENING = {
 }
 
 
+def total_screening_factor(rho_local: float, n_mb: float, rho_half: float = 0.5, n_steep: float = 2.0, anchor_name: str = None) -> float:
+    """
+    Universal Two-Factor Screening model: S_total = S_local * S_group.
+    Applies equitably to both anchors and SN hosts to prevent p-hacking.
+    """
+    # Local density screening (M31 bulge test mechanism)
+    if np.isnan(rho_local) or rho_local < 0:
+        s_local = 1.0
+    else:
+        s_local = 1.0 / (1.0 + (rho_local / rho_half) ** n_steep)
+        
+    # Group richness screening applies equitably to ALL galaxies based on N_mb
+    if anchor_name and anchor_name in ANCHOR_NMB:
+        n_mb_effective = ANCHOR_NMB[anchor_name]
+    else:
+        n_mb_effective = 1.0 if (n_mb is None or np.isnan(n_mb)) else n_mb
+        
+    s_group = group_screening_factor(n_mb_effective)
+        
+    return float(s_local * s_group)
+
 def tep_correction(
     sigma: np.ndarray | float,
     sigma_ref: float,
@@ -97,10 +120,8 @@ def tep_correction(
         Effective calibrator velocity dispersion, km/s.
     kappa_cep : float
         Observable Response Coefficient (units: magnitude; ~10^6 expected).
-        This is the astrophysical response parameter, not the bare coupling.
     S : array or float, optional
-        Continuous shear-suppression factor S(rho) in [0, 1]. Default 1.0
-        (fully active regime).
+        Universal shear-suppression factor S_total in [0, 1]. Default 1.0.
 
     Returns
     -------
@@ -108,7 +129,8 @@ def tep_correction(
         Additive correction Delta_mu such that mu_corr = mu_obs + Delta_mu.
     """
     sigma_sq = np.asarray(sigma) ** 2
-    return kappa_cep * S * (sigma_sq - sigma_ref**2) / C_SQUARED_KM_S
+    sigma_ref_sq = sigma_ref ** 2
+    return kappa_cep * S * (sigma_sq - sigma_ref_sq) / C_SQUARED_KM_S
 
 
 __all__ = [
@@ -117,6 +139,7 @@ __all__ = [
     "N_CRIT",
     "GAMMA",
     "group_screening_factor",
+    "total_screening_factor",
     "ANCHOR_NMB",
     "ANCHOR_SCREENING",
     "tep_correction",

@@ -274,7 +274,7 @@ def main() -> None:
     cbar = fig.colorbar(sm, cax=cbar_ax)
     cbar.set_label(r"Shear Suppression $S$", rotation=270, labelpad=20)
 
-    fig.tight_layout(rect=[0, 0, 0.90, 1])
+    fig.subplots_adjust(left=0.08, right=0.88, bottom=0.07, top=0.95, wspace=0.28, hspace=0.30)
 
     # ------------------------------------------------------------------
     # Save

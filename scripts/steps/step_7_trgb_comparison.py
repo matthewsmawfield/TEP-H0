@@ -122,7 +122,7 @@ class Step7TRGBComparison:
         # Merge
         merged = pd.merge(
             trgb_df, 
-            hosts_df[['match_name', 'sigma_measured', 'sigma_corrected', 'z_cmb']], 
+            hosts_df[['match_name', 'sigma_inferred', 'z_hd', 'z_cmb']], 
             on='match_name', 
             how='inner'
         )
@@ -143,8 +143,13 @@ class Step7TRGBComparison:
         c = 299792.458  # km/s
         
         df['distance_mpc'] = 10 ** ((df['mu_trgb'] - 25) / 5)
-        df['h0_trgb'] = c * df['z_cmb'] / df['distance_mpc']
-        df['h0_trgb_err'] = df['h0_trgb'] * (np.log(10) / 5) * df['mu_trgb_err']
+        df['h0_trgb'] = c * df['z_hd'] / df['distance_mpc']
+        
+        # Include standard 250 km/s peculiar velocity uncertainty (added in quadrature)
+        h0_err_mu = df['h0_trgb'] * (np.log(10) / 5) * df['mu_trgb_err']
+        h0_err_vpec = 250.0 / df['distance_mpc']
+        df['h0_trgb_err'] = np.sqrt(h0_err_mu**2 + h0_err_vpec**2)
+
         
         print_status(f"TRGB H0 range: {df['h0_trgb'].min():.1f} - {df['h0_trgb'].max():.1f} km/s/Mpc", "INFO")
         print_status(f"TRGB H0 mean: {df['h0_trgb'].mean():.2f} ± {df['h0_trgb'].std():.2f} km/s/Mpc", "INFO")
@@ -158,7 +163,7 @@ class Step7TRGBComparison:
         TEP Prediction: If TRGB is truly non-periodic and unaffected by TEP,
         then r(H0_TRGB, σ) should be WEAKER than r(H0_Ceph, σ).
         """
-        sigma = df['sigma_corrected'].values
+        sigma = df['sigma_inferred'].values
         h0 = df['h0_trgb'].values
         
         # Pearson correlation
@@ -172,8 +177,8 @@ class Step7TRGBComparison:
         
         # Stratified analysis
         median_sigma = np.median(sigma)
-        low_sigma = df[df['sigma_corrected'] <= median_sigma]
-        high_sigma = df[df['sigma_corrected'] > median_sigma]
+        low_sigma = df[df['sigma_inferred'] <= median_sigma]
+        high_sigma = df[df['sigma_inferred'] > median_sigma]
         
         h0_low = low_sigma['h0_trgb'].mean()
         h0_high = high_sigma['h0_trgb'].mean()
@@ -241,7 +246,7 @@ class Step7TRGBComparison:
         fig, ax = plt.subplots(figsize=(14, 9))
         
         ax.errorbar(
-            df['sigma_corrected'], 
+            df['sigma_inferred'], 
             df['h0_trgb'], 
             yerr=df['h0_trgb_err'],
             fmt='o', 
@@ -253,9 +258,9 @@ class Step7TRGBComparison:
         )
         
         # Fit line
-        x_fit = np.linspace(df['sigma_corrected'].min() * 0.9, df['sigma_corrected'].max() * 1.1, 100)
+        x_fit = np.linspace(df['sigma_inferred'].min() * 0.9, df['sigma_inferred'].max() * 1.1, 100)
         y_fit = results['slope'] * np.log10(x_fit) + (
-            df['h0_trgb'].mean() - results['slope'] * np.log10(df['sigma_corrected']).mean()
+            df['h0_trgb'].mean() - results['slope'] * np.log10(df['sigma_inferred']).mean()
         )
         ax.plot(x_fit, y_fit, '--', color=colors['accent'], linewidth=2, 
                 label=f"Fit: slope = {results['slope']:.2f} km/s/Mpc/dex")
@@ -268,7 +273,7 @@ class Step7TRGBComparison:
         
         # Annotate galaxies
         for _, row in df.iterrows():
-            ax.annotate(row['galaxy'], (row['sigma_corrected'], row['h0_trgb']),
+            ax.annotate(row['galaxy'], (row['sigma_inferred'], row['h0_trgb']),
                        xytext=(5, 5), textcoords='offset points', fontsize=8, alpha=0.7)
         
         ax.legend(loc='upper left')

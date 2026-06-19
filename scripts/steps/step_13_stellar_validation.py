@@ -16,8 +16,8 @@ The validation chain is:
         P_obs = P_MESA * exp(-DeltaTheta).
 3.  **Closure test**: Propagating P_obs through the Wesenheit P-L
     relation (slope b ≈ -3.26) yields the same DeltaMu law used in
-    the main analysis.  Fitting the synthetic grid recovers
-    kappa_Cep = 1.05e6 mag to numerical precision.
+    the main analysis.  Fitting the synthetic grid recovers the current
+    Step 3 kappa_Cep value to numerical precision.
 
 This step does **not** require MESA to run.  If MESA is not installed,
 it uses the canonical literature baseline period (5.5 d) and still

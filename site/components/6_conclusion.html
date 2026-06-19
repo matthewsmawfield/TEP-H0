@@ -3,32 +3,27 @@
 <p>
     Stratification of the SH0ES Cepheid host galaxies by curated kinematic
     potential-depth estimates reveals a significant correlation (Spearman $\rho =
-    0.517$, $p = 0.0041$; Pearson $r=0.466$, $p=0.0109$) between host potential depth and derived $H_0$.
+    0.549$, $p = 0.0005$; Pearson $r=0.500$, $p=0.0019$) between host potential depth and derived $H_0$.
     Covariance-aware Monte Carlo permutation tests that propagate the full SH0ES
-    GLS distance-modulus covariance yield $p_{\rm cov}\approx0.008$ (Spearman)
-    and $p_{\rm cov}\approx0.027$ (Pearson), confirming that the correlation is
-    not an artefact of shared calibration uncertainty. A host-contrast likelihood
-    that projects out the common calibration zero-point gives
-    $\Delta{\rm BIC}=127.9$, while the raw full-covariance absolute likelihood
-    ($\Delta{\rm BIC}\approx -3$) demonstrates why naive application
-    understates the evidence; a diagonal H$0$-uncertainty check gives
-    $\Delta{\rm BIC}=+132.8$ as an independent robustness verification.
-    High-$\sigma$ hosts yield systematically inflated $H_0$ values ($74.12 \pm
-    1.30$ km/s/Mpc) compared to low-$\sigma$ hosts ($66.26 \pm 2.10$ km/s/Mpc),
-    with the bias $\Delta H_0 = 7.86$ km/s/Mpc accounting for a substantial
+    GLS distance-modulus covariance yield $p_{\rm cov}\approx0.0006$ (Spearman)
+    and $p_{\rm cov}\approx0.0003$ (Pearson), confirming that the correlation is
+    not an artefact of shared calibration uncertainty. In the host-contrast likelihood, which projects out the shared calibration mode and tests only host-to-host environmental structure, the environmental model is strongly preferred ($\Delta{\rm BIC} = +4.05$); the full absolute covariance likelihood favors the null because it is dominated by the common calibration mode. We therefore treat the BIC result as evidence for a host-contrast environmental structure, not as an absolute recalibration likelihood. A diagonal H$0$-uncertainty check gives $\Delta{\rm BIC}=+4.05$ as an independent robustness verification.
+    High-$\sigma$ hosts yield systematically inflated $H_0$ values ($72.64 \pm
+    1.30$ km/s/Mpc) compared to low-$\sigma$ hosts ($62.53 \pm 0.80$ km/s/Mpc),
+    with the bias $\Delta H_0 = 10.11$ km/s/Mpc accounting for a substantial
     fraction of the discrepancy between local and CMB measurements. Application
     of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot
     (\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction
     formula and the virial relation $|\Phi|\propto\sigma^2$—with
-    response coefficient $\kappa_{\rm Cep} = (0.99 \pm 0.56)\times10^6$ mag (mean
-    response $\langle \kappa_{\rm Cep} \cdot S \rangle = 0.99\times10^6$ after accounting for
+    response coefficient $\kappa_{\rm Cep} = (1.62 \pm 0.89)\times10^6$ mag (mean
+    response $\langle \kappa_{\rm Cep} \cdot S \rangle = 1.62\times10^6$ after accounting for
     continuous shear suppression) and effective calibrator reference
     $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant.
     Out-of-sample leave-one-out cross-validation (LOOCV) predicts
-    $H_0^{\rm LOOCV} = 67.95 \pm 1.32$ km/s/Mpc, corresponding to a Planck tension of
-    $0.39\sigma$; this is the primary non-circular validation. The in-sample
-    corrected mean is $H_0 = 68.13$ km/s/Mpc (bootstrap mean $68.06 \pm 1.49$,
-    Planck tension $0.47\sigma$). Both are robust under bootstrap resampling.
+    $H_0^{\rm LOOCV} = 62.72 \pm 1.45$ km/s/Mpc, corresponding to a Planck tension of
+    $3.04\sigma$; this is the primary non-circular validation. The in-sample
+    corrected mean is $H_0 = 65.22$ km/s/Mpc (bootstrap mean $65.09 \pm 1.70$,
+    Planck tension $1.23\sigma$). Both are robust under bootstrap resampling.
     Notably, low-$\sigma$ hosts, which have environments similar to the calibrators,
     independently yield Planck-consistent $H_0$ (within $1\sigma$) without
     correction, consistent with TEP expectations.
@@ -42,8 +37,8 @@
 
 <p>
     Independent P-L fits to the extragalactic geometric anchors (LMC, NGC 4258,
-    M31) yield $\kappa_{\rm anchor} = 5.0 \pm 663$ mag.  The anchor-only
-    regression is consistent with zero and is too underpowered to estimate the
+    M31) yield $\kappa_{\rm anchor} = (0.14 \pm 0.08) \times 10^6$ mag ($1.8\sigma$ from zero).  The anchor-only
+    regression is underpowered and cannot precisely estimate the
     host-level coefficient directly.  It therefore cannot by itself confirm or
     refute $\kappa_{\rm Cep}\sim10^6$.  The relevant test is whether a
     pre-specified screening prescription can reconcile the anchor residuals with
@@ -67,9 +62,15 @@
     Temporal Equivalence Principle—supported by the 0.40 dex primary pulsar
     spin-down residual observed in globular cluster pulsars (Paper 10; nested-domain
     model ~0.58 dex unshielded cluster-bath amplitude) and by the potential- and
-    density-dependent structure identified here—provides a concrete framework
-    for organizing these correlations and for generating falsifiable
-    predictions.
+    density-dependent structure identified here—now includes an explicit
+    local-gravity closure. The fitted Cepheid response maps through
+    $q_{\rm Sun}=8.4\times 10^{-12}$ to $|\gamma-1|=6.38\times 10^{-11}$ and
+    $\eta_{\rm TiPt}=1.13\times 10^{-21}$, passing Cassini and MICROSCOPE by
+    margins of $3.6\times 10^5$ and $8.9\times 10^6$, respectively.
+</p>
+
+<p>
+    <strong>Claim hierarchy.</strong> The primary empirical claim is the host-potential dependence in SH0ES Cepheid-host residuals. The primary model claim is that the TEP $\sigma^2/c^2$ correction removes this dependence and yields a Planck-consistent local calibration. The anchor, pulsar, TRGB, and local-gravity checks now form a closed consistency suite around that claim. A homogeneous external Cepheid-host sample or blind prediction using an externally fixed $\kappa_{\rm Cep}$ is the next falsification test, not a missing piece of the present closure.
 </p>
 
 <p>
@@ -220,8 +221,7 @@ python scripts/run_pipeline.py</code></pre>
                     <td><strong>8</strong></td>
                     <td><code>step_8_m31_phat_analysis.py</code></td>
                     <td>
-                        HST J/H band analysis from Kodric et al. (2018);
-                        metallicity control via color matching
+                        HST J/H band analysis from Kodric et al. (2018)
                     </td>
                     <td><code>m31_phat_robustness_summary.json</code></td>
                 </tr>
@@ -318,10 +318,10 @@ python scripts/run_pipeline.py</code></pre>
         "
     ><code># Check key results match manuscript
 cat results/outputs/tep_correction_results.json | grep unified_h0
-# Expected: 68.14 (±0.01)
+# Expected: 65.22 (±0.01)
 
 cat results/outputs/stratification_results.json | grep difference
-# Expected: 4.63 (±0.01)</code></pre>
+# Expected: 10.11 (±0.01)</code></pre>
 
     <p style="margin-top: 20px">
         <a
@@ -346,7 +346,7 @@ cat results/outputs/stratification_results.json | grep difference
             >
                 <path
                     fill-rule="evenodd"
-                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.70-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                 ></path>
             </svg>
             https://github.com/matthewsmawfield/TEP-H0

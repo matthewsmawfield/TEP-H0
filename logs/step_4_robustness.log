@@ -1,136 +1,116 @@
-[13:15:03] [INFO] 
-[13:15:03] [INFO] ================================================================================
-[13:15:03] [INFO]    Starting Step 4: Robustness Checks
-[13:15:03] [INFO] ================================================================================
-[13:15:03] [INFO] 
-[13:15:03] [INFO] Initiating Jackknife Analysis...
-[13:15:03] [INFO] Loaded 29 hosts for Jackknife stability test.
-[13:15:16] [INFO] Bayesian Model Comparison
-[13:15:16] [INFO] Model Comparison
-[13:15:16] [INFO] +-------------------------------+-------------------+-------------------+-------+--------------------------------+
-[13:15:16] [INFO] | Likelihood                    | Null BIC          | TEP BIC           | ΔBIC  | Interpretation                 |
-[13:15:16] [INFO] +-------------------------------+-------------------+-------------------+-------+--------------------------------+
-[13:15:16] [INFO] | diagonal host scatter         | 544.2             | 411.4             | 132.8 | exploratory / host scatter     |
-[13:15:16] [INFO] | full covariance absolute      | 578.4962709476426 | 581.7224025539422 | -3.2  | dominated by common mode       |
-[13:15:16] [INFO] | projected contrast covariance | 578.5             | 450.6             | 127.9 | primary environmental evidence |
-[13:15:16] [INFO] +-------------------------------+-------------------+-------------------+-------+--------------------------------+
-[13:15:16] [INFO] Projected Δχ² = 131.24; ΔBIC = 127.88 (headline)
-[13:15:16] [INFO] WLS-implied κ_Cep = 1.669e+06 mag (Step 3 fitted ~1.05e6)
-[13:15:16] [INFO] Correlation Tests (H0 vs Sigma)
-[13:15:16] [INFO] +------------------+---------------------------------+------------+------------------------------+
-[13:15:16] [INFO] | Test             | Statistic                       | p-value    | Interpretation               |
-[13:15:16] [INFO] +------------------+---------------------------------+------------+------------------------------+
-[13:15:16] [INFO] | Pearson r        | 0.4659                          | 0.0109     | Parametric                   |
-[13:15:16] [INFO] | Spearman ρ       | 0.5172                          | 0.0041     | Non-parametric (rank)        |
-[13:15:16] [INFO] | Bootstrap p      | -                               | 0.0127     | Permutation (N=10000)        |
-[13:15:16] [INFO] | GLS slope        | 12.652                          | 0.0000     | Covariance-aware Wald test   |
-[13:15:16] [INFO] | Pearson p (cov)  | 0.4659                          | 0.0232     | Parametric MVN null          |
-[13:15:16] [INFO] | Spearman p (cov) | 0.5172                          | 0.0045     | Parametric MVN null          |
-[13:15:16] [INFO] | Bayes factor     | 67684189667399179872373833728.0 | ΔBIC=132.8 | very strong evidence for TEP |
-[13:15:16] [INFO] +------------------+---------------------------------+------------+------------------------------+
-[13:15:16] [SUCCESS] Saved covariance-aware results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/covariance_robustness.json
-[13:15:16] [SUCCESS] Bootstrap p = 0.0127 < 0.05: Correlation is SIGNIFICANT.
-[13:15:16] [INFO] Jackknife Range: r in [0.4282, 0.5550]
-[13:15:16] [SUCCESS] CONCLUSION: Correlation is ROBUST. No single host drives the trend.
-[13:15:16] [INFO] Most Influential Hosts (Supports Trend)
-[13:15:16] [INFO] +----------+-------------+---------+
-[13:15:16] [INFO] | Host     | r (without) | Delta r |
-[13:15:16] [INFO] +----------+-------------+---------+
-[13:15:16] [INFO] | NGC 3447 | 0.4282      | -0.0377 |
-[13:15:16] [INFO] | NGC 5728 | 0.4349      | -0.0310 |
-[13:15:16] [INFO] | NGC 3147 | 0.4390      | -0.0269 |
-[13:15:16] [INFO] +----------+-------------+---------+
-[13:15:16] [PROCESS] Generating Jackknife influence plot...
-[13:15:16] [SUCCESS] Saved Jackknife plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/supplement_02_jackknife_influence.png
-[13:15:16] [SUCCESS] Copied Jackknife plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/supplement_02_jackknife_influence.png
-[13:15:16] [INFO] Initiating Out-of-Sample Validation (kappa_cep)
-[13:15:16] [INFO] Out-of-Sample Validation Summary
-[13:15:16] [INFO] +------------+------------------------+--------------------------+
-[13:15:16] [INFO] | Validation | Metric                 | Value                    |
-[13:15:16] [INFO] +------------+------------------------+--------------------------+
-[13:15:16] [INFO] | Baseline   | Slope dH0/dsigma       | 0.0851                   |
-[13:15:16] [INFO] | Baseline   | Pearson r (p)          | 0.466 (0.0109)           |
-[13:15:16] [INFO] | Baseline   | Spearman rho (p)       | 0.517 (0.0041)           |
-[13:15:16] [INFO] | Train/Test | kappa_cep mean ± std   | 1026568.604 ± 312195.449 |
-[13:15:16] [INFO] | Train/Test | test slope median      | 0.0179                   |
-[13:15:16] [INFO] | Train/Test | test |r| median        | 0.298                    |
-[13:15:16] [INFO] | Train/Test | test H0 mean (median)  | 67.83                    |
-[13:15:16] [INFO] | LOOCV      | kappa_cep mean ± std   | 996876.684 ± 75021.450   |
-[13:15:16] [INFO] | LOOCV      | pred slope dH0/dsigma  | -0.0130                  |
-[13:15:16] [INFO] | LOOCV      | Pearson r (p)          | -0.077 (0.6895)          |
-[13:15:16] [INFO] | LOOCV      | Spearman rho (p)       | 0.108 (0.5758)           |
-[13:15:16] [INFO] | LOOCV      | H0 mean ± SEM          | 67.95 ± 1.32             |
-[13:15:16] [INFO] | LOOCV      | Planck tension (sigma) | 0.39                     |
-[13:15:16] [INFO] +------------+------------------------+--------------------------+
-[13:15:16] [SUCCESS] Saved out-of-sample validation to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/out_of_sample_validation.json
-[13:15:16] [INFO] Initiating Bivariate Analysis...
-[13:15:16] [INFO] Loaded 29 hosts for Bivariate Analysis.
-[13:15:16] [INFO] Bivariate Analysis Results
-[13:15:16] [INFO] +----------------------+------------------+-------------+---------+
-[13:15:16] [INFO] | Relation             | Correlation Type | Coefficient | p-value |
-[13:15:16] [INFO] +----------------------+------------------+-------------+---------+
-[13:15:16] [INFO] | H0 vs Sigma          | Pearson (Raw)    | 0.466       | 0.0109  |
-[13:15:16] [INFO] | H0 vs Metallicity    | Pearson (Raw)    | 0.304       | 0.1087  |
-[13:15:16] [INFO] | Sigma vs Metallicity | Pearson (Raw)    | 0.137       | 0.4799  |
-[13:15:16] [INFO] | H0 vs Sigma | Z      | Partial          | 0.450       | 0.0164  |
-[13:15:16] [INFO] | H0 vs Z | Sigma      | Partial          | 0.274       | 0.1577  |
-[13:15:16] [INFO] +----------------------+------------------+-------------+---------+
-[13:15:16] [SUCCESS] Saved stats to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/bivariate_stats.txt
-[13:15:16] [SUCCESS] Saved bivariate plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/figure_02_bivariate_h0_sigma_metallicity.png
-[13:15:16] [SUCCESS] Copied bivariate plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/figure_02_bivariate_h0_sigma_metallicity.png
-[13:15:16] [INFO] Redshift Cut Sensitivity Scan...
-[13:15:21] [SUCCESS] Saved redshift cut sensitivity results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/redshift_cut_sensitivity.txt
-[13:15:21] [INFO] Redshift Cut Sensitivity (H0 vs Sigma)
-[13:15:21] [INFO] +--------+----+-----------+------------+--------+
-[13:15:21] [INFO] | z_cut  | N  | Pearson r | Spearman ρ | Perm p |
-[13:15:21] [INFO] +--------+----+-----------+------------+--------+
-[13:15:21] [INFO] | 0.0035 | 29 | 0.466     | 0.517      | 0.0126 |
-[13:15:21] [INFO] | 0.0050 | 23 | 0.437     | 0.317      | 0.0338 |
-[13:15:21] [INFO] | 0.0070 | 16 | 0.525     | 0.391      | 0.0418 |
-[13:15:21] [INFO] | 0.0100 | 5  | 0.946     | 0.900      | 0.0238 |
-[13:15:21] [INFO] | 0.0150 | 1  | nan       | nan        | nan    |
-[13:15:21] [INFO] | 0.0200 | 0  | nan       | nan        | nan    |
-[13:15:21] [INFO] +--------+----+-----------+------------+--------+
-[13:15:21] [INFO] Flow/Environment Confound Robustness...
-[13:15:29] [SUCCESS] Saved flow/environment robustness results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/flow_environment_robustness.txt
-[13:15:29] [INFO] Flow + Environment Controls
-[13:15:29] [INFO] +-----------------------------+-----------+---------+----+
-[13:15:29] [INFO] | Test                        | Statistic | p-value | N  |
-[13:15:29] [INFO] +-----------------------------+-----------+---------+----+
-[13:15:29] [INFO] | Baseline r(H0,Sigma)        | 0.466     | 0.0126  | 29 |
-[13:15:29] [INFO] | Partial r(H0,Sigma|z)       | 0.410     | 0.0304  | 29 |
-[13:15:29] [INFO] | Partial r(H0,Sigma|z,Nmb)   | 0.347     | 0.0766  | 29 |
-[13:15:29] [INFO] | Partial r(H0,Sigma|z,logpK) | 0.535     | 0.0071  | 26 |
-[13:15:29] [INFO] +-----------------------------+-----------+---------+----+
-[13:15:29] [INFO] v_pec Monte Carlo Robustness
-[13:15:29] [INFO] +-----------+----------------+
-[13:15:29] [INFO] | MC Metric | Value          |
-[13:15:29] [INFO] +-----------+----------------+
-[13:15:29] [INFO] | N_hosts   | 29             |
-[13:15:29] [INFO] | r_mean    | 0.311          |
-[13:15:29] [INFO] | r_std     | 0.113          |
-[13:15:29] [INFO] | r_95CI    | [0.081, 0.524] |
-[13:15:29] [INFO] | P(r<=0)   | 0.0042         |
-[13:15:29] [INFO] +-----------+----------------+
-[13:15:29] [INFO] Joint v_pec + sigma Monte Carlo Robustness
-[13:15:29] [INFO] +-----------+----------------+
-[13:15:29] [INFO] | MC Metric | Value          |
-[13:15:29] [INFO] +-----------+----------------+
-[13:15:29] [INFO] | N_hosts   | 29             |
-[13:15:29] [INFO] | r_mean    | 0.308          |
-[13:15:29] [INFO] | r_std     | 0.115          |
-[13:15:29] [INFO] | r_95CI    | [0.071, 0.522] |
-[13:15:29] [INFO] | P(r<=0)   | 0.0056         |
-[13:15:29] [INFO] +-----------+----------------+
-[13:15:29] [INFO] Provenance-Aware Errors-in-Variables Model
-[13:15:29] [INFO] +--------------------+-----------+-----------+-------+--------+
-[13:15:29] [INFO] | Parameter          | Estimate  | SE        | t     | p      |
-[13:15:29] [INFO] +--------------------+-----------+-----------+-------+--------+
-[13:15:29] [INFO] | β0 (intercept)     | 61.32     | 0.71      | -     | -      |
-[13:15:29] [INFO] | β1 (X_TEP slope)   | 7.888e+07 | 7.758e+06 | 10.17 | 0.0000 |
-[13:15:29] [INFO] | γ_HI (HI offset)   | 5.55      | 0.96      | -     | -      |
-[13:15:29] [INFO] | γ_rot (rot offset) | 0.00      | 0.00      | -     | -      |
-[13:15:29] [INFO] +--------------------+-----------+-----------+-------+--------+
-[13:15:29] [INFO] Method counts: stellar=16, HI=13, rot=0
-[13:15:29] [INFO] Mean X_TEP uncertainty from σ error: HI=2.07e-08, rot=N/A
-[13:15:29] [SUCCESS] Step 4 Complete.
+[20:18:35] [INFO] 
+[20:18:35] [INFO] ================================================================================
+[20:18:35] [INFO]    Starting Step 4: Robustness Checks
+[20:18:35] [INFO] ================================================================================
+[20:18:35] [INFO] 
+[20:18:35] [INFO] Initiating Jackknife Analysis...
+[20:18:35] [INFO] Loaded 36 hosts for Jackknife stability test.
+[20:18:48] [INFO] Bayesian Model Comparison
+[20:18:48] [INFO] Model Comparison
+[20:18:48] [INFO] +------------------------------------+----------+---------+------+----------------------------------+
+[20:18:48] [INFO] | Likelihood                         | Null BIC | TEP BIC | ΔBIC | Interpretation                   |
+[20:18:48] [INFO] +------------------------------------+----------+---------+------+----------------------------------+
+[20:18:48] [INFO] | diagonal host scatter              | 32.5     | 28.4    | 4.1  | exploratory / host scatter       |
+[20:18:48] [INFO] | full covariance GLS slope          | 32.5     | 28.5    | 4.0  | free intercept; matches contrast |
+[20:18:48] [INFO] | projected host-contrast covariance | 32.5     | 28.5    | 4.0  | primary environmental evidence   |
+[20:18:48] [INFO] +------------------------------------+----------+---------+------+----------------------------------+
+[20:18:48] [INFO] Projected Δχ² = 7.63; ΔBIC = 4.05 (headline)
+[20:18:48] [INFO] WLS-implied κ_Cep = 1.056e+06 mag (Step 3 fitted 1.622e+06)
+[20:18:48] [INFO] Correlation Tests (H0 vs Sigma)
+[20:18:48] [INFO] +------------------+-----------+----------+----------------------------+
+[20:18:48] [INFO] | Test             | Statistic | p-value  | Interpretation             |
+[20:18:48] [INFO] +------------------+-----------+----------+----------------------------+
+[20:18:48] [INFO] | Pearson r        | 0.4998    | 0.0019   | Parametric                 |
+[20:18:48] [INFO] | Spearman ρ       | 0.5485    | 0.0005   | Non-parametric (rank)      |
+[20:18:48] [INFO] | Bootstrap p      | -         | 0.0028   | Permutation (N=10000)      |
+[20:18:48] [INFO] | GLS slope        | 2.811     | 0.0081   | Covariance-aware Wald test |
+[20:18:48] [INFO] | Pearson p (cov)  | 0.4998    | 0.0003   | Parametric MVN null        |
+[20:18:48] [INFO] | Spearman p (cov) | 0.5485    | 0.0006   | Parametric MVN null        |
+[20:18:48] [INFO] | Bayes factor     | 7.7       | ΔBIC=4.1 | positive evidence for TEP  |
+[20:18:48] [INFO] +------------------+-----------+----------+----------------------------+
+[20:18:48] [SUCCESS] Saved covariance-aware results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/covariance_robustness.json
+[20:18:48] [SUCCESS] Bootstrap p = 0.0028 < 0.01: Correlation is HIGHLY SIGNIFICANT.
+[20:18:48] [INFO] Jackknife Range: r in [0.4617, 0.5381]
+[20:18:48] [SUCCESS] CONCLUSION: Correlation is ROBUST. No single host drives the trend.
+[20:18:48] [INFO] Most Influential Hosts (Supports Trend)
+[20:18:48] [INFO] +----------+-------------+---------+
+[20:18:48] [INFO] | Host     | r (without) | Delta r |
+[20:18:48] [INFO] +----------+-------------+---------+
+[20:18:48] [INFO] | M 101    | 0.4617      | -0.0381 |
+[20:18:48] [INFO] | NGC 5728 | 0.4742      | -0.0256 |
+[20:18:48] [INFO] | NGC 3447 | 0.4821      | -0.0177 |
+[20:18:48] [INFO] +----------+-------------+---------+
+[20:18:48] [PROCESS] Generating Jackknife influence plot...
+[20:18:49] [SUCCESS] Saved Jackknife plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/supplement_02_jackknife_influence.png
+[20:18:49] [SUCCESS] Copied Jackknife plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/supplement_02_jackknife_influence.png
+[20:18:49] [INFO] Initiating Out-of-Sample Validation (kappa_cep)
+[20:18:49] [INFO] Out-of-Sample Validation Summary
+[20:18:49] [INFO] +------------+------------------------+--------------------------+
+[20:18:49] [INFO] | Validation | Metric                 | Value                    |
+[20:18:49] [INFO] +------------+------------------------+--------------------------+
+[20:18:49] [INFO] | Baseline   | Slope dH0/dsigma       | 0.1193                   |
+[20:18:49] [INFO] | Baseline   | Pearson r (p)          | 0.500 (0.0019)           |
+[20:18:49] [INFO] | Baseline   | Spearman rho (p)       | 0.549 (0.0005)           |
+[20:18:49] [INFO] | Train/Test | kappa_cep mean ± std   | 1781498.657 ± 741780.917 |
+[20:18:49] [INFO] | Train/Test | test slope median      | 0.0276                   |
+[20:18:49] [INFO] | Train/Test | test |r| median        | 0.311                    |
+[20:18:49] [INFO] | Train/Test | test H0 mean (median)  | 63.10                    |
+[20:18:49] [INFO] | LOOCV      | kappa_cep mean ± std   | 1657858.276 ± 126507.961 |
+[20:18:49] [INFO] | LOOCV      | pred slope dH0/dsigma  | -0.0210                  |
+[20:18:49] [INFO] | LOOCV      | Pearson r (p)          | -0.098 (0.5699)          |
+[20:18:49] [INFO] | LOOCV      | Spearman rho (p)       | 0.129 (0.4535)           |
+[20:18:49] [INFO] | LOOCV      | H0 mean ± SEM          | 62.72 ± 1.45             |
+[20:18:49] [INFO] | LOOCV      | Planck tension (sigma) | 3.04                     |
+[20:18:49] [INFO] +------------+------------------------+--------------------------+
+[20:18:49] [SUCCESS] Saved out-of-sample validation to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/out_of_sample_validation.json
+[20:18:49] [INFO] Initiating Bivariate Analysis...
+[20:18:49] [INFO] Loaded 36 hosts for Bivariate Analysis.
+[20:18:49] [INFO] Bivariate Analysis Results
+[20:18:49] [INFO] +----------------------+------------------+-------------+---------+
+[20:18:49] [INFO] | Relation             | Correlation Type | Coefficient | p-value |
+[20:18:49] [INFO] +----------------------+------------------+-------------+---------+
+[20:18:49] [INFO] | H0 vs Sigma          | Pearson (Raw)    | 0.500       | 0.0019  |
+[20:18:49] [INFO] | H0 vs Metallicity    | Pearson (Raw)    | 0.161       | 0.3483  |
+[20:18:49] [INFO] | Sigma vs Metallicity | Pearson (Raw)    | 0.096       | 0.5783  |
+[20:18:49] [INFO] | H0 vs Sigma | Z      | Partial          | 0.493       | 0.0026  |
+[20:18:49] [INFO] | H0 vs Z | Sigma      | Partial          | 0.131       | 0.4526  |
+[20:18:49] [INFO] +----------------------+------------------+-------------+---------+
+[20:18:49] [SUCCESS] Saved stats to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/bivariate_stats.txt
+[20:18:49] [SUCCESS] Saved bivariate plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/figure_02_bivariate_h0_sigma_metallicity.png
+[20:18:49] [SUCCESS] Copied bivariate plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/figure_02_bivariate_h0_sigma_metallicity.png
+[20:18:49] [INFO] Redshift Cut Sensitivity Scan...
+[20:18:54] [SUCCESS] Saved redshift cut sensitivity results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/redshift_cut_sensitivity.txt
+[20:18:54] [INFO] Redshift Cut Sensitivity (H0 vs Sigma)
+[20:18:54] [INFO] +--------+----+-----------+------------+--------+
+[20:18:54] [INFO] | z_cut  | N  | Pearson r | Spearman ρ | Perm p |
+[20:18:54] [INFO] +--------+----+-----------+------------+--------+
+[20:18:54] [INFO] | 0.0035 | 29 | 0.466     | 0.517      | 0.0126 |
+[20:18:54] [INFO] | 0.0050 | 23 | 0.437     | 0.317      | 0.0338 |
+[20:18:54] [INFO] | 0.0070 | 16 | 0.525     | 0.391      | 0.0418 |
+[20:18:54] [INFO] | 0.0100 | 5  | 0.946     | 0.900      | 0.0238 |
+[20:18:54] [INFO] | 0.0150 | 1  | nan       | nan        | nan    |
+[20:18:54] [INFO] | 0.0200 | 0  | nan       | nan        | nan    |
+[20:18:54] [INFO] +--------+----+-----------+------------+--------+
+[20:18:54] [INFO] Flow/Environment Confound Robustness...
+[20:18:59] [SUCCESS] Saved flow/environment robustness results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/flow_environment_robustness.txt
+[20:18:59] [INFO] Flow + Environment Controls
+[20:18:59] [INFO] +-----------------------------+-----------+---------+----+
+[20:18:59] [INFO] | Test                        | Statistic | p-value | N  |
+[20:18:59] [INFO] +-----------------------------+-----------+---------+----+
+[20:18:59] [INFO] | Baseline r(H0,Sigma)        | 0.500     | 0.0018  | 36 |
+[20:18:59] [INFO] | Partial r(H0,Sigma|z)       | 0.361     | 0.0329  | 36 |
+[20:18:59] [INFO] | Partial r(H0,Sigma|z,Nmb)   | 0.391     | 0.0221  | 36 |
+[20:18:59] [INFO] | Partial r(H0,Sigma|z,logpK) | 0.499     | 0.0043  | 33 |
+[20:18:59] [INFO] +-----------------------------+-----------+---------+----+
+[20:18:59] [INFO] Provenance-Aware Errors-in-Variables Model
+[20:18:59] [INFO] +--------------------+-----------+-----------+------+--------+
+[20:18:59] [INFO] | Parameter          | Estimate  | SE        | t    | p      |
+[20:18:59] [INFO] +--------------------+-----------+-----------+------+--------+
+[20:18:59] [INFO] | β0 (intercept)     | 43.15     | 3.56      | -    | -      |
+[20:18:59] [INFO] | β1 (X_TEP slope)   | 3.469e+08 | 7.163e+07 | 4.84 | 0.0000 |
+[20:18:59] [INFO] | γ_HI (HI offset)   | 13.36     | 3.82      | -    | -      |
+[20:18:59] [INFO] | γ_rot (rot offset) | 0.00      | 0.00      | -    | -      |
+[20:18:59] [INFO] +--------------------+-----------+-----------+------+--------+
+[20:18:59] [INFO] Method counts: stellar=18, HI=18, rot=0
+[20:18:59] [INFO] Mean X_TEP uncertainty from σ error: HI=1.93e-08, rot=N/A
+[20:18:59] [SUCCESS] Step 4 Complete.

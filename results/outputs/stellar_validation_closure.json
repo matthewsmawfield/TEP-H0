@@ -1,0 +1,21 @@
+{
+    "module": "stellar_validation_core",
+    "description": "Numerical closure test: MESA/RSP matter-frame period + TEP scalar-boundary transport recovers headline kappa_Cep.",
+    "parameters": {
+        "KAPPA_CEP": 58432.0068359375,
+        "KAPPA_CEP_ERR": 193463.9650936247,
+        "B_PL": -3.26,
+        "SIGMA_REF_SCREENED_SQ": 1646.7480013807622,
+        "ALPHA_CLOCK": 41271.37051967972,
+        "P_mesa_days": 5.5
+    },
+    "closure_test": {
+        "kappa_hat": 58432.00683593749,
+        "rms_residual_mag": 8.44943280423144e-19,
+        "max_abs_diff_mag": 3.469446951953614e-18,
+        "expected_kappa_Cep": 58432.0068359375,
+        "relative_error": 1.245200705601726e-16,
+        "passed": true
+    },
+    "grid_checksum": null
+}

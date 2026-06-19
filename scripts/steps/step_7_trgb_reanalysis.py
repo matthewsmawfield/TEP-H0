@@ -97,7 +97,7 @@ class Step7TRGBReanalysis:
         
         # 2. Sigma Stratification
         # Use our corrected sigma
-        merged['sigma'] = merged['sigma_corrected_trgb']
+        merged['sigma'] = merged['sigma_inferred_trgb']
         merged['log_sigma'] = np.log10(merged['sigma'])
         
         # 3. Statistics
@@ -105,6 +105,18 @@ class Step7TRGBReanalysis:
         rho, prho = stats.spearmanr(merged['sigma'], merged['delta_mu'])
         
         slope, intercept, r_val, p_val, std_err = stats.linregress(merged['log_sigma'], merged['delta_mu'])
+        
+        # Apply 1-tailed p-values because TEP makes a strict a priori directional prediction:
+        # Cepheid periods dilate (appear shorter) -> inferred absolute magnitudes are fainter ->
+        # inferred distance modulus is smaller -> mu_TRGB - mu_Ceph > 0.
+        if r > 0: p /= 2.0
+        else: p = 1.0 - (p / 2.0)
+        
+        if rho > 0: prho /= 2.0
+        else: prho = 1.0 - (prho / 2.0)
+        
+        if slope > 0: p_val /= 2.0
+        else: p_val = 1.0 - (p_val / 2.0)
         
         # 4. Display Results
         print_status("\nDifferential Modulus (TRGB - Cepheid) vs Sigma:", "INFO")

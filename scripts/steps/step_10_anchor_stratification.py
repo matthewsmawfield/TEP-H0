@@ -157,12 +157,17 @@ class AnchorStratificationStep:
             
             n, p = len(W), 2
             sigma2 = np.sum((W - X @ beta)**2) / (n - p)
-            XtX = X.T @ X
-            # Add small regularization to prevent singular matrix
-            reg = 1e-10 * np.trace(XtX) / XtX.shape[0]
-            XtX_reg = XtX + reg * np.eye(XtX.shape[0])
+            # Add small regularization to prevent singular matrix using scaled matrix
+            col_norms = np.linalg.norm(X, axis=0)
+            col_norms[col_norms < 1e-10] = 1.0
+            X_scaled = X / col_norms
+            XtX_scaled = X_scaled.T @ X_scaled
+            
+            reg = 1e-10 * np.trace(XtX_scaled) / XtX_scaled.shape[0]
+            XtX_reg_scaled = XtX_scaled + reg * np.eye(XtX_scaled.shape[0])
             try:
-                cov = sigma2 * np.linalg.inv(XtX_reg)
+                cov_scaled = sigma2 * np.linalg.inv(XtX_reg_scaled)
+                cov = cov_scaled / np.outer(col_norms, col_norms)
                 se = np.sqrt(np.diag(cov))
             except np.linalg.LinAlgError:
                 se = np.full(X.shape[1], np.nan)
@@ -190,43 +195,56 @@ class AnchorStratificationStep:
         
         return results
     
-    def _multi_anchor_regression(self, results):
-        """Fit M_W vs log(σ) across all anchors."""
+    def _multi_anchor_regression(self, results: dict) -> dict:
+        """Perform a simple least-squares regression on the geometric anchors."""
+        sigma_ref = 75.25
         anchor_names = [k for k in results.keys() if k not in ['regression', 'test']]
         
         sigmas = np.array([results[n]['sigma'] for n in anchor_names])
         M_Ws = np.array([results[n]['M_W_absolute'] for n in anchor_names])
         M_W_errs = np.array([results[n]['M_W_err'] for n in anchor_names])
         
-        # Load sigma_ref dynamically from step 3 (effective calibrator dispersion)
+        # Load sigma_ref_screened_sq dynamically from step 3 (effective calibrator dispersion)
         # to keep the anchor and host analyses on the same reference.
-        sigma_ref = 75.25  # Fallback if tep_correction_results.json is missing
+        sigma_ref_screened_sq = 30.51**2  # Fallback if tep_correction_results.json is missing
         try:
             tep_path_for_ref = self.outputs_dir / "tep_correction_results.json"
             if tep_path_for_ref.exists():
                 with open(tep_path_for_ref, "r") as f:
                     _tep = json.load(f)
-                if isinstance(_tep, dict) and 'sigma_ref' in _tep:
-                    sigma_ref = float(_tep['sigma_ref'])
+                if isinstance(_tep, dict) and 'sigma_ref_screened' in _tep:
+                    sigma_ref_screened_sq = float(_tep['sigma_ref_screened'])**2
         except Exception:
             pass
-        # Physics-derived regressor: (sigma^2 - sigma_ref^2)/c^2
+            
+        from scripts.utils.tep_correction import ANCHOR_SCREENING
+        S_anchors = np.array([ANCHOR_SCREENING.get(n, 1.0) for n in anchor_names])
+
+        # Physics-derived regressor: (S * sigma^2 - sigma_ref_screened_sq)/c^2
         c_km_s = 299792.458
-        sigma_regressor = (sigmas**2 - sigma_ref**2) / c_km_s**2
+        sigma_regressor = (S_anchors * sigmas**2 - sigma_ref_screened_sq) / c_km_s**2
         
         # Weighted least squares
         weights = 1.0 / M_W_errs**2
         X = np.column_stack([np.ones_like(sigma_regressor), sigma_regressor])
         W_mat = np.diag(weights)
         
-        XtWX = X.T @ W_mat @ X
-        XtWy = X.T @ W_mat @ M_Ws
-        # Add small regularization for numerical stability
-        reg = 1e-10 * np.trace(XtWX) / XtWX.shape[0]
-        XtWX_reg = XtWX + reg * np.eye(XtWX.shape[0])
+        # Add small regularization for numerical stability using scaled matrix
+        col_norms = np.linalg.norm(X, axis=0)
+        col_norms[col_norms < 1e-10] = 1.0
+        X_scaled = X / col_norms
+        
+        XtWX_scaled = X_scaled.T @ W_mat @ X_scaled
+        XtWy_scaled = X_scaled.T @ W_mat @ M_Ws
+        
+        reg = 1e-10 * np.trace(XtWX_scaled) / XtWX_scaled.shape[0]
+        XtWX_reg_scaled = XtWX_scaled + reg * np.eye(XtWX_scaled.shape[0])
         try:
-            beta = np.linalg.solve(XtWX_reg, XtWy)
-            cov = np.linalg.inv(XtWX_reg)
+            beta_scaled = np.linalg.solve(XtWX_reg_scaled, XtWy_scaled)
+            cov_scaled = np.linalg.inv(XtWX_reg_scaled)
+            
+            beta = beta_scaled / col_norms
+            cov = cov_scaled / np.outer(col_norms, col_norms)
             se = np.sqrt(np.diag(cov))
         except np.linalg.LinAlgError:
             beta = np.array([np.nan, np.nan])
@@ -303,15 +321,14 @@ class AnchorStratificationStep:
 
                 # TEP-aware prediction (per-anchor S applied) using the same
                 # reference-subtracted response as the primary correction:
-                # Δμ_i = κ_Cep S_i (σ_i² - σ_ref²) / c².
+                # Δμ_i = κ_Cep (S_i σ_i² - S_ref σ_ref²) / c².
+                # (Note that sigma_ref_screened_sq cancels out when taking the difference).
                 S_i = ANCHOR_SCREENING.get(name, 1.0)
                 d_mu_tep = kappa_host * (
-                    S_i * (sigmas[i]**2 - sigma_ref**2)
-                    - S_ref * (sigma_anchor**2 - sigma_ref**2)
+                    S_i * sigmas[i]**2 - S_ref * sigma_anchor**2
                 ) / c_km_s**2
                 d_mu_tep_err = kappa_host_err * abs(
-                    S_i * (sigmas[i]**2 - sigma_ref**2)
-                    - S_ref * (sigma_anchor**2 - sigma_ref**2)
+                    S_i * sigmas[i]**2 - S_ref * sigma_anchor**2
                 ) / c_km_s**2
                 M_W_pred_tep = M_W_anchor + d_mu_tep
                 err_tep = float(np.sqrt(M_W_errs[i]**2 + M_W_anchor_err**2 + d_mu_tep_err**2))
@@ -423,7 +440,7 @@ class AnchorStratificationStep:
             'kappa_anchor_err': float(kappa_anchor_err),
             'intercept': float(intercept),
             'intercept_err': float(intercept_err),
-            'sigma_ref': float(sigma_ref),
+            'sigma_ref_screened_sq': float(sigma_ref_screened_sq),
             'r_pearson': float(r_pearson),
             'p_pearson': float(p_pearson),
             'chi2': float(chi2),
@@ -460,8 +477,8 @@ class AnchorStratificationStep:
         reg = results['regression']
         sigma_range = np.linspace(min(sigmas)*0.8, max(sigmas)*1.2, 100)
         c_km_s = 299792.458
-        sigma_ref_fit = float(reg.get('sigma_ref', 75.25))
-        x_reg = (sigma_range**2 - sigma_ref_fit**2) / c_km_s**2
+        sigma_ref_screened_sq = float(reg.get('sigma_ref_screened_sq', 30.51**2))
+        x_reg = (sigma_range**2 - sigma_ref_screened_sq) / c_km_s**2
         # Rescale x-axis by 10^7 for readability
         x_reg_scaled = x_reg * 1e7
         M_W_pred = reg['intercept'] + reg['kappa_anchor'] * x_reg

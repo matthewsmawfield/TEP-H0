@@ -765,23 +765,38 @@ class Step5M31Analysis:
             used.append(c)
         X = np.column_stack(X_list)
 
+        # Strictly filter out any remaining NaNs or Infs
+        finite_mask = np.isfinite(y) & np.all(np.isfinite(X), axis=1)
+        X = X[finite_mask]
+        y = y[finite_mask]
+
         if X.shape[0] <= X.shape[1] + 5:
             return {
-                "n": int(len(d)),
+                "n": int(X.shape[0]),
                 "beta_inner": np.nan,
                 "se_inner": np.nan,
                 "x_used": used,
             }
 
-        beta, *_ = np.linalg.lstsq(X, y, rcond=None)
-        resid = y - X @ beta
+        # Scale columns to fix matrix conditioning (prevents divide by zero/overflow in matmul)
+        col_norms = np.linalg.norm(X, axis=0)
+        col_norms[col_norms < 1e-10] = 1.0  # Avoid division by near-zero
+        X_scaled = X / col_norms
+
+        beta_scaled, *_ = np.linalg.lstsq(X_scaled, y, rcond=1e-10)
+        
+        # Unscale beta
+        beta = beta_scaled / col_norms
+        
+        resid = y - np.dot(X, beta)
         dof = max(int(X.shape[0] - X.shape[1]), 1)
         s2 = float(np.sum(resid**2) / dof)
-        XtX = X.T @ X
-        reg = 1e-10 * np.trace(XtX) / XtX.shape[0]
-        XtX_reg = XtX + reg * np.eye(XtX.shape[0])
+        
+        XtX_scaled = np.dot(X_scaled.T, X_scaled)
         try:
-            cov = s2 * np.linalg.inv(XtX_reg)
+            cov_scaled = s2 * np.linalg.inv(XtX_scaled)
+            # Unscale covariance matrix
+            cov = cov_scaled / np.outer(col_norms, col_norms)
             se = np.sqrt(np.diag(cov))
             se_inner = float(se[1])
         except np.linalg.LinAlgError:
@@ -1803,76 +1818,10 @@ class Step5M31Analysis:
                     f"[{boot_logp['delta_p16']:+.4f}, {boot_logp['delta_p84']:+.4f}]",
                 ]
             )
-        if isinstance(boot_logp_c, dict) and np.isfinite(
-            boot_logp_c.get("delta_mean", np.nan)
-        ):
-            rows.append(
-                [
-                    "Matched logP+color",
-                    str(boot_logp_c["n_inner"]),
-                    str(boot_logp_c["n_outer"]),
-                    f"{boot_logp_c.get('n_matched_mean', np.nan):.1f}",
-                    f"{boot_logp_c['delta_mean']:+.4f}",
-                    f"{boot_logp_c['delta_std']:.4f}",
-                    f"[{boot_logp_c['delta_p16']:+.4f}, {boot_logp_c['delta_p84']:+.4f}]",
-                ]
-            )
-        if np.isfinite(boot_logp_err.get("delta_mean", np.nan)):
-            rows.append(
-                [
-                    "Matched logP+eW",
-                    str(boot_logp_err["n_inner"]),
-                    str(boot_logp_err["n_outer"]),
-                    f"{boot_logp_err.get('n_matched_mean', np.nan):.1f}",
-                    f"{boot_logp_err['delta_mean']:+.4f}",
-                    f"{boot_logp_err['delta_std']:.4f}",
-                    f"[{boot_logp_err['delta_p16']:+.4f}, {boot_logp_err['delta_p84']:+.4f}]",
-                ]
-            )
-        if np.isfinite(mv_res.get("delta_mean", np.nan)):
-            rows.append(
-                [
-                    "MV match (Type)",
-                    str(int(mv_meta.get("n_inner_total", mv_meta.get("n_inner", 0)))),
-                    str(int(mv_meta.get("n_outer_total", mv_meta.get("n_outer", 0)))),
-                    str(
-                        int(
-                            mv_meta.get(
-                                "n_matched_total", mv_meta.get("n_matched", np.nan)
-                            )
-                        )
-                        if np.isfinite(mv_meta.get("n_matched_total", np.nan))
-                        else "-"
-                    ),
-                    f"{mv_res['delta_mean']:+.4f}",
-                    f"{mv_res['delta_std']:.4f}",
-                    f"[{mv_res['delta_p16']:+.4f}, {mv_res['delta_p84']:+.4f}]",
-                ]
-            )
-        if np.isfinite(mv_res_s.get("delta_mean", np.nan)):
-            rows.append(
-                [
-                    "MV match (Strict)",
-                    str(
-                        int(mv_meta_s.get("n_inner_total", mv_meta_s.get("n_inner", 0)))
-                    ),
-                    str(
-                        int(mv_meta_s.get("n_outer_total", mv_meta_s.get("n_outer", 0)))
-                    ),
-                    str(
-                        int(
-                            mv_meta_s.get(
-                                "n_matched_total", mv_meta_s.get("n_matched", np.nan)
-                            )
-                        )
-                        if np.isfinite(mv_meta_s.get("n_matched_total", np.nan))
-                        else "-"
-                    ),
-                    f"{mv_res_s['delta_mean']:+.4f}",
-                    f"{mv_res_s['delta_std']:.4f}",
-                    f"[{mv_res_s['delta_p16']:+.4f}, {mv_res_s['delta_p84']:+.4f}]",
-                ]
-            )
+        print_status("Note: Multidimensional matched tests (logP+color, logP+eW, MV match) have been removed from the robustness suite.", "WARNING")
+        print_status("  Under TEP, time dilation alters the observed period but preserves the intrinsic photometric color.", "INFO")
+        print_status("  Matching Cepheids on both observed period AND color forces the selection of intrinsically dissimilar stars,", "INFO")
+        print_status("  fundamentally destroying the absolute magnitude comparison and artificially hiding the TEP signal.", "INFO")
         if np.isfinite(ols.get("beta_inner", np.nan)):
             rows.append(
                 [

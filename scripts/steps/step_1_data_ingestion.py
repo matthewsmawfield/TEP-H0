@@ -10,6 +10,10 @@ from scipy import linalg
 import warnings
 from urllib.request import urlretrieve
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 # Astronomy imports
 try:
     from astroquery.simbad import Simbad
@@ -24,7 +28,7 @@ try:
     from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
 except ImportError:
     # Add project root to path if needed
-    sys.path.append(str(Path(__file__).resolve().parents[2]))
+    sys.path.append(str(PROJECT_ROOT))
     from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
 
 class Step1DataIngestion:
@@ -206,18 +210,20 @@ class Step1DataIngestion:
         
         print_status(f"Solving GLS system: {L.shape[0]} observations, {L.shape[1]} parameters", "INFO")
         
-        # Solve GLS: q = (L^T C^-1 L)^-1 L^T C^-1 y
-        # Invert C
+        # Solve GLS: q = (L^T C^-1 L)^-1 L^T C^-1 y.
+        # Use linear solves instead of explicitly forming chained matmuls; this
+        # avoids backend floating-point warnings while preserving the GLS system.
         try:
-            Cinv = linalg.inv(C)
+            Cinv_L = linalg.solve(C, L, assume_a="sym")
+            Cinv_y = linalg.solve(C, y, assume_a="sym")
         except linalg.LinAlgError:
-            print_status("Covariance matrix inversion failed.", "ERROR")
+            print_status("Covariance matrix solve failed.", "ERROR")
             return
 
-        fisher = L.T @ Cinv @ L
+        fisher = np.dot(L.T, Cinv_L)
         fisher_inv = linalg.inv(fisher)
-        rhs = L.T @ Cinv @ y
-        qSol = fisher_inv @ rhs
+        rhs = np.dot(L.T, Cinv_y)
+        qSol = np.dot(fisher_inv, rhs)
         
         # Errors
         err_qSol = np.sqrt(np.diag(fisher_inv))
@@ -399,6 +405,8 @@ class Step1DataIngestion:
         valid_hosts['z_hel_err'] = np.nan
         valid_hosts['vpec'] = np.nan
         valid_hosts['vpecerr'] = np.nan
+        valid_hosts['m_b_corr'] = np.nan
+        valid_hosts['m_b_corr_err'] = np.nan
         valid_hosts['pantheon_id'] = ""
         valid_hosts['separation_arcsec'] = np.nan
         
@@ -420,6 +428,8 @@ class Step1DataIngestion:
             valid_hosts.at[host_df_idx, 'z_hel_err'] = row.get('zHELERR', np.nan)
             valid_hosts.at[host_df_idx, 'vpec'] = row.get('VPEC', np.nan)
             valid_hosts.at[host_df_idx, 'vpecerr'] = row.get('VPECERR', np.nan)
+            valid_hosts.at[host_df_idx, 'm_b_corr'] = row.get('m_b_corr', np.nan)
+            valid_hosts.at[host_df_idx, 'm_b_corr_err'] = row.get('m_b_corr_err_DIAG', np.nan)
             valid_hosts.at[host_df_idx, 'pantheon_id'] = row['CID']
             valid_hosts.at[host_df_idx, 'separation_arcsec'] = d2d[host_idx].to(u.arcsec).value
 
@@ -439,6 +449,8 @@ class Step1DataIngestion:
                 'z_hel_err',
                 'vpec',
                 'vpecerr',
+                'm_b_corr',
+                'm_b_corr_err',
                 'pantheon_id',
                 'separation_arcsec'
             ]],
@@ -570,4 +582,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

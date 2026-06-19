@@ -8,6 +8,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 # Astronomy imports (environment catalog)
 try:
     from astroquery.vizier import Vizier
@@ -24,7 +28,7 @@ try:
     )
 except ImportError:
     # Add project root to path if needed
-    sys.path.append(str(Path(__file__).resolve().parents[2]))
+    sys.path.append(str(PROJECT_ROOT))
     from scripts.utils.logger import (
         TEPLogger,
         print_status,
@@ -120,23 +124,18 @@ class Step2Stratification:
         return merged
 
     def calculate_h0(self, df):
-        """Calculates H0 for each host."""
-        print_status("Calculating Individual H0 Values...", "SECTION")
+        """Calculates H0 for each host using the 3-rung distance ladder."""
+        print_status("Calculating Individual H0 Values (3-Rung Ladder)...", "SECTION")
 
-        c = 299792.458  # km/s
-
-        # v = c * z_hd
-        df["velocity"] = c * df["z_hd"]
-
-        # d = 10^((mu - 25)/5)
-        # 'value' column in r22_distances is mu
+        # We keep distance_mpc and velocity just for display/reference
         df["distance_mpc"] = 10 ** ((df["value"] - 25) / 5)
+        df["velocity"] = 299792.458 * df["z_hd"]
 
         # H0 = v / d
         df["h0_derived"] = df["velocity"] / df["distance_mpc"]
 
-        # Filter valid entries (require Sigma, H0, and minimum redshift)
-        valid = df.dropna(subset=["h0_derived", "sigma_inferred"]).copy()
+        # Filter valid entries (require Sigma, H0, and SN photometry)
+        valid = df.dropna(subset=["h0_derived", "sigma_inferred", "m_b_corr"]).copy()
 
         # Ensure normalized_name is stripped and string
         valid["normalized_name"] = valid["normalized_name"].astype(str).str.strip()
@@ -149,25 +148,7 @@ class Step2Stratification:
 
         n_before = len(valid)
 
-        # MINIMUM REDSHIFT CUT: z > 0.0035
-        # Rationale: At low redshift, peculiar velocities (v_pec ~ 300 km/s) dominate
-        # the recession velocity. For z = 0.0035, v_rec = cz ≈ 1050 km/s, so
-        # v_pec/v_rec ≈ 29%. This is a reasonable compromise between sample size
-        # and peculiar velocity contamination.
-        # We use z > 0.0035 (rather than z > 0.01 as in some studies) to maximize
-        # sample size while keeping peculiar velocity errors below ~30%.
-        # Reference: Scolnic et al. (2022), Pantheon+ methodology
-        MIN_REDSHIFT = 0.0035
-        valid = valid[valid["z_hd"] >= MIN_REDSHIFT].copy()
-        n_excluded = n_before - len(valid)
-
-        if n_excluded > 0:
-            print_status(
-                f"Excluded {n_excluded} low-z hosts (z < {MIN_REDSHIFT}) to minimize peculiar velocity errors.",
-                "WARNING",
-            )
-
-        print_status(f"Final Sample Size: {len(valid)} SN Ia Hosts", "SUCCESS")
+        print_status(f"Final Sample Size: {len(valid)} SN Ia Hosts (no redshift cuts applied)", "SUCCESS")
 
         # Display Sample
         headers = ["Host", "z_HD", "mu (mag)", "D (Mpc)", "H0 (km/s/Mpc)"]
@@ -329,11 +310,17 @@ class Step2Stratification:
         sub = 0.5 * (sub + sub.T)
         return sub
 
-    def _mu_to_h0_covariance(self, mu_values, h0_values, mu_cov):
+    def _mu_to_h0_covariance(self, mu_values, h0_values, mu_cov, vpec_err=None, distances=None):
+        # Original exact mapping: cov_H0 = (dH0/dmu) * cov_mu * (dH0/dmu)^T
         dH_dmu = -(np.log(10.0) / 5.0) * h0_values
-        J = np.diag(dH_dmu)
-        h0_cov = J @ mu_cov @ J
+        h0_cov = dH_dmu[:, None] * mu_cov * dH_dmu[None, :]
         h0_cov = 0.5 * (h0_cov + h0_cov.T)
+        
+        # Add vpec uncertainty to the diagonal
+        if vpec_err is not None and distances is not None:
+            vpec_variance = (vpec_err / distances) ** 2
+            np.fill_diagonal(h0_cov, h0_cov.diagonal() + vpec_variance)
+            
         return h0_cov
 
     def calculate_densities(self, df):
@@ -410,13 +397,10 @@ class Step2Stratification:
 
         valid["rho_local"] = valid.apply(get_rho, axis=1)
 
-        # Compute continuous shear-suppression factor S(rho)
-        # rho_half = 0.5 M_sun/pc^3 (galactic-scale half-suppression density)
-        # n = 2 (smooth transition steepness)
-        rho_half = 0.5
-        n_steep = 2.0
-        valid["shear_suppression"] = 1.0 / (
-            1.0 + (valid["rho_local"] / rho_half) ** n_steep
+        # Compute continuous shear-suppression factor S(rho) using Universal Two-Factor model
+        from scripts.utils.tep_correction import total_screening_factor
+        valid["shear_suppression"] = valid.apply(
+            lambda r: total_screening_factor(r["rho_local"], r.get("tully_nmb", np.nan)), axis=1
         )
 
         # Merge back to main df for export
@@ -495,7 +479,9 @@ class Step2Stratification:
                 mu_cov_sub = self._subset_covariance(mu_cov, mu_labels, sample_labels)
                 h0_vals = df["h0_derived"].values
                 mu_vals = df["value"].values
-                h0_cov = self._mu_to_h0_covariance(mu_vals, h0_vals, mu_cov_sub)
+                vpec_err = pd.to_numeric(df.get("vpecerr", pd.Series(np.full(len(df), 250.0))), errors="coerce").fillna(250.0).values
+                distances = df["distance_mpc"].values
+                h0_cov = self._mu_to_h0_covariance(mu_vals, h0_vals, mu_cov_sub, vpec_err=vpec_err, distances=distances)
 
                 np.save(self.h0_cov_path, h0_cov)
                 with open(self.h0_cov_labels_path, "w") as f:

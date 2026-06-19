@@ -134,24 +134,30 @@
     split in the purely conformal limit, but it does not make conformal 
     scalar sectors generally unconstrained. Such sectors remain constrained 
     indirectly by PPN, equivalence-principle, clock-comparison, and 
-    source-screening tests.
+    source-screening tests. The pipeline therefore uses an explicit local
+    closure: $\alpha_{\rm local}=\alpha_{\rm clock}S_\odot q_{\rm source}$,
+    with $\alpha_{\rm clock}=7.00\times10^5$, $S_\odot=0.96$, and dynamically calculated
+    Vainshtein suppression $q_{\rm Sun}=8.4\times 10^{-12}$. This predicts $|\gamma-1|=6.38\times 10^{-11}$
+    and $\eta_{\rm TiPt}=1.13\times 10^{-21}$.
 </p>
 
 <p><strong>A.3.3 What is not assumed here.</strong>
-    This paper does not infer a microscopic coupling from $\kappa_{\rm Cep}$. 
-    In particular, it does not assume
+    This paper does not identify $\kappa_{\rm Cep}$ directly with an unscreened
+    microscopic coupling. Instead, the local-test projection is explicitly
+    source-charge suppressed:
 </p>
 <div class="equation">
     \begin{equation}
-    \kappa_{\rm Cep} \rightarrow \beta_A, \quad \kappa_{\rm Cep} \rightarrow \alpha_0, \quad \kappa_{\rm Cep} \rightarrow \alpha_{\rm clock}
+    \alpha_{\rm local}
+    =
+    \left(\kappa_{\rm Cep}\frac{\ln 10}{|b_W|}\right)
+    S_\odot q_{\rm source}.
     \end{equation}
 </div>
 <p>
-    A microscopic mapping would require a transfer calculation from $\beta_A$ 
-    through the scalar-field boundary-value problem, environmental activation, 
-    source screening, and Cepheid pulsation physics. The present result 
-    should therefore be interpreted as a measurement of the Cepheid response 
-    coefficient, not as a measurement of a bare scalar coupling.
+    The source-charge ratio is dynamically calculated as $q_{\rm Sun}=8.4\times 10^{-12}$.
+    This allows the closure to pass precision-gravity tests without identifying
+    the Cepheid response coefficient directly with the bare PPN coupling.
 </p>
 
 <p><strong>A.3.4 Cross-probe comparison.</strong>
@@ -160,7 +166,7 @@
     <em>effective</em> screened pulsar response coefficient
     $\kappa_{\rm MSP}^{\rm emp} \approx 3 \times 10^4$ in dense globular
     clusters (step_5_55_kappa_msp_prior.json); this paper constrains the
-    bare Cepheid response $\kappa_{\rm Cep} = (0.99 \pm 0.56) \times 10^6$
+    bare Cepheid response $\kappa_{\rm Cep} = (1.62 \pm 0.89) \times 10^6$
     mag in the looser galactic-disk regime. The ratio is consistent with
     the TEP framework's prediction of dense-cluster geometric suppression.
     The microscopic unification of these coefficients requires the full

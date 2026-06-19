@@ -1,5 +1,5 @@
 # Data File Checksums (SHA-256)
-# Generated: 2026-06-19T12:12:04.219948
+# Generated: 2026-06-19T14:16:00
 # Verify with: sha256sum -c CHECKSUMS.txt (after removing size/mtime notes)
 #
 1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8  data/raw/Pantheon+SH0ES.dat  (579,283 bytes, modified 2026-01-10 10:07:13)
@@ -8,4 +8,4 @@
 270ca9708ea554e4174ca7b973b9c3f369ec7658183be1d29687f8a9a124aeae  data/raw/external/anchor_galaxy_data.csv  (510 bytes, modified 2026-06-19 13:06:07)
 1e2e4f91e1adaaed86a0da349a19c0ce7557277f923dca2ba4790a3686d4c8af  data/interim/hosts_coords.csv  (2,342 bytes, modified 2026-06-18 14:53:44)
 162a845958ab02c07b95bdd8d69e16d524e6459a454ce1552ddf12cbd023bcd2  data/interim/hosts_properties.csv  (3,381 bytes, modified 2026-01-10 10:16:55)
-46b99be19f995ff02090454053a7a468c62bb7d912ff82170c8a8794ceec6046  data/processed/hosts_processed.csv  (10,272 bytes, modified 2026-06-19 13:09:46)
+edcb82bfc4431865ec608be2ae33d44a0d994f041999c2d164047c985562b049  data/processed/hosts_processed.csv  (6,323 bytes, modified 2026-06-19 14:04:00)

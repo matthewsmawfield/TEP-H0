@@ -86,7 +86,7 @@ class Step3TEPCorrection:
         which are NOT modelled here. As a result, screening is largely inactive
         ($S\approx 1$) for the SH0ES disk Cepheid sample, consistent with their
         Hubble-flow location (UNSCREENED regime).
-    -   The geometric anchors LMC, M31, N4258 reside in DEEP cosmological
+    -   The geometric anchors LMC, M31, NGC 4258 reside in DEEP cosmological
         potential wells (Local Group / Local Volume) and are expected to be
         SCREENED in TEP. Absence of $\sigma$-correlation across the anchors
         is therefore the predicted density-regime screening transition,
@@ -101,7 +101,7 @@ class Step3TEPCorrection:
     -   $S(\rho) \in [0,1]$: Local-density shear-suppression factor (partial
         proxy for the full TEP $\mathcal{S}_\Sigma(\mathcal{E})$).
     -   $\sigma_{\rm ref}$: Effective velocity dispersion of the calibrator
-        sample (MW, LMC, N4258).
+        sample (MW, LMC, NGC 4258).
 
     Objective:
     Fit $\kappa_{\rm Cep}$ to minimise the residual H0–σ slope across the
@@ -165,7 +165,7 @@ class Step3TEPCorrection:
 
         - MW (~20%): Many Cepheids with individual Gaia parallaxes, but higher scatter
         - LMC (~25%): ~70 Cepheids with excellent HST photometry, precise DEB distance
-        - N4258 (~55%): ~139 Cepheids, gold-standard maser distance, and critically:
+        - NGC 4258 (~55%): ~139 Cepheids, gold-standard maser distance, and critically:
           it is the ONLY anchor that is a GALAXY (like the SN hosts being corrected)
 
         NGC 4258 is weighted most heavily because it provides the most relevant
@@ -180,7 +180,7 @@ class Step3TEPCorrection:
         Sources:
         - MW: Bovy+2012 thin disk σ_z at solar neighborhood = 30 km/s
         - LMC: van der Marel+2002 disk dispersion = 24 km/s
-        - N4258: Kormendy & Ho 2013 intermediate-aperture value = 115 km/s
+        - NGC 4258: Kormendy & Ho 2013 intermediate-aperture value = 115 km/s
           (NOT the central bulge value of 148 km/s from Ho+2009)
 
         The resulting σ_ref ≈ 75 km/s is validated by the empirical result that
@@ -530,9 +530,7 @@ class Step3TEPCorrection:
             kappa_refit = self.optimize_correction(df, sr)
 
             S = df["shear_suppression"].values
-            correction = tep_correction(
-                df["sigma_inferred"].values, sr, kappa_refit, S
-            )
+            correction = tep_correction(df["sigma_inferred"].values, sr, kappa_refit, S)
             mu_corr = df["value"].values + correction
             dist_corr = 10 ** ((mu_corr - 25) / 5)
             h0_corr = df["velocity"].values / dist_corr
@@ -542,9 +540,7 @@ class Step3TEPCorrection:
             # Stronger robustness curve: keep the primary fitted kappa fixed and
             # vary only the externally defined calibrator reference.
             if fixed_kappa_cep is not None:
-                fixed_correction = tep_correction(
-                    df["sigma_inferred"].values, sr, fixed_kappa_cep, S
-                )
+                fixed_correction = tep_correction(df["sigma_inferred"].values, sr, fixed_kappa_cep, S)
                 fixed_mu = df["value"].values + fixed_correction
                 fixed_dist = 10 ** ((fixed_mu - 25) / 5)
                 fixed_h0 = df["velocity"].values / fixed_dist
@@ -920,7 +916,7 @@ class Step3TEPCorrection:
         if not all_ok:
             print_status("SLOPE CONVENTION AUDIT FAILED — sign inconsistency detected!", "CRITICAL")
             raise RuntimeError("Slope convention audit failed: inconsistent signs.")
-        print_status("Slope convention audit PASSED.", "SUCCESS")
+        print_status("Slope Convention Audit PASSED.", "SUCCESS")
         return audit
 
     def run(self):

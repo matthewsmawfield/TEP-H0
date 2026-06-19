@@ -10,16 +10,37 @@ modified gravity parameters used in Boltzmann solvers.
 
 Theoretical Framework:
 - Metric: Jordan frame metric g_tilde = A(phi) g + B(phi) d_phi d_phi
-- Clock response: kappa_cep ~ 1.05e6 mag (Observable Response Coefficient)
+- Clock response: kappa_cep read from Step 3 when available (~0.99e6 mag)
 - Screening scale: m_phi(rho) (candidate completion for continuous Temporal Shear suppression)
 
 Author: Matthew Lukin Smawfield
 Date: April 2026
 """
 
+import json
 from pathlib import Path
+import sys
 import numpy as np
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(PROJECT_ROOT))
+
 from scripts.utils.logger import TEPLogger, print_status, set_step_logger
+DEFAULT_KAPPA_CEP = 0.991381e6
+DEFAULT_H0 = 68.13222017543657
+
+
+def _load_tep_headlines():
+    tep_path = PROJECT_ROOT / "results" / "outputs" / "tep_correction_results.json"
+    values = {"kappa_cep": DEFAULT_KAPPA_CEP, "h0": DEFAULT_H0}
+    try:
+        with open(tep_path, "r") as f:
+            tep = json.load(f)
+        values["kappa_cep"] = float(tep.get("optimal_kappa_cep", values["kappa_cep"]))
+        values["h0"] = float(tep.get("unified_h0", values["h0"]))
+    except (OSError, TypeError, ValueError, json.JSONDecodeError):
+        pass
+    return values
 
 def define_tep_cosmology_params():
     """
@@ -27,15 +48,17 @@ def define_tep_cosmology_params():
     """
     print_status("Initializing TEP-CLASS Parameter Mapping...", "INFO")
 
+    headlines = _load_tep_headlines()
+
     # TEP Core Parameters (from Paper 11/12)
-    kappa_cep = 1.05e6      # Clock/Matter sector (mag) - Observable Response Coefficient
+    kappa_cep = headlines["kappa_cep"]  # Clock/Matter sector (mag)
     kappa_grav = 1.1e-3     # Gravitational sector (dimensionless, from Paper 12)
     m_phi_0 = 1.0          # h/Mpc (fiducial mass scale)
     rho_c = 20.0           # g/cm^3 (critical screening density)
     
     # Mapping to hi_class (Horndeski / Scalar-Tensor)
     params = {
-        'H0': 68.17,
+        'H0': headlines["h0"],
         'omega_b': 0.02237,
         'omega_cdm': 0.1200,
         'tau_reio': 0.0544,

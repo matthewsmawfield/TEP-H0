@@ -108,60 +108,6 @@ class Step8M31PHATAnalysis:
         resid = y - slope * logp
         return np.mean(resid), np.std(resid, ddof=1) / np.sqrt(len(resid))
 
-    def _color_matched_bootstrap(self, inner, outer, y_col, slope, n_boot=1000, caliper=1.5):
-        """
-        2D matched bootstrap controlling for Period AND Color (metallicity proxy).
-        """
-        features = ['logP', 'JH_color']
-        df_in = inner.dropna(subset=features + [y_col]).copy()
-        df_out = outer.dropna(subset=features + [y_col]).copy()
-        
-        if len(df_in) < 5 or len(df_out) < 5:
-            return {'n_matched': 0, 'delta_mean': np.nan, 'delta_std': np.nan}
-        
-        # Standardize features
-        combined = pd.concat([df_in[features], df_out[features]])
-        for col in features:
-            mu, sig = combined[col].mean(), combined[col].std()
-            if sig > 0:
-                df_in[f'{col}_z'] = (df_in[col] - mu) / sig
-                df_out[f'{col}_z'] = (df_out[col] - mu) / sig
-        
-        z_cols = [f'{c}_z' for c in features]
-        
-        # Build KD-tree for nearest neighbor matching
-        tree = cKDTree(df_out[z_cols].values)
-        distances, indices = tree.query(df_in[z_cols].values, k=1)
-        
-        # Filter by caliper
-        valid = distances < caliper
-        n_matched = valid.sum()
-        
-        if n_matched < 5:
-            return {'n_matched': n_matched, 'delta_mean': np.nan, 'delta_std': np.nan}
-        
-        matched_in = df_in[valid].reset_index(drop=True)
-        matched_out = df_out.iloc[indices[valid]].reset_index(drop=True)
-        
-        # Bootstrap
-        rng = np.random.default_rng(42)
-        deltas = []
-        for _ in range(n_boot):
-            boot = rng.choice(n_matched, n_matched, replace=True)
-            ai, _ = self._weighted_intercept(matched_in.iloc[boot]['logP'].values,
-                                              matched_in.iloc[boot][y_col].values, slope)
-            ao, _ = self._weighted_intercept(matched_out.iloc[boot]['logP'].values,
-                                              matched_out.iloc[boot][y_col].values, slope)
-            deltas.append(ai - ao)
-        
-        return {
-            'n_matched': n_matched,
-            'delta_mean': float(np.mean(deltas)),
-            'delta_std': float(np.std(deltas, ddof=1)),
-            'delta_p16': float(np.percentile(deltas, 16)),
-            'delta_p84': float(np.percentile(deltas, 84))
-        }
-
     def run(self):
         print_status("Starting Step 8: M31 HST Differential Analysis", "TITLE")
         
@@ -228,40 +174,84 @@ class Step8M31PHATAnalysis:
         sign_str = "INNER BRIGHTER" if delta_baseline < 0 else "INNER FAINTER"
         print_status(f"Baseline: ΔW = {delta_baseline:+.3f} ± {err_baseline:.3f} mag ({sig_baseline:.1f}σ) [{sign_str}]", "RESULT")
         
-        # 5. Color-matched analysis (metallicity control)
-        print_status("=== COLOR-MATCHED ANALYSIS (Metallicity Control) ===", "SECTION")
+        # 5. Color-matched analysis (metallicity/crowding control)
+        print_status("=== 2D MULTIDIMENSIONAL MATCHING (logP + Color) ===", "SECTION")
         
-        color_result = self._color_matched_bootstrap(inner, outer, 'W_H', fixed_slope)
+        # Normalize the matching parameters so distance is meaningful
+        logp_std = df['logP'].std()
+        color_std = df['JH_color'].std()
         
-        if color_result['n_matched'] >= 5:
-            delta_color = color_result['delta_mean']
-            err_color = color_result['delta_std']
-            sig_color = abs(delta_color) / err_color if err_color > 0 else 0
-            sign_color = "INNER BRIGHTER" if delta_color < 0 else "INNER FAINTER"
-            print_status(f"Color-matched (N={color_result['n_matched']}): ΔW = {delta_color:+.3f} ± {err_color:.3f} mag ({sig_color:.1f}σ) [{sign_color}]", "RESULT")
+        inner_params = np.column_stack([
+            inner['logP'].values / logp_std,
+            inner['JH_color'].values / color_std
+        ])
+        
+        outer_params = np.column_stack([
+            outer['logP'].values / logp_std,
+            outer['JH_color'].values / color_std
+        ])
+        
+        # Build tree for outer Cepheids
+        tree = cKDTree(outer_params)
+        
+        # Find nearest outer neighbor for each inner Cepheid
+        # Max distance: ~0.1 in normalized units (roughly 10% variation)
+        max_dist = 0.15 
+        distances, indices = tree.query(inner_params, distance_upper_bound=max_dist)
+        
+        valid_matches = distances != np.inf
+        
+        matched_inner = inner[valid_matches]
+        matched_outer = outer.iloc[indices[valid_matches]]
+        
+        if len(matched_inner) < 5:
+            print_status(f"Only {len(matched_inner)} matches found. Sample too sparse for color control.", "WARNING")
+            delta_matched = np.nan
+            err_matched = np.nan
+            sig_matched = np.nan
+            match_str = "INCONCLUSIVE"
         else:
-            print_status(f"Insufficient matches for color control (N={color_result['n_matched']})", "WARNING")
-            delta_color, err_color = np.nan, np.nan
+            # We matched on period, so we can just compare magnitudes directly!
+            # Let's still use the slope offset to be totally rigorous against small logP diffs
+            dm = matched_inner['W_H'].values - matched_outer['W_H'].values
+            
+            # Correct for any residual period difference between pairs
+            dlogp = matched_inner['logP'].values - matched_outer['logP'].values
+            dm_corrected = dm - fixed_slope * dlogp
+            
+            delta_matched = np.mean(dm_corrected)
+            err_matched = np.std(dm_corrected, ddof=1) / np.sqrt(len(dm_corrected))
+            sig_matched = abs(delta_matched) / err_matched
+            
+            match_str = "INNER BRIGHTER" if delta_matched < 0 else "INNER FAINTER"
+            print_status(f"Found {len(matched_inner)} tight 2D matches.", "INFO")
+            print_status(f"Matched: ΔW = {delta_matched:+.3f} ± {err_matched:.3f} mag ({sig_matched:.1f}σ) [{match_str}]", "RESULT")
         
         # 6. Summary
         print_status("=" * 60, "INFO")
         print_status("SUMMARY", "TITLE")
-        print_status(f"Baseline:      ΔW = {delta_baseline:+.3f} ± {err_baseline:.3f} mag [{sign_str}]", "RESULT")
-        if not np.isnan(delta_color):
-            print_status(f"Color-matched: ΔW = {delta_color:+.3f} ± {err_color:.3f} mag [{sign_color}]", "RESULT")
+        print_status(f"Baseline (Confounded): ΔW = {delta_baseline:+.3f} ± {err_baseline:.3f} mag [{sign_str}]", "RESULT")
+        if not np.isnan(delta_matched):
+            print_status(f"Matched (Controlled):  ΔW = {delta_matched:+.3f} ± {err_matched:.3f} mag [{match_str}]", "RESULT")
         
         # Interpret result
-        if delta_baseline < 0:
+        if np.isnan(delta_matched) or sig_matched < 2.0:
             print_status("", "INFO")
-            print_status("*** M31 HST shows INNER BRIGHTER - CONSISTENT WITH UNSCREENED TEP ***", "SUCCESS")
-            print_status("Inner region (deep potential) is unscreened/contracted -> Brighter.", "INFO")
-            interpretation = "Inner BRIGHTER - Consistent with Unscreened TEP"
+            print_status("*** M31 HST SIGNAL VANISHED UNDER METALLICITY/COLOR CONTROL ***", "WARNING")
+            print_status("The 'Inner Brighter' signal is overwhelmingly driven by standard astrophysical", "WARNING")
+            print_status("crowding/metallicity in the central bulge, not TEP time dilation.", "WARNING")
+            interpretation = "Signal eliminated by color control; Evidence of Confounding."
+            sign_str = "CONFOUNDED"
+        elif delta_matched < 0:
+            print_status("", "INFO")
+            print_status("*** M31 HST shows ROBUST INNER BRIGHTER - CONSISTENT WITH UNSCREENED TEP ***", "SUCCESS")
+            interpretation = "Robust Inner BRIGHTER - Consistent with Unscreened TEP"
+            sign_str = "INNER BRIGHTER"
         else:
             print_status("", "INFO")
-            print_status("*** M31 HST shows INNER FAINTER - CONSISTENT WITH SCREENED TEP ***", "SUCCESS")
-            print_status("Inner region (high density) is SCREENED (Standard); Outer is ACTIVE (Brighter).", "INFO")
-            print_status("Relative to Outer (Brighter), Inner appears Fainter. Matches Screening Inversion.", "INFO")
-            interpretation = "Inner FAINTER - Consistent with Screened TEP (Inversion)"
+            print_status("*** M31 HST shows ROBUST INNER FAINTER - CONSISTENT WITH SCREENED TEP ***", "SUCCESS")
+            interpretation = "Robust Inner FAINTER - Consistent with Screened TEP (Inversion)"
+            sign_str = "INNER FAINTER"
         
         # 7. Save results
         results = {
@@ -274,14 +264,16 @@ class Step8M31PHATAnalysis:
             'baseline': {
                 'delta_mag': float(delta_baseline),
                 'delta_err': float(err_baseline),
-                'significance_sigma': float(sig_baseline),
-                'interpretation': sign_str
+                'significance_sigma': float(sig_baseline)
             },
-            'color_matched': {
-                'n_matched': int(color_result['n_matched']),
-                'delta_mag': float(delta_color) if not np.isnan(delta_color) else None,
-                'delta_err': float(err_color) if not np.isnan(err_color) else None,
+            'color_matched_omitted': False,
+            'matched': {
+                'n_matched': len(matched_inner),
+                'delta_mag': float(delta_matched) if not np.isnan(delta_matched) else None,
+                'delta_err': float(err_matched) if not np.isnan(err_matched) else None,
+                'significance_sigma': float(sig_matched) if not np.isnan(sig_matched) else None
             },
+            'interpretation': sign_str,
             'conclusion': interpretation
         }
         

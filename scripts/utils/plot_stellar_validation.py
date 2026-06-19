@@ -30,7 +30,7 @@ import pandas as pd
 
 from scripts.utils.stellar_validation_core import (
     KAPPA_CEP,
-    SIGMA_REF,
+    SIGMA_REF_SCREENED_SQ,
     B_PL,
     transport_period,
     delta_mu_from_transport,
@@ -63,8 +63,9 @@ def plot_period_transport_grid(
         axes[0].plot(sigmas, P_obs, label=f"$\\rho/\\rho_{{1/2}}={rho}$", color=color, lw=2)
         axes[1].plot(sigmas, frac, color=color, lw=2)
 
-    axes[0].axvline(SIGMA_REF, color="gray", ls="--", lw=1)
-    axes[1].axvline(SIGMA_REF, color="gray", ls="--", lw=1, label=f"$\\sigma_{{ref}}={SIGMA_REF:.2f}$ km/s")
+    sigma_ref_eff = np.sqrt(SIGMA_REF_SCREENED_SQ)
+    axes[0].axvline(sigma_ref_eff, color="gray", ls="--", lw=1)
+    axes[1].axvline(sigma_ref_eff, color="gray", ls="--", lw=1, label=f"$\\sigma_{{ref,scr}}={sigma_ref_eff:.2f}$ km/s")
     axes[1].axhline(0, color="black", ls="-", lw=0.5)
 
     axes[0].set_ylabel("Observed period $P_{\\rm obs}$ (days)", fontsize=12)
@@ -114,8 +115,8 @@ def plot_closure_test(
     ]
     # 1:1 reference
     ax.plot(lim, lim, "k--", lw=1.5, label="1:1", zorder=2)
-    # Fitted line (least-squares through origin on x = S*(sigma^2-sigma_ref^2)/c^2)
-    x = df["S_rho"].values * ((df["sigma_km_s"].values ** 2 - SIGMA_REF**2) / (299792.458**2))
+    # Fitted line (least-squares through origin on x = (S*sigma^2 - sigma_ref_screened_sq)/c^2)
+    x = (df["S_rho"].values * df["sigma_km_s"].values ** 2 - SIGMA_REF_SCREENED_SQ) / (299792.458**2)
     y = df["DeltaMu_transport"].values
     kappa_hat = np.sum(x * y) / np.sum(x * x)
     y_fit = kappa_hat * x
@@ -189,7 +190,8 @@ def plot_higher_order_stress_test(
                 label=f"{label}  (f={falsifier:.2f})",
             )
 
-    ax.axvline(SIGMA_REF, color="gray", ls="--", lw=1, label=f"$\\sigma_{{ref}}={SIGMA_REF:.2f}$ km/s")
+    sigma_ref_eff = np.sqrt(SIGMA_REF_SCREENED_SQ)
+    ax.axvline(sigma_ref_eff, color="gray", ls="--", lw=1, label=f"$\\sigma_{{ref,scr}}={sigma_ref_eff:.2f}$ km/s")
     ax.axhline(0, color="black", ls="-", lw=0.5)
     ax.set_xlabel("Velocity dispersion $\\sigma$ (km/s)", fontsize=12)
     ax.set_ylabel("$\\Delta\\mu_{\\rm general}$ (mag)", fontsize=12)
