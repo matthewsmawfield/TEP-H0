@@ -19,21 +19,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from scripts.utils.plot_style import apply_tep_style
 from scripts.utils.logger import print_status, print_table
-from scripts.utils.tep_correction import ANCHOR_SCREENING
-
-# Anchor properties
-ANCHOR_SIGMA = {
-    'NGC 4258': 115.0,
-    'LMC': 24.0,
-    'M31': 160.0,
-}
-
-ANCHOR_MU = {
-    'NGC 4258': 29.397,
-    'LMC': 18.477,
-    'M31': 24.407,
-}
-
+from scripts.utils.tep_correction import ANCHOR_SCREENING, ANCHOR_NMB, group_screening_factor
 
 class AnchorStratificationStep:
     """Pipeline step for anchor stratification analysis."""
@@ -45,6 +31,36 @@ class AnchorStratificationStep:
         self.figures_dir = self.results_dir / "figures"
         self.outputs_dir = self.results_dir / "outputs"
         
+        self.anchor_sigma, self.anchor_mu = self._load_anchor_properties()
+        
+    def _load_anchor_properties(self):
+        """Load anchor properties from traceable CSVs to ensure full data provenance."""
+        sigma_df = pd.read_csv(self.data_dir / 'raw' / 'external' / 'velocity_dispersions_literature.csv', comment='#')
+        mu_df = pd.read_csv(self.data_dir / 'raw' / 'external' / 'anchor_galaxy_data.csv', comment='#')
+        
+        anchor_sigma = {}
+        anchor_mu = {}
+        
+        # Map names to expected dictionary keys
+        name_map = {
+            'M 31': 'M31',
+            'LMC': 'LMC',
+            'NGC 4258': 'NGC 4258'
+        }
+        
+        for _, row in mu_df.iterrows():
+            gal_csv = row['galaxy']
+            if gal_csv in name_map:
+                gal_key = name_map[gal_csv]
+                anchor_mu[gal_key] = row['mu_anchor']
+                
+                # Match sigma
+                sigma_match = sigma_df[sigma_df['galaxy'] == gal_csv]
+                if not sigma_match.empty:
+                    anchor_sigma[gal_key] = float(sigma_match.iloc[0]['sigma_kms'])
+                    
+        return anchor_sigma, anchor_mu
+        
     def run(self):
         """Execute the anchor stratification test."""
         print_status("=" * 70, "INFO")
@@ -52,10 +68,15 @@ class AnchorStratificationStep:
         print_status("Testing for internal P-L tension in geometric anchors", "INFO")
         print_status("=" * 70, "INFO")
 
-        # Explicit replication transparency: canonical hardcoded screening inputs
-        print_status("Canonical Anchor Screening Inputs (tep_correction.ANCHOR_SCREENING):", "SECTION")
+        # Explicit replication transparency: formula-derived screening inputs
+        print_status("Anchor Screening from Continuous Nmb Formula:", "SECTION")
+        print_status("  S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}", "INFO")
+        print_status("  N_crit = 10.0, gamma = 1.2 (fixed before any fit)", "INFO")
         for _scr_name, _scr_val in ANCHOR_SCREENING.items():
-            print_status(f"  S_{{{_scr_name}}} = {_scr_val:.2f}", "INFO")
+            _nmb = ANCHOR_NMB.get(_scr_name, 1)
+            print_status(
+                f"  S_{{{_scr_name}}} = {_scr_val:.3f}  (N_mb = {_nmb})", "INFO"
+            )
 
         # Load Cepheid data
         df = self._load_cepheid_data()
@@ -75,9 +96,10 @@ class AnchorStratificationStep:
         # Create visualization
         self._create_figure(results)
 
-        # Persist hardcoded screening inputs for replication transparency
+        # Persist formula-derived screening inputs for replication transparency
         results['anchor_screening_inputs'] = dict(ANCHOR_SCREENING)
-        results['anchor_screening_source'] = 'scripts.utils.tep_correction.ANCHOR_SCREENING'
+        results['anchor_nmb_inputs'] = dict(ANCHOR_NMB)
+        results['anchor_screening_source'] = 'scripts.utils.tep_correction.ANCHOR_SCREENING (formula-derived)'
 
         # Save results
         self._save_results(results)
@@ -112,7 +134,7 @@ class AnchorStratificationStep:
         
         print_status("Anchor Sample Sizes:", "SECTION")
         headers = ["Anchor", "N", "σ (km/s)", "μ_geo"]
-        rows = [[name, len(sample), f"{ANCHOR_SIGMA[name]:.0f}", f"{ANCHOR_MU[name]:.3f}"]
+        rows = [[name, len(sample), f"{self.anchor_sigma[name]:.0f}", f"{self.anchor_mu[name]:.3f}"]
                 for name, sample in anchors.items()]
         print_table(headers, rows)
         
@@ -146,12 +168,12 @@ class AnchorStratificationStep:
                 se = np.full(X.shape[1], np.nan)
             
             M_W_apparent = beta[0]
-            M_W_absolute = M_W_apparent - ANCHOR_MU[name]
+            M_W_absolute = M_W_apparent - self.anchor_mu[name]
             
             results[name] = {
                 'N': len(sample),
-                'sigma': ANCHOR_SIGMA[name],
-                'mu_geo': ANCHOR_MU[name],
+                'sigma': self.anchor_sigma[name],
+                'mu_geo': self.anchor_mu[name],
                 'M_W_apparent': float(M_W_apparent),
                 'M_W_absolute': float(M_W_absolute),
                 'M_W_err': float(se[0]),

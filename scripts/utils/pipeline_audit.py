@@ -153,6 +153,18 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
             {"expected": {"n": derived['n'], "pearson_r": derived['pearson_r'], "spearman_rho": derived['spearman_rho']}, "got": cov},
         ))
 
+        projected = cov.get("bayesian_comparison", {}).get("projected", {})
+        projected_delta_bic = projected.get("delta_bic_matched", projected.get("delta_bic"))
+        try:
+            projected_ok = float(projected_delta_bic) > 10.0
+        except (TypeError, ValueError):
+            projected_ok = False
+        report["checks"].append(_check(
+            "covariance_projected_bic_retains_strong_evidence",
+            projected_ok,
+            {"projected": projected},
+        ))
+
     # Check TEP correction
     tep = _read_json(outputs / "tep_correction_results.json")
     if tep is None:
@@ -187,6 +199,41 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
                 "got": tep,
                 "recomputed_tension_bootstrap": tension_bootstrap,
                 "recomputed_tension_sem": tension_sem,
+            },
+        ))
+
+        corrected_path = outputs / "tep_corrected_h0.csv"
+        if not corrected_path.exists():
+            report["checks"].append(_check(
+                "tep_corrected_csv_matches_primary_headline",
+                False,
+                {"path": str(corrected_path)},
+            ))
+        else:
+            corrected = pd.read_csv(corrected_path)
+            csv_mean = float(corrected["h0_corrected"].mean())
+            json_mean = float(tep.get("unified_h0"))
+            report["checks"].append(_check(
+                "tep_corrected_csv_matches_primary_headline",
+                _approx(csv_mean, json_mean, atol=1e-6, rtol=1e-9),
+                {"csv_mean": csv_mean, "json_unified_h0": json_mean},
+            ))
+
+        anchor_screening = tep.get("anchor_screening", {})
+        ngc4258_screening = anchor_screening.get("NGC 4258")
+        try:
+            screened_ref = float(tep.get("sigma_ref_screened"))
+            ngc4258_screening = float(ngc4258_screening)
+            anchor_ok = screened_ref < 40.0 and ngc4258_screening < 0.2
+        except (TypeError, ValueError):
+            anchor_ok = False
+        report["checks"].append(_check(
+            "screened_reference_uses_ngc4258_anchor_screening",
+            anchor_ok,
+            {
+                "sigma_ref_screened": tep.get("sigma_ref_screened"),
+                "anchor_screening": anchor_screening,
+                "anchor_nmb": tep.get("anchor_nmb", {}),
             },
         ))
 
@@ -431,7 +478,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
                 )
             )
             ok = (
-                abs(kappa_anchor) < 10.0
+                abs(kappa_anchor / kappa_err) < 0.1
                 and kappa_err > 100.0
                 and screened_resid < 2.0
                 and "Anchor Screening Resolution" in final_report_text

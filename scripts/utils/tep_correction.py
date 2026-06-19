@@ -36,6 +36,50 @@ import numpy as np
 C_KM_S: float = 299792.458
 C_SQUARED_KM_S: float = C_KM_S**2
 
+# Continuous group-halo screening parameters (fixed before any fit).
+N_CRIT: float = 10.0
+GAMMA: float = 1.2
+
+
+def group_screening_factor(n_mb: float, n_crit: float = N_CRIT, gamma: float = GAMMA) -> float:
+    """Continuous group-halo screening factor from Tully group richness.
+
+    S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}
+
+    Parameters
+    ----------
+    n_mb : float
+        Tully group membership count (richness proxy).
+    n_crit : float
+        Structural transition scale to group-dominated halos.
+    gamma : float
+        Suppression steepness.
+
+    Returns
+    -------
+    float
+        Screening factor in [0, 1].
+    """
+    return 1.0 / (1.0 + (n_mb / n_crit) ** gamma)
+
+
+# Anchor N_mb values used to compute screening factors via the formula.
+# M31 and NGC 4258 are from the Tully 2015 2MRS catalog (actual catalog values).
+# MW and LMC are not in the catalog; they use representative Local Group values.
+ANCHOR_NMB = {
+    "MW": 7,         # Local Group typical (PGC 2, 18, 82, 304 in catalog)
+    "LMC": 2,        # Local Group satellite typical (PGC 23, 31, 65, 77 in catalog)
+    "M31": 11,       # PGC 224 in Tully 2015 2MRS catalog
+    "NGC 4258": 65,  # PGC 39600 in Tully 2015 2MRS catalog
+}
+
+# Canonical TEP environmental screening factors for geometric calibrators.
+# These are now derived from the continuous N_mb formula, not hand-tuned.
+ANCHOR_SCREENING = {
+    name: group_screening_factor(nmb)
+    for name, nmb in ANCHOR_NMB.items()
+}
+
 
 def tep_correction(
     sigma: np.ndarray | float,
@@ -67,15 +111,13 @@ def tep_correction(
     return kappa_cep * S * (sigma_sq - sigma_ref**2) / C_SQUARED_KM_S
 
 
-# Canonical TEP environmental screening factors for geometric calibrators.
-# These are coarse estimates from cosmological environment depth (Local Group,
-# Local Volume, group-halo membership) used consistently across the pipeline.
-# They match the values in step_10_anchor_stratification.py and the manuscript.
-ANCHOR_SCREENING = {
-    "MW": 0.10,      # Local Group thin disk; deeply screened by MW halo
-    "LMC": 0.10,     # Local Group satellite; deeply screened
-    "M31": 0.20,     # Local Group core; strongly screened
-    "NGC 4258": 0.50,   # Canes Venatici I Group; partially screened
-}
-
-__all__ = ["C_KM_S", "C_SQUARED_KM_S", "KAPPA_CEP_PAPER10", "ANCHOR_SCREENING", "tep_correction"]
+__all__ = [
+    "C_KM_S",
+    "C_SQUARED_KM_S",
+    "N_CRIT",
+    "GAMMA",
+    "group_screening_factor",
+    "ANCHOR_NMB",
+    "ANCHOR_SCREENING",
+    "tep_correction",
+]

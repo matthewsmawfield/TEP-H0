@@ -54,17 +54,25 @@
     ]
   },
   "gold_standard": {
-    "n_gold": 0,
+    "n_gold": 7,
     "gold_sources": [
       "Kormendy&Ho2013",
       "SDSS DR7",
       "Ho+2009"
     ],
-    "gold_hosts": [],
-    "pearson_r": null,
-    "pearson_p": null,
-    "spearman_rho": null,
-    "spearman_p": null
+    "gold_hosts": [
+      "NGC 1365",
+      "NGC 3021",
+      "NGC 3147",
+      "NGC 3254",
+      "NGC 3583",
+      "NGC 4639",
+      "UGC 9391"
+    ],
+    "pearson_r": 0.558828464334325,
+    "pearson_p": 0.19221308857594643,
+    "spearman_rho": 0.642857142857143,
+    "spearman_p": 0.11939237342741094
   },
   "density_control": {
     "available": true,
@@ -92,10 +100,10 @@
       "h0_error": 1.5710652400343095
     },
     "gold_standard": {
-      "n": 0,
-      "kappa_cep": null,
-      "unified_h0": null,
-      "h0_error": null
+      "n": 7,
+      "kappa_cep": 1076580.810546875,
+      "unified_h0": 63.15383500548411,
+      "h0_error": 2.951546489863499
     }
   },
   "convergence": {
@@ -127,6 +135,20 @@
         "kappa_bound_1sigma": 1231106.7334906938,
         "delta_planck": -1.2933205421801262,
         "tension_sigma_planck": 0.7984318019153049
+      },
+      {
+        "tier": "Gold standard",
+        "n": 7,
+        "h0_raw": 66.77873890889217,
+        "h0_raw_sem": 4.0892664630673785,
+        "h0_corrected": 63.41736913850067,
+        "h0_corrected_sem": 3.206813843533747,
+        "correction_kms": 3.361369770391498,
+        "dH_dkappa": -3.3905930443339423e-06,
+        "kappa_for_planck": null,
+        "kappa_bound_1sigma": null,
+        "delta_planck": -3.982630861499338,
+        "tension_sigma_planck": 1.2419276752000918
       }
     ],
     "tightest_bound": 1231106.7334906938,
@@ -161,6 +183,20 @@
       "corrected_mean_full_kappa": 66.10667945781988,
       "corrected_mean_refit_kappa": 66.27216913718296,
       "refit_kappa": 933575.439453125
+    },
+    {
+      "tier": "Gold standard",
+      "n": 7,
+      "mean_sigma": 113.55348808152472,
+      "median_sigma": 102.6945397409901,
+      "mean_redshift": 0.006922857142857143,
+      "group_richness_mean": 10.5,
+      "n_high_sigma": 4,
+      "n_low_sigma": 3,
+      "raw_slope": 0.10985233389029014,
+      "corrected_mean_full_kappa": 63.41736913850067,
+      "corrected_mean_refit_kappa": 63.15383500548411,
+      "refit_kappa": 1076580.810546875
     }
   ]
 }

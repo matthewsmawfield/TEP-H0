@@ -26,5 +26,19 @@
     "corrected_mean_full_kappa": 66.10667945781988,
     "corrected_mean_refit_kappa": 66.27216913718296,
     "refit_kappa": 933575.439453125
+  },
+  {
+    "tier": "Gold standard",
+    "n": 7,
+    "mean_sigma": 113.55348808152472,
+    "median_sigma": 102.6945397409901,
+    "mean_redshift": 0.006922857142857143,
+    "group_richness_mean": 10.5,
+    "n_high_sigma": 4,
+    "n_low_sigma": 3,
+    "raw_slope": 0.10985233389029014,
+    "corrected_mean_full_kappa": 63.41736913850067,
+    "corrected_mean_refit_kappa": 63.15383500548411,
+    "refit_kappa": 1076580.810546875
   }
 ]

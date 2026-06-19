@@ -1,0 +1,38 @@
+
+> tep-h0-site@0.7.0 build
+> node build.js
+
+🔨 Building static site...
+🧹 Cleaning dist directory...
+📄 Loading section: Abstract
+📄 Loading section: 1. Introduction
+📄 Loading section: 2. Methodology
+📄 Loading section: 3. Results
+📄 Loading section: 4. Discussion
+📄 Loading section: 5. Conclusion
+📄 Loading section: References
+📄 Loading section: Appendix A
+📄 Loading section: Appendix B
+📄 Loading section: Appendix C
+📄 Loading section: Appendix D
+📁 Copying public/
+📁 Copying styles/
+📁 Copied simple-styles.css
+📁 Copying results/figures/ → dist/figures/
+📁 Copied .nojekyll to dist root
+📁 Copied 404.html to dist root
+📁 Copied robots.txt to dist root
+📁 Copied sitemap.xml to dist root
+📁 Copied 29c6507763d2303d801cc8ed89d39f88.txt to dist root
+📁 Copied CITATION.cff to dist root
+📁 Copied CITATION.bib to dist root
+📁 Copied citation.json to dist root
+📁 Copied codemeta.json to dist root
+📁 Copied .well-known/ to dist
+📝 Generating markdown version...
+🔄 Converting HTML site to markdown (TEP-H0)...
+✅ Markdown saved to: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/11-TEP-H0-v0.7-KingstonUponHull.md
+✅ Static site built successfully!
+📁 Output: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/dist/index.html
+📊 Generated 11 sections
+🚀 Ready for deployment

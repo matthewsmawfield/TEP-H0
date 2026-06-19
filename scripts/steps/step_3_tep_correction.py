@@ -34,7 +34,13 @@ except ImportError:
         set_step_logger,
     )
 
-from scripts.utils.tep_correction import tep_correction, C_SQUARED_KM_S, ANCHOR_SCREENING
+from scripts.utils.tep_correction import (
+    tep_correction,
+    C_SQUARED_KM_S,
+    ANCHOR_SCREENING,
+    ANCHOR_NMB,
+    group_screening_factor,
+)
 
 
 class Step3TEPCorrection:
@@ -209,7 +215,7 @@ class Step3TEPCorrection:
                 "Weight": 0.25,  # ~70 Cepheids, excellent photometry
             },
             {
-                "ID": "N4258",
+                "ID": "NGC 4258",
                 "Sigma": 115.0,
                 "Desc": "NGC 4258 Disk (K&H2013)",
                 "Weight": 0.55,  # ~139 Cepheids, gold anchor, galaxy environment
@@ -221,7 +227,7 @@ class Step3TEPCorrection:
         )
 
         # Display Anchor Table
-        headers = ["Anchor", "Sigma (km/s)", "S", "Weight", "Description"]
+        headers = ["Anchor", "Sigma (km/s)", "Nmb", "S", "Weight", "Description"]
         rows = []
         numerator = 0.0
         denominator = 0.0
@@ -229,14 +235,15 @@ class Step3TEPCorrection:
 
         for a in anchors:
             S = ANCHOR_SCREENING.get(a["ID"], 1.0)
+            nmb = ANCHOR_NMB.get(a["ID"], 1)
             rows.append(
-                [a["ID"], f"{a['Sigma']:.1f}", f"{S:.2f}", f"{a['Weight']:.2f}", a["Desc"]]
+                [a["ID"], f"{a['Sigma']:.1f}", f"{nmb}", f"{S:.3f}", f"{a['Weight']:.2f}", a["Desc"]]
             )
             numerator += a["Sigma"] * a["Weight"]
             denominator += a["Weight"]
             numerator_scr += a["Weight"] * S * (a["Sigma"] ** 2)
 
-        print_table(headers, rows, title="Geometric Anchor Sample")
+        print_table(headers, rows, title="Geometric Anchor Sample (S from Nmb formula)")
 
         sigma_ref = numerator / denominator
         sigma_ref_screened = np.sqrt(numerator_scr / denominator)
@@ -845,7 +852,7 @@ class Step3TEPCorrection:
         )
         kappa_scr = self.optimize_correction(df, sigma_ref_screened)
         _, h0_mean_scr, h0_sem_scr = self.apply_correction(
-            df, kappa_scr, sigma_ref_screened
+            df.copy(), kappa_scr, sigma_ref_screened
         )
         print_status(
             f"Screened Variant: κ_Cep = {kappa_scr:.3e} mag, "
@@ -945,7 +952,7 @@ class Step3TEPCorrection:
         self.sensitivity_analysis(final_df, fixed_kappa_cep=kappa_cep)
 
         # 8. Screened-Effective Variant
-        screened_results = self.screened_variant_analysis(df, sigma_ref_screened)
+        screened_results = self.screened_variant_analysis(df.copy(), sigma_ref_screened)
 
         # Stability check
         delta_h0_screened = abs(h0_mean - screened_results["unified_h0_screened"])
@@ -1046,6 +1053,12 @@ class Step3TEPCorrection:
             "n_hosts": len(final_df),
             # Slope convention audit
             "slope_audit": audit,
+            # Screening formula metadata
+            "screening_formula": "S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}",
+            "screening_n_crit": 10.0,
+            "screening_gamma": 1.2,
+            "anchor_nmb": dict(ANCHOR_NMB),
+            "anchor_screening": dict(ANCHOR_SCREENING),
             # Screened-effective variant
             "sigma_ref_screened": screened_results["sigma_ref_screened"],
             "optimal_kappa_cep_screened": screened_results["kappa_cep_screened"],

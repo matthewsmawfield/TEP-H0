@@ -112,9 +112,22 @@ class Step4RobustnessChecks:
         sub = 0.5 * (sub + sub.T)
         return sub
 
+    def _regularize_covariance(self, cov):
+        cov_reg = 0.5 * (np.asarray(cov, dtype=float) + np.asarray(cov, dtype=float).T)
+        if not np.all(np.isfinite(cov_reg)):
+            raise ValueError("Covariance matrix contains non-finite values")
+        scale = float(np.trace(cov_reg) / cov_reg.shape[0])
+        if not np.isfinite(scale) or scale <= 0:
+            scale = 1.0
+        cov_reg = cov_reg + np.eye(cov_reg.shape[0]) * (1e-12 * scale)
+        min_eig = float(np.min(np.linalg.eigvalsh(cov_reg)))
+        if min_eig <= 0:
+            cov_reg = cov_reg + np.eye(cov_reg.shape[0]) * (-min_eig + 1e-12 * scale)
+        return cov_reg
+
     def _gls_fit(self, X, y, cov):
         try:
-            cov_reg = cov + np.eye(cov.shape[0]) * (1e-12 * np.trace(cov) / cov.shape[0])
+            cov_reg = self._regularize_covariance(cov)
             cov_inv = np.linalg.inv(cov_reg)
             XtCi = X.T @ cov_inv
             fisher = XtCi @ X
@@ -137,6 +150,7 @@ class Step4RobustnessChecks:
 
         target_labels = df['source_id'].astype(str).tolist()
         cov = self._subset_covariance(cov, cov_labels, target_labels)
+        cov_reg = self._regularize_covariance(cov)
 
         sigma = df['sigma_inferred'].values.astype(float)
         y = df['h0_derived'].values.astype(float)
@@ -145,7 +159,7 @@ class Step4RobustnessChecks:
         x = sigma - np.mean(sigma)
         X = np.column_stack([np.ones(n), x])
 
-        beta, beta_cov = self._gls_fit(X, y, cov)
+        beta, beta_cov = self._gls_fit(X, y, cov_reg)
         slope = float(beta[1])
         slope_se = float(np.sqrt(beta_cov[1, 1]))
         t_slope = slope / slope_se if slope_se > 0 else np.nan
@@ -153,20 +167,20 @@ class Step4RobustnessChecks:
 
         # Parametric covariance simulation under null (intercept-only)
         X0 = np.ones((n, 1))
-        beta0, _ = self._gls_fit(X0, y, cov)
+        beta0, _ = self._gls_fit(X0, y, cov_reg)
         mu0 = float(beta0[0])
 
         try:
-            L = np.linalg.cholesky(cov)
+            L = np.linalg.cholesky(cov_reg)
         except np.linalg.LinAlgError:
-            w, V = np.linalg.eigh(cov)
+            w, V = np.linalg.eigh(cov_reg)
             w = np.clip(w, 0.0, None)
             L = V @ np.diag(np.sqrt(w))
 
         n_sims = 20000
         rng = np.random.default_rng(42)
         z = rng.standard_normal((n, n_sims))
-        y_sims = mu0 + (L @ z)
+        y_sims = mu0 + np.dot(L, z)
 
         r_obs, _ = stats.pearsonr(sigma, y)
         rho_obs, _ = stats.spearmanr(sigma, y)
@@ -182,10 +196,10 @@ class Step4RobustnessChecks:
         p_rho_cov = float(np.mean(np.abs(rho_null) >= abs(rho_obs)))
 
         # Effective N via Kish-like approximation using equicorrelation proxy
-        d = np.sqrt(np.diag(cov))
+        d = np.sqrt(np.diag(cov_reg))
         denom = np.outer(d, d)
         with np.errstate(divide='ignore', invalid='ignore'):
-            R = np.where(denom > 0, cov / denom, 0.0)
+            R = np.where(denom > 0, cov_reg / denom, 0.0)
         avg_offdiag = float((np.sum(R) - n) / (n * (n - 1))) if n > 1 else 0.0
         n_eff = float(n / (1 + (n - 1) * max(0.0, avg_offdiag))) if n > 1 else float(n)
 
@@ -1355,8 +1369,18 @@ class Step4RobustnessChecks:
 
         prov_path = self.outputs_dir / "sigma_provenance_table.csv"
         if not prov_path.exists():
-            print_status("Sigma provenance table missing; skipping EIV model.", "WARNING")
-            return None
+            print_status("Sigma provenance table missing; generating it via Step 4b.", "WARNING")
+            try:
+                from scripts.steps.step_4b_aperture_sensitivity import Step4bApertureSensitivity
+
+                Step4bApertureSensitivity().run()
+                set_step_logger(self.logger)
+            except Exception as exc:
+                print_status(f"Could not generate sigma provenance table: {exc}", "WARNING")
+                return None
+            if not prov_path.exists():
+                print_status("Sigma provenance table still missing; skipping EIV model.", "WARNING")
+                return None
 
         prov = pd.read_csv(prov_path)
         df = df.copy()

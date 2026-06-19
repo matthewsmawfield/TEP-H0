@@ -40,37 +40,10 @@ except ImportError:
     from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
 
 
-# =============================================================================
-# TRGB DISTANCE DATA FROM FREEDMAN ET AL. (2024) - TABLE 2
-# =============================================================================
+# TRGB DISTANCE DATA FROM FREEDMAN ET AL. (2024)
 # Source: arXiv:2408.06153, Table 2 "TRGB Distances to SN Ia Host Galaxies"
-# These are F814W TRGB distance moduli from HST observations.
 # Citation: Freedman, W. L., Madore, B. F., Jang, I. S., et al. 2024, arXiv:2408.06153
-
-FREEDMAN_2024_TRGB = {
-    # Galaxy: (μ_TRGB, error, SN_name, reference_note)
-    # Values from Table 2, Column 4 (μ_TRGB) and Column 5 (σ_μ)
-    'NGC 1309': (32.52, 0.05, '2002fk', 'HST/ACS F814W'),
-    'NGC 1365': (31.36, 0.04, '2012fr', 'HST/ACS F814W'),
-    'NGC 1448': (31.32, 0.04, '2001el', 'HST/ACS F814W'),
-    'NGC 1559': (31.44, 0.04, '2005df', 'HST/ACS F814W'),
-    'NGC 2442': (31.45, 0.05, '2015F', 'HST/ACS F814W'),
-    'NGC 3021': (32.42, 0.05, '1995al', 'HST/ACS F814W'),
-    'NGC 3370': (32.09, 0.04, '1994ae', 'HST/ACS F814W'),
-    'NGC 3972': (31.60, 0.05, '2011by', 'HST/ACS F814W'),
-    'NGC 4038': (31.61, 0.05, '2007sr', 'HST/ACS F814W'),
-    'NGC 4424': (31.04, 0.05, '2012cg', 'HST/ACS F814W'),
-    'NGC 4526': (30.99, 0.04, '1994D', 'HST/ACS F814W'),
-    'NGC 4536': (30.96, 0.04, '1981B', 'HST/ACS F814W'),
-    'NGC 4639': (31.80, 0.05, '1990N', 'HST/ACS F814W'),
-    'NGC 5584': (31.82, 0.04, '2007af', 'HST/ACS F814W'),
-    'NGC 5643': (30.48, 0.05, '2017cbv', 'HST/ACS F814W'),
-    'NGC 5861': (32.26, 0.06, '2017erp', 'HST/ACS F814W'),
-    'NGC 5917': (32.30, 0.06, '2005cf', 'HST/ACS F814W'),
-    'NGC 7250': (31.51, 0.06, '2013dy', 'HST/ACS F814W'),
-    'NGC 1015': (32.63, 0.06, '2009ig', 'HST/ACS F814W'),
-    'NGC 4039': (31.61, 0.05, '2007sr', 'HST/ACS F814W'),  # Antennae companion
-}
+# Loaded dynamically from data/raw/external/trgb_distances_freedman2024.csv
 
 
 class Step7TRGBComparison:
@@ -122,22 +95,20 @@ class Step7TRGBComparison:
         
         Source: arXiv:2408.06153, Table 2
         """
-        print_status("Loading TRGB distances from Freedman et al. (2024)", "INFO")
-        print_status("Source: arXiv:2408.06153, Table 2", "INFO")
+        print_status("Loading TRGB distances from Freedman et al. (2024) from CSV", "INFO")
         
-        rows = []
-        for galaxy, (mu, err, sn, ref) in FREEDMAN_2024_TRGB.items():
-            rows.append({
-                'galaxy': galaxy,
-                'mu_trgb': mu,
-                'mu_trgb_err': err,
-                'sne': sn,
-                'reference': ref,
-                'source': 'Freedman+2024 (arXiv:2408.06153)'
-            })
+        csv_path = self.data_dir / 'raw' / 'external' / 'trgb_distances_freedman2024.csv'
+        raw_df = pd.read_csv(csv_path)
         
-        df = pd.DataFrame(rows)
-        print_status(f"Loaded {len(df)} TRGB distances from CCHP catalog", "INFO")
+        df = pd.DataFrame()
+        df['galaxy'] = raw_df['galaxy']
+        df['mu_trgb'] = raw_df['mu_TRGB']
+        df['mu_trgb_err'] = raw_df['error_mu']
+        df['sne'] = raw_df['SN_name']
+        df['reference'] = raw_df['method']
+        df['source'] = 'Freedman+2024 (arXiv:2408.06153)'
+        
+        print_status(f"Loaded {len(df)} TRGB distances from traceable CCHP CSV catalog", "INFO")
         return df
     
     def _match_with_sigma(self, trgb_df, hosts_df):

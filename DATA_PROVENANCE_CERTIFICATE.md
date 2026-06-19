@@ -47,7 +47,25 @@ There are no hidden inputs, no manually inserted values, and no data that cannot
 | **Traceability** | Every entry has ADS bibcode, source URL, measurement method, notes, date_accessed |
 | **Ingested by** | `scripts/steps/step_1_data_ingestion.py` |
 
-### 4. Host Galaxy Coordinates
+### 4. TRGB Distance Catalog
+
+| Field | Value |
+|-------|-------|
+| **Publication** | Freedman et al. 2024, arXiv:2408.06153 |
+| **Data Source** | Table 2 ("TRGB Distances to SN Ia Host Galaxies") |
+| **File** | `data/raw/external/trgb_distances_freedman2024.csv` |
+| **SHA-256** | `3dea0b89c5ef59031d35d45c582767f4c4ee5484978949ddde81e8464f13b3be` |
+| **Ingested by** | `scripts/steps/step_7_trgb_comparison.py` |
+
+### 5. Anchor Galaxy Calibration Catalog
+
+| Field | Value |
+|-------|-------|
+| **Source** | Riess et al. (2022) / Pietrzynski et al. (2019) / Reid et al. (2019) |
+| **File** | `data/raw/external/anchor_galaxy_data.csv` |
+| **SHA-256** | `270ca9708ea554e4174ca7b973b9c3f369ec7658183be1d29687f8a9a124aeae` |
+| **Ingested by** | `scripts/steps/step_10_anchor_stratification.py` |
+### 6. Host Galaxy Coordinates
 
 | Field | Value |
 |-------|-------|

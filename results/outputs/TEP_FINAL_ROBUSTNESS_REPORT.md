@@ -32,7 +32,7 @@ We verified the core TEP prediction (H0 bias correlated with host velocity dispe
 
 ### Primary H0 Result (Fitted κ_Cep)
 - **Uncorrected correlation:** Pearson $r = 0.466$; median $\sigma = 96.4$ km/s; $\Delta H_0 = 7.86$ km/s/Mpc.
-- **TEP response coefficient:** $\kappa_{\rm Cep} = 9.914e+05$ mag ($0.99 \times 10^6$ mag).
+- **TEP response coefficient:** $\kappa_{\rm Cep} = (0.99 \pm 0.56) \times 10^6$ mag.
 - **Unified H0:** $68.13$ km/s/Mpc; bootstrap mean $68.06 \pm 1.49$ km/s/Mpc.
 - **Planck tension:** $0.47\sigma$ using the joint bootstrap uncertainty.
 
@@ -59,6 +59,7 @@ We verified the core TEP prediction (H0 bias correlated with host velocity dispe
 - Applying the *same* full-sample $\kappa_{\rm Cep}$ uniformly across quality tiers reveals a physical convergence, not a proxy artifact.
 - **Full sample** ($N=29$): raw $H_0=70.06$, corrected $H_0=68.13$, correction $=1.93$ km/s/Mpc.
 - **Stellar only** ($N=16$): raw $H_0=69.14$, corrected $H_0=66.11$, correction $=3.04$ km/s/Mpc.
+- **Gold standard** ($N=7$): raw $H_0=66.78$, corrected $H_0=63.42$, correction $=3.36$ km/s/Mpc.
 - Tightest 1$\sigma$ upper bound: $\kappa_{\rm Cep} < 1.231e+06$ mag (Stellar only).
 - The correction grows with $\sigma$ fidelity because proxy scatter dilutes the environmental bias. This confirms the signal is physical.
 
@@ -100,10 +101,10 @@ The TRGB comparison tests a different distance indicator whose physical clock de
 
 The latest anchor stratification test no longer treats NGC 4258 as a simple local-density counterexample. The anchors sit in deep group or local-volume environments, so TEP predicts additional ambient-potential screening beyond the local disk-density proxy. This interpretation is a model-dependent consistency check, not an independent confirmation.
 
-- **Anchor regression:** $\kappa_{\rm anchor} = 5.0 \pm 663.3$ mag, consistent with zero.
-- **Host comparison:** host-level $\kappa_{\rm Cep} = 9.914e+05$ mag; anchor/host comparison is 1.8$\sigma$ with only three anchors.
-- **Naive unscreened anchor prediction:** mean residual 1.5$\sigma$.
-- **TEP-aware screened prediction:** mean residual 0.7$\sigma$.
+- **Anchor regression:** $\kappa_{\rm anchor} = 10.1 \pm 663.3$ mag, consistent with zero.
+- **Host comparison:** host-level $\kappa_{\rm Cep} = (0.99 \pm 0.56) \times 10^6$ mag; anchor/host comparison is 1.8$\sigma$ with only three anchors.
+- **Naive unscreened anchor prediction:** mean residual 1.4$\sigma$.
+- **TEP-aware screened prediction:** mean residual 0.9$\sigma$.
 - Interpretation: LMC, M31, and NGC 4258 behave as screened calibrators; smooth Hubble-flow SN hosts preferentially sample less-screened field environments. This converts the anchor mismatch into a concrete environmental prediction for future field-versus-group distance-ladder tests.
 
 ## 7. Conclusion

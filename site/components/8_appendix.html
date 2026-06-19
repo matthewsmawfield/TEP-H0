@@ -57,10 +57,50 @@
 <h3>A.1 Velocity Dispersion Provenance</h3>
 <p>The velocity dispersion compilation draws from multiple sources with heterogeneous methodology:</p>
 <ul>
-    <li><strong>Stellar absorption (direct):</strong> 17 hosts have $\sigma$ measured from stellar absorption line broadening, the gold-standard method. Sources include HyperLEDA, SDSS DR7, Ho et al. (2007, 2009), BASS DR2, and MNRAS 482:1427.</li>
-    <li><strong>HI linewidth proxy:</strong> 12 hosts use HI 21-cm linewidth measurements calibrated via $\sigma = 0.467 \times V_{\rm max} + 42.9$ km/s (HyperLEDA calibrated_vmax mode). This introduces additional scatter but preserves the kinematic nature of the observable.</li>
+    <li><strong>Stellar absorption (direct):</strong> 16 hosts have $\sigma$ measured from stellar absorption line broadening, the gold-standard method. Sources include HyperLEDA, SDSS DR7, Ho et al. (2007, 2009), BASS DR2, and MNRAS 482:1427.</li>
+    <li><strong>HI linewidth proxy:</strong> 13 hosts use HI 21-cm linewidth measurements calibrated via $\sigma = 0.467 \times V_{\rm max} + 42.9$ km/s (HyperLEDA calibrated_vmax mode). This introduces additional scatter but preserves the kinematic nature of the observable.</li>
 </ul>
-<p>The correlation coefficient strengthens when restricting to stellar-absorption-only hosts ($N=17$, Pearson $r = 0.472$, $p = 0.055$). Critically, the 12 kinematic-proxy hosts do not cluster anomalously—they span the full $\sigma$–$H_0$ distribution and follow the same physical trend as stellar hosts (see Section 3.2). Application of the TEP correction to the stellar-only subsample yields a unified $H_0 = 67.25 \pm 1.67$ km/s/Mpc, consistent with the full-sample result.</p>
+<p>The correlation coefficient strengthens when restricting to stellar-absorption-only hosts ($N=16$, Pearson $r = 0.549$, $p = 0.028$). Critically, the 13 kinematic-proxy hosts do not cluster anomalously—they span the full $\sigma$–$H_0$ distribution and follow the same physical trend as stellar hosts (see Section 3.2). Application of the TEP correction to the stellar-only subsample yields a unified $H_0 = 66.27 \pm 1.57$ km/s/Mpc, consistent with the full-sample result.</p>
+
+<h3>A.2 Gold Standard Subsample</h3>
+<p>
+    The highest-fidelity subsample comprises the seven hosts with $\sigma$
+    measurements from Kormendy &amp; Ho (2013), SDSS DR7, or Ho et al. (2009).
+    Because $N=7$ is underpowered for a standalone $\kappa$ fit, this tier is
+    reported in the appendix rather than the main text.
+</p>
+
+<div class="results-table">
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th scope="col">Subsample</th>
+                <th scope="col">N</th>
+                <th scope="col">Pearson $r$</th>
+                <th scope="col">$p$-value</th>
+                <th scope="col">Raw $H_0$</th>
+                <th scope="col">Corr. $H_0^{\rm TEP}$ (uniform $\kappa$)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Gold Standard</td>
+                <td>7</td>
+                <td>0.559</td>
+                <td>0.192</td>
+                <td>$66.78 \pm 4.09$</td>
+                <td>$63.15 \pm 2.95$</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>
+    The Gold Standard preserves the sign of the environmental response
+    ($r=0.559$) but is too small for a decisive standalone fit. Its value is to
+    bound $\kappa_{\rm Cep}$ and test whether the sign survives when all proxy
+    data are removed.
+</p>
 
 <h3>A.3 Sector interpretation of $\kappa_{\rm Cep}$</h3>
 
@@ -120,7 +160,7 @@
     <em>effective</em> screened pulsar response coefficient
     $\kappa_{\rm MSP}^{\rm emp} \approx 3 \times 10^4$ in dense globular
     clusters (step_5_55_kappa_msp_prior.json); this paper constrains the
-    bare Cepheid response $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$
+    bare Cepheid response $\kappa_{\rm Cep} = (0.99 \pm 0.56) \times 10^6$
     mag in the looser galactic-disk regime. The ratio is consistent with
     the TEP framework's prediction of dense-cluster geometric suppression.
     The microscopic unification of these coefficients requires the full

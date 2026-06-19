@@ -33,9 +33,24 @@
         "correction_delta_slope_value": -0.08511851145536725,
         "dmu_high_sigma_mean": 0.08827322817544211
     },
-    "sigma_ref_screened": 85.47602002901165,
-    "optimal_kappa_cep_screened": 987178.8024902344,
-    "unified_h0_screened": 68.65866438528309,
-    "h0_screened_sem": 1.2969409247878707,
-    "delta_h0_screened": 0.5264442098465167
+    "screening_formula": "S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}",
+    "screening_n_crit": 10.0,
+    "screening_gamma": 1.2,
+    "anchor_nmb": {
+        "MW": 7,
+        "LMC": 2,
+        "M31": 11,
+        "NGC 4258": 65
+    },
+    "anchor_screening": {
+        "MW": 0.6053983587536133,
+        "LMC": 0.8733960595416025,
+        "M31": 0.4714380741611139,
+        "NGC 4258": 0.09568098445277634
+    },
+    "sigma_ref_screened": 30.50738103825078,
+    "optimal_kappa_cep_screened": 1003867.3400878906,
+    "unified_h0_screened": 66.61512572079913,
+    "h0_screened_sem": 1.2469659181251826,
+    "delta_h0_screened": 1.5170944546374443
 }

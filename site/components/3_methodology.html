@@ -32,6 +32,26 @@
 </p>
 
 <p>
+    <strong>Primary statistical observable.</strong> The per-host quantity used
+    in all correlation and significance tests is a <em>distance-ladder residual</em>,
+    defined as the deviation of each host's SH0ES distance modulus from the
+    mean calibration prediction:
+    \begin{equation}
+    \delta_i = \mu_{i,\rm SH0ES} - \mu_{i,\rm no\text{-}env} ,
+    \end{equation}
+    where $\mu_{i,\rm no\text{-}env}$ is the distance modulus inferred from
+    the recession velocity under a fiducial Planck $H_0 = 67.4$ km/s/Mpc.
+    Because the residual carries the same environmental information as the
+    derived $H_0$ but avoids the interpretive step of treating each host as an
+    independent $H_0$ determination, it is the primary statistical variable.
+    For visualization and physical intuition, these residuals are converted into
+    host-level $H_0$-equivalent values via $H_{0,i} = c z_{\rm HD} / d_i$
+    (with $d_i = 10^{(\mu_i-25)/5}$ Mpc); however, the statistical test is a
+    host-to-host ladder residual test, not a collection of independent
+    per-host $H_0$ measurements.
+</p>
+
+<p>
     To test sensitivity to flow-model residuals, a Monte Carlo propagation is
     performed using Pantheon+ peculiar-velocity uncertainty estimates. For each
     host, the recession velocity is perturbed as $v \rightarrow v + \delta v$
@@ -339,11 +359,11 @@
     Using the SH0ES calibration weights (NGC 4258 $\sim 55\%$, LMC $\sim 25\%$, MW $\sim 20\%$),
     NGC 4258 contributes 84% (63.25/75.25) of the weighted $\sigma_{\rm ref}$.
     Because NGC 4258 is group-screened, a <em>screen-weighted anchor
-    contribution scale</em> $\sigma_{\rm ref,scr} \approx 60.6$ km/s is also defined. This is an
+    contribution scale</em> $\sigma_{\rm ref,scr} \approx 30.51$ km/s is also defined. This is an
     amplitude that down-weights each anchor's <em>contribution</em> by its
     environmental screening factor $S$; it is not a normalized weighted mean.
     Re-optimising $\kappa_{\rm Cep}$ with either reference yields headline
-    $H_0$ values that differ by only $0.71$ km/s/Mpc, confirming that the
+    $H_0$ values that differ by only $1.52$ km/s/Mpc, confirming that the
     TEP correction is stable under both definitions and removing the apparent
     contradiction:
 </p>
@@ -354,12 +374,12 @@
 </div>
 <p>
     The screen-weighted variant down-weights each anchor's contribution by its
-    environmental screening factor $S$ (with $S_{\rm N4258}=0.50$, $S_{\rm LMC}=0.10$,
-    $S_{\rm MW}=0.10$):
+    environmental screening factor $S$ (with $S_{\rm N4258}=0.096$, $S_{\rm LMC}=0.873$,
+    $S_{\rm MW}=0.605$):
 </p>
 <div class="equation">
     \begin{equation}
-    \sigma_{\rm ref,scr}^2 = 0.55(0.50) \times 115^2 + 0.25(0.10) \times 24^2 + 0.20(0.10) \times 30^2 \approx 60.6^2 \text{ km}^2\!\!/\text{s}^2
+    \sigma_{\rm ref,scr}^2 = 0.55(0.096) \times 115^2 + 0.25(0.873) \times 24^2 + 0.20(0.605) \times 30^2 \approx 30.51^2 \text{ km}^2\!\!/\text{s}^2
     \end{equation}
 </div>
 <p>

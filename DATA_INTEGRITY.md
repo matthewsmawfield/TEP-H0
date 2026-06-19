@@ -51,6 +51,8 @@ python scripts/run_pipeline.py --rebuild-sigma
 | Cepheid/SN Ia distances | Scolnic et al. (2022) Pantheon+ | `data/raw/Pantheon+SH0ES.dat` |
 | Velocity dispersions | Curated literature (Ho+2009, Campbell+2014, etc.) | `data/raw/external/velocity_dispersions_literature.csv` |
 | Cepheid P-L data | Riess et al. (2022) SH0ES | `data/raw/external/Cepheid-Distance-Ladder-Data/SH0ES2022/` |
+| TRGB Distances | Freedman et al. (2024) CCHP | `data/raw/external/trgb_distances_freedman2024.csv` |
+| Anchor Calibrations | Riess et al. (2022), Pietrzynski et al. (2019), Reid et al. (2019) | `data/raw/external/anchor_galaxy_data.csv` |
 | Host coordinates | HyperLEDA / VizieR | `data/interim/hosts_coords.csv` (generated) |
 
 ## Corrections Documented

@@ -249,7 +249,7 @@ class Step9FinalSynthesis:
                         f.write(f"- **Uncorrected correlation:** Pearson $r = {corr_r:.3f}$; median $\\sigma = {median_sigma:.1f}$ km/s; $\\Delta H_0 = {delta_h0:.2f}$ km/s/Mpc.\n")
                     else:
                         f.write("- **Uncorrected correlation:** [Stratification results not available]\n")
-                    f.write(f"- **TEP response coefficient:** $\\kappa_{{\\rm Cep}} = {tep['optimal_kappa_cep']:.3e}$ mag.\n")
+                    f.write(f"- **TEP response coefficient:** $\\kappa_{{\\rm Cep}} = ({tep['optimal_kappa_cep']/1e6:.2f} \\pm {tep['bootstrap_kappa_std']/1e6:.2f}) \\times 10^6$ mag.\n")
                     f.write(f"- **Unified H0:** ${tep['unified_h0']:.2f}$ km/s/Mpc; bootstrap mean ${tep['bootstrap_h0_mean']:.2f} \\pm {tep['bootstrap_h0_std']:.2f}$ km/s/Mpc.\n")
                     f.write(f"- **Planck tension:** ${tep['tension_sigma']:.2f}\\sigma$ using the joint bootstrap uncertainty.\n\n")
 
@@ -347,7 +347,7 @@ class Step9FinalSynthesis:
                 reg = anchor['regression']
                 pred = reg.get('prediction_test', {})
                 f.write(f"- **Anchor regression:** $\\kappa_{{\\rm anchor}} = {reg['kappa_anchor']:.1f} \\pm {reg['kappa_anchor_err']:.1f}$ mag, consistent with zero.\n")
-                f.write(f"- **Host comparison:** host-level $\\kappa_{{\\rm Cep}} = {reg['kappa_host']:.3e}$ mag; anchor/host comparison is {reg['tension_with_host']:.1f}$\\sigma$ with only three anchors.\n")
+                f.write(f"- **Host comparison:** host-level $\\kappa_{{\\rm Cep}} = ({reg['kappa_host']/1e6:.2f} \\pm {reg['kappa_host_err']/1e6:.2f}) \\times 10^6$ mag; anchor/host comparison is {reg['tension_with_host']:.1f}$\\sigma$ with only three anchors.\n")
                 if pred:
                     f.write(f"- **Naive unscreened anchor prediction:** mean residual {pred.get('naive_mean_abs_tension_sigma', float('nan')):.1f}$\\sigma$.\n")
                     f.write(f"- **TEP-aware screened prediction:** mean residual {pred.get('tep_screened_mean_abs_tension_sigma', float('nan')):.1f}$\\sigma$.\n")

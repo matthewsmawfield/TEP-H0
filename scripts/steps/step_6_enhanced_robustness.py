@@ -21,11 +21,15 @@ from pathlib import Path
 import sys
 import json
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 # Import TEP Logger
 try:
     from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
 except ImportError:
-    sys.path.append(str(Path(__file__).resolve().parents[2]))
+    sys.path.append(str(PROJECT_ROOT))
     from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
 
 
@@ -101,59 +105,61 @@ class Step6EnhancedRobustness:
         print_status("=" * 60, "SECTION")
         
         return results
+
+    @staticmethod
+    def _method_class(v: str) -> str:
+        s = str(v).lower().strip()
+        if 'stellar absorption' in s:
+            return 'stellar absorption'
+        if 'hi' in s or 'w50' in s or 'vrot' in s or 'linewidth' in s or 'proxy' in s:
+            return 'HI linewidth proxy'
+        return 'unknown'
+
+    @staticmethod
+    def _source_class(v: str) -> str:
+        s = str(v).lower().strip()
+        if 'kormendy' in s:
+            return 'Kormendy&Ho2013'
+        if 'sdss' in s:
+            return 'SDSS DR7'
+        if 'ho+2009' in s or 'ho+09' in s or 'j/apjs/183/1' in s:
+            return 'Ho+2009'
+        if 'hyperleda' in s and 'hi' in s:
+            return 'HyperLEDA HI'
+        if 'hyperleda' in s:
+            return 'HyperLEDA'
+        if 'ho 2007' in s or 'j/apj/668/94' in s:
+            return 'Ho2007'
+        if 'bass' in s:
+            return 'BASS DR2'
+        if '6dfgs' in s:
+            return '6dFGSv'
+        if 'apj 929:84' in s or 'j/apj/929/84' in s:
+            return 'ApJ 929:84'
+        if 'mnras 482:1427' in s or 'j/mnras/482/1427' in s:
+            return 'MNRAS 482:1427'
+        return str(v).strip()
+
+    def _classified_sigma_provenance(self, sigma_prov):
+        prov = sigma_prov.copy()
+        for c in ['normalized_name', 'sigma_method', 'sigma_source', 'sigma_notes']:
+            if c in prov.columns:
+                prov[c] = prov[c].astype(str).str.strip()
+            else:
+                prov[c] = ''
+
+        src_col = prov['sigma_source'].fillna('')
+        notes_col = prov['sigma_notes'].fillna('')
+        combined_source = src_col.where(src_col.str.strip() != '', notes_col)
+        prov['sigma_method_class'] = prov['sigma_method'].apply(self._method_class)
+        prov['sigma_source_class'] = combined_source.apply(self._source_class)
+        return prov
     
     def _analyze_stellar_absorption_subsample(self, df, sigma_prov):
         """Analyze only hosts with stellar absorption σ measurements."""
         print_status("\n--- STELLAR ABSORPTION SUBSAMPLE ---", "SECTION")
         
-        prov = sigma_prov.copy()
-        if 'normalized_name' in prov.columns:
-            prov['normalized_name'] = prov['normalized_name'].astype(str).str.strip()
-        for c in ['sigma_method', 'sigma_source']:
-            if c in prov.columns:
-                prov[c] = prov[c].astype(str).str.strip()
-
-        def _method_class(v: str) -> str:
-            s = str(v).lower().strip()
-            if 'stellar absorption' in s:
-                return 'stellar absorption'
-            if 'hi' in s or 'w50' in s or 'vrot' in s or 'linewidth' in s or 'proxy' in s:
-                return 'HI linewidth proxy'
-            return 'unknown'
-
-        def _source_class(v: str) -> str:
-            s = str(v).lower().strip()
-            if 'kormendy' in s:
-                return 'Kormendy&Ho2013'
-            if 'sdss' in s:
-                return 'SDSS DR7'
-            if 'ho+2009' in s or 'ho+09' in s or 'j/apjs/183/1' in s:
-                return 'Ho+2009'
-            if 'hyperleda' in s and 'hi' in s:
-                return 'HyperLEDA HI'
-            if 'hyperleda' in s:
-                return 'HyperLEDA'
-            if 'ho 2007' in s or 'j/apj/668/94' in s:
-                return 'Ho2007'
-            if 'bass' in s:
-                return 'BASS DR2'
-            if '6dfgs' in s:
-                return '6dFGSv'
-            if 'apj 929:84' in s or 'j/apj/929/84' in s:
-                return 'ApJ 929:84'
-            if 'mnras 482:1427' in s or 'j/mnras/482/1427' in s:
-                return 'MNRAS 482:1427'
-            return str(v).strip()
-
-        if 'sigma_method' in prov.columns:
-            prov['sigma_method_class'] = prov['sigma_method'].apply(_method_class)
-        else:
-            prov['sigma_method_class'] = 'unknown'
-
-        if 'sigma_source' in prov.columns:
-            prov['sigma_source_class'] = prov['sigma_source'].apply(_source_class)
-        else:
-            prov['sigma_source_class'] = ''
+        prov = self._classified_sigma_provenance(sigma_prov)
 
         # Identify stellar absorption hosts
         stellar_hosts = prov[prov['sigma_method_class'] == 'stellar absorption']['normalized_name'].tolist()
@@ -237,25 +243,7 @@ class Step6EnhancedRobustness:
         
         # Identify gold standard sources
         gold_sources = ['Kormendy&Ho2013', 'SDSS DR7', 'Ho+2009']
-        prov = sigma_prov.copy()
-        if 'normalized_name' in prov.columns:
-            prov['normalized_name'] = prov['normalized_name'].astype(str).str.strip()
-        for c in ['sigma_source', 'sigma_method']:
-            if c in prov.columns:
-                prov[c] = prov[c].astype(str).str.strip()
-
-        if 'sigma_source_class' not in prov.columns:
-            def _source_class(v: str) -> str:
-                s = str(v).lower().strip()
-                if 'kormendy' in s:
-                    return 'Kormendy&Ho2013'
-                if 'sdss' in s:
-                    return 'SDSS DR7'
-                if 'ho+2009' in s or 'ho+09' in s or 'j/apjs/183/1' in s:
-                    return 'Ho+2009'
-                return str(v).strip()
-
-            prov['sigma_source_class'] = prov['sigma_source'].apply(_source_class) if 'sigma_source' in prov.columns else ''
+        prov = self._classified_sigma_provenance(sigma_prov)
 
         gold_prov = prov[prov['sigma_source_class'].isin(gold_sources)]
         gold_hosts = gold_prov['normalized_name'].tolist()
@@ -423,26 +411,14 @@ class Step6EnhancedRobustness:
         kappa_full, h0_full, err_full = optimize_kappa(df)
         
         # Stellar absorption only
-        sigma_prov = sigma_prov.copy()
-        for c in ['normalized_name', 'sigma_method', 'sigma_source']:
-            if c in sigma_prov.columns:
-                sigma_prov[c] = sigma_prov[c].astype(str).str.strip()
-        stellar_hosts = sigma_prov[sigma_prov['sigma_method'] == 'stellar absorption']['normalized_name'].tolist()
+        sigma_prov = self._classified_sigma_provenance(sigma_prov)
+        stellar_hosts = sigma_prov[sigma_prov['sigma_method_class'] == 'stellar absorption']['normalized_name'].tolist()
         df_stellar = df[df['normalized_name'].isin(stellar_hosts)].copy()
         kappa_stellar, h0_stellar, err_stellar = optimize_kappa(df_stellar)
         
         # Gold standard only
-        def _source_class(v: str) -> str:
-            s = str(v).lower().strip()
-            if 'kormendy' in s: return 'Kormendy&Ho2013'
-            if 'sdss' in s: return 'SDSS DR7'
-            if 'ho+2009' in s or 'ho+09' in s or 'j/apjs/183/1' in s: return 'Ho+2009'
-            return str(v).strip()
-            
-        sigma_prov_temp = sigma_prov.copy()
-        sigma_prov_temp['sigma_source_class'] = sigma_prov_temp['sigma_source'].apply(_source_class)
         gold_sources = ['Kormendy&Ho2013', 'SDSS DR7', 'Ho+2009']
-        gold_prov = sigma_prov_temp[sigma_prov_temp['sigma_source_class'].isin(gold_sources)]
+        gold_prov = sigma_prov[sigma_prov['sigma_source_class'].isin(gold_sources)]
         gold_hosts = gold_prov['normalized_name'].tolist()
         df_gold = df[df['normalized_name'].isin(gold_hosts)].copy()
         kappa_gold, h0_gold, err_gold = optimize_kappa(df_gold)
@@ -524,25 +500,10 @@ class Step6EnhancedRobustness:
             pass
 
         # Build provenance masks
-        prov = sigma_prov.copy()
-        for c in ['normalized_name', 'sigma_method', 'sigma_source']:
-            if c in prov.columns:
-                prov[c] = prov[c].astype(str).str.strip()
-
-        def _source_class(v):
-            s = str(v).lower().strip()
-            if 'kormendy' in s:
-                return 'Kormendy&Ho2013'
-            if 'sdss' in s:
-                return 'SDSS DR7'
-            if 'ho+2009' in s or 'ho+09' in s or 'j/apjs/183/1' in s:
-                return 'Ho+2009'
-            return str(v).strip()
-
-        prov['sigma_source_class'] = prov['sigma_source'].apply(_source_class)
+        prov = self._classified_sigma_provenance(sigma_prov)
         gold_sources = ['Kormendy&Ho2013', 'SDSS DR7', 'Ho+2009']
         prov['is_gold'] = prov['sigma_source_class'].isin(gold_sources)
-        prov['is_stellar'] = prov['sigma_method'].str.lower().str.contains('stellar absorption', na=False)
+        prov['is_stellar'] = prov['sigma_method_class'] == 'stellar absorption'
 
         lookup = prov.set_index('normalized_name')
         df = df.copy()
@@ -686,25 +647,10 @@ class Step6EnhancedRobustness:
             pass
 
         # Build provenance masks
-        prov = sigma_prov.copy()
-        for c in ["normalized_name", "sigma_method", "sigma_source"]:
-            if c in prov.columns:
-                prov[c] = prov[c].astype(str).str.strip()
-
-        def _source_class(v):
-            s = str(v).lower().strip()
-            if "kormendy" in s:
-                return "Kormendy&Ho2013"
-            if "sdss" in s:
-                return "SDSS DR7"
-            if "ho+2009" in s or "ho+09" in s or "j/apjs/183/1" in s:
-                return "Ho+2009"
-            return str(v).strip()
-
-        prov["sigma_source_class"] = prov["sigma_source"].apply(_source_class)
+        prov = self._classified_sigma_provenance(sigma_prov)
         gold_sources = ["Kormendy&Ho2013", "SDSS DR7", "Ho+2009"]
         prov["is_gold"] = prov["sigma_source_class"].isin(gold_sources)
-        prov["is_stellar"] = prov["sigma_method"].str.lower().str.contains("stellar absorption", na=False)
+        prov["is_stellar"] = prov["sigma_method_class"] == "stellar absorption"
 
         lookup = prov.set_index("normalized_name")
         df = df.copy()

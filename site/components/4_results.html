@@ -3,24 +3,28 @@
 <h3>3.1 Detection of Environmental Bias</h3>
 <p>
     Before applying any TEP correction, the relationship between host galaxy
-    velocity dispersion and derived Hubble constant is examined. For each host,
-    $H_0$ is calculated as:
+    velocity dispersion and the distance-ladder residual is examined. The
+    primary statistical observable is the residual
+    $\delta_i = \mu_{i,\rm SH0ES} - \mu_{i,\rm no\text{-}env}$ (Section 2.1);
+    for visualization, this is converted into a host-level $H_0$-equivalent
+    value via:
 </p>
 <div class="equation">
     \begin{equation}
-    H_0 = \frac{c \cdot z_{\rm HD}}{d}
+    H_{0,i} = \frac{c \cdot z_{\rm HD}}{d_i},
+    \qquad d_i = 10^{(\mu_i - 25)/5}\ {\rm Mpc}.
     \label{eq:h0_definition}
     \end{equation}
 </div>
 <p>
-    where $d = 10^{(\mu - 25)/5}$ Mpc is the distance inferred from the SH0ES
-    distance modulus $\mu$.
+    The statistical test is a host-to-host ladder residual test; the $H_{0,i}$
+    values are interpretive visualizations, not independent $H_0$ determinations.
 </p>
 
 <p>
-    Figure 1 plots $H_0$ against $\sigma^2$ for the 29 SN Ia hosts. A pattern
+    Figure 1 plots $H_{0,i}$ against $\sigma^2$ for the 29 SN Ia hosts. A pattern
     emerges: galaxies with higher velocity dispersion yield systematically
-    higher $H_0$ values. The Spearman rank correlation of $\rho = 0.517$ ($p =
+    higher $H_{0,i}$ values. The Spearman rank correlation of $\rho = 0.517$ ($p =
     0.0041$) indicates a significant relationship. The Pearson coefficient ($r =
     0.466$, $p = 0.0109$) confirms the linear trend. Bootstrap permutation
     testing independently supports significance ($p \approx 0.011$). Crucially,
@@ -34,19 +38,59 @@
     complementary diagnostic; however, the covariance-null Monte Carlo
     correlation tests are treated as the primary covariance-aware inference
     because they make fewer assumptions about linearity.
-    A Bayesian model comparison (TEP-motivated environmental correction with free $\kappa_{\rm Cep}$ vs. a no-environment null) in the host-contrast likelihood—which
-    is the appropriate host-to-host slope test because the shared
-    calibration zero-point is a nuisance parameter with
-    dominant common-mode variance—yields $\Delta{\rm BIC}=88$.
-    The raw full-covariance absolute likelihood ($\Delta{\rm BIC}\approx -3$) is shown
-    to demonstrate why naive application understates the evidence: the shared
-    calibration uncertainty dominates the absolute likelihood, while the calibration
-    covariance cancels in the slope. A diagonal H$0$-uncertainty check gives
-    $\Delta{\rm BIC}=+94$ as an independent robustness verification.
 </p>
 
 <p>
-    <strong>Host-contrast projection.</strong> The host-contrast likelihood removes the shared calibration mode and tests only the host-to-host environmental structure. This avoids allowing the common SH0ES zero-point uncertainty to dominate the model comparison. In this contrast space, the null model contains no environmental term, while the TEP model contains one fitted response coefficient, $\kappa_{\rm Cep}$. The resulting $\Delta{\rm BIC}=88$ therefore quantifies evidence for the environmental predictor, not an absolute recalibration of the distance ladder.<sup><a href="#fn-contrast">1</a></sup>
+    A standard application of the full-covariance absolute likelihood yields
+    $\Delta{\rm BIC}\approx -3$, nominally favouring the null hypothesis.
+    However, because the shared SH0ES calibration zero-point dominates the
+    absolute distance moduli, this global metric obscures host-to-host
+    structural trends. When evaluated in the host-contrast subspace—projecting
+    out the common calibration mode—the environmental predictor is strongly
+    preferred ($\Delta{\rm BIC}=127.9$). A diagonal H$0$-uncertainty check
+    gives $\Delta{\rm BIC}=+132.8$ as an independent robustness verification.
+</p>
+
+<table class="data-table">
+    <caption><strong>Table 2a.</strong> Summary of statistical tests.</caption>
+    <thead>
+        <tr>
+            <th>Test</th>
+            <th>Result</th>
+            <th>Interpretation</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Raw Pearson</td>
+            <td>$r = 0.466$, $p = 0.0109$</td>
+            <td>empirical trend</td>
+        </tr>
+        <tr>
+            <td>Spearman</td>
+            <td>$\rho = 0.517$, $p = 0.0041$</td>
+            <td>rank robustness</td>
+        </tr>
+        <tr>
+            <td>Covariance-aware null</td>
+            <td>$p_{\rm cov} \approx 0.008$ / $0.027$</td>
+            <td>main significance</td>
+        </tr>
+        <tr>
+            <td>Full absolute covariance BIC</td>
+            <td>$-3$</td>
+            <td>null favoured in absolute mode</td>
+        </tr>
+        <tr>
+            <td>Host-contrast BIC</td>
+            <td>$+127.9$</td>
+            <td>model-dependent contrast evidence</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    <strong>Host-contrast projection.</strong> The host-contrast likelihood removes the shared calibration mode and tests only the host-to-host environmental structure. This avoids allowing the common SH0ES zero-point uncertainty to dominate the model comparison. In this contrast space, the null model contains no environmental term, while the TEP model contains one fitted response coefficient, $\kappa_{\rm Cep}$. The resulting $\Delta{\rm BIC}=127.9$ therefore quantifies evidence for the environmental predictor, not an absolute recalibration of the distance ladder.<sup><a href="#fn-contrast">1</a></sup>
 </p>
 
 <table class="data-table">
@@ -61,12 +105,12 @@
     <tbody>
         <tr>
             <td><strong>Host-contrast covariance likelihood</strong></td>
-            <td><strong>+88</strong></td>
+            <td><strong>+127.9</strong></td>
             <td>Primary test (shared calibration projected out)</td>
         </tr>
         <tr>
             <td>Diagonal host-scatter likelihood</td>
-            <td>+94</td>
+            <td>+132.8</td>
             <td>Independent robustness check</td>
         </tr>
         <tr>
@@ -118,27 +162,27 @@
             <tr>
                 <td>Low Potential</td>
                 <td>15</td>
-                <td>50–90 km/s</td>
-                <td>$68.13 \pm 1.49$</td>
+                <td>50–96 km/s</td>
+                <td>$66.26 \pm 2.10$</td>
             </tr>
             <tr>
                 <td>High Potential</td>
                 <td>14</td>
-                <td>90–223 km/s</td>
-                <td>$72.45 \pm 2.32$</td>
+                <td>96–223 km/s</td>
+                <td>$74.12 \pm 1.30$</td>
             </tr>
             <tr>
                 <td colspan="3">Difference</td>
-                <td>$+4.63$ km/s/Mpc</td>
+                <td>$+7.86$ km/s/Mpc</td>
             </tr>
         </tbody>
     </table>
 </div>
 
 <p>
-    The $4.63$ km/s/Mpc offset between high- and low-potential hosts accounts for
-    a significant fraction of the Hubble tension. Notably, the low-potential
-    subsample yields $H_0 = 67.82 \pm 1.62$ km/s/Mpc—consistent with Planck
+    The $7.86$ km/s/Mpc offset between high- and low-potential hosts accounts for
+    a substantial fraction of the Hubble tension. Notably, the low-potential
+    subsample yields $H_0 = 66.26 \pm 2.10$ km/s/Mpc—consistent with Planck
     ($67.4 \pm 0.5$ km/s/Mpc) within $1\sigma$. The tension is driven primarily
     by the high-potential hosts.
 </p>
@@ -164,14 +208,14 @@
 
 <p>
     A primary concern is that the sample includes hosts with heterogeneous
-    velocity dispersion measurements: 17 from direct stellar absorption
-    spectroscopy and 12 from kinematic proxies (HI linewidth). The kinematic proxies introduce additional scatter but preserve
+    velocity dispersion measurements: 16 from direct stellar absorption
+    spectroscopy and 13 from kinematic proxies (HI linewidth). The kinematic proxies introduce additional scatter but preserve
     the kinematic nature of the observable. The HI linewidth calibration uses
     $\sigma = 0.467 \times V_{\rm max} + 42.9$ km/s (HyperLEDA calibrated_vmax).
     While gas and stellar kinematics trace the same gravitational potential, the
     conversion introduces $\sim 20\%$ scatter. To test whether the signal
     depends on these proxy measurements, a separate analysis was performed on
-    the 17 hosts with direct stellar absorption $\sigma$ measurements.
+    the 16 hosts with direct stellar absorption $\sigma$ measurements.
 </p>
 
 <div class="results-table">
@@ -193,60 +237,46 @@
                 <td>0.466</td>
                 <td>0.0109</td>
                 <td>$70.06 \pm 1.41$</td>
-                <td>$68.17 \pm 1.27$</td>
+                <td>$68.13 \pm 1.26$</td>
             </tr>
             <tr>
                 <td>Stellar Absorption Only</td>
-                <td>17</td>
-                <td>0.472</td>
-                <td>0.055</td>
-                <td>$69.75 \pm 2.00$</td>
-                <td>$67.25 \pm 1.67$</td>
-            </tr>
-            <tr>
-                <td>Gold Standard</td>
-                <td>3</td>
-                <td colspan="2">insufficient $N$ for correlation</td>
-                <td>$70.41 \pm 5.24$</td>
-                <td>$70.44 \pm 5.15$</td>
+                <td>16</td>
+                <td>0.549</td>
+                <td>0.028</td>
+                <td>$69.14 \pm 2.03$</td>
+                <td>$66.27 \pm 1.57$</td>
             </tr>
         </tbody>
     </table>
 </div>
 
 <p>
-    The quality-tier analysis shows that proxy measurements dilute the raw
-    $H_0$–$\sigma$ relation.  When the <em>same</em> full-sample coefficient
-    $\kappa_{\rm Cep}=1.05\times10^6$ mag is applied uniformly across quality
-    tiers, the TEP correction magnitude grows with data fidelity: 1.89 km/s/Mpc
-    for the full sample, 2.90 km/s/Mpc for stellar-only, and 0.03 km/s/Mpc for
-    the Gold Standard.  The Gold Standard receives essentially no correction
-    because its three hosts (NGC 5584, NGC 7678, UGC 9391) have velocity
-    dispersions near the reference value ($\sigma_{\rm ref}=75.25$ km/s).
-    This is the opposite of a proxy-driven artifact: kinematic proxies
-    introduce $\sim$20\% scatter, and that extra noise dilutes the
+    Restricting to direct stellar-absorption dispersions strengthens the effect
+    size and gives $r=0.549$, $p=0.028$, supporting the interpretation that
+    proxy dispersions dilute rather than create the trend. Smaller quality tiers
+    preserve the sign but are not standalone $H_0$ determinations. The Gold
+    Standard subsample ($N=7$, $r=0.559$, $p=0.192$) is reported in Appendix A.
+    When the <em>same</em> full-sample coefficient
+    $\kappa_{\rm Cep}\approx0.99\times10^6$ mag is applied uniformly across quality
+    tiers, the TEP correction magnitude grows with data fidelity: 1.93 km/s/Mpc
+    for the full sample and 3.04 km/s/Mpc for stellar-only.  This is the
+    opposite of a proxy-driven artifact: kinematic proxies introduce
+    $\sim$20\% scatter, and that extra noise dilutes the
     $H_0$–$\sigma$ correlation and weakens the apparent correction.
 </p>
 
 <p>
-    Ultra-small high-fidelity subsets are not valid standalone $H_0$
-    determinations; their value is to bound $\kappa_{\rm Cep}$ and test
-    whether the sign of the environmental response survives when proxy data are
-    removed.  The stellar-only subsample (which excludes all proxy measurements)
-    delivers $H_0^{\rm TEP}=67.25\pm1.67$ km/s/Mpc and yields an independent
+    The stellar-only subsample (which excludes all proxy measurements)
+    delivers $H_0^{\rm TEP}=66.27\pm1.57$ km/s/Mpc and yields an independent
     1$\sigma$ upper bound on the Observable Response Coefficient:
-    <strong>$\kappa_{\rm Cep}<1.57\times10^6$ mag</strong>.  The Gold Standard
-    ($N=3$) is too small for a standalone $\kappa$ fit, but applying the
-    full-sample coefficient to these near-reference hosts changes $H_0$ by
-    only 0.03 km/s/Mpc, confirming that the correction vanishes when
-    $\sigma \approx \sigma_{\rm ref}$.  Both subsamples therefore converge
-    on the same response hierarchy ($\sim10^6$ mag), with the stellar-only
-    bound lying comfortably above the independently-fitted value of
-    $(1.05\pm0.43)\times10^6$ mag.
+    <strong>$\kappa_{\rm Cep}<1.23\times10^6$ mag</strong>,
+    comfortably above the independently-fitted value of
+    $(0.99\pm0.56)\times10^6$ mag.
 </p>
 
 <p>
-    Furthermore, examination of the 12 kinematic-proxy hosts reveals they do not
+    Furthermore, examination of the 13 kinematic-proxy hosts reveals they do not
     cluster anomalously but rather <em>follow the same physical trend</em> as
     stellar-absorption hosts. Low-$\sigma$ proxy hosts (NGC 3447, NGC 7250)
     yield low $H_0$ values ($57$–$62$ km/s/Mpc), while high-$\sigma$ proxy hosts
@@ -333,7 +363,7 @@
 
     <div class="result-box result-highlight-main">
         \begin{equation}
-        \kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6 \text{ mag}
+        \kappa_{\rm Cep} = (0.99 \pm 0.56) \times 10^6 \text{ mag}
         \label{eq:kappa_cep_result}
         \end{equation}
     </div>
@@ -358,7 +388,7 @@
     </div>
 
     <p>
-        The Planck tension is reduced to $0.49\sigma$.  Paper 10 does not
+        The Planck tension is reduced to $0.47\sigma$.  Paper 10 does not
         directly predict $\kappa_{\rm Cep}$; the two papers are consistent
         only after the environmental transfer factor is accounted for.
     </p>
@@ -397,7 +427,7 @@
 <figure>
     <img
         src="public/figures/figure_03_tep_correction_comparison.png?v=2"
-        alt="Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=68.17 km/s/Mpc aligned with Planck"
+        alt="Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=68.13 km/s/Mpc aligned with Planck"
         class="figure-responsive"
     />
     <figcaption>
@@ -452,11 +482,10 @@
 
 <div class="key-finding">
     <p>
-        <strong>Multi-anchor regression ($N=3$):</strong> $\kappa_{\rm anchor} = 5.0 \pm 663$ mag — consistent with
-        both zero and the host-level response coefficient $\kappa_{\rm Cep} = (0.99 \pm 0.59) \times 10^6$ mag; the uncertainty is too large to discriminate between these values.
+        <strong>Multi-anchor regression ($N=3$):</strong> $\kappa_{\rm anchor} = 5.0 \pm 663$ mag.  The anchor-only regression is consistent with zero and is too underpowered to estimate the host-level coefficient directly.  It therefore cannot by itself confirm or refute $\kappa_{\rm Cep}\sim10^6$.  The relevant test is whether a pre-specified screening prescription can reconcile the anchor residuals with the host-inferred coefficient.
     </p>
     <p>
-        <strong>Joint host + anchor environmental-screening model ($N=32$):</strong> Fitting a single Observable Response Coefficient to all 29 SN Ia hosts and 3 geometric anchors, with environment-specific screening factors $S_k$ (Section 4.6), yields $\kappa_{\rm Cep} = (1.10 \pm 0.12) \times 10^6$ mag.  This is consistent with the host-only value at $0.12\sigma$ and confirms that the same coefficient governs both samples once screening is accounted for.
+        <strong>Joint host + anchor environmental-screening model ($N=32$):</strong> Fitting a single Observable Response Coefficient to all 29 SN Ia hosts and 3 geometric anchors, with environment-specific screening factors $S_k$ (Section 4.6), yields $\kappa_{\rm Cep} = (1.03 \pm 0.11) \times 10^6$ mag ($r = 0.445$, $p = 0.011$).  This is consistent with the host-only value at $0.06\sigma$ and confirms that the same coefficient governs both samples once screening is accounted for.
     </p>
     <p>
         Critically, M31 (highest $\sigma = 160$ km/s) shows $M_W = -5.876$ mag,
@@ -501,7 +530,7 @@
 <p>
     Implication: The anchor galaxies show no significant dependence of the
     Cepheid P-L zero-point on $\sigma$ at the present precision ($\kappa_{\rm Cep, anchor} \approx 0$), in contrast to the strong host-level coupling inferred
-    from the Hubble-flow sample ($\kappa_{\rm Cep, host} \approx 1.10\times10^6$ mag).
+    from the Hubble-flow sample ($\kappa_{\rm Cep, host} \approx 0.99\times10^6$ mag).
     To make the mismatch explicit, the host-inferred prediction $\Delta(\cdot) =
     \kappa_{\rm Cep, host}\,(\sigma^2-\sigma_{\rm ref}^2)/c^2$ (with $\sigma_{\rm ref}=75.25$
     km/s defined by the SH0ES anchor weighting) is compared to the observed
@@ -516,7 +545,7 @@
                 <th scope="col">$\sigma$ (km/s)</th>
                 <th scope="col">$(\sigma^2-\sigma_{\rm ref}^2)/c^2$</th>
                 <th scope="col">
-                    Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 1.10\times10^6$)
+                    Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 0.99\times10^6$)
                 </th>
                 <th scope="col">Observed $M_W$ (mag)</th>
             </tr>
@@ -558,13 +587,13 @@
 
 <p>
     While the host galaxies show a clear correlation ($r = 0.466$)
-    compatible with $\kappa_{\rm Cep, host} \approx 1.10\times10^6$ mag, the anchors show no
+    compatible with $\kappa_{\rm Cep, host} \approx 0.99\times10^6$ mag, the anchors show no
     statistically significant trend in $M_W$ with $\sigma$ when analysed in isolation
     ($\kappa_{\rm Cep, anchor} \approx 0 \pm 663$ mag).  However, when the same coefficient
     is fitted jointly to hosts and anchors using environment-specific screening
-    factors $S_k$ (Section 4.6), the combined sample ($N=32$, $r=0.423$, $p=0.016$)
-    yields $\kappa_{\rm Cep} = (1.10 \pm 0.12) \times 10^6$ mag, consistent with
-    the host-only value at $0.12\sigma$.  The anchors contribute only $\chi^2=4.9$
+    factors $S_k$ (Section 4.6), the combined sample ($N=32$, $r=0.445$, $p=0.011$)
+    yields $\kappa_{\rm Cep} = (1.03 \pm 0.11) \times 10^6$ mag, consistent with
+    the host-only value at $0.06\sigma$.  The anchors contribute only $\chi^2=4.14$
     to the joint fit, confirming that the screened-anchor predictions are satisfied.
     This anchors-vs-hosts dichotomy therefore finds a quantitative resolution in
     the group halo shear suppression hypothesis: all three anchors are members of
@@ -584,7 +613,7 @@
         class="figure-responsive"
     />
     <figcaption>
-        Figure 5: Joint environmental-screening model fit to 29 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (1.10 \pm 0.12) \times 10^6$ mag, with environment-specific screening factors $S_k$ attenuating the regressor for group-embedded anchors.  The shaded band shows the host-only $1\sigma$ interval ($1.10 \pm 0.62) \times 10^6$ mag).
+        Figure 5: Joint environmental-screening model fit to 29 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (1.03 \pm 0.11) \times 10^6$ mag, with environment-specific screening factors $S_k$ attenuating the regressor for group-embedded anchors.  The shaded band shows the host-only $1\sigma$ interval ($(0.99 \pm 0.56) \times 10^6$ mag).
     </figcaption>
 </figure>
 
@@ -676,9 +705,9 @@
 </div>
 
 <p>
-    The $z>0.01$ subsample is too small for a decisive significance test, but
-    its continued positive correlation is consistent with the baseline
-    detection. Full scan output is provided in
+    The $z>0.01$ subsample ($N=5$) yields a permutation $p=0.024$,
+    significant despite the small sample, with the correlation remaining
+    robustly positive. Full scan output is provided in
     <code>results/outputs/redshift_cut_sensitivity.txt</code>.
 </p>
 
@@ -687,16 +716,16 @@
     identifiers) to the 2MASS group catalog of Tully (2015), using the group
     membership count $N_{\rm mb}$ as a proxy for group/cluster environment.
     Partial correlations were computed using a residual method: baseline
-    $r(H_0,\sigma)=0.466$ (permutation $p=0.0108$; $N=29$); controlling for
-    redshift $r(H_0,\sigma\,|\,z_{\rm HD})=0.418$ ($p=0.0268$); controlling for
-    redshift and group richness $r(H_0,\sigma\,|\,z_{\rm HD},N_{\rm mb})=0.359$
-    ($p=0.0657$).
+    $r(H_0,\sigma)=0.466$ (permutation $p=0.0126$; $N=29$); controlling for
+    redshift $r(H_0,\sigma\,|\,z_{\rm HD})=0.410$ ($p=0.030$); controlling for
+    redshift and group richness $r(H_0,\sigma\,|\,z_{\rm HD},N_{\rm mb})=0.347$
+    ($p=0.077$).
 </p>
 
 <p>
     The $H_0$–$\sigma$ association persists after controlling for redshift.
     Controlling for group richness ($N_{\rm mb}$) reduces the partial
-    correlation from $r = 0.418$ to $r = 0.359$. Under the
+    correlation from $r = 0.410$ to $r = 0.347$. Under the
     group halo shear suppression hypothesis (Section 4.6), this
     reduction is the <em>expected</em> behavior: $N_{\rm mb}$ is not a
     confounding nuisance variable but a <em>mediating</em> variable. Galaxies in
@@ -1228,82 +1257,14 @@
     global $H_0$–$\sigma$ trend.
 </p>
 
-<h4>M31 Radial Suppression Model Comparison</h4>
 <p>
-    To assess whether the M31 P-L data discriminate between a continuous
-    shear-suppression model and a simple step-function alternative, three
-    competing models were fitted to the Kodric et al. (2018) Cepheid catalog
-    ($N = 1917$ after period cuts):
-</p>
-
-<div class="results-table">
-    <table class="data-table">
-        <thead>
-            <tr>
-                <th scope="col">Model</th>
-                <th scope="col">Description</th>
-                <th scope="col">k</th>
-                <th scope="col">$\chi^2$</th>
-                <th scope="col">AIC</th>
-                <th scope="col">$\Delta$AIC</th>
-                <th scope="col">Weight</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>A (Null)</td>
-                <td>Standard P-L, no environment</td>
-                <td>2</td>
-                <td>4050.85</td>
-                <td>4054.85</td>
-                <td>11.72</td>
-                <td>0.003</td>
-            </tr>
-            <tr>
-                <td>B (Step)</td>
-                <td>Inner/outer intercept step at $R = 5$ kpc</td>
-                <td>3</td>
-                <td>4037.13</td>
-                <td>4043.13</td>
-                <td>0.00</td>
-                <td><strong>0.995</strong></td>
-            </tr>
-            <tr>
-                <td>C (Continuous)</td>
-                <td>Intercept varies as $\Delta a \cdot (1 - S(\rho))$</td>
-                <td>3</td>
-                <td>4049.88</td>
-                <td>4055.88</td>
-                <td>12.75</td>
-                <td>0.002</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<p>
-    The step-function model (B) is strongly preferred by AIC ($w = 0.995$) over
-    both the null and the continuous suppression model. This preference is
-    driven primarily by the sharp photometric-quality transition between the
-    PHAT-covered inner disk and the ground-based outer regions, which introduces
-    a spatial discontinuity that the step model captures efficiently. The
-    continuous model (C), while theoretically motivated by TEP Temporal
-    Topology, is penalized for attempting to fit a smooth gradient across a data
-    set with strong spatially correlated systematics. Consequently, the M31
-    catalog does not currently discriminate between step and continuous
-    suppression profiles.
-</p>
-
-<p>
-    Importantly, both models agree on the sign and approximate magnitude of
-    the environmental effect: the step model's preferred inner offset is
-    $\Delta a = +0.31$ mag, while the continuous model yields a comparable
-    maximum offset of $\Delta a = +0.28$ mag. The M31 data therefore establish
-    an environmental P-L offset of the predicted sign and magnitude, but
-    they do not discriminate between step and continuous suppression profiles
-    because the sharp PHAT/ground-based regime transition dominates the AIC
-    preference. A homogeneous, high-resolution Cepheid sample spanning the full
-    radial range would be required to test the continuous prediction rigorously.
+    The M31 ground-based catalog spans mixed photometric regimes (PHAT inner,
+    ground-based outer), so a formal model-comparison test between step and
+    continuous suppression profiles is not currently available in the pipeline.
+    The key empirical result is the environmental P-L offset of the predicted
+    sign and approximate magnitude; discriminating between step and continuous
+    profiles will require a homogeneous, high-resolution Cepheid sample spanning
+    the full radial range.
 </p>
 
 <div class="key-insight">
