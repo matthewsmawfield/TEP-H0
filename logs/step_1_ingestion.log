@@ -1,2 +1,18 @@
-[20:23:03] [INFO] Step 1 (Pre-flight): Preparing Host Coordinates...
+[20:23:03] [INFO] 
+[20:23:03] [INFO] ================================================================================
+[20:23:03] [INFO]    Starting Step 1: Data Ingestion
+[20:23:03] [INFO] ================================================================================
+[20:23:03] [INFO] 
 [20:23:03] [INFO] Reconstructing SH0ES Cepheid Catalog...
+[20:23:03] [INFO] Catalog Reconstruction Verification:
+[20:23:03] [INFO] SH0ES Cepheid Sample (First 3)
+[20:23:03] [INFO] +--------+------------+-------------+------------+
+[20:23:03] [INFO] | Source | Data (mag) | Period Term | Metal Term |
+[20:23:03] [INFO] +--------+------------+-------------+------------+
+[20:23:03] [INFO] | M101   | 23.691     | -0.164      | 0.053      |
+[20:23:03] [INFO] | M101   | 22.955     | -0.163      | 0.089      |
+[20:23:03] [INFO] | M101   | 23.535     | -0.157      | 0.089      |
+[20:23:03] [INFO] +--------+------------+-------------+------------+
+[20:23:03] [SUCCESS] Saved reconstructed catalog with 3130 Cepheids to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/reconstructed_shoes_cepheids.csv
+[20:23:03] [INFO] Calculating R22 Distances (GLS Solution)...
+[20:23:03] [INFO] Solving GLS system: 3490 observations, 46 parameters
