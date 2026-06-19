@@ -177,3 +177,38 @@
 [22:16:24] [INFO]    >>> STEP 11: PIPELINE AUDIT
 [22:16:24] [INFO] ================================================================================
 [22:16:24] [INFO] 
+[22:16:24] [SUCCESS] Wrote pipeline audit report: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/pipeline_audit_report.json
+[22:16:24] [SUCCESS] Step 11 (Audit) PASSED: All outputs consistent.
+[22:16:24] [INFO] 
+[22:16:24] [INFO] ================================================================================
+[22:16:24] [INFO]    PIPELINE EXECUTION SUMMARY
+[22:16:24] [INFO] ================================================================================
+[22:16:24] [INFO] 
+[22:16:24] [INFO] Execution Timing
+[22:16:24] [INFO] +----------+--------------+-----------+
+[22:16:24] [INFO] | Step     | Duration (s) | Status    |
+[22:16:24] [INFO] +----------+--------------+-----------+
+[22:16:24] [INFO] | Step 0   | 0.00         | COMPLETED |
+[22:16:24] [INFO] | Step 1   | 1.11         | COMPLETED |
+[22:16:24] [INFO] | Step 1b  | 0.14         | COMPLETED |
+[22:16:24] [INFO] | Step 2   | 0.31         | COMPLETED |
+[22:16:24] [INFO] | Step 3   | 1.67         | COMPLETED |
+[22:16:24] [INFO] | Step 3b  | 0.39         | COMPLETED |
+[22:16:24] [INFO] | Step 4   | 22.95        | COMPLETED |
+[22:16:24] [INFO] | Step 5   | 60.17        | COMPLETED |
+[22:16:24] [INFO] | Step 6   | 0.22         | COMPLETED |
+[22:16:24] [INFO] | Step 6b  | 0.07         | COMPLETED |
+[22:16:24] [INFO] | Step 7   | 27.85        | COMPLETED |
+[22:16:24] [INFO] | Step 7b  | 0.16         | COMPLETED |
+[22:16:24] [INFO] | Step 7c  | 0.33         | COMPLETED |
+[22:16:24] [INFO] | Step 8   | 0.28         | COMPLETED |
+[22:16:24] [INFO] | Step 10  | 0.20         | COMPLETED |
+[22:16:24] [INFO] | Step 10b | 0.00         | COMPLETED |
+[22:16:24] [INFO] | Step 9   | 0.10         | COMPLETED |
+[22:16:24] [INFO] | Step 11  | 0.03         | COMPLETED |
+[22:16:24] [INFO] | TOTAL    | 116.03       | SUCCESS   |
+[22:16:24] [INFO] +----------+--------------+-----------+
+[22:16:24] [SUCCESS] Total Execution Time: 116.03 seconds
+[22:16:24] [INFO] Results Directory: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/
+[22:16:24] [INFO] Logs Directory:    /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/logs/
+[22:16:24] [SUCCESS] Pipeline finished.
