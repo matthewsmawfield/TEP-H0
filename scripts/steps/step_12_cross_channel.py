@@ -30,6 +30,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
 from scripts.utils.tep_correction import tep_correction, C_SQUARED_KM_S
+from core.constants import KAPPA_GAL, KAPPA_GAL_UNCERTAINTY
 
 
 class Step12CrossChannel:
@@ -231,8 +232,8 @@ class Step12CrossChannel:
         # ============================================================
         # 4. CONSISTENCY TESTS
         # ============================================================
-        kappa_gal = 9.6e5
-        kappa_gal_err = 4.0e5
+        kappa_gal = KAPPA_GAL
+        kappa_gal_err = KAPPA_GAL_UNCERTAINTY
 
         # Tensions
         tension_diff_vs_cep = (

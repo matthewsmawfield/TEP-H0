@@ -26,6 +26,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, print_status, set_step_logger
+from core.constants import RHO_C
 DEFAULT_KAPPA_CEP = 1.611136e6       # Current host-only κ_Cep from pipeline
 DEFAULT_H0 = 68.13222017543657       # Raw (uncorrected) H0 mean from Cepheid data
 
@@ -54,7 +55,7 @@ def define_tep_cosmology_params():
     kappa_cep = headlines["kappa_cep"]  # Clock/Matter sector (mag)
     kappa_grav = 1.1e-3     # Gravitational sector (dimensionless, from Paper 12)
     m_phi_0 = 1.0          # h/Mpc (fiducial mass scale)
-    rho_c = 20.0           # g/cm^3 (critical screening density)
+    rho_c = RHO_C           # g/cm^3 (critical screening density)
     
     # Mapping to hi_class (Horndeski / Scalar-Tensor)
     params = {

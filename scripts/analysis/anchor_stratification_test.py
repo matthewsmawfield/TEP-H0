@@ -421,9 +421,9 @@ def create_anchor_comparison_figure(results):
         if json_path.exists():
             with open(json_path) as f:
                 tep_results = json.load(f)
-            kappa_cep_ref = float(tep_results.get("optimal_kappa_cep", 9.6e5))
+            kappa_cep_ref = float(tep_results.get("optimal_kappa_cep", 9.7e5))
         else:
-            kappa_cep_ref = 9.6e5
+            kappa_cep_ref = 9.7e5
         sigma_ref = sigmas[lmc_idx]
         M_W_ref = M_Ws[lmc_idx]
         

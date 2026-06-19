@@ -12,6 +12,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
+from core.constants import KAPPA_GAL, KAPPA_GAL_UNCERTAINTY
 try:
     from scripts.utils.plot_style import apply_tep_style
     colors = apply_tep_style()
@@ -415,8 +416,8 @@ class Step9FinalSynthesis:
             kappa_mill = tep.get('optimal_kappa_cep', float('nan')) / 1e6
             kappa_err_mill = (tep.get('bootstrap_kappa_robust_std') or tep.get('wls_kappa_err_scaled') or tep.get('bootstrap_kappa_std', float('nan'))) / 1e6
             # Compute actual tension with KAPPA_GAL, not Planck tension
-            kappa_gal = 9.7e5
-            kappa_gal_err = 4.0e5
+            kappa_gal = KAPPA_GAL
+            kappa_gal_err = KAPPA_GAL_UNCERTAINTY
             tension_kgal = abs(kappa_mill * 1e6 - kappa_gal) / np.sqrt((kappa_err_mill * 1e6)**2 + kappa_gal_err**2)
             f.write(f"**Single-channel evidence (Cepheid) is strong.** SH0ES Hubble-flow Cepheid hosts show a significant H0-$\\sigma$ bias ($r=0.500$, $p=0.002$); the suppression-aware $\\kappa_{{\\rm Cep}}$ correction removes the trend; covariance-aware, stellar-only, density-control, redshift/flow, and out-of-sample tests preserve the signal. The fitted $\\kappa_{{\\rm Cep}} = ({kappa_mill:.2f} \\pm {kappa_err_mill:.2f}) \\times 10^6$ mag is consistent with the TEP theoretical prediction $\\kappa_{{\\rm gal}} = 9.7 \\times 10^5 \\pm 4.0 \\times 10^5$ mag at ${tension_kgal:.1f}\\sigma$.\n\n")
             f.write("**Cross-channel evidence is suggestive but not definitive.** The TRGB comparison shows a weaker raw correlation ($r=0.41$, $p=0.09$) and the differential test (TRGB $-$ Cepheid vs $\\sigma$) is not significant ($r=0.088$, $p=0.36$). Applying the Cepheid $\\kappa$ to TRGB data produces a 58% slope reduction, which is directionally consistent with TEP (non-periodic indicators should couple more weakly), but a rigorous cross-channel consistency test requires additional channels—specifically SN Ia and pulsar spin-down measurements—to confirm the predicted channel hierarchy.\n\n")
