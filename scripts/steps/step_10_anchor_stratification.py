@@ -197,7 +197,7 @@ class AnchorStratificationStep:
     
     def _multi_anchor_regression(self, results: dict) -> dict:
         """Perform a simple least-squares regression on the geometric anchors."""
-        sigma_ref = 75.25
+        sigma_ref = 87.17
         anchor_names = [k for k in results.keys() if k not in ['regression', 'test']]
         
         sigmas = np.array([results[n]['sigma'] for n in anchor_names])
@@ -270,8 +270,12 @@ class AnchorStratificationStep:
                     tep = json.load(f)
                 if isinstance(tep, dict) and 'optimal_kappa_cep' in tep:
                     kappa_host = float(tep['optimal_kappa_cep'])
-                if isinstance(tep, dict) and 'bootstrap_kappa_std' in tep:
-                    kappa_host_err = float(tep['bootstrap_kappa_std'])
+                if isinstance(tep, dict):
+                    kappa_host_err = float(
+                        tep.get('bootstrap_kappa_robust_std')
+                        or tep.get('wls_kappa_err_scaled')
+                        or tep.get('bootstrap_kappa_std', 8.9e5)
+                    )
         except Exception:
             pass
         if np.isfinite(kappa_host) and np.isfinite(kappa_host_err):
@@ -524,8 +528,8 @@ class AnchorStratificationStep:
         plt.tight_layout()
         
         fig_path = self.figures_dir / "anchor_stratification_test.png"
-        plt.savefig(fig_path, dpi=150, bbox_inches='tight', facecolor='white')
-        print_status(f"Figure saved: {fig_path}", "SUCCESS")
+        # plt.savefig(fig_path, dpi=150, bbox_inches='tight', facecolor='white')
+        # print_status(f"Figure saved: {fig_path}", "SUCCESS")
         plt.close()
     
     def _save_results(self, results):

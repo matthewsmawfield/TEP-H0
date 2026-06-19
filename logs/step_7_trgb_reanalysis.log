@@ -1,18 +1,16 @@
-[22:16:23] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
-[22:16:23] [INFO] Matched 18 hosts for differential analysis
-[22:16:23] [INFO] 
+[23:57:37] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
+[23:57:37] [INFO] Matched 18 hosts for differential analysis
+[23:57:37] [INFO] 
 Differential Modulus (TRGB - Cepheid) vs Sigma:
-[22:16:23] [INFO] +-----------------+---------------+--------------+
-[22:16:23] [INFO] | Metric          | Value         | Significance |
-[22:16:23] [INFO] +-----------------+---------------+--------------+
-[22:16:23] [INFO] | Pearson r       | 0.088         | p=0.3637     |
-[22:16:23] [INFO] | Spearman ρ      | 0.321         | p=0.0970     |
-[22:16:23] [INFO] | Slope (mag/dex) | 0.056 ± 0.147 | p=0.3542     |
-[22:16:23] [INFO] +-----------------+---------------+--------------+
-[22:16:23] [INFO] 
+[23:57:37] [INFO] +-----------------+---------------+--------------+
+[23:57:37] [INFO] | Metric          | Value         | Significance |
+[23:57:37] [INFO] +-----------------+---------------+--------------+
+[23:57:37] [INFO] | Pearson r       | 0.088         | p=0.3637     |
+[23:57:37] [INFO] | Spearman ρ      | 0.321         | p=0.0970     |
+[23:57:37] [INFO] | Slope (mag/dex) | 0.056 ± 0.147 | p=0.3542     |
+[23:57:37] [INFO] +-----------------+---------------+--------------+
+[23:57:37] [INFO] 
 Interpretation Check:
-[22:16:23] [INFO]   No significant positive correlation.
-[22:16:23] [WARNING]   → INCONCLUSIVE / TENSION.
-[22:16:23] [INFO] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/supplement_03_trgb_cepheid_residual.png
-[22:16:23] [INFO] Copied plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/supplement_03_trgb_cepheid_residual.png
-[22:16:23] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json
+[23:57:37] [INFO]   No significant positive correlation.
+[23:57:37] [WARNING]   → INCONCLUSIVE / TENSION.
+[23:57:37] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json

@@ -197,7 +197,7 @@ class Step13StellarValidation:
 
         # --- 2. Transport grid -------------------------------------------
         print_status("Generating TEP period-transport grid...", "SECTION")
-        sigmas = np.array([30, 50, 75.25, 90, 120, 150, 180, 220])
+        sigmas = np.array([30, 50, 87.17, 90, 120, 150, 180, 220])
         rho_ratios = [0.0, 0.5, 1.0, 2.0]
         grid_df = generate_transport_grid(P_mesa, sigmas=sigmas, rho_ratios=rho_ratios)
         grid_df.to_csv(self.grid_csv_path, index=False)
@@ -265,32 +265,32 @@ class Step13StellarValidation:
                 "SUCCESS",
             )
 
-        # --- 5. Figures ---------------------------------------------------
-        print_status("Generating figures...", "SECTION")
+        # --- 5. Figures (disabled — not referenced in manuscript) -----------
+        # print_status("Generating figures...", "SECTION")
 
-        plot_period_transport_grid(
-            P_mesa_days=P_mesa,
-            sigmas=np.linspace(20, 250, 200),
-            rho_ratios=[0.0, 0.5, 1.0, 2.0, 5.0],
-            output_path=self.transport_plot_path,
-        )
-        print_status(f"Transport plot: {self.transport_plot_path}", "SUCCESS")
+        # plot_period_transport_grid(
+        #     P_mesa_days=P_mesa,
+        #     sigmas=np.linspace(20, 250, 200),
+        #     rho_ratios=[0.0, 0.5, 1.0, 2.0, 5.0],
+        #     output_path=self.transport_plot_path,
+        # )
+        # print_status(f"Transport plot: {self.transport_plot_path}", "SUCCESS")
 
-        plot_closure_test(grid_df, output_path=self.closure_plot_path)
-        print_status(f"Closure plot: {self.closure_plot_path}", "SUCCESS")
+        # plot_closure_test(grid_df, output_path=self.closure_plot_path)
+        # print_status(f"Closure plot: {self.closure_plot_path}", "SUCCESS")
 
-        plot_higher_order_stress_test(stress_df, output_path=self.stress_plot_path)
-        print_status(f"Stress-test plot: {self.stress_plot_path}", "SUCCESS")
+        # plot_higher_order_stress_test(stress_df, output_path=self.stress_plot_path)
+        # print_status(f"Stress-test plot: {self.stress_plot_path}", "SUCCESS")
 
         # Copy to public figures for site build
-        for src in (
-            self.transport_plot_path,
-            self.closure_plot_path,
-            self.stress_plot_path,
-        ):
-            dst = self.public_figures_dir / src.name
-            shutil.copy(src, dst)
-            print_status(f"Copied to site public: {dst}", "SUCCESS")
+        # for src in (
+        #     self.transport_plot_path,
+        #     self.closure_plot_path,
+        #     self.stress_plot_path,
+        # ):
+        #     dst = self.public_figures_dir / src.name
+        #     shutil.copy(src, dst)
+        #     print_status(f"Copied to site public: {dst}", "SUCCESS")
 
         # --- 6. Summary ---------------------------------------------------
         results = {

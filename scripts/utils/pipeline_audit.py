@@ -193,9 +193,11 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
         try:
             planck_h0 = float(tep['planck_h0'])
             planck_err = 0.5
+            # Step 3 computes tension_sigma from bootstrap_h0_mean, not unified_h0
+            h0_boot = float(tep.get('bootstrap_h0_mean', tep['unified_h0']))
             h0 = float(tep['unified_h0'])
             if 'bootstrap_h0_std' in tep:
-                tension_bootstrap = abs(h0 - planck_h0) / math.sqrt(float(tep['bootstrap_h0_std']) ** 2 + planck_err ** 2)
+                tension_bootstrap = abs(h0_boot - planck_h0) / math.sqrt(float(tep['bootstrap_h0_std']) ** 2 + planck_err ** 2)
             if 'h0_sem' in tep:
                 tension_sem = abs(h0 - planck_h0) / math.sqrt(float(tep['h0_sem']) ** 2 + planck_err ** 2)
         except Exception:
@@ -371,7 +373,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
                 f"{float(tep['bootstrap_h0_std']):.2f}",
                 f"{float(tep['tension_sigma']):.2f}",
                 f"{float(tep['optimal_kappa_cep']) / 1e6:.2f}",
-                f"{float(tep['bootstrap_kappa_std']) / 1e6:.2f}",
+                f"{float(tep.get('bootstrap_kappa_robust_std') or tep.get('wls_kappa_err_scaled') or tep.get('bootstrap_kappa_std', 0.89)) / 1e6:.2f}",
             ]
             # Check 1: Global presence (at least one file has all tokens)
             ok_global, missing_global = _contains_all(narrative_text, expected_tokens)

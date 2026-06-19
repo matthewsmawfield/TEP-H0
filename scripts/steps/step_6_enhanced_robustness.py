@@ -358,14 +358,14 @@ class Step6EnhancedRobustness:
         print_status("\n--- TEP CORRECTION ON SUBSAMPLES ---", "SECTION")
         
         from scripts.utils.tep_correction import tep_correction
-        sigma_ref_screened = 30.51  # Fallback if tep_correction_results.json is missing
+        sigma_ref = 87.17  # Fallback if tep_correction_results.json is missing
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     _tep = json.load(f)
-                if isinstance(_tep, dict) and 'sigma_ref_screened' in _tep:
-                    sigma_ref_screened = float(_tep['sigma_ref_screened'])
+                if isinstance(_tep, dict) and 'sigma_ref' in _tep:
+                    sigma_ref = float(_tep['sigma_ref'])
         except Exception:
             pass
         
@@ -382,7 +382,7 @@ class Step6EnhancedRobustness:
             
             def objective(kappa):
                 k = float(kappa[0]) if hasattr(kappa, '__len__') else float(kappa)
-                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref_screened, k, S_arr)
+                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, k, S_arr)
                 d_corr = 10 ** ((mu_corr - 25) / 5)
                 h0_corr = 299792.458 * z_arr / d_corr
                 slope, _, _, _, _ = stats.linregress(sigma_arr, h0_corr)
@@ -397,7 +397,7 @@ class Step6EnhancedRobustness:
             kappa_cep_opt = float(result.x[0])
             
             # Compute unified H0
-            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref_screened, kappa_cep_opt, S_arr)
+            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, kappa_cep_opt, S_arr)
             d_corr = 10 ** ((mu_corr - 25) / 5)
             h0_corr = 299792.458 * z_arr / d_corr
             unified_h0 = np.mean(h0_corr)
@@ -474,19 +474,19 @@ class Step6EnhancedRobustness:
         print_status("\n--- σ-QUALITY CONVERGENCE TEST ---", "SECTION")
         from scripts.utils.tep_correction import tep_correction
 
-        sigma_ref_screened = 30.51
+        sigma_ref = 87.17
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     _tep = json.load(f)
-                if isinstance(_tep, dict) and 'sigma_ref_screened' in _tep:
-                    sigma_ref_screened = float(_tep['sigma_ref_screened'])
+                if isinstance(_tep, dict) and 'sigma_ref' in _tep:
+                    sigma_ref = float(_tep['sigma_ref'])
         except Exception:
             pass
 
         # Use the FULL-SAMPLE fitted kappa (uniform across subsamples)
-        kappa_full = 0.99e6
+        kappa_full = 1.611136e6
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
@@ -537,7 +537,7 @@ class Step6EnhancedRobustness:
             h0_raw_sem = float(np.std(h0_raw, ddof=1) / np.sqrt(len(h0_raw)))
 
             # Corrected H0 with FULL-SAMPLE kappa
-            dmu = tep_correction(sigma, sigma_ref_screened, kappa_full, S)
+            dmu = tep_correction(sigma, sigma_ref, kappa_full, S)
             mu_corr = mu + dmu
             d_corr = 10 ** ((mu_corr - 25) / 5)
             h0_corr = 299792.458 * z / d_corr
@@ -631,15 +631,15 @@ class Step6EnhancedRobustness:
         print_status("\n--- SUBSET COMPOSITION TABLE ---", "SECTION")
         from scripts.utils.tep_correction import tep_correction
 
-        sigma_ref_screened = 30.51
-        kappa_full = 0.99e6
+        sigma_ref = 87.17
+        kappa_full = 1.611136e6
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     _tep = json.load(f)
                 if isinstance(_tep, dict):
-                    sigma_ref_screened = float(_tep.get("sigma_ref_screened", 30.51))
+                    sigma_ref = float(_tep.get("sigma_ref", 87.17))
                     kappa_full = float(_tep.get("optimal_kappa_cep", kappa_full))
         except Exception:
             pass
@@ -673,7 +673,7 @@ class Step6EnhancedRobustness:
 
             def objective(kappa):
                 k = float(kappa[0]) if hasattr(kappa, "__len__") else float(kappa)
-                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref_screened, k, S_arr)
+                mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, k, S_arr)
                 d_corr = 10 ** ((mu_corr - 25) / 5)
                 h0_corr = 299792.458 * z_arr / d_corr
                 slope, _, _, _, _ = stats.linregress(sigma_arr, h0_corr)
@@ -686,7 +686,7 @@ class Step6EnhancedRobustness:
                 options={"xatol": 10.0, "fatol": 1e-6, "maxiter": 500},
             )
             kappa_opt = float(result.x[0])
-            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref_screened, kappa_opt, S_arr)
+            mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, kappa_opt, S_arr)
             d_corr = 10 ** ((mu_corr - 25) / 5)
             h0_corr = 299792.458 * z_arr / d_corr
             unified_h0 = float(np.mean(h0_corr))
@@ -719,7 +719,7 @@ class Step6EnhancedRobustness:
             raw_slope, _, _, _, _ = stats.linregress(sigma, h0_raw)
 
             # Corrected with full-sample κ
-            dmu_full = tep_correction(sigma, sigma_ref_screened, kappa_full, S)
+            dmu_full = tep_correction(sigma, sigma_ref, kappa_full, S)
             mu_corr_full = mu + dmu_full
             d_corr_full = 10 ** ((mu_corr_full - 25) / 5)
             h0_corr_full = 299792.458 * z / d_corr_full

@@ -95,6 +95,8 @@ class Step3TEPCorrection:
         Hubble-flow regime. The TEP test is CROSS-CHANNEL consistency
         ($\kappa_{\rm Cep}$ vs $\kappa_{\rm TRGB}$, $\kappa_{\rm SN}$,
         $\kappa_{\rm pulsar}$), not single-channel significance from zero.
+        See `scripts/analysis/cross_channel_kappa_consistency.py` for the
+        quantitative cross-channel synthesis.
 
     Where:
     -   $\kappa_{\rm Cep}$: Observable Response Coefficient (units: magnitude).
@@ -229,7 +231,7 @@ class Step3TEPCorrection:
         # Display Anchor Table
         headers = ["Anchor", "Sigma (km/s)", "Nmb", "S", "Weight", "Description"]
         rows = []
-        numerator = 0.0
+        numerator_sq = 0.0
         denominator = 0.0
         numerator_scr = 0.0
 
@@ -239,13 +241,13 @@ class Step3TEPCorrection:
             rows.append(
                 [a["ID"], f"{a['Sigma']:.1f}", f"{nmb}", f"{S:.3f}", f"{a['Weight']:.2f}", a["Desc"]]
             )
-            numerator += a["Sigma"] * a["Weight"]
+            numerator_sq += (a["Sigma"] ** 2) * a["Weight"]
             denominator += a["Weight"]
             numerator_scr += a["Weight"] * S * (a["Sigma"] ** 2)
 
         print_table(headers, rows, title="Geometric Anchor Sample (S from Nmb formula)")
 
-        sigma_ref = numerator / denominator
+        sigma_ref = np.sqrt(numerator_sq / denominator)
         sigma_ref_screened = np.sqrt(numerator_scr / denominator)
         print_status(
             f"Standard Reference Sigma (σ_ref):       {sigma_ref:.2f} km/s", "SUCCESS"
@@ -397,7 +399,9 @@ class Step3TEPCorrection:
             sample = df.sample(n=n_samples, replace=True)
             S_sample = sample["shear_suppression"].values
             sigma_sample = sample["sigma_inferred"].values
-            mu_sample = sample["value"].values
+            # Perturb distance moduli by measurement noise (parametric bootstrap)
+            mu_noise = np.random.normal(0, sample["error"].values)
+            mu_sample = sample["value"].values + mu_noise
             v_sample = sample["velocity"].values
 
             # Re-optimize kappa using SAME objective as main fit (slope^2)
@@ -448,6 +452,29 @@ class Step3TEPCorrection:
         h0_q50 = float(np.percentile(h0s, 50))
         h0_q84 = float(np.percentile(h0s, 84))
 
+        # Also compute a host-only WLS through-the-origin uncertainty.
+        # The slope-minimisation bootstrap is positively skewed and can
+        # over-estimate scatter; the WLS formal error scaled by sqrt(chi2/dof)
+        # provides a complementary uncertainty estimate.
+        c2 = C_SQUARED_KM_S
+        S_all = df["shear_suppression"].values
+        sigma_all = df["sigma_inferred"].values
+        mu_all = df["value"].values
+        v_all = df["velocity"].values
+        h0_raw_all = v_all / (10 ** ((mu_all - 25) / 5))
+        h0_base_all = float(np.mean(h0_raw_all))  # approximate baseline
+        ln10 = np.log(10)
+        delta_mu_all = (5.0 / ln10) * (h0_raw_all - h0_base_all) / h0_base_all
+        x_all = S_all * (sigma_all**2 - sigma_ref**2) / c2
+        y_err_all = df["error"].values
+        weights_all = 1.0 / y_err_all**2
+        kappa_wls = float(np.sum(weights_all * x_all * delta_mu_all) / np.sum(weights_all * x_all**2))
+        kappa_err_wls = float(np.sqrt(1.0 / np.sum(weights_all * x_all**2)))
+        residuals_wls = delta_mu_all - kappa_wls * x_all
+        chi2_wls = float(np.sum((residuals_wls / y_err_all)**2))
+        dof_wls = len(x_all) - 1
+        kappa_err_wls_scaled = float(kappa_err_wls * np.sqrt(chi2_wls / dof_wls)) if dof_wls > 0 and chi2_wls > dof_wls else kappa_err_wls
+
         metrics = {
             "bootstrap_h0_mean": float(np.mean(h0s)),
             "bootstrap_h0_std": float(np.std(h0s)),
@@ -468,6 +495,11 @@ class Step3TEPCorrection:
             "bootstrap_residual_slope_mean": float(np.mean(np.abs(slopes))),
             "bootstrap_n_converged": int(len(h0s)),
             "bootstrap_n_failed": int(n_failed),
+            "wls_kappa": kappa_wls,
+            "wls_kappa_err": kappa_err_wls,
+            "wls_kappa_err_scaled": kappa_err_wls_scaled,
+            "wls_chi2": chi2_wls,
+            "wls_dof": dof_wls,
         }
 
         print_status("Joint Bootstrap Results:", "SUBTITLE")
@@ -480,10 +512,16 @@ class Step3TEPCorrection:
                 f"[{metrics['bootstrap_h0_ci_lower']:.2f}, {metrics['bootstrap_h0_ci_upper']:.2f}]",
             ],
             [
-                "kappa_Cep",
-                f"{metrics['bootstrap_kappa_mean']:.3e}",
-                f"{metrics['bootstrap_kappa_std']:.3e} ({metrics['bootstrap_kappa_std']/metrics['bootstrap_kappa_mean']*100:.1f}%)",
+                "kappa_Cep (bootstrap robust)",
+                f"{metrics['bootstrap_kappa_median']:.3e}",
+                f"{metrics['bootstrap_kappa_robust_std']:.3e} ({metrics['bootstrap_kappa_robust_std']/metrics['bootstrap_kappa_median']*100:.1f}%)",
                 f"[{metrics['bootstrap_kappa_ci_lower']:.3e}, {metrics['bootstrap_kappa_ci_upper']:.3e}]",
+            ],
+            [
+                "kappa_Cep (WLS scaled)",
+                f"{metrics['wls_kappa']:.3e}",
+                f"{metrics['wls_kappa_err_scaled']:.3e} ({metrics['wls_kappa_err_scaled']/metrics['wls_kappa']*100:.1f}%)",
+                "—",
             ],
         ]
         print_table(headers, rows, title="Bootstrap (kappa refit per sample)")
@@ -603,14 +641,14 @@ class Step3TEPCorrection:
         )
         
         # Add vertical marker at primary architectural sigma_ref
-        sigma_ref_primary = 75.25
+        sigma_ref_primary = 87.17
         plt.axvline(
             sigma_ref_primary,
             color=colors["green"],
             linestyle="-",
             linewidth=2.0,
             alpha=0.8,
-            label="Primary ($\\sigma_{\\rm ref}=75.25$ km/s)",
+            label="Primary ($\\sigma_{\\rm ref}=87.17$ km/s)",
             zorder=4,
         )
 
@@ -621,14 +659,14 @@ class Step3TEPCorrection:
         plt.tight_layout()
 
         path = self.figures_dir / "supplement_01_sensitivity_h0_vs_sigmaref.png"
-        plt.savefig(path, dpi=300)
-        print_status(f"Saved sensitivity plot to {path}", "SUCCESS")
+        # plt.savefig(path, dpi=300)
+        # print_status(f"Saved sensitivity plot to {path}", "SUCCESS")
         plt.close()
 
         # Copy to public
-        public_path = self.public_figures_dir / "supplement_01_sensitivity_h0_vs_sigmaref.png"
-        shutil.copy(path, public_path)
-        print_status(f"Copied sensitivity plot to {public_path}", "SUCCESS")
+        # public_path = self.public_figures_dir / "supplement_01_sensitivity_h0_vs_sigmaref.png"
+        # shutil.copy(path, public_path)
+        # print_status(f"Copied sensitivity plot to {public_path}", "SUCCESS")
 
         grid = pd.DataFrame({
             "sigma_ref": sigma_refs,
@@ -781,10 +819,11 @@ class Step3TEPCorrection:
         if len(df) > 1:
             z2 = np.polyfit(df["sigma_inferred"], df["h0_corrected"], 1)
             p2 = np.poly1d(z2)
-            slope_corrected = z2[0]
-            
-            # Calculate correlation and p-value for corrected data
-            r_corr, p_corr = stats.pearsonr(df["sigma_inferred"], df["h0_corrected"])
+            # POST-SELECTION RISK: κ_Cep is fitted to remove the H₀–σ trend, so
+            # any residual slope ≈ 0 and r ≈ 0 are fitted-correction diagnostics,
+            # not independent validation statistics. We do not report a p-value
+            # for the corrected correlation because the optimisation makes any
+            # standard significance test invalid.
             
             plt.plot(
                 x,
@@ -969,7 +1008,9 @@ class Step3TEPCorrection:
 
         # Tension Calculations
         tension_stat = abs(h0_mean - planck_h0) / np.sqrt(h0_sem**2 + planck_err**2)
-        tension_primary = abs(h0_mean - planck_h0) / np.sqrt(
+        # Primary tension uses bootstrap mean (not in-sample mean) for consistency
+        h0_mean_boot = boot_metrics["bootstrap_h0_mean"]
+        tension_primary = abs(h0_mean_boot - planck_h0) / np.sqrt(
             primary_error**2 + planck_err**2
         )
 
@@ -983,9 +1024,15 @@ class Step3TEPCorrection:
             "INFO",
         )
         print_status(
-            f"  kappa_Cep = ({boot_metrics['bootstrap_kappa_mean']:.2e}) +/- "
-            f"({boot_metrics['bootstrap_kappa_std']:.2e})  "
-            f"[{boot_metrics['bootstrap_kappa_std']/boot_metrics['bootstrap_kappa_mean']*100:.0f}%]",
+            f"  kappa_Cep (bootstrap robust) = ({boot_metrics['bootstrap_kappa_median']:.2e}) +/- "
+            f"({boot_metrics['bootstrap_kappa_robust_std']:.2e})  "
+            f"[{boot_metrics['bootstrap_kappa_robust_std']/boot_metrics['bootstrap_kappa_median']*100:.0f}%]",
+            "INFO",
+        )
+        print_status(
+            f"  kappa_Cep (WLS scaled)       = ({boot_metrics['wls_kappa']:.2e}) +/- "
+            f"({boot_metrics['wls_kappa_err_scaled']:.2e})  "
+            f"[{boot_metrics['wls_kappa_err_scaled']/boot_metrics['wls_kappa']*100:.0f}%]",
             "INFO",
         )
         print_status("-" * 60, "INFO")
@@ -1013,7 +1060,9 @@ class Step3TEPCorrection:
         print_status(
             "Note: Universal-TEP validation requires CROSS-CHANNEL consistency "
             "(κ_Cep vs κ_TRGB vs κ_SN vs κ_pulsar). Single-channel significance "
-            "of κ_Cep from zero is NOT the TEP test (Jakarta §7; Istanbul §1.3).",
+            "of κ_Cep from zero is NOT the TEP test (Jakarta §7; Istanbul §1.3). "
+            "See scripts/analysis/cross_channel_kappa_consistency.py for the "
+            "quantitative cross-channel synthesis.",
             "INFO",
         )
 
@@ -1042,6 +1091,11 @@ class Step3TEPCorrection:
             ),
             "bootstrap_n_converged": int(boot_metrics["bootstrap_n_converged"]),
             "bootstrap_n_failed": int(boot_metrics["bootstrap_n_failed"]),
+            "wls_kappa": float(boot_metrics["wls_kappa"]),
+            "wls_kappa_err": float(boot_metrics["wls_kappa_err"]),
+            "wls_kappa_err_scaled": float(boot_metrics["wls_kappa_err_scaled"]),
+            "wls_chi2": float(boot_metrics["wls_chi2"]),
+            "wls_dof": int(boot_metrics["wls_dof"]),
             "planck_h0": float(planck_h0),
             "tension_sigma": float(tension_primary),
             "tension_statistical": float(tension_stat),

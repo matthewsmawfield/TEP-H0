@@ -927,8 +927,8 @@ class Step7LMCReplication:
         plt.legend()
         
         plt.tight_layout()
-        plt.savefig(self.output_plot_path, dpi=300)
-        print_status(f"Saved plot to {self.output_plot_path}", "SUCCESS")
+        # plt.savefig(self.output_plot_path, dpi=300)
+        # print_status(f"Saved plot to {self.output_plot_path}", "SUCCESS")
         plt.close()
 
         # Robustness plot
@@ -958,17 +958,17 @@ class Step7LMCReplication:
             ax2.grid(True, linestyle=':', alpha=0.6)
 
             plt.tight_layout()
-            plt.savefig(self.output_robust_plot_path, dpi=300)
+            # plt.savefig(self.output_robust_plot_path, dpi=300)
             plt.close(fig)
-            print_status(f"Saved robustness plot to {self.output_robust_plot_path}", "SUCCESS")
+            # print_status(f"Saved robustness plot to {self.output_robust_plot_path}", "SUCCESS")
 
-            shutil.copy(self.output_robust_plot_path, self.public_figures_dir / "lmc_differential_robustness.png")
-            print_status("Copied robustness plot to public figures directory.", "SUCCESS")
+            # shutil.copy(self.output_robust_plot_path, self.public_figures_dir / "lmc_differential_robustness.png")
+            # print_status("Copied robustness plot to public figures directory.", "SUCCESS")
         except Exception as e:
             print_status(f"Failed to generate robustness plot: {e}", "WARNING")
 
-        shutil.copy(self.output_plot_path, self.public_figures_dir / "lmc_differential_pl.png")
-        print_status("Copied plot to public figures directory.", "SUCCESS")
+        # shutil.copy(self.output_plot_path, self.public_figures_dir / "lmc_differential_pl.png")
+        # print_status("Copied plot to public figures directory.", "SUCCESS")
 
     def run(self):
         print_status("Starting Step 7: LMC Replication", "TITLE")

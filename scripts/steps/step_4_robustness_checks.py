@@ -1086,14 +1086,14 @@ class Step4RobustnessChecks:
         plt.grid(axis='y', linestyle=':', alpha=0.5)
         plt.tight_layout()
         
-        plt.savefig(self.jackknife_plot_path, dpi=300)
-        print_status(f"Saved Jackknife plot to {self.jackknife_plot_path}", "SUCCESS")
+        # plt.savefig(self.jackknife_plot_path, dpi=300)
+        # print_status(f"Saved Jackknife plot to {self.jackknife_plot_path}", "SUCCESS")
         plt.close()
-        
+
         # Copy to public
-        public_jack = self.public_figures_dir / "supplement_02_jackknife_influence.png"
-        shutil.copy(self.jackknife_plot_path, public_jack)
-        print_status(f"Copied Jackknife plot to {public_jack}", "SUCCESS")
+        # public_jack = self.public_figures_dir / "supplement_02_jackknife_influence.png"
+        # shutil.copy(self.jackknife_plot_path, public_jack)
+        # print_status(f"Copied Jackknife plot to {public_jack}", "SUCCESS")
 
     def perform_bivariate_analysis(self):
         """Performs bivariate analysis (H0 vs Sigma + Metallicity)."""

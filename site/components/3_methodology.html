@@ -12,11 +12,16 @@
 
 <p>
     Cross-matching host galaxies with the Pantheon+ supernova catalog (Scolnic
-    et al. 2022) yields Hubble-flow redshifts ($z_{\rm HD}$). The final sample
-    comprises $N = 36$ SN Ia host galaxies spanning $z_{\rm HD} = 0.0012$–$0.017$.
-    A redshift sensitivity analysis (Section 3.6) tests stability under stricter
-    cuts ($z > 0.0035$, $N=29$; $z > 0.005$, $N=23$), confirming the correlation
-    is not dominated by low-redshift peculiar-velocity contamination.
+    et al. 2022) yields Hubble-flow redshifts ($z_{\rm HD}$). The headline
+    sample comprises $N = 36$ SN Ia host galaxies spanning $z_{\rm HD} = 0.0012$–$0.017$.
+    This sample maximizes SH0ES host coverage; it therefore includes very
+    low-redshift hosts ($z \lesssim 0.0035$) where peculiar velocities ($v_{\rm pec}
+    \sim 300$ km/s) can introduce $>30\%$ uncertainty in derived $H_0$. The
+    Hubble-flow-safe subsamples obtained by stricter redshift cuts ($z > 0.0035$, $N=29$;
+    $z > 0.005$, $N=23$) are reported separately as robustness tests. In all
+    cases the correlation preserves its sign and approximate strength,
+    confirming the headline result is not an artefact of low-redshift
+    peculiar-velocity contamination.
 </p>
 
 <p>
@@ -107,7 +112,7 @@
     fiber spectroscopy) and $R_{\rm eff}$ is the effective radius derived from
     RC3 $D_{25}$ isophotal diameters ($R_{\rm eff} \approx 0.5 R_{25}$). This
     homogenization reduces systematic noise from aperture effects. The corrected
-    sample spans $\sigma = 50$–$223$ km/s, with a median of $96$ km/s.
+    sample spans $\sigma = 50$–$223$ km/s, with a median of $89.7$ km/s.
 </p>
 
 <p>
@@ -332,45 +337,45 @@
             <td>Milky Way</td>
             <td>30.0</td>
             <td>0.20</td>
-            <td>6.00</td>
+            <td>180.00</td>
         </tr>
         <tr>
             <td>LMC</td>
             <td>24.0</td>
             <td>0.25</td>
-            <td>6.00</td>
+            <td>144.00</td>
         </tr>
         <tr>
             <td><strong>NGC 4258</strong></td>
             <td><strong>115.0</strong></td>
             <td><strong>0.55</strong></td>
-            <td><strong>63.25</strong></td>
+            <td><strong>7273.75</strong></td>
         </tr>
         <tr>
             <td><strong>Total</strong></td>
             <td>—</td>
             <td><strong>1.00</strong></td>
-            <td><strong>75.25</strong></td>
+            <td><strong>7597.75</strong></td>
         </tr>
     </tbody>
 </table>
 
 <p>
     Using the SH0ES calibration weights (NGC 4258 $\sim 55\%$, LMC $\sim 25\%$, MW $\sim 20\%$),
-    NGC 4258 contributes 84% (63.25/75.25) of the weighted $\sigma_{\rm ref}$.
+    NGC 4258 contributes 96% (7274/7598) of the weighted $\sigma_{\rm ref}^2$.
     Because NGC 4258 is group-screened, a <em>screen-weighted anchor
     contribution scale</em> $\sigma_{\rm ref,scr} \approx 30.51$ km/s is also defined. This is an
     amplitude that down-weights each anchor's <em>contribution</em> by its
     environmental screening factor $S$; it is not a normalized weighted mean.
     Re-optimising $\kappa_{\rm Cep}$ with either reference yields headline
-    $H_0$ values that differ by $\Delta H_0 = 2.25$ km/s/Mpc
-    ($H_0^{\rm std} = 65.22$ km/s/Mpc vs $H_0^{\rm scr} = 62.98$ km/s/Mpc),
+    $H_0$ values that differ by $\Delta H_0 = 3.17$ km/s/Mpc
+    ($H_0^{\rm std} = 66.14$ km/s/Mpc vs $H_0^{\rm scr} = 62.98$ km/s/Mpc),
     showing the correction is consistent under both definitions at the level
     of the intrinsic uncertainty:
 </p>
 <div class="equation">
     \begin{equation}
-    \sigma_{\rm ref} = 0.55 \times 115 + 0.25 \times 24 + 0.20 \times 30 = 75.25 \text{ km/s}
+    \sigma_{\rm ref} = \sqrt{0.55 \times 115^2 + 0.25 \times 24^2 + 0.20 \times 30^2} = 87.17 \text{ km/s}
     \end{equation}
 </div>
 <p>
@@ -436,7 +441,7 @@
     distributions. Second, a sensitivity analysis assesses the stability of the
     solution against the choice of calibrator reference $\sigma_{\rm ref}$:
     while the primary analysis uses the calculated weighted average
-    ($\sigma_{\rm ref} = 75.25$ km/s), a grid scan over the range $30$–$130$
+    ($\sigma_{\rm ref} = 87.17$ km/s), a grid scan over the range $30$–$130$
     km/s determines the range over which the TEP-corrected $H_0$ remains
     consistent with the Planck CMB value.
 </p>

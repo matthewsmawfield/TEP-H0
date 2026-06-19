@@ -1,23 +1,22 @@
-[22:14:31] [INFO] 
-[22:14:31] [INFO] ================================================================================
-[22:14:31] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis
-[22:14:31] [INFO] ================================================================================
-[22:14:31] [INFO] 
-[22:14:32] [INFO] Using master sigma catalog for provenance: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv
-[22:14:32] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sigma_provenance_table.csv
-[22:14:32] [INFO] Analyzing 36 hosts with both Raw and Corrected data.
-[22:14:32] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_grid.csv
-[22:14:32] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_summary.json
-[22:14:32] [INFO] Sensitivity Results
-[22:14:32] [INFO] +-----------------+-------------------------+-----------------------+
-[22:14:32] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |
-[22:14:32] [INFO] +-----------------+-------------------------+-----------------------+
-[22:14:32] [INFO] | Correlation (r) | 0.5047                  | 0.4998                |
-[22:14:32] [INFO] | P-value         | 1.6929e-03              | 1.9113e-03            |
-[22:14:32] [INFO] | Significance    | Significant (>99%)      | Significant (>99%)    |
-[22:14:32] [INFO] +-----------------+-------------------------+-----------------------+
-[22:14:32] [SUCCESS] CONCLUSION: The signal is ROBUST. It exists independently of aperture corrections.
-[22:14:32] [PROCESS] Generating sensitivity plot...
-[22:14:32] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/supplement_06_aperture_sensitivity.png
-[22:14:32] [SUCCESS] Step 4b Complete.
-[22:14:32] [PROCESS] Running Jackknife and Bivariate Analysis...
+[23:55:40] [INFO] 
+[23:55:40] [INFO] ================================================================================
+[23:55:40] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis
+[23:55:40] [INFO] ================================================================================
+[23:55:40] [INFO] 
+[23:55:40] [INFO] Using master sigma catalog for provenance: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv
+[23:55:40] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sigma_provenance_table.csv
+[23:55:40] [INFO] Analyzing 36 hosts with both Raw and Corrected data.
+[23:55:40] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_grid.csv
+[23:55:40] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_summary.json
+[23:55:40] [INFO] Sensitivity Results
+[23:55:40] [INFO] +-----------------+-------------------------+-----------------------+
+[23:55:40] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |
+[23:55:40] [INFO] +-----------------+-------------------------+-----------------------+
+[23:55:40] [INFO] | Correlation (r) | 0.5047                  | 0.4998                |
+[23:55:40] [INFO] | P-value         | 1.6929e-03              | 1.9113e-03            |
+[23:55:40] [INFO] | Significance    | Significant (>99%)      | Significant (>99%)    |
+[23:55:40] [INFO] +-----------------+-------------------------+-----------------------+
+[23:55:40] [SUCCESS] CONCLUSION: The signal is ROBUST. It exists independently of aperture corrections.
+[23:55:40] [PROCESS] Generating sensitivity plot...
+[23:55:40] [SUCCESS] Step 4b Complete.
+[23:55:40] [PROCESS] Running Jackknife and Bivariate Analysis...

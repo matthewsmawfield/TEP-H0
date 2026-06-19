@@ -298,6 +298,12 @@ class Step4bApertureSensitivity:
         return float((num_scr / den) ** 0.5)
 
     def _optimize_kappa_and_unified_h0(self, df: pd.DataFrame, sigma_col: str, sigma_ref_screened: float) -> dict:
+        """Fit κ_Cep to minimise slope and return fitted diagnostics.
+
+        NOTE: post_r and post_slope are fitted-correction diagnostics
+        (κ is optimised to flatten the trend), not independent validation
+        statistics. They are reported for internal consistency checks only.
+        """
         required = [sigma_col, 'value', 'velocity']
         missing = [c for c in required if c not in df.columns]
         if missing:
@@ -547,12 +553,12 @@ class Step4bApertureSensitivity:
             plt.axis('off')
         
         plt.tight_layout()
-        plt.savefig(self.plot_path, dpi=300)
+        # plt.savefig(self.plot_path, dpi=300)
         plt.close()
-        
+
         # Copy to public
-        shutil.copy(self.plot_path, self.public_figures_dir / "supplement_06_aperture_sensitivity.png")
-        print_status(f"Saved plot to {self.plot_path}", "SUCCESS")
+        # shutil.copy(self.plot_path, self.public_figures_dir / "supplement_06_aperture_sensitivity.png")
+        # print_status(f"Saved plot to {self.plot_path}", "SUCCESS")
 
 if __name__ == "__main__":
     Step4bApertureSensitivity().run()

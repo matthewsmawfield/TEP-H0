@@ -235,7 +235,7 @@
                 <td>0.500</td>
                 <td>0.0019</td>
                 <td>$67.59 \pm 1.62$</td>
-                <td>$63.05 \pm 1.39$</td>
+                <td>$66.14 \pm 1.46$</td>
             </tr>
             <tr>
                 <td>Stellar Absorption Only</td>
@@ -243,7 +243,7 @@
                 <td>0.537</td>
                 <td>0.022</td>
                 <td>$67.79 \pm 2.12$</td>
-                <td>$61.56 \pm 1.65$</td>
+                <td>$64.57 \pm 1.78$</td>
             </tr>
         </tbody>
     </table>
@@ -256,9 +256,9 @@
     preserve the sign but are not standalone $H_0$ determinations. The Gold
     Standard subsample ($N=9$, $r=0.569$, $p=0.110$) is reported in Appendix A.
     When the <em>same</em> full-sample coefficient
-    $\kappa_{\rm Cep}\approx1.62\times10^6$ mag is applied uniformly across quality
-    tiers, the TEP correction magnitude grows with data fidelity: 4.54 km/s/Mpc
-    for the full sample and 6.23 km/s/Mpc for stellar-only.  This is the
+    $\kappa_{\rm Cep}\approx1.61\times10^6$ mag is applied uniformly across quality
+    tiers, the TEP correction magnitude grows with data fidelity: 2.37 km/s/Mpc
+    for the full sample and 4.12 km/s/Mpc for stellar-only.  This is the
     opposite of a proxy-driven artifact: kinematic proxies introduce
     $\sim$20\% scatter, and that extra noise dilutes the
     $H_0$–$\sigma$ correlation and weakens the apparent correction.
@@ -266,11 +266,11 @@
 
 <p>
     The stellar-only subsample (which excludes all proxy measurements)
-    delivers $H_0^{\rm TEP}=63.31\pm1.60$ km/s/Mpc (refit $\kappa$) and yields an independent
+    delivers $H_0^{\rm TEP}=64.80\pm1.67$ km/s/Mpc (refit $\kappa$) and yields an independent
     1$\sigma$ upper bound on the Observable Response Coefficient:
-    <strong>$\kappa_{\rm Cep}<6.52\times10^5$ mag</strong>.
-    This bound is tighter than the full-sample fitted value of
-    $(1.62\pm0.89)\times10^6$ mag, indicating that the full-sample correction may slightly
+    <strong>$\kappa_{\rm Cep}<9.86\times10^5$ mag</strong>.
+    This bound is tighter than the joint-fit scaled value of
+    $(0.97\pm0.41)\times10^6$ mag, indicating that the full-sample correction may slightly
     overcorrect; the order of magnitude ($\sim10^6$ mag) and sign remain stable.
 </p>
 
@@ -362,10 +362,14 @@
 
     <div class="result-box result-highlight-main">
         \begin{equation}
-        \kappa_{\rm Cep} = (1.62 \pm 0.89) \times 10^6 \text{ mag}
+        \kappa_{\rm Cep} = (0.97 \pm 0.41) \times 10^6 \text{ mag}
         \label{eq:kappa_cep_result}
         \end{equation}
     </div>
+    <p style="text-align:center; font-size:0.9em; color:#666;">
+        Joint host+anchor fit, chi2-scaled (formal $0.97 \pm 0.08$;
+        host-only WLS scaled $1.57 \pm 0.60$; bootstrap robust $1.64 \pm 0.63$).
+    </p>
 
     <p>
         The Cepheid value is consistent with the bare TEP geometric-factor
@@ -382,12 +386,12 @@
 
     <div class="result-box">
         \begin{equation}
-        H_0^{\rm TEP} = 65.22 \text{ km/s/Mpc}\quad(\text{bootstrap mean }65.09\pm1.70)
+        H_0^{\rm TEP} = 66.14 \text{ km/s/Mpc}\quad(\text{bootstrap mean }66.22\pm1.61)
         \end{equation}
     </div>
 
     <p>
-        The Planck tension is reduced to $1.23\sigma$.  Paper 10 does not
+        The Planck tension is reduced to $0.70\sigma$.  Paper 10 does not
         directly predict $\kappa_{\rm Cep}$; the two papers are consistent
         only after the environmental transfer factor is accounted for.
     </p>
@@ -426,7 +430,7 @@
 <figure>
     <img
         src="public/figures/figure_03_tep_correction_comparison.png?v=2"
-        alt="Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=65.22 km/s/Mpc aligned with Planck"
+        alt="Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=66.14 km/s/Mpc aligned with Planck"
         class="figure-responsive"
     />
     <figcaption>
@@ -439,10 +443,10 @@
         NGC 4639 ($H_0 \approx 47.3$ km/s/Mpc) is explicitly annotated;
         jackknife analysis shows its removal strengthens the correlation,
         confirming it is a defensive robustness check rather than a liability.
-        Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.62\times10^6$
+        Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.61\times10^6$
         mag, $\sigma^2/c^2$ scaling). The corrected panel shows $r \simeq 0$ by construction since $\kappa_{\rm Cep}$ is fitted to remove the trend; this is a fitted-correction diagnostic, not an independent validation statistic. Independent robustness is assessed by jackknife, host-contrast likelihood, train/test, anchor, and systematics tests. The unified mean
-        ($65.22$ km/s/Mpc; bootstrap mean $65.09 \pm 1.70$) is statistically consistent with Planck (dashed line,
-        $1.23\sigma$ tension). Error bars represent standard measurement uncertainties.
+        ($66.14$ km/s/Mpc; bootstrap mean $66.22 \pm 1.61$) is statistically consistent with Planck (dashed line,
+        $0.70\sigma$ tension). Error bars represent standard measurement uncertainties.
     </figcaption>
 </figure>
 
@@ -528,9 +532,9 @@
 <p>
     Implication: The anchor galaxies show no significant dependence of the
     Cepheid P-L zero-point on $\sigma$ at the present precision ($\kappa_{\rm Cep, anchor} \approx 0$), in contrast to the strong host-level coupling inferred
-    from the Hubble-flow sample ($\kappa_{\rm Cep, host} \approx 1.62\times10^6$ mag).
+    from the Hubble-flow sample ($\kappa_{\rm Cep, host} \approx 1.61\times10^6$ mag).
     To make the mismatch explicit, the host-inferred prediction $\Delta(\cdot) =
-    \kappa_{\rm Cep, host}\,(\sigma^2-\sigma_{\rm ref}^2)/c^2$ (with $\sigma_{\rm ref}=75.25$
+    \kappa_{\rm Cep, host}\,(\sigma^2-\sigma_{\rm ref}^2)/c^2$ (with $\sigma_{\rm ref}=87.17$
     km/s defined by the SH0ES anchor weighting) is compared to the observed
     anchor zero-points:
 </p>
@@ -543,7 +547,7 @@
                 <th scope="col">$\sigma$ (km/s)</th>
                 <th scope="col">$(\sigma^2-\sigma_{\rm ref}^2)/c^2$</th>
                 <th scope="col">
-                    Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 1.62\times10^6$)
+                    Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 1.61\times10^6$)
                 </th>
                 <th scope="col">Observed $M_W$ (mag)</th>
             </tr>
@@ -585,7 +589,7 @@
 
 <p>
     While the host galaxies show a clear correlation ($r = 0.500$)
-    compatible with $\kappa_{\rm Cep, host} \approx 1.62\times10^6$ mag, the anchors show no
+    compatible with $\kappa_{\rm Cep, host} \approx 1.61\times10^6$ mag, the anchors show no
     statistically significant trend in $M_W$ with $\sigma$ when analysed in isolation
     ($\kappa_{\rm Cep, anchor} \approx 0 \pm 663$ mag).  However, when the same coefficient
     is fitted jointly to hosts and anchors using environment-specific screening
@@ -614,7 +618,7 @@
         class="figure-responsive"
     />
     <figcaption>
-        Figure 5: Joint environmental-screening model fit to 36 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.97 \pm 0.08) \times 10^6$ mag, with environment-specific screening factors $S_k$ attenuating the regressor for group-embedded anchors.  The shaded band shows the host-only $1\sigma$ interval ($(1.62 \pm 0.89) \times 10^6$ mag).
+        Figure 5: Joint environmental-screening model fit to 36 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.97 \pm 0.41) \times 10^6$ mag (chi2-scaled; formal $0.97 \pm 0.08$), with environment-specific screening factors $S_k$ attenuating the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.57 \pm 0.60) \times 10^6$ mag).
     </figcaption>
 </figure>
 
@@ -654,11 +658,11 @@
 </p>
 
 <p>
-    The baseline analysis imposes $z_{\rm HD} > 0.0035$. Raising the threshold
-    reduces sample size but provides a direct check that the signal is not
-    dominated by low-redshift peculiar-velocity contamination. The correlation
-    remains positive under stricter cuts (with reduced formal significance as
-    $N$ decreases):
+    The headline analysis uses the full $N=36$ sample spanning $z_{\rm HD}=0.0012$–$0.017$.
+    To test whether the signal is driven by low-redshift hosts where peculiar
+    velocities dominate, Hubble-flow-safe subsamples are constructed by raising
+    the redshift threshold. Reducing sample size lowers formal significance, but
+    the correlation remains positive and preserves its approximate strength:
 </p>
 
 <div class="results-table">

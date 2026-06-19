@@ -39,9 +39,14 @@ class Step10bLocalGravityClosure:
         with open(self.tep_path, "r") as f:
             tep = json.load(f)
 
+        kappa_cep_err = float(
+            tep.get("bootstrap_kappa_robust_std")
+            or tep.get("wls_kappa_err_scaled")
+            or tep.get("bootstrap_kappa_std", 0.0)
+        )
         closure = compute_local_gravity_closure(
             kappa_cep=float(tep["optimal_kappa_cep"]),
-            kappa_cep_err=float(tep.get("bootstrap_kappa_std", 0.0)),
+            kappa_cep_err=kappa_cep_err,
         )
         result = {
             "description": (

@@ -1,65 +1,61 @@
-[22:14:54] [INFO] 
-[22:14:54] [INFO] ================================================================================
-[22:14:54] [INFO]    Starting Step 5: M31 Analysis
-[22:14:54] [INFO] ================================================================================
-[22:14:54] [INFO] 
-[22:14:54] [INFO] Initiating M31 Differential Analysis
-[22:14:54] [PROCESS] Fetching M31 Cepheid data (Kodric et al. 2018)...
-[22:14:55] [INFO] Retrieved main table.
-[22:14:55] [SUCCESS] Retrieved 5356 Cepheids from Vizier.
-[22:14:55] [INFO] Calculating Galactocentric Properties...
-[22:14:55] [INFO] Radial Range: 0.6 - 93.5 kpc
-[22:14:55] [INFO] M31 Subsamples
-[22:14:55] [INFO] +--------+--------------+---------------------------+--------------+
-[22:14:55] [INFO] | Region | Radius (kpc) | Mean Density (M_sun/pc^3) | N (Cepheids) |
-[22:14:55] [INFO] +--------+--------------+---------------------------+--------------+
-[22:14:55] [INFO] | Inner  | < 5.0        | 0.3092                    | 153          |
-[22:14:55] [INFO] | Outer  | > 15.0       | 0.0060                    | 919          |
-[22:14:55] [INFO] +--------+--------------+---------------------------+--------------+
-[22:14:55] [INFO] Screening Threshold Summary (rho_trans=0.5 M_sun/pc^3)
-[22:14:55] [INFO] +------------+--------------+---------------------------+-----+--------------+--------------+
-[22:14:55] [INFO] | Region     | Cut          | Mean Density (M_sun/pc^3) | N   | N(ρ>ρ_trans) | f(ρ>ρ_trans) |
-[22:14:55] [INFO] +------------+--------------+---------------------------+-----+--------------+--------------+
-[22:14:55] [INFO] | Inner      | R < 5.0 kpc  | 0.3092                    | 153 | 14           | 0.092        |
-[22:14:55] [INFO] | Inner core | R < 1.0 kpc  | 2.1591                    | 5   | 5            | 1.000        |
-[22:14:55] [INFO] | Outer      | R > 15.0 kpc | 0.0060                    | 919 | 0            | 0.000        |
-[22:14:55] [INFO] +------------+--------------+---------------------------+-----+--------------+--------------+
-[22:14:55] [INFO] Fitting Period-Luminosity Relations...
-[22:14:55] [INFO] P-L Fit Results (W = a + b*logP)
-[22:14:55] [INFO] +--------+---------------+--------+---------------+
-[22:14:55] [INFO] | Region | Intercept (a) | Error  | Slope (Fixed) |
-[22:14:55] [INFO] +--------+---------------+--------+---------------+
-[22:14:55] [INFO] | Inner  | 24.4306       | 0.1256 | -3.3          |
-[22:14:55] [INFO] | Outer  | 24.0746       | 0.0516 | -3.3          |
-[22:14:55] [INFO] | Offset | +0.3560       | 0.1357 | -             |
-[22:14:55] [INFO] +--------+---------------+--------+---------------+
-[22:14:55] [INFO] Detected Offset (Inner - Outer): +0.3560 mag (2.6 sigma)
-[22:14:55] [SUCCESS] CONCLUSION: Significant environmental P-L offset detected.
-[22:14:55] [SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_results.csv
-[22:14:55] [INFO] Running M31 robustness suite (matched subsamples and sensitivity tests)...
-[22:14:55] [PROCESS] Fetching PHAT footprint for spatial restriction...
-[22:14:55] [INFO] Identified 1683 Cepheids within PHAT footprint.
-[22:14:55] [INFO] PHAT-restricted Offset: +0.6304 +/- 0.1948 mag
-[22:15:50] [INFO] Inferred Wesenheit form: anchor='i', R0=2.88 (MAD score: i=0.005, r=0.005)
-[22:15:50] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_robustness_summary.csv
-[22:15:50] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_robustness_summary.json
-[22:15:50] [WARNING] Note: Multidimensional matched tests (logP+color, logP+eW, MV match) have been removed from the robustness suite.
-[22:15:50] [INFO]   Under TEP, time dilation alters the observed period but preserves the intrinsic photometric color.
-[22:15:50] [INFO]   Matching Cepheids on both observed period AND color forces the selection of intrinsically dissimilar stars,
-[22:15:50] [INFO]   fundamentally destroying the absolute magnitude comparison and artificially hiding the TEP signal.
-[22:15:50] [INFO] M31 Differential Robustness Summary
-[22:15:50] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
-[22:15:50] [INFO] | Test              | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |
-[22:15:50] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
-[22:15:50] [INFO] | Baseline          | 153  | 919   | -         | +0.3560     | 0.1357  | -                  |
-[22:15:50] [INFO] | Matched logP      | 153  | 919   | 152.0     | +0.2529     | 0.1615  | [+0.1029, +0.4130] |
-[22:15:50] [INFO] | OLS inner (ctrl)  | 153  | 919   | -         | +0.1587     | 0.1156  | -                  |
-[22:15:50] [INFO] | Metallicity γ req | 153  | 919   | -         | +0.741      | -       | -                  |
-[22:15:50] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
-[22:15:50] [PROCESS] Generating Differential P-L Plot...
-[22:15:50] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/m31_differential_pl.png
-[22:15:50] [PROCESS] Generating M31 robustness plot...
-[22:15:55] [SUCCESS] Saved robustness plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/m31_differential_robustness.png
-[22:15:55] [SUCCESS] Copied robustness plot to public figures directory.
-[22:15:55] [SUCCESS] Copied plot to public figures directory.
-[22:15:55] [SUCCESS] Step 5 Complete.
+[23:56:04] [INFO] 
+[23:56:04] [INFO] ================================================================================
+[23:56:04] [INFO]    Starting Step 5: M31 Analysis
+[23:56:04] [INFO] ================================================================================
+[23:56:04] [INFO] 
+[23:56:04] [INFO] Initiating M31 Differential Analysis
+[23:56:04] [PROCESS] Fetching M31 Cepheid data (Kodric et al. 2018)...
+[23:56:05] [INFO] Retrieved main table.
+[23:56:05] [SUCCESS] Retrieved 5356 Cepheids from Vizier.
+[23:56:05] [INFO] Calculating Galactocentric Properties...
+[23:56:05] [INFO] Radial Range: 0.6 - 93.5 kpc
+[23:56:05] [INFO] M31 Subsamples
+[23:56:05] [INFO] +--------+--------------+---------------------------+--------------+
+[23:56:05] [INFO] | Region | Radius (kpc) | Mean Density (M_sun/pc^3) | N (Cepheids) |
+[23:56:05] [INFO] +--------+--------------+---------------------------+--------------+
+[23:56:05] [INFO] | Inner  | < 5.0        | 0.3092                    | 153          |
+[23:56:05] [INFO] | Outer  | > 15.0       | 0.0060                    | 919          |
+[23:56:05] [INFO] +--------+--------------+---------------------------+--------------+
+[23:56:05] [INFO] Screening Threshold Summary (rho_trans=0.5 M_sun/pc^3)
+[23:56:05] [INFO] +------------+--------------+---------------------------+-----+--------------+--------------+
+[23:56:05] [INFO] | Region     | Cut          | Mean Density (M_sun/pc^3) | N   | N(ρ>ρ_trans) | f(ρ>ρ_trans) |
+[23:56:05] [INFO] +------------+--------------+---------------------------+-----+--------------+--------------+
+[23:56:05] [INFO] | Inner      | R < 5.0 kpc  | 0.3092                    | 153 | 14           | 0.092        |
+[23:56:05] [INFO] | Inner core | R < 1.0 kpc  | 2.1591                    | 5   | 5            | 1.000        |
+[23:56:05] [INFO] | Outer      | R > 15.0 kpc | 0.0060                    | 919 | 0            | 0.000        |
+[23:56:05] [INFO] +------------+--------------+---------------------------+-----+--------------+--------------+
+[23:56:05] [INFO] Fitting Period-Luminosity Relations...
+[23:56:05] [INFO] P-L Fit Results (W = a + b*logP)
+[23:56:05] [INFO] +--------+---------------+--------+---------------+
+[23:56:05] [INFO] | Region | Intercept (a) | Error  | Slope (Fixed) |
+[23:56:05] [INFO] +--------+---------------+--------+---------------+
+[23:56:05] [INFO] | Inner  | 24.4306       | 0.1256 | -3.3          |
+[23:56:05] [INFO] | Outer  | 24.0746       | 0.0516 | -3.3          |
+[23:56:05] [INFO] | Offset | +0.3560       | 0.1357 | -             |
+[23:56:05] [INFO] +--------+---------------+--------+---------------+
+[23:56:05] [INFO] Detected Offset (Inner - Outer): +0.3560 mag (2.6 sigma)
+[23:56:05] [SUCCESS] CONCLUSION: Significant environmental P-L offset detected.
+[23:56:05] [SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_results.csv
+[23:56:05] [INFO] Running M31 robustness suite (matched subsamples and sensitivity tests)...
+[23:56:05] [PROCESS] Fetching PHAT footprint for spatial restriction...
+[23:56:05] [INFO] Identified 1683 Cepheids within PHAT footprint.
+[23:56:05] [INFO] PHAT-restricted Offset: +0.6304 +/- 0.1948 mag
+[23:57:03] [INFO] Inferred Wesenheit form: anchor='i', R0=2.88 (MAD score: i=0.005, r=0.005)
+[23:57:03] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_robustness_summary.csv
+[23:57:03] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_robustness_summary.json
+[23:57:03] [WARNING] Note: Multidimensional matched tests (logP+color, logP+eW, MV match) have been removed from the robustness suite.
+[23:57:03] [INFO]   Under TEP, time dilation alters the observed period but preserves the intrinsic photometric color.
+[23:57:03] [INFO]   Matching Cepheids on both observed period AND color forces the selection of intrinsically dissimilar stars,
+[23:57:03] [INFO]   fundamentally destroying the absolute magnitude comparison and artificially hiding the TEP signal.
+[23:57:03] [INFO] M31 Differential Robustness Summary
+[23:57:03] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
+[23:57:03] [INFO] | Test              | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |
+[23:57:03] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
+[23:57:03] [INFO] | Baseline          | 153  | 919   | -         | +0.3560     | 0.1357  | -                  |
+[23:57:03] [INFO] | Matched logP      | 153  | 919   | 152.0     | +0.2529     | 0.1615  | [+0.1029, +0.4130] |
+[23:57:03] [INFO] | OLS inner (ctrl)  | 153  | 919   | -         | +0.1587     | 0.1156  | -                  |
+[23:57:03] [INFO] | Metallicity γ req | 153  | 919   | -         | +0.741      | -       | -                  |
+[23:57:03] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
+[23:57:03] [PROCESS] Generating Differential P-L Plot...
+[23:57:03] [PROCESS] Generating M31 robustness plot...
+[23:57:07] [SUCCESS] Step 5 Complete.

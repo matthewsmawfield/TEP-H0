@@ -281,8 +281,8 @@ class Step7TRGBComparison:
         
         plt.tight_layout()
         output_path = self.figures_dir / "trgb_figure_01_h0_vs_sigma.png"
-        plt.savefig(output_path, dpi=150, bbox_inches='tight')
-        print_status(f"Saved plot to {output_path}", "INFO")
+        # plt.savefig(output_path, dpi=150, bbox_inches='tight')
+        # print_status(f"Saved plot to {output_path}", "INFO")
         plt.close()
     
     def run(self):

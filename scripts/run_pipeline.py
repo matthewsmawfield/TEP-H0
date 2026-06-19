@@ -57,6 +57,7 @@ from scripts.steps.step_8_m31_phat_analysis import Step8M31PHATAnalysis
 from scripts.steps.step_9_final_synthesis import Step9FinalSynthesis
 from scripts.steps.step_10_anchor_stratification import AnchorStratificationStep
 from scripts.steps.step_10b_local_gravity_closure import Step10bLocalGravityClosure
+from scripts.steps.step_12_cross_channel import Step12CrossChannel
 from scripts.steps.step_13_stellar_validation import Step13StellarValidation
 from scripts.utils.pipeline_audit import audit
 
@@ -262,6 +263,15 @@ def run_pipeline():
 
         set_step_logger(pipeline_logger)
         print_status("Step 10b (Local Gravity Closure) completed successfully.", "SUCCESS")
+
+        # --- Step 12: Cross-Channel Consistency ---
+        print_status(">>> STEP 12: CROSS-CHANNEL CONSISTENCY", "TITLE")
+        t0 = time.time()
+        Step12CrossChannel().run()
+        step_times['Step 12'] = time.time() - t0
+
+        set_step_logger(pipeline_logger)
+        print_status("Step 12 (Cross-Channel) completed successfully.", "SUCCESS")
 
         # --- Step 9: Final Synthesis ---
         print_status(">>> STEP 9: FINAL SYNTHESIS", "TITLE")

@@ -230,7 +230,7 @@ def run_anchor_stratification_test():
         # M_W = a + κ_anchor * (σ^2 - σ_ref^2)/c^2
         # This directly tests if anchor zero-points correlate with potential depth
         
-        sigma_ref = 75.25  # Same reference as main analysis
+        sigma_ref = 87.17  # Same reference as main analysis
         c_km_s = 299792.458
         # Physics-derived regressor: (sigma^2 - sigma_ref^2)/c^2 (matches step_3 correction form)
         sigma_regressor = (sigmas**2 - sigma_ref**2) / c_km_s**2
@@ -284,8 +284,12 @@ def run_anchor_stratification_test():
                     tep = json.load(f)
                 if isinstance(tep, dict) and 'optimal_kappa_cep' in tep:
                     kappa_host = float(tep['optimal_kappa_cep'])
-                if isinstance(tep, dict) and 'bootstrap_kappa_std' in tep:
-                    kappa_host_err = float(tep['bootstrap_kappa_std'])
+                if isinstance(tep, dict):
+                    kappa_host_err = float(
+                        tep.get('bootstrap_kappa_robust_std')
+                        or tep.get('wls_kappa_err_scaled')
+                        or tep.get('bootstrap_kappa_std', 8.9e5)
+                    )
         except Exception:
             pass
         

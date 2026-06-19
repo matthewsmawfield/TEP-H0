@@ -98,21 +98,21 @@
   "subsample_tep": {
     "full_sample": {
       "n": 36,
-      "kappa_cep": 1648974.609375,
-      "unified_h0": 62.975265220319734,
-      "h0_error": 1.3707434571784616
+      "kappa_cep": 1611138.916015625,
+      "unified_h0": 66.14245561901501,
+      "h0_error": 1.4390114873233777
     },
     "stellar_only": {
       "n": 18,
-      "kappa_cep": 1132098.388671875,
-      "unified_h0": 63.310563652041274,
-      "h0_error": 1.6008109967674542
+      "kappa_cep": 1146704.1015625,
+      "unified_h0": 65.42198009876051,
+      "h0_error": 1.6991920837843664
     },
     "gold_standard": {
       "n": 9,
-      "kappa_cep": 1331658.935546875,
-      "unified_h0": 59.5580264733602,
-      "h0_error": 2.5561267101077507
+      "kappa_cep": 1370928.955078125,
+      "unified_h0": 61.76550528228415,
+      "h0_error": 2.773248910848681
     }
   },
   "convergence": {
@@ -122,47 +122,47 @@
         "n": 36,
         "h0_raw": 67.5868988898651,
         "h0_raw_sem": 1.617580691910576,
-        "h0_corrected": 63.04577478337759,
-        "h0_corrected_sem": 1.3901629642506947,
-        "correction_kms": 4.5411241064875085,
-        "dH_dkappa": -2.8001239085706618e-06,
-        "kappa_for_planck": 66746.6497796859,
-        "kappa_bound_1sigma": 644428.4755587023,
-        "delta_planck": -4.354225216622417,
-        "tension_sigma_planck": 3.1321689101172163
+        "h0_corrected": 66.14245739416326,
+        "h0_corrected_sem": 1.4594239325968725,
+        "correction_kms": 1.444441495701838,
+        "dH_dkappa": -8.96535694936431e-07,
+        "kappa_for_planck": 208467.87352771632,
+        "kappa_bound_1sigma": 2012724.7492400326,
+        "delta_planck": -1.257542605836747,
+        "tension_sigma_planck": 0.8616705384562924
       },
       {
         "tier": "Stellar only",
         "n": 18,
         "h0_raw": 67.78857085963095,
         "h0_raw_sem": 2.11693156545915,
-        "h0_corrected": 61.555201271344835,
-        "h0_corrected_sem": 1.6459366516807517,
-        "correction_kms": 6.233369588286116,
-        "dH_dkappa": -3.843587359830556e-06,
-        "kappa_for_planck": 101095.88341659956,
-        "kappa_bound_1sigma": 651865.6116093989,
-        "delta_planck": -5.844798728655171,
-        "tension_sigma_planck": 3.5510471941230195
+        "h0_corrected": 64.57169331349074,
+        "h0_corrected_sem": 1.782475332103627,
+        "correction_kms": 3.2168775461402106,
+        "dH_dkappa": -1.996650992744354e-06,
+        "kappa_for_planck": 194611.30715531978,
+        "kappa_bound_1sigma": 1254852.4675543525,
+        "delta_planck": -2.828306686509265,
+        "tension_sigma_planck": 1.586729777164084
       },
       {
         "tier": "Gold standard",
         "n": 9,
         "h0_raw": 64.59308889375819,
         "h0_raw_sem": 3.675307273297239,
-        "h0_corrected": 58.57698189287828,
-        "h0_corrected_sem": 2.675234340449847,
-        "correction_kms": 6.016107000879913,
-        "dH_dkappa": -3.709620053241221e-06,
+        "h0_corrected": 61.33309046315324,
+        "h0_corrected_sem": 2.9454089273751767,
+        "correction_kms": 3.259998430604952,
+        "dH_dkappa": -2.0234152557725956e-06,
         "kappa_for_planck": null,
         "kappa_bound_1sigma": null,
-        "delta_planck": -8.823018107121726,
-        "tension_sigma_planck": 3.2980356052240696
+        "delta_planck": -6.066909536846765,
+        "tension_sigma_planck": 2.0597851389869106
       }
     ],
-    "tightest_bound": 644428.4755587023,
-    "tightest_bound_tier": "Full sample",
-    "uniform_kappa": 1621758.2702636719
+    "tightest_bound": 1254852.4675543525,
+    "tightest_bound_tier": "Stellar only",
+    "uniform_kappa": 1611136.6271972656
   },
   "composition": [
     {
@@ -175,9 +175,9 @@
       "n_high_sigma": 18,
       "n_low_sigma": 18,
       "raw_slope": 0.1192797925955749,
-      "corrected_mean_full_kappa": 63.04577478337759,
-      "corrected_mean_refit_kappa": 62.975265220319734,
-      "refit_kappa": 1648974.609375
+      "corrected_mean_full_kappa": 66.14245739416326,
+      "corrected_mean_refit_kappa": 66.14245561901501,
+      "refit_kappa": 1611138.916015625
     },
     {
       "tier": "Stellar only",
@@ -189,9 +189,9 @@
       "n_high_sigma": 11,
       "n_low_sigma": 7,
       "raw_slope": 0.10119090270609575,
-      "corrected_mean_full_kappa": 61.555201271344835,
-      "corrected_mean_refit_kappa": 63.310563652041274,
-      "refit_kappa": 1132098.388671875
+      "corrected_mean_full_kappa": 64.57169331349074,
+      "corrected_mean_refit_kappa": 65.42198009876051,
+      "refit_kappa": 1146704.1015625
     },
     {
       "tier": "Gold standard",
@@ -203,9 +203,9 @@
       "n_high_sigma": 6,
       "n_low_sigma": 3,
       "raw_slope": 0.12815646429566044,
-      "corrected_mean_full_kappa": 58.57698189287828,
-      "corrected_mean_refit_kappa": 59.5580264733602,
-      "refit_kappa": 1331658.935546875
+      "corrected_mean_full_kappa": 61.33309046315324,
+      "corrected_mean_refit_kappa": 61.76550528228415,
+      "refit_kappa": 1370928.955078125
     }
   ]
 }

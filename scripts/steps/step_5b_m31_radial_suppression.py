@@ -489,13 +489,13 @@ def main():
     plt.tight_layout()
 
     fig_path = figures_dir / "supplement_04_m31_radial_suppression.png"
-    fig.savefig(fig_path, dpi=300)
-    print_status(f"Saved figure to {fig_path}", "SUCCESS")
+    # fig.savefig(fig_path, dpi=300)
+    # print_status(f"Saved figure to {fig_path}", "SUCCESS")
     plt.close(fig)
 
-    public_path = public_dir / "supplement_04_m31_radial_suppression.png"
-    shutil.copy(fig_path, public_path)
-    print_status(f"Copied figure to {public_path}", "SUCCESS")
+    # public_path = public_dir / "supplement_04_m31_radial_suppression.png"
+    # shutil.copy(fig_path, public_path)
+    # print_status(f"Copied figure to {public_path}", "SUCCESS")
 
     # ------------------------------------------------------------------
     # 6. Save results

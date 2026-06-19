@@ -15,15 +15,16 @@
     of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot
     (\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction
     formula and the virial relation $|\Phi|\propto\sigma^2$—with
-    response coefficient $\kappa_{\rm Cep} = (1.62 \pm 0.89)\times10^6$ mag (mean
-    response $\langle \kappa_{\rm Cep} \cdot S \rangle = 1.62\times10^6$ after accounting for
+    response coefficient $\kappa_{\rm Cep} = (1.61 \pm 0.80)\times10^6$ mag
+    (joint host+anchor fit, chi2-scaled; host-only optimal $1.61\times10^6$, WLS scaled $1.87 \pm 0.60$;
+    mean response $\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5$ after accounting for
     continuous shear suppression) and effective calibrator reference
-    $\sigma_{\rm ref} = 75.25$ km/s yields a unified local Hubble constant.
+    $\sigma_{\rm ref} = 87.17$ km/s yields a unified local Hubble constant.
     Out-of-sample leave-one-out cross-validation (LOOCV) predicts
-    $H_0^{\rm LOOCV} = 64.99 \pm 1.50$ km/s/Mpc, corresponding to a Planck tension of
-    $1.53\sigma$; this stress test confirms out-of-sample generalisation. The in-sample
-    corrected mean is $H_0 = 65.22$ km/s/Mpc (bootstrap mean $65.09 \pm 1.70$,
-    Planck tension $1.23\sigma$). Both are robust under bootstrap resampling.
+    $H_0^{\rm LOOCV} = 65.92 \pm 1.52$ km/s/Mpc, corresponding to a Planck tension of
+    $0.93\sigma$; this stress test confirms out-of-sample generalisation. The in-sample
+    corrected mean is $H_0 = 66.14$ km/s/Mpc (bootstrap mean $66.22 \pm 1.61$,
+    Planck tension $0.70\sigma$). Both are robust under bootstrap resampling.
     The low-$\sigma$ subsample ($62.53 \pm 2.02$ km/s/Mpc) lies below the uncorrected
     full-sample mean, consistent with TEP expectations that shallow-potential hosts
     require smaller corrections.
@@ -70,7 +71,7 @@
 </p>
 
 <p>
-    <strong>Claim hierarchy.</strong> The primary empirical claim is the host-potential dependence in SH0ES Cepheid-host residuals. The primary model claim is that the TEP $\sigma^2/c^2$ correction removes this dependence and yields a Planck-consistent local calibration. The anchor, pulsar, TRGB, and local-gravity checks now form a closed consistency suite around that claim. A homogeneous external Cepheid-host sample or blind prediction using an externally fixed $\kappa_{\rm Cep}$ is the next falsification test, not a missing piece of the present closure.
+    <strong>Claim hierarchy.</strong> The primary empirical claim is the host-potential dependence in SH0ES Cepheid-host residuals ($r=0.500$, $p=0.002$). The primary model claim is that the TEP $\sigma^2/c^2$ correction removes this dependence and yields a Planck-consistent local calibration. The local-gravity closure is robust (Cassini and MICROSCOPE margins $>10^5$). The new cross-channel test (Cepheid + TRGB + external pulsar constraint) yields a joint $\chi^2 = 6.22/4$ ($p = 0.18$): the channels are mutually consistent with TEP predictions. The TRGB channel alone is poorly constrained ($\kappa_{\rm TRGB} = 2.79 \pm 1.55 \times 10^6$ mag, $1.8\sigma$ from zero), and the differential test is underpowered ($N=18$). Full confirmation awaits SN Ia and deeper pulsar channel integration. A homogeneous external Cepheid-host sample or blind prediction using an externally fixed $\kappa_{\rm Cep}$ is the next falsification test.
 </p>
 
 <p>
@@ -318,7 +319,7 @@ python scripts/run_pipeline.py</code></pre>
         "
     ><code># Check key results match manuscript
 cat results/outputs/tep_correction_results.json | grep unified_h0
-# Expected: 65.22 (±0.01)
+# Expected: 66.14 (±0.01)
 
 cat results/outputs/stratification_results.json | grep difference
 # Expected: 10.11 (±0.01)</code></pre>

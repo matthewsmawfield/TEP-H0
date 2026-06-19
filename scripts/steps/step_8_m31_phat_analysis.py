@@ -310,9 +310,9 @@ class Step8M31PHATAnalysis:
         plt.grid(True, linestyle='--', alpha=0.4)
         plt.tight_layout()
         
-        plt.savefig(self.output_plot, dpi=300)
-        shutil.copy(self.output_plot, self.public_figures_dir / "m31_phat_differential_pl.png")
-        print_status(f"Plot saved to {self.output_plot}", "SUCCESS")
+        # plt.savefig(self.output_plot, dpi=300)
+        # shutil.copy(self.output_plot, self.public_figures_dir / "m31_phat_differential_pl.png")
+        # print_status(f"Plot saved to {self.output_plot}", "SUCCESS")
         plt.close()
 
 

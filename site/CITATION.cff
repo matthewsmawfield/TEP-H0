@@ -51,8 +51,8 @@ abstract: 'The Hubble Tension—the persistent 5σ discrepancy between local dis
   (leave-one-out cross-validation, LOOCV) predicts $H_0^{\rm LOOCV} = 64.99 \pm 1.50$
   km/s/Mpc, corresponding to a Planck tension of $1.53\sigma$; this stress test confirms
   the correction generalises out of sample, with the response coefficient trained on 35 hosts and
-  tested on the held-out host. The in-sample corrected mean is $H_0 = 65.22$ km/s/Mpc
-  (bootstrap mean $65.09 \pm 1.70$, Planck tension $1.23\sigma$), with the corrected $r \simeq 0$ a fitted-correction
+  tested on the held-out host. The in-sample corrected mean is $H_0 = 66.14$ km/s/Mpc
+  (bootstrap mean $66.22 \pm 1.61$, Planck tension $0.70\sigma$), with the corrected $r \simeq 0$ a fitted-correction
   diagnostic rather than an independent validation statistic. A differential analysis within
   M31 yields an "Inner Fainter"
   signal in HST photometry consistent with density-dependent

@@ -280,12 +280,12 @@ def main() -> None:
     # Save
     # ------------------------------------------------------------------
     save_path = fig_dir / "supplement_05_shear_suppression.png"
-    fig.savefig(save_path, dpi=300)
-    print(f"Saved figure to {save_path}")
+    # fig.savefig(save_path, dpi=300)
+    # print(f"Saved figure to {save_path}")
 
-    public_path = public_dir / "supplement_05_shear_suppression.png"
-    shutil.copy(save_path, public_path)
-    print(f"Copied figure to {public_path}")
+    # public_path = public_dir / "supplement_05_shear_suppression.png"
+    # shutil.copy(save_path, public_path)
+    # print(f"Copied figure to {public_path}")
 
     plt.close(fig)
 

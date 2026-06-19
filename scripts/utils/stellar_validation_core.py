@@ -42,9 +42,9 @@ from scripts.utils.tep_correction import C_KM_S, C_SQUARED_KM_S
 # =============================================================================
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
-_DEFAULT_KAPPA_CEP = 0.991381e6
-_DEFAULT_KAPPA_CEP_ERR = 0.560033e6
-_DEFAULT_SIGMA_REF = 75.25
+_DEFAULT_KAPPA_CEP = 1.611137e6   # Current host-only κ_Cep from pipeline (tep_correction_results.json)
+_DEFAULT_KAPPA_CEP_ERR = 0.619065e6  # Current bootstrap_kappa_robust_std from pipeline
+_DEFAULT_SIGMA_REF = 87.17
 
 
 def _load_headline_tep_parameters() -> Dict[str, float]:
@@ -58,7 +58,11 @@ def _load_headline_tep_parameters() -> Dict[str, float]:
         with open(tep_path, "r") as f:
             tep = json.load(f)
         values["kappa_cep"] = float(tep.get("optimal_kappa_cep", values["kappa_cep"]))
-        values["kappa_cep_err"] = float(tep.get("bootstrap_kappa_std", values["kappa_cep_err"]))
+        values["kappa_cep_err"] = float(
+            tep.get("bootstrap_kappa_robust_std")
+            or tep.get("wls_kappa_err_scaled")
+            or tep.get("bootstrap_kappa_std", values["kappa_cep_err"])
+        )
         values["sigma_ref_screened_sq"] = float(tep.get("sigma_ref_screened", 30.51))**2
     except (OSError, TypeError, ValueError, json.JSONDecodeError):
         pass
@@ -280,7 +284,7 @@ def generate_transport_grid(
         abs_difference.
     """
     if sigmas is None:
-        sigmas = [30, 50, 75.25, 90, 120, 150, 180, 220]
+        sigmas = [30, 50, 87.17, 90, 120, 150, 180, 220]
     if rho_ratios is None:
         rho_ratios = [0.0, 0.5, 1.0, 2.0]
 
@@ -375,7 +379,7 @@ def run_higher_order_stress_test(
         DeltaMu_general, and the falsifier quantity |b|*q_P + 2.5*chi_L.
     """
     if sigmas is None:
-        sigmas = [30, 50, 75.25, 90, 120, 150, 180, 220]
+        sigmas = [30, 50, 87.17, 90, 120, 150, 180, 220]
     if rho_ratios is None:
         rho_ratios = [0.0, 0.5, 1.0, 2.0]
     if q_P_values is None:

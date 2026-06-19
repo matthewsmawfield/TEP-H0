@@ -253,15 +253,15 @@ class Step7TRGBReanalysis:
         # Grid is handled by apply_tep_style
         
         output_path = self.figures_dir / "supplement_03_trgb_cepheid_residual.png"
-        plt.savefig(output_path, bbox_inches='tight')
-        print_status(f"Plot saved to {output_path}", "INFO")
+        # plt.savefig(output_path, bbox_inches='tight')
+        # print_status(f"Plot saved to {output_path}", "INFO")
         plt.close()
 
-        public_dir = self.root_dir / "site" / "public" / "figures"
-        public_dir.mkdir(parents=True, exist_ok=True)
-        public_path = public_dir / "supplement_03_trgb_cepheid_residual.png"
-        shutil.copy(output_path, public_path)
-        print_status(f"Copied plot to {public_path}", "INFO")
+        # public_dir = self.root_dir / "site" / "public" / "figures"
+        # public_dir.mkdir(parents=True, exist_ok=True)
+        # public_path = public_dir / "supplement_03_trgb_cepheid_residual.png"
+        # shutil.copy(output_path, public_path)
+        # print_status(f"Copied plot to {public_path}", "INFO")
 
 def main():
     step = Step7TRGBReanalysis()

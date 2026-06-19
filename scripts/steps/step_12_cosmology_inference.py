@@ -26,8 +26,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, print_status, set_step_logger
-DEFAULT_KAPPA_CEP = 0.991381e6
-DEFAULT_H0 = 68.13222017543657
+DEFAULT_KAPPA_CEP = 1.611136e6       # Current host-only κ_Cep from pipeline
+DEFAULT_H0 = 68.13222017543657       # Raw (uncorrected) H0 mean from Cepheid data
 
 
 def _load_tep_headlines():

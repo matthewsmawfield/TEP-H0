@@ -1,0 +1,49 @@
+{
+  "kappa_cep": {
+    "kappa_host": 1611136.6271972656,
+    "kappa_host_err": 619064.453125,
+    "kappa_joint": 803196.9028347775,
+    "kappa_joint_err": 415341.88400800707,
+    "sigma_ref": 87.16507328052906,
+    "unified_h0": 66.14245739416327
+  },
+  "kappa_trgb": {
+    "kappa_trgb": -3113840.362859623,
+    "kappa_trgb_err": 2286298.508204799,
+    "h0_base_trgb": 67.80516263448675,
+    "h0_base_trgb_err": 2.5622039083742427,
+    "raw_slope": 97231008.46054986,
+    "raw_slope_err": 71296049.08213218,
+    "raw_slope_t": 1.363764327929882,
+    "n_trgb": 18
+  },
+  "kappa_diff": {
+    "kappa_diff": 391724.10170164367,
+    "kappa_diff_err": 469433.07741272415,
+    "intercept": 2.566570991526353e-05,
+    "intercept_err": 0.017964389720488784,
+    "chi2": 11.635356208654457,
+    "dof": 16,
+    "chi2_per_dof": 0.7272097630409036,
+    "pearson_r": 0.14196797110756315,
+    "pearson_p": 0.5741589131400353,
+    "n_diff": 18
+  },
+  "consistency_tests": {
+    "tension_kappa_host_vs_kappa_gal": 0.8698700923492372,
+    "consistent_kappa_host_vs_kappa_gal": true,
+    "tension_kappa_joint_vs_kappa_gal": 0.2892693940336625,
+    "consistent_kappa_joint_vs_kappa_gal": true,
+    "tension_kappa_trgb_vs_zero": 1.3619570461534394,
+    "consistent_kappa_trgb_with_zero": true,
+    "tension_kappa_diff_vs_kappa_cep": 1.5695425075779796,
+    "consistent_kappa_diff_with_kappa_cep": true,
+    "tension_kappa_diff_vs_zero": 0.8344620789413205,
+    "consistent_kappa_diff_with_zero": true,
+    "joint_chi2": 11.572283786009864,
+    "joint_dof": 4,
+    "joint_chi2_per_dof": 2.893070946502466,
+    "joint_pvalue": 0.020832118654455417
+  },
+  "n_matched_hosts": 18
+}

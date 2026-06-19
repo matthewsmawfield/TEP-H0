@@ -1901,8 +1901,8 @@ class Step5M31Analysis:
         plt.gca().invert_yaxis()
         plt.legend()
 
-        plt.savefig(self.output_plot_path, dpi=300)
-        print_status(f"Saved plot to {self.output_plot_path}", "SUCCESS")
+        # plt.savefig(self.output_plot_path, dpi=300)
+        # print_status(f"Saved plot to {self.output_plot_path}", "SUCCESS")
         plt.close()
 
         # Robustness plot: (i) matched-bootstrap delta distribution, (ii) slope sensitivity, (iii) Wesenheit R scan (if present)
@@ -2118,27 +2118,27 @@ class Step5M31Analysis:
                 ax3.axis("off")
 
             plt.tight_layout()
-            plt.savefig(self.output_robust_plot_path, dpi=300)
-            print_status(
-                f"Saved robustness plot to {self.output_robust_plot_path}", "SUCCESS"
-            )
+            # plt.savefig(self.output_robust_plot_path, dpi=300)
+            # print_status(
+            #     f"Saved robustness plot to {self.output_robust_plot_path}", "SUCCESS"
+            # )
             plt.close(fig)
 
-            shutil.copy(
-                self.output_robust_plot_path,
-                self.public_figures_dir / "m31_differential_robustness.png",
-            )
-            print_status(
-                "Copied robustness plot to public figures directory.", "SUCCESS"
-            )
+            # shutil.copy(
+            #     self.output_robust_plot_path,
+            #     self.public_figures_dir / "m31_differential_robustness.png",
+            # )
+            # print_status(
+            #     "Copied robustness plot to public figures directory.", "SUCCESS"
+            # )
         except Exception as e:
             print_status(f"Failed to generate robustness plot: {e}", "WARNING")
 
         # Copy to public site
-        shutil.copy(
-            self.output_plot_path, self.public_figures_dir / "m31_differential_pl.png"
-        )
-        print_status("Copied plot to public figures directory.", "SUCCESS")
+        # shutil.copy(
+        #     self.output_plot_path, self.public_figures_dir / "m31_differential_pl.png"
+        # )
+        # print_status("Copied plot to public figures directory.", "SUCCESS")
 
     def run(self):
         print_status("Starting Step 5: M31 Analysis", "TITLE")

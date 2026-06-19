@@ -147,6 +147,12 @@ def fit_joint_model(data):
     chi2 = np.sum((residuals / y_err) ** 2)
     dof = len(x) - 1
 
+    # Scale formal uncertainty by sqrt(chi2/dof) when the model fit is poor
+    # (chi2/dof >> 1), indicating either misspecification or underestimated
+    # errors.  This is standard covariance-scaling practice.
+    chi2_per_dof = float(chi2 / dof) if dof > 0 else float("nan")
+    kappa_err_scaled = float(kappa_err * np.sqrt(chi2_per_dof)) if chi2_per_dof > 1 else float(kappa_err)
+
     # Pearson r
     r, p = stats.pearsonr(x, y)
 
@@ -160,9 +166,10 @@ def fit_joint_model(data):
     return {
         "kappa": float(kappa),
         "kappa_err": float(kappa_err),
+        "kappa_err_scaled": kappa_err_scaled,
         "chi2": float(chi2),
         "dof": int(dof),
-        "chi2_per_dof": float(chi2 / dof) if dof > 0 else float("nan"),
+        "chi2_per_dof": chi2_per_dof,
         "r_pearson": float(r),
         "p_pearson": float(p),
         "n_total": int(len(x)),
@@ -258,20 +265,20 @@ def create_figure(data, fit_results, output_path):
         "--",
         color="black",
         linewidth=2,
-        label=rf"Joint fit: $\kappa_\mathrm{{Cep}} = ({fit_results['kappa']/1e6:.2f} \pm {fit_results['kappa_err']/1e6:.2f}) \times 10^6$ mag",
+        label=rf"Joint fit: $\kappa_\mathrm{{Cep}} = ({fit_results['kappa']/1e6:.2f} \pm {fit_results['kappa_err_scaled']/1e6:.2f}) \times 10^6$ mag",
         zorder=2,
     )
 
-    # Shade: host-only fitted κ band (from step 3)
-    kappa_host = 1.049548e6
-    kappa_host_err = 0.427260e6
+    # Shade: host-only fitted κ band (from step 3 tep_correction_results.json)
+    kappa_host = 1.611137e6
+    kappa_host_err = 0.619e6  # WLS scaled uncertainty
     ax.fill_between(
         x_line,
         (kappa_host - kappa_host_err) * x_line,
         (kappa_host + kappa_host_err) * x_line,
         color=colors["blue"],
         alpha=0.15,
-        label=r"Host-only $\kappa_\mathrm{Cep}$ ($1.05 \pm 0.43) \times 10^6$ mag)",
+        label=r"Host-only $\kappa_\mathrm{Cep}$ ($1.61 \pm 0.62) \times 10^6$ mag)",
         zorder=1,
     )
 
@@ -310,24 +317,26 @@ def main():
     fit = fit_joint_model(data)
 
     print(f"\nJoint fit (N={fit['n_total']}: {fit['n_hosts']} hosts + {fit['n_anchors']} anchors)")
-    print(f"  κ_Cep = {fit['kappa']:.3e} ± {fit['kappa_err']:.3e} mag")
+    print(f"  κ_Cep (formal)  = {fit['kappa']:.3e} ± {fit['kappa_err']:.3e} mag")
+    print(f"  κ_Cep (scaled)  = {fit['kappa']:.3e} ± {fit['kappa_err_scaled']:.3e} mag")
     print(f"  Pearson r = {fit['r_pearson']:.3f} (p = {fit['p_pearson']:.4g})")
     print(f"  χ² = {fit['chi2']:.2f} / {fit['dof']} dof")
     print(f"  χ²/dof = {fit['chi2_per_dof']:.3f}")
     print(f"  Host contribution: χ² = {fit['chi2_host']:.2f}")
     print(f"  Anchor contribution: χ² = {fit['chi2_anchor']:.2f}")
 
-    # Compare with host-only fit
+    # Compare with host-only fit (use SCALED uncertainty for fair comparison)
     kappa_host = anchor_json["regression"]["kappa_host"]
     kappa_host_err = anchor_json["regression"]["kappa_host_err"]
-    tension = abs(fit["kappa"] - kappa_host) / np.sqrt(fit["kappa_err"] ** 2 + kappa_host_err**2)
+    tension = abs(fit["kappa"] - kappa_host) / np.sqrt(fit["kappa_err_scaled"] ** 2 + kappa_host_err**2)
     print(f"\nComparison with host-only κ_Cep = {kappa_host:.3e} ± {kappa_host_err:.3e}")
-    print(f"  Tension: {tension:.2f}σ")
+    print(f"  Tension (scaled): {tension:.2f}σ")
 
     # Save results
     results = {
         "joint_kappa_cep": fit["kappa"],
         "joint_kappa_err": fit["kappa_err"],
+        "joint_kappa_err_scaled": fit["kappa_err_scaled"],
         "chi2": fit["chi2"],
         "dof": fit["dof"],
         "chi2_per_dof": fit["chi2_per_dof"],
