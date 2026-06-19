@@ -1,0 +1,51 @@
+[00:38:01] [INFO] 
+[00:38:01] [INFO] ================================================================================
+[00:38:01] [INFO]    Starting Step 3: TEP Correction
+[00:38:01] [INFO] ================================================================================
+[00:38:01] [INFO] 
+[00:38:01] [INFO] Loading Data...
+[00:38:01] [INFO] Loaded 29 hosts for correction.
+[00:38:01] [INFO] Calculating Effective Calibrator Sigma...
+[00:38:01] [INFO] Using SH0ES-motivated weights (based on P-L contribution).
+[00:38:01] [INFO] Geometric Anchor Sample (S from Nmb formula)
+[00:38:01] [INFO] +----------+--------------+-----+-------+--------+----------------------------+
+[00:38:01] [INFO] | Anchor   | Sigma (km/s) | Nmb | S     | Weight | Description                |
+[00:38:01] [INFO] +----------+--------------+-----+-------+--------+----------------------------+
+[00:38:01] [INFO] | MW       | 30.0         | 7   | 0.605 | 0.20   | Milky Way Disk (Bovy+2012) |
+[00:38:01] [INFO] | LMC      | 24.0         | 2   | 0.873 | 0.25   | LMC Disk (vdMarel+2002)    |
+[00:38:01] [INFO] | NGC 4258 | 115.0        | 65  | 0.096 | 0.55   | NGC 4258 Disk (K&H2013)    |
+[00:38:01] [INFO] +----------+--------------+-----+-------+--------+----------------------------+
+[00:38:01] [SUCCESS] Standard Reference Sigma (σ_ref):       87.17 km/s
+[00:38:01] [SUCCESS] Screened-Effective Sigma (σ_ref,scr):   30.51 km/s  (NGC 4258 contribution down-weighted by S=0.10)
+[00:38:01] [INFO] Optimizing TEP Coupling (κ_Cep)...
+[00:38:01] [INFO] Optimization converged: True
+[00:38:01] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.049e+06 mag
+[00:38:01] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 8.939e+05
+[00:38:01] [INFO] Applying Conformal Correction...
+[00:38:01] [INFO] Sample Corrections (Suppression-Aware)
+[00:38:01] [INFO] +----------+-------+--------+----------+------------+----------+
+[00:38:01] [INFO] | Host     | Sigma | S(rho) | H0 (Raw) | Corr (mag) | H0 (TEP) |
+[00:38:01] [INFO] +----------+-------+--------+----------+------------+----------+
+[00:38:01] [INFO] | NGC 5917 | 52.6  | 0.938  | 72.56    | -0.0529    | 74.35    |
+[00:38:01] [INFO] | NGC 3370 | 80.5  | 0.936  | 65.72    | -0.0123    | 66.09    |
+[00:38:01] [INFO] | NGC 2608 | 83.4  | 0.913  | 76.42    | -0.0068    | 76.66    |
+[00:38:01] [INFO] | NGC 4639 | 96.4  | 0.073  | 47.25    | +0.0014    | 47.22    |
+[00:38:01] [INFO] | NGC 976  | 212.7 | 0.775  | 76.91    | +0.3404    | 65.75    |
+[00:38:01] [INFO] +----------+-------+--------+----------+------------+----------+
+[00:38:01] [INFO] ------------------------------------------------------------
+[00:38:01] [SUCCESS] UNIFIED H0 (Statistical): 68.75 +/- 1.30 km/s/Mpc
+[00:38:01] [INFO] Note: This error (SEM) assumes κ_Cep is fixed/known perfectly.
+[00:38:01] [INFO] ------------------------------------------------------------
+[00:38:01] [INFO] Slope Convention Audit
+[00:38:01] [INFO] +----------------------+-------------+--------+
+[00:38:01] [INFO] | Check                | Value       | Status |
+[00:38:01] [INFO] +----------------------+-------------+--------+
+[00:38:01] [INFO] | raw slope H0–σ > 0   | +0.0851     | PASS   |
+[00:38:01] [INFO] | correction slope < 0 | -0.0851     | PASS   |
+[00:38:01] [INFO] | Δμ(high σ) > 0       | +0.0932 mag | PASS   |
+[00:38:01] [INFO] +----------------------+-------------+--------+
+[00:38:01] [SUCCESS] Slope Convention Audit PASSED.
+[00:38:01] [PROCESS] Generating Comparison Plots...
+[00:38:01] [SUCCESS] Saved comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/figure_03_tep_correction_comparison.png
+[00:38:01] [SUCCESS] Copied comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/figure_03_tep_correction_comparison.png
+[00:38:01] [INFO] Joint Bootstrap (kappa refit + H0): N=1000...

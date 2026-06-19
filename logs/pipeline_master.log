@@ -26,3 +26,27 @@
 [00:38:00] [INFO] Fetching Galaxy Metadata (RC3)
 [00:38:00] [INFO] Loaded 42 hosts for metadata enrichment.
 [00:38:00] [PROCESS] Querying Vizier (Catalog VII/155)...
+[00:38:00] [SUCCESS] Metadata Retrieval Complete. Found RC3 data for 42/42 hosts.
+[00:38:00] [INFO] Sample Galaxy Metadata (RC3)
+[00:38:00] [INFO] +----------+----------+----------+------------+
+[00:38:00] [INFO] | Host     | log(D25) | R25 ('') | R_eff ('') |
+[00:38:00] [INFO] +----------+----------+----------+------------+
+[00:38:00] [INFO] | LMC      | 3.81     | 19369.6  | 9684.8     |
+[00:38:00] [INFO] | LMC      | 3.81     | 19369.6  | 9684.8     |
+[00:38:00] [INFO] | M 101    | 2.46     | 865.2    | 432.6      |
+[00:38:00] [INFO] | NGC 1337 | 1.76     | 172.6    | 86.3       |
+[00:38:00] [INFO] | M 31     | 3.28     | 5716.4   | 2858.2     |
+[00:38:00] [INFO] +----------+----------+----------+------------+
+[00:38:00] [SUCCESS] Saved enriched metadata to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_metadata_enriched.csv
+[00:38:00] [SUCCESS] Step 1b (Aperture Correction) completed successfully.
+[00:38:00] [INFO] 
+[00:38:00] [INFO] ================================================================================
+[00:38:00] [INFO]    >>> STEP 2: STRATIFICATION
+[00:38:00] [INFO] ================================================================================
+[00:38:00] [INFO] 
+[00:38:01] [SUCCESS] Step 2 (Stratification) completed successfully.
+[00:38:01] [INFO] 
+[00:38:01] [INFO] ================================================================================
+[00:38:01] [INFO]    >>> STEP 3: TEP CORRECTION
+[00:38:01] [INFO] ================================================================================
+[00:38:01] [INFO] 
