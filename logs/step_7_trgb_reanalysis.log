@@ -13,3 +13,6 @@ Differential Modulus (TRGB - Cepheid) vs Sigma:
 Interpretation Check:
 [22:16:23] [INFO]   No significant positive correlation.
 [22:16:23] [WARNING]   → INCONCLUSIVE / TENSION.
+[22:16:23] [INFO] Plot saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/supplement_03_trgb_cepheid_residual.png
+[22:16:23] [INFO] Copied plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/supplement_03_trgb_cepheid_residual.png
+[22:16:23] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json
