@@ -152,3 +152,22 @@
 [22:16:24] [INFO]   NGC 4258 S=0.10  Δμ_TEP=+0.014  M_W obs=-5.838  pred=-5.864  resid=+0.026 (+1.1σ)
 [22:16:24] [INFO]   M31      S=0.47  Δμ_TEP=+0.209  M_W obs=-5.849  pred=-5.669  resid=-0.180 (-1.5σ)
 [22:16:24] [INFO]   Mean |residual| = 1.3σ; chi2 = 3.58 / 2 dof
+[22:16:24] [SUCCESS] Figure saved: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/anchor_stratification_test.png
+[22:16:24] [SUCCESS] Results saved: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/anchor_stratification_test.json
+[22:16:24] [INFO] ======================================================================
+[22:16:24] [INFO] ANCHOR STRATIFICATION SUMMARY
+[22:16:24] [INFO] ======================================================================
+[22:16:24] [INFO] TEP framing: anchors lie in DEEP cosmological potential wells (LG/Local Volume); hosts are in Hubble flow (less screened). Density-regime screening is expected.
+[22:16:24] [WARNING] Marginal anchor/host κ comparison (1.5σ) — anchor sample (N=3) insufficient to discriminate screening regimes.
+[22:16:24] [SUCCESS] Step 10 (Anchor Stratification) completed successfully.
+[22:16:24] [INFO] 
+[22:16:24] [INFO] ================================================================================
+[22:16:24] [INFO]    >>> STEP 10b: LOCAL GRAVITY CLOSURE
+[22:16:24] [INFO] ================================================================================
+[22:16:24] [INFO] 
+[22:16:24] [SUCCESS] Step 10b (Local Gravity Closure) completed successfully.
+[22:16:24] [INFO] 
+[22:16:24] [INFO] ================================================================================
+[22:16:24] [INFO]    >>> STEP 9: FINAL SYNTHESIS
+[22:16:24] [INFO] ================================================================================
+[22:16:24] [INFO] 
