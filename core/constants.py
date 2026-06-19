@@ -90,3 +90,15 @@ GNSS_LAMBDA_T_EXPONENTIAL_BY_CENTER = {
 # metrology shifts.
 ALPHA_LOG = -7.66e-3             # Density-sector coupling (negative by field-equation sign)
 BETA_GEOM = 1.50e-4              # Mass-sector geometric coupling
+# =============================================================================
+# TEP OBSERVABLE RESPONSE COEFFICIENTS
+# =============================================================================
+
+# Canonical galaxy-scale observable response coefficient (Paper 11).
+# This is the joint host+anchor fit: κ_Cep = (0.97 ± 0.08) × 10⁶ mag
+# (joint_environmental_screening_model.json, N=36 hosts + 3 anchors).
+# Host-only value: (1.62 ± 0.89) × 10⁶ mag (tep_correction_results.json).
+# KAPPA_GAL is used as a cross-probe consistency prior (e.g., Paper 12 JWST).
+# The uncertainty is kept conservative (±4.0×10⁵) as a cross-probe envelope.
+KAPPA_GAL = 9.7e5                # mag (rounded from joint fit 9.72e5)
+KAPPA_GAL_UNCERTAINTY = 4.0e5    # mag (conservative cross-probe envelope)

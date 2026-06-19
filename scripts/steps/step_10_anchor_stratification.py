@@ -204,25 +204,25 @@ class AnchorStratificationStep:
         M_Ws = np.array([results[n]['M_W_absolute'] for n in anchor_names])
         M_W_errs = np.array([results[n]['M_W_err'] for n in anchor_names])
         
-        # Load sigma_ref_screened_sq dynamically from step 3 (effective calibrator dispersion)
+        # Load sigma_ref_screened dynamically from step 3 (effective calibrator dispersion)
         # to keep the anchor and host analyses on the same reference.
-        sigma_ref_screened_sq = 30.51**2  # Fallback if tep_correction_results.json is missing
+        sigma_ref_screened = 30.51  # Fallback if tep_correction_results.json is missing
         try:
             tep_path_for_ref = self.outputs_dir / "tep_correction_results.json"
             if tep_path_for_ref.exists():
                 with open(tep_path_for_ref, "r") as f:
                     _tep = json.load(f)
                 if isinstance(_tep, dict) and 'sigma_ref_screened' in _tep:
-                    sigma_ref_screened_sq = float(_tep['sigma_ref_screened'])**2
+                    sigma_ref_screened = float(_tep['sigma_ref_screened'])
         except Exception:
             pass
-            
+
         from scripts.utils.tep_correction import ANCHOR_SCREENING
         S_anchors = np.array([ANCHOR_SCREENING.get(n, 1.0) for n in anchor_names])
 
-        # Physics-derived regressor: (S * sigma^2 - sigma_ref_screened_sq)/c^2
+        # Physics-derived regressor: (S * sigma^2 - sigma_ref_screened^2)/c^2
         c_km_s = 299792.458
-        sigma_regressor = (S_anchors * sigmas**2 - sigma_ref_screened_sq) / c_km_s**2
+        sigma_regressor = (S_anchors * sigmas**2 - sigma_ref_screened**2) / c_km_s**2
         
         # Weighted least squares
         weights = 1.0 / M_W_errs**2
@@ -322,7 +322,7 @@ class AnchorStratificationStep:
                 # TEP-aware prediction (per-anchor S applied) using the same
                 # reference-subtracted response as the primary correction:
                 # Δμ_i = κ_Cep (S_i σ_i² - S_ref σ_ref²) / c².
-                # (Note that sigma_ref_screened_sq cancels out when taking the difference).
+                # (Note that sigma_ref_screened^2 cancels out when taking the difference).
                 S_i = ANCHOR_SCREENING.get(name, 1.0)
                 d_mu_tep = kappa_host * (
                     S_i * sigmas[i]**2 - S_ref * sigma_anchor**2
@@ -440,7 +440,7 @@ class AnchorStratificationStep:
             'kappa_anchor_err': float(kappa_anchor_err),
             'intercept': float(intercept),
             'intercept_err': float(intercept_err),
-            'sigma_ref_screened_sq': float(sigma_ref_screened_sq),
+            'sigma_ref_screened': float(sigma_ref_screened),
             'r_pearson': float(r_pearson),
             'p_pearson': float(p_pearson),
             'chi2': float(chi2),
@@ -477,8 +477,8 @@ class AnchorStratificationStep:
         reg = results['regression']
         sigma_range = np.linspace(min(sigmas)*0.8, max(sigmas)*1.2, 100)
         c_km_s = 299792.458
-        sigma_ref_screened_sq = float(reg.get('sigma_ref_screened_sq', 30.51**2))
-        x_reg = (sigma_range**2 - sigma_ref_screened_sq) / c_km_s**2
+        sigma_ref_screened = float(reg.get('sigma_ref_screened', 30.51))
+        x_reg = (sigma_range**2 - sigma_ref_screened**2) / c_km_s**2
         # Rescale x-axis by 10^7 for readability
         x_reg_scaled = x_reg * 1e7
         M_W_pred = reg['intercept'] + reg['kappa_anchor'] * x_reg

@@ -1,34 +1,34 @@
-[19:15:33] [INFO] 
-[19:15:33] [INFO] ================================================================================
-[19:15:33] [INFO]    STEP 13: STELLAR VALIDATION OF SCALAR-BOUNDARY TRANSPORT
-[19:15:33] [INFO] ================================================================================
-[19:15:33] [INFO] 
-[19:15:33] [INFO] Establishing matter-frame baseline period...
-[19:15:33] [WARNING] MESA/RSP not detected. Using canonical literature placeholder P_MESA = 5.5 d.  For first-principles reproduction, install MESA and run: bash stellar_validation/run_rsp_baseline.sh
-[19:15:33] [INFO] P_MESA = 5.5000 d
-[19:15:33] [INFO] SIGMA_REF = 75.25 km/s
-[19:15:33] [INFO] KAPPA_CEP = 5.84e+04 +/- 1.93e+05 mag
-[19:15:33] [INFO] B_PL (Wesenheit slope) = -3.26
-[19:15:33] [INFO] ALPHA_CLOCK = 4.127137e+04
-[19:15:33] [INFO] Generating TEP period-transport grid...
-[19:15:33] [SUCCESS] Saved grid: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/stellar_validation_grid.csv
-[19:15:33] [TEST] Max |DeltaMu_transport - DeltaMu_direct| = 3.469447e-18 mag
-[19:15:33] [INFO] Running kappa_Cep closure test...
-[19:15:33] [INFO] Fitted kappa_hat   = 5.843201e+04 mag
-[19:15:33] [INFO] Expected kappa_Cep = 5.843201e+04 mag
-[19:15:33] [INFO] RMS residual       = 8.449433e-19 mag
-[19:15:33] [INFO] Relative error     = 1.245201e-16
-[19:15:33] [SUCCESS] Closure test PASSED.
-[19:15:33] [SUCCESS] Saved closure JSON: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/stellar_validation_closure.json
-[19:15:33] [INFO] Running higher-order stress test...
-[19:15:33] [SUCCESS] Saved stress-test grid: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/stellar_validation_stress_test.csv
-[19:15:33] [INFO] Falsifier range: 2.108 to 4.412
-[19:15:33] [SUCCESS] Sign survives for all scanned higher-order combinations.
-[19:15:33] [INFO] Generating figures...
-[19:15:33] [SUCCESS] Transport plot: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/stellar_validation_transport.png
-[19:15:33] [SUCCESS] Closure plot: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/stellar_validation_closure.png
-[19:15:33] [SUCCESS] Stress-test plot: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/stellar_validation_stress_test.png
-[19:15:33] [SUCCESS] Copied to site public: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/stellar_validation_transport.png
-[19:15:33] [SUCCESS] Copied to site public: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/stellar_validation_closure.png
-[19:15:33] [SUCCESS] Copied to site public: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/stellar_validation_stress_test.png
-[19:15:33] [SUCCESS] Step 13 complete.
+[20:46:23] [INFO] 
+[20:46:23] [INFO] ================================================================================
+[20:46:23] [INFO]    STEP 13: STELLAR VALIDATION OF SCALAR-BOUNDARY TRANSPORT
+[20:46:23] [INFO] ================================================================================
+[20:46:23] [INFO] 
+[20:46:23] [INFO] Establishing matter-frame baseline period...
+[20:46:23] [WARNING] MESA/RSP not detected. Using canonical literature placeholder P_MESA = 5.5 d.  For first-principles reproduction, install MESA and run: bash stellar_validation/run_rsp_baseline.sh
+[20:46:23] [INFO] P_MESA = 5.5000 d
+[20:46:23] [INFO] SIGMA_REF = 75.25 km/s
+[20:46:23] [INFO] KAPPA_CEP = 1.62e+06 +/- 8.90e+05 mag
+[20:46:23] [INFO] B_PL (Wesenheit slope) = -3.26
+[20:46:23] [INFO] ALPHA_CLOCK = 1.145471e+06
+[20:46:23] [INFO] Generating TEP period-transport grid...
+[20:46:23] [SUCCESS] Saved grid: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/stellar_validation_grid.csv
+[20:46:23] [TEST] Max |DeltaMu_transport - DeltaMu_direct| = 1.110223e-16 mag
+[20:46:23] [INFO] Running kappa_Cep closure test...
+[20:46:23] [INFO] Fitted kappa_hat   = 1.621758e+06 mag
+[20:46:23] [INFO] Expected kappa_Cep = 1.621758e+06 mag
+[20:46:23] [INFO] RMS residual       = 3.396236e-17 mag
+[20:46:23] [INFO] Relative error     = 1.435668e-16
+[20:46:23] [SUCCESS] Closure test PASSED.
+[20:46:23] [SUCCESS] Saved closure JSON: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/stellar_validation_closure.json
+[20:46:23] [INFO] Running higher-order stress test...
+[20:46:23] [SUCCESS] Saved stress-test grid: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/stellar_validation_stress_test.csv
+[20:46:23] [INFO] Falsifier range: 2.108 to 4.412
+[20:46:23] [SUCCESS] Sign survives for all scanned higher-order combinations.
+[20:46:23] [INFO] Generating figures...
+[20:46:23] [SUCCESS] Transport plot: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/stellar_validation_transport.png
+[20:46:23] [SUCCESS] Closure plot: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/stellar_validation_closure.png
+[20:46:23] [SUCCESS] Stress-test plot: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/stellar_validation_stress_test.png
+[20:46:23] [SUCCESS] Copied to site public: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/stellar_validation_transport.png
+[20:46:23] [SUCCESS] Copied to site public: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/stellar_validation_closure.png
+[20:46:23] [SUCCESS] Copied to site public: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/stellar_validation_stress_test.png
+[20:46:23] [SUCCESS] Step 13 complete.

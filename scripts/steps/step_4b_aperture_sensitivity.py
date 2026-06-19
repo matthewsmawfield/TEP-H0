@@ -285,22 +285,19 @@ class Step4bApertureSensitivity:
             "median_sigma": float(med),
         }
 
-    def _calculate_sigma_ref_screened_sq(self) -> float:
+    def _calculate_sigma_ref_screened(self) -> float:
         # Mirror Step 3 anchor-weighting; keep local to avoid cross-imports.
+        from scripts.utils.tep_correction import ANCHOR_SCREENING
         anchors = [
-            (30.0, 0.20),  # MW
-            (24.0, 0.25),  # LMC
-            (115.0, 0.55), # N4258
+            (30.0, 0.20, "MW"),
+            (24.0, 0.25, "LMC"),
+            (115.0, 0.55, "NGC 4258"),
         ]
-        num = sum(s * w for s, w in anchors)
-        den = sum(w for _, w in anchors)
-        return float(num / den) # Note: we just need a dummy baseline here if we pull from step_3. Let's load it properly.
-        # Actually I will just calculate it properly
-        from scripts.utils.tep_correction import ANCHOR_SCREENING, ANCHOR_NMB
-        num_scr = sum(w * ANCHOR_SCREENING.get(id, 1.0) * (s**2) for s, w, id in [(30.0, 0.20, "MW"), (24.0, 0.25, "LMC"), (115.0, 0.55, "NGC 4258")])
-        return float(num_scr / den)
+        den = sum(w for _, w, _ in anchors)
+        num_scr = sum(w * ANCHOR_SCREENING.get(id, 1.0) * (s**2) for s, w, id in anchors)
+        return float((num_scr / den) ** 0.5)
 
-    def _optimize_kappa_and_unified_h0(self, df: pd.DataFrame, sigma_col: str, sigma_ref_screened_sq: float) -> dict:
+    def _optimize_kappa_and_unified_h0(self, df: pd.DataFrame, sigma_col: str, sigma_ref_screened: float) -> dict:
         required = [sigma_col, 'value', 'velocity']
         missing = [c for c in required if c not in df.columns]
         if missing:
@@ -329,7 +326,7 @@ class Step4bApertureSensitivity:
 
         def objective(params):
             kappa_cep = float(params[0])
-            corr = tep_correction(sigma_vals, kappa_cep, S_vals, sigma_ref_screened_sq)
+            corr = tep_correction(sigma_vals, sigma_ref_screened, kappa_cep, S_vals)
             mu_corr = mu_vals + corr
             d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
             h0_corr = v_vals / d_corr
@@ -344,7 +341,7 @@ class Step4bApertureSensitivity:
         )
         kappa_cep_opt = float(res.x[0])
 
-        corr = tep_correction(sigma_vals, kappa_cep_opt, S_vals, sigma_ref_screened_sq)
+        corr = tep_correction(sigma_vals, sigma_ref_screened, kappa_cep_opt, S_vals)
         mu_corr = mu_vals + corr
         d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
         h0_corr = v_vals / d_corr
@@ -370,7 +367,7 @@ class Step4bApertureSensitivity:
         if 'r_eff_arcsec' not in base_df.columns:
             base_df['r_eff_arcsec'] = np.nan
 
-        sigma_ref_screened_sq = self._calculate_sigma_ref_screened_sq()
+        sigma_ref_screened = self._calculate_sigma_ref_screened()
         can_optimize_kappa = all(c in base_df.columns for c in ['value', 'velocity'])
         if not can_optimize_kappa:
             print_status(
@@ -391,7 +388,7 @@ class Step4bApertureSensitivity:
 
                 m = self._metrics_for_sigma(tmp, 'sigma_scenario')
 
-                tep = self._optimize_kappa_and_unified_h0(tmp, 'sigma_scenario', sigma_ref_screened_sq) if can_optimize_kappa else {
+                tep = self._optimize_kappa_and_unified_h0(tmp, 'sigma_scenario', sigma_ref_screened) if can_optimize_kappa else {
                     "kappa_cep_opt": np.nan,
                     "unified_h0": np.nan,
                     "post_slope": np.nan,
@@ -406,7 +403,7 @@ class Step4bApertureSensitivity:
                     "slope": m["slope"],
                     "delta_h0": m["delta_h0"],
                     "median_sigma": m.get("median_sigma", np.nan),
-                    "sigma_ref_screened_sq": float(sigma_ref_screened_sq),
+                    "sigma_ref_screened": float(sigma_ref_screened),
                     "kappa_cep_opt": tep["kappa_cep_opt"],
                     "unified_h0": tep["unified_h0"],
                     "post_slope": tep["post_slope"],

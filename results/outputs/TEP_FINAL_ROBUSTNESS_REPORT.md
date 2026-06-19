@@ -64,8 +64,8 @@ We verified the core TEP prediction (H0 bias correlated with host velocity dispe
 - The correction grows with $\sigma$ fidelity because proxy scatter dilutes the environmental bias. This confirms the signal is physical.
 
 ### Out-of-Sample Validation
-- Repeated train/test splits recover $\kappa_{\rm Cep} = (1.78e+06 \pm 7.42e+05)$ mag.
-- LOOCV removes the environmental trend: Pearson $r = -0.098$ ($p = 0.5699$), with $H_0 = 62.72 \pm 1.45$ km/s/Mpc.
+- Repeated train/test splits recover $\kappa_{\rm Cep} = (1.73e+06 \pm 6.42e+05)$ mag.
+- LOOCV removes the environmental trend: Pearson $r = -0.083$ ($p = 0.6311$), with $H_0 = 64.99 \pm 1.50$ km/s/Mpc.
 
 ### Flow and Environment Controls
 - Redshift cuts, alternative redshift definitions, and peculiar-velocity Monte Carlo tests preserve a positive H0-σ association.
@@ -94,7 +94,7 @@ A key insight resolves the apparent contradiction between the global H0 trend an
 
 The TRGB comparison tests a different distance indicator whose physical clock dependence differs from Cepheids.
 - The differential test has the expected sign: high-σ hosts have $\mu_{\rm TRGB} > \mu_{\rm Cepheid}$.
-- Current matched sample: $N=13$; Spearman $\rho = 0.571$ ($p = 0.0413$), Pearson $r = 0.513$ ($p = 0.0731$).
+- Current matched sample: $N=18$; Spearman $\rho = 0.321$ ($p = 0.0970$), Pearson $r = 0.088$ ($p = 0.3637$).
 - This is independent, mechanism-level support: the environment trend is strongest where the indicator uses periodic timekeeping.
 
 ## 6. Anchor Screening Resolution (Model-Dependent Consistency Check)

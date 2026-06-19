@@ -96,7 +96,7 @@
               "tep_bic_matched": 28.494282930596675,
               "tep_chi2": 21.327245053684457
             },
-            "sigma_ref_screened_sq": 930.7002978130233,
+            "sigma_ref_screened": 30.50738103825078,
             "tep_bic": 28.44731859091779,
             "tep_chi2": 21.280280714005567,
             "wls_beta_x": 31753969.881801065,
@@ -579,7 +579,7 @@
             ]
           },
           "r_pearson": 0.306183306290876,
-          "sigma_ref_screened_sq": 930.7002978130233,
+          "sigma_ref_screened": 30.50738103825078,
           "tension_with_host": 1.5256950699719207
         },
         "host_comparison": {}

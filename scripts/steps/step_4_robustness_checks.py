@@ -490,7 +490,7 @@ class Step4RobustnessChecks:
 
         result = {
             "n": int(n),
-            "sigma_ref_screened_sq": float(sigma_ref_screened**2),
+            "sigma_ref_screened": float(sigma_ref_screened),
             "null_chi2": float(chi2_null_diag),
             "null_bic": float(bic_null_diag),
             "tep_chi2": float(chi2_tep_diag),
@@ -517,6 +517,16 @@ class Step4RobustnessChecks:
             with open(self.tep_results_path, 'r') as f:
                 d = json.load(f)
             return float(d.get('sigma_ref_screened')) if 'sigma_ref_screened' in d else None
+        except Exception:
+            return None
+
+    def _load_sigma_ref(self):
+        if not self.tep_results_path.exists():
+            return None
+        try:
+            with open(self.tep_results_path, 'r') as f:
+                d = json.load(f)
+            return float(d.get('sigma_ref')) if 'sigma_ref' in d else None
         except Exception:
             return None
 
@@ -562,9 +572,9 @@ class Step4RobustnessChecks:
             print_status("Stratified data missing. Run Step 2 first.", "ERROR")
             return
 
-        sigma_ref_screened = self._load_sigma_ref_screened()
-        if sigma_ref_screened is None:
-            print_status("Could not load sigma_ref_screened from Step 3 results. Run Step 3 first.", "ERROR")
+        sigma_ref = self._load_sigma_ref()
+        if sigma_ref is None:
+            print_status("Could not load sigma_ref from Step 3 results. Run Step 3 first.", "ERROR")
             return
 
         df = pd.read_csv(self.stratified_path)
@@ -600,8 +610,8 @@ class Step4RobustnessChecks:
             train = df.iloc[train_idx]
             test = df.iloc[test_idx]
 
-            kappa_hat = self._fit_kappa(train, sigma_ref_screened)
-            h0_test = self._apply_kappa(test, kappa_hat, sigma_ref_screened)
+            kappa_hat = self._fit_kappa(train, sigma_ref)
+            h0_test = self._apply_kappa(test, kappa_hat, sigma_ref)
 
             slope_test, _ = np.polyfit(test['sigma_inferred'].values, h0_test, 1)
             r_test = stats.pearsonr(test['sigma_inferred'].values, h0_test)[0]
@@ -623,10 +633,10 @@ class Step4RobustnessChecks:
         loo_pred = np.empty(n)
         for i in range(n):
             train = df.drop(index=i)
-            kappa_i = self._fit_kappa(train, sigma_ref_screened)
+            kappa_i = self._fit_kappa(train, sigma_ref)
             loo_kappa_ceps.append(kappa_i)
             # Apply to hold-out
-            loo_pred[i] = float(self._apply_kappa(df.iloc[[i]], kappa_i, sigma_ref_screened)[0])
+            loo_pred[i] = float(self._apply_kappa(df.iloc[[i]], kappa_i, sigma_ref)[0])
 
         loo_kappa_ceps = np.array(loo_kappa_ceps)
         loo_slope, _ = np.polyfit(sigma_all, loo_pred, 1)
@@ -659,7 +669,7 @@ class Step4RobustnessChecks:
 
         payload = {
             "n": int(n),
-            "sigma_ref_screened_sq": float(sigma_ref_screened**2),
+            "sigma_ref": float(sigma_ref),
             "planck_h0": float(planck_h0),
             "planck_err": float(planck_err),
             "baseline": {

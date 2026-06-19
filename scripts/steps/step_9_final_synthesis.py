@@ -340,7 +340,12 @@ class Step9FinalSynthesis:
                 f.write("## 5. TRGB Differential Check\n\n")
                 f.write("The TRGB comparison tests a different distance indicator whose physical clock dependence differs from Cepheids.\n")
                 f.write("- The differential test has the expected sign: high-σ hosts have $\\mu_{\\rm TRGB} > \\mu_{\\rm Cepheid}$.\n")
-                f.write("- Current matched sample: $N=13$; Spearman $\\rho = 0.571$ ($p = 0.0413$), Pearson $r = 0.513$ ($p = 0.0731$).\n")
+                n_trgb = trgb.get('n', '?')
+                rho_trgb = trgb.get('spearman_rho', 0)
+                p_rho_trgb = trgb.get('spearman_p', 1)
+                r_trgb = trgb.get('pearson_r', 0)
+                p_r_trgb = trgb.get('pearson_p', 1)
+                f.write(f"- Current matched sample: $N={n_trgb}$; Spearman $\\rho = {rho_trgb:.3f}$ ($p = {p_rho_trgb:.4f}$), Pearson $r = {r_trgb:.3f}$ ($p = {p_r_trgb:.4f}$).\n")
                 f.write("- This is independent, mechanism-level support: the environment trend is strongest where the indicator uses periodic timekeeping.\n\n")
 
             f.write("## 6. Anchor Screening Resolution (Model-Dependent Consistency Check)\n\n")

@@ -2,30 +2,34 @@
 """
 Bulk-update narrative surface files with current pipeline headline numbers.
 Run after pipeline completion to synchronize manuscript/site text with results.
+
+WARNING: This script uses hardcoded replacement strings. After any pipeline change,
+verify that NEW and REPLACEMENTS match the actual latest JSON outputs before
+running, or stale numbers will be re-injected into the narrative.
 """
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
-# New headline numbers from latest pipeline run
+# New headline numbers from latest pipeline run (TEP-H0 N=36, v0.7 Kingston upon Hull)
 NEW = {
-    "spearman_rho": "0.517",
-    "spearman_p": "0.0041",
-    "pearson_r": "0.466",
-    "pearson_p": "0.0109",
-    "unified_h0": "68.13",
-    "bootstrap_h0_mean": "68.06",
-    "bootstrap_h0_std": "1.49",
-    "tension_sigma": "0.47",
-    "kappa_million": "0.99",
-    "kappa_std_million": "0.56",
-    "median_sigma": "96",
-    "low_mean_h0": "66.26",
-    "low_std_err": "2.10",
-    "high_mean_h0": "74.12",
-    "high_std_err": "1.30",
-    "delta_h0": "7.86",
+    "spearman_rho": "0.549",
+    "spearman_p": "0.0005",
+    "pearson_r": "0.500",
+    "pearson_p": "0.0019",
+    "unified_h0": "65.22",
+    "bootstrap_h0_mean": "65.09",
+    "bootstrap_h0_std": "1.70",
+    "tension_sigma": "1.23",
+    "kappa_million": "1.62",
+    "kappa_std_million": "0.89",
+    "median_sigma": "89.7",
+    "low_mean_h0": "62.53",
+    "low_std_err": "2.02",
+    "high_mean_h0": "72.64",
+    "high_std_err": "1.92",
+    "delta_h0": "10.11",
 }
 
 # Ordered replacements: longer/more specific strings first to avoid partial matches

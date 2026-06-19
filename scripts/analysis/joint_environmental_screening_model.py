@@ -122,7 +122,7 @@ def build_joint_dataset(host_df, anchor_json, sigma_ref_screened_sq=30.51**2):
         "x_anchor": x_anchor,
         "y_anchor": delta_mu_anchor,
         "y_err_anchor": sigma_delta_mu_anchor,
-        "sigma_ref": sigma_ref,
+        "sigma_ref": np.sqrt(sigma_ref_screened_sq),
         "h0_base": h0_base,
         "anchor_names": anchor_names,
     }

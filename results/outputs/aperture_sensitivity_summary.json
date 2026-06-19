@@ -43,9 +43,9 @@
     "slope_max": 0.12660631676160491,
     "delta_h0_min": 10.109375342032507,
     "delta_h0_max": 10.109375342032507,
-    "kappa_cep_min": 0.0,
-    "kappa_cep_max": 0.0,
-    "unified_h0_min": 67.5866210992718,
-    "unified_h0_max": 67.58668519136228
+    "kappa_cep_min": 1495275.87890625,
+    "kappa_cep_max": 1877947.998046875,
+    "unified_h0_min": 62.87252441743731,
+    "unified_h0_max": 63.13459961541509
   }
 }

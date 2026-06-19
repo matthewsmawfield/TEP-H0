@@ -13,7 +13,7 @@
   "n_sims": 20000,
   "bayesian_comparison": {
     "n": 36,
-    "sigma_ref_screened_sq": 930.7002978130233,
+    "sigma_ref_screened": 30.50738103825078,
     "null_chi2": 28.946311563437458,
     "null_bic": 32.52983050189357,
     "tep_chi2": 21.280280714005567,
