@@ -187,3 +187,11 @@
 [19:02:14] [INFO]   sn_offset                           unscreened_centered H0=73.14 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=1.78e+05 kappaCep_6=nan
 [19:02:14] [INFO]   cepheid_plus_sn                     unscreened_centered H0=73.14 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=-1.58e+07 kappaCep_6=-1.60e+07
 [19:02:14] [INFO] Leave-One-Host-Out Diagnostic
+[19:02:24] [SUCCESS] Saved leave-one-host-out to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_leave_one_host_out.csv
+[19:02:24] [INFO] Hosts with largest kappa influence:
+[19:02:24] [INFO]   N976A      sigma= 212.7 kappa=   8.381e+04 +/-    2.397e+05
+[19:02:24] [INFO]   N1365      sigma= 135.9 kappa=   6.260e+04 +/-    2.165e+05
+[19:02:24] [INFO]   N3147      sigma= 223.4 kappa=  -1.779e+05 +/-    2.429e+05
+[19:02:24] [INFO]   LMC        sigma=  18.4 kappa=  -1.367e+05 +/-    2.393e+05
+[19:02:24] [INFO]   M101       sigma=  24.3 kappa=  -1.320e+05 +/-    2.158e+05
+[19:02:24] [INFO] Residual-After-Fit Audit
