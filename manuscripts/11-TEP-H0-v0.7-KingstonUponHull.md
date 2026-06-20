@@ -973,7 +973,7 @@ The observed shift ($+0.04$ mag vs. the naive unscreened $\sim+0.09$ mag
 relative-to-LMC prediction) implies substantial ambient suppression for NGC 4258.
 Applying
 the same reference-subtracted correction with anchor-specific screening factors
-gives a TEP-aware prediction of $+0.050$ mag for NGC 4258 relative to LMC
+gives a TEP-aware prediction of $+0.044$ mag for NGC 4258 relative to LMC
 and reduces the screened-anchor mean residual to $0.9\sigma$
 ($\chi^2=2.51$ for 2 dof). The anchor screening result supports group-halo
 shear suppression and explains why $\sigma_{\rm ref}$ is a screened reference
