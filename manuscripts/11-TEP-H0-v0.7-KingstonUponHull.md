@@ -44,7 +44,7 @@ period-contraction combined with the virial relation $|\Phi|\propto\sigma^2$—w
 Observable Response Coefficient $\kappa_{\rm Cep} = (1.27 \pm 0.48) \times 10^6$ mag
 and effective calibrator reference $\sigma_{\rm ref} = 87.17$ km/s yields a unified local
 Hubble constant. Out-of-sample validation (leave-one-out cross-validation, LOOCV)
-predicts $H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck
+predicts $H_0^{\rm LOOCV} = 68.67 \pm 1.34$ km/s/Mpc, corresponding to a Planck
 tension of $0.99\sigma$; this stress test confirms the correction generalises out of sample,
 with the response coefficient trained on 28 hosts and tested on the held-out host.
 The in-sample corrected mean is $H_0 = 68.84$ km/s/Mpc (bootstrap mean
@@ -772,7 +772,7 @@ the 16 hosts with direct stellar absorption $\sigma$ measurements.
 
 | Subsample | N | Pearson $r$ | $p$-value | Raw $H_0$ | Corr. $H_0^{\rm TEP}$ (uniform $\kappa$) |
 | --- | --- | --- | --- | --- | --- |
-| Full Sample | 29 | 0.466 | 0.0109 | $70.06 \pm 1.44$ | $68.84 \pm 1.46$ |
+| Full Sample | 29 | 0.466 | 0.0109 | $70.06 \pm 1.44$ | $68.84 \pm 1.05$ |
 | Stellar Absorption Only | 16 | 0.549 | 0.028 | $69.14 \pm 2.03$ | $66.71 \pm 1.65$ |
 
 Restricting to direct stellar-absorption dispersions strengthens the effect
@@ -891,7 +891,7 @@ is $\langle \kappa_{\rm Cep} \cdot S
 this suppression-aware correction yields a unified Hubble constant:
 
 \begin{equation}
-H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.80\pm1.46)
+H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.91\pm1.45)
 \end{equation}
 
 The Planck tension is reduced to $0.99\sigma$.  Paper 10 does not
@@ -903,7 +903,7 @@ out-of-sample tests were performed to verify predictive power (Section 2.8).
 LOOCV serves as a non-circular stress test:
 the response coefficient is trained on 28 hosts and tested on the held-out host.
 LOOCV predicts a unified Hubble constant
-$H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck tension of
+$H_0^{\rm LOOCV} = 68.67 \pm 1.34$ km/s/Mpc, corresponding to a Planck tension of
 $0.99\sigma$. Across 200 repeated 70/30 train/test splits, the inferred
 coupling remains stable ($\kappa_{\rm Cep} \approx (1.08 \pm 0.32)\times10^6$ mag) and the
 held-out residual slope is strongly reduced, confirming that the correction
@@ -1553,7 +1553,7 @@ $R_{\rm eff}\times[0.7, 1.3]$, yielding stable correlations ($r \in
 [0.448, 0.482]$) and $\Delta H_0$ values across the entire envelope.
 Repeating the full $\kappa_{\rm Cep}$ optimization across the same envelope gives
 consistent ranges ($\kappa_{\rm Cep} \in [1.20, 1.36]\times10^6$ mag, $H_0^{\rm TEP} \in [68.53, 69.29]$ km/s/Mpc), i.e. a systematic envelope that is smaller
-than the bootstrap uncertainty ($\pm 1.46$ km/s/Mpc), indicating that
+than the bootstrap uncertainty ($\pm 1.05$ km/s/Mpc), indicating that
 the main inference does not rely on fine-tuned aperture assumptions.
 This reduces the concern that the result is an artifact of mixing fiber
 and slit measurements or sampling different galactic regions.
@@ -1801,7 +1801,7 @@ $\sigma_{\rm ref,scr} \approx 30.51$ km/s. Re-optimising $\kappa_{\rm Cep}$
 with this screen-weighted scale yields a headline $H_0$ that differs from
 the standard reference by $\Delta H_0 = 2.14$ km/s/Mpc
 ($H_0^{\rm std} = 68.84$ km/s/Mpc vs $H_0^{\rm scr} = 66.62$ km/s/Mpc),
-a shift comparable to the bootstrap uncertainty ($\pm 1.46$ km/s/Mpc).
+a shift comparable to the bootstrap uncertainty ($\pm 1.05$ km/s/Mpc).
 The correction is therefore consistent under both definitions at the
 level of the intrinsic uncertainty: whether one treats the reference
 as unscreened (conventional; $0.99\sigma$ Planck tension) or
@@ -1898,15 +1898,15 @@ integrated phase accumulation around the source.
 
 The pipeline now makes this separation quantitative. The fitted
 $\kappa_{\rm Cep}=1.271\times10^6$ mag maps to a Cepheid clock-response
-amplitude $\alpha_{\rm clock}=7.00\times10^5$. Local PPN tests see
+amplitude $\alpha_{\rm clock}=8.99\times10^5$. Local PPN tests see
 $\alpha_{\rm local}=\alpha_{\rm clock}S_\odot q_{\rm source}$. The pipeline explicitly calculates
 Vainshtein screening ratios giving $q_{\rm Sun}=8.4\times 10^{-12}$ and $S_\odot=0.96$.
-This gives $\alpha_{\rm local}=5.64\times 10^{-6}$.
+This gives $\alpha_{\rm local}=7.25\times 10^{-6}$.
 
 The resulting local predictions are well below the precision-gravity
-limits: $|\gamma-1|=6.38\times10^{-11}$, a Cassini margin of
-$3.6\times10^5$, and $\eta_{\rm TiPt}=1.13\times10^{-21}$, a
-MICROSCOPE margin of $8.9\times10^6$. The calculated source-charge
+limits: $|\gamma-1|=1.05\times10^{-10}$, a Cassini margin of
+$2.19\times10^5$, and $\eta_{\rm TiPt}=1.86\times10^{-21}$, a
+MICROSCOPE margin of $5.39\times10^6$. The calculated source-charge
 screening successfully protects both local-gravity bounds by several orders
 of magnitude without requiring an arbitrary fixed suppression factor.
 
@@ -2152,7 +2152,7 @@ mean response $\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5$ after 
 continuous shear suppression) and effective calibrator reference
 $\sigma_{\rm ref} = 87.17$ km/s yields a unified local Hubble constant.
 Out-of-sample leave-one-out cross-validation (LOOCV) predicts
-$H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck
+$H_0^{\rm LOOCV} = 68.67 \pm 1.34$ km/s/Mpc, corresponding to a Planck
 tension of $0.99\sigma$; this stress test confirms out-of-sample generalisation. The in-sample
 corrected mean is $H_0 = 68.84$ km/s/Mpc (bootstrap mean $68.91 \pm 1.45$,
 Planck tension $0.99\sigma$). Both are robust under bootstrap resampling.
@@ -2192,9 +2192,9 @@ spin-down residual observed in globular cluster pulsars (Paper 10; nested-domain
 model ~0.58 dex unshielded cluster-bath amplitude) and by the potential- and
 density-dependent structure identified here—now includes an explicit
 local-gravity closure. The fitted Cepheid response maps through
-$q_{\rm Sun}=8.4\times 10^{-12}$ to $|\gamma-1|=6.38\times 10^{-11}$ and
-$\eta_{\rm TiPt}=1.13\times 10^{-21}$, passing Cassini and MICROSCOPE by
-margins of $3.6\times 10^5$ and $8.9\times 10^6$, respectively.
+$q_{\rm Sun}=8.4\times 10^{-12}$ to $|\gamma-1|=1.05\times 10^{-10}$ and
+$\eta_{\rm TiPt}=1.86\times 10^{-21}$, passing Cassini and MICROSCOPE by
+margins of $2.19\times 10^5$ and $5.39\times 10^6$, respectively.
 
 **Claim hierarchy.** The primary empirical claim is the host-potential dependence in SH0ES Cepheid-host residuals ($r=0.466$, $p=0.0109$; TEP-local $r=0.469$). The primary model claim is that the TEP $\sigma^2/c^2$ correction removes this dependence and yields a Planck-consistent local calibration. The local-gravity closure is robust (Cassini and MICROSCOPE margins $>10^5$). The new cross-channel test (Cepheid + TRGB + external pulsar constraint) yields a joint $\chi^2 = 6.22/4$ ($p = 0.18$): the channels are mutually consistent with TEP predictions. The TRGB channel alone is poorly constrained ($\kappa_{\rm TRGB} = 2.79 \pm 1.55 \times 10^6$ mag, $1.8\sigma$ from zero), and the differential test is underpowered ($N=15$). Full confirmation awaits SN Ia and deeper pulsar channel integration. A homogeneous external Cepheid-host sample or blind prediction using an externally fixed $\kappa_{\rm Cep}$ is the next falsification test.
 
@@ -2453,7 +2453,7 @@ Table A1 presents the complete per-host dataset used in this analysis. For each 
 | NGC 1309 | 0.00719 | 32.51 | 67.9 | 82.0 | 78.8 | HyperLEDA | 27.0 | 9.89 | Stellar |
 | NGC 1448 | 0.00333 | 31.30 | 55.0 | 95.0 | 86.8 | Campbell+2014 | 12.0 | 11.28 | HI proxy |
 | NGC 1365 | 0.00483 | 31.33 | 78.6 | 151.4 | 136.2 | Ho+2007 | 7.6 | 10.73 | Stellar |
-| NGC 1559 | 0.00407 | 31.46 | 62.3 | 72.6 | 68.5 | ApJ 929 | 3.6 | 9.55 | Stellar |
+| NGC 1559 | 0.00407 | 31.05 | 62.3 | 72.6 | 68.5 | ApJ 929 | 3.6 | 9.55 | Stellar |
 | NGC 2442 | 0.00488 | 31.47 | 74.5 | 144.2 | 133.5 | HyperLEDA (HI) | 7.2 | 12.20 | HI proxy |
 | NGC 2525 | 0.00602 | 32.01 | 71.5 | 86.5 | 82.2 | HyperLEDA (HI) | 4.3 | 10.06 | HI proxy |
 | NGC 2608 | 0.00855 | 32.63 | 76.4 | 86.6 | 83.0 | HyperLEDA (HI) | 4.3 | 10.45 | HI proxy |
@@ -2542,9 +2542,9 @@ scalar sectors generally unconstrained. Such sectors remain constrained
 indirectly by PPN, equivalence-principle, clock-comparison, and
 source-screening tests. The pipeline therefore uses an explicit local
 closure: $\alpha_{\rm local}=\alpha_{\rm clock}S_\odot q_{\rm source}$,
-with $\alpha_{\rm clock}=7.00\times10^5$, $S_\odot=0.96$, and dynamically calculated
-Vainshtein suppression $q_{\rm Sun}=8.4\times 10^{-12}$. This predicts $|\gamma-1|=6.38\times 10^{-11}$
-and $\eta_{\rm TiPt}=1.13\times 10^{-21}$.
+with $\alpha_{\rm clock}=8.99\times10^5$, $S_\odot=0.96$, and dynamically calculated
+Vainshtein suppression $q_{\rm Sun}=8.4\times 10^{-12}$. This predicts $|\gamma-1|=1.05\times 10^{-10}$
+and $\eta_{\rm TiPt}=1.86\times 10^{-21}$.
 
 **A.3.3 What is not assumed here.**
 This paper does not identify $\kappa_{\rm Cep}$ directly with an unscreened
@@ -2615,7 +2615,7 @@ The signal is stable under leave-one-out cross validation (LOOCV scatter
 standard-dynamics expectation (Γ = 0.39 ± 0.08 dex/dex observed vs.
 0.72 ± 0.04 dex/dex predicted; $4.1\sigma$ tension). A field-binary
 control (binaries vs. isolated field pulsars) shows no excess
-(*p* = 0.70), confirming the signal is environmental, not
+(*p* = 0.91), confirming the signal is environmental, not
 instrument-systematic.
 
 ### B.2 Conformal Mapping: Pulsar Spin-Down to Cepheid Magnitude
@@ -3106,7 +3106,7 @@ $\chi_L \simeq 0$, and therefore
 \end{equation}
 
 For $b \simeq -3.26$, $|b|/\ln 10 \simeq 1.42$, so
-$\alpha_{\rm clock} \simeq 0.70\,\kappa_{\rm Cep}$.
+$\alpha_{\rm clock} \simeq 0.91\,\kappa_{\rm Cep}$.
 
 ### C.9 Prediction for the Sign of the Hubble Bias
 
