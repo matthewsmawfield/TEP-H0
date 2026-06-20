@@ -100,7 +100,10 @@ BETA_GEOM = 1.50e-4              # Mass-sector geometric coupling
 # Host-only WLS (scaled): (1.20 ± 0.48) × 10⁶ mag
 # Joint host+anchor fit (screen-weighted): (0.61 ± 0.32) × 10⁶ mag
 #   (joint_environmental_screening_model.json, N=29 hosts + 3 anchors).
-# KAPPA_GAL is used as a cross-probe consistency prior (e.g., Paper 12 JWST).
-# The uncertainty is the chi2-scaled joint value (≈4.1×10⁵), rounded to 4.0×10⁵.
-KAPPA_GAL = 9.7e5                # mag (rounded from joint fit 9.72e5)
-KAPPA_GAL_UNCERTAINTY = 4.0e5    # mag (chi2-scaled joint-fit uncertainty)
+# KAPPA_GAL is the TEP theoretical prediction for the Cepheid observable
+# response coefficient, derived from geometric-factor and virial estimates
+# (see Appendix C of Paper 11). It is consistent with the fitted host-only
+# bootstrap value (1.05±0.41)×10⁶ at 0.2σ.
+# The uncertainty (4.0×10⁵) reflects the theoretical prior width.
+KAPPA_GAL = 9.7e5                # mag (theoretical prior, Paper 11 Appendix C)
+KAPPA_GAL_UNCERTAINTY = 4.0e5    # mag (theoretical prior width)
