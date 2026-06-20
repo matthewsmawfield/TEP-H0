@@ -1,0 +1,12 @@
+[10:51:20] [INFO] 
+[10:51:20] [INFO] ================================================================================
+[10:51:20] [INFO]    >>> STEP 21: EXACT ANCHOR-LEVERAGE SIGMA_REF
+[10:51:20] [INFO] ================================================================================
+[10:51:20] [INFO] 
+[10:51:20] [INFO] Approximate weights, unscreened:   112.71 km/s
+[10:51:20] [INFO] Approximate weights, screened:     44.05 km/s
+[10:51:20] [INFO] Equal weights, unscreened:         127.48 km/s
+[10:51:20] [INFO] Equal weights, screened:           85.64 km/s
+[10:51:20] [INFO] Pipeline sigma_ref (standard):     87.17 km/s
+[10:51:20] [INFO] Pipeline sigma_ref (screened):     30.51 km/s
+[10:51:20] [SUCCESS] Step 21 complete

@@ -110,6 +110,13 @@ class Step4RobustnessChecks:
 
         sub = cov[np.ix_(idx, idx)]
         sub = 0.5 * (sub + sub.T)
+        
+        # Hard assertions against silent ordering bugs
+        assert len(target_labels) == sub.shape[0]
+        assert sub.shape == (len(target_labels), len(target_labels))
+        assert np.allclose(sub, sub.T)
+        assert np.min(np.linalg.eigvalsh(sub)) > -1e-10
+        
         return sub
 
     def _regularize_covariance(self, cov):
@@ -841,7 +848,7 @@ class Step4RobustnessChecks:
         if "shear_suppression" not in df_full.columns:
             df_full["shear_suppression"] = 1.0
 
-        cuts = [0.0, 0.0035, 0.005, 0.007, 0.01, 0.015]
+        cuts = [0.0, 0.0035, 0.004, 0.005, 0.007, 0.01, 0.015]
         rows = []
         
         from scripts.steps.step_3_tep_correction import Step3TEPCorrection

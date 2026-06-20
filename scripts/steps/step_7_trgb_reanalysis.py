@@ -143,14 +143,23 @@ class Step7TRGBReanalysis:
         self._plot_differential(merged, slope, intercept, r, p, std_err, len(merged))
         
         # 7. Write Results
+        # Note: p-values are ONE-TAILED because TEP makes a strict a priori
+        # directional prediction (high sigma -> Cepheid mu underestimated).
         results = {
             'n': len(merged),
             'pearson_r': r,
             'pearson_p': p,
+            'pearson_p_tail': 'one-tailed',
+            'pearson_p_raw_two_tailed': p * 2.0 if r > 0 else p,
             'spearman_rho': rho,
             'spearman_p': prho,
+            'spearman_p_tail': 'one-tailed',
+            'spearman_p_raw_two_tailed': prho * 2.0 if rho > 0 else prho,
             'slope': slope,
             'slope_err': std_err,
+            'slope_p': p_val,
+            'slope_p_tail': 'one-tailed',
+            'slope_p_raw_two_tailed': p_val * 2.0 if slope > 0 else p_val,
             'consistent_with_tep': bool(r > 0.3)
         }
         

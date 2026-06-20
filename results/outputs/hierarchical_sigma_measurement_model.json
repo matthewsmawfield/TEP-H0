@@ -1,0 +1,23 @@
+{
+  "method_parameters": {
+    "stellar absorption": {
+      "n_hosts": 16,
+      "median_bias_kms": 4.749259500823264,
+      "median_scatter_kms": 16.5,
+      "mean_measured_kms": 116.7875,
+      "mean_inferred_kms": 111.04982215576244
+    },
+    "HI linewidth proxy": {
+      "n_hosts": 13,
+      "median_bias_kms": 3.585250396549739,
+      "median_scatter_kms": 7.0,
+      "mean_measured_kms": 90.07692307692308,
+      "mean_inferred_kms": 85.61865886923869
+    }
+  },
+  "ols_slope": 0.08511851500603197,
+  "odr_slope": 0.23459541627130298,
+  "odr_slope_error": 0.04860083810562825,
+  "odr_ols_ratio": 2.756103255028336,
+  "description": "Hierarchical measurement-error model for velocity dispersion.\nDelta_method captures residual method-specific bias not accounted\nfor by the pipeline's aperture correction and calibration.\nODR slope is ~2.8x steeper than OLS due to sigma measurement error."
+}

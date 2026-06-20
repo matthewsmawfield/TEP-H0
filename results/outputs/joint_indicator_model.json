@@ -1,0 +1,17 @@
+{
+  "N_hosts": 13,
+  "regressor": "S_local * (sigma^2 - sigma_ref^2) / c^2 (same as Step 12)",
+  "B_ceph": 191985.96846209772,
+  "B_ceph_se": 4615364.996572763,
+  "B_ceph_t": 0.04159713665217398,
+  "B_ceph_p": 0.9675652894932694,
+  "B_trgb": 1001383.799764091,
+  "B_trgb_se": 4733742.784054844,
+  "B_trgb_t": 0.21154165856606233,
+  "B_trgb_p": 0.8363329403808473,
+  "kappa_diff": 809397.8313019935,
+  "kappa_diff_err": 360182.0771407153,
+  "kappa_diff_t": 2.2471907478777164,
+  "kappa_diff_p": 0.046116460485692956,
+  "interpretation": "kappa_diff > 0 is directionally consistent with TEP (Cepheids underestimated at high sigma), but magnitude (8.09e+05) is smaller than kappa_Cep (1.26e+06), suggesting shared systematic dominates."
+}

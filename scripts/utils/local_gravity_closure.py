@@ -18,23 +18,30 @@ CASSINI_GAMMA_MINUS_ONE_LIMIT = 2.3e-5
 MICROSCOPE_ETA_LIMIT = 1.0e-14
 MICROSCOPE_COMPOSITION_CHARGE_CONTRAST = 1.0e-3
 SOLAR_NEIGHBORHOOD_SCREENING = 0.96
+# H0 used for Vainshtein radius computation; this is the Hubble constant
+# in km/s/Mpc, set to the canonical local measurement (Riess et al. 2022)
+# consistent with the SH0ES Cepheid host sample used in the TEP analysis.
+LOCAL_H0_KM_S_MPC = 73.0
+
+
 def compute_vainshtein_suppression_sun() -> float:
     # Constants
     c = 299792.458
-    H0_km_s_mpc = 73.0
+    H0_km_s_mpc = LOCAL_H0_KM_S_MPC
     Mpc_to_km = 3.086e19
     H0_s = H0_km_s_mpc / Mpc_to_km
     H0_m_inv = H0_s / (c * 1000.0)
     
     rs_sun_m = 2953.0
-    r_earth_m = 1.496e11  # Cassini impact parameter is roughly 1 AU to 1.5 AU, we'll use 1 AU as conservative
+    r_earth_m = 1.496e11  # Cassini impact parameter is roughly 1 AU to 1.5 AU
     
     r_V = (rs_sun_m / (H0_m_inv**2))**(1.0/3.0)
     return float((r_earth_m / r_V)**1.5)
 
+
 def compute_vainshtein_suppression_earth() -> float:
     c = 299792.458
-    H0_km_s_mpc = 73.0
+    H0_km_s_mpc = LOCAL_H0_KM_S_MPC
     Mpc_to_km = 3.086e19
     H0_s = H0_km_s_mpc / Mpc_to_km
     H0_m_inv = H0_s / (c * 1000.0)

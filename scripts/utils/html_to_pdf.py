@@ -201,7 +201,7 @@ class HTMLToPDFConverter:
                     timeout=30000
                 )
                 logger.info("Loading indicator hidden, content should be ready")
-            except:
+            except Exception:
                 logger.warning("Could not detect loading indicator state, proceeding anyway")
             
             # Final check for content presence
@@ -211,7 +211,7 @@ class HTMLToPDFConverter:
                     timeout=10000
                 )
                 logger.info("Content container has content loaded")
-            except:
+            except Exception:
                 logger.warning("Could not verify content loading, proceeding anyway")
             
             # Wait specifically for MathJax to finish typesetting
@@ -230,7 +230,7 @@ class HTMLToPDFConverter:
                 logger.info("MathJax typesetting complete")
                 # Extra wait for MathJax fonts to settle
                 await page.wait_for_timeout(2000)
-            except:
+            except Exception:
                 logger.warning("MathJax wait timed out, proceeding anyway")
 
             # Wait specifically for images to load
@@ -246,13 +246,13 @@ class HTMLToPDFConverter:
                     timeout=15000
                 )
                 logger.info(f"All images loaded successfully")
-            except:
+            except Exception:
                 logger.warning("Could not verify all images loaded, proceeding anyway")
                 # Log how many images we found
                 try:
                     image_count = await page.evaluate("document.querySelectorAll('img').length")
                     logger.info(f"Found {image_count} images in document")
-                except:
+                except Exception:
                     pass
             
             # Configure PDF options

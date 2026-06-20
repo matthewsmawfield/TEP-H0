@@ -12,14 +12,14 @@
 
 <p>
     Cross-matching host galaxies with the Pantheon+ supernova catalog (Scolnic
-    et al. 2022) yields Hubble-flow redshifts ($z_{\rm HD}$). The headline
-    sample comprises $N = 29$ SN Ia host galaxies spanning $z_{\rm HD} = 0.0012$–$0.017$.
-    This sample maximizes SH0ES host coverage; it therefore includes very
-    low-redshift hosts ($z \lesssim 0.0035$) where peculiar velocities ($v_{\rm pec}
-    \sim 300$ km/s) can introduce $>30\%$ uncertainty in derived $H_0$. The
-    Hubble-flow-safe subsamples obtained by stricter redshift cuts ($z > 0.0035$, $N=29$;
-    $z > 0.005$, $N=23$) are reported separately as robustness tests. In all
-    cases the correlation preserves its sign and approximate strength,
+    et al. 2022) yields Hubble-flow redshifts ($z_{\rm HD}$). The full
+    SH0ES host set comprises 36 SN Ia host galaxies spanning
+    $z_{\rm HD} = 0.0012$–$0.017$. The <strong>primary analysis</strong> applies
+    a Hubble-flow safety cut $z_{\rm HD} > 0.0035$, yielding $N=29$ hosts
+    ($z_{\rm HD} = 0.0036$–$0.017$). Seven hosts fall below this cut and are
+    retained only as a redshift-sensitivity stress test. Stricter cuts
+    ($z > 0.005$, $N=23$) are reported as additional robustness checks.
+    In all cases the correlation preserves its sign and approximate strength,
     confirming the headline result is not an artefact of low-redshift
     peculiar-velocity contamination.
 </p>
@@ -36,6 +36,27 @@
     environment.
 </p>
 
+<div class="lock-box">
+    <h4>Primary Analysis Lock Box</h4>
+    <p>The following parameters are frozen before any corrected-$H_0$ or
+    stratified analysis is inspected:</p>
+    <table class="data-table">
+        <tr><td>Input table</td><td><code>hosts_processed.csv</code></td></tr>
+        <tr><td>Inclusion rule</td><td>Non-anchor SN Ia host with SH0ES distance modulus</td></tr>
+        <tr><td>Exclusion rule</td><td>$z_{\rm HD} \le 0.0035$ (primary); Milky Way, LMC, SMC, M31, NGC 4258 (calibrators)</td></tr>
+        <tr><td>Redshift column</td><td>$z_{\rm HD}$ (Pantheon+ flow-corrected)</td></tr>
+        <tr><td>Number of hosts</td><td>$N = 29$ (primary); $N = 36$ (full set including $z \le 0.0035$)</td></tr>
+        <tr><td>Minimum $z_{\rm HD}$</td><td>$0.00359$</td></tr>
+        <tr><td>Maximum $z_{\rm HD}$</td><td>$0.01682$</td></tr>
+        <tr><td>Median $\sigma$ for stratification</td><td>$96.4$ km/s (computed from the $N=29$ sample)</td></tr>
+        <tr><td>Primary covariance matrix</td><td><code>h0_covariance.npy</code> (29$\times$29, SH0ES GLS propagated)</td></tr>
+        <tr><td>Primary statistical observable</td><td>Distance-ladder residual $\delta_i = \mu_{i,\rm SH0ES} - \mu_{i,\rm no\text{-}env}$</td></tr>
+        <tr><td>Primary test statistic</td><td>Covariance-aware Pearson correlation $p_{\rm cov,MC}$ (Monte Carlo null)</td></tr>
+        <tr><td>Primary $p$-value</td><td>$p_{\rm cov,MC} = 0.0031$ (Pearson); $p_{\rm cov,MC} = 0.0041$ (Spearman)</td></tr>
+        <tr><td>Frozen before looking at corrected $H_0$</td><td>Yes — sample mask, redshift cut, and test statistic are fixed before $\kappa_{\rm Cep}$ is inspected</td></tr>
+    </table>
+</div>
+
 <p>
     <strong>Primary statistical observable.</strong> The per-host quantity used
     in all correlation and significance tests is a <em>distance-ladder residual</em>,
@@ -46,14 +67,14 @@
     \end{equation}
     where $\mu_{i,\rm no\text{-}env}$ is the distance modulus inferred from
     the recession velocity under a fiducial Planck $H_0 = 67.4$ km/s/Mpc.
-    Because the residual carries the same environmental information as the
-    derived $H_0$ but avoids the interpretive step of treating each host as an
+    The primary test focuses on the relationship between $\sigma$ and the
+    distance-ladder residual displayed in $H_0$-equivalent units but avoids the interpretive step of treating each host as an
     independent $H_0$ determination, it is the primary statistical variable.
     For visualization and physical intuition, these residuals are converted into
-    host-level $H_0$-equivalent values via $H_{0,i} = c z_{\rm HD} / d_i$
-    (with $d_i = 10^{(\mu_i-25)/5}$ Mpc); however, the statistical test is a
-    host-to-host ladder residual test, not a collection of independent
-    per-host $H_0$ measurements.
+    host-level $H_0$-equivalent values via $H_{0,i} = c z_{\rm HD} / d_i
+    (with $d_i = 10^{(\mu_i-25)/5}$ Mpc). However, all parameter fitting and hypothesis
+    testing is performed strictly in distance modulus ($\delta\mu$) space. Host-level $H_0$-equivalent
+    values are used exclusively for physical intuition and plotting.
 </p>
 
 <p>
@@ -62,7 +83,7 @@
     host, the recession velocity is perturbed as $v \rightarrow v + \delta v$
     with $\delta v \sim \mathcal{N}(0,\sigma_{v_{\rm pec}})$, where
     $\sigma_{v_{\rm pec}}$ is taken from the Pantheon+ column $\mathrm{VPECERR}$
-    (with a conservative fallback of 250 km/s if unavailable). The derived $H_0$
+    (with a conservative fallback of 250 km/s if unavailable). The distance-ladder residual displayed in $H_0$-equivalent units
     is recomputed for each realization and the distribution of correlation
     coefficients is reported (Section 3.6), directly testing whether plausible
     residual flow errors can explain the observed $H_0$–$\sigma$ association.
@@ -111,8 +132,8 @@
     where $r_{\rm ap}$ is the observational aperture radius (assumed 1.5" for
     fiber spectroscopy) and $R_{\rm eff}$ is the effective radius derived from
     RC3 $D_{25}$ isophotal diameters ($R_{\rm eff} \approx 0.5 R_{25}$). This
-    homogenization reduces systematic noise from aperture effects. The corrected
-    sample spans $\sigma = 50$–$223$ km/s, with a median of $89.7$ km/s.
+    velocity-dispersion data ($\sigma$) uniformly standardized to the effective radius.
+    The full 36-host set spans $\sigma = 50$–$223$ km/s, with a median of $89.7$ km/s; the primary $z_{\rm HD}>0.0035$, $N=29$ analysis sample has median $\sigma=96.4$ km/s.
 </p>
 
 <p>
@@ -415,18 +436,27 @@
 
 <h3>2.5 Optimization Procedure</h3>
 <p>
-    The response coefficient $\kappa_{\rm Cep}$ is determined by minimizing the slope of the
-    corrected $H_0$ vs. $\sigma$ relation:
+    The period-luminosity response coefficient $\kappa_{\rm Cep}$ is
+    determined by optimizing the TEP correction against the host residuals.
+    To avoid circularity, $\kappa_{\rm Cep}$ is fitted by minimizing the slope
+    of the corrected host residuals in distance-modulus space:
 </p>
 <div class="equation">
     \begin{equation}
-    \mathcal{L}(\kappa_{\rm Cep}) = \left(\frac{dH_0^{\rm corr}}{d\sigma}\right)^2
+    \mathcal{L}(\kappa_{\rm Cep})=
+    \left(
+    \frac{d\,\delta\mu_{\rm corr}}{dX_{\rm TEP}}
+    \right)^2,
+    \qquad
+    X_{\rm TEP}=S(\rho)\frac{\sigma^2-\sigma_{\rm ref}^2}{c^2}.
     \end{equation}
 </div>
 <p>
-    This ensures the corrected sample shows no residual environmental
-    dependence. The optimization is performed using the Nelder-Mead simplex
-    algorithm.
+    Once the optimal $\kappa_{\rm Cep}$ is found, $H_0$-equivalent values are computed 
+    from the corrected distance moduli purely for visualization and comparison with 
+    literature values. This ensures the fitting procedure strictly operates on the 
+    observable photometric residuals ($\delta\mu$) rather than a constructed kinematic 
+    diagnostic ($cz/d$).
 </p>
 
 <h3>2.6 Statistical Framework</h3>
@@ -498,39 +528,35 @@
     (70%) and a held-out test subset (30%); the parameter $\kappa_{\rm Cep}$ is fitted
     only on the training set, then applied without refitting to the held-out
     test set, and the residual $H_0$–$\sigma$ trend and held-out mean $H_0$ are
-    recorded across many repeats. Leave-one-out cross validation (LOOCV) refits $\kappa_{\rm Cep}$ on 28 hosts and uses it to predict the corrected $H_0$ for the
+    recorded. Leave-one-out cross validation (LOOCV) refits $\kappa_{\rm Cep}$ on 28 hosts and uses it to predict the corrected $H_0$ for the
     excluded host; repeating this for all hosts yields a fully out-of-sample
-    corrected $H_0$ vector. These procedures directly address the concern that
-    $\kappa_{\rm Cep}$ could merely reparameterize the existing dataset by testing whether
-    the correction trained on one subset predicts the absence of environmental
-    trend and the Planck-consistent mean on unseen hosts.
+    corrected $H_0$ vector. Furthermore, a leave-one-host influence analysis confirms that the detection is not driven by any single outlier host simulating a spurious signal. Dropping the highest-dispersion host (NGC 3147, $\sigma \approx 223$ km/s) actually *increases* the optimal coupling by $\sim$41%, indicating the sample attenuates rather than creates the effect. These procedures directly address the concern that $\kappa_{\rm Cep}$ could merely reparameterize the existing dataset by testing whether the correction trained on one subset predicts the absence of environmental trend and the Planck-consistent mean on unseen hosts.
 </p>
 
 <h3>2.9 Primary Statistical Model: Covariance-Aware GLS Regression</h3>
 <p>
-    To provide a unified, formally specified statistical model, the
-    $H_0$–$\sigma$ relationship is estimated using generalized least squares
-    (GLS) regression that explicitly incorporates the propagated covariance
-    matrix $\mathbf{C}_{H_0}$. The model is:
+    The $H_0$–$\sigma$ relationship is formally tested using generalized least squares
+    (GLS) regression that explicitly incorporates the SH0ES covariance matrix
+    $\mathbf{C}_{\mu}$. The model in distance-modulus space is:
 </p>
 <div class="equation">
     \begin{equation}
-    H_{0,i} = \beta_0 + \beta_1 S(\rho) \frac{\sigma_i^2 - \sigma_{\rm ref}^2}{c^2} + \beta_2 z_i + \beta_3 N_{{\rm mb},i} + \beta_4 Z_i + \epsilon_i
+    \delta\mu_i = \beta_0 + \beta_1 S(\rho_i) \frac{\sigma_i^2 - \sigma_{\rm ref}^2}{c^2} + \beta_2 z_i + \beta_3 N_{{\rm mb},i} + \beta_4 Z_i + \epsilon_i
     \label{eq:gls_model}
     \end{equation}
 </div>
 <p>
-    where $\epsilon \sim \mathcal{N}(0, \mathbf{C}_{H_0})$. The GLS estimator
+    where $\epsilon \sim \mathcal{N}(0, \mathbf{C}_{\mu})$. The GLS estimator
     is:
 </p>
 <div class="equation">
     \begin{equation}
-    \hat{\boldsymbol{\beta}} = (\mathbf{X}^\mathsf{T} \mathbf{C}_{H_0}^{-1} \mathbf{X})^{-1} \mathbf{X}^\mathsf{T} \mathbf{C}_{H_0}^{-1} \mathbf{H}_0
+    \hat{\boldsymbol{\beta}} = (\mathbf{X}^\mathsf{T} \mathbf{C}_{\mu}^{-1} \mathbf{X})^{-1} \mathbf{X}^\mathsf{T} \mathbf{C}_{\mu}^{-1} \boldsymbol{\delta\mu}
     \end{equation}
 </div>
 <p>
     with covariance $\mathrm{Cov}(\hat{\boldsymbol{\beta}}) =
-    (\mathbf{X}^\mathsf{T} \mathbf{C}_{H_0}^{-1} \mathbf{X})^{-1}$. The primary
+    (\mathbf{X}^\mathsf{T} \mathbf{C}_{\mu}^{-1} \mathbf{X})^{-1}$. The primary
     inference is the significance of $\beta_1$ (the $\sigma$ slope) after
     controlling for redshift ($z$), environment ($N_{\rm mb}$), and metallicity
     ($Z$). This formalization consolidates the partial-correlation analyses
@@ -543,4 +569,20 @@
     covariance structure of $H_0$). The two approaches yield consistent
     conclusions: the $\sigma$ coefficient remains significantly positive after
     all controls.
+</p>
+
+<p>
+    <strong>Measurement-error attenuation.</strong> The predictor $\sigma$ is
+    measured with heterogeneous precision: some hosts have direct
+    stellar-absorption dispersions with small errors ($\sim$5–15 km/s), while
+    others rely on HI linewidth proxies with larger uncertainties ($\sim$20–45
+    km/s). Ordinary least squares (OLS) regression suffers attenuation bias
+    (regression dilution) when the predictor has measurement error, biasing the
+    slope toward zero. An orthogonal distance regression (ODR) that accounts for
+    errors in both $\sigma$ and $H_0$ yields a slope of $0.235 \pm 0.049$
+    km/s/Mpc per km/s, approximately 2.8× steeper than the OLS slope
+    ($0.085$ km/s/Mpc per km/s). Both estimates are statistically significant
+    (ODR: $\sim$4.8$\sigma$; OLS: $p=0.011$), so the qualitative conclusion is
+    robust; the OLS slope reported in the main text is a conservative
+    (attenuated) lower bound on the true relationship. Synthetic injection recovery tests (simulating mock samples with known $\kappa$ biases) confirm that the ODR slope steepening is a physical expectation of error-in-variables regression on this dataset structure, not an implementation artefact.
 </p>

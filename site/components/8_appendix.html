@@ -71,9 +71,10 @@
 
 <h3>A.2 Gold Standard Subsample</h3>
 <p>
-    The highest-fidelity subsample comprises the nine hosts with $\sigma$
-    measurements from Kormendy &amp; Ho (2013), SDSS DR7, or Ho et al. (2009).
-    Because $N=9$ is underpowered for a standalone $\kappa$ fit, this tier is
+    The highest-fidelity subsample comprises the seven hosts with $\sigma$
+    measurements from Kormendy &amp; Ho (2013), SDSS DR7, or Ho et al. (2009)
+    that also satisfy the Hubble-flow cut $z_{\rm HD}>0.0035$.
+    Because $N=7$ is underpowered for a standalone $\kappa$ fit, this tier is
     reported in the appendix rather than the main text.
 </p>
 
@@ -92,11 +93,11 @@
         <tbody>
             <tr>
                 <td>Gold Standard</td>
-                <td>9</td>
-                <td>0.569</td>
-                <td>0.110</td>
-                <td>$64.59 \pm 3.68$</td>
-                <td>$58.58 \pm 2.68$</td>
+                <td>7</td>
+                <td>0.559</td>
+                <td>0.192</td>
+                <td>$66.78 \pm 4.09$</td>
+                <td>$63.97 \pm 3.04$</td>
             </tr>
         </tbody>
     </table>
@@ -104,7 +105,7 @@
 
 <p>
     The Gold Standard preserves the sign of the environmental response
-    ($r=0.569$) but is too small for a decisive standalone fit. Its value is to
+    ($r=0.559$) but is too small for a decisive standalone fit. Its value is to
     bound $\kappa_{\rm Cep}$ and test whether the sign survives when all proxy
     data are removed.
 </p>
@@ -188,4 +189,44 @@
     standardized as Temporal Shear, referring to the 
     gradient-based suppression of scalar field activity in dense 
     environments.
+</p>
+
+<h3>A.5 TEP Correction Prediction Grid</h3>
+<p>
+    The TEP framework makes explicit quantitative predictions for the period-luminosity 
+    correction $\Delta\mu$ in untested host environments as a function of velocity 
+    dispersion $\sigma$ and local density screening factor $S(\rho)$. The table below 
+    presents expected theoretical distance-modulus corrections and approximate $H_0$ shifts 
+    using the optimized Cepheid clock response coefficient $\kappa_{\rm Cep} \approx 1.05 \times 10^6$ mag.
+    This explicit prediction grid provides a preregistered target for falsifying the TEP 
+    hypothesis with future homogeneous Cepheid or Mira observations in targeted environments.
+</p>
+
+<div class="appendix-table">
+<table class="data-table">
+    <thead>
+        <tr>
+            <th scope="col">Potential ($\sigma$, km/s)</th>
+            <th scope="col">Shear Activity ($S$)</th>
+            <th scope="col">Predicted $\Delta\mu$ (mag)</th>
+            <th scope="col">Approx. $\Delta H_0$ (km/s/Mpc)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td>50</td><td>1.0 (Diffuse)</td><td>$-0.059$</td><td>$+1.92$</td></tr>
+        <tr><td>75</td><td>1.0 (Diffuse)</td><td>$-0.023$</td><td>$+0.74$</td></tr>
+        <tr><td>100</td><td>1.0 (Diffuse)</td><td>$+0.028$</td><td>$-0.90$</td></tr>
+        <tr><td>125</td><td>1.0 (Diffuse)</td><td>$+0.094$</td><td>$-3.02$</td></tr>
+        <tr><td>150</td><td>1.0 (Diffuse)</td><td>$+0.174$</td><td>$-5.61$</td></tr>
+        <tr><td>175</td><td>1.0 (Diffuse)</td><td>$+0.269$</td><td>$-8.66$</td></tr>
+        <tr><td>200</td><td>1.0 (Diffuse)</td><td>$+0.378$</td><td>$-12.19$</td></tr>
+        <tr><td>225</td><td>1.0 (Diffuse)</td><td>$+0.502$</td><td>$-16.18$</td></tr>
+        <tr><td>150</td><td>0.5 (Intermediate)</td><td>$+0.087$</td><td>$-2.80$</td></tr>
+        <tr><td>150</td><td>0.1 (Dense)</td><td>$+0.017$</td><td>$-0.56$</td></tr>
+        <tr><td>200</td><td>0.1 (Dense)</td><td>$+0.038$</td><td>$-1.22$</td></tr>
+    </tbody>
+</table>
+</div>
+<p class="table-notes">
+    <em>Notes:</em> Negative $\Delta H_0$ means the standard pipeline <em>overestimates</em> $H_0$ in that environment, so the TEP correction shifts it down toward Planck. Positive $\Delta\mu$ indicates the Cepheid distance was underestimated due to clock-period contraction. The reference scale is the unscreened SH0ES effective calibrator $\sigma_{\rm ref} = 87.17$ km/s.
 </p>

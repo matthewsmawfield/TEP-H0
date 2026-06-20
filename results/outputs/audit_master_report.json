@@ -1,0 +1,20 @@
+{
+  "audit_completed": true,
+  "n_findings": 12,
+  "findings": [
+    "SAMPLE: N=29, z\u2208[0.00359,0.01682], all z>0.0035=True, no_dups=True",
+    "KAPPA: recomputed=1.257e+06, json=1.257e+06, match=True",
+    "COV_ORDER: MATCH",
+    "COV: shape=(29, 29), symmetric=True, PSD=True, min_eig=22.04",
+    "PROVENANCE: stellar=16, proxy=13",
+    "GOLD_STD: N=7, r=0.559, p=0.192",
+    "FREE_INTERCEPT: slope=0.0851",
+    "ODR: slope=0.2346\u00b10.0486, ratio_to_OLS=2.76x",
+    "MULTIPLE_TESTING: Bonferroni_thresh=0.0042, significant=3/12",
+    "LARGE_CORRECTIONS: 3 hosts with |\u0394\u03bc|>0.20 mag",
+    "ANCHOR_SCREENING: formula-derived, pre-specified, PASS",
+    "UNIT_TESTS: PASS"
+  ],
+  "pipeline_version": "v0.7",
+  "status": "PASS"
+}

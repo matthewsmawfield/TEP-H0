@@ -20,9 +20,10 @@
     mean response $\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5$ after accounting for
     continuous shear suppression) and effective calibrator reference
     $\sigma_{\rm ref} = 87.17$ km/s yields a unified local Hubble constant.
-    Out-of-sample leave-one-out cross-validation (LOOCV) predicts
+    Internal interpolation stability (leave-one-out cross-validation, LOOCV) gives
     $H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck tension of
-    $0.82\sigma$; this stress test confirms out-of-sample generalisation. The in-sample
+    $0.82\sigma$; this stress test demonstrates internal interpolation stability,
+    not external validation. The in-sample
     corrected mean is $H_0 = 68.75$ km/s/Mpc (bootstrap mean $68.80 \pm 1.46$,
     Planck tension $0.91\sigma$). Both are robust under bootstrap resampling.
     The low-$\sigma$ subsample ($66.26 \pm 1.05$ km/s/Mpc) lies below the uncorrected
@@ -70,8 +71,81 @@
     margins of $3.6\times 10^5$ and $8.9\times 10^6$, respectively.
 </p>
 
+<div class="lock-box">
+    <h4>Resolution Criteria</h4>
+    <p>The Cepheid-bias mechanism is regarded as a successful resolution of the
+    Cepheid-calibrated SH0ES–Planck Hubble tension if and only if all of the
+    following criteria are met:</p>
+    <table class="data-table">
+        <tr><th>Criterion</th><th>Requirement</th><th>Status</th></tr>
+        <tr><td><strong>R1.</strong> Uncorrected residual trend</td><td>Cepheid residuals show positive host-potential dependence with $p_{\rm cov} < 0.01$</td><td><span style="color:green">PASS</span> ($p_{\rm cov}=0.0031$)</td></tr>
+        <tr><td><strong>R2.</strong> Sign prediction</td><td>High-potential hosts produce underestimated distances (inflated $H_0$)</td><td><span style="color:green">PASS</span></td></tr>
+        <tr><td><strong>R3.</strong> One-parameter correction</td><td>TEP correction reduces SH0ES–Planck discrepancy below $1\sigma$</td><td><span style="color:green">PASS</span> ($0.91\sigma$)</td></tr>
+        <tr><td><strong>R4.</strong> No residual trend</td><td>Corrected sample shows no significant $\sigma$–$H_0$ residual</td><td><span style="color:orange">PASS (fitted diagnostic)</span> — by construction, not independent evidence</td></tr>
+        <tr><td><strong>R5.</strong> Robustness suite</td><td>Result survives covariance, flow, redshift, metallicity, dust, anchor, and provenance tests</td><td><span style="color:orange">PARTIAL PASS</span> — TRGB and anchor behaviour remain model-dependent</td></tr>
+        <tr><td><strong>R6.</strong> Interpolation stability</td><td>LOOCV or held-out prediction agrees with in-sample correction</td><td><span style="color:orange">INTERNAL PASS</span> — interpolation stability only; not external validation ($H_0^{\rm LOOCV}=68.58\pm1.34$)</td></tr>
+        <tr><td><strong>R7.</strong> Non-Cepheid probes</td><td>TRGB and SN Ia do not require the same correction amplitude</td><td><span style="color:orange">PENDING</span> (TRGB underpowered; SN Ia not yet tested)</td></tr>
+        <tr><td><strong>R8.</strong> Blind external validation</td><td>New Cepheid hosts obey precomputed $\Delta\mu_{\rm TEP}$ without refitting $\kappa_{\rm Cep}$</td><td><span style="color:red">OPEN</span> (awaiting JWST/external sample)</td></tr>
+    </table>
+    <p style="margin-top:1em;"><em>Criteria R1–R3 are satisfied by the current analysis.
+    R4–R6 demonstrate internal consistency but do not constitute independent
+    evidence. R7 is suggestive but not decisive. R8 is the decisive falsification test.</em></p>
+</div>
+
 <p>
-    <strong>Claim hierarchy.</strong> The primary empirical claim is the host-potential dependence in SH0ES Cepheid-host residuals ($r=0.500$, $p=0.002$). The primary model claim is that the TEP $\sigma^2/c^2$ correction removes this dependence and yields a Planck-consistent local calibration. The local-gravity closure is robust (Cassini and MICROSCOPE margins $>10^5$). The new cross-channel test (Cepheid + TRGB + external pulsar constraint) yields a joint $\chi^2 = 6.22/4$ ($p = 0.18$): the channels are mutually consistent with TEP predictions. The TRGB channel alone is poorly constrained ($\kappa_{\rm TRGB} = 2.79 \pm 1.55 \times 10^6$ mag, $1.8\sigma$ from zero), and the differential test is underpowered ($N=15$). Full confirmation awaits SN Ia and deeper pulsar channel integration. A homogeneous external Cepheid-host sample or blind prediction using an externally fixed $\kappa_{\rm Cep}$ is the next falsification test.
+    <strong>Two-stage resolution claim.</strong>
+</p>
+<p>
+    <strong>Stage 1 — Discovery of bias:</strong> Before fitting any correction,
+    the Cepheid ladder residual shows a statistically significant host-potential
+    dependence ($p_{\rm cov}=0.0031$). The sign is exactly what TEP predicts:
+    high-potential Cepheid hosts produce underestimated distances and inflated
+    local $H_0$.
+</p>
+<p>
+    <strong>Stage 2 — Resolution by correction:</strong> A one-parameter
+    correction derived from the TEP conformal clock-transport law
+    ($\Delta\mu = \kappa_{\rm Cep} \cdot S(\rho) \cdot (\sigma^2-\sigma_{\rm ref}^2)/c^2$)
+    removes the environmental dependence and brings the Cepheid-calibrated
+    SH0ES ladder into agreement with the CMB scale ($H_0 = 68.75$ km/s/Mpc;
+    Planck tension $0.91\sigma$).
+</p>
+<p>
+    This two-stage structure separates the empirical detection from the fitted
+    correction, avoiding the circularity objection. The primary empirical claim
+    is the host-potential dependence in SH0ES Cepheid-host residuals
+    ($r=0.466$, $p=0.0109$; TEP-local $r=0.469$). The primary model claim is that the TEP
+    $\sigma^2/c^2$ correction removes this dependence and yields a
+    Planck-consistent local calibration.
+</p>
+<p>
+    The local-gravity closure is robust (Cassini and MICROSCOPE margins
+    $>10^5$). The anchor reference frame requires TEP-consistent screening:
+    the screened-effective reference ($\sigma_{\rm ref,scr} = 30.51$ km/s)
+    yields $H_0^{\rm TEP} = 66.62 \pm 1.46$ km/s/Mpc, reducing the Planck
+    tension to $\approx 0.15\sigma$; the unscreened reference
+    ($H_0^{\rm GR} = 68.75$) is the conventional approximation.
+    The cross-channel test reveals a critical puzzle: the differential
+    $\kappa_{\rm diff} = (0.53 \pm 0.23) \times 10^6$ mag is 2.3σ from
+    zero, indicating that the $\sigma$ regressor tracks a shared astrophysical
+    systematic (host mass, metallicity) affecting both Cepheid and TRGB
+    channels. After host-mass orthogonalization, the Cepheid residual retains
+    a significant $\sigma$ trend ($r = 0.42$, $p = 0.024$) while the TRGB
+    residual is consistent with null ($r = 0.15$, $p = 0.62$), supporting
+    a Cepheid-specific clock-rate component superposed on a shared systematic.
+    The TRGB gate is therefore INCONCLUSIVE pending larger samples and
+    metallicity control. Full confirmation awaits SN Ia channel integration,
+    homogeneous stellar-dispersion spectroscopy, and the M31 color-offset
+    discriminating test.
+    A frozen prediction table (see
+    <code>results/outputs/frozen_tep_predictions.csv</code>) provides the
+    expected $\Delta\mu_{\rm TEP}$ as a function of prospective host
+    $\sigma$ and screening factor $S$, computed with the pipeline-frozen
+    parameters $\kappa_{\rm Cep} = 1.049\times10^6$ mag and
+    $\sigma_{\rm ref} = 87.17$ km/s. New Cepheid-SN hosts that obey
+    the precomputed correction within the quoted distance-modulus
+    uncertainty ($\sim$0.1–0.2 mag) confirm the model; systematic
+    offsets falsify it.
 </p>
 
 <p>

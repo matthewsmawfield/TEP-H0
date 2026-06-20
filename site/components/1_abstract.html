@@ -26,9 +26,13 @@
     </p>
 
     <p>
-        Analysis of the Hubble-flow SH0ES Cepheid sample ($z > 0.0035$; $N=29$), stratified by host galaxy
-        velocity dispersion (a TEP-independent kinematic observable), reveals a
-        correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.517$, $p = 0.0041$; Pearson $r = 0.466$, $p = 0.0109$). A median-split stratification at $\sigma_{\rm med} \approx 96.4$ km/s yields $H_0 = 66.26$ km/s/Mpc (low-$\sigma$; $N=15$) versus $74.12$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 7.86$ km/s/Mpc. Because published $\sigma$ values
+        The primary statistical observable is a covariance-propagated host-to-host
+        distance-modulus residual; host-equivalent $H_0$ values are shown only for
+        interpretability. Analysis of the Hubble-flow SH0ES Cepheid sample
+        ($z_{\rm HD} > 0.0035$; $N=29$), stratified by host galaxy velocity dispersion
+        (a TEP-independent kinematic observable), reveals a correlation between host
+        potential depth and the residual (Spearman $\rho = 0.517$, $p = 0.0041$;
+        Pearson $r = 0.466$, $p = 0.0109$). A median-split stratification at $\sigma_{\rm med} \approx 96.4$ km/s yields $H_0 = 66.26$ km/s/Mpc (low-$\sigma$; $N=15$) versus $74.12$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 7.86$ km/s/Mpc. Because published $\sigma$ values
         are heterogeneous (direct stellar absorption and calibrated HI linewidth
         proxies), all values are fully traceable to original literature sources
         with ADS bibcodes. Measurement methodology is treated as a first-class
@@ -41,14 +45,18 @@
         $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP
         period-contraction combined with the virial relation $|\Phi|\propto\sigma^2$—with
         Observable Response Coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.41) \times 10^6$ mag
-        and effective calibrator reference $\sigma_{\rm ref} = 87.17$ km/s yields a unified local
-        Hubble constant. Out-of-sample validation (leave-one-out cross-validation, LOOCV)
-        predicts $H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck
-        tension of $0.82\sigma$; this stress test confirms the correction generalises out of sample,
-        with the response coefficient trained on 28 hosts and tested on the held-out host.
-        The in-sample corrected mean is $H_0 = 68.75$ km/s/Mpc (bootstrap mean
-        $68.80 \pm 1.46$, Planck tension $0.91\sigma$), with the corrected $r \simeq 0$ a fitted-correction diagnostic
-        rather than an independent validation statistic.
+        and effective calibrator reference $\sigma_{\rm ref} = 87.17$ km/s removes the
+        host-potential dependence and brings the Cepheid-calibrated SH0ES ladder into
+        agreement with the CMB scale ($H_0 = 68.75$ km/s/Mpc; Planck tension $0.91\sigma$).
+        Internal interpolation stability (leave-one-out cross-validation, LOOCV) gives
+        $H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, Planck tension $0.82\sigma$.
+        The correction survives covariance propagation, redshift cuts, peculiar-velocity
+        perturbation, metallicity/dust controls, and velocity-dispersion provenance tests.
+        A two-stage resolution claim is proposed: (i) the Cepheid ladder contains a
+        host-potential bias with the predicted sign and magnitude; (ii) a one-parameter
+        correction derived from the TEP conformal clock-transport law removes the
+        SH0ES–Planck discrepancy. Full confirmation requires blind external validation
+        on new Cepheid hosts without refitting $\kappa_{\rm Cep}$.
     </p>
 
     <p>

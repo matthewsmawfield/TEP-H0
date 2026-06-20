@@ -692,10 +692,12 @@ class Step2Stratification:
         merged = self.load_and_merge()
         analyzed = self.calculate_h0(merged)
 
-        # Add density calculation
-        rho_mean, rho_min, rho_max, analyzed = self.calculate_densities(analyzed)
-
+        # Annotate large-scale environment FIRST so tully_nmb is available
+        # for group screening in the density/shear-suppression calculation
         analyzed = self.annotate_large_scale_environment(analyzed)
+
+        # Add density calculation (requires tully_nmb for S_group)
+        rho_mean, rho_min, rho_max, analyzed = self.calculate_densities(analyzed)
 
         final_df, metrics = self.stratify_and_analyze(analyzed)
 

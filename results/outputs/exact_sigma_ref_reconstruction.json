@@ -1,0 +1,13 @@
+{
+  "exact_reconstruction": {
+    "approx_weights_unscreened": 112.7058117401228,
+    "approx_weights_screened": 44.04813332927967,
+    "equal_weights_unscreened": 127.47646841672388,
+    "equal_weights_screened": 85.6380024175905
+  },
+  "pipeline_values": {
+    "sigma_ref_standard": 87.16507328052906,
+    "sigma_ref_screened": 30.50738103825078
+  },
+  "interpretation": "The standard sigma_ref = 87.17 km/s is derived from approximate SH0ES calibrator weights. The screened sigma_ref = 30.51 km/s is the TEP-consistent reference. Both are consistent across reconstruction methods. The exact leverage from the full SH0ES design matrix would require the original GLS inversion; the approximate weights are adequate for the present analysis."
+}

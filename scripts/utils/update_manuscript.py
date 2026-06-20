@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 import re
+from pathlib import Path
 
-path = "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/manuscripts/11-TEP-H0-v0.7-KingstonUponHull.md"
+path = str(Path(__file__).resolve().parent.parent.parent / "manuscripts" / "11-TEP-H0-v0.7-KingstonUponHull.md")
 text = open(path).read()
 original = text
 

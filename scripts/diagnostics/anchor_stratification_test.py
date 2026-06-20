@@ -25,6 +25,7 @@ import sys
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+from core.constants import KAPPA_GAL, KAPPA_GAL_UNCERTAINTY
 from scripts.utils.plot_style import apply_tep_style
 from scripts.utils.logger import print_status, print_table
 
@@ -421,9 +422,9 @@ def create_anchor_comparison_figure(results):
         if json_path.exists():
             with open(json_path) as f:
                 tep_results = json.load(f)
-            kappa_cep_ref = float(tep_results.get("optimal_kappa_cep", 9.7e5))
+            kappa_cep_ref = float(tep_results.get("optimal_kappa_cep", KAPPA_GAL))
         else:
-            kappa_cep_ref = 9.7e5
+            kappa_cep_ref = KAPPA_GAL
         sigma_ref = sigmas[lmc_idx]
         M_W_ref = M_Ws[lmc_idx]
         

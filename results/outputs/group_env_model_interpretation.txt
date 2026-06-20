@@ -1,0 +1,21 @@
+GROUP ENVIRONMENT MODEL COMPARISON
+============================================================
+
+TEP prediction: Model 'tep_full' should be preferred.
+Confound prediction: Model 'confound_nmb' should be preferred.
+
+TEP-local: S_local * sigma^2
+  BIC=201.7, scatter=6.97, p=0.0103
+
+TEP-full: S_local * S_group * sigma^2
+  BIC=202.7, scatter=7.10, p=0.0180
+
+Baseline: sigma^2 only
+  BIC=203.1, scatter=7.14, p=0.0212
+
+TEP-full + N_mb residual
+  BIC=204.2, scatter=6.88, p=0.0098
+
+Confound: sigma^2 + N_mb
+  BIC=206.7, scatter=7.17, p=0.0334
+

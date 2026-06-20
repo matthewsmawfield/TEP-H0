@@ -1,0 +1,11 @@
+{
+  "kappa_cep_frozen": 1048680.1147460938,
+  "sigma_ref_frozen": 87.16507328052906,
+  "c_km_s": 299792.458,
+  "c_squared": 89875517873.68175,
+  "screening_formula": "S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}",
+  "screening_n_crit": 10.0,
+  "screening_gamma": 1.2,
+  "local_screening_formula": "S_local(rho) = [1 + (rho / rho_half)^n_steep]^{-1}",
+  "prediction_criterion": "A new Cepheid-SN host validates the TEP correction if its observed\ndistance-modulus residual agrees with the predicted Delta_mu within\nthe quoted uncertainty (distance-modulus uncertainty ~ 0.1-0.2 mag).\nIf the residual is systematically offset, the model is falsified."
+}

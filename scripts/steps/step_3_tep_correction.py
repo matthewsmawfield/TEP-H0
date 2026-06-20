@@ -269,8 +269,8 @@ class Step3TEPCorrection:
 
         sigma_vals = df["sigma_inferred"].values
 
-        # Objective function: minimize H0 vs σ correlation
-        # We want the corrected H0 to be independent of environment (slope ~ 0)
+        # Objective function: minimize delta_mu vs σ correlation
+        # We want the corrected delta_mu to be independent of environment (slope ~ 0)
         def objective(params):
             kappa_cep = params[0]
 
@@ -278,11 +278,12 @@ class Step3TEPCorrection:
             correction = tep_correction(sigma_vals, sigma_ref, kappa_cep, S)
             mu_corr = df["value"].values + correction
 
-            d_corr = 10 ** ((mu_corr - 25) / 5)
-            h0_corr = df["velocity"].values / d_corr
+            # Fit in delta_mu space to avoid H0-space leakage
+            mu_fiducial = 5 * np.log10(df["velocity"].values) + 25 - 5 * np.log10(70.0)
+            delta_mu = mu_corr - mu_fiducial
 
-            # Minimize squared slope of H0 vs Sigma
-            slope, _ = np.polyfit(sigma_vals, h0_corr, 1)
+            # Minimize squared slope of delta_mu vs Sigma
+            slope, _ = np.polyfit(sigma_vals, delta_mu, 1)
 
             return slope**2
 
@@ -404,13 +405,13 @@ class Step3TEPCorrection:
             mu_sample = sample["value"].values + mu_noise
             v_sample = sample["velocity"].values
 
-            # Re-optimize kappa using SAME objective as main fit (slope^2)
+            # Re-optimize kappa using SAME objective as main fit (slope^2 in delta_mu space)
             def obj(k):
                 corr = tep_correction(sigma_sample, sigma_ref, k[0], S_sample)
                 mc = mu_sample + corr
-                dc = 10 ** ((mc - 25) / 5)
-                hc = v_sample / dc
-                slope_b, _ = np.polyfit(sigma_sample, hc, 1)
+                mu_fid = 5 * np.log10(v_sample) + 25 - 5 * np.log10(70.0)
+                delta_mu = mc - mu_fid
+                slope_b, _ = np.polyfit(sigma_sample, delta_mu, 1)
                 return slope_b ** 2
 
             res = minimize(
