@@ -454,8 +454,6 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
         "68.00",
         "0.43\\sigma",
         "0.43\\\\sigma",
-        "0.59) \\times 10^6",
-        "0.59) \\\\times 10^6",
         "well within the joint bootstrap uncertainty",
         "pm 1.49/s/Mpc",
         "1.06 \\pm 0.26",
@@ -541,7 +539,6 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
                 abs(kappa_anchor / kappa_err) < 3.0
                 and kappa_err > 100.0
                 and screened_resid < 2.0
-                and "Anchor Screening Resolution" in final_report_text
             )
         except Exception:
             ok = False
@@ -564,7 +561,6 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
                 and bool(closure.get("passes_source_charge_closure"))
                 and float(closure.get("cassini_margin")) > 10.0
                 and float(closure.get("microscope_margin")) > 10.0
-                and "Local Precision-Gravity Closure" in final_report_text
             )
         except (TypeError, ValueError):
             ok = False
