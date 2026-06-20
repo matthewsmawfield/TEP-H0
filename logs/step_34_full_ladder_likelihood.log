@@ -195,3 +195,22 @@
 [19:02:24] [INFO]   LMC        sigma=  18.4 kappa=  -1.367e+05 +/-    2.393e+05
 [19:02:24] [INFO]   M101       sigma=  24.3 kappa=  -1.320e+05 +/-    2.158e+05
 [19:02:24] [INFO] Residual-After-Fit Audit
+[19:02:25] [INFO] Baseline residual-sigma: r=0.443, rho=0.041
+[19:02:25] [INFO] TEP residual-sigma:      r=0.409, rho=0.004
+[19:02:25] [SUCCESS] ✓ TEP fit reduces residual-sigma correlation
+[19:02:25] [SUCCESS] Saved residual audit to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_residual_after_fit.csv
+[19:02:25] [INFO] Host Covariate Table (B)
+[19:02:25] [INFO] Host-level correlations:
+[19:02:25] [INFO]   r(sigma, mean period term         ) = +0.202 (p=0.2939)
+[19:02:25] [INFO]   r(sigma, mean period contrib      ) = -0.202 (p=0.2939)
+[19:02:25] [INFO]   r(sigma, mean Z term              ) = +0.531 (p=0.0031)
+[19:02:25] [INFO]   r(sigma, mean Z contrib           ) = -0.531 (p=0.0031)
+[19:02:25] [INFO]   r(sigma, fraction logP > 1.5      ) = +nan (p=nan)
+[19:02:25] [INFO] ---
+[19:02:25] [INFO]   r(H0, mean period term         ) = +0.279 (p=0.1428)
+[19:02:25] [INFO]   r(H0, mean period contrib      ) = -0.279 (p=0.1428)
+[19:02:25] [INFO]   r(H0, mean Z term              ) = +0.323 (p=0.0875)
+[19:02:25] [INFO]   r(H0, mean Z contrib           ) = -0.323 (p=0.0875)
+[19:02:25] [INFO]   r(H0, fraction logP > 1.5      ) = +nan (p=nan)
+[19:02:25] [SUCCESS] Saved host covariate table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_host_covariate_table.csv
+[19:02:25] [INFO] Nested Absorption Test (P6) — Decomposition
