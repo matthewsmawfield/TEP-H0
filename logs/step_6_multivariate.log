@@ -11,3 +11,6 @@
 [13:02:14] [SUCCESS] Sigma remains significant in primary astrophysical HC3 model (p=0.0125).
 [13:02:14] [INFO] Flow/environment model is a saturated mediator stress test; sigma HC3 p=0.2783.
 [13:02:14] [PROCESS] Generating Robustness Plot...
+[13:02:14] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/figure_12_multivariate_robustness.png
+[13:02:14] [SUCCESS] Copied plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/figure_12_multivariate_robustness.png
+[13:02:14] [SUCCESS] Step 6 Complete.

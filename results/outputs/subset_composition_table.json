@@ -9,9 +9,9 @@
     "n_high_sigma": 14,
     "n_low_sigma": 15,
     "raw_slope": 0.0851185150060325,
-    "corrected_mean_full_kappa": 68.75204211389524,
-    "corrected_mean_refit_kappa": 68.75204036798077,
-    "refit_kappa": 1048681.640625
+    "corrected_mean_full_kappa": 68.83787861896722,
+    "corrected_mean_refit_kappa": 68.8516394181665,
+    "refit_kappa": 1256701.66015625
   },
   {
     "tier": "Stellar only",
@@ -23,9 +23,9 @@
     "n_high_sigma": 9,
     "n_low_sigma": 7,
     "raw_slope": 0.08877575299390997,
-    "corrected_mean_full_kappa": 66.71202563366097,
-    "corrected_mean_refit_kappa": 66.82454837066513,
-    "refit_kappa": 996368.408203125
+    "corrected_mean_full_kappa": 66.86215537320248,
+    "corrected_mean_refit_kappa": 66.98198018763117,
+    "refit_kappa": 1199969.482421875
   },
   {
     "tier": "Gold standard",
@@ -37,8 +37,8 @@
     "n_high_sigma": 4,
     "n_low_sigma": 3,
     "raw_slope": 0.10985233389027711,
-    "corrected_mean_full_kappa": 63.96996016082353,
-    "corrected_mean_refit_kappa": 63.71031981087186,
-    "refit_kappa": 1155755.615234375
+    "corrected_mean_full_kappa": 64.56287397650688,
+    "corrected_mean_refit_kappa": 64.20563603442487,
+    "refit_kappa": 1503778.076171875
   }
 ]
