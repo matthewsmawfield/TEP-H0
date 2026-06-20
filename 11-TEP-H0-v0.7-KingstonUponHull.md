@@ -1626,7 +1626,7 @@ estimates low. The TEP correction yields a unified $H_0 = 68.75$ km/s/Mpc
 (bootstrap mean $68.80 \pm 1.46$), reducing the Planck tension to $0.91\sigma$.
 
 The correlation detected (Spearman $\rho = 0.517$, $p = 0.0041$; Pearson $r = 0.466$, $p = 0.0109$) between
-host velocity dispersion and derived $H_0$ is notable for an
+host velocity dispersion and the distance-ladder residual displayed in $H_0$-equivalent units is notable for an
 astrophysical systematic. The signal is not contingent on the aperture
 homogenization: the Pearson correlation is comparable when using the raw
 literature values ($r_{\rm raw} \approx 0.43$, $p \approx 0.02$) versus
@@ -1852,9 +1852,14 @@ $\sigma=115$ and $\sigma=160$ km/s are $+0.088$ and $+0.233$ mag respectively
 (relative to LMC at $\sigma=24$). The observed shifts are only $+0.04$ mag
 (NGC 4258) and $+0.002$ mag (M31). Applying the same reference-subtracted
 correction with anchor-specific group-screening factors gives $+0.044$ and
-$+0.047$ mag, reducing the screened-anchor residuals to a mean
-$0.9\sigma$ ($\chi^2=2.51$ for 2 dof). All three anchors are strongly
-screened by their group environments.
+$+0.047$ mag, model reduces the overall calibrator-mean residual to $0.9\sigma$
+($\chi^2=2.51$ for 2 dof). All three anchors are strongly
+suppressed by group-halo embedding. This offers a model-dependent
+resolution for the fact that geometric anchors—while spanning a large
+range of mass—show no relative zero-point scaling: they all sit deep
+in their respective group halos. The anchor data do not independently
+confirm the TEP effect, but they are broadly compatible with it under
+this screening prescription.
 
 **Physical size of host-level corrections.**
 The TEP correction magnitudes vary strongly with host potential depth.
@@ -2052,7 +2057,7 @@ bias (e.g., peculiar velocities, dust, metallicity, host mass):
 
 | Test | TEP Expectation | Outcome Needed | Current Status |
 | --- | --- | --- | --- |
-| Cepheid SN hosts | Strong $\sigma^2$ trend (clock-period bias) | Positive ($r \sim 0.5$, $p < 0.01$) | PASS ($r=0.466$, $p_{\rm cov}=0.0031$) |
+| Cepheid SN hosts | Strong $\sigma^2$ trend (clock-period bias) | Positive ($r \sim 0.5$, $p < 0.01$) | PASS ($r=0.466$, $p_{\rm cov,MC}=0.0031$) |
 | TRGB differential | Positive differential shift (Cepheids shrink relative to TRGB) | Positive $\kappa_{\rm diff}$ isolating Cepheid-specific bias | PASS ($\kappa_{\rm diff} = 5.35 \pm 2.32 \times 10^5$ mag, $p=0.041$; underpowered, $N=13$) |
 | SNe after Cepheid correction | No residual $\sigma$ trend | Null | PASS (fitted diagnostic) — by construction, not independent evidence |
 | Cepheid residuals vs metallicity | Weaker than $\sigma$ dependence | Subordinate to $\sigma$ signal | PASS (metallicity weaker, $p > 0.05$) |
@@ -2109,10 +2114,10 @@ Distance-modulus covariance: Because SH0ES host distance moduli are
 derived from a global GLS solution, the inferred host-level $\mu_i$
 values share calibration covariance. The full GLS covariance
 submatrix for $\mu_i$ is propagated into a covariance matrix for the
-derived $H_{0,i}$ values, and the significance of the $H_0$–$\sigma$
-correlation is recomputed under a correlated-null Monte Carlo model
+derived host residuals in $H_0$-equivalent space, and the significance of the $H_0$–$\sigma$
+correlation, are exactly evaluated accounting for the full $N \times N$Carlo model
 (Section 2.7). The detection remains significant under this
-covariance-aware host-contrast test ($p_{\rm cov} \approx 0.0045$ Spearman; $p_{\rm cov} \approx 0.023$ Pearson). Note: these are distinct from the primary lock-box statistic ($p_{\rm cov}=0.0031$ Pearson, $0.0041$ Spearman), which uses a different covariance propagation method.
+covariance-aware host-contrast test ($p_{\rm cov,GLS} \approx 0.0045$ Spearman; $p_{\rm cov,GLS} \approx 0.023$ Pearson). Note: these are distinct from the primary lock-box statistic ($p_{\rm cov,MC}=0.0031$ Pearson, $0.0041$ Spearman), which uses a different covariance propagation method.
 
 Interpolation stability of $\kappa_{\rm Cep}$: Optimizing $\kappa_{\rm Cep}$ to remove the
 observed $H_0$–$\sigma$ slope is tested directly against
