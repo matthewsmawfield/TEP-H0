@@ -62,7 +62,7 @@ class Step9FinalSynthesis:
         self.trgb_json = self.outputs_dir / "trgb_differential_results.json"
         self.anchor_json = self.outputs_dir / "anchor_stratification_test.json"
         self.local_gravity_json = self.outputs_dir / "local_gravity_closure.json"
-        self.cross_channel_json = self.outputs_dir / "cross_channel_kappa_consistency.json"
+        self.cross_channel_json = self.outputs_dir / "cross_channel_consistency.json"
         self.stratification_json = self.outputs_dir / "stratification_results.json"
         
         # Output Files

@@ -752,7 +752,7 @@ A primary concern is that the sample includes hosts with heterogeneous
 velocity dispersion measurements: 16 from direct stellar absorption
 spectroscopy and 13 from kinematic proxies (HI linewidth). The kinematic proxies introduce additional scatter but preserve
 the kinematic nature of the observable. The HI linewidth calibration uses
-$\sigma = 0.467 \times V_{\rm max} + 40.91$ km/s (HyperLEDA calibrated_vmax).
+$\sigma = 0.467 \times V_{\rm max} + 42.9$ km/s (HyperLEDA calibrated_vmax).
 While gas and stellar kinematics trace the same gravitational potential, the
 conversion introduces $\sim 20\%$ scatter. To test whether the signal
 depends on these proxy measurements, a separate analysis was performed on
@@ -845,9 +845,10 @@ channel-specific Temporal Shear transfer factor $T_{\rm env}$:
 Paper 10 (TEP-COS) measures the effective screened pulsar response in
 dense globular clusters:
 $\kappa_{\rm MSP}^{\rm emp} = (0.91 \pm 4.5) \times 10^4$
-(step_5_55_kappa_msp_prior.json), consistent with a dense-cluster
-suppression factor $T_{\rm GC} \sim 0.03$ acting on the bare scale.
-This paper (Paper 11) independently calibrates the weakly screened
+(step_5_55_kappa_msp_prior.json). The large uncertainty means this is not an
+independent precision confirmation, but the central value is scale-compatible
+with a dense-cluster suppression factor $T_{\rm GC} \sim 0.03$ acting on the
+unsuppressed scale. This paper (Paper 11) independently calibrates the weakly screened
 galactic-disk response via Cepheid period-luminosity residuals:
 
 \begin{equation}
@@ -857,9 +858,18 @@ galactic-disk response via Cepheid period-luminosity residuals:
 
 Host-only bootstrap robust $1.05 \pm 0.41$; WLS scaled $1.20 \pm 0.48$.
 
-The Cepheid value is consistent with the bare TEP geometric-factor
+| Coefficient | Value | Used for |
+| --- | --- | --- |
+| Host-only bootstrap | $(1.05 \pm 0.41) \times 10^6$ mag | Main N=29 correction |
+| Host-only WLS scaled | $(1.20 \pm 0.48) \times 10^6$ mag | Host-only uncertainty check |
+| Joint host+anchor formal | $(0.97 \pm 0.08) \times 10^6$ mag | Formal combined fit (unscaled) |
+| Screen-weighted joint | $(0.61 \pm 0.32) \times 10^6$ mag | Anchor-screening sensitivity |
+
+The headline correction uses the host-only bootstrap value $(1.05 \pm 0.41) \times 10^6$ mag.
+
+The Cepheid value is consistent with the unsuppressed TEP geometric-factor
 estimate ($T_{\rm disk} \sim 1$); the pulsar value is consistent with
-the same bare estimate after dense-cluster geometric suppression
+the same estimate after dense-cluster geometric suppression
 ($T_{\rm GC} \sim 0.03$).  Together they support a shared TEP response
 *hierarchy*, not a direct one-to-one equality of raw coefficients
 across channels.  The mean suppression-aware response across the sample
@@ -1036,7 +1046,7 @@ agreement with the low-$\sigma$ subsample.
 
 Given the sample size ($N=29$) and heterogeneous velocity dispersion data,
 multiple robustness tests were performed: Spearman rank correlation ($\rho =
-0.549$, non-parametric and robust to outliers), bootstrap permutation test
+0.517$, non-parametric and robust to outliers), bootstrap permutation test
 ($p \approx 0.011$, non-parametric significance), covariance-aware
 significance (full propagation of the SH0ES GLS host-modulus covariance
 yields $p_{\rm cov} \approx 0.0041$ Spearman and $p_{\rm cov} \approx 0.0031$ Pearson),
@@ -1081,7 +1091,7 @@ Large-scale environment was quantified by crossmatching each host (via PGC
 identifiers) to the 2MASS group catalog of Tully (2015), using the group
 membership count $N_{\rm mb}$ as a proxy for group/cluster environment.
 Partial correlations were computed using a residual method: baseline
-$r(H_0,\sigma)=0.500$ (permutation $p=0.0126$; $N=29$); controlling for
+$r(H_0,\sigma)=0.466$ (permutation $p=0.0109$; $N=29$); controlling for
 redshift $r(H_0,\sigma\,|\,z_{\rm HD})=0.410$ ($p=0.030$); controlling for
 redshift and group richness $r(H_0,\sigma\,|\,z_{\rm HD},N_{\rm mb})=0.347$
 ($p=0.077$).
@@ -1243,7 +1253,7 @@ indicators, though not necessarily immune to all environmental effects
 #### 3.7.3 Observational Test
 
 The differential distance modulus $\Delta\mu = \mu_{\rm TRGB} - \mu_{\rm
-Cepheid}$ was analyzed for the 15 hosts in common between SH0ES and the
+Cepheid}$ was analyzed for the 13 hosts in common between SH0ES and the
 Chicago-Carnegie Hubble Program (Freedman et al. 2024). The TEP prediction
 is clear:
 
@@ -1264,21 +1274,21 @@ cancel in the difference.
 
 The analysis yields:
 
-- **Pearson correlation:** $r = 0.118$ ($p \approx 0.68$, not significant)
+- **Pearson correlation:** $r = 0.478$ ($p = 0.049$, one-tailed)
 
-- **Spearman correlation:** $\rho = 0.582$ ($p = 0.037$)
+- **Spearman correlation:** $\rho = 0.582$ ($p = 0.018$, one-tailed)
 
-**Slope:** $d(\Delta\mu)/d\log_{10}\sigma = +0.15 \pm 0.07$
-mag/dex
+- **Slope:** $d(\Delta\mu)/d\log_{10}\sigma = +0.14 \pm 0.08$
+  mag/dex
 
-**Sign:** Positive (Cepheid distances shrink relative to
-TRGB in deep potentials)
+- **Sign:** Positive (Cepheid distances shrink relative to
+  TRGB in deep potentials)
 
 > 
 
 #### Interpretation
 
-The differential TRGB–Cepheid test is directionally consistent with TEP but underpowered; the non-parametric rank trend is suggestive, while the Pearson statistic is not robust. It is not straightforward to reproduce with simple, shared "light" systematics acting similarly on both tracers:
+The differential TRGB–Cepheid test is directionally consistent with TEP, with both parametric and non-parametric trends marginally significant. Because the sample is small ($N=13$) and the effect size is modest, we treat this as a qualitative mechanism test rather than a primary detection. It is not straightforward to reproduce with simple, shared "light" systematics acting similarly on both tracers:
 
 **Dust extinction:** In the simplest shared-screen
 picture, dust would dim both indicators in the same direction → a
@@ -1300,7 +1310,7 @@ Among proposed mechanisms, environment-dependent clock rates (as in the
 TEP framework) provide a plausible explanation for this differential
 signature.
 
-The sample size is modest ($N=15$) and the significance is at the ~2σ level,
+The sample size is modest ($N=13$) and the significance is at the ~2σ level,
 so this result should be interpreted with appropriate caution. However, it
 represents a qualitatively different type of evidence than the
 $H_0$–$\sigma$ correlation alone, as it directly tests the
@@ -1313,21 +1323,22 @@ with larger samples, this would be the signature of a "time" effect, not a
 
 A comparative analysis shows that Cepheids exhibit a significant
 $H_0$–$\sigma$ correlation (Spearman $\rho = 0.517$, $p = 0.0041$; $N=29$).
-The TRGB sample shows a comparable trend (Spearman $\rho = 0.467$,
-$p = 0.050$; $N=15$), suggesting that the $H_0$–$\sigma$ association is not
-unique to periodic indicators and may be driven in part by a systematic
-that affects both tracers (e.g. residual peculiar-velocity correlations with
-host mass). This pattern indicates that the TRGB-only correlation, while
-statistically significant, does not by itself isolate a clock-rate
-mechanism.
+The TRGB-only sample ($N=18$) shows a comparable trend (Spearman $\rho = 0.467$,
+$p = 0.050$; Pearson $r = 0.410$, $p = 0.091$), suggesting that the
+$H_0$–$\sigma$ association is not unique to periodic indicators and may be
+driven in part by a systematic that affects both tracers (e.g. residual
+peculiar-velocity correlations with host mass). This pattern indicates that
+the TRGB-only correlation, while marginally significant, does not by itself
+isolate a clock-rate mechanism.
 
-The differential test ($\Delta\mu = \mu_{\rm TRGB} - \mu_{\rm Cepheid}$)
-is the primary discriminating statistic: it asks whether the two
-indicators diverge in high-$\sigma$ environments. The observed positive
-correlation ($r = 0.088$, $p = 0.36$; $N=15$) is directionally consistent
-with Cepheids experiencing an *additional* distance underestimation
-beyond any effect shared with TRGB, but the modest sample size means this
-result should be treated as suggestive rather than decisive. The key
+The *differential* test ($\Delta\mu = \mu_{\rm TRGB} - \mu_{\rm Cepheid}$)
+—performed on the 13 hosts with both indicators—is the primary
+discriminating statistic: it asks whether the two indicators diverge in
+high-$\sigma$ environments. The observed positive correlation
+($r = 0.478$, $p = 0.049$; $N=13$) is directionally consistent with
+Cepheids experiencing an *additional* distance underestimation beyond any
+effect shared with TRGB. Because the matched sample is small, this should be
+treated as a qualitative mechanism test rather than a primary detection. The key
 discriminating prediction of TEP remains that non-periodic indicators
 should show a *weaker* differential trend than periodic ones; larger
 matched samples are required to test this quantitatively.
@@ -1823,20 +1834,21 @@ stellar and cosmological scales, with environmental modulation of
 Temporal Shear governing where the effect is active.
 
 **Quantitative Cross-Probe Comparison.** The TEP framework
-predicts a bare observable response coefficient $\kappa \sim 10^6$–$10^7$
+predicts an unsuppressed observable response coefficient $\kappa \sim 10^6$–$10^7$
 (geometric-factor estimate). Paper 10 (TEP-COS) measures the
 *effective* screened coefficient in dense globular clusters:
 $\kappa_{\rm MSP}^{\rm emp} = (0.91 \pm 4.5) \times 10^4$
 (step_5_55_kappa_msp_prior.json), derived from the 0.63 dex raw excess
 and real cluster parameters. Paper 11 measures
-$\kappa_{\rm Cep} = (1.05 \pm 0.41) \times 10^6$ mag from the joint
-host+anchor fit (chi2-scaled; host-only WLS scaled gives $1.05 \pm 0.41$)
+$\kappa_{\rm Cep} = (1.05 \pm 0.41) \times 10^6$ mag from the
+host-only bootstrap robust fit (host-only WLS scaled gives $1.20 \pm 0.48$)
 in the looser galactic-disk regime.
-The Cepheid value is compatible with the bare TEP estimate; the pulsar
-value is compatible with the same bare estimate after dense-cluster
-geometric suppression. This theoretical agreement across independent
-probes spanning ~8 orders of magnitude in timescale is treated as
-cross-domain consistency rather than an input to the Cepheid inference.
+The pulsar coefficient is not an independent precision confirmation—its
+uncertainty includes zero—but the central value is scale-compatible with the
+same response hierarchy after environmental transfer factors. This
+theoretical agreement across independent probes spanning ~8 orders of
+magnitude in timescale is treated as cross-domain consistency rather than
+an input to the Cepheid inference.
 
 Environmental scaling provides a consistency check. Globular clusters
 have characteristic densities $\rho_{\rm GC} \sim 10^{-18}$ g/cm³,

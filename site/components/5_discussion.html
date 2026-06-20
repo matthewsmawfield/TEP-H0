@@ -22,7 +22,7 @@
         literature values ($r_{\rm raw} \approx 0.11$, $p \approx 0.02$) versus
         aperture-corrected values ($r_{\rm corr} \approx 0.11$, $p \approx
         0.02$). Furthermore, the correlation coefficient persists in the
-        "Stellar-Only" verification subsample ($N=15, r \approx 0.55$), with
+        "Stellar-Only" verification subsample ($N=16, r \approx 0.55$), with
         significance ($p = 0.028$).
         Moreover, a full aperture/size sensitivity envelope was computed by
         scanning $\beta \in [0, 0.08]$ and scaling the effective radii by
@@ -30,7 +30,7 @@
         [0.448, 0.482]$) and $\Delta H_0$ values across the entire envelope.
         Repeating the full $\kappa_{\rm Cep}$ optimization across the same envelope gives
         consistent ranges ($\kappa_{\rm Cep} \in [9.24, 10.96]\times10^5$ mag, $H_0^{\rm TEP} \in [67.9, 68.5]$ km/s/Mpc), i.e. a systematic envelope that is smaller
-        than the bootstrap uncertainty ($\pm 1.05$ km/s/Mpc), indicating that
+        than the bootstrap uncertainty ($\pm 1.46$ km/s/Mpc), indicating that
         the main inference does not rely on fine-tuned aperture assumptions.
         This reduces the concern that the result is an artifact of mixing fiber
         and slit measurements or sampling different galactic regions.
@@ -174,7 +174,7 @@
     <h3>4.6 Connection to the TEP Framework: Group Halo Shear Suppression</h3>
     <p>
         The response coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.41)\times10^6$ mag
-        (joint host+anchor fit, chi2-scaled; host-only WLS scaled $1.05 \pm 0.41$)
+        (host-only bootstrap robust; host-only WLS scaled $1.20 \pm 0.48$)
         derived from the Hubble Tension analysis—using the physics-derived
         $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$
         regressor—provides an independent calibration of the TEP conformal factor.
@@ -182,11 +182,11 @@
         reflecting weak but non-zero attenuation of Temporal Shear in two hosts
         (NGC 2442 at $S = 0.075$ and NGC 3021 at $S = 0.793$). Critically, this
         value places the distance-ladder probe in the same response hierarchy as
-        the TEP framework's bare estimate ($\kappa \sim 10^6$–$10^7$ mag) and as
+        the TEP framework's unsuppressed estimate ($\kappa \sim 10^6$–$10^7$ mag) and as
         the effective pulsar measurement in dense globular clusters
         ($\kappa_{\rm MSP}^{\rm emp} \approx 3 \times 10^4$, Paper 10,
-        step_5_55_kappa_msp_prior.json). The latter is consistent with the bare
-        estimate when dense-cluster geometric suppression is accounted for.
+        step_5_55_kappa_msp_prior.json). The latter is consistent with the
+        unsuppressed estimate when dense-cluster geometric suppression is accounted for.
         The apparent regime mismatch present in earlier
         phenomenological $\log_{10}\sigma$ fits is resolved. The Temporal Topology
         framework (Paper 6) provides additional independent constraints. The consistency across
@@ -290,7 +290,7 @@
                 <td><strong>NGC 4258</strong></td>
                 <td><strong>115</strong></td>
                 <td>$-5.837 \pm 0.022$</td>
-                <td>$+0.148$ mag naive; $+0.050$ mag screened</td>
+                <td>$+0.088$ mag naive; $+0.044$ mag screened</td>
                 <td><strong>group-screened</strong></td>
                 <td>CVn I Group ($N_{\rm mb} \approx 65$)</td>
             </tr>
@@ -298,7 +298,7 @@
                 <td>M31</td>
                 <td>160</td>
                 <td>$-5.849 \pm 0.024$</td>
-                <td>$+0.292$ mag naive; $+0.053$ mag screened</td>
+                <td>$+0.233$ mag naive; $+0.047$ mag screened</td>
                 <td>strongly group-screened</td>
                 <td>Local Group (dominant member)</td>
             </tr>
@@ -307,11 +307,11 @@
 
     <p>
         <em>Interpretation:</em> The expected TEP shift for unscreened anchors at
-        $\sigma=115$ and $\sigma=160$ km/s are $+0.148$ and $+0.292$ mag respectively
+        $\sigma=115$ and $\sigma=160$ km/s are $+0.088$ and $+0.233$ mag respectively
         (relative to LMC at $\sigma=24$). The observed shifts are only $+0.04$ mag
         (NGC 4258) and $+0.002$ mag (M31). Applying the same reference-subtracted
-        correction with anchor-specific group-screening factors gives $+0.050$ and
-        $+0.053$ mag, reducing the screened-anchor residuals to a mean
+        correction with anchor-specific group-screening factors gives $+0.044$ and
+        $+0.047$ mag, reducing the screened-anchor residuals to a mean
         $0.9\sigma$ ($\chi^2=2.51$ for 2 dof). All three anchors are strongly
         screened by their group environments.
     </p>
@@ -404,17 +404,17 @@
 
     <p>
         <strong>Quantitative Cross-Probe Comparison.</strong> The TEP framework
-        predicts a bare observable response coefficient $\kappa \sim 10^6$–$10^7$
+        predicts an unsuppressed observable response coefficient $\kappa \sim 10^6$–$10^7$
         (geometric-factor estimate). Paper 10 (TEP-COS) measures the
         <em>effective</em> screened coefficient in dense globular clusters:
         $\kappa_{\rm MSP}^{\rm emp} = (0.91 \pm 4.5) \times 10^4$
         (step_5_55_kappa_msp_prior.json), derived from the 0.63 dex raw excess
         and real cluster parameters. Paper 11 measures
-        $\kappa_{\rm Cep} = (1.05 \pm 0.41) \times 10^6$ mag from the joint
-        host+anchor fit (chi2-scaled; host-only WLS scaled gives $1.05 \pm 0.41$)
+        $\kappa_{\rm Cep} = (1.05 \pm 0.41) \times 10^6$ mag from the
+        host-only bootstrap robust fit (host-only WLS scaled gives $1.20 \pm 0.48$)
         in the looser galactic-disk regime.
-        The Cepheid value is compatible with the bare TEP estimate; the pulsar
-        value is compatible with the same bare estimate after dense-cluster
+        The Cepheid value is compatible with the unsuppressed TEP estimate; the pulsar
+        value is compatible with the same unsuppressed estimate after dense-cluster
         geometric suppression. This theoretical agreement across independent
         probes spanning ~8 orders of magnitude in timescale is treated as
         cross-domain consistency rather than an input to the Cepheid inference.
