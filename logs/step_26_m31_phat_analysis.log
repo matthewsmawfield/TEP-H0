@@ -1,0 +1,32 @@
+[18:36:38] [INFO] 
+[18:36:38] [INFO] ================================================================================
+[18:36:38] [INFO]    Starting Step 8: M31 HST Differential Analysis
+[18:36:38] [INFO] ================================================================================
+[18:36:38] [INFO] 
+[18:36:38] [PROCESS] Fetching Kodric 2018 HST J/H catalog (J/ApJ/864/59)...
+[18:36:38] [SUCCESS] Downloaded 1113 Cepheids with HST J/H photometry
+[18:36:38] [INFO] After quality cuts: 391 classical Cepheids (P=10-60d)
+[18:36:38] [INFO] M31 HST Sample
+[18:36:38] [INFO] +--------+--------------+----+----------+----------+
+[18:36:38] [INFO] | Region | Cut          | N  | Mean W_H | Mean J-H |
+[18:36:38] [INFO] +--------+--------------+----+----------+----------+
+[18:36:38] [INFO] | Inner  | R < 5.0 kpc  | 78 | 18.31    | 0.680    |
+[18:36:38] [INFO] | Outer  | R > 15.0 kpc | 69 | 18.00    | 0.544    |
+[18:36:38] [INFO] +--------+--------------+----+----------+----------+
+[18:36:38] [INFO] === BASELINE ANALYSIS (No Color Matching) ===
+[18:36:38] [INFO] Baseline: ΔW = +0.681 ± 0.187 mag (3.6σ) [INNER FAINTER]
+[18:36:38] [INFO] === 2D MULTIDIMENSIONAL MATCHING (logP + Color) ===
+[18:36:38] [INFO] Found 26 tight 2D matches.
+[18:36:38] [INFO] Matched: ΔW = +0.604 ± 0.277 mag (2.2σ) [INNER FAINTER]
+[18:36:38] [INFO] ============================================================
+[18:36:38] [INFO] 
+[18:36:38] [INFO] ================================================================================
+[18:36:38] [INFO]    SUMMARY
+[18:36:38] [INFO] ================================================================================
+[18:36:38] [INFO] 
+[18:36:38] [INFO] Baseline (Confounded): ΔW = +0.681 ± 0.187 mag [INNER FAINTER]
+[18:36:38] [INFO] Matched (Controlled):  ΔW = +0.604 ± 0.277 mag [INNER FAINTER]
+[18:36:38] [INFO] 
+[18:36:38] [SUCCESS] *** M31 HST shows ROBUST INNER FAINTER - CONSISTENT WITH SCREENED TEP ***
+[18:36:38] [SUCCESS] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_26_m31_phat_robustness_summary.json
+[18:36:38] [SUCCESS] Step 8 complete.

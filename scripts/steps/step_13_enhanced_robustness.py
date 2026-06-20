@@ -47,17 +47,17 @@ class Step6EnhancedRobustness:
         self.logs_dir.mkdir(parents=True, exist_ok=True)
         
         # Initialize Logger
-        self.logger = TEPLogger("step_6_enhanced", log_file_path=self.logs_dir / "step_6_enhanced_robustness.log")
+        self.logger = TEPLogger("step_6_enhanced", log_file_path=self.logs_dir / "step_13_enhanced_robustness.log")
         set_step_logger(self.logger)
         
         # Inputs
-        self.stratified_path = self.outputs_dir / "stratified_h0.csv"
-        self.sigma_provenance_path = self.outputs_dir / "sigma_provenance_table.csv"
+        self.stratified_path = self.outputs_dir / "step_03_stratified_h0.csv"
+        self.sigma_provenance_path = self.outputs_dir / "step_07_sigma_provenance_table.csv"
         
         # Outputs
-        self.enhanced_results_path = self.outputs_dir / "enhanced_robustness_results.json"
-        self.subsample_stats_path = self.outputs_dir / "subsample_sensitivity.txt"
-        self.composition_table_path = self.outputs_dir / "subset_composition_table.json"
+        self.enhanced_results_path = self.outputs_dir / "step_13_enhanced_robustness_results.json"
+        self.subsample_stats_path = self.outputs_dir / "step_08_subsample_sensitivity.txt"
+        self.composition_table_path = self.outputs_dir / "step_10_subset_composition_table.json"
     
     def run(self):
         """Execute enhanced robustness analysis."""
@@ -358,16 +358,16 @@ class Step6EnhancedRobustness:
         print_status("\n--- TEP CORRECTION ON SUBSAMPLES ---", "SECTION")
         
         from scripts.utils.tep_correction import tep_correction
-        sigma_ref = 87.17  # Fallback if tep_correction_results.json is missing
+        sigma_ref = 87.17  # Fallback if step_04_tep_correction_results.json is missing
         try:
-            tep_path = self.outputs_dir / "tep_correction_results.json"
+            tep_path = self.outputs_dir / "step_04_tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     _tep = json.load(f)
                 if isinstance(_tep, dict) and 'sigma_ref' in _tep:
                     sigma_ref = float(_tep['sigma_ref'])
         except Exception:
-            print_status(f"Could not load tep_correction_results.json for sigma_ref: using default {sigma_ref}", "WARNING")
+            print_status(f"Could not load step_04_tep_correction_results.json for sigma_ref: using default {sigma_ref}", "WARNING")
         
         def optimize_kappa(subset_df):
             """Optimize kappa_cep for a subset."""
@@ -476,19 +476,19 @@ class Step6EnhancedRobustness:
 
         sigma_ref = 87.17
         try:
-            tep_path = self.outputs_dir / "tep_correction_results.json"
+            tep_path = self.outputs_dir / "step_04_tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     _tep = json.load(f)
                 if isinstance(_tep, dict) and 'sigma_ref' in _tep:
                     sigma_ref = float(_tep['sigma_ref'])
         except Exception:
-            print_status(f"Could not load tep_correction_results.json for sigma_ref: using default {sigma_ref}", "WARNING")
+            print_status(f"Could not load step_04_tep_correction_results.json for sigma_ref: using default {sigma_ref}", "WARNING")
 
         # Use the FULL-SAMPLE fitted kappa (uniform across subsamples)
         kappa_full = float('nan')  # must be loaded from JSON; no valid hardcoded fallback
         try:
-            tep_path = self.outputs_dir / "tep_correction_results.json"
+            tep_path = self.outputs_dir / "step_04_tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     _tep = json.load(f)
@@ -497,7 +497,7 @@ class Step6EnhancedRobustness:
         except Exception:
             pass
         if not np.isfinite(kappa_full):
-            print_status("Could not load optimal_kappa_cep from tep_correction_results.json — skipping convergence analysis", "WARNING")
+            print_status("Could not load optimal_kappa_cep from step_04_tep_correction_results.json — skipping convergence analysis", "WARNING")
             return
 
         # Build provenance masks
@@ -637,7 +637,7 @@ class Step6EnhancedRobustness:
         sigma_ref = 87.17
         kappa_full = float('nan')  # must be loaded from JSON; no valid hardcoded fallback
         try:
-            tep_path = self.outputs_dir / "tep_correction_results.json"
+            tep_path = self.outputs_dir / "step_04_tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     _tep = json.load(f)
@@ -645,7 +645,7 @@ class Step6EnhancedRobustness:
                     sigma_ref = float(_tep.get("sigma_ref", 87.17))
                     kappa_full = float(_tep.get("optimal_kappa_cep", float('nan')))
         except Exception:
-            print_status("Could not load tep_correction_results.json: using default sigma_ref", "WARNING")
+            print_status("Could not load step_04_tep_correction_results.json: using default sigma_ref", "WARNING")
         if not np.isfinite(kappa_full):
             print_status("optimal_kappa_cep unavailable — skipping subset composition table", "WARNING")
             return

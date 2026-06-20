@@ -42,7 +42,7 @@ from scripts.utils.tep_correction import C_KM_S, C_SQUARED_KM_S
 # =============================================================================
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
-_DEFAULT_KAPPA_CEP = 1.611137e6   # Current host-only κ_Cep from pipeline (tep_correction_results.json)
+_DEFAULT_KAPPA_CEP = 1.611137e6   # Current host-only κ_Cep from pipeline (step_04_tep_correction_results.json)
 _DEFAULT_KAPPA_CEP_ERR = 0.619065e6  # Current bootstrap_kappa_robust_std from pipeline
 _DEFAULT_SIGMA_REF = 87.17
 
@@ -53,7 +53,7 @@ def _load_headline_tep_parameters() -> Dict[str, float]:
         "kappa_cep_err": _DEFAULT_KAPPA_CEP_ERR,
         "sigma_ref": _DEFAULT_SIGMA_REF,
     }
-    tep_path = _PROJECT_ROOT / "results" / "outputs" / "tep_correction_results.json"
+    tep_path = _PROJECT_ROOT / "results" / "outputs" / "step_04_tep_correction_results.json"
     try:
         with open(tep_path, "r") as f:
             tep = json.load(f)

@@ -23,8 +23,8 @@ def main() -> None:
     script_dir = Path(__file__).resolve().parent
     project_root = script_dir.parent.parent
 
-    csv_path = project_root / "results" / "outputs" / "tep_corrected_h0.csv"
-    json_path = project_root / "results" / "outputs" / "tep_correction_results.json"
+    csv_path = project_root / "results" / "outputs" / "step_04_tep_corrected_h0.csv"
+    json_path = project_root / "results" / "outputs" / "step_04_tep_correction_results.json"
     fig_dir = project_root / "results" / "figures"
     public_dir = project_root / "site" / "public" / "figures"
 
@@ -279,11 +279,11 @@ def main() -> None:
     # ------------------------------------------------------------------
     # Save
     # ------------------------------------------------------------------
-    save_path = fig_dir / "supplement_05_shear_suppression.png"
+    save_path = fig_dir / "step_06_supplement_05_shear_suppression.png"
     # fig.savefig(save_path, dpi=300)
     # print(f"Saved figure to {save_path}")
 
-    # public_path = public_dir / "supplement_05_shear_suppression.png"
+    # public_path = public_dir / "step_06_supplement_05_shear_suppression.png"
     # shutil.copy(save_path, public_path)
     # print(f"Copied figure to {public_path}")
 

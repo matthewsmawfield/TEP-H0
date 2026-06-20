@@ -9,13 +9,13 @@ class Step0SigmaCatalog:
         self.logs_dir = self.root_dir / "logs"
         self.logs_dir.mkdir(parents=True, exist_ok=True)
 
-        self.logger = TEPLogger("step_0_sigma_catalog", log_file_path=self.logs_dir / "step_0_sigma_catalog.log")
+        self.logger = TEPLogger("step_0_sigma_catalog", log_file_path=self.logs_dir / "step_00_sigma_catalog.log")
         set_step_logger(self.logger)
 
     def run(self, rebuild: bool = False):
         # SINGLE SOURCE OF TRUTH: master literature CSV with full provenance
         lit_csv = self.root_dir / "data" / "raw" / "external" / "velocity_dispersions_literature.csv"
-        report_json = self.root_dir / "results" / "outputs" / "sigma_regeneration_report.json"
+        report_json = self.root_dir / "results" / "outputs" / "step_00_sigma_regeneration_report.json"
 
         # The master file is the only source of truth. It is manually curated
         # with ADS bibcodes, source URLs, and provenance notes for every value.

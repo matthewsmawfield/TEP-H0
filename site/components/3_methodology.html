@@ -49,7 +49,7 @@
         <tr><td>Minimum $z_{\rm HD}$</td><td>$0.00359$</td></tr>
         <tr><td>Maximum $z_{\rm HD}$</td><td>$0.01682$</td></tr>
         <tr><td>Median $\sigma$ for stratification</td><td>$96.4$ km/s (computed from the $N=29$ sample)</td></tr>
-        <tr><td>Primary covariance matrix</td><td><code>h0_covariance.npy</code> (29$\times$29, SH0ES GLS propagated)</td></tr>
+        <tr><td>Primary covariance matrix</td><td><code>step_03_h0_covariance.npy</code> (29$\times$29, SH0ES GLS propagated)</td></tr>
         <tr><td>Primary statistical observable</td><td>Distance-ladder residual $\delta_i = \mu_{i,\rm SH0ES} - \mu_{i,\rm no\text{-}env}$</td></tr>
         <tr><td>Primary test statistic</td><td>Covariance-aware Pearson correlation $p_{\rm cov,MC}$ (Monte Carlo null)</td></tr>
         <tr><td>Primary $p$-value</td><td>$p_{\rm cov,MC} = 0.0031$ (Pearson); $p_{\rm cov,MC} = 0.0041$ (Spearman)</td></tr>
@@ -135,7 +135,9 @@
     fiber spectroscopy) and $R_{\rm eff}$ is the effective radius derived from
     RC3 $D_{25}$ isophotal diameters ($R_{\rm eff} \approx 0.5 R_{25}$). This
     velocity-dispersion data ($\sigma$) uniformly standardized to the effective radius.
-    The full 36-host set spans $\sigma = 50$–$223$ km/s, with a median of $89.7$ km/s; the primary $z_{\rm HD}>0.0035$, $N=29$ analysis sample has median $\sigma=96.4$ km/s.
+    The full 36-host compilation spans $\sigma = 24$–$223$ km/s with a median of
+    $89.7$ km/s.  The primary $z_{\rm HD}>0.0035$, $N=29$ analysis sample spans
+    $\sigma = 50$–$223$ km/s with median $\sigma = 96.4$ km/s.
 </p>
 
 <p>
@@ -246,12 +248,12 @@
 
 <div class="footnote" id="fn-screening">
     <sup>1</sup>The screening factor $S(\rho)$ derives from the canonical
-    Temporal Shear mechanism (Paper 0, v0.8), where the continuous
-    spatial profile of the scalar field suppresses Temporal Shear in
-    dense environments via environment-responsive suppression of the locally active Temporal Shear sector.
-    A chameleon-like density-mass completion is one possible microscopic realization, but it is not assumed in the present Cepheid analysis.
-    See Paper 6, Box 6.5 for the soliton
-    derivation and the $R_{\rm sol} \propto M^{1/3}$ scaling from the
+    Temporal Topology of the scalar time field (Paper 0, v0.9 Jakarta), where
+    the continuous spatial profile suppresses the locally active Temporal Shear
+    sector in dense environments. Chameleon, Vainshtein, Galileon, DBI, and
+    symmetron mechanisms may be studied as candidate microscopic completions, but
+    they are not the defining ontology of TEP. See Paper 6, Box 6.5 for the
+    soliton derivation and the $R_{\rm sol} \propto M^{1/3}$ scaling from the
     canonical action with saturation potential $V(\phi)$.
 </div>
 <div class="equation">
@@ -273,12 +275,12 @@
 
 <p>
     <strong>Physical mechanism:</strong> The suppression arises from non-linear
-    superposition of the scalar field gradient with ambient matter gradients. In
-    dense environments, large matter gradients flatten the field gradient
-    (Temporal Shear), recovering standard GR; in diffuse environments, the
+    superposition of the scalar field gradient (Temporal Shear) with ambient
+    matter gradients. In dense environments, large matter gradients flatten the
+    field gradient, recovering standard GR; in diffuse environments, the
     gradient tracks the background potential, producing measurable clock-rate
-    anomalies. This non-linear field gradient flattening replaces the discrete
-    thin-shell boundaries of conventional chameleon theories.
+    anomalies. This continuous field-gradient flattening is a manifestation of
+    Temporal Topology, not a discrete thin-shell boundary.
 </p>
 
 <p>
@@ -433,7 +435,10 @@
     Those experiments constrain different observable projections: local source charge,
     photon-cone propagation, equivalence-principle violation, and screened solar-system
     gradients. The present coefficient is a channel-level Cepheid period-response
-    coefficient. The precise microscopic mapping from the bare scalar coupling $\beta_A$ to the observable response coefficient $\kappa_{\rm Cep}$ is established through the continuous screening function; the leading scalar-boundary Cepheid period-transport law is derived in Appendix C.
+    coefficient. The mapping from the bare scalar coupling $\beta_A$ to the
+    observable response coefficient $\kappa_{\rm Cep}$ is parameterized and
+    constrained by the data; the leading scalar-boundary Cepheid period-transport
+    law is derived in Appendix C.
 </p>
 
 <h3>2.5 Optimization Procedure</h3>
@@ -509,6 +514,24 @@
     and Spearman statistics across the ensemble. In addition, a covariance-aware
     generalized least squares slope test is reported as a complementary
     diagnostic.
+</p>
+
+<p>
+    <strong>Why $N_{\rm eff} \approx 24$ rather than $\sim$7.</strong>
+    The covariance propagation includes two distinct contributions:
+    (i) the shared SH0ES calibration covariance, which has mean off-diagonal
+    correlation $\langle r_{ij} \rangle \approx 0.12$ in $\mu$-space and would
+    give $N_{\rm eff} \approx 7$ if it were the only term; and (ii) the
+    peculiar-velocity uncertainty, which adds uncorrelated variance
+    $\sigma_{v_{\rm pec}}^2 / d_i^2$ to each diagonal. With a conservative
+    $\sigma_{v_{\rm pec}} = 250$ km/s and typical distances $d_i \sim 30$–80 Mpc,
+    the vpec contribution ($\sim$8 km/s/Mpc) dominates the diagonal noise over
+    the calibration contribution ($\sim$2 km/s/Mpc). In the correlation matrix
+    this dilutes the off-diagonal entries to $\langle r_{ij} \rangle \approx 0.008$,
+    yielding $N_{\rm eff} \approx 24$. The physical interpretation is that
+    peculiar-velocity noise, not shared calibration, is the dominant source of
+    host-to-host scatter; the covariance-aware test therefore differs only
+    modestly from the permutation test ($p_{\rm cov}=0.0031$ vs $p_{\rm perm}=0.012$).
 </p>
 
 <p>

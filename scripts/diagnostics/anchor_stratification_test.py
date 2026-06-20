@@ -279,7 +279,7 @@ def run_anchor_stratification_test():
         kappa_host_err = np.nan
         try:
             project_root = Path(__file__).parent.parent.parent
-            tep_path = project_root / "results" / "outputs" / "tep_correction_results.json"
+            tep_path = project_root / "results" / "outputs" / "step_04_tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     tep = json.load(f)
@@ -350,7 +350,7 @@ def run_anchor_stratification_test():
     create_anchor_comparison_figure(results)
     
     # Save results
-    output_path = Path(__file__).parent.parent.parent / "results" / "outputs" / "anchor_stratification_test.json"
+    output_path = Path(__file__).parent.parent.parent / "results" / "outputs" / "step_27_anchor_stratification_test.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     
     # Convert to serializable format
@@ -416,9 +416,9 @@ def create_anchor_comparison_figure(results):
         sigma_range = np.linspace(min(sigmas)*0.8, max(sigmas)*1.2, 100)
         # Use LMC as reference
         lmc_idx = names.index('LMC') if 'LMC' in names else 0
-        # Load fitted kappa from tep_correction_results.json
+        # Load fitted kappa from step_04_tep_correction_results.json
         import json
-        json_path = Path(__file__).resolve().parents[2] / "results" / "outputs" / "tep_correction_results.json"
+        json_path = Path(__file__).resolve().parents[2] / "results" / "outputs" / "step_04_tep_correction_results.json"
         if json_path.exists():
             with open(json_path) as f:
                 tep_results = json.load(f)
@@ -462,7 +462,7 @@ def create_anchor_comparison_figure(results):
     plt.tight_layout()
     
     # Save figure
-    fig_path = Path(__file__).parent.parent.parent / "results" / "figures" / "anchor_stratification_test.png"
+    fig_path = Path(__file__).parent.parent.parent / "results" / "figures" / "step_27_anchor_stratification_test.png"
     fig_path.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(fig_path, dpi=150, bbox_inches='tight', facecolor='white')
     print_status(f"Figure saved to: {fig_path}", "SUCCESS")

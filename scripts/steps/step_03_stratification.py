@@ -82,7 +82,7 @@ class Step2Stratification:
         # Initialize Logger
         self.logger = TEPLogger(
             "step_2_stratification",
-            log_file_path=self.logs_dir / "step_2_stratification.log",
+            log_file_path=self.logs_dir / "step_03_stratification.log",
         )
         set_step_logger(self.logger)
 
@@ -100,12 +100,12 @@ class Step2Stratification:
         )
 
         # Outputs
-        self.stratified_output_path = self.outputs_dir / "stratified_h0.csv"
-        self.json_output_path = self.outputs_dir / "stratification_results.json"
-        self.plot_path = self.figures_dir / "figure_01_h0_vs_sigma.png"
+        self.stratified_output_path = self.outputs_dir / "step_03_stratified_h0.csv"
+        self.json_output_path = self.outputs_dir / "step_03_stratification_results.json"
+        self.plot_path = self.figures_dir / "step_03_figure_01_h0_vs_sigma.png"
 
-        self.h0_cov_path = self.outputs_dir / "h0_covariance.npy"
-        self.h0_cov_labels_path = self.outputs_dir / "h0_covariance_labels.json"
+        self.h0_cov_path = self.outputs_dir / "step_03_h0_covariance.npy"
+        self.h0_cov_labels_path = self.outputs_dir / "step_03_h0_covariance_labels.json"
 
     def load_and_merge(self):
         """Loads data and merges host properties with distances."""
@@ -682,7 +682,7 @@ class Step2Stratification:
         plt.close()
 
         # Copy to public figures
-        public_path = self.root_dir / "site" / "public" / "figures" / "figure_01_h0_vs_sigma.png"
+        public_path = self.root_dir / "site" / "public" / "figures" / "step_03_figure_01_h0_vs_sigma.png"
         public_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(self.plot_path, public_path)
         print_status(f"Copied plot to {public_path}", "SUCCESS")

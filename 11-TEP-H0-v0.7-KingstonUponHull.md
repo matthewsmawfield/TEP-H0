@@ -48,7 +48,7 @@ period-contraction combined with the virial relation $|\Phi|\propto\sigma^2$—w
 Observable Response Coefficient $\kappa_{\rm Cep} = (1.27 \pm 0.48) \times 10^6$ mag
 and effective calibrator reference $\sigma_{\rm ref} = 87.17$ km/s removes the
 host-potential dependence and brings the Cepheid-calibrated SH0ES ladder into
-agreement with the CMB scale ($H_0 = 68.84$ km/s/Mpc; Planck tension $0.99\sigma$).
+agreement with the CMB scale ($H_0 = 68.84$ km/s/Mpc; Planck tension $0.96\sigma$).
 Internal interpolation stability (leave-one-out cross-validation, LOOCV) gives
 $H_0^{\rm LOOCV} = 68.67 \pm 1.35$ km/s/Mpc, Planck tension $0.89\sigma$.
 The correction survives covariance propagation, redshift cuts, peculiar-velocity
@@ -261,7 +261,7 @@ stratified analysis is inspected:
 | Minimum $z_{\rm HD}$ | $0.00359$ |
 | Maximum $z_{\rm HD}$ | $0.01682$ |
 | Median $\sigma$ for stratification | $96.4$ km/s (computed from the $N=29$ sample) |
-| Primary covariance matrix | h0_covariance.npy (29$\times$29, SH0ES GLS propagated) |
+| Primary covariance matrix | step_03_h0_covariance.npy (29$\times$29, SH0ES GLS propagated) |
 | Primary statistical observable | Distance-ladder residual $\delta_i = \mu_{i,\rm SH0ES} - \mu_{i,\rm no\text{-}env}$ |
 | Primary test statistic | Covariance-aware Pearson correlation $p_{\rm cov,MC}$ (Monte Carlo null) |
 | Primary $p$-value | $p_{\rm cov,MC} = 0.0031$ (Pearson); $p_{\rm cov,MC} = 0.0041$ (Spearman) |
@@ -782,7 +782,7 @@ independent robustness verification.
 | Diagonal host-scatter likelihood | +2.6 | Independent robustness check |
 | Full-covariance GLS slope likelihood | +2.6 | Equivalent free-intercept covariance fit |
 
-![Scatter plot showing positive correlation between the SH0ES Cepheid-host distance-ladder residual in H0-equivalent units and host galaxy velocity dispersion squared (Spearman rho=0.517, p=0.0041), with high-sigma hosts yielding systematically higher residual values and NGC 4639 annotated as a low-redshift host with large peculiar-velocity uncertainty](public/figures/figure_01_h0_vs_sigma.png?v=2)
+![Scatter plot showing positive correlation between the SH0ES Cepheid-host distance-ladder residual in H0-equivalent units and host galaxy velocity dispersion squared (Spearman rho=0.517, p=0.0041), with high-sigma hosts yielding systematically higher residual values and NGC 4639 annotated as a low-redshift host with large peculiar-velocity uncertainty](public/figures/step_03_figure_01_h0_vs_sigma.png?v=2)
 
 Figure 1: Observed correlation between the SH0ES Cepheid-host
 distance-ladder residual, displayed in $H_0$-equivalent units, and host
@@ -808,7 +808,7 @@ med} \approx 96.4$ km/s) reveals the following structure:
 | --- | --- | --- | --- |
 | Mean $H_0$ | $66.26$ | $74.12$ | Bin mean |
 | SEM | $\pm 2.10$ | $\pm 1.30$ | Host scatter / $\sqrt{N}$ |
-| Bootstrap error | $\pm 1.45$ | $\pm 1.45$ | Resampled host uncertainty (overall) |
+| Bootstrap error | $\pm 1.48$ | $\pm 1.48$ | Resampled host uncertainty (overall) |
 | Covariance-aware error | $\pm 2.50$ | $\pm 2.51$ | Propagated SH0ES covariance |
 | Plotted error | $\pm 2.10$ | $\pm 1.30$ | Standard Error of the Mean (SEM) convention |
 
@@ -885,7 +885,7 @@ on metallicity, might the observed trend simply reflect residual metallicity
 bias? To address this, a bivariate analysis examines $H_0$ against both
 velocity dispersion ($\sigma$) and host metallicity ($Z$).
 
-![Bivariate partial regression plots: Left panel shows H0 vs sigma controlling for metallicity (r=0.450, p=0.016); Right panel shows H0 vs metallicity controlling for sigma (r=0.25, p=0.20, not significant)](public/figures/figure_02_bivariate_h0_sigma_metallicity.png?v=2)
+![Bivariate partial regression plots: Left panel shows H0 vs sigma controlling for metallicity (r=0.450, p=0.016); Right panel shows H0 vs metallicity controlling for sigma (r=0.25, p=0.20, not significant)](public/figures/step_08_figure_02_bivariate_h0_sigma_metallicity.png?v=2)
 
 Figure 2: Bivariate analysis of the distance-ladder residual. Left: Partial
 regression plot of $H_0$ residuals controlling for host metallicity
@@ -955,10 +955,10 @@ is $\langle \kappa_{\rm Cep} \cdot S
 this suppression-aware correction yields a unified Hubble constant:
 
 \begin{equation}
-H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.91\pm1.45)
+H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.90\pm1.48)
 \end{equation}
 
-The Planck tension is reduced to $0.99\sigma$.  Paper 10 does not
+The Planck tension is reduced to $0.96\sigma$.  Paper 10 does not
 directly predict $\kappa_{\rm Cep}$; the two papers are consistent
 only after the environmental transfer factor is accounted for.
 
@@ -986,7 +986,7 @@ with its clear $\sigma$-dependence, while the right panel shows the
 TEP-corrected sample with the environmental trend removed and the mean $H_0$
 aligned with Planck.
 
-![Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=68.84 km/s/Mpc aligned with Planck](public/figures/figure_03_tep_correction_comparison.png?v=2)
+![Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=68.84 km/s/Mpc aligned with Planck](public/figures/step_04_figure_03_tep_correction_comparison.png?v=2)
 
 Figure 3: Effect of TEP correction on the distance ladder. Left:
 Original SH0ES data (29-host Hubble-flow-safe sample) showing the dependence of the
@@ -1000,8 +1000,8 @@ velocities dominate; jackknife analysis shows its removal strengthens the
 correlation, confirming the signal is robust against low-z systematics.
 Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.27\times10^6$
 mag, $\sigma^2/c^2$ scaling). The corrected panel shows $r \simeq 0$ by construction since $\kappa_{\rm Cep}$ is fitted to remove the trend; this is a fitted-correction diagnostic, not an independent validation statistic. Independent robustness is assessed by jackknife, host-contrast likelihood, train/test, anchor, and systematics tests. The unified mean
-($68.84$ km/s/Mpc; bootstrap mean $68.91 \pm 1.45$) is statistically consistent with Planck (dashed line,
-$0.99\sigma$ tension). Error bars represent standard measurement uncertainties.
+($68.84$ km/s/Mpc; bootstrap mean $68.90 \pm 1.48$) is statistically consistent with Planck (dashed line,
+$0.96\sigma$ tension). Error bars represent standard measurement uncertainties.
 
 ### 3.4 Self-Consistency Check
 
@@ -1123,7 +1123,7 @@ controls ambient-field suppression. The effective screening factor is the
 envelope of both effects.
 The joint result is stable under reasonable variations of the anchor-screening factors; sensitivity tests are reported in Appendix D.
 
-![Joint environmental-screening model fit to 29 SN Ia hosts and 3 geometric anchors](public/figures/figure_05_joint_screening_model.png?v=2)
+![Joint environmental-screening model fit to 29 SN Ia hosts and 3 geometric anchors](public/figures/step_20_figure_05_joint_screening_model.png?v=2)
 
 Figure 5: Joint environmental-screening model fit to 29 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.61 \pm 0.32) \times 10^6$ mag (using the screen-weighted reference scale), consistent with the host-only value at $0.85\sigma$.  Environment-specific screening factors $S_k$ attenuate the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.41 \pm 0.59) \times 10^6$ mag).
 
@@ -1176,7 +1176,7 @@ The $z>0.01$ subsample ($N=5$) yields a permutation $p=0.024$,
 not a standalone significance test, but a sign-stability check showing that
 the correlation does not reverse under the strictest redshift cut, with the
 correlation remaining robustly positive. Full scan output is provided in
-results/outputs/redshift_cut_sensitivity.txt.
+results/outputs/step_08_redshift_cut_sensitivity.txt.
 
 Large-scale environment was quantified by crossmatching each host (via PGC
 identifiers) to the 2MASS group catalog of Tully (2015), using the group
@@ -1227,7 +1227,7 @@ In addition, repeating the definition $H_0 = cz/d$ using alternative
 Pantheon+ redshifts yields consistent positive correlations: $r=0.442$ using
 $z_{\rm CMB}$ and $r=0.395$ using $z_{\rm HEL}$ (both
 permutation-significant). Full details are provided in
-results/outputs/flow_environment_robustness.txt.
+results/outputs/step_08_flow_environment_robustness.txt.
 
 Finally, a Monte Carlo test was performed in which velocities were perturbed
 by residual peculiar-velocity uncertainty using the Pantheon+ $v_{\rm pec}$
@@ -1260,7 +1260,7 @@ systematic envelope is smaller than the bootstrap uncertainty, indicating
 that the main inference does not rely on fine-tuned aperture assumptions. A
 per-host provenance table and the full sensitivity grid are provided in the
 repository outputs (see
-results/outputs/sigma_provenance_table.csv and
+results/outputs/step_07_sigma_provenance_table.csv and
 results/outputs/aperture_sensitivity_grid.csv).
 
 To further test whether the signal could arise from unmodeled
@@ -1284,7 +1284,7 @@ that the $H_0$–$\sigma$ association is not a byproduct of local density
 systematics. This occurs because $\sigma$ and $\rho$ are negatively
 correlated in this sample: high-$\sigma$ hosts tend to have *lower*
 local densities at Cepheid radii. Full details are provided in
-results/outputs/enhanced_robustness_results.json.
+results/outputs/step_13_enhanced_robustness_results.json.
 
 ### 3.7 TRGB Differential Test
 
@@ -1528,7 +1528,7 @@ for environmental P-L dependence consistent with TEP shear suppression.
 The Inner Fainter offset is also consistent with dust extinction in the
 bulge; the color-offset test is the discriminating observation.
 
-![Multi-panel synthesis showing Inner Fainter offsets in both ground-based and HST M31 data consistent with TEP shear suppression; LMC control shows no large offset indicating no large pipeline artifacts](public/figures/figure_08_robustness_synthesis_plot.png?v=2)
+![Multi-panel synthesis showing Inner Fainter offsets in both ground-based and HST M31 data consistent with TEP shear suppression; LMC control shows no large offset indicating no large pipeline artifacts](public/figures/step_31_figure_08_robustness_synthesis_plot.png?v=2)
 
 Figure 8: Synthesis of environmental differential tests. Both
 ground-based and HST M31 data show 'Inner Fainter' offsets consistent
@@ -1648,7 +1648,7 @@ environment-independent. Under the TEP framework, the $5\sigma$ discrepancy
 emerges because the SH0ES sample includes numerous SN Ia hosts with deep
 gravitational potentials, where period contraction biases distance
 estimates low. The TEP correction yields a unified $H_0 = 68.84$ km/s/Mpc
-(bootstrap mean $68.91 \pm 1.45$), reducing the Planck tension to $0.99\sigma$.
+(bootstrap mean $68.90 \pm 1.48$), reducing the Planck tension to $0.96\sigma$.
 
 The correlation detected (Spearman $\rho = 0.517$, $p = 0.0041$; Pearson $r = 0.466$, $p = 0.0109$) between
 host velocity dispersion and the distance-ladder residual displayed in $H_0$-equivalent units is notable for an
@@ -1703,7 +1703,7 @@ flow/environment stress model is interpreted separately because
 group richness can mediate TEP screening rather than act as a pure
 nuisance covariate.
 
-![Forest plot of standardized regression coefficients showing Velocity Dispersion (Potential Proxy) remains the dominant predictor of H0 across Baseline, AgeControl, DustControl, Full, and FlowEnvironment model specifications](public/figures/figure_12_multivariate_robustness.png?v=2)
+![Forest plot of standardized regression coefficients showing Velocity Dispersion (Potential Proxy) remains the dominant predictor of H0 across Baseline, AgeControl, DustControl, Full, and FlowEnvironment model specifications](public/figures/step_12_figure_12_multivariate_robustness.png?v=2)
 
 Figure 12: Standardized regression coefficients for $H_0$
 determinants. The dependence on velocity dispersion (Potential)
@@ -2433,8 +2433,8 @@ Internal interpolation stability (leave-one-out cross-validation, LOOCV) gives
 $H_0^{\rm LOOCV} = 68.67 \pm 1.35$ km/s/Mpc, corresponding to a Planck tension of
 $0.89\sigma$; this stress test demonstrates internal interpolation stability,
 not external validation. The in-sample
-corrected mean is $H_0 = 68.84$ km/s/Mpc (bootstrap mean $68.91 \pm 1.45$,
-Planck tension $0.99\sigma$). Both are robust under bootstrap resampling.
+corrected mean is $H_0 = 68.84$ km/s/Mpc (bootstrap mean $68.90 \pm 1.48$,
+Planck tension $0.96\sigma$). Both are robust under bootstrap resampling.
 The low-$\sigma$ subsample ($66.26 \pm 2.10$ km/s/Mpc) lies below the uncorrected
 full-sample mean, consistent with TEP expectations that shallow-potential hosts
 require smaller corrections.
@@ -2488,7 +2488,7 @@ correction derived from the TEP conformal clock-transport law
 ($\Delta\mu = \kappa_{\rm Cep} \cdot S(\rho) \cdot (\sigma^2-\sigma_{\rm ref}^2)/c^2$)
 removes the environmental dependence and brings the Cepheid-calibrated
 SH0ES ladder into agreement with the CMB scale ($H_0 = 68.84$ km/s/Mpc;
-Planck tension $0.99\sigma$).
+Planck tension $0.96\sigma$).
 
 This two-stage structure separates the empirical detection from the fitted
 correction, avoiding the circularity objection. The primary empirical claim
@@ -2518,7 +2518,7 @@ metallicity control. Full confirmation awaits SN Ia channel integration,
 homogeneous stellar-dispersion spectroscopy, and the M31 color-offset
 discriminating test.
 A frozen prediction table (see
-results/outputs/frozen_tep_predictions.csv) provides the
+results/outputs/step_05_frozen_tep_predictions.csv) provides the
 expected $\Delta\mu_{\rm TEP}$ as a function of prospective host
 $\sigma$ and screening factor $S$, computed with the pipeline-frozen
 parameters $\kappa_{\rm Cep} = 1.272\times10^6$ mag and
@@ -2578,15 +2578,15 @@ a self-contained Python module:
 | --- | --- | --- | --- |
 | 01 | step_01_data_ingestion.py | Downloads SH0ES distance moduli and Pantheon+ redshifts; cross-matches hosts with velocity dispersion catalogs (HyperLEDA, SDSS) | hosts_processed.csv |
 | 02 | step_02_aperture_correction.py | Applies Jorgensen et al. (1995) aperture corrections to normalize $\sigma$ measurements to $R_{\rm eff}/8$ | Homogenized $\sigma$ values |
-| 03 | step_03_stratification.py | Calculates per-host $H_0$; stratifies by median $\sigma$; computes correlation statistics | stratification_results.json |
-| 04 | step_04_tep_correction.py | Optimizes $\kappa_{\rm Cep}$ by minimizing residual–$\sigma$ slope in $\delta\mu$ space; applies TEP correction; bootstrap uncertainty estimation | tep_correction_results.json |
-| 08 | step_08_robustness_checks.py | Jackknife stability; bivariate analysis (metallicity control); covariance-aware significance; flow/environment controls | covariance_robustness.json |
-| 10 | step_10_m31_analysis.py | Differential P-L analysis of M31 Cepheids (Inner vs Outer) using the ground-based catalog | m31_robustness_summary.json |
-| 12 | step_12_multivariate_analysis.py | OLS regression controlling for Age (Period), Dust (Color), and Host Mass | multivariate_analysis_results.json |
-| 14 | step_14_lmc_replication.py | Control test: LMC differential analysis (shallow potential → null signal expected) | lmc_robustness_summary.json |
-| 26 | step_26_m31_phat_analysis.py | HST J/H band analysis from Kodric et al. (2018) | m31_phat_robustness_summary.json |
+| 03 | step_03_stratification.py | Calculates per-host $H_0$; stratifies by median $\sigma$; computes correlation statistics | step_03_stratification_results.json |
+| 04 | step_04_tep_correction.py | Optimizes $\kappa_{\rm Cep}$ by minimizing residual–$\sigma$ slope in $\delta\mu$ space; applies TEP correction; bootstrap uncertainty estimation | step_04_tep_correction_results.json |
+| 08 | step_08_robustness_checks.py | Jackknife stability; bivariate analysis (metallicity control); covariance-aware significance; flow/environment controls | step_08_covariance_robustness.json |
+| 10 | step_10_m31_analysis.py | Differential P-L analysis of M31 Cepheids (Inner vs Outer) using the ground-based catalog | step_10_m31_robustness_summary.json |
+| 12 | step_12_multivariate_analysis.py | OLS regression controlling for Age (Period), Dust (Color), and Host Mass | step_12_multivariate_analysis_results.json |
+| 14 | step_14_lmc_replication.py | Control test: LMC differential analysis (shallow potential → null signal expected) | step_14_lmc_robustness_summary.json |
+| 26 | step_26_m31_phat_analysis.py | HST J/H band analysis from Kodric et al. (2018) | step_26_m31_phat_robustness_summary.json |
 | 31 | step_31_final_synthesis.py | Generates synthesis figures and final summary statistics | All manuscript figures |
-| 27 | step_27_anchor_stratification.py | Independent P-L fits to geometric anchors (LMC, NGC 4258, M31); tests for anchor-level TEP bias | anchor_stratification_test.json |
+| 27 | step_27_anchor_stratification.py | Independent P-L fits to geometric anchors (LMC, NGC 4258, M31); tests for anchor-level TEP bias | step_27_anchor_stratification_test.json |
 
 #### Repository Structure
 
@@ -2605,16 +2605,16 @@ TEP-H0/
 └── site/                        # Manuscript HTML and website
 #### Key Output Files
 
-[tep_correction_results.json](results/outputs/tep_correction_results.json) — Unified
+[step_04_tep_correction_results.json](results/outputs/step_04_tep_correction_results.json) — Unified
 $H_0$, optimal $\kappa_{\rm Cep}$, Planck tension
 
-results/outputs/stratification_results.json —
+results/outputs/step_03_stratification_results.json —
 High/low-$\sigma$ stratification statistics
 
-results/outputs/covariance_robustness.json —
+results/outputs/step_08_covariance_robustness.json —
 Covariance-aware p-values and $N_{\rm eff}$
 
-results/outputs/out_of_sample_validation.json —
+results/outputs/step_08_out_of_sample_validation.json —
 Train/test and LOOCV results
 
 data/processed/hosts_processed.csv — Complete host
@@ -2642,9 +2642,9 @@ installable via pip):
 After running the pipeline, verify reproduction by checking:
 
 # Check key results match manuscript
-cat results/outputs/tep_correction_results.json | grep unified_h0
+cat results/outputs/step_04_tep_correction_results.json | grep unified_h0
 # Expected: 68.84 (±0.01)
-cat results/outputs/stratification_results.json | grep difference
+cat results/outputs/step_03_stratification_results.json | grep difference
 # Expected: 7.86 (±0.01)
 
 https://github.com/matthewsmawfield/TEP-H0

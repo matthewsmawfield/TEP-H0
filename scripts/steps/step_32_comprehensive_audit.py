@@ -59,7 +59,7 @@ class Step11ComprehensiveAudit:
 
         self.logger = TEPLogger(
             "step_11_audit",
-            log_file_path=self.logs_dir / "step_11_comprehensive_audit.log",
+            log_file_path=self.logs_dir / "step_32_comprehensive_audit.log",
         )
         set_step_logger(self.logger)
 
@@ -72,9 +72,9 @@ class Step11ComprehensiveAudit:
         print_status(">>> STEP 11: COMPREHENSIVE AUDIT & INTEGRITY VERIFICATION", "TITLE"
         )
 
-        strat = pd.read_csv(self.results_dir / "stratified_h0.csv")
-        prov = pd.read_csv(self.results_dir / "sigma_provenance_table.csv")
-        with open(self.results_dir / "tep_correction_results.json") as f:
+        strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
+        prov = pd.read_csv(self.results_dir / "step_07_sigma_provenance_table.csv")
+        with open(self.results_dir / "step_04_tep_correction_results.json") as f:
             tep_json = json.load(f)
 
         # Override hardcoded sigma_ref with the pipeline value
@@ -84,15 +84,15 @@ class Step11ComprehensiveAudit:
         errors = []
 
         # --- 0. Pipeline Freshness Check ---
-        # Warn if any downstream artifact is older than tep_correction_results.json,
+        # Warn if any downstream artifact is older than step_04_tep_correction_results.json,
         # which indicates a partial rerun where downstream steps used stale kappa_cep.
-        tep_mtime = (self.results_dir / "tep_correction_results.json").stat().st_mtime
+        tep_mtime = (self.results_dir / "step_04_tep_correction_results.json").stat().st_mtime
         downstream_files = [
-            "covariance_robustness.json",
-            "cross_channel_consistency.json",
-            "local_gravity_closure.json",
-            "pipeline_audit_report.json",
-            "enhanced_robustness_results.json",
+            "step_08_covariance_robustness.json",
+            "step_29_cross_channel_consistency.json",
+            "step_28_local_gravity_closure.json",
+            "step_32_pipeline_audit_report.json",
+            "step_13_enhanced_robustness_results.json",
         ]
         stale_files = []
         for fname in downstream_files:
@@ -100,7 +100,7 @@ class Step11ComprehensiveAudit:
             if fpath.exists() and fpath.stat().st_mtime < tep_mtime:
                 stale_files.append(fname)
         if stale_files:
-            msg = f"FRESHNESS_WARNING: {len(stale_files)} downstream files predate tep_correction_results.json: {stale_files}"
+            msg = f"FRESHNESS_WARNING: {len(stale_files)} downstream files predate step_04_tep_correction_results.json: {stale_files}"
             findings.append(msg)
             print_status(msg, "WARNING")
             print_status(
@@ -108,7 +108,7 @@ class Step11ComprehensiveAudit:
                 "WARNING",
             )
         else:
-            findings.append("FRESHNESS: all downstream files postdate tep_correction_results.json, PASS")
+            findings.append("FRESHNESS: all downstream files postdate step_04_tep_correction_results.json, PASS")
             print_status("Freshness check: all downstream artifacts current, PASS", "SUCCESS")
         n = len(strat)
         z_min = strat["z_hd"].min()
@@ -133,8 +133,8 @@ class Step11ComprehensiveAudit:
         )
 
         # --- 3. Covariance Sanity & Host-Order Assertion ---
-        cov = np.load(self.results_dir / "h0_covariance.npy")
-        with open(self.results_dir / "h0_covariance_labels.json", "r") as f:
+        cov = np.load(self.results_dir / "step_03_h0_covariance.npy")
+        with open(self.results_dir / "step_03_h0_covariance_labels.json", "r") as f:
             cov_labels = json.load(f)
             
         import hashlib
@@ -232,18 +232,18 @@ class Step11ComprehensiveAudit:
         # --- 8. Multiple-Testing Correction ---
         # Collect p-values dynamically from pipeline output files rather than hardcoding.
         p_sources = []
-        # Primary: tep_correction_results.json
+        # Primary: step_04_tep_correction_results.json
         for key in ("pearson_p", "spearman_p", "bootstrap_permutation_p", "gls_p"):
             v = tep_json.get(key)
             if v is not None:
                 p_sources.append(float(v))
         # Robustness tests
         for fname, keys in [
-            ("enhanced_robustness_results.json", ("pearson_p", "spearman_p", "gls_p", "wls_p", "stellar_only_p", "covariate_p")),
-            ("stratification_results.json", ("stratification_p",)),
-            ("host_mass_residual_test.json", ("cepheid_mass_residual_p", "cepheid_both_residual_p")),
-            ("cross_channel_consistency.json", ("trgb_pearson_p", "differential_p")),
-            ("anchor_stratification_test.json", ("pearson_p",)),
+            ("step_13_enhanced_robustness_results.json", ("pearson_p", "spearman_p", "gls_p", "wls_p", "stellar_only_p", "covariate_p")),
+            ("step_03_stratification_results.json", ("stratification_p",)),
+            ("step_17_host_mass_residual_test.json", ("cepheid_mass_residual_p", "cepheid_both_residual_p")),
+            ("step_29_cross_channel_consistency.json", ("trgb_pearson_p", "differential_p")),
+            ("step_27_anchor_stratification_test.json", ("pearson_p",)),
         ]:
             try:
                 with open(self.results_dir / fname) as _f:
@@ -324,12 +324,12 @@ class Step11ComprehensiveAudit:
             "host_order_sha256": host_order_sha256
         }
 
-        with open(self.results_dir / "audit_master_report.json", "w") as f:
+        with open(self.results_dir / "step_32_audit_master_report.json", "w") as f:
             json.dump(report, f, indent=2)
 
         # Save master table
         master = strat[["normalized_name", "z_hd", "z_cmb", "z_hel", "sigma_inferred", "h0_derived"]].copy()
-        master.to_csv(self.results_dir / "audit_master_table.csv", index=False)
+        master.to_csv(self.results_dir / "step_32_audit_master_table.csv", index=False)
 
         print_status(
             f"Step 11 complete: {len(findings)} checks, status={report['status']}",

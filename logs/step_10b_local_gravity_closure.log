@@ -1,9 +1,0 @@
-[14:21:50] [INFO] 
-[14:21:50] [INFO] ================================================================================
-[14:21:50] [INFO]    Starting Step 10b: Local-Gravity Closure
-[14:21:50] [INFO] ================================================================================
-[14:21:50] [INFO] 
-[14:21:50] [INFO] alpha_clock=8.988e+05
-[14:21:50] [INFO] Cassini margin=2.19e+05; MICROSCOPE margin=5.39e+06
-[14:21:50] [INFO] q_sun=8.4e-12; q_earth=1.6e-15
-[14:21:50] [SUCCESS] Saved local-gravity closure to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/local_gravity_closure.json

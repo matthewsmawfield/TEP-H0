@@ -52,7 +52,7 @@ class Step17RegressorAudit:
 
         self.logger = TEPLogger(
             "step_17_regressor_audit",
-            log_file_path=self.logs_dir / "step_17_regressor_audit.log",
+            log_file_path=self.logs_dir / "step_18_regressor_audit.log",
         )
         set_step_logger(self.logger)
 
@@ -60,11 +60,11 @@ class Step17RegressorAudit:
         print_status(">>> STEP 17: PRIMARY TEP REGRESSOR AUDIT", "TITLE"
         )
 
-        strat = pd.read_csv(self.results_dir / "stratified_h0.csv")
+        strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
         n = len(strat)
 
         # Load TEP parameters
-        with open(self.results_dir / "tep_correction_results.json") as f:
+        with open(self.results_dir / "step_04_tep_correction_results.json") as f:
             tep = json.load(f)
         sigma_ref = float(tep["sigma_ref"])
         c2 = C_SQUARED_KM_S
@@ -155,7 +155,7 @@ class Step17RegressorAudit:
 
         # Save
         df.to_json(
-            self.results_dir / "regressor_audit.json",
+            self.results_dir / "step_18_regressor_audit.json",
             orient="records",
             indent=2,
         )
@@ -173,7 +173,7 @@ class Step17RegressorAudit:
             ) if "TEP_full" in df["regressor"].values else None,
             "all_results": df.to_dict(orient="records"),
         }
-        with open(self.results_dir / "regressor_audit_summary.json", "w") as f:
+        with open(self.results_dir / "step_18_regressor_audit_summary.json", "w") as f:
             json.dump(summary, f, indent=2)
 
         print_status("Step 17 complete", "SUCCESS")

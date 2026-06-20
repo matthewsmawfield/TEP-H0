@@ -13,9 +13,9 @@ from scripts.utils.tep_correction import tep_correction
 def run_loocv():
     print("--- Running Leave-One-Host-Out Influence Analysis ---")
     base_dir = Path(__file__).resolve().parents[2]
-    df = pd.read_csv(base_dir / "results" / "outputs" / "tep_corrected_h0.csv")
+    df = pd.read_csv(base_dir / "results" / "outputs" / "step_04_tep_corrected_h0.csv")
     
-    with open(base_dir / "results" / "outputs" / "tep_correction_results.json", "r") as f:
+    with open(base_dir / "results" / "outputs" / "step_04_tep_correction_results.json", "r") as f:
         tep = json.load(f)
     
     sigma_ref = tep['sigma_ref_screened']
@@ -68,7 +68,7 @@ def run_loocv():
         print(f"{r['excluded_host']:<15} {r['sigma']:<8.1f} {r['shear_suppression']:<5.2f} "
               f"{r['kappa_loo']:<10.2e} {r['delta_kappa']:<10.2e} {r['pct_change']:>8.2f}%")
               
-    output_path = base_dir / "results" / "outputs" / "leave_one_out_influence.csv"
+    output_path = base_dir / "results" / "outputs" / "step_25_leave_one_out_influence.csv"
     df_res.to_csv(output_path, index=False)
     print(f"\nSaved influence table to {output_path}")
 

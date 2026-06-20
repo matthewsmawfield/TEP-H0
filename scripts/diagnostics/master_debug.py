@@ -19,8 +19,8 @@ def sh(title): print(f"\n  --- {title} ---\n")
 # 1. REGRESSOR DEBUG
 # ---------------------------------------------------------------------------
 h2("1. REGRESSOR CONSTRUCTION DEBUG")
-strat = pd.read_csv(PROJECT_ROOT / "results/outputs/stratified_h0.csv")
-with open(PROJECT_ROOT / "results/outputs/tep_correction_results.json") as f:
+strat = pd.read_csv(PROJECT_ROOT / "results/outputs/step_03_stratified_h0.csv")
+with open(PROJECT_ROOT / "results/outputs/step_04_tep_correction_results.json") as f:
     tep = json.load(f)
 sigma = strat["sigma_inferred"].values
 h0 = strat["h0_derived"].values
@@ -112,7 +112,7 @@ print(f"  Equal screened:     {ref({k:0.25 for k in weights},sigmas,ANCHOR_SCREE
 # 4. TRGB DIFFERENTIAL
 # ---------------------------------------------------------------------------
 h2("4. TRGB DIFFERENTIAL DEBUG")
-trgb = pd.read_csv(PROJECT_ROOT / "results/outputs/trgb_hosts_data.csv")
+trgb = pd.read_csv(PROJECT_ROOT / "results/outputs/step_15_trgb_hosts_data.csv")
 trgb["match"] = trgb["galaxy"].str.replace(" ","").str.upper()
 strat["match"] = strat["normalized_name"].str.replace(" ","").str.upper()
 merged = pd.merge(trgb, strat, on="match", suffixes=("_trgb","_host"))
@@ -129,8 +129,8 @@ if r_d > 0: print("OK: Positive = Cepheid mu underestimated at high sigma (TEP-c
 else: print("WARNING: Sign reversed!")
 
 # Cross-check stored
-with open(PROJECT_ROOT / "results/outputs/cross_channel_consistency.json") as f: cc=json.load(f)
-with open(PROJECT_ROOT / "results/outputs/joint_indicator_model.json") as f: ji=json.load(f)
+with open(PROJECT_ROOT / "results/outputs/step_29_cross_channel_consistency.json") as f: cc=json.load(f)
+with open(PROJECT_ROOT / "results/outputs/step_20_joint_indicator_model.json") as f: ji=json.load(f)
 print(f"\nStep 12 kappa_diff: {cc['kappa_diff']['kappa_diff']:.1f}")
 print(f"Step 19 kappa_diff: {ji['kappa_diff']:.1f}")
 print(f"Match: {abs(cc['kappa_diff']['kappa_diff']-ji['kappa_diff'])<1000}")
@@ -139,8 +139,8 @@ print(f"Match: {abs(cc['kappa_diff']['kappa_diff']-ji['kappa_diff'])<1000}")
 # 5. COVARIANCE
 # ---------------------------------------------------------------------------
 h2("5. COVARIANCE MATRIX DEBUG")
-cov = np.load(PROJECT_ROOT / "results/outputs/h0_covariance.npy")
-with open(PROJECT_ROOT / "results/outputs/h0_covariance_labels.json") as f: labels=json.load(f)
+cov = np.load(PROJECT_ROOT / "results/outputs/step_03_h0_covariance.npy")
+with open(PROJECT_ROOT / "results/outputs/step_03_h0_covariance_labels.json") as f: labels=json.load(f)
 print(f"Shape: {cov.shape}; Symmetric: {np.allclose(cov,cov.T)}")
 eig = np.linalg.eigvalsh(cov)
 print(f"PSD: {np.all(eig>-1e-10)}; Min eig: {eig.min():.6f}; Max eig: {eig.max():.2f}")
@@ -164,7 +164,7 @@ else: print("OK: Shuffled sigma not significant.")
 # 6. VELOCITY DISPERSIONS
 # ---------------------------------------------------------------------------
 h2("6. VELOCITY DISPERSION HOST AUDIT")
-prov = pd.read_csv(PROJECT_ROOT / "results/outputs/sigma_provenance_table.csv")
+prov = pd.read_csv(PROJECT_ROOT / "results/outputs/step_07_sigma_provenance_table.csv")
 strat = strat.merge(prov[["normalized_name","sigma_method"]], on="normalized_name", how="left")
 for method in strat["sigma_method"].dropna().unique():
     sub = strat[strat["sigma_method"]==method]

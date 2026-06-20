@@ -29,9 +29,9 @@ Inputs:
     - Optional: MESA/RSP history file (auto-detected or user-supplied)
 
 Outputs:
-    - results/outputs/stellar_validation_grid.csv
-    - results/outputs/stellar_validation_closure.json
-    - results/outputs/stellar_validation_stress_test.csv
+    - results/outputs/step_33_stellar_validation_grid.csv
+    - results/outputs/step_33_stellar_validation_closure.json
+    - results/outputs/step_33_stellar_validation_stress_test.csv
     - results/figures/stellar_validation_transport.png
     - results/figures/stellar_validation_closure.png
     - results/figures/stellar_validation_stress_test.png
@@ -108,17 +108,17 @@ class Step13StellarValidation:
         # Logger
         self.logger = TEPLogger(
             "step_13_stellar_validation",
-            log_file_path=self.logs_dir / "step_13_stellar_validation.log",
+            log_file_path=self.logs_dir / "step_33_stellar_validation.log",
         )
         set_step_logger(self.logger)
 
         # Paths
-        self.grid_csv_path = self.outputs_dir / "stellar_validation_grid.csv"
-        self.closure_json_path = self.outputs_dir / "stellar_validation_closure.json"
-        self.stress_csv_path = self.outputs_dir / "stellar_validation_stress_test.csv"
-        self.transport_plot_path = self.figures_dir / "stellar_validation_transport.png"
-        self.closure_plot_path = self.figures_dir / "stellar_validation_closure.png"
-        self.stress_plot_path = self.figures_dir / "stellar_validation_stress_test.png"
+        self.grid_csv_path = self.outputs_dir / "step_33_stellar_validation_grid.csv"
+        self.closure_json_path = self.outputs_dir / "step_33_stellar_validation_closure.json"
+        self.stress_csv_path = self.outputs_dir / "step_33_stellar_validation_stress_test.csv"
+        self.transport_plot_path = self.figures_dir / "step_33_stellar_validation_transport.png"
+        self.closure_plot_path = self.figures_dir / "step_33_stellar_validation_closure.png"
+        self.stress_plot_path = self.figures_dir / "step_33_stellar_validation_stress_test.png"
 
         # Public figure copy directory (for site build)
         self.public_figures_dir = self.root_dir / "site" / "public" / "figures"

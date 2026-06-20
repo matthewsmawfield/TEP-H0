@@ -7,9 +7,9 @@ ROOT = Path(__file__).resolve().parents[2]
 OUTPUTS = ROOT / "results" / "outputs"
 
 # Load current headline numbers
-tep = json.load(open(OUTPUTS / "tep_correction_results.json"))
-oos = json.load(open(OUTPUTS / "out_of_sample_validation.json"))
-strat = json.load(open(OUTPUTS / "stratification_results.json"))
+tep = json.load(open(OUTPUTS / "step_04_tep_correction_results.json"))
+oos = json.load(open(OUTPUTS / "step_08_out_of_sample_validation.json"))
+strat = json.load(open(OUTPUTS / "step_03_stratification_results.json"))
 
 # Derived headline numbers
 unified_h0 = f"{tep['unified_h0']:.2f}"

@@ -1,0 +1,21 @@
+[18:36:38] [INFO] 
+[18:36:38] [INFO] ================================================================================
+[18:36:38] [INFO]    >>> STEP 16: HOST-MASS RESIDUAL TEST (TEP-SPECIFIC BIAS ISOLATION)
+[18:36:38] [INFO] ================================================================================
+[18:36:38] [INFO] 
+[18:36:38] [INFO] Cepheid: Host-mass partial correlation
+[18:36:38] [INFO] Raw: r=0.466, p=0.0109
+[18:36:38] [INFO] Mass-residual: r=0.445, p=0.0154 (N=29)
+[18:36:38] [INFO] Both-residual: r=0.450, p=0.0144
+[18:36:38] [INFO] TRGB: Host-mass partial correlation
+[18:36:38] [INFO] TRGB raw: r=0.327, p=0.2747
+[18:36:38] [INFO] TRGB mass-residual: r=-0.004, p=0.9904 (N=13)
+[18:36:38] [INFO] --- SUMMARY ---
+[18:36:38] [INFO] +---------+-------+--------+-----------------+-----------------+
+[18:36:38] [INFO] | Channel | Raw r | Raw p  | Mass-residual r | Mass-residual p |
+[18:36:38] [INFO] +---------+-------+--------+-----------------+-----------------+
+[18:36:38] [INFO] | Cepheid | 0.466 | 0.0109 | 0.445           | 0.0154          |
+[18:36:38] [INFO] | TRGB    | 0.327 | 0.2747 | -0.004          | 0.9904          |
+[18:36:38] [INFO] +---------+-------+--------+-----------------+-----------------+
+[18:36:38] [SUCCESS] Saved results to step_17_host_mass_residual_test.json
+[18:36:38] [SUCCESS] Step 16 complete

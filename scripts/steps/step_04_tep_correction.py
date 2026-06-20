@@ -123,17 +123,17 @@ class Step3TEPCorrection:
 
         # Initialize Logger
         self.logger = TEPLogger(
-            "step_3_correction", log_file_path=self.logs_dir / "step_3_correction.log"
+            "step_3_correction", log_file_path=self.logs_dir / "step_04_tep_correction.log"
         )
         set_step_logger(self.logger)
 
         # Inputs
-        self.input_path = self.outputs_dir / "stratified_h0.csv"
+        self.input_path = self.outputs_dir / "step_03_stratified_h0.csv"
 
         # Outputs
-        self.corrected_output_path = self.outputs_dir / "tep_corrected_h0.csv"
-        self.json_output_path = self.outputs_dir / "tep_correction_results.json"
-        self.plot_path = self.figures_dir / "figure_03_tep_correction_comparison.png"
+        self.corrected_output_path = self.outputs_dir / "step_04_tep_corrected_h0.csv"
+        self.json_output_path = self.outputs_dir / "step_04_tep_correction_results.json"
+        self.plot_path = self.figures_dir / "step_04_figure_03_tep_correction_comparison.png"
 
         self.public_figures_dir = self.root_dir / "site" / "public" / "figures"
         self.public_figures_dir.mkdir(parents=True, exist_ok=True)
@@ -677,7 +677,7 @@ class Step3TEPCorrection:
         if fixed_kappa_cep is not None:
             grid["h0_fixed_kappa"] = h0_results_fixed
             grid["h0_fixed_err"] = h0_err_fixed
-        grid_path = self.outputs_dir / "sensitivity_h0_vs_sigmaref.csv"
+        grid_path = self.outputs_dir / "step_07_sensitivity_h0_vs_sigmaref.csv"
         grid.to_csv(grid_path, index=False)
         print_status(f"Saved sensitivity grid to {grid_path}", "SUCCESS")
 
@@ -872,7 +872,7 @@ class Step3TEPCorrection:
         plt.close()
 
         # Copy to public
-        public_path = self.public_figures_dir / "figure_03_tep_correction_comparison.png"
+        public_path = self.public_figures_dir / "step_04_figure_03_tep_correction_comparison.png"
         shutil.copy(self.plot_path, public_path)
         print_status(f"Copied comparison plot to {public_path}", "SUCCESS")
 

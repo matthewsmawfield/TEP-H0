@@ -39,14 +39,14 @@ class Step6MultivariateAnalysis:
     is supported over astrophysical systematics.
     
     Inputs:
-        - results/outputs/stratified_h0.csv (H_0 & σ)
+        - results/outputs/step_03_stratified_h0.csv (H_0 & σ)
         - data/interim/reconstructed_shoes_cepheids.csv (Periods)
         - data/raw/Pantheon+SH0ES.dat (SN Colors)
         
     Outputs:
-        - results/outputs/multivariate_analysis_results.json
-        - results/outputs/multivariate_analysis_summary.txt
-        - results/figures/figure_12_multivariate_robustness.png
+        - results/outputs/step_12_multivariate_analysis_results.json
+        - results/outputs/step_12_multivariate_analysis_summary.txt
+        - results/figures/step_12_figure_12_multivariate_robustness.png
     """
     
     def __init__(self):
@@ -64,18 +64,18 @@ class Step6MultivariateAnalysis:
         self.logs_dir.mkdir(parents=True, exist_ok=True)
         
         # Initialize Logger
-        self.logger = TEPLogger("step_6_multivariate", log_file_path=self.logs_dir / "step_6_multivariate.log")
+        self.logger = TEPLogger("step_6_multivariate", log_file_path=self.logs_dir / "step_12_multivariate_analysis.log")
         set_step_logger(self.logger)
         
         # Inputs
-        self.h0_path = self.outputs_dir / "stratified_h0.csv"
+        self.h0_path = self.outputs_dir / "step_03_stratified_h0.csv"
         self.cepheid_path = self.data_dir / "interim" / "reconstructed_shoes_cepheids.csv"
         self.pantheon_path = self.data_dir / "raw" / "Pantheon+SH0ES.dat"
         
         # Outputs
-        self.summary_path = self.outputs_dir / "multivariate_analysis_summary.txt"
-        self.json_path = self.outputs_dir / "multivariate_analysis_results.json"
-        self.plot_path = self.figures_dir / "figure_12_multivariate_robustness.png"
+        self.summary_path = self.outputs_dir / "step_12_multivariate_analysis_summary.txt"
+        self.json_path = self.outputs_dir / "step_12_multivariate_analysis_results.json"
+        self.plot_path = self.figures_dir / "step_12_figure_12_multivariate_robustness.png"
 
     def load_and_merge_data(self):
         """Load stratified H0 data and merge with auxiliary astrophysical params."""
@@ -350,7 +350,7 @@ class Step6MultivariateAnalysis:
         plt.close()
 
         # Copy to public figures for site build
-        public_plot_path = self.public_figures_dir / "figure_12_multivariate_robustness.png"
+        public_plot_path = self.public_figures_dir / "step_12_figure_12_multivariate_robustness.png"
         shutil.copy(self.plot_path, public_plot_path)
         print_status(f"Copied plot to {public_plot_path}", "SUCCESS")
 

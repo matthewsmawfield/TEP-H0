@@ -54,17 +54,17 @@ class Step20StratifiedValidation:
 
         self.logger = TEPLogger(
             "step_20_stratified_val",
-            log_file_path=self.logs_dir / "step_20_stratified_validation.log",
+            log_file_path=self.logs_dir / "step_21_stratified_validation.log",
         )
         set_step_logger(self.logger)
 
     def run(self):
         print_status(">>> STEP 20: PHYSICALLY STRATIFIED VALIDATION", "TITLE")
 
-        strat = pd.read_csv(self.results_dir / "stratified_h0.csv")
-        prov = pd.read_csv(self.results_dir / "sigma_provenance_table.csv")
+        strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
+        prov = pd.read_csv(self.results_dir / "step_07_sigma_provenance_table.csv")
 
-        with open(self.results_dir / "tep_correction_results.json") as f:
+        with open(self.results_dir / "step_04_tep_correction_results.json") as f:
             tep = json.load(f)
         sigma_ref = float(tep["sigma_ref"])
         c2 = C_SQUARED_KM_S
@@ -180,7 +180,7 @@ class Step20StratifiedValidation:
             "SUCCESS" if n_pass >= len(results) * 0.5 else "WARNING",
         )
 
-        with open(self.results_dir / "stratified_validation.json", "w") as f:
+        with open(self.results_dir / "step_21_stratified_validation.json", "w") as f:
             json.dump(results, f, indent=2)
 
         print_status("Step 20 complete", "SUCCESS")

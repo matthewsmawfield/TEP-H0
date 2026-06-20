@@ -1,0 +1,34 @@
+{
+  "kappa_cep": {
+    "kappa_host": 1272448.73046875,
+    "kappa_host_err": 786040.9378865366,
+    "kappa_joint": 1272451.0192871094,
+    "kappa_joint_err": 448900.390625,
+    "unified_h0": 68.83787861896722
+  },
+  "kappa_trgb": {
+    "kappa_trgb": 2985548.670061774,
+    "kappa_trgb_err": 1784579.6336427943,
+    "n_trgb": 18,
+    "raw_slope_t": -1.6729702691762136
+  },
+  "kappa_diff": {
+    "kappa_diff": 809397.8313019935,
+    "kappa_diff_err": 360182.0771407153,
+    "n_diff": 13
+  },
+  "consistency_tests": {
+    "tension_kappa_diff_vs_kappa_cep": -0.5355457274230383,
+    "tension_kappa_diff_vs_zero": 2.2471907478777164,
+    "tension_kappa_trgb_vs_zero": 1.6729702691762134,
+    "joint_chi2": 3.4562765414000034,
+    "joint_dof": 4,
+    "joint_pvalue": 0.4845576596034571
+  },
+  "theory": {
+    "kappa_gal": 970000.0,
+    "kappa_gal_err": 400000.0,
+    "kappa_msp": 29000.0,
+    "kappa_msp_err": 45000.0
+  }
+}

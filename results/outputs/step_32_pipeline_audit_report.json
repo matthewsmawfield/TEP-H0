@@ -1,0 +1,643 @@
+{
+  "checks": [
+    {
+      "details": {
+        "duplicates": []
+      },
+      "name": "no_duplicate_hosts_in_stratified_h0",
+      "ok": true
+    },
+    {
+      "details": {
+        "anchors_present": []
+      },
+      "name": "anchors_excluded_from_stratified_h0",
+      "ok": true
+    },
+    {
+      "details": {
+        "expected": {
+          "delta_h0": 7.860052734142712,
+          "high_mean_h0": 74.12407411543644,
+          "high_n": 14,
+          "low_mean_h0": 66.26402138129373,
+          "low_n": 15,
+          "median_sigma": 96.40480287112231,
+          "n": 29,
+          "pearson_p": 0.010855420330156207,
+          "pearson_r": 0.46591788894213326,
+          "spearman_p": 0.004061456506390692,
+          "spearman_rho": 0.5172413793103448
+        },
+        "got": {
+          "correlation_r": 0.4659178889421334,
+          "difference": 7.860052734142712,
+          "difference_cov_err": 3.3973175326052147,
+          "h0_covariance_saved": true,
+          "h0_mean_cov_err": 1.8402298949135711,
+          "high_density": {
+            "cov_err": 2.5095354030210992,
+            "mean_h0": 74.12407411543644,
+            "n": 14,
+            "std_err": 1.3008872175375852
+          },
+          "low_density": {
+            "cov_err": 2.498219276618911,
+            "mean_h0": 66.26402138129373,
+            "n": 15,
+            "std_err": 2.1013632169668233
+          },
+          "median_sigma": 96.40480287112231,
+          "sh0es_density_max": 1.759078117964844,
+          "sh0es_density_mean": 0.17903632916721793,
+          "sh0es_density_min": 7.844355552799971e-05
+        }
+      },
+      "name": "stratification_results_matches_recomputed",
+      "ok": true
+    },
+    {
+      "details": {
+        "expected": {
+          "n": 29,
+          "pearson_r": 0.46591788894213326,
+          "spearman_rho": 0.5172413793103448
+        },
+        "got": {
+          "avg_offdiag_corr": 0.007583743621655924,
+          "bayesian_comparison": {
+            "bayes_factor": 3.2496313409200543,
+            "delta_bic": 2.3570831126890255,
+            "delta_chi2": 5.724378942675498,
+            "evidence_strength": "positive",
+            "gls_crosscheck": {
+              "delta_bic": 2.373228397081398,
+              "null_bic": 23.359085995886502,
+              "null_chi2": 19.991790165900028,
+              "tep_bic": 20.985857598805104,
+              "tep_chi2": 14.251265938832155
+            },
+            "kappa_wls_implied": 1041441.9665768298,
+            "ln_bayes_factor": 1.1785415563445127,
+            "n": 29,
+            "null_bic": 23.269632083640854,
+            "null_chi2": 19.90233625365438,
+            "projected": {
+              "bayes_factor": 3.333956905387034,
+              "beta_proj": 0.0,
+              "delta_bic": 2.4083197168926667,
+              "delta_bic_matched": 2.3732283970813945,
+              "delta_chi2": 5.740524227067869,
+              "evidence_strength": "positive",
+              "ln_bayes_factor": 1.2041598584463333,
+              "n_eff": 28,
+              "null_bic_matched": 23.359085995886502,
+              "null_chi2": 19.991790165900028,
+              "tep_bic_matched": 20.985857598805108,
+              "tep_chi2": 14.251265938832159
+            },
+            "sigma_ref": 87.16507328052906,
+            "tep_bic": 20.91254897095183,
+            "tep_chi2": 14.177957310978881,
+            "wls_beta_x": 32812420.609655235,
+            "wls_mu_tep": 68.41597355396435
+          },
+          "gls_slope_p": 0.021482258082255568,
+          "gls_slope_per_kms": 0.07617622778484542,
+          "gls_slope_se": 0.03120621850412874,
+          "gls_slope_t": 2.4410592323054754,
+          "n": 29,
+          "n_eff_equicorr": 23.920587186044067,
+          "n_sims": 20000,
+          "pearson_p_cov": 0.0031,
+          "pearson_r": 0.46591788894213326,
+          "provenance_eiv": {
+            "beta": [
+              53.43599701785996,
+              584901638.8835797,
+              25.278308586558733,
+              0.0
+            ],
+            "beta1_p": null,
+            "beta1_t": null,
+            "beta_se": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "gamma_HI": 25.278308586558733,
+            "gamma_HI_se": 0.0,
+            "gamma_rotation": 0.0,
+            "gamma_rotation_se": 0.0,
+            "mean_x_err_hi": 1.8991618909840668e-08,
+            "mean_x_err_rot": null,
+            "mean_x_err_stellar": 3.531101617959294e-08,
+            "n_hi": 13,
+            "n_rot": 0,
+            "n_stellar": 16
+          },
+          "spearman_p_cov": 0.0041,
+          "spearman_rho": 0.5172413793103448
+        }
+      },
+      "name": "covariance_robustness_matches_recomputed",
+      "ok": true
+    },
+    {
+      "details": {
+        "projected": {
+          "bayes_factor": 3.333956905387034,
+          "beta_proj": 0.0,
+          "delta_bic": 2.4083197168926667,
+          "delta_bic_matched": 2.3732283970813945,
+          "delta_chi2": 5.740524227067869,
+          "evidence_strength": "positive",
+          "ln_bayes_factor": 1.2041598584463333,
+          "n_eff": 28,
+          "null_bic_matched": 23.359085995886502,
+          "null_chi2": 19.991790165900028,
+          "tep_bic_matched": 20.985857598805108,
+          "tep_chi2": 14.251265938832159
+        }
+      },
+      "name": "covariance_projected_bic_retains_strong_evidence",
+      "ok": true
+    },
+    {
+      "details": {
+        "gls_crosscheck": {
+          "delta_bic": 2.373228397081398,
+          "null_bic": 23.359085995886502,
+          "null_chi2": 19.991790165900028,
+          "tep_bic": 20.985857598805104,
+          "tep_chi2": 14.251265938832155
+        },
+        "projected": {
+          "bayes_factor": 3.333956905387034,
+          "beta_proj": 0.0,
+          "delta_bic": 2.4083197168926667,
+          "delta_bic_matched": 2.3732283970813945,
+          "delta_chi2": 5.740524227067869,
+          "evidence_strength": "positive",
+          "ln_bayes_factor": 1.2041598584463333,
+          "n_eff": 28,
+          "null_bic_matched": 23.359085995886502,
+          "null_chi2": 19.991790165900028,
+          "tep_bic_matched": 20.985857598805108,
+          "tep_chi2": 14.251265938832159
+        }
+      },
+      "name": "covariance_gls_slope_matches_projected_contrast",
+      "ok": true
+    },
+    {
+      "details": {
+        "got": {
+          "anchor_nmb": {
+            "LMC": 2,
+            "M31": 11,
+            "MW": 7,
+            "NGC 4258": 65
+          },
+          "anchor_screening": {
+            "LMC": 0.8733960595416025,
+            "M31": 0.4714380741611139,
+            "MW": 0.6053983587536133,
+            "NGC 4258": 0.09568098445277634
+          },
+          "bootstrap_h0_ci_lower": 65.87812302990373,
+          "bootstrap_h0_ci_upper": 71.71952984500459,
+          "bootstrap_h0_mean": 68.89918478983842,
+          "bootstrap_h0_median": 68.97473531251501,
+          "bootstrap_h0_robust_std": 1.4282396881625274,
+          "bootstrap_h0_std": 1.4790147059547696,
+          "bootstrap_kappa_ci_lower": 630290.52734375,
+          "bootstrap_kappa_ci_upper": 3389233.398437499,
+          "bootstrap_kappa_mean": 1440407.71484375,
+          "bootstrap_kappa_median": 1276562.5,
+          "bootstrap_kappa_n_negative": 0,
+          "bootstrap_kappa_robust_std": 448900.390625,
+          "bootstrap_kappa_skewness": 3.1431112724245405,
+          "bootstrap_kappa_std": 737991.4971948254,
+          "bootstrap_n_converged": 1000,
+          "bootstrap_n_failed": 0,
+          "bootstrap_residual_slope_mean": 0.0017440288566485868,
+          "delta_h0_screened": 2.4971337712861015,
+          "h0_screened_sem": 1.2731906596265927,
+          "h0_sem": 1.3119258982092847,
+          "is_consistent": true,
+          "n_hosts": 29,
+          "optimal_kappa_cep": 1272451.0192871094,
+          "optimal_kappa_cep_screened": 1350379.9438476562,
+          "planck_h0": 67.4,
+          "screening_formula": "S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}",
+          "screening_gamma": 1.2,
+          "screening_n_crit": 10.0,
+          "sigma_ref": 87.16507328052906,
+          "sigma_ref_screened": 30.50738103825078,
+          "slope_audit": {
+            "correction_delta_slope_value": -0.08610739625507939,
+            "correction_slope_H0_sigma_negative": true,
+            "distance_modulus_correction_high_sigma_positive": true,
+            "dmu_high_sigma_mean": 0.0923659456832565,
+            "raw_slope_H0_sigma_positive": true,
+            "raw_slope_value": 0.08511851500603197
+          },
+          "tension_sigma": 0.9602498234600322,
+          "tension_statistical": 1.0241473294991124,
+          "unified_h0": 68.83787861896722,
+          "unified_h0_screened": 66.34074484768112,
+          "wls_chi2": 382.27876366667334,
+          "wls_dof": 28,
+          "wls_kappa": 1414440.6924207672,
+          "wls_kappa_err": 159498.18790314713,
+          "wls_kappa_err_scaled": 589341.2284366533
+        },
+        "recomputed_tension_bootstrap": 0.9602498234600322,
+        "recomputed_tension_sem": 1.0241473294991124
+      },
+      "name": "tep_correction_internal_consistency",
+      "ok": true
+    },
+    {
+      "details": {
+        "csv_mean": 68.83787861896722,
+        "json_unified_h0": 68.83787861896722
+      },
+      "name": "tep_corrected_csv_matches_primary_headline",
+      "ok": true
+    },
+    {
+      "details": {
+        "anchor_nmb": {
+          "LMC": 2,
+          "M31": 11,
+          "MW": 7,
+          "NGC 4258": 65
+        },
+        "anchor_screening": {
+          "LMC": 0.8733960595416025,
+          "M31": 0.4714380741611139,
+          "MW": 0.6053983587536133,
+          "NGC 4258": 0.09568098445277634
+        },
+        "sigma_ref_screened": 30.50738103825078
+      },
+      "name": "screened_reference_uses_ngc4258_anchor_screening",
+      "ok": true
+    },
+    {
+      "details": {
+        "counts": {
+          "n_hosts": 43,
+          "n_missing_sigma": 0,
+          "n_with_sigma": 43
+        },
+        "inputs": {}
+      },
+      "name": "sigma_regeneration_has_full_coverage",
+      "ok": true
+    },
+    {
+      "details": {
+        "duplicates": [],
+        "expected_n": 29,
+        "n": 29
+      },
+      "name": "sigma_provenance_unique",
+      "ok": true
+    },
+    {
+      "details": {
+        "path": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv"
+      },
+      "name": "master_sigma_catalog_present",
+      "ok": true
+    },
+    {
+      "details": {
+        "expected": {
+          "n": 29,
+          "pearson_r": 0.46591788894213326,
+          "spearman_rho": 0.5172413793103448
+        },
+        "got": {
+          "full_sample": {
+            "pearson_p": 0.010855420330156207,
+            "pearson_r": 0.46591788894213326,
+            "spearman_p": 0.004061456506390692,
+            "spearman_rho": 0.5172413793103448
+          },
+          "hi_hosts": [
+            "NGC 105",
+            "NGC 2442",
+            "NGC 2525",
+            "NGC 2608",
+            "NGC 3447",
+            "NGC 4038",
+            "NGC 4680",
+            "NGC 5468",
+            "NGC 5584",
+            "NGC 5861",
+            "NGC 5917",
+            "NGC 7250",
+            "NGC 7329"
+          ],
+          "n_hi": 13,
+          "n_stellar": 16,
+          "n_total": 29,
+          "stellar_hosts": [
+            "NGC 0691",
+            "NGC 1015",
+            "NGC 1309",
+            "NGC 1365",
+            "NGC 1559",
+            "NGC 3021",
+            "NGC 3147",
+            "NGC 3254",
+            "NGC 3370",
+            "NGC 3583",
+            "NGC 4639",
+            "NGC 5728",
+            "NGC 7541",
+            "NGC 7678",
+            "NGC 976",
+            "UGC 9391"
+          ],
+          "stellar_only": {
+            "delta_h0": 8.539856404964894,
+            "h0_high_sigma": 73.41415618947005,
+            "h0_low_sigma": 64.87429978450515,
+            "median_sigma": 101.69761062572539,
+            "pearson_p": 0.027741737572847,
+            "pearson_r": 0.548682280291328,
+            "spearman_p": 0.010787984601948835,
+            "spearman_rho": 0.6176470588235293
+          }
+        }
+      },
+      "name": "enhanced_robustness_matches_full_sample",
+      "ok": true
+    },
+    {
+      "details": {
+        "expected": {
+          "cepheid_delta_h0": 7.860052734142712,
+          "cepheid_n": 29,
+          "cepheid_spearman": 0.5172413793103448
+        },
+        "got": {
+          "cepheid_delta_h0": 7.860052734142712,
+          "cepheid_n": 29,
+          "cepheid_p": 0.004061456506390692,
+          "cepheid_spearman": 0.5172413793103448,
+          "trgb_delta_h0": 10.308622630688085,
+          "trgb_n": 18,
+          "trgb_p": 0.05043751945104438,
+          "trgb_spearman": 0.4674922600619195
+        }
+      },
+      "name": "trgb_comparison_uses_current_cepheid_stats",
+      "ok": true
+    },
+    {
+      "details": {
+        "duplicates_by_name": {
+          "LMC": 1
+        },
+        "n_rows": 42
+      },
+      "name": "hosts_coords_duplicates_reported",
+      "ok": true
+    },
+    {
+      "details": {
+        "files_with_missing_critical_tokens": {},
+        "missing_tokens_global": [],
+        "paths": [
+          "README.md",
+          "zenodo.txt",
+          "manuscripts/11-TEP-H0-v0.7-KingstonUponHull.md",
+          "11-TEP-H0-v0.7-KingstonUponHull.md",
+          "site/components/1_abstract.html",
+          "site/components/4_results.html",
+          "site/components/5_discussion.html",
+          "site/components/6_conclusion.html",
+          "site/CITATION.cff",
+          "site/dist/index.html",
+          "site/dist/CITATION.cff",
+          "site/codemeta.json",
+          "site/index.html",
+          "results/outputs/step_31_TEP_FINAL_ROBUSTNESS_REPORT.md"
+        ],
+        "required_tokens": [
+          "0.517",
+          "0.0041",
+          "0.466",
+          "0.0109",
+          "68.84",
+          "68.90",
+          "1.48",
+          "0.96",
+          "1.27",
+          "0.45"
+        ]
+      },
+      "name": "narrative_surfaces_include_current_headline_numbers",
+      "ok": true
+    },
+    {
+      "details": {
+        "forbidden_hits": {},
+        "paths": [
+          "README.md",
+          "zenodo.txt",
+          "manuscripts/11-TEP-H0-v0.7-KingstonUponHull.md",
+          "11-TEP-H0-v0.7-KingstonUponHull.md",
+          "site/components/1_abstract.html",
+          "site/components/4_results.html",
+          "site/components/5_discussion.html",
+          "site/components/6_conclusion.html",
+          "site/CITATION.cff",
+          "site/dist/index.html",
+          "site/dist/CITATION.cff",
+          "site/codemeta.json",
+          "site/index.html",
+          "results/outputs/step_31_TEP_FINAL_ROBUSTNESS_REPORT.md"
+        ]
+      },
+      "name": "narrative_surfaces_have_no_stale_framing_or_numbers",
+      "ok": true
+    },
+    {
+      "details": {
+        "interpretation": {
+          "primary_model": "Full",
+          "primary_reason": "Controls age, SN color, and stellar mass. This is the primary astrophysical-confound model.",
+          "primary_sigma_hc3_p": 0.012529035552599859,
+          "stress_model": "FlowEnvironment",
+          "stress_reason": "Adds redshift and group richness. This is a conservative stress test because group richness can mediate TEP screening rather than act as a pure nuisance covariate.",
+          "stress_sigma_hc3_p": 0.27830223891172684
+        }
+      },
+      "name": "multivariate_primary_interpretation_is_defensible",
+      "ok": true
+    },
+    {
+      "details": {
+        "anchor": {
+          "chi2": 1.1742141839165596,
+          "dof": 1,
+          "intercept": -5.860363029076873,
+          "intercept_err": 0.009398138785988277,
+          "kappa_anchor": 246442.21361560377,
+          "kappa_anchor_err": 138653.37389942596,
+          "kappa_host": 1272451.0192871094,
+          "kappa_host_err": 448900.390625,
+          "n_anchors": 3,
+          "p_pearson": 0.5381819555331222,
+          "prediction_test": {
+            "chi2": 10.880431367119566,
+            "dof": 2,
+            "mean_abs_tension_sigma": 2.3205430466484502,
+            "naive_chi2": 10.880431367119566,
+            "naive_mean_abs_tension_sigma": 2.3205430466484502,
+            "naive_predictions": [
+              {
+                "M_W_obs": -5.8382610325460895,
+                "M_W_pred": -5.6986751442036665,
+                "anchor": "NGC 4258",
+                "d_mu_err": 0.06317783947566388,
+                "d_mu_pred": 0.17908361836183437,
+                "residual": -0.13958588834242303,
+                "sigma": 115.0,
+                "tension_sigma": -2.085392770843143
+              },
+              {
+                "M_W_obs": -5.8491945771974265,
+                "M_W_pred": -5.523470797834174,
+                "anchor": "M31",
+                "d_mu_err": 0.12498713376859932,
+                "d_mu_pred": 0.35428796473132607,
+                "residual": -0.32572377936325214,
+                "sigma": 160.0,
+                "tension_sigma": -2.5556933224537577
+              }
+            ],
+            "predictions": [
+              {
+                "M_W_obs": -5.8382610325460895,
+                "M_W_pred": -5.6986751442036665,
+                "anchor": "NGC 4258",
+                "d_mu_err": 0.06317783947566388,
+                "d_mu_pred": 0.17908361836183437,
+                "residual": -0.13958588834242303,
+                "sigma": 115.0,
+                "tension_sigma": -2.085392770843143
+              },
+              {
+                "M_W_obs": -5.8491945771974265,
+                "M_W_pred": -5.523470797834174,
+                "anchor": "M31",
+                "d_mu_err": 0.12498713376859932,
+                "d_mu_pred": 0.35428796473132607,
+                "residual": -0.32572377936325214,
+                "sigma": 160.0,
+                "tension_sigma": -2.5556933224537577
+              }
+            ],
+            "reference_S_assumed": 0.8733960595416025,
+            "reference_anchor": "LMC",
+            "tep_screened_chi2": 6.253048167794776,
+            "tep_screened_mean_abs_tension_sigma": 1.7139731288145135,
+            "tep_screened_predictions": [
+              {
+                "M_W_obs": -5.8382610325460895,
+                "M_W_pred": -5.866966105609732,
+                "S_anchor_assumed": 0.09568098445277634,
+                "anchor": "NGC 4258",
+                "d_mu_err": 0.0038074769479459554,
+                "d_mu_pred": 0.010792656955768278,
+                "residual": 0.028705073063642672,
+                "sigma": 115.0,
+                "tension_sigma": 1.279438668041636
+              },
+              {
+                "M_W_obs": -5.8491945771974265,
+                "M_W_pred": -5.714011880454236,
+                "S_anchor_assumed": 0.4714380741611139,
+                "anchor": "M31",
+                "d_mu_err": 0.0577672839498014,
+                "d_mu_pred": 0.16374688211126498,
+                "residual": -0.1351826967431906,
+                "sigma": 160.0,
+                "tension_sigma": -2.148507589587391
+              }
+            ]
+          },
+          "r_pearson": 0.663451316128769,
+          "sigma_ref_screened": 30.50738103825078,
+          "tension_with_host": 2.183806681021834
+        },
+        "host_comparison": {}
+      },
+      "name": "anchor_screening_result_is_current",
+      "ok": true
+    },
+    {
+      "details": {
+        "local_gravity": {
+          "closure": {
+            "alpha_clock": 898750.5363728765,
+            "alpha_clock_err": 317064.8305804691,
+            "cassini_gamma_minus_one_limit": 2.3e-05,
+            "cassini_gamma_minus_one_predicted": 1.0509803385086155e-10,
+            "cassini_margin": 218843.294753144,
+            "earth_source_charge_ratio": 1.578651683697185e-15,
+            "kappa_cep": 1272451.0192871094,
+            "kappa_cep_err": 448900.390625,
+            "microscope_eta_limit": 1e-14,
+            "microscope_eta_predicted": 1.8552114904732585e-21,
+            "microscope_margin": 5390221.034826079,
+            "passes_cassini": true,
+            "passes_microscope": true,
+            "passes_source_charge_closure": true,
+            "solar_neighborhood_screening": 0.96,
+            "solar_source_charge_ratio": 8.401791547411366e-12
+          },
+          "description": "Quantitative source-charge closure mapping the fitted Cepheid clock-response coefficient to local solar-system scalar charge.",
+          "inputs": {
+            "cassini_reference": "Bertotti, Iess & Tortora 2003, Nature 425, 374",
+            "microscope_reference": "Touboul et al. 2022, Physical Review Letters 129, 121102",
+            "source_charge_definition": "alpha_local = alpha_clock * S_solar * q_source, with q_source fixed before checking precision-gravity bounds.",
+            "tep_correction_results": "results/outputs/step_04_tep_correction_results.json"
+          },
+          "passes": true
+        }
+      },
+      "name": "local_gravity_closure_passes_precision_bounds",
+      "ok": true
+    }
+  ],
+  "outputs_dir": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs",
+  "project_root": "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0",
+  "summary": {
+    "derived_from_stratified_h0": {
+      "delta_h0": 7.860052734142712,
+      "high_mean_h0": 74.12407411543644,
+      "high_n": 14,
+      "low_mean_h0": 66.26402138129373,
+      "low_n": 15,
+      "median_sigma": 96.40480287112231,
+      "n": 29,
+      "pearson_p": 0.010855420330156207,
+      "pearson_r": 0.46591788894213326,
+      "spearman_p": 0.004061456506390692,
+      "spearman_rho": 0.5172413793103448
+    },
+    "n_checks": 20,
+    "n_failed": 0,
+    "ok": true
+  }
+}

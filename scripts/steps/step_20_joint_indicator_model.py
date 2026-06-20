@@ -53,7 +53,7 @@ class Step19JointIndicatorModel:
 
         self.logger = TEPLogger(
             "step_19_joint_indicator",
-            log_file_path=self.logs_dir / "step_19_joint_indicator.log",
+            log_file_path=self.logs_dir / "step_20_joint_indicator.log",
         )
         set_step_logger(self.logger)
 
@@ -61,11 +61,11 @@ class Step19JointIndicatorModel:
         print_status(">>> STEP 19: JOINT CEPHEID + TRGB INDICATOR MODEL", "TITLE"
         )
 
-        strat = pd.read_csv(self.results_dir / "stratified_h0.csv")
-        trgb = pd.read_csv(self.results_dir / "trgb_hosts_data.csv")
+        strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
+        trgb = pd.read_csv(self.results_dir / "step_15_trgb_hosts_data.csv")
 
         # Load TEP params
-        with open(self.results_dir / "tep_correction_results.json") as f:
+        with open(self.results_dir / "step_04_tep_correction_results.json") as f:
             tep = json.load(f)
         sigma_ref = float(tep["sigma_ref"])
         c2 = C_SQUARED_KM_S
@@ -87,7 +87,7 @@ class Step19JointIndicatorModel:
         # Compute TEP regressor: use SAME regressor as Step 12 cross-channel
         # Step 12 uses: R_m = S_local * (sigma^2 - sigma_ref^2) / c^2
         # NOT S_total = S_local * S_group (which adds noise for isolated hosts)
-        # Use the same sigma as Step 3/Step 12 (from stratified_h0.csv),
+        # Use the same sigma as Step 3/Step 12 (from step_03_stratified_h0.csv),
         # not the TRGB-file sigma, to ensure regressor consistency.
         sigma = merged["sigma_inferred_host"].values
         S_local = merged["shear_suppression"].values
@@ -180,10 +180,10 @@ class Step19JointIndicatorModel:
             ),
         }
 
-        with open(self.results_dir / "joint_indicator_model.json", "w") as f:
+        with open(self.results_dir / "step_20_joint_indicator_model.json", "w") as f:
             json.dump(results, f, indent=2)
 
-        print_status("Saved results to joint_indicator_model.json", "SUCCESS")
+        print_status("Saved results to step_20_joint_indicator_model.json", "SUCCESS")
         print_status("Step 19 complete", "SUCCESS")
 
 

@@ -48,7 +48,7 @@ class Step1bApertureCorrection:
         self.metadata_path = self.processed_dir / "hosts_metadata_enriched.csv"
         
         # Initialize Logger
-        self.logger = TEPLogger("step_1b_aperture", log_file_path=self.logs_dir / "step_1b_aperture.log")
+        self.logger = TEPLogger("step_1b_aperture", log_file_path=self.logs_dir / "step_02_aperture_correction.log")
         set_step_logger(self.logger)
 
     def apply_aperture_corrections(self):

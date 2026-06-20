@@ -174,7 +174,7 @@ def main():
     logs_dir = root_dir / "logs"
     logs_dir.mkdir(parents=True, exist_ok=True)
     logger = TEPLogger(
-        "step_5b_m31_radial", log_file_path=logs_dir / "step_5b_m31_radial.log"
+        "step_5b_m31_radial", log_file_path=logs_dir / "step_11_m31_radial_suppression.log"
     )
     set_step_logger(logger)
 
@@ -488,12 +488,12 @@ def main():
 
     plt.tight_layout()
 
-    fig_path = figures_dir / "supplement_04_m31_radial_suppression.png"
+    fig_path = figures_dir / "step_11_supplement_04_m31_radial_suppression.png"
     # fig.savefig(fig_path, dpi=300)
     # print_status(f"Saved figure to {fig_path}", "SUCCESS")
     plt.close(fig)
 
-    # public_path = public_dir / "supplement_04_m31_radial_suppression.png"
+    # public_path = public_dir / "step_11_supplement_04_m31_radial_suppression.png"
     # shutil.copy(fig_path, public_path)
     # print_status(f"Copied figure to {public_path}", "SUCCESS")
 
@@ -516,7 +516,7 @@ def main():
         },
     }
 
-    json_path = outputs_dir / "m31_radial_suppression.json"
+    json_path = outputs_dir / "step_11_m31_radial_suppression.json"
     with open(json_path, "w") as f:
         json.dump(results, f, indent=2)
     print_status(f"Saved results to {json_path}", "SUCCESS")

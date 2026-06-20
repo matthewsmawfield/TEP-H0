@@ -50,25 +50,25 @@ class Step23SyntheticInjection:
 
         self.logger = TEPLogger(
             "step_23_synthetic_injection",
-            log_file_path=self.logs_dir / "step_23_synthetic_injection.log",
+            log_file_path=self.logs_dir / "step_24_synthetic_injection.log",
         )
         set_step_logger(self.logger)
 
     def run(self):
         print_status(">>> STEP 23: SYNTHETIC INJECTION RECOVERY TEST", "TITLE")
 
-        df = pd.read_csv(self.results_dir / "tep_corrected_h0.csv")
+        df = pd.read_csv(self.results_dir / "step_04_tep_corrected_h0.csv")
         df = df[df["z_hd"] > 0.0035].copy()
         N = len(df)
 
         # Load sigma_ref from pipeline JSON (not hardcoded)
-        with open(self.results_dir / "tep_correction_results.json") as f:
+        with open(self.results_dir / "step_04_tep_correction_results.json") as f:
             tep_results = json.load(f)
         sigma_ref = float(tep_results["sigma_ref"])
-        print_status(f"sigma_ref = {sigma_ref:.4f} km/s (from tep_correction_results.json)", "INFO")
+        print_status(f"sigma_ref = {sigma_ref:.4f} km/s (from step_04_tep_correction_results.json)", "INFO")
 
         # Load covariance matrix for GLS; align to filtered sample
-        cov_path = self.results_dir / "h0_covariance.npy"
+        cov_path = self.results_dir / "step_03_h0_covariance.npy"
         if cov_path.exists():
             cov_full = np.load(cov_path)
             if cov_full.shape == (N, N):
@@ -76,7 +76,7 @@ class Step23SyntheticInjection:
             else:
                 # Covariance built for a different sample size — fall back to diagonal
                 print_status(
-                    f"h0_covariance.npy shape {cov_full.shape} != ({N},{N}); using diagonal fallback",
+                    f"step_03_h0_covariance.npy shape {cov_full.shape} != ({N},{N}); using diagonal fallback",
                     "WARNING",
                 )
                 cov = np.eye(N) * 0.15**2
@@ -84,7 +84,7 @@ class Step23SyntheticInjection:
             cov = np.eye(N) * 0.15**2
 
         # Get sigma measurement errors for ODR
-        prov_path = self.results_dir / "sigma_provenance_table.csv"
+        prov_path = self.results_dir / "step_07_sigma_provenance_table.csv"
         if prov_path.exists():
             prov = pd.read_csv(prov_path)
             df = df.merge(prov[["normalized_name", "sigma_measured_error_kms"]],
@@ -192,8 +192,8 @@ class Step23SyntheticInjection:
             )
 
         out_df = pd.DataFrame(results)
-        out_df.to_csv(self.results_dir / "synthetic_injection.csv", index=False)
-        print_status("Synthetic injection table saved to synthetic_injection.csv", "SUCCESS")
+        out_df.to_csv(self.results_dir / "step_24_synthetic_injection.csv", index=False)
+        print_status("Synthetic injection table saved to step_24_synthetic_injection.csv", "SUCCESS")
         print_status("Step 23 complete", "SUCCESS")
 
 

@@ -65,11 +65,11 @@ class Step8M31PHATAnalysis:
         for d in [self.figures_dir, self.outputs_dir, self.logs_dir, self.public_figures_dir]:
             d.mkdir(parents=True, exist_ok=True)
         
-        self.logger = TEPLogger("step_8_m31_hst", log_file_path=self.logs_dir / "step_8_m31_hst.log")
+        self.logger = TEPLogger("step_8_m31_hst", log_file_path=self.logs_dir / "step_26_m31_phat_analysis.log")
         set_step_logger(self.logger)
         
-        self.output_json = self.outputs_dir / "m31_phat_robustness_summary.json"
-        self.output_plot = self.figures_dir / "m31_phat_differential_pl.png"
+        self.output_json = self.outputs_dir / "step_26_m31_phat_robustness_summary.json"
+        self.output_plot = self.figures_dir / "step_26_m31_phat_differential_pl.png"
 
     def _fetch_hst_catalog(self) -> pd.DataFrame:
         """
@@ -311,7 +311,7 @@ class Step8M31PHATAnalysis:
         plt.tight_layout()
         
         # plt.savefig(self.output_plot, dpi=300)
-        # shutil.copy(self.output_plot, self.public_figures_dir / "m31_phat_differential_pl.png")
+        # shutil.copy(self.output_plot, self.public_figures_dir / "step_26_m31_phat_differential_pl.png")
         # print_status(f"Plot saved to {self.output_plot}", "SUCCESS")
         plt.close()
 

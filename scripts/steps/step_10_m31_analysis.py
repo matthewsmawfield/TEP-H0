@@ -94,17 +94,17 @@ class Step5M31Analysis:
 
         # Initialize Logger
         self.logger = TEPLogger(
-            "step_5_m31", log_file_path=self.logs_dir / "step_5_m31.log"
+            "step_5_m31", log_file_path=self.logs_dir / "step_10_m31_analysis.log"
         )
         set_step_logger(self.logger)
 
-        self.output_plot_path = self.figures_dir / "m31_differential_pl.png"
+        self.output_plot_path = self.figures_dir / "step_10_m31_differential_pl.png"
         self.output_robust_plot_path = (
             self.figures_dir / "m31_differential_robustness.png"
         )
-        self.output_csv_path = self.outputs_dir / "m31_results.csv"
-        self.output_robust_csv_path = self.outputs_dir / "m31_robustness_summary.csv"
-        self.output_robust_json_path = self.outputs_dir / "m31_robustness_summary.json"
+        self.output_csv_path = self.outputs_dir / "step_10_m31_results.csv"
+        self.output_robust_csv_path = self.outputs_dir / "step_10_m31_robustness_summary.csv"
+        self.output_robust_json_path = self.outputs_dir / "step_10_m31_robustness_summary.json"
 
     def calculate_galactocentric_distance(self, ra, dec):
         """
@@ -2136,7 +2136,7 @@ class Step5M31Analysis:
 
         # Copy to public site
         # shutil.copy(
-        #     self.output_plot_path, self.public_figures_dir / "m31_differential_pl.png"
+        #     self.output_plot_path, self.public_figures_dir / "step_10_m31_differential_pl.png"
         # )
         # print_status("Copied plot to public figures directory.", "SUCCESS")
 

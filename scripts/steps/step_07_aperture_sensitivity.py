@@ -54,17 +54,17 @@ class Step4bApertureSensitivity:
         self.public_figures_dir.mkdir(parents=True, exist_ok=True)
         
         # Initialize Logger
-        self.logger = TEPLogger("step_4b_aperture", log_file_path=self.logs_dir / "step_4b_aperture.log")
+        self.logger = TEPLogger("step_4b_aperture", log_file_path=self.logs_dir / "step_07_aperture_sensitivity.log")
         set_step_logger(self.logger)
         
-        self.stratified_path = self.outputs_dir / "stratified_h0.csv"
-        self.output_stats_path = self.outputs_dir / "aperture_sensitivity_stats.txt"
-        self.plot_path = self.figures_dir / "supplement_06_aperture_sensitivity.png"
+        self.stratified_path = self.outputs_dir / "step_03_stratified_h0.csv"
+        self.output_stats_path = self.outputs_dir / "step_07_aperture_sensitivity_stats.txt"
+        self.plot_path = self.figures_dir / "step_07_supplement_06_aperture_sensitivity.png"
 
         self.sigma_compilation_path = self.root_dir / "data" / "raw" / "external" / "velocity_dispersions_literature.csv"
-        self.provenance_output_path = self.outputs_dir / "sigma_provenance_table.csv"
-        self.grid_output_path = self.outputs_dir / "aperture_sensitivity_grid.csv"
-        self.summary_json_path = self.outputs_dir / "aperture_sensitivity_summary.json"
+        self.provenance_output_path = self.outputs_dir / "step_07_sigma_provenance_table.csv"
+        self.grid_output_path = self.outputs_dir / "step_07_aperture_sensitivity_grid.csv"
+        self.summary_json_path = self.outputs_dir / "step_07_aperture_sensitivity_summary.json"
 
         self.assumed_aperture_radius_arcsec = 1.5
         self.default_beta = 0.04
@@ -377,7 +377,7 @@ class Step4bApertureSensitivity:
         can_optimize_kappa = all(c in base_df.columns for c in ['value', 'velocity'])
         if not can_optimize_kappa:
             print_status(
-                "TEP optimization columns missing from stratified_h0.csv (need 'value' and 'velocity'); grid will report only raw H0–sigma metrics.",
+                "TEP optimization columns missing from step_03_stratified_h0.csv (need 'value' and 'velocity'); grid will report only raw H0–sigma metrics.",
                 "WARNING",
             )
 
@@ -557,7 +557,7 @@ class Step4bApertureSensitivity:
         plt.close()
 
         # Copy to public
-        # shutil.copy(self.plot_path, self.public_figures_dir / "supplement_06_aperture_sensitivity.png")
+        # shutil.copy(self.plot_path, self.public_figures_dir / "step_07_supplement_06_aperture_sensitivity.png")
         # print_status(f"Saved plot to {self.plot_path}", "SUCCESS")
 
 if __name__ == "__main__":

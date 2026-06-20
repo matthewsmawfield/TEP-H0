@@ -62,27 +62,27 @@ class Step4RobustnessChecks:
         self.public_figures_dir.mkdir(parents=True, exist_ok=True)
         
         # Initialize Logger
-        self.logger = TEPLogger("step_4_robustness", log_file_path=self.logs_dir / "step_4_robustness.log")
+        self.logger = TEPLogger("step_4_robustness", log_file_path=self.logs_dir / "step_08_robustness_checks.log")
         set_step_logger(self.logger)
         
         # Inputs
-        self.stratified_path = self.outputs_dir / "stratified_h0.csv"
+        self.stratified_path = self.outputs_dir / "step_03_stratified_h0.csv"
         self.cepheids_path = self.data_dir / "interim" / "reconstructed_shoes_cepheids.csv"
-        self.tep_corrected_path = self.outputs_dir / "tep_corrected_h0.csv"
-        self.tep_results_path = self.outputs_dir / "tep_correction_results.json"
+        self.tep_corrected_path = self.outputs_dir / "step_04_tep_corrected_h0.csv"
+        self.tep_results_path = self.outputs_dir / "step_04_tep_correction_results.json"
         
         # Outputs
-        self.stats_path = self.outputs_dir / "bivariate_stats.txt"
-        self.covariance_results_path = self.outputs_dir / "covariance_robustness.json"
-        self.oos_results_path = self.outputs_dir / "out_of_sample_validation.json"
-        self.plot_path = self.figures_dir / "figure_02_bivariate_h0_sigma_metallicity.png"
-        self.jackknife_plot_path = self.figures_dir / "supplement_02_jackknife_influence.png"
+        self.stats_path = self.outputs_dir / "step_08_bivariate_stats.txt"
+        self.covariance_results_path = self.outputs_dir / "step_08_covariance_robustness.json"
+        self.oos_results_path = self.outputs_dir / "step_08_out_of_sample_validation.json"
+        self.plot_path = self.figures_dir / "step_08_figure_02_bivariate_h0_sigma_metallicity.png"
+        self.jackknife_plot_path = self.figures_dir / "step_08_supplement_02_jackknife_influence.png"
 
-        self.flow_env_stats_path = self.outputs_dir / "flow_environment_robustness.txt"
-        self.zcut_stats_path = self.outputs_dir / "redshift_cut_sensitivity.txt"
+        self.flow_env_stats_path = self.outputs_dir / "step_08_flow_environment_robustness.txt"
+        self.zcut_stats_path = self.outputs_dir / "step_08_redshift_cut_sensitivity.txt"
 
-        self.h0_cov_path = self.outputs_dir / "h0_covariance.npy"
-        self.h0_cov_labels_path = self.outputs_dir / "h0_covariance_labels.json"
+        self.h0_cov_path = self.outputs_dir / "step_03_h0_covariance.npy"
+        self.h0_cov_labels_path = self.outputs_dir / "step_03_h0_covariance_labels.json"
 
     def _load_h0_covariance(self):
         if not self.h0_cov_path.exists() or not self.h0_cov_labels_path.exists():
@@ -480,7 +480,7 @@ class Step4RobustnessChecks:
         else:
             print_status(f"Δχ² (null − TEP) = {chi2_null_diag - chi2_tep_diag:.2f}", "INFO")
             print_status(f"ΔBIC = {delta_bic_diag:.2f}  ({strength} evidence for TEP)", "RESULT")
-        tep_path = self.outputs_dir / "tep_correction_results.json"
+        tep_path = self.outputs_dir / "step_04_tep_correction_results.json"
         step3_kappa = None
         try:
             if tep_path.exists():
@@ -1159,7 +1159,7 @@ class Step4RobustnessChecks:
         plt.close()
 
         # Copy to public
-        # public_jack = self.public_figures_dir / "supplement_02_jackknife_influence.png"
+        # public_jack = self.public_figures_dir / "step_08_supplement_02_jackknife_influence.png"
         # shutil.copy(self.jackknife_plot_path, public_jack)
         # print_status(f"Copied Jackknife plot to {public_jack}", "SUCCESS")
 
@@ -1323,7 +1323,7 @@ class Step4RobustnessChecks:
         plt.close()
         
         # Copy to public
-        public_biv = self.public_figures_dir / "figure_02_bivariate_h0_sigma_metallicity.png"
+        public_biv = self.public_figures_dir / "step_08_figure_02_bivariate_h0_sigma_metallicity.png"
         shutil.copy(self.plot_path, public_biv)
         print_status(f"Copied bivariate plot to {public_biv}", "SUCCESS")
 
@@ -1390,7 +1390,7 @@ class Step4RobustnessChecks:
         print_status(f"Saved bivariate plot to {self.plot_path}", "SUCCESS")
         
         # Copy to public
-        shutil.copy(self.plot_path, self.public_figures_dir / "figure_02_bivariate_h0_sigma_metallicity.png")
+        shutil.copy(self.plot_path, self.public_figures_dir / "step_08_figure_02_bivariate_h0_sigma_metallicity.png")
 
     def _provenance_eiv_model(self, df):
         """Provenance-aware errors-in-variables regression.
@@ -1403,7 +1403,7 @@ class Step4RobustnessChecks:
         """
         print_status("Provenance-Aware Errors-in-Variables Model", "SECTION")
 
-        prov_path = self.outputs_dir / "sigma_provenance_table.csv"
+        prov_path = self.outputs_dir / "step_07_sigma_provenance_table.csv"
         if not prov_path.exists():
             print_status("Sigma provenance table missing; generating it via Step 4b.", "WARNING")
             try:

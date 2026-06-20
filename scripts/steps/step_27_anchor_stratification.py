@@ -207,9 +207,9 @@ class AnchorStratificationStep:
         
         # Load sigma_ref_screened dynamically from step 3 (effective calibrator dispersion)
         # to keep the anchor and host analyses on the same reference.
-        sigma_ref_screened = 30.51  # Fallback if tep_correction_results.json is missing; same default as stellar_validation_core.py
+        sigma_ref_screened = 30.51  # Fallback if step_04_tep_correction_results.json is missing; same default as stellar_validation_core.py
         try:
-            tep_path_for_ref = self.outputs_dir / "tep_correction_results.json"
+            tep_path_for_ref = self.outputs_dir / "step_04_tep_correction_results.json"
             if tep_path_for_ref.exists():
                 with open(tep_path_for_ref, "r") as f:
                     _tep = json.load(f)
@@ -267,7 +267,7 @@ class AnchorStratificationStep:
         kappa_host = np.nan
         kappa_host_err = np.nan
         try:
-            tep_path = self.outputs_dir / "tep_correction_results.json"
+            tep_path = self.outputs_dir / "step_04_tep_correction_results.json"
             if tep_path.exists():
                 with open(tep_path, "r") as f:
                     tep = json.load(f)
@@ -530,14 +530,14 @@ class AnchorStratificationStep:
         
         plt.tight_layout()
         
-        fig_path = self.figures_dir / "anchor_stratification_test.png"
+        fig_path = self.figures_dir / "step_27_anchor_stratification_test.png"
         # plt.savefig(fig_path, dpi=150, bbox_inches='tight', facecolor='white')
         # print_status(f"Figure saved: {fig_path}", "SUCCESS")
         plt.close()
     
     def _save_results(self, results):
         """Save results to JSON."""
-        output_path = self.outputs_dir / "anchor_stratification_test.json"
+        output_path = self.outputs_dir / "step_27_anchor_stratification_test.json"
         with open(output_path, 'w') as f:
             json.dump(results, f, indent=2)
         print_status(f"Results saved: {output_path}", "SUCCESS")

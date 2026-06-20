@@ -30,7 +30,7 @@ def load_and_merge_data():
     """Load stratified H0 data and merge with auxiliary astrophysical params."""
     
     # 1. Main H0 vs Sigma Data
-    h0_data = pd.read_csv(OUTPUTS_DIR / "stratified_h0.csv")
+    h0_data = pd.read_csv(OUTPUTS_DIR / "step_03_stratified_h0.csv")
     
     # 2. Cepheid Period Data (Aggregated per host)
     cepheids = pd.read_csv(DATA_DIR / "interim/reconstructed_shoes_cepheids.csv")
@@ -39,8 +39,8 @@ def load_and_merge_data():
     host_periods.rename(columns={'Source': 'source_id', 'logP': 'mean_logP'}, inplace=True)
     
     # 3. SN Color Data (from Pantheon+)
-    # We need to re-match or extract if not present in stratified_h0.csv
-    # stratified_h0.csv has 'pantheon_id', but not 'c' (color) or 'x1' (stretch)
+    # We need to re-match or extract if not present in step_03_stratified_h0.csv
+    # step_03_stratified_h0.csv has 'pantheon_id', but not 'c' (color) or 'x1' (stretch)
     pantheon_path = DATA_DIR / "raw/Pantheon+SH0ES.dat"
     if pantheon_path.exists():
         pan_df = pd.read_csv(pantheon_path, sep=r'\s+')
@@ -121,12 +121,12 @@ def run_regression(df):
         }
     
     # Write to files
-    summary_path = OUTPUTS_DIR / "multivariate_analysis_summary.txt"
+    summary_path = OUTPUTS_DIR / "step_12_multivariate_analysis_summary.txt"
     with open(summary_path, 'w') as f:
         f.write("\n\n".join(summaries))
     print(f"Saved full regression summaries to {summary_path}")
         
-    json_path = OUTPUTS_DIR / "multivariate_analysis_results.json"
+    json_path = OUTPUTS_DIR / "step_12_multivariate_analysis_results.json"
     with open(json_path, 'w') as f:
         json.dump(structured_results, f, indent=4)
     print(f"Saved structured results to {json_path}")
@@ -216,13 +216,13 @@ def plot_coefficients(models):
     plt.legend()
     plt.grid(True, axis='x', alpha=0.3, linestyle=':')
     
-    out_path = FIGURES_DIR / "figure_12_multivariate_robustness.png"
+    out_path = FIGURES_DIR / "step_12_figure_12_multivariate_robustness.png"
     plt.savefig(out_path, dpi=300)
     print(f"Saved coefficient plot to {out_path}")
     plt.close()
 
     # Copy to public figures for site build
-    public_path = PUBLIC_FIGURES_DIR / "figure_12_multivariate_robustness.png"
+    public_path = PUBLIC_FIGURES_DIR / "step_12_figure_12_multivariate_robustness.png"
     shutil.copy(out_path, public_path)
     print(f"Copied coefficient plot to {public_path}")
 

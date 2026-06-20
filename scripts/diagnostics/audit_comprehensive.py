@@ -29,9 +29,9 @@ from scipy.optimize import minimize
 ROOT = Path("/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0")
 RESULTS_DIR = ROOT / "results" / "outputs"
 
-strat = pd.read_csv(RESULTS_DIR / "stratified_h0.csv")
-prov = pd.read_csv(RESULTS_DIR / "sigma_provenance_table.csv")
-with open(RESULTS_DIR / "tep_correction_results.json") as f:
+strat = pd.read_csv(RESULTS_DIR / "step_03_stratified_h0.csv")
+prov = pd.read_csv(RESULTS_DIR / "step_07_sigma_provenance_table.csv")
+with open(RESULTS_DIR / "step_04_tep_correction_results.json") as f:
     tep_json = json.load(f)
 
 C_KM_S = 299792.458
@@ -298,7 +298,7 @@ d = strat['distance_mpc'].values
 C_h0_flow = C_flow / np.outer(d, d)
 
 # Add to existing covariance
-h0_cov = np.load(RESULTS_DIR / "h0_covariance.npy")
+h0_cov = np.load(RESULTS_DIR / "step_03_h0_covariance.npy")
 h0_cov_total = h0_cov + C_h0_flow
 
 # Check impact on slope significance

@@ -1,0 +1,22 @@
+[18:36:09] [INFO] ======================================================================
+[18:36:09] [INFO] STEP 5b: M31 RADIAL SHEAR-SUPPRESSION MODEL
+[18:36:09] [INFO] ======================================================================
+[18:36:09] [PROCESS] Fetching M31 Cepheid data (Kodric et al. 2018)...
+[18:36:09] [SUCCESS] Retrieved 5356 Cepheids.
+[18:36:09] [PROCESS] Fetching HST/PHAT catalog for cross-match (J/ApJ/864/59)...
+[18:36:09] [SUCCESS] Cross-matched 302 HST Cepheids (2 arcsec tol).
+[18:36:09] [INFO] Sample after cuts: N = 1917
+[18:36:09] [INFO] Radial range: 0.6 - 93.5 kpc
+[18:36:09] [INFO] Density range: 0.0000 - 3.1221 M_sun/pc^3
+[18:36:09] [INFO] Suppression range: 0.025 - 1.000
+[18:36:09] [INFO] Model Comparison (Lower AIC = Better)
+[18:36:09] [INFO] +----------------+---+---------+---------+-------+-------+
+[18:36:09] [INFO] | Model          | k | chi2    | AIC     | ΔAIC  | w     |
+[18:36:09] [INFO] +----------------+---+---------+---------+-------+-------+
+[18:36:09] [INFO] | A (Null)       | 2 | 4050.85 | 4054.85 | 11.72 | 0.003 |
+[18:36:09] [INFO] | B (Step)       | 3 | 4037.13 | 4043.13 | 0.00  | 0.995 |
+[18:36:09] [INFO] | C (Continuous) | 3 | 4049.88 | 4055.88 | 12.75 | 0.002 |
+[18:36:09] [INFO] +----------------+---+---------+---------+-------+-------+
+[18:36:09] [PROCESS] Generating radial suppression figure...
+[18:36:09] [SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_11_m31_radial_suppression.json
+[18:36:09] [SUCCESS] Step 5b Complete.

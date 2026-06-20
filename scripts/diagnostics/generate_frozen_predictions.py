@@ -31,7 +31,7 @@ from scripts.utils.tep_correction import (
 )
 
 # Load frozen parameters from pipeline output
-with open(ROOT / "results/outputs/tep_correction_results.json") as f:
+with open(ROOT / "results/outputs/step_04_tep_correction_results.json") as f:
     tep_json = json.load(f)
 
 KAPPA_CEP = float(tep_json["optimal_kappa_cep"])
@@ -48,7 +48,7 @@ print(f"c^2:                {C2:.3f} km^2/s^2")
 print()
 
 # Existing sample: print their predicted corrections (for verification)
-strat = pd.read_csv(ROOT / "results/outputs/stratified_h0.csv")
+strat = pd.read_csv(ROOT / "results/outputs/step_03_stratified_h0.csv")
 print("Verification: existing N=29 hosts")
 print("-" * 70)
 print(f"{'Host':<15s} {'sigma':>8s} {'S':>6s} {'Delta_mu':>10s} {'H0_raw':>8s}")
@@ -95,7 +95,7 @@ pred_df = pd.DataFrame(rows)
 print(pred_df.to_string(index=False))
 
 # Save to CSV
-out_path = ROOT / "results/outputs/frozen_tep_predictions.csv"
+out_path = ROOT / "results/outputs/step_05_frozen_tep_predictions.csv"
 pred_df.to_csv(out_path, index=False)
 print(f"\nSaved to {out_path}")
 
@@ -117,7 +117,7 @@ manifest = {
     ),
 }
 
-manifest_path = ROOT / "results/outputs/frozen_tep_prediction_manifest.json"
+manifest_path = ROOT / "results/outputs/step_05_frozen_tep_prediction_manifest.json"
 with open(manifest_path, "w") as f:
     json.dump(manifest, f, indent=2)
 

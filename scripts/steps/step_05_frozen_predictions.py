@@ -10,8 +10,8 @@ The correction for a prospective host is:
     Delta_mu = kappa_Cep * S(rho, N_mb) * (sigma^2 - sigma_ref^2) / c^2
 
 Parameters are frozen at pipeline values:
-    kappa_Cep = 1.049e6 mag  (from tep_correction_results.json)
-    sigma_ref = 87.17 km/s   (from tep_correction_results.json)
+    kappa_Cep = 1.049e6 mag  (from step_04_tep_correction_results.json)
+    sigma_ref = 87.17 km/s   (from step_04_tep_correction_results.json)
     S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}
 
 This is a formal pipeline step. The output prediction table is a
@@ -48,7 +48,7 @@ class Step14FrozenPredictions:
 
         self.logger = TEPLogger(
             "step_14_predictions",
-            log_file_path=self.logs_dir / "step_14_frozen_predictions.log",
+            log_file_path=self.logs_dir / "step_05_frozen_predictions.log",
         )
         set_step_logger(self.logger)
 
@@ -56,7 +56,7 @@ class Step14FrozenPredictions:
         print_status(">>> STEP 14: FROZEN TEP PREDICTION TABLE", "TITLE")
 
         # Load frozen parameters from pipeline output
-        with open(self.results_dir / "tep_correction_results.json") as f:
+        with open(self.results_dir / "step_04_tep_correction_results.json") as f:
             tep_json = json.load(f)
 
         KAPPA_CEP = float(tep_json["optimal_kappa_cep"])
@@ -67,7 +67,7 @@ class Step14FrozenPredictions:
         print_status(f"Frozen sigma_ref: {SIGMA_REF:.2f} km/s", "INFO")
 
         # Verification: existing N=29 hosts
-        strat = pd.read_csv(self.results_dir / "stratified_h0.csv")
+        strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
         print_status(f"Verifying predictions against {len(strat)} existing hosts", "PROCESS")
 
         max_residual = 0.0
@@ -75,7 +75,7 @@ class Step14FrozenPredictions:
             s = row["sigma_inferred"]
             S = row["shear_suppression"]
             dmu_pred = KAPPA_CEP * S * (s ** 2 - SIGMA_REF ** 2) / C2
-            # Compare with actual correction from tep_corrected_h0.csv
+            # Compare with actual correction from step_04_tep_corrected_h0.csv
             max_residual = max(max_residual, abs(dmu_pred))
 
         print_status(f"Max prediction residual: {max_residual:.6f} mag", "INFO")
@@ -98,7 +98,7 @@ class Step14FrozenPredictions:
                 )
 
         pred_df = pd.DataFrame(rows)
-        pred_df.to_csv(self.results_dir / "frozen_tep_predictions.csv", index=False)
+        pred_df.to_csv(self.results_dir / "step_05_frozen_tep_predictions.csv", index=False)
         print_status(
             f"Saved prediction grid: {len(pred_df)} rows", "SUCCESS"
         )
@@ -121,7 +121,7 @@ class Step14FrozenPredictions:
             ),
         }
 
-        with open(self.results_dir / "frozen_tep_prediction_manifest.json", "w") as f:
+        with open(self.results_dir / "step_05_frozen_tep_prediction_manifest.json", "w") as f:
             json.dump(manifest, f, indent=2)
 
         print_status("Saved prediction manifest", "SUCCESS")

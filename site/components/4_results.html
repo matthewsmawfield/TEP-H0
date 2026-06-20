@@ -131,7 +131,7 @@
 
 <figure>
     <img
-        src="public/figures/figure_01_h0_vs_sigma.png?v=2"
+        src="public/figures/step_03_figure_01_h0_vs_sigma.png?v=2"
         alt="Scatter plot showing positive correlation between the SH0ES Cepheid-host distance-ladder residual in H0-equivalent units and host galaxy velocity dispersion squared (Spearman rho=0.517, p=0.0041), with high-sigma hosts yielding systematically higher residual values and NGC 4639 annotated as a low-redshift host with large peculiar-velocity uncertainty"
         class="figure-responsive"
     />
@@ -186,8 +186,8 @@
             </tr>
             <tr>
                 <td>Bootstrap error</td>
-                <td>$\pm 1.45$</td>
-                <td>$\pm 1.45$</td>
+                <td>$\pm 1.48$</td>
+                <td>$\pm 1.48$</td>
                 <td>Resampled host uncertainty (overall)</td>
             </tr>
             <tr>
@@ -238,7 +238,7 @@
     velocity dispersion measurements: 16 from direct stellar absorption
     spectroscopy and 13 from kinematic proxies (HI linewidth). The kinematic proxies introduce additional scatter but preserve
     the kinematic nature of the observable. The HI linewidth calibration uses
-    $\sigma = 0.467 \times V_{\rm max} + 42.9$ km/s (HyperLEDA calibrated_vmax).
+    $\sigma = 0.467 \times V_{\rm max} + 40.91$ km/s (HyperLEDA calibrated_vmax).
     While gas and stellar kinematics trace the same gravitational potential, the
     conversion introduces $\sim 20\%$ scatter. To test whether the signal
     depends on these proxy measurements, a separate analysis was performed on
@@ -264,7 +264,7 @@
                 <td>0.466</td>
                 <td>0.0109</td>
                 <td>$70.06 \pm 1.44$</td>
-                <td>$68.84 \pm 1.46$</td>
+                <td>$68.84 \pm 1.05$</td>
             </tr>
             <tr>
                 <td>Stellar Absorption Only</td>
@@ -290,7 +290,7 @@
     for the full sample and 2.43 km/s/Mpc for stellar-only.  This is the
     opposite of a proxy-driven artifact: kinematic proxies introduce
     $\sim$20\% scatter, and that extra noise dilutes the
-    $H_0$–$\sigma$ correlation and weakens the apparent correction.
+    residual–$\sigma$ correlation and weakens the apparent correction.
 </p>
 
 <p>
@@ -309,7 +309,7 @@
     yield low $H_0$ values ($57$–$62$ km/s/Mpc), while high-$\sigma$ proxy hosts
     (NGC 4038, NGC 2442) yield high $H_0$ values ($75$–$81$ km/s/Mpc). If the
     kinematic proxies were driving a spurious correlation, they would need to
-    cluster in a way that artificially creates the $H_0$–$\sigma$ pattern;
+    cluster in a way that artificially creates the residual–$\sigma$ pattern;
     instead, they span the full distribution and reinforce the trend. The signal
     is thus robust to measurement methodology.
 </p>
@@ -324,7 +324,7 @@
 
 <figure>
     <img
-        src="public/figures/figure_02_bivariate_h0_sigma_metallicity.png?v=2"
+        src="public/figures/step_08_figure_02_bivariate_h0_sigma_metallicity.png?v=2"
         alt="Bivariate partial regression plots: Left panel shows H0 vs sigma controlling for metallicity (r=0.450, p=0.016); Right panel shows H0 vs metallicity controlling for sigma (r=0.25, p=0.20, not significant)"
         class="figure-responsive"
     />
@@ -349,9 +349,9 @@
 
 <p>
     Partial correlation coefficients were calculated to isolate the effect of
-    each variable while holding the other constant: $H_0$ vs $\sigma$
+    each variable while holding the other constant: residual vs. $\sigma$
     (controlling for metallicity) yields partial $r = 0.450$ ($p = 0.016$), while
-    $H_0$ vs metallicity (controlling for $\sigma$) yields partial $r = 0.25$
+    residual vs. metallicity (controlling for $\sigma$) yields partial $r = 0.25$
     (not significant, $p = 0.20$).
 </p>
 
@@ -413,12 +413,12 @@
 
     <div class="result-box">
         \begin{equation}
-        H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.91\pm1.45)
+        H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.90\pm1.48)
         \end{equation}
     </div>
 
     <p>
-        The Planck tension is reduced to $0.99\sigma$.  Paper 10 does not
+        The Planck tension is reduced to $0.96\sigma$.  Paper 10 does not
         directly predict $\kappa_{\rm Cep}$; the two papers are consistent
         only after the environmental transfer factor is accounted for.
     </p>
@@ -456,7 +456,7 @@
 
 <figure>
     <img
-        src="public/figures/figure_03_tep_correction_comparison.png?v=2"
+        src="public/figures/step_04_figure_03_tep_correction_comparison.png?v=2"
         alt="Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=68.84 km/s/Mpc aligned with Planck"
         class="figure-responsive"
     />
@@ -473,8 +473,8 @@
         correlation, confirming the signal is robust against low-z systematics.
         Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.27\times10^6$
         mag, $\sigma^2/c^2$ scaling). The corrected panel shows $r \simeq 0$ by construction since $\kappa_{\rm Cep}$ is fitted to remove the trend; this is a fitted-correction diagnostic, not an independent validation statistic. Independent robustness is assessed by jackknife, host-contrast likelihood, train/test, anchor, and systematics tests. The unified mean
-        ($68.84$ km/s/Mpc; bootstrap mean $68.91 \pm 1.45$) is statistically consistent with Planck (dashed line,
-        $0.99\sigma$ tension). Error bars represent standard measurement uncertainties.
+        ($68.84$ km/s/Mpc; bootstrap mean $68.90 \pm 1.48$) is statistically consistent with Planck (dashed line,
+        $0.96\sigma$ tension). Error bars represent standard measurement uncertainties.
     </figcaption>
 </figure>
 
@@ -619,7 +619,7 @@
                 <th scope="col">$\sigma$ (km/s)</th>
                 <th scope="col">$(\sigma^2-\sigma_{\rm ref}^2)/c^2$</th>
                 <th scope="col">
-                    Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 1.27\times10^6$)
+                    Predicted Naive Shift ($\kappa_{\rm Cep}=1.27\times10^6$)
                 </th>
                 <th scope="col">Observed $M_W$ (mag)</th>
             </tr>
@@ -636,14 +636,14 @@
                 <td>NGC 4258</td>
                 <td>115</td>
                 <td>$+8.40\times10^{-8}$</td>
-                <td>$+0.088$ mag relative to LMC (naive)</td>
+                <td>$+0.107$ mag (naive unscreened)</td>
                 <td>$-5.837 \pm 0.022$</td>
             </tr>
             <tr>
                 <td>M31</td>
                 <td>160</td>
                 <td>$+2.22\times10^{-7}$</td>
-                <td>$+0.233$ mag relative to LMC (naive)</td>
+                <td>$+0.282$ mag (naive unscreened)</td>
                 <td>$-5.849 \pm 0.024$</td>
             </tr>
         </tbody>
@@ -686,7 +686,7 @@
 
 <figure>
     <img
-        src="public/figures/figure_05_joint_screening_model.png?v=2"
+        src="public/figures/step_20_figure_05_joint_screening_model.png?v=2"
         alt="Joint environmental-screening model fit to 29 SN Ia hosts and 3 geometric anchors"
         class="figure-responsive"
     />
@@ -788,7 +788,7 @@
     not a standalone significance test, but a sign-stability check showing that
     the correlation does not reverse under the strictest redshift cut, with the
     correlation remaining robustly positive. Full scan output is provided in
-    <code>results/outputs/redshift_cut_sensitivity.txt</code>.
+    <code>results/outputs/step_08_redshift_cut_sensitivity.txt</code>.
 </p>
 
 <p>
@@ -838,7 +838,7 @@
 <div class="key-finding">
     <h4>Group Environment as a Physical Prediction</h4>
     <p>
-        The reduction of the $H_0$–$\sigma$ signal after controlling for
+        The reduction of the residual–$\sigma$ signal after controlling for
         group richness is consistent with the proposed group-suppression
         picture and motivates a dedicated environmental test.
     </p>
@@ -849,7 +849,7 @@
     Pantheon+ redshifts yields consistent positive correlations: $r=0.442$ using
     $z_{\rm CMB}$ and $r=0.395$ using $z_{\rm HEL}$ (both
     permutation-significant). Full details are provided in
-    <code>results/outputs/flow_environment_robustness.txt</code>.
+    <code>results/outputs/step_08_flow_environment_robustness.txt</code>.
 </p>
 
 <p>
@@ -876,7 +876,7 @@
 
 <p>
     To address the concern that heterogeneous spectroscopic apertures and galaxy
-    size estimates could imprint a spurious $H_0$–$\sigma$ trend, an explicit
+    size estimates could imprint a spurious residual–$\sigma$ trend, an explicit
     aperture/size sensitivity envelope was computed by scanning the aperture
     exponent $\beta \in [0, 0.08]$ and scaling the effective radii by $R_{\rm
     eff}\times[0.7, 1.3]$. Across this envelope, the Pearson correlation remains
@@ -888,7 +888,7 @@
     that the main inference does not rely on fine-tuned aperture assumptions. A
     per-host provenance table and the full sensitivity grid are provided in the
     repository outputs (see
-    <code>results/outputs/sigma_provenance_table.csv</code> and
+    <code>results/outputs/step_07_sigma_provenance_table.csv</code> and
     <code>results/outputs/aperture_sensitivity_grid.csv</code>).
 </p>
 
@@ -896,7 +896,7 @@
     To further test whether the signal could arise from unmodeled
     environment-dependent systematics, a partial correlation was computed
     controlling for the local stellar mass density $\rho_{\rm local}$ at the
-    typical Cepheid galactocentric radius. If the $H_0$–$\sigma$ correlation
+    typical Cepheid galactocentric radius. If the residual–$\sigma$ correlation
     were driven by some confound associated with local density rather than the
     gravitational potential itself, controlling for $\rho$ should weaken the
     signal.
@@ -943,7 +943,7 @@
     systematics. This occurs because $\sigma$ and $\rho$ are negatively
     correlated in this sample: high-$\sigma$ hosts tend to have <em>lower</em>
     local densities at Cepheid radii. Full details are provided in
-    <code>results/outputs/enhanced_robustness_results.json</code>.
+    <code>results/outputs/step_13_enhanced_robustness_results.json</code>.
 </p>
 
 <h3>3.7 TRGB Differential Test</h3>
@@ -1175,7 +1175,7 @@
 <p>
     A comparative analysis shows that Cepheids exhibit a significant
     $H_0$–$\sigma$ correlation (Spearman $\rho = 0.517$, $p = 0.0041$; $N=29$).
-    The TRGB-only sample ($N=18$) shows a comparable trend (Spearman $\rho = 0.467$,
+    The TRGB-only sample ($N=15$) shows a comparable trend (Spearman $\rho = 0.467$,
     $p = 0.050$; Pearson $r = 0.410$, $p = 0.091$), suggesting that the
     $H_0$–$\sigma$ association is not unique to periodic indicators and may be
     driven in part by a systematic that affects both tracers (e.g. residual
@@ -1290,7 +1290,7 @@
 
 <figure>
     <img
-        src="public/figures/figure_08_robustness_synthesis_plot.png?v=2"
+        src="public/figures/step_31_figure_08_robustness_synthesis_plot.png?v=2"
         alt="Multi-panel synthesis showing Inner Fainter offsets in both ground-based and HST M31 data consistent with TEP shear suppression; LMC control shows no large offset indicating no large pipeline artifacts"
         class="figure-responsive"
     />

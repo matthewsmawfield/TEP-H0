@@ -7,8 +7,8 @@ Comprehensive audit of the TEP-H0 analysis following the practical audit checkli
 Run with: python scripts/audit_master.py
 
 Outputs:
-- results/outputs/audit_master_report.json
-- results/outputs/audit_master_table.csv
+- results/outputs/step_32_audit_master_report.json
+- results/outputs/step_32_audit_master_table.csv
 - stdout: formatted audit findings
 """
 
@@ -36,19 +36,19 @@ FIGURES_DIR = PROJECT_ROOT / "results" / "figures"
 
 HOSTS_PATH = DATA_DIR / "processed" / "hosts_processed.csv"
 DISTANCES_PATH = DATA_DIR / "interim" / "r22_distances.csv"
-STRATIFIED_PATH = RESULTS_DIR / "stratified_h0.csv"
-CORRECTED_PATH = RESULTS_DIR / "tep_corrected_h0.csv"
-COV_PATH = RESULTS_DIR / "h0_covariance.npy"
-COV_LABELS_PATH = RESULTS_DIR / "h0_covariance_labels.json"
+STRATIFIED_PATH = RESULTS_DIR / "step_03_stratified_h0.csv"
+CORRECTED_PATH = RESULTS_DIR / "step_04_tep_corrected_h0.csv"
+COV_PATH = RESULTS_DIR / "step_03_h0_covariance.npy"
+COV_LABELS_PATH = RESULTS_DIR / "step_03_h0_covariance_labels.json"
 MU_COV_PATH = DATA_DIR / "interim" / "r22_mu_covariance.npy"
 MU_COV_LABELS_PATH = DATA_DIR / "interim" / "r22_mu_covariance_labels.json"
-SIGMA_PROV_PATH = RESULTS_DIR / "sigma_provenance_table.csv"
-REDZ_SENS_PATH = RESULTS_DIR / "redshift_cut_sensitivity.txt"
-APERTURE_SUMMARY_PATH = RESULTS_DIR / "aperture_sensitivity_summary.json"
-TEP_CORR_JSON_PATH = RESULTS_DIR / "tep_correction_results.json"
+SIGMA_PROV_PATH = RESULTS_DIR / "step_07_sigma_provenance_table.csv"
+REDZ_SENS_PATH = RESULTS_DIR / "step_08_redshift_cut_sensitivity.txt"
+APERTURE_SUMMARY_PATH = RESULTS_DIR / "step_07_aperture_sensitivity_summary.json"
+TEP_CORR_JSON_PATH = RESULTS_DIR / "step_04_tep_correction_results.json"
 
-REPORT_PATH = RESULTS_DIR / "audit_master_report.json"
-TABLE_PATH = RESULTS_DIR / "audit_master_table.csv"
+REPORT_PATH = RESULTS_DIR / "step_32_audit_master_report.json"
+TABLE_PATH = RESULTS_DIR / "step_32_audit_master_table.csv"
 
 C_KM_S = 299792.458
 C2 = C_KM_S ** 2
@@ -162,11 +162,11 @@ def audit_h0_contradictions(data):
     """Priority 1.2: Check corrected H0 values for contradictions."""
     findings = []
 
-    # From tep_correction_results.json
+    # From step_04_tep_correction_results.json
     if TEP_CORR_JSON_PATH.exists():
         with open(TEP_CORR_JSON_PATH) as f:
             tep_json = json.load(f)
-        findings.append(f"tep_correction_results.json: unified_h0 = {tep_json.get('unified_h0'):.2f}")
+        findings.append(f"step_04_tep_correction_results.json: unified_h0 = {tep_json.get('unified_h0'):.2f}")
         findings.append(f"  bootstrap_h0_mean = {tep_json.get('bootstrap_h0_mean'):.2f} +/- {tep_json.get('bootstrap_h0_std'):.2f}")
         findings.append(f"  optimal_kappa_cep = {tep_json.get('optimal_kappa_cep'):.3e}")
         findings.append(f"  sigma_ref = {tep_json.get('sigma_ref'):.2f}")

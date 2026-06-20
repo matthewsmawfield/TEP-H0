@@ -419,7 +419,7 @@ def run_pipeline():
             report = audit(project_root=PROJECT_ROOT, write_report=True)
             if not report.get('summary', {}).get('ok', False):
                 n_fail = report.get('summary', {}).get('n_failed', -1)
-                raise RuntimeError(f"Pipeline Audit FAILED with {n_fail} errors. See results/outputs/pipeline_audit_report.json")
+                raise RuntimeError(f"Pipeline Audit FAILED with {n_fail} errors. See results/outputs/step_32_pipeline_audit_report.json")
             step_times['Step 32b'] = time.time() - t0
             set_step_logger(pipeline_logger)
             print_status("Step 32b (Self-Check) PASSED: All outputs consistent.", "SUCCESS")

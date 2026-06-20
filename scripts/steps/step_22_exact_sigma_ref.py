@@ -47,7 +47,7 @@ class Step21ExactSigmaRef:
 
         self.logger = TEPLogger(
             "step_21_exact_sigma_ref",
-            log_file_path=self.logs_dir / "step_21_exact_sigma_ref.log",
+            log_file_path=self.logs_dir / "step_22_exact_sigma_ref.log",
         )
         set_step_logger(self.logger)
 
@@ -56,7 +56,7 @@ class Step21ExactSigmaRef:
 
         # Load anchor data from stratified file (anchors have h0_derived but
         # are not in the primary sample)
-        strat = pd.read_csv(self.results_dir / "stratified_h0.csv")
+        strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
         hosts = pd.read_csv(self.root / "data" / "processed" / "hosts_processed.csv")
 
         # Anchor weights matching step_3_tep_correction.py exactly
@@ -105,7 +105,7 @@ class Step21ExactSigmaRef:
         print_status(f"Equal weights, screened:           {sigma_ref_equal_screened:.2f} km/s", "INFO")
 
         # From pipeline JSON
-        with open(self.results_dir / "tep_correction_results.json") as f:
+        with open(self.results_dir / "step_04_tep_correction_results.json") as f:
             tep = json.load(f)
         sigma_ref_pipeline = float(tep["sigma_ref"])
         sigma_ref_scr_pipeline = float(tep.get("sigma_ref_screened", 0))
@@ -137,7 +137,7 @@ class Step21ExactSigmaRef:
             ),
         }
 
-        with open(self.results_dir / "exact_sigma_ref_reconstruction.json", "w") as f:
+        with open(self.results_dir / "step_22_exact_sigma_ref_reconstruction.json", "w") as f:
             json.dump(results, f, indent=2)
 
         print_status("Step 21 complete", "SUCCESS")

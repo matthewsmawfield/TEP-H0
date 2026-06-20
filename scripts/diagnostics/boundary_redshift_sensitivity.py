@@ -13,9 +13,9 @@ from scripts.utils.tep_correction import tep_correction
 def run_redshift_sensitivity():
     print("--- Running Boundary-Redshift Sensitivity Analysis ---")
     base_dir = Path(__file__).resolve().parents[2]
-    df = pd.read_csv(base_dir / "results" / "outputs" / "tep_corrected_h0.csv")
+    df = pd.read_csv(base_dir / "results" / "outputs" / "step_04_tep_corrected_h0.csv")
     
-    with open(base_dir / "results" / "outputs" / "tep_correction_results.json", "r") as f:
+    with open(base_dir / "results" / "outputs" / "step_04_tep_correction_results.json", "r") as f:
         tep = json.load(f)
     
     sigma_ref = tep['sigma_ref_screened']
@@ -78,7 +78,7 @@ def run_redshift_sensitivity():
         pct = f"{r['pct_change']:>8.2f}%" if pd.notnull(r['pct_change']) else "N/A"
         print(f"{r['z_min']:<10.4f} {r['N_hosts']:<10} {k:<12} {pct:<10}")
               
-    output_path = base_dir / "results" / "outputs" / "redshift_cut_sensitivity.csv"
+    output_path = base_dir / "results" / "outputs" / "step_08_redshift_cut_sensitivity.csv"
     df_res.to_csv(output_path, index=False)
     print(f"\nSaved boundary-redshift table to {output_path}")
 

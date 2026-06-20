@@ -33,7 +33,7 @@ Previous Analysis Error:
 
 Data:
 - TRGB: CCHP (Freedman et al. 2024)
-- Cepheids: SH0ES (Riess et al. 2022) via our 'stratified_h0.csv'
+- Cepheids: SH0ES (Riess et al. 2022) via our 'step_03_stratified_h0.csv'
 """
 
 import pandas as pd
@@ -65,11 +65,11 @@ class Step7TRGBReanalysis:
         self.logs_dir.mkdir(parents=True, exist_ok=True)
         self.figures_dir.mkdir(parents=True, exist_ok=True)
         
-        self.logger = TEPLogger("step_7_trgb_reanalysis", log_file_path=self.logs_dir / "step_7_trgb_reanalysis.log")
+        self.logger = TEPLogger("step_7_trgb_reanalysis", log_file_path=self.logs_dir / "step_16_trgb_reanalysis.log")
         set_step_logger(self.logger)
         
-        self.trgb_data_path = self.outputs_dir / "trgb_hosts_data.csv"
-        self.ceph_data_path = self.outputs_dir / "stratified_h0.csv"
+        self.trgb_data_path = self.outputs_dir / "step_15_trgb_hosts_data.csv"
+        self.ceph_data_path = self.outputs_dir / "step_03_stratified_h0.csv"
         
     def run(self):
         print_status("STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)", "SECTION")
@@ -91,7 +91,7 @@ class Step7TRGBReanalysis:
         print_status(f"Matched {len(merged)} hosts for differential analysis", "INFO")
         
         # 1. Calculate Differential Modulus
-        # μ_Ceph is 'value' in stratified_h0.csv (the SH0ES distance modulus)
+        # μ_Ceph is 'value' in step_03_stratified_h0.csv (the SH0ES distance modulus)
         merged['mu_ceph'] = merged['value']
         merged['delta_mu'] = merged['mu_trgb'] - merged['mu_ceph']
         
@@ -168,7 +168,7 @@ class Step7TRGBReanalysis:
         
         # Save results to JSON
         import json
-        output_file = self.outputs_dir / "trgb_differential_results.json"
+        output_file = self.outputs_dir / "step_16_trgb_differential_results.json"
         with open(output_file, 'w') as f:
             json.dump(results, f, indent=2)
         print_status(f"Results saved to {output_file}", "INFO")
@@ -264,14 +264,14 @@ class Step7TRGBReanalysis:
         ax.legend(frameon=True)
         # Grid is handled by apply_tep_style
         
-        output_path = self.figures_dir / "supplement_03_trgb_cepheid_residual.png"
+        output_path = self.figures_dir / "step_16_supplement_03_trgb_cepheid_residual.png"
         # plt.savefig(output_path, bbox_inches='tight')
         # print_status(f"Plot saved to {output_path}", "INFO")
         plt.close()
 
         # public_dir = self.root_dir / "site" / "public" / "figures"
         # public_dir.mkdir(parents=True, exist_ok=True)
-        # public_path = public_dir / "supplement_03_trgb_cepheid_residual.png"
+        # public_path = public_dir / "step_16_supplement_03_trgb_cepheid_residual.png"
         # shutil.copy(output_path, public_path)
         # print_status(f"Copied plot to {public_path}", "INFO")
 

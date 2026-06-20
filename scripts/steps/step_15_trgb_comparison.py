@@ -78,16 +78,16 @@ class Step7TRGBComparison:
         self.logs_dir.mkdir(parents=True, exist_ok=True)
         
         self.logger = TEPLogger("step_7_trgb_comparison", 
-                                log_file_path=self.logs_dir / "step_7_trgb_comparison.log")
+                                log_file_path=self.logs_dir / "step_15_trgb_comparison.log")
         set_step_logger(self.logger)
         
         # Input paths
-        self.stratified_path = self.outputs_dir / "stratified_h0.csv"
+        self.stratified_path = self.outputs_dir / "step_03_stratified_h0.csv"
         self.hosts_path = self.data_dir / "processed" / "hosts_processed.csv"
         
         # Output paths
-        self.trgb_data_path = self.outputs_dir / "trgb_hosts_data.csv"
-        self.results_path = self.outputs_dir / "trgb_comparison_results.json"
+        self.trgb_data_path = self.outputs_dir / "step_15_trgb_hosts_data.csv"
+        self.results_path = self.outputs_dir / "step_15_trgb_comparison_results.json"
     
     def _load_trgb_data(self):
         """
@@ -203,7 +203,7 @@ class Step7TRGBComparison:
         Compare TRGB correlation with Cepheid correlation from Step 2.
         """
         # Load Cepheid results
-        ceph_path = self.outputs_dir / "stratified_h0.csv"
+        ceph_path = self.outputs_dir / "step_03_stratified_h0.csv"
         if not ceph_path.exists():
             print_status("Cepheid stratified data not found", "WARNING")
             return None
@@ -280,7 +280,7 @@ class Step7TRGBComparison:
         ax.axhline(67.4, color='gray', linestyle=':', alpha=0.5, label='Planck H0')
         
         plt.tight_layout()
-        output_path = self.figures_dir / "trgb_figure_01_h0_vs_sigma.png"
+        output_path = self.figures_dir / "step_15_trgb_figure_01_h0_vs_sigma.png"
         # plt.savefig(output_path, dpi=150, bbox_inches='tight')
         # print_status(f"Saved plot to {output_path}", "INFO")
         plt.close()

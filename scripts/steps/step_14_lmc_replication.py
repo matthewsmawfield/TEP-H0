@@ -35,14 +35,14 @@ class Step7LMCReplication:
         self.logs_dir.mkdir(parents=True, exist_ok=True)
         self.public_figures_dir.mkdir(parents=True, exist_ok=True)
 
-        self.logger = TEPLogger("step_7_lmc", log_file_path=self.logs_dir / "step_7_lmc_replication.log")
+        self.logger = TEPLogger("step_7_lmc", log_file_path=self.logs_dir / "step_14_lmc_replication.log")
         set_step_logger(self.logger)
 
-        self.output_plot_path = self.figures_dir / "lmc_differential_pl.png"
-        self.output_robust_plot_path = self.figures_dir / "lmc_differential_robustness.png"
-        self.output_csv_path = self.outputs_dir / "lmc_results.csv"
-        self.output_robust_csv_path = self.outputs_dir / "lmc_robustness_summary.csv"
-        self.output_robust_json_path = self.outputs_dir / "lmc_robustness_summary.json"
+        self.output_plot_path = self.figures_dir / "step_14_lmc_differential_pl.png"
+        self.output_robust_plot_path = self.figures_dir / "step_14_lmc_differential_robustness.png"
+        self.output_csv_path = self.outputs_dir / "step_14_lmc_results.csv"
+        self.output_robust_csv_path = self.outputs_dir / "step_14_lmc_robustness_summary.csv"
+        self.output_robust_json_path = self.outputs_dir / "step_14_lmc_robustness_summary.json"
 
         # Default selection for a high-statistics LMC replication.
         # (A long-period-only variant can be added as an explicit robustness slice.)
@@ -962,12 +962,12 @@ class Step7LMCReplication:
             plt.close(fig)
             # print_status(f"Saved robustness plot to {self.output_robust_plot_path}", "SUCCESS")
 
-            # shutil.copy(self.output_robust_plot_path, self.public_figures_dir / "lmc_differential_robustness.png")
+            # shutil.copy(self.output_robust_plot_path, self.public_figures_dir / "step_14_lmc_differential_robustness.png")
             # print_status("Copied robustness plot to public figures directory.", "SUCCESS")
         except Exception as e:
             print_status(f"Failed to generate robustness plot: {e}", "WARNING")
 
-        # shutil.copy(self.output_plot_path, self.public_figures_dir / "lmc_differential_pl.png")
+        # shutil.copy(self.output_plot_path, self.public_figures_dir / "step_14_lmc_differential_pl.png")
         # print_status("Copied plot to public figures directory.", "SUCCESS")
 
     def run(self):

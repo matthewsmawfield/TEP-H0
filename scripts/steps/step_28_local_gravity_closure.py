@@ -23,11 +23,11 @@ class Step10bLocalGravityClosure:
         self.outputs_dir.mkdir(parents=True, exist_ok=True)
         self.logs_dir.mkdir(parents=True, exist_ok=True)
 
-        self.tep_path = self.outputs_dir / "tep_correction_results.json"
-        self.output_path = self.outputs_dir / "local_gravity_closure.json"
+        self.tep_path = self.outputs_dir / "step_04_tep_correction_results.json"
+        self.output_path = self.outputs_dir / "step_28_local_gravity_closure.json"
         self.logger = TEPLogger(
             "step_10b_local_gravity_closure",
-            log_file_path=self.logs_dir / "step_10b_local_gravity_closure.log",
+            log_file_path=self.logs_dir / "step_28_local_gravity_closure.log",
         )
         set_step_logger(self.logger)
 

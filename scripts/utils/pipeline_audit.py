@@ -68,7 +68,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
     }
 
     # Canonical per-host table
-    strat_path = outputs / "stratified_h0.csv"
+    strat_path = outputs / "step_03_stratified_h0.csv"
     if not strat_path.exists():
         report["checks"].append(_check("stratified_h0_exists", False, {"path": str(strat_path)}))
         return report
@@ -117,8 +117,8 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
     }
     report["summary"]["derived_from_stratified_h0"] = derived
 
-    # Check stratification_results.json
-    strat_json = _read_json(outputs / "stratification_results.json")
+    # Check step_03_stratification_results.json
+    strat_json = _read_json(outputs / "step_03_stratification_results.json")
     if strat_json is None:
         report["checks"].append(_check("stratification_results_json_exists", False, {}))
     else:
@@ -137,8 +137,8 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
             {"expected": derived, "got": strat_json},
         ))
 
-    # Check covariance_robustness.json
-    cov = _read_json(outputs / "covariance_robustness.json")
+    # Check step_08_covariance_robustness.json
+    cov = _read_json(outputs / "step_08_covariance_robustness.json")
     if cov is None:
         report["checks"].append(_check("covariance_robustness_json_exists", False, {}))
     else:
@@ -181,7 +181,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
         ))
 
     # Check TEP correction
-    tep = _read_json(outputs / "tep_correction_results.json")
+    tep = _read_json(outputs / "step_04_tep_correction_results.json")
     if tep is None:
         report["checks"].append(_check("tep_correction_results_json_exists", False, {}))
     else:
@@ -219,7 +219,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
             },
         ))
 
-        corrected_path = outputs / "tep_corrected_h0.csv"
+        corrected_path = outputs / "step_04_tep_corrected_h0.csv"
         if not corrected_path.exists():
             report["checks"].append(_check(
                 "tep_corrected_csv_matches_primary_headline",
@@ -255,7 +255,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
         ))
 
     # Sigma regeneration report integrity
-    sigma_report = _read_json(outputs / "sigma_regeneration_report.json")
+    sigma_report = _read_json(outputs / "step_00_sigma_regeneration_report.json")
     if sigma_report is None:
         report["checks"].append(_check("sigma_regeneration_report_exists", False, {}))
     else:
@@ -271,7 +271,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
         ))
 
     # Sigma provenance table existence and uniqueness
-    prov_path = outputs / "sigma_provenance_table.csv"
+    prov_path = outputs / "step_07_sigma_provenance_table.csv"
     if not prov_path.exists():
         report["checks"].append(_check("sigma_provenance_table_exists", False, {"path": str(prov_path)}))
     else:
@@ -293,7 +293,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
         ))
 
     # Enhanced robustness should align with recomputed full-sample stats
-    enh = _read_json(outputs / "enhanced_robustness_results.json")
+    enh = _read_json(outputs / "step_13_enhanced_robustness_results.json")
     if enh is None:
         report["checks"].append(_check("enhanced_robustness_exists", False, {}))
     else:
@@ -310,7 +310,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
         ))
 
     # TRGB comparison should use current cepheid stats
-    trgb = _read_json(outputs / "trgb_comparison_results.json")
+    trgb = _read_json(outputs / "step_15_trgb_comparison_results.json")
     if trgb is None:
         report["checks"].append(_check("trgb_comparison_exists", False, {}))
     else:
@@ -356,7 +356,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
         root / "site" / "dist" / "CITATION.cff",
         root / "site" / "codemeta.json",
         root / "site" / "index.html",
-        outputs / "TEP_FINAL_ROBUSTNESS_REPORT.md",
+        outputs / "step_31_TEP_FINAL_ROBUSTNESS_REPORT.md",
     ]
     narrative_text_by_path = {str(path.relative_to(root)): _read_text(path) for path in narrative_paths if path.exists()}
     narrative_text = "\n".join(narrative_text_by_path.values())
@@ -491,7 +491,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
         {"forbidden_hits": stale_hits, "paths": list(narrative_text_by_path.keys())},
     ))
 
-    multivar = _read_json(outputs / "multivariate_analysis_results.json")
+    multivar = _read_json(outputs / "step_12_multivariate_analysis_results.json")
     if multivar is None:
         report["checks"].append(_check("multivariate_analysis_results_exists", False, {}))
     else:
@@ -518,7 +518,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
             {"interpretation": interp},
         ))
 
-    anchor = _read_json(outputs / "anchor_stratification_test.json")
+    anchor = _read_json(outputs / "step_27_anchor_stratification_test.json")
     final_report_text = narrative_text_by_path.get("results/outputs/TEP_FINAL_ROBUSTNESS_REPORT.md", "")
     if anchor is None:
         report["checks"].append(_check("anchor_stratification_test_exists", False, {}))
@@ -548,7 +548,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
             {"anchor": anchor.get("anchor_regression", anchor.get("regression", {})), "host_comparison": anchor.get("host_comparison", {})},
         ))
 
-    local_gravity = _read_json(outputs / "local_gravity_closure.json")
+    local_gravity = _read_json(outputs / "step_28_local_gravity_closure.json")
     if local_gravity is None:
         report["checks"].append(_check("local_gravity_closure_exists", False, {}))
     else:
@@ -577,7 +577,7 @@ def audit(project_root: Optional[Path] = None, write_report: bool = True) -> Dic
     report['summary']['ok'] = bool(n_fail == 0)
 
     if write_report:
-        out_path = outputs / "pipeline_audit_report.json"
+        out_path = outputs / "step_32_pipeline_audit_report.json"
         out_path.write_text(json.dumps(report, indent=2, sort_keys=True))
         print_status(f"Wrote pipeline audit report: {out_path}", "SUCCESS" if n_fail == 0 else "WARNING")
 

@@ -86,7 +86,7 @@ def run_cut(name, df_subset):
     }
 
 def main():
-    stratified_path = PROJECT_ROOT / "results" / "outputs" / "stratified_h0.csv"
+    stratified_path = PROJECT_ROOT / "results" / "outputs" / "step_03_stratified_h0.csv"
     if not stratified_path.exists():
         print("Run step 2 first.")
         return

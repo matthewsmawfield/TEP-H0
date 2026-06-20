@@ -32,7 +32,7 @@ DEFAULT_H0 = 68.83787861896722       # Unified H0 from pipeline (Step 3)
 
 
 def _load_tep_headlines():
-    tep_path = PROJECT_ROOT / "results" / "outputs" / "tep_correction_results.json"
+    tep_path = PROJECT_ROOT / "results" / "outputs" / "step_04_tep_correction_results.json"
     values = {"kappa_cep": DEFAULT_KAPPA_CEP, "h0": DEFAULT_H0}
     try:
         with open(tep_path, "r") as f:
@@ -118,10 +118,10 @@ def main():
     }
     
     import json
-    with open(PROJECT_ROOT / "results/outputs/cosmology_inference_template.json", "w") as f:
+    with open(PROJECT_ROOT / "results/outputs/step_30_cosmology_inference_template.json", "w") as f:
         json.dump(results, f, indent=4)
         
-    print_status("Results saved to results/outputs/cosmology_inference_template.json", "INFO")
+    print_status("Results saved to results/outputs/step_30_cosmology_inference_template.json", "INFO")
 
 if __name__ == "__main__":
     main()

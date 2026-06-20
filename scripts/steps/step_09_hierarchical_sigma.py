@@ -53,7 +53,7 @@ class Step15HierarchicalSigma:
 
         self.logger = TEPLogger(
             "step_15_sigma",
-            log_file_path=self.logs_dir / "step_15_hierarchical_sigma.log",
+            log_file_path=self.logs_dir / "step_09_hierarchical_sigma.log",
         )
         set_step_logger(self.logger)
 
@@ -62,8 +62,8 @@ class Step15HierarchicalSigma:
             ">>> STEP 15: HIERARCHICAL SIGMA MEASUREMENT-ERROR MODEL", "TITLE"
         )
 
-        prov = pd.read_csv(self.results_dir / "sigma_provenance_table.csv")
-        strat = pd.read_csv(self.results_dir / "stratified_h0.csv")
+        prov = pd.read_csv(self.results_dir / "step_07_sigma_provenance_table.csv")
+        strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
 
         # Merge provenance with stratified data
         merged = strat.merge(
@@ -140,7 +140,7 @@ class Step15HierarchicalSigma:
         }
 
         with open(
-            self.results_dir / "hierarchical_sigma_measurement_model.json", "w"
+            self.results_dir / "step_09_hierarchical_sigma_measurement_model.json", "w"
         ) as f:
             json.dump(out, f, indent=2)
 

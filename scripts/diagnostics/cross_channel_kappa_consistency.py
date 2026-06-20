@@ -80,10 +80,10 @@ class CrossChannelKappaConsistency:
             d.mkdir(parents=True, exist_ok=True)
         self.logger = TEPLogger("cross_channel_kappa", log_file_path=self.logs_dir / "cross_channel_kappa_consistency.log")
         set_step_logger(self.logger)
-        self.tep_json = self.outputs_dir / "tep_correction_results.json"
-        self.joint_json = self.outputs_dir / "joint_environmental_screening_model.json"
-        self.trgb_csv = self.outputs_dir / "trgb_hosts_data.csv"
-        self.stratified_csv = self.outputs_dir / "stratified_h0.csv"
+        self.tep_json = self.outputs_dir / "step_04_tep_correction_results.json"
+        self.joint_json = self.outputs_dir / "step_20_joint_environmental_screening_model.json"
+        self.trgb_csv = self.outputs_dir / "step_15_trgb_hosts_data.csv"
+        self.stratified_csv = self.outputs_dir / "step_03_stratified_h0.csv"
         self.output_json = self.outputs_dir / "cross_channel_kappa_consistency.json"
         self.output_plot = self.figures_dir / "figure_06_cross_channel_kappa.png"
 

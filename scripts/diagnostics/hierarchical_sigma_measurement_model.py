@@ -101,8 +101,8 @@ def compute_odr_slope(sigma_vals, h0_vals, sigma_errs, h0_errs):
 
 
 def main():
-    prov = pd.read_csv(ROOT / "results/outputs/sigma_provenance_table.csv")
-    strat = pd.read_csv(ROOT / "results/outputs/stratified_h0.csv")
+    prov = pd.read_csv(ROOT / "results/outputs/step_07_sigma_provenance_table.csv")
+    strat = pd.read_csv(ROOT / "results/outputs/step_03_stratified_h0.csv")
 
     print("=" * 70)
     print("HIERARCHICAL SIGMA MEASUREMENT-ERROR MODEL")
@@ -164,7 +164,7 @@ def main():
         ),
     }
 
-    out_path = ROOT / "results/outputs/hierarchical_sigma_measurement_model.json"
+    out_path = ROOT / "results/outputs/step_09_hierarchical_sigma_measurement_model.json"
     with open(out_path, "w") as f:
         json.dump(out, f, indent=2)
 

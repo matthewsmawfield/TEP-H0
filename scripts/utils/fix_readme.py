@@ -1,6 +1,6 @@
 import json
 
-with open("results/outputs/tep_correction_results.json") as f:
+with open("results/outputs/step_04_tep_correction_results.json") as f:
     tep = json.load(f)
 
 print(f"unified_h0: {float(tep['unified_h0']):.2f}")

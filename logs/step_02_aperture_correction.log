@@ -1,0 +1,27 @@
+[18:34:41] [INFO] 
+[18:34:41] [INFO] ================================================================================
+[18:34:41] [INFO]    Starting Step 1b: Aperture Correction
+[18:34:41] [INFO] ================================================================================
+[18:34:41] [INFO] 
+[18:34:41] [INFO] Initializing Aperture Correction Protocol
+[18:34:41] [INFO] Loaded 42 hosts from pipeline processing.
+[18:34:41] [PROCESS] Merging enriched metadata (R_eff, R25)...
+[18:34:41] [INFO] Correction Parameters (Jorgensen et al. 1995):
+[18:34:41] [INFO]   Beta (Slope):       0.04
+[18:34:41] [INFO]   Aperture Radius:    1.5 arcsec
+[18:34:41] [INFO]   Norm Radius:        R_eff / 8
+[18:34:41] [PROCESS] Calculating corrections...
+[18:34:41] [INFO] Aperture Correction Samples
+[18:34:41] [INFO] +-------+-----------+-----------+------------+-------+
+[18:34:41] [INFO] | Host  | R_eff (") | Raw Sigma | Corr Sigma | Delta |
+[18:34:41] [INFO] +-------+-----------+-----------+------------+-------+
+[18:34:41] [INFO] | LMC   | 9684.8    | 24.0      | 18.4       | -5.64 |
+[18:34:41] [INFO] | LMC   | 9684.8    | 24.0      | 18.4       | -5.64 |
+[18:34:41] [INFO] | LMC   | 9684.8    | 24.0      | 18.4       | -5.64 |
+[18:34:41] [INFO] | LMC   | 9684.8    | 24.0      | 18.4       | -5.64 |
+[18:34:41] [INFO] | M 101 | 432.6     | 28.0      | 24.3       | -3.74 |
+[18:34:41] [INFO] +-------+-----------+-----------+------------+-------+
+[18:34:41] [SUCCESS] Applied corrections to 44/44 hosts.
+[18:34:41] [INFO] Mean Velocity Dispersion Change: -6.13 km/s
+[18:34:41] [SUCCESS] Updated /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_processed.csv with homogenized velocity dispersions.
+[18:34:41] [SUCCESS] Step 1b Complete.

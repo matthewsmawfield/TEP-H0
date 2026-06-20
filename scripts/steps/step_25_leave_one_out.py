@@ -21,7 +21,7 @@ class Step24LeaveOneOut:
         self.C2 = C_SQUARED_KM_S
 
     def run(self):
-        df = pd.read_csv(self.results_dir / "tep_corrected_h0.csv")
+        df = pd.read_csv(self.results_dir / "step_04_tep_corrected_h0.csv")
         df = df[df["z_hd"] > 0.0035].copy().reset_index(drop=True)
         
         # Load baseline full sample values
@@ -29,7 +29,7 @@ class Step24LeaveOneOut:
         h0_all = df["h0_derived"].values
         r_full, p_full = stats.pearsonr(sigma_all**2, h0_all)
         
-        with open(self.results_dir / "tep_correction_results.json", "r") as f:
+        with open(self.results_dir / "step_04_tep_correction_results.json", "r") as f:
             full_results = json.load(f)
             kappa_full = full_results["optimal_kappa_cep"]
             h0_corr_full = full_results["unified_h0"]
@@ -97,7 +97,7 @@ class Step24LeaveOneOut:
         out_df["kappa_val"] = out_df["$\\Delta \\kappa$"].apply(get_kappa_val)
         out_df = out_df.sort_values(by="kappa_val", ascending=False).drop(columns=["kappa_val"])
         
-        out_df.to_csv(self.results_dir / "leave_one_out.csv", index=False)
+        out_df.to_csv(self.results_dir / "step_25_leave_one_out.csv", index=False)
         print_status("Leave-One-Out table generated.", "SUCCESS")
 
 if __name__ == "__main__":

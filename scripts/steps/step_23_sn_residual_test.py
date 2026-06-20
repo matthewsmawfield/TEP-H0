@@ -7,7 +7,7 @@ After applying the TEP correction to Cepheid distances, the corrected
 SNe Ia should show no residual dependence on host sigma.
 
 This step:
-    1. Loads corrected H0 values from tep_corrected_h0.csv
+    1. Loads corrected H0 values from step_04_tep_corrected_h0.csv
     2. Tests whether corrected H0 still correlates with sigma
     3. Tests whether corrected SN Ia residuals correlate with sigma
     4. Compares raw vs corrected scatter
@@ -44,7 +44,7 @@ class Step22SNResidualTest:
 
         self.logger = TEPLogger(
             "step_22_sn_residual",
-            log_file_path=self.logs_dir / "step_22_sn_residual_test.log",
+            log_file_path=self.logs_dir / "step_23_sn_residual_test.log",
         )
         set_step_logger(self.logger)
 
@@ -53,8 +53,8 @@ class Step22SNResidualTest:
         )
 
         # Load corrected data
-        corrected = pd.read_csv(self.results_dir / "tep_corrected_h0.csv")
-        raw = pd.read_csv(self.results_dir / "stratified_h0.csv")
+        corrected = pd.read_csv(self.results_dir / "step_04_tep_corrected_h0.csv")
+        raw = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
 
         # Merge on normalized_name to guarantee row alignment between raw and corrected
         merged = raw.merge(
@@ -122,7 +122,7 @@ class Step22SNResidualTest:
             ),
         }
 
-        with open(self.results_dir / "sn_downstream_residual_test.json", "w") as f:
+        with open(self.results_dir / "step_23_sn_downstream_residual_test.json", "w") as f:
             json.dump(results, f, indent=2)
 
         print_status("Step 22 complete", "SUCCESS")

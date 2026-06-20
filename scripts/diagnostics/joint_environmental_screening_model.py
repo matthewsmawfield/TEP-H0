@@ -37,8 +37,8 @@ from scripts.utils.plot_style import apply_tep_style
 
 def load_host_data():
     """Load SH0ES host data with raw and corrected H0."""
-    raw_path = PROJECT_ROOT / "results" / "outputs" / "stratified_h0.csv"
-    corr_path = PROJECT_ROOT / "results" / "outputs" / "tep_corrected_h0.csv"
+    raw_path = PROJECT_ROOT / "results" / "outputs" / "step_03_stratified_h0.csv"
+    corr_path = PROJECT_ROOT / "results" / "outputs" / "step_04_tep_corrected_h0.csv"
     raw = pd.read_csv(raw_path)
     corr = pd.read_csv(corr_path)
     # Merge on source_id
@@ -52,7 +52,7 @@ def load_host_data():
 
 def load_anchor_data():
     """Load anchor stratification results."""
-    path = PROJECT_ROOT / "results" / "outputs" / "anchor_stratification_test.json"
+    path = PROJECT_ROOT / "results" / "outputs" / "step_27_anchor_stratification_test.json"
     with open(path) as f:
         data = json.load(f)
     return data
@@ -269,7 +269,7 @@ def create_figure(data, fit_results, output_path):
         zorder=2,
     )
 
-    # Shade: host-only fitted κ band (from step 3 tep_correction_results.json)
+    # Shade: host-only fitted κ band (from step 3 step_04_tep_correction_results.json)
     kappa_host = 1.611137e6
     kappa_host_err = 0.619e6  # WLS scaled uncertainty
     ax.fill_between(
@@ -355,16 +355,16 @@ def main():
 
     out_dir = PROJECT_ROOT / "results" / "outputs"
     out_dir.mkdir(parents=True, exist_ok=True)
-    json_path = out_dir / "joint_environmental_screening_model.json"
+    json_path = out_dir / "step_20_joint_environmental_screening_model.json"
     with open(json_path, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nResults saved: {json_path}")
 
-    fig_path = PROJECT_ROOT / "results" / "figures" / "figure_05_joint_screening_model.png"
+    fig_path = PROJECT_ROOT / "results" / "figures" / "step_20_figure_05_joint_screening_model.png"
     create_figure(data, fit, fig_path)
 
     # Also copy to site/public/figures
-    public_fig = PROJECT_ROOT / "site" / "public" / "figures" / "figure_05_joint_screening_model.png"
+    public_fig = PROJECT_ROOT / "site" / "public" / "figures" / "step_20_figure_05_joint_screening_model.png"
     shutil.copy(fig_path, public_fig)
     print(f"Copied to: {public_fig}")
 

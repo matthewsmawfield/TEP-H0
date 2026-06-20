@@ -49,7 +49,7 @@ class Step16HostMassResidual:
 
         self.logger = TEPLogger(
             "step_16_mass_residual",
-            log_file_path=self.logs_dir / "step_16_host_mass_residual.log",
+            log_file_path=self.logs_dir / "step_17_host_mass_residual.log",
         )
         set_step_logger(self.logger)
 
@@ -57,8 +57,8 @@ class Step16HostMassResidual:
         print_status(">>> STEP 16: HOST-MASS RESIDUAL TEST (TEP-SPECIFIC BIAS ISOLATION)", "TITLE"
         )
 
-        strat = pd.read_csv(self.results_dir / "stratified_h0.csv")
-        trgb = pd.read_csv(self.results_dir / "trgb_hosts_data.csv")
+        strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
+        trgb = pd.read_csv(self.results_dir / "step_15_trgb_hosts_data.csv")
 
         # --- 1. Cepheid Host-Mass Partial Correlation ---
         print_status("Cepheid: Host-mass partial correlation", "SECTION")
@@ -171,10 +171,10 @@ class Step16HostMassResidual:
             ),
         }
 
-        with open(self.results_dir / "host_mass_residual_test.json", "w") as f:
+        with open(self.results_dir / "step_17_host_mass_residual_test.json", "w") as f:
             json.dump(results, f, indent=2)
 
-        print_status("Saved results to host_mass_residual_test.json", "SUCCESS")
+        print_status("Saved results to step_17_host_mass_residual_test.json", "SUCCESS")
         print_status("Step 16 complete", "SUCCESS")
 
 

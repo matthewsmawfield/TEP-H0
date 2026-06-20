@@ -46,14 +46,14 @@ class Step12CrossChannel:
 
         self.logger = TEPLogger(
             "step_12_cross_channel",
-            log_file_path=self.logs_dir / "step_12_cross_channel.log",
+            log_file_path=self.logs_dir / "step_29_cross_channel.log",
         )
         set_step_logger(self.logger)
 
-        self.tep_json = self.outputs_dir / "tep_correction_results.json"
-        self.trgb_csv = self.outputs_dir / "trgb_hosts_data.csv"
-        self.stratified_csv = self.outputs_dir / "stratified_h0.csv"
-        self.results_json = self.outputs_dir / "cross_channel_consistency.json"
+        self.tep_json = self.outputs_dir / "step_04_tep_correction_results.json"
+        self.trgb_csv = self.outputs_dir / "step_15_trgb_hosts_data.csv"
+        self.stratified_csv = self.outputs_dir / "step_03_stratified_h0.csv"
+        self.results_json = self.outputs_dir / "step_29_cross_channel_consistency.json"
 
     def _load_tep_results(self):
         with open(self.tep_json) as f:

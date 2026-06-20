@@ -76,7 +76,7 @@ class Step1DataIngestion:
         self.external_dir = self.raw_dir / "external" / "Cepheid-Distance-Ladder-Data" / "SH0ES2022"
         
         # Initialize Logger
-        self.logger = TEPLogger("step_1_ingestion", log_file_path=self.logs_dir / "step_1_ingestion.log")
+        self.logger = TEPLogger("step_1_ingestion", log_file_path=self.logs_dir / "step_01_data_ingestion.log")
         set_step_logger(self.logger)
         
         # Output files (Interim & Processed)

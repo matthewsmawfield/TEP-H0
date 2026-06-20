@@ -12,7 +12,7 @@ values via the scalar-boundary transport law, then perform a
 least-squares fit through the origin to recover kappa_Cep.
 
 Usage:
-    python scripts/utils/fit_rsp_kappa.py results/outputs/stellar_validation_grid.csv
+    python scripts/utils/fit_rsp_kappa.py results/outputs/step_33_stellar_validation_grid.csv
 
 If no CSV path is supplied, the script auto-generates a fresh grid
 using the canonical MESA baseline period (5.5 d) and fits that.
@@ -51,7 +51,7 @@ def main() -> None:
         nargs="?",
         default=None,
         help=(
-            "Path to transport-grid CSV (e.g. results/outputs/stellar_validation_grid.csv). "
+            "Path to transport-grid CSV (e.g. results/outputs/step_33_stellar_validation_grid.csv). "
             "If omitted, a fresh grid is generated using P_MESA_CANONICAL_DAYS."
         ),
     )
@@ -79,7 +79,7 @@ def main() -> None:
     else:
         P_mesa = args.mesa_period if args.mesa_period is not None else P_MESA_CANONICAL_DAYS
         df = generate_transport_grid(P_mesa)
-        grid_path = _PROJECT_ROOT / "results" / "outputs" / "stellar_validation_grid.csv"
+        grid_path = _PROJECT_ROOT / "results" / "outputs" / "step_33_stellar_validation_grid.csv"
         grid_path.parent.mkdir(parents=True, exist_ok=True)
         df.to_csv(grid_path, index=False)
         print(f"Generated fresh grid: {grid_path}")

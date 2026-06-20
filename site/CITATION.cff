@@ -37,22 +37,20 @@ abstract: 'The Hubble Tension—the persistent 5σ discrepancy between local dis
   in the
   host-contrast likelihood—which is the appropriate host-to-host slope test
   because the shared calibration zero-point is a nuisance parameter with
-  dominant common-mode variance—yields $\Delta{\rm BIC}=4.05$.
-  A full covariance analysis including a global intercept gives the same $\Delta{\rm BIC}$; the shared
-  calibration covariance is treated as a nuisance mode rather than as evidence
-  against the host-to-host slope. A diagonal H$0$-uncertainty check gives
-  $\Delta{\rm BIC}=+4.05$ as an independent robustness verification.
+  dominant common-mode variance—yields $\Delta{\rm BIC}=+2.6$ (positive evidence).
+  The equivalent full-covariance GLS slope test with a free calibration intercept gives the same $\Delta$BIC to rounding, confirming that the shared
+  calibration covariance is treated as a nuisance mode rather than as evidence against the host-to-host slope. A diagonal H0-uncertainty check gives $\Delta$BIC=+2.6 as an independent robustness verification.
 
   Application of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm
   ref}^2)/c^2$—derived from the TEP period-contraction combined with the virial relation
   $|\Phi|\propto\sigma^2$—with Observable Response Coefficient $\kappa_{\rm Cep} =
-  (1.62 \pm 0.89) \times 10^6$ mag and effective calibrator reference $\sigma_{\rm
-  ref} = 75.25$ km/s yields a unified local Hubble constant. Out-of-sample validation
-  (leave-one-out cross-validation, LOOCV) predicts $H_0^{\rm LOOCV} = 64.99 \pm 1.50$
-  km/s/Mpc, corresponding to a Planck tension of $1.53\sigma$; this stress test confirms
-  the correction generalises out of sample, with the response coefficient trained on 35 hosts and
+  (1.27 \pm 0.48) \times 10^6$ mag and effective calibrator reference $\sigma_{\rm
+  ref} = 87.17$ km/s yields a unified local Hubble constant. Out-of-sample validation
+  (leave-one-out cross-validation, LOOCV) predicts $H_0^{\rm LOOCV} = 68.67 \pm 1.35$
+  km/s/Mpc, corresponding to a Planck tension of $0.89\sigma$; this stress test confirms
+  the correction generalises out of sample, with the response coefficient trained on 28 hosts and
   tested on the held-out host. The in-sample corrected mean is $H_0 = 68.84$ km/s/Mpc
-  (bootstrap mean $68.80 \pm 1.27$, Planck tension $0.99\sigma$), with the corrected $r \simeq 0$ a fitted-correction
+  (bootstrap mean $68.90 \pm 1.48$, Planck tension $0.96\sigma$), with the corrected $r \simeq 0$ a fitted-correction
   diagnostic rather than an independent validation statistic. A differential analysis within
   M31 yields an "Inner Fainter"
   signal in HST photometry consistent with density-dependent

@@ -47,28 +47,28 @@ class Step9FinalSynthesis:
         self.logs_dir.mkdir(parents=True, exist_ok=True)
         
         # Initialize Logger
-        self.logger = TEPLogger("step_9_synthesis", log_file_path=self.logs_dir / "step_9_synthesis.log")
+        self.logger = TEPLogger("step_9_synthesis", log_file_path=self.logs_dir / "step_31_final_synthesis.log")
         set_step_logger(self.logger)
         
         # Input Files
-        self.m31_ground_json = self.outputs_dir / "m31_robustness_summary.json"
-        self.m31_phat_json = self.outputs_dir / "m31_phat_robustness_summary.json"
-        self.lmc_json = self.outputs_dir / "lmc_robustness_summary.json"
-        self.enhanced_json = self.outputs_dir / "enhanced_robustness_results.json"
-        self.covariance_json = self.outputs_dir / "covariance_robustness.json"
-        self.tep_json = self.outputs_dir / "tep_correction_results.json"
-        self.oos_json = self.outputs_dir / "out_of_sample_validation.json"
-        self.flow_env_path = self.outputs_dir / "flow_environment_robustness.txt"
-        self.trgb_json = self.outputs_dir / "trgb_differential_results.json"
-        self.anchor_json = self.outputs_dir / "anchor_stratification_test.json"
-        self.local_gravity_json = self.outputs_dir / "local_gravity_closure.json"
-        self.cross_channel_json = self.outputs_dir / "cross_channel_consistency.json"
-        self.stratification_json = self.outputs_dir / "stratification_results.json"
-        self.regressor_audit_json = self.outputs_dir / "regressor_audit_summary.json"
+        self.m31_ground_json = self.outputs_dir / "step_10_m31_robustness_summary.json"
+        self.m31_phat_json = self.outputs_dir / "step_26_m31_phat_robustness_summary.json"
+        self.lmc_json = self.outputs_dir / "step_14_lmc_robustness_summary.json"
+        self.enhanced_json = self.outputs_dir / "step_13_enhanced_robustness_results.json"
+        self.covariance_json = self.outputs_dir / "step_08_covariance_robustness.json"
+        self.tep_json = self.outputs_dir / "step_04_tep_correction_results.json"
+        self.oos_json = self.outputs_dir / "step_08_out_of_sample_validation.json"
+        self.flow_env_path = self.outputs_dir / "step_08_flow_environment_robustness.txt"
+        self.trgb_json = self.outputs_dir / "step_16_trgb_differential_results.json"
+        self.anchor_json = self.outputs_dir / "step_27_anchor_stratification_test.json"
+        self.local_gravity_json = self.outputs_dir / "step_28_local_gravity_closure.json"
+        self.cross_channel_json = self.outputs_dir / "step_29_cross_channel_consistency.json"
+        self.stratification_json = self.outputs_dir / "step_03_stratification_results.json"
+        self.regressor_audit_json = self.outputs_dir / "step_18_regressor_audit_summary.json"
         
         # Output Files
-        self.report_path = self.outputs_dir / "TEP_FINAL_ROBUSTNESS_REPORT.md"
-        self.summary_plot_path = self.figures_dir / "figure_08_robustness_synthesis_plot.png"
+        self.report_path = self.outputs_dir / "step_31_TEP_FINAL_ROBUSTNESS_REPORT.md"
+        self.summary_plot_path = self.figures_dir / "step_31_figure_08_robustness_synthesis_plot.png"
 
     def load_json(self, path):
         if not path.exists():
@@ -195,7 +195,7 @@ class Step9FinalSynthesis:
         plt.tight_layout()
         plt.savefig(self.summary_plot_path, dpi=300)
         import shutil
-        shutil.copy(self.summary_plot_path, self.public_figures_dir / "figure_08_robustness_synthesis_plot.png")
+        shutil.copy(self.summary_plot_path, self.public_figures_dir / "step_31_figure_08_robustness_synthesis_plot.png")
         print_status(f"Saved comparison plot to {self.summary_plot_path}", "SUCCESS")
 
     def _write_report(self, m31_g, m31_p, lmc, h0_robust, tep=None, oos=None, trgb=None, anchor=None, local_gravity=None, cross_channel=None, strat=None, reg_audit=None):
@@ -426,7 +426,7 @@ class Step9FinalSynthesis:
             kappa_gal = KAPPA_GAL
             kappa_gal_err = KAPPA_GAL_UNCERTAINTY
             tension_kgal = abs(kappa_mill * 1e6 - kappa_gal) / np.sqrt((kappa_err_mill * 1e6)**2 + kappa_gal_err**2)
-            # reg_audit already loaded at top of run() from regressor_audit_summary.json
+            # reg_audit already loaded at top of run() from step_18_regressor_audit_summary.json
             best_r = reg_audit.get("best_pearson_r", float("nan")) if reg_audit else float("nan")
             best_p = reg_audit.get("best_pearson_p", float("nan")) if reg_audit else float("nan")
             tep_local_r = float("nan")
