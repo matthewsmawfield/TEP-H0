@@ -290,9 +290,9 @@ class Step11ComprehensiveAudit:
         def objective(k):
             correction = tep_correction(sigma_vals, self.sigma_ref, k[0], S)
             mu_corr = mu_vals + correction
-            d_corr = 10 ** ((mu_corr - 25) / 5)
-            h0_corr = v_vals / d_corr
-            slope, _ = np.polyfit(sigma_vals, h0_corr, 1)
+            mu_fid = 5 * np.log10(v_vals) + 25 - 5 * np.log10(70.0)
+            delta_mu = mu_corr - mu_fid
+            slope, _ = np.polyfit(sigma_vals, delta_mu, 1)
             return slope ** 2
 
         res = minimize(
