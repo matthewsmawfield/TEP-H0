@@ -276,14 +276,16 @@ mean calibration prediction:
 \end{equation}
 where $\mu_{i,\rm no\text{-}env}$ is the distance modulus inferred from
 the recession velocity under a fiducial Planck $H_0 = 67.4$ km/s/Mpc.
-The primary test focuses on the relationship between $\sigma$ and the
-distance-ladder residual displayed in $H_0$-equivalent units but avoids the interpretive step of treating each host as an
-independent $H_0$ determination, it is the primary statistical variable.
-For visualization and physical intuition, these residuals are converted into
-host-level $H_0$-equivalent values via $H_{0,i} = c z_{\rm HD} / d_i
-(with $d_i = 10^{(\mu_i-25)/5}$ Mpc). However, all parameter fitting and hypothesis
-testing is performed strictly in distance modulus ($\delta\mu$) space. Host-level $H_0$-equivalent
-values are used exclusively for physical intuition and plotting.
+The primary statistical variable is the distance-ladder residual
+$\delta_i$ (Equation 1), displayed in $H_0$-equivalent units for
+physical intuition while avoiding the interpretive step of treating each
+host as an independent $H_0$ determination.
+For visualization, these residuals are converted into host-level
+$H_0$-equivalent values via $H_{0,i} = c z_{\rm HD} / d_i$
+(with $d_i = 10^{(\mu_i-25)/5}$ Mpc).
+However, all parameter fitting and hypothesis testing is performed
+strictly in distance-modulus ($\delta\mu$) space; host-level
+$H_0$-equivalent values are used exclusively for plotting.
 
 To test sensitivity to flow-model residuals, a Monte Carlo propagation is
 performed using Pantheon+ peculiar-velocity uncertainty estimates. For each
