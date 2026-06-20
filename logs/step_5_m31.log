@@ -40,3 +40,21 @@
 [13:01:17] [PROCESS] Fetching PHAT footprint for spatial restriction...
 [13:01:17] [INFO] Identified 1683 Cepheids within PHAT footprint.
 [13:01:17] [INFO] PHAT-restricted Offset: +0.6304 +/- 0.1948 mag
+[13:02:10] [INFO] Inferred Wesenheit form: anchor='i', R0=2.88 (MAD score: i=0.005, r=0.005)
+[13:02:10] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_robustness_summary.csv
+[13:02:10] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/m31_robustness_summary.json
+[13:02:10] [WARNING] Note: Multidimensional matched tests (logP+color, logP+eW, MV match) have been removed from the robustness suite.
+[13:02:10] [INFO]   Under TEP, time dilation alters the observed period but preserves the intrinsic photometric color.
+[13:02:10] [INFO]   Matching Cepheids on both observed period AND color forces the selection of intrinsically dissimilar stars,
+[13:02:10] [INFO]   fundamentally destroying the absolute magnitude comparison and artificially hiding the TEP signal.
+[13:02:10] [INFO] M31 Differential Robustness Summary
+[13:02:10] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
+[13:02:10] [INFO] | Test              | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |
+[13:02:10] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
+[13:02:10] [INFO] | Baseline          | 153  | 919   | -         | +0.3560     | 0.1357  | -                  |
+[13:02:10] [INFO] | Matched logP      | 153  | 919   | 152.0     | +0.2529     | 0.1615  | [+0.1029, +0.4130] |
+[13:02:10] [INFO] | OLS inner (ctrl)  | 153  | 919   | -         | +0.1587     | 0.1156  | -                  |
+[13:02:10] [INFO] | Metallicity γ req | 153  | 919   | -         | +0.741      | -       | -                  |
+[13:02:10] [INFO] +-------------------+------+-------+-----------+-------------+---------+--------------------+
+[13:02:10] [PROCESS] Generating Differential P-L Plot...
+[13:02:10] [PROCESS] Generating M31 robustness plot...
