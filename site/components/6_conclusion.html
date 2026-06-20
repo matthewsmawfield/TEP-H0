@@ -3,11 +3,11 @@
 <p>
     Stratification of the SH0ES Cepheid host galaxies by curated kinematic
     potential-depth estimates reveals a significant correlation (Spearman $\rho =
-    0.517$, $p = 0.0041$; Pearson $r=0.466$, $p=0.0109$) between host potential depth and derived $H_0$.
-    Covariance-aware Monte Carlo permutation tests that propagate the full SH0ES
-    GLS distance-modulus covariance yield $p_{\rm cov}\approx0.0041$ (Spearman)
-    and $p_{\rm cov}\approx0.0031$ (Pearson), confirming that the correlation is
-    not an artefact of shared calibration uncertainty. In the host-contrast likelihood, which projects out the shared calibration mode and tests only host-to-host environmental structure, the environmental model receives positive evidence ($\Delta{\rm BIC} = +2.6$); the full absolute covariance likelihood favors the null because it is dominated by the common calibration mode. We therefore treat the BIC result as evidence for a host-contrast environmental structure, not as an absolute recalibration likelihood. A diagonal H$0$-uncertainty check gives $\Delta{\rm BIC}=+2.6$ as an independent robustness verification.
+    0.517$, $p = 0.0041$; Pearson $r=0.466$, $p=0.0109$) between host potential depth and the distance-ladder residual displayed in $H_0$-equivalent units.
+    Tests propagating the full SH0ES
+    GLS distance-modulus covariance yield $p_{\rm cov,MC}\approx0.0041$ (Spearman)
+    and $p_{\rm cov,MC}\approx0.0031$ (Pearson), confirming that the correlation is
+    not an artifact of sample covariance or zero-point variance. In the host-contrast likelihood, which projects out the shared calibration mode and tests only host-to-host environmental structure, the environmental model receives positive evidence ($\Delta{\rm BIC} = +2.6$); the full absolute covariance likelihood favors the null because it is dominated by the common calibration mode. We therefore treat the BIC result as evidence for a host-contrast environmental structure, not as an absolute recalibration likelihood. A diagonal H$0$-uncertainty check gives $\Delta{\rm BIC}=+2.6$ as an independent robustness verification.
     High-$\sigma$ hosts yield systematically inflated $H_0$ values ($74.12 \pm
     1.05$ km/s/Mpc) compared to low-$\sigma$ hosts ($66.26 \pm 1.05$ km/s/Mpc),
     with the bias $\Delta H_0 = 7.86$ km/s/Mpc accounting for a substantial
@@ -78,7 +78,7 @@
     following criteria are met:</p>
     <table class="data-table">
         <tr><th>Criterion</th><th>Requirement</th><th>Status</th></tr>
-        <tr><td><strong>R1.</strong> Uncorrected residual trend</td><td>Cepheid residuals show positive host-potential dependence with $p_{\rm cov} < 0.01$</td><td><span style="color:green">PASS</span> ($p_{\rm cov}=0.0031$)</td></tr>
+        <tr><td><strong>R1.</strong> Uncorrected residual trend</td><td>Cepheid residuals show positive host-potential dependence with $p_{\rm cov,MC} < 0.01$</td><td><span style="color:green">PASS</span> ($p_{\rm cov,MC}=0.0031$)</td></tr>
         <tr><td><strong>R2.</strong> Sign prediction</td><td>High-potential hosts produce underestimated distances (inflated $H_0$)</td><td><span style="color:green">PASS</span></td></tr>
         <tr><td><strong>R3.</strong> One-parameter correction</td><td>TEP correction reduces SH0ES–Planck discrepancy below $1\sigma$</td><td><span style="color:green">PASS</span> ($0.91\sigma$)</td></tr>
         <tr><td><strong>R4.</strong> No residual trend</td><td>Corrected sample shows no significant $\sigma$–$H_0$ residual</td><td><span style="color:orange">PASS (fitted diagnostic)</span> — by construction, not independent evidence</td></tr>
@@ -98,9 +98,9 @@
 <p>
     <strong>Stage 1 — Discovery of bias:</strong> Before fitting any correction,
     the Cepheid ladder residual shows a statistically significant host-potential
-    dependence ($p_{\rm cov}=0.0031$). The sign is exactly what TEP predicts:
-    high-potential Cepheid hosts produce underestimated distances and inflated
-    local $H_0$.
+    dependence ($p_{\rm cov,MC}=0.0031$). The sign is exactly what TEP predicts:
+    deep potentials induce apparent luminosity dimming, masquerading as a
+    Hubble tension.
 </p>
 <p>
     <strong>Stage 2 — Resolution by correction:</strong> A one-parameter

@@ -13,26 +13,26 @@
   "train_test": {
     "n_repeats": 200,
     "train_frac": 0.7,
-    "kappa_cep_mean": 1083338.9587402344,
-    "kappa_cep_std": 319279.6078845102,
-    "test_slope_median": 0.016880367709003807,
-    "test_slope_q16": -0.057366915557921665,
-    "test_slope_q84": 0.11301853579766745,
-    "test_abs_pearson_r_median": 0.2911622701650232,
-    "test_h0_mean_median": 68.47516971300723,
-    "test_h0_mean_q16": 66.56145542474151,
-    "test_h0_mean_q84": 70.52785326464841
+    "kappa_cep_mean": 1289802.490234375,
+    "kappa_cep_std": 405888.9451155706,
+    "test_slope_median": 0.018687111079974367,
+    "test_slope_q16": -0.05101010765488401,
+    "test_slope_q84": 0.11869690446548405,
+    "test_abs_pearson_r_median": 0.3049008569725902,
+    "test_h0_mean_median": 68.59478169294854,
+    "test_h0_mean_q16": 66.74897695062839,
+    "test_h0_mean_q84": 70.75809842462695
   },
   "loocv": {
-    "kappa_cep_mean": 1054301.7157192887,
-    "kappa_cep_std": 77882.61723131788,
-    "pred_h0_mean": 68.57590926922977,
-    "pred_h0_sem": 1.3393580377279932,
-    "pred_slope": -0.01221390956683306,
-    "pearson_r": -0.07185647094429398,
-    "pearson_p": 0.7110717401660231,
-    "spearman_rho": 0.09802955665024629,
-    "spearman_p": 0.6129229431611378,
-    "tension_sigma": 0.8225193463881125
+    "kappa_cep_mean": 1263196.0112473061,
+    "kappa_cep_std": 89562.89229184945,
+    "pred_h0_mean": 68.671861397346,
+    "pred_h0_sem": 1.3454644014460806,
+    "pred_slope": -0.011742592873583526,
+    "pearson_r": -0.0687701013568383,
+    "pearson_p": 0.7229880002561138,
+    "spearman_rho": 0.08768472906403939,
+    "spearman_p": 0.6510536024486941,
+    "tension_sigma": 0.8860887999163161
   }
 }

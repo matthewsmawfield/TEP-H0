@@ -16,62 +16,36 @@
     "sigma_ref": 87.16507328052906,
     "null_chi2": 19.90233625365438,
     "null_bic": 23.269632083640854,
-    "tep_chi2": 14.280994400812839,
-    "tep_bic": 21.015586060785786,
-    "delta_chi2": 5.621341852841541,
-    "delta_bic": 2.254046022855068,
-    "bayes_factor": 3.0864544700647776,
-    "ln_bayes_factor": 1.127023011427534,
+    "tep_chi2": 14.177957310978881,
+    "tep_bic": 20.91254897095183,
+    "delta_chi2": 5.724378942675498,
+    "delta_bic": 2.3570831126890255,
+    "bayes_factor": 3.2496313409200543,
+    "ln_bayes_factor": 1.1785415563445127,
     "evidence_strength": "positive",
-    "kappa_wls_implied": 873044.9630958759,
-    "wls_beta_x": 27507333.13360017,
-    "wls_mu_tep": 68.41734101205233,
+    "kappa_wls_implied": 1041441.9665768298,
+    "wls_beta_x": 32812420.609655235,
+    "wls_mu_tep": 68.41597355396435,
     "gls_crosscheck": {
       "null_chi2": 19.991790165900028,
-      "tep_chi2": 14.354645979500372,
+      "tep_chi2": 14.251265938832155,
       "null_bic": 23.359085995886502,
-      "tep_bic": 21.08923763947332,
-      "delta_bic": 2.2698483564131813
+      "tep_bic": 20.985857598805104,
+      "delta_bic": 2.373228397081398
     },
     "projected": {
       "n_eff": 28,
       "null_chi2": 19.991790165900028,
-      "tep_chi2": 14.354645979500372,
-      "delta_chi2": 5.637144186399656,
-      "delta_bic": 2.3049396762244534,
-      "bayes_factor": 3.166002775485901,
-      "ln_bayes_factor": 1.1524698381122267,
+      "tep_chi2": 14.251265938832159,
+      "delta_chi2": 5.740524227067869,
+      "delta_bic": 2.4083197168926667,
+      "bayes_factor": 3.333956905387034,
+      "ln_bayes_factor": 1.2041598584463333,
       "evidence_strength": "positive",
       "beta_proj": 0.0,
       "null_bic_matched": 23.359085995886502,
-      "tep_bic_matched": 21.08923763947332,
-      "delta_bic_matched": 2.2698483564131813
+      "tep_bic_matched": 20.985857598805108,
+      "delta_bic_matched": 2.3732283970813945
     }
-  },
-  "provenance_eiv": {
-    "beta": [
-      54.76166077102874,
-      310054739.4515391,
-      20.627433373132217,
-      0.0
-    ],
-    "beta_se": [
-      0.0,
-      0.0,
-      0.0,
-      0.0
-    ],
-    "beta1_t": null,
-    "beta1_p": null,
-    "gamma_HI": 20.627433373132217,
-    "gamma_HI_se": 0.0,
-    "gamma_rotation": 0.0,
-    "gamma_rotation_se": 0.0,
-    "n_stellar": 16,
-    "n_hi": 13,
-    "n_rot": 0,
-    "mean_x_err_stellar": 4.181701268723964e-08,
-    "mean_x_err_hi": 1.9500892006470315e-08,
-    "mean_x_err_rot": null
   }
 }

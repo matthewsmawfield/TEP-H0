@@ -1,22 +1,22 @@
-[01:13:05] [INFO] 
-[01:13:05] [INFO] ================================================================================
-[01:13:05] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis
-[01:13:05] [INFO] ================================================================================
-[01:13:05] [INFO] 
-[01:13:05] [INFO] Using master sigma catalog for provenance: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv
-[01:13:05] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sigma_provenance_table.csv
-[01:13:05] [INFO] Analyzing 29 hosts with both Raw and Corrected data.
-[01:13:06] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_grid.csv
-[01:13:06] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_summary.json
-[01:13:06] [INFO] Sensitivity Results
-[01:13:06] [INFO] +-----------------+-------------------------+-----------------------+
-[01:13:06] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |
-[01:13:06] [INFO] +-----------------+-------------------------+-----------------------+
-[01:13:06] [INFO] | Correlation (r) | 0.4817                  | 0.4659                |
-[01:13:06] [INFO] | P-value         | 8.1420e-03              | 1.0855e-02            |
-[01:13:06] [INFO] | Significance    | Significant (>99%)      | Significant (>99%)    |
-[01:13:06] [INFO] +-----------------+-------------------------+-----------------------+
-[01:13:06] [SUCCESS] CONCLUSION: The signal is ROBUST. It exists independently of aperture corrections.
-[01:13:06] [PROCESS] Generating sensitivity plot...
-[01:13:06] [SUCCESS] Step 4b Complete.
-[01:13:06] [PROCESS] Running Jackknife and Bivariate Analysis...
+[13:00:53] [INFO] 
+[13:00:53] [INFO] ================================================================================
+[13:00:53] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis
+[13:00:53] [INFO] ================================================================================
+[13:00:53] [INFO] 
+[13:00:53] [INFO] Using master sigma catalog for provenance: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv
+[13:00:53] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/sigma_provenance_table.csv
+[13:00:53] [INFO] Analyzing 29 hosts with both Raw and Corrected data.
+[13:00:53] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_grid.csv
+[13:00:53] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/aperture_sensitivity_summary.json
+[13:00:53] [INFO] Sensitivity Results
+[13:00:53] [INFO] +-----------------+-------------------------+-----------------------+
+[13:00:53] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |
+[13:00:53] [INFO] +-----------------+-------------------------+-----------------------+
+[13:00:53] [INFO] | Correlation (r) | 0.4817                  | 0.4659                |
+[13:00:53] [INFO] | P-value         | 8.1420e-03              | 1.0855e-02            |
+[13:00:53] [INFO] | Significance    | Significant (>99%)      | Significant (>99%)    |
+[13:00:53] [INFO] +-----------------+-------------------------+-----------------------+
+[13:00:53] [SUCCESS] CONCLUSION: The signal is ROBUST. It exists independently of aperture corrections.
+[13:00:53] [PROCESS] Generating sensitivity plot...
+[13:00:53] [SUCCESS] Step 4b Complete.
+[13:00:53] [PROCESS] Running Jackknife and Bivariate Analysis...

@@ -1,0 +1,12 @@
+[13:00:53] [INFO] 
+[13:00:53] [INFO] ================================================================================
+[13:00:53] [INFO]    >>> STEP 14: FROZEN TEP PREDICTION TABLE
+[13:00:53] [INFO] ================================================================================
+[13:00:53] [INFO] 
+[13:00:53] [INFO] Frozen kappa_Cep: 1.272e+06 mag
+[13:00:53] [INFO] Frozen sigma_ref: 87.17 km/s
+[13:00:53] [PROCESS] Verifying predictions against 29 existing hosts
+[13:00:53] [INFO] Max prediction residual: 0.449412 mag
+[13:00:53] [SUCCESS] Saved prediction grid: 54 rows
+[13:00:53] [SUCCESS] Saved prediction manifest
+[13:00:53] [SUCCESS] Step 14 complete

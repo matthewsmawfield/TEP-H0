@@ -1852,7 +1852,7 @@ $\sigma=115$ and $\sigma=160$ km/s are $+0.088$ and $+0.233$ mag respectively
 (relative to LMC at $\sigma=24$). The observed shifts are only $+0.04$ mag
 (NGC 4258) and $+0.002$ mag (M31). Applying the same reference-subtracted
 correction with anchor-specific group-screening factors gives $+0.044$ and
-$+0.047$ mag, model reduces the overall calibrator-mean residual to $0.9\sigma$
+$+0.047$ mag, which reduces the overall calibrator-mean residual to $0.9\sigma$
 ($\chi^2=2.51$ for 2 dof). All three anchors are strongly
 suppressed by group-halo embedding. This offers a model-dependent
 resolution for the fact that geometric anchors—while spanning a large
@@ -2368,11 +2368,11 @@ environments could provide independent laboratory constraints.
 
 Stratification of the SH0ES Cepheid host galaxies by curated kinematic
 potential-depth estimates reveals a significant correlation (Spearman $\rho =
-0.517$, $p = 0.0041$; Pearson $r=0.466$, $p=0.0109$) between host potential depth and derived $H_0$.
-Covariance-aware Monte Carlo permutation tests that propagate the full SH0ES
-GLS distance-modulus covariance yield $p_{\rm cov}\approx0.0041$ (Spearman)
-and $p_{\rm cov}\approx0.0031$ (Pearson), confirming that the correlation is
-not an artefact of shared calibration uncertainty. In the host-contrast likelihood, which projects out the shared calibration mode and tests only host-to-host environmental structure, the environmental model receives positive evidence ($\Delta{\rm BIC} = +2.6$); the full absolute covariance likelihood favors the null because it is dominated by the common calibration mode. We therefore treat the BIC result as evidence for a host-contrast environmental structure, not as an absolute recalibration likelihood. A diagonal H$0$-uncertainty check gives $\Delta{\rm BIC}=+2.6$ as an independent robustness verification.
+0.517$, $p = 0.0041$; Pearson $r=0.466$, $p=0.0109$) between host potential depth and the distance-ladder residual displayed in $H_0$-equivalent units.
+Tests propagating the full SH0ES
+GLS distance-modulus covariance yield $p_{\rm cov,MC}\approx0.0041$ (Spearman)
+and $p_{\rm cov,MC}\approx0.0031$ (Pearson), confirming that the correlation is
+not an artifact of sample covariance or zero-point variance. In the host-contrast likelihood, which projects out the shared calibration mode and tests only host-to-host environmental structure, the environmental model receives positive evidence ($\Delta{\rm BIC} = +2.6$); the full absolute covariance likelihood favors the null because it is dominated by the common calibration mode. We therefore treat the BIC result as evidence for a host-contrast environmental structure, not as an absolute recalibration likelihood. A diagonal H$0$-uncertainty check gives $\Delta{\rm BIC}=+2.6$ as an independent robustness verification.
 High-$\sigma$ hosts yield systematically inflated $H_0$ values ($74.12 \pm
 1.05$ km/s/Mpc) compared to low-$\sigma$ hosts ($66.26 \pm 1.05$ km/s/Mpc),
 with the bias $\Delta H_0 = 7.86$ km/s/Mpc accounting for a substantial
@@ -2439,7 +2439,7 @@ following criteria are met:
 
 | Criterion | Requirement | Status |
 | --- | --- | --- |
-| R1. Uncorrected residual trend | Cepheid residuals show positive host-potential dependence with $p_{\rm cov} < 0.01$ | PASS ($p_{\rm cov}=0.0031$) |
+| R1. Uncorrected residual trend | Cepheid residuals show positive host-potential dependence with $p_{\rm cov,MC} < 0.01$ | PASS ($p_{\rm cov,MC}=0.0031$) |
 | R2. Sign prediction | High-potential hosts produce underestimated distances (inflated $H_0$) | PASS |
 | R3. One-parameter correction | TEP correction reduces SH0ES–Planck discrepancy below $1\sigma$ | PASS ($0.91\sigma$) |
 | R4. No residual trend | Corrected sample shows no significant $\sigma$–$H_0$ residual | PASS (fitted diagnostic) — by construction, not independent evidence |
@@ -2456,9 +2456,9 @@ evidence. R7 is suggestive but not decisive. R8 is the decisive falsification te
 
 **Stage 1 — Discovery of bias:** Before fitting any correction,
 the Cepheid ladder residual shows a statistically significant host-potential
-dependence ($p_{\rm cov}=0.0031$). The sign is exactly what TEP predicts:
-high-potential Cepheid hosts produce underestimated distances and inflated
-local $H_0$.
+dependence ($p_{\rm cov,MC}=0.0031$). The sign is exactly what TEP predicts:
+deep potentials induce apparent luminosity dimming, masquerading as a
+Hubble tension.
 
 **Stage 2 — Resolution by correction:** A one-parameter
 correction derived from the TEP conformal clock-transport law
