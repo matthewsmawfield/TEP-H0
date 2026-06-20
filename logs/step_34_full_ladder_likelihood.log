@@ -6,3 +6,137 @@
 [19:01:58] [INFO] Loading SH0ES Data...
 [19:01:58] [INFO] Design matrix shape: (3490, 46)
 [19:01:58] [INFO] Data vector length: 3490
+[19:01:58] [INFO] Covariance matrix shape: (3490, 3490)
+[19:01:58] [INFO] Number of parameters: 46
+[19:01:58] [INFO] Loading Host Metadata...
+[19:01:58] [INFO] Loaded 44 hosts
+[19:01:58] [INFO] Mapped M1337 -> N1337
+[19:01:58] [INFO] Mapped N105A -> N105
+[19:01:58] [INFO] Mapped N976A -> N976
+[19:01:58] [INFO] Created 122 name mappings
+[19:01:58] [INFO] Calculating Effective Calibrator Sigma...
+[19:01:58] [SUCCESS] Effective sigma_ref: 87.17 km/s
+[19:01:58] [INFO] Running Baseline SH0ES Fit...
+[19:01:58] [INFO] Using SH0ES reference GLS method
+[19:01:59] [INFO] Covariance inversion successful
+[19:01:59] [SUCCESS] Baseline H0: 73.04 +/- 1.01 km/s/Mpc
+[19:01:59] [INFO] Baseline Chi2/dof: 1.03
+[19:01:59] [INFO] Stage 1: Summary-Likelihood Analysis
+[19:01:59] [INFO] Fitting 38 hosts with TEP regressor
+[19:01:59] [INFO] X range: [-7.799e-08, 4.708e-07]
+[19:01:59] [INFO] mu range: [29.16, 34.49]
+[19:01:59] [INFO] Condition number of ATWA: 1.53e+14
+[19:01:59] [INFO] Baseline mu_true: 31.377 mag
+[19:01:59] [SUCCESS] TEP coefficient kappa_Cep: 2.750e+06 +/- 1.098e+05 mag
+[19:01:59] [INFO] Chi2/dof: 581.32
+[19:01:59] [WARNING] WARNING: Very high chi2/dof suggests model misspecification
+[19:01:59] [WARNING] The simple linear model mu = mu_true + kappa*X may not be appropriate
+[19:01:59] [INFO] Mean mu shift: -0.0891 mag
+[19:01:59] [INFO] Stage 2: Matrix-Level Likelihood Analysis
+[19:01:59] [INFO] Found 40 host distance modulus parameters
+[19:01:59] [INFO] TEP column has 3209/3490 non-zero entries
+[19:02:00] [INFO] Baseline H0: 73.04 +/- 1.01 km/s/Mpc
+[19:02:00] [INFO] Variant A: Free kappa with full latent host distances
+[19:02:00] [INFO] Row class counts:
+[19:02:00] [INFO]   Anchor_prior        :    2 rows (no TEP)
+[19:02:00] [INFO]   Cepheid             : 3132 rows (TEP applied)
+[19:02:00] [INFO]   Other               :    2 rows (no TEP)
+[19:02:00] [INFO]   SN_Hubble           :  277 rows (no TEP)
+[19:02:00] [INFO]   SN_calibrator       :   77 rows (no TEP)
+[19:02:00] [INFO] Host-level TEP application:
+[19:02:00] [INFO] Host       Cepheid rows          X_i  TEP?
+[19:02:00] [INFO] ---------------------------------------------
+[19:02:00] [INFO] LMC                 482   -8.078e-08   yes
+[19:02:00] [INFO] M101                259   -7.799e-08   yes
+[19:02:00] [INFO] M1337                15   -5.785e-10   yes
+[19:02:00] [INFO] M31                  55    9.931e-08   yes
+[19:02:00] [INFO] N0691                28    3.088e-08   yes
+[19:02:00] [INFO] N1015                18    3.020e-08   yes
+[19:02:00] [INFO] N105A                 8   -6.294e-09   yes
+[19:02:00] [INFO] N1309                53   -3.219e-09   yes
+[19:02:00] [INFO] N1365                46    1.208e-07   yes
+[19:02:00] [INFO] N1448                73   -6.574e-10   yes
+[19:02:00] [INFO] N1559               110   -3.181e-08   yes
+[19:02:00] [INFO] N2442               177    1.132e-07   yes
+[19:02:00] [INFO] N2525                73   -1.702e-08   yes
+[19:02:00] [INFO] N2608                22   -7.118e-09   yes
+[19:02:00] [INFO] N3021                16   -5.185e-08   yes
+[19:02:00] [INFO] N3147                27    4.708e-07   yes
+[19:02:00] [INFO] N3254                48    4.878e-08   yes
+[19:02:00] [INFO] N3370                73   -1.252e-08   yes
+[19:02:00] [INFO] N3447               101   -5.477e-08   yes
+[19:02:00] [INFO] N3583                54    3.281e-08   yes
+[19:02:00] [INFO] N3972                52   -2.489e-08   yes
+[19:02:00] [INFO] N3982                27   -6.727e-09   yes
+[19:02:00] [INFO] N4038                29    2.505e-08   yes
+[19:02:00] [INFO] N4258               443    2.986e-08   yes
+[19:02:00] [INFO] N4424                 9   -4.288e-08   yes
+[19:02:00] [INFO] N4536                40    1.541e-08   yes
+[19:02:00] [INFO] N4639                30    1.887e-08   yes
+[19:02:00] [INFO] N4680                11    2.805e-08   yes
+[19:02:00] [INFO] N5468                93   -3.776e-08   yes
+[19:02:00] [INFO] N5584               165    1.067e-08   yes
+[19:02:00] [INFO] N5643               251    2.627e-08   yes
+[19:02:00] [INFO] N5728                20    2.248e-07   yes
+[19:02:00] [INFO] N5861                41    4.096e-08   yes
+[19:02:00] [INFO] N5917                14   -5.370e-08   yes
+[19:02:00] [INFO] N7250                21   -5.626e-08   yes
+[19:02:00] [INFO] N7329                31    6.621e-08   yes
+[19:02:00] [INFO] N7541                33   -4.204e-08   yes
+[19:02:00] [INFO] N7678                16    3.235e-08   yes
+[19:02:00] [INFO] N976A                33    4.189e-07   yes
+[19:02:00] [INFO] U9391                33   -2.550e-08   yes
+[19:02:00] [INFO] TEP column: 3130/3490 non-zero entries
+[19:02:00] [INFO] X range: [-8.078e-08, 4.708e-07]
+[19:02:00] [INFO] X_scaled range: [-8.078e-02, 4.708e-01]
+[19:02:00] [INFO] L_aug rank: 47 (full: 47)
+[19:02:00] [INFO] LTCL_aug rank: 47
+[19:02:00] [INFO] Parameter correlations with kappa:
+[19:02:00] [INFO]   corr(kappa, MHW1    ) =  -0.167
+[19:02:00] [INFO]   corr(kappa, MB      ) =  -0.241
+[19:02:00] [INFO]   corr(kappa, bW      ) =   0.000
+[19:02:00] [INFO]   corr(kappa, ZW      ) =   0.208
+[19:02:00] [INFO]   corr(kappa, 5logH0  ) =  -0.240
+[19:02:00] [INFO] Free kappa: -6.665e+04 +/- 2.103e+05 mag
+[19:02:00] [INFO] Significance: 0.32 sigma
+[19:02:00] [INFO] H0 (free kappa): 73.12 km/s/Mpc
+[19:02:00] [INFO] Chi2/dof: 1.03
+[19:02:00] [INFO] Variant B: Prior-constrained kappa
+[19:02:00] [INFO] Prior kappa: 1.578e+05 +/- 1.861e+05 mag
+[19:02:00] [INFO] H0 (prior): 72.86 +/- 1.03 km/s/Mpc
+[19:02:00] [INFO] Chi2/dof: 1.03
+[19:02:00] [INFO] Variant C: Fixed-kappa sensitivity test
+[19:02:00] [INFO] Fixed kappa = 9.700e+05 mag
+[19:02:00] [INFO] Baseline H0: 73.04 +/- 1.01 km/s/Mpc
+[19:02:00] [SUCCESS] Fixed-kappa H0: 71.90 +/- 0.99 km/s/Mpc
+[19:02:00] [INFO] Baseline Chi2/dof: 1.03
+[19:02:00] [INFO] Fixed-kappa Chi2/dof: 1.04
+[19:02:00] [INFO] Delta Chi2: -24.2074 (dof=0)
+[19:02:00] [INFO] Delta AIC: -24.2074
+[19:02:00] [INFO] Delta BIC: -24.2074 (not valid for model selection)
+[19:02:01] [INFO] Host-Summary Reconstruction Audit
+[19:02:01] [INFO] Total hosts with both published and matrix mu: 40
+[19:02:01] [INFO] After anchor exclusion and z>0.0035 cut: 29
+[19:02:01] [INFO] --- Paper Discovery Statistic Reproduction ---
+[19:02:01] [INFO] Published H0 vs sigma:  r=+0.466 (p=0.0109), rho=+0.517
+[19:02:01] [INFO] Matrix H0 vs sigma:     r=+0.466 (p=0.0109), rho=+0.517
+[19:02:01] [INFO] Published mu vs sigma:  r=+0.266 (p=0.1623)
+[19:02:01] [INFO] Matrix mu vs sigma:    r=+0.266 (p=0.1623)
+[19:02:01] [INFO] Delta mu vs sigma:     r=+0.212 (p=0.2687)
+[19:02:01] [INFO] Delta H0 vs sigma:     r=-0.195 (p=0.3107)
+[19:02:01] [INFO] Manuscript claims: r=0.466, rho=0.517
+[19:02:01] [SUCCESS] ✓ Published H0-sigma reproduces manuscript r within 0.1
+[19:02:01] [SUCCESS] ✓ Published H0-sigma reproduces manuscript rho within 0.1
+[19:02:01] [SUCCESS] ✓ Matrix-derived H0 reproduces published H0 trend
+[19:02:01] [INFO] Hosts with largest H0 discrepancy (published vs matrix):
+[19:02:01] [INFO]   N2525        sigma=  77.9 H0_pub=  71.47 H0_fit=  71.47 dH0=  +0.00
+[19:02:01] [INFO]   N5728        sigma= 166.7 H0_pub=  77.96 H0_fit=  77.96 dH0=  +0.00
+[19:02:01] [INFO]   N1365        sigma= 135.9 H0_pub=  78.65 H0_fit=  78.65 dH0=  +0.00
+[19:02:01] [INFO]   U9391        sigma=  72.8 H0_pub=  61.23 H0_fit=  61.23 dH0=  +0.00
+[19:02:01] [INFO]   N3147        sigma= 223.4 H0_pub=  77.93 H0_fit=  77.93 dH0=  -0.00
+[19:02:01] [SUCCESS] Saved audit to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_host_summary_audit.csv
+[19:02:01] [SUCCESS] Saved comparison to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_matrix_vs_paper_host_residuals.csv
+[19:02:01] [INFO] Injection test: kappa_inj = 9.700e+05 mag
+[19:02:02] [INFO] Injected:  9.700e+05
+[19:02:02] [INFO] Recovered: 9.683e+05 +/- 2.103e+05
+[19:02:02] [INFO] Recovery fraction: 0.998
