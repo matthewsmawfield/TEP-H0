@@ -1,21 +1,21 @@
-[13:00:20] [INFO] 
-[13:00:20] [INFO] ================================================================================
-[13:00:20] [INFO]    >>> STEP 16: HOST-MASS RESIDUAL TEST (TEP-SPECIFIC BIAS ISOLATION)
-[13:00:20] [INFO] ================================================================================
-[13:00:20] [INFO] 
-[13:00:20] [INFO] Cepheid: Host-mass partial correlation
-[13:00:20] [INFO] Raw: r=0.466, p=0.0109
-[13:00:20] [INFO] Mass-residual: r=0.445, p=0.0154 (N=29)
-[13:00:20] [INFO] Both-residual: r=0.450, p=0.0144
-[13:00:20] [INFO] TRGB: Host-mass partial correlation
-[13:00:20] [INFO] TRGB raw: r=0.327, p=0.2747
-[13:00:20] [INFO] TRGB mass-residual: r=-0.001, p=0.0977 (N=13)
-[13:00:20] [INFO] --- SUMMARY ---
-[13:00:20] [INFO] +---------+-------+--------+-----------------+-----------------+
-[13:00:20] [INFO] | Channel | Raw r | Raw p  | Mass-residual r | Mass-residual p |
-[13:00:20] [INFO] +---------+-------+--------+-----------------+-----------------+
-[13:00:20] [INFO] | Cepheid | 0.466 | 0.0109 | 0.445           | 0.0154          |
-[13:00:20] [INFO] | TRGB    | 0.327 | 0.2747 | -0.001          | 0.0977          |
-[13:00:20] [INFO] +---------+-------+--------+-----------------+-----------------+
-[13:00:20] [SUCCESS] Saved results to host_mass_residual_test.json
-[13:00:20] [SUCCESS] Step 16 complete
+[13:02:42] [INFO] 
+[13:02:42] [INFO] ================================================================================
+[13:02:42] [INFO]    >>> STEP 16: HOST-MASS RESIDUAL TEST (TEP-SPECIFIC BIAS ISOLATION)
+[13:02:42] [INFO] ================================================================================
+[13:02:42] [INFO] 
+[13:02:42] [INFO] Cepheid: Host-mass partial correlation
+[13:02:42] [INFO] Raw: r=0.466, p=0.0109
+[13:02:42] [INFO] Mass-residual: r=0.445, p=0.0154 (N=29)
+[13:02:42] [INFO] Both-residual: r=0.450, p=0.0144
+[13:02:42] [INFO] TRGB: Host-mass partial correlation
+[13:02:42] [INFO] TRGB raw: r=0.327, p=0.2747
+[13:02:42] [INFO] TRGB mass-residual: r=-0.001, p=0.0977 (N=13)
+[13:02:42] [INFO] --- SUMMARY ---
+[13:02:42] [INFO] +---------+-------+--------+-----------------+-----------------+
+[13:02:42] [INFO] | Channel | Raw r | Raw p  | Mass-residual r | Mass-residual p |
+[13:02:42] [INFO] +---------+-------+--------+-----------------+-----------------+
+[13:02:42] [INFO] | Cepheid | 0.466 | 0.0109 | 0.445           | 0.0154          |
+[13:02:42] [INFO] | TRGB    | 0.327 | 0.2747 | -0.001          | 0.0977          |
+[13:02:42] [INFO] +---------+-------+--------+-----------------+-----------------+
+[13:02:42] [SUCCESS] Saved results to host_mass_residual_test.json
+[13:02:42] [SUCCESS] Step 16 complete

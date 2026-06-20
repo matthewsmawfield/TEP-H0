@@ -13,5 +13,5 @@
   "kappa_diff_err": 360182.0771407153,
   "kappa_diff_t": 2.2471907478777164,
   "kappa_diff_p": 0.046116460485692956,
-  "interpretation": "kappa_diff > 0 is directionally consistent with TEP (Cepheids underestimated at high sigma), but magnitude (8.09e+05) is smaller than kappa_Cep (1.26e+06), suggesting shared systematic dominates."
+  "interpretation": "kappa_diff > 0 is directionally consistent with TEP (Cepheids underestimated at high sigma), but magnitude (8.09e+05) is smaller than kappa_Cep (1.27e+06), suggesting shared systematic dominates."
 }

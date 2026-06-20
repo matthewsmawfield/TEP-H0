@@ -2,9 +2,16 @@
   "n": 13,
   "pearson_r": 0.477836928338353,
   "pearson_p": 0.04931957566415615,
+  "pearson_p_tail": "one-tailed",
+  "pearson_p_raw_two_tailed": 0.0986391513283123,
   "spearman_rho": 0.5824175824175823,
   "spearman_p": 0.018370667179327137,
+  "spearman_p_tail": "one-tailed",
+  "spearman_p_raw_two_tailed": 0.03674133435865427,
   "slope": 0.14111138666527287,
   "slope_err": 0.07627419382999487,
+  "slope_p": 0.045664701562529574,
+  "slope_p_tail": "one-tailed",
+  "slope_p_raw_two_tailed": 0.09132940312505915,
   "consistent_with_tep": true
 }

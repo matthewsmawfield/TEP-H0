@@ -1,17 +1,17 @@
-[11:20:32] [INFO] 
-[11:20:32] [INFO] ================================================================================
-[11:20:32] [INFO]    >>> STEP 11: COMPREHENSIVE AUDIT & INTEGRITY VERIFICATION
-[11:20:32] [INFO] ================================================================================
-[11:20:32] [INFO] 
-[11:20:32] [INFO] Sample: N=29, z∈[0.00359,0.01682]
-[11:20:32] [SUCCESS] κ_Cep recomputed=1.257e+06, json=1.257e+06, match=True
-[11:20:32] [SUCCESS] Covariance: (29, 29), symmetric=True, PSD=True
-[11:20:32] [INFO] Provenance: stellar=16, proxy=13
-[11:20:32] [INFO] Gold Standard: N=7, r=0.559, p=0.192
-[11:20:32] [INFO] Free-intercept slope=0.0851
-[11:20:32] [INFO] ODR slope=0.2346±0.0486 (2.76x OLS)
-[11:20:32] [INFO] Bonferroni: 3/12 significant (thresh=0.0042)
-[11:20:32] [INFO] Large corrections: 3 hosts with |Δμ|>0.20 mag
-[11:20:32] [SUCCESS] Anchor screening: pre-specified formula, PASS
-[11:20:32] [SUCCESS] Unit tests: PASS
-[11:20:32] [SUCCESS] Step 11 complete: 12 checks, status=PASS
+[13:02:43] [INFO] 
+[13:02:43] [INFO] ================================================================================
+[13:02:43] [INFO]    >>> STEP 11: COMPREHENSIVE AUDIT & INTEGRITY VERIFICATION
+[13:02:43] [INFO] ================================================================================
+[13:02:43] [INFO] 
+[13:02:43] [INFO] Sample: N=29, z∈[0.00359,0.01682]
+[13:02:43] [WARNING] κ_Cep recomputed=1.257e+06, json=1.272e+06, match=False
+[13:02:43] [SUCCESS] Covariance: (29, 29), symmetric=True, PSD=True
+[13:02:43] [INFO] Provenance: stellar=16, proxy=13
+[13:02:43] [INFO] Gold Standard: N=7, r=0.559, p=0.192
+[13:02:43] [INFO] Free-intercept slope=0.0851
+[13:02:43] [INFO] ODR slope=0.2346±0.0486 (2.76x OLS)
+[13:02:43] [INFO] Bonferroni: 3/12 significant (thresh=0.0042)
+[13:02:43] [INFO] Large corrections: 3 hosts with |Δμ|>0.20 mag
+[13:02:43] [SUCCESS] Anchor screening: pre-specified formula, PASS
+[13:02:43] [SUCCESS] Unit tests: PASS
+[13:02:43] [SUCCESS] Step 11 complete: 12 checks, status=PASS

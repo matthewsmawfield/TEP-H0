@@ -19,3 +19,17 @@
 [13:02:15] [INFO] Detected Offset (Inner - Outer): +0.0284 mag (3.3 sigma)
 [13:02:15] [SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_results.csv
 [13:02:15] [INFO] Running LMC robustness suite...
+[13:02:41] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_robustness_summary.csv
+[13:02:41] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_robustness_summary.json
+[13:02:41] [INFO] LMC Differential Robustness Summary
+[13:02:41] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
+[13:02:41] [INFO] | Test               | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |
+[13:02:41] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
+[13:02:41] [INFO] | Baseline           | 419  | 419   | -         | +0.0284     | 0.0086  | -                  |
+[13:02:41] [INFO] | Matched logP       | 419  | 419   | 340.0     | +0.0285     | 0.0092  | [+0.0191, +0.0378] |
+[13:02:41] [INFO] | Matched logP+color | 419  | 419   | 300.0     | +0.0361     | 0.0076  | [+0.0285, +0.0437] |
+[13:02:41] [INFO] | MV match (Type)    | 419  | 419   | 414       | +0.0304     | 0.0054  | [+0.0251, +0.0358] |
+[13:02:41] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
+[13:02:41] [PROCESS] Generating LMC differential P–L plot...
+[13:02:41] [PROCESS] Generating LMC robustness plot...
+[13:02:41] [SUCCESS] Step 7 Complete.
