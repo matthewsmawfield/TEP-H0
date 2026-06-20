@@ -1,4 +1,4 @@
-sample,screening,sigma_v,N_hosts,z_cut,beta_X,beta_X_err,beta_X_sig,p_perm,LOOCV
+sample,screening,sigma_v,N_hosts,z_cut,beta_X,beta_X_err,beta_X_sig,redshift_binned_permutation_p,LOOCV
 primary,screened,150,29,0.0,23982064.984634534,7049663.610291014,3.4018736652378423,,
 primary,screened,250,29,0.0,23497395.187015716,10044765.415191676,2.339267689763896,,
 primary,screened,300,29,0.0,23509657.94119122,11647171.339354116,2.0184864853627995,,
