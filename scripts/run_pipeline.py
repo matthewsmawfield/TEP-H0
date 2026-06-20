@@ -38,39 +38,41 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.append(str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status, print_table
-from scripts.steps.step_0_sigma_catalog import Step0SigmaCatalog
-from scripts.steps.step_1_data_ingestion import Step1DataIngestion
+from scripts.steps.step_00_sigma_catalog import Step0SigmaCatalog
+from scripts.steps.step_01_data_ingestion import Step1DataIngestion
 from scripts.utils.fetch_metadata import fetch_galaxy_metadata
-from scripts.steps.step_1b_aperture_correction import Step1bApertureCorrection
-from scripts.steps.step_2_stratification import Step2Stratification
-from scripts.steps.step_2b_shear_suppression_viz import main as step2b_viz
-from scripts.steps.step_3_tep_correction import Step3TEPCorrection
-from scripts.steps.step_4_robustness_checks import Step4RobustnessChecks
-from scripts.steps.step_4b_aperture_sensitivity import Step4bApertureSensitivity
-from scripts.steps.step_5_m31_analysis import Step5M31Analysis
-from scripts.steps.step_6_multivariate_analysis import Step6MultivariateAnalysis
-from scripts.steps.step_6_enhanced_robustness import Step6EnhancedRobustness
-from scripts.steps.step_7_lmc_replication import Step7LMCReplication
-from scripts.steps.step_7_trgb_comparison import Step7TRGBComparison
-from scripts.steps.step_7_trgb_reanalysis import Step7TRGBReanalysis
-from scripts.steps.step_8_m31_phat_analysis import Step8M31PHATAnalysis
-from scripts.steps.step_9_final_synthesis import Step9FinalSynthesis
-from scripts.steps.step_10_anchor_stratification import AnchorStratificationStep
-from scripts.steps.step_10b_local_gravity_closure import Step10bLocalGravityClosure
-from scripts.steps.step_11_comprehensive_audit import Step11ComprehensiveAudit
-from scripts.steps.step_12_cross_channel import Step12CrossChannel
-from scripts.steps.step_13_stellar_validation import Step13StellarValidation
-from scripts.steps.step_14_frozen_predictions import Step14FrozenPredictions
-from scripts.steps.step_15_hierarchical_sigma import Step15HierarchicalSigma
-from scripts.steps.step_16_host_mass_residual import Step16HostMassResidual
-from scripts.steps.step_17_regressor_audit import Step17RegressorAudit
-from scripts.steps.step_18_group_env_models import Step18GroupEnvModels
-from scripts.steps.step_19_joint_indicator_model import Step19JointIndicatorModel
-from scripts.steps.step_20_stratified_validation import Step20StratifiedValidation
-from scripts.steps.step_21_exact_sigma_ref import Step21ExactSigmaRef
-from scripts.steps.step_22_sn_residual_test import Step22SNResidualTest
-from scripts.steps.step_23_synthetic_injection import Step23SyntheticInjection
-from scripts.steps.step_24_leave_one_out import Step24LeaveOneOut
+from scripts.steps.step_02_aperture_correction import Step1bApertureCorrection
+from scripts.steps.step_03_stratification import Step2Stratification
+from scripts.steps.step_04_tep_correction import Step3TEPCorrection
+from scripts.steps.step_05_frozen_predictions import Step14FrozenPredictions
+from scripts.steps.step_06_shear_suppression_viz import main as step2b_viz
+from scripts.steps.step_07_aperture_sensitivity import Step4bApertureSensitivity
+from scripts.steps.step_08_robustness_checks import Step4RobustnessChecks
+from scripts.steps.step_09_hierarchical_sigma import Step15HierarchicalSigma
+from scripts.steps.step_10_m31_analysis import Step5M31Analysis
+from scripts.steps.step_11_m31_radial_suppression import main as step_11_m31_radial_suppression_main
+from scripts.steps.step_12_multivariate_analysis import Step6MultivariateAnalysis
+from scripts.steps.step_13_enhanced_robustness import Step6EnhancedRobustness
+from scripts.steps.step_14_lmc_replication import Step7LMCReplication
+from scripts.steps.step_15_trgb_comparison import Step7TRGBComparison
+from scripts.steps.step_16_trgb_reanalysis import Step7TRGBReanalysis
+from scripts.steps.step_17_host_mass_residual import Step16HostMassResidual
+from scripts.steps.step_18_regressor_audit import Step17RegressorAudit
+from scripts.steps.step_19_group_env_models import Step18GroupEnvModels
+from scripts.steps.step_20_joint_indicator_model import Step19JointIndicatorModel
+from scripts.steps.step_21_stratified_validation import Step20StratifiedValidation
+from scripts.steps.step_22_exact_sigma_ref import Step21ExactSigmaRef
+from scripts.steps.step_23_sn_residual_test import Step22SNResidualTest
+from scripts.steps.step_24_synthetic_injection import Step23SyntheticInjection
+from scripts.steps.step_25_leave_one_out import Step24LeaveOneOut
+from scripts.steps.step_26_m31_phat_analysis import Step8M31PHATAnalysis
+from scripts.steps.step_27_anchor_stratification import AnchorStratificationStep
+from scripts.steps.step_28_local_gravity_closure import Step10bLocalGravityClosure
+from scripts.steps.step_29_cross_channel import Step12CrossChannel
+from scripts.steps.step_30_cosmology_inference import main as step_12_cosmology_inference_main
+from scripts.steps.step_31_final_synthesis import Step9FinalSynthesis
+from scripts.steps.step_32_comprehensive_audit import Step11ComprehensiveAudit
+from scripts.steps.step_33_stellar_validation import Step13StellarValidation
 from scripts.utils.pipeline_audit import audit
 
 def run_pipeline():
@@ -80,7 +82,7 @@ def run_pipeline():
     ap.add_argument("--use-lit-overrides", action="store_true")
     ap.add_argument("--skip-audit", action="store_true")
     ap.add_argument("--run-stellar-validation", action="store_true",
-                    help="Run Step 13: MESA/RSP stellar validation (optional, post-pipeline)")
+                    help="Run Step 33: MESA/RSP stellar validation (optional, post-pipeline)")
     args = ap.parse_args()
 
     # Setup Global Logger
@@ -99,34 +101,34 @@ def run_pipeline():
     step_times = {}
     
     try:
-        # --- Step 1 (Pre-flight): Prepare Coordinates ---
-        # Needed for Step 0 (Sigma Catalog Build) to know which galaxies to query
-        print_status(">>> STEP 1 (PRE-FLIGHT): COORDINATE PREPARATION", "TITLE")
+        # --- Step 01 (Pre-flight): Prepare Coordinates ---
+        # Needed for Step 00 (Sigma Catalog Build) to know which galaxies to query
+        print_status(">>> PRE-FLIGHT: COORDINATE PREPARATION", "TITLE")
         step1_pre = Step1DataIngestion()
         step1_pre.prepare_coordinates()
 
-        # --- Step 0: Sigma Catalog Build (Provenance) ---
+        # --- Step 00: Sigma Catalog Build (Provenance) ---
         if not args.skip_sigma_step:
-            print_status(">>> STEP 0: SIGMA CATALOG (PROVENANCE BUILD)", "TITLE")
+            print_status(">>> STEP 00: SIGMA CATALOG (PROVENANCE BUILD)", "TITLE")
             t0 = time.time()
             Step0SigmaCatalog().run(rebuild=bool(args.rebuild_sigma))
-            step_times['Step 0'] = time.time() - t0
+            step_times['Step 00'] = time.time() - t0
             set_step_logger(pipeline_logger)
-            print_status("Step 0 (Sigma Catalog) completed successfully.", "SUCCESS")
+            print_status("Step 00 (Sigma Catalog) completed successfully.", "SUCCESS")
 
-        # --- Step 1: Data Ingestion ---
-        print_status(">>> STEP 1: DATA INGESTION", "TITLE")
+        # --- Step 01: Data Ingestion ---
+        print_status(">>> STEP 01: DATA INGESTION", "TITLE")
         t0 = time.time()
         step1 = Step1DataIngestion()
         step1.run()
-        step_times['Step 1'] = time.time() - t0
+        step_times['Step 01'] = time.time() - t0
         
         # Reset logger to master after step completion (step scripts set their own)
         set_step_logger(pipeline_logger)
-        print_status("Step 1 (Ingestion) completed successfully.", "SUCCESS")
+        print_status("Step 01 (Ingestion) completed successfully.", "SUCCESS")
         
-        # --- Step 1b: Aperture Correction ---
-        print_status(">>> STEP 1b: APERTURE CORRECTION", "TITLE")
+        # --- Step 02: Aperture Correction ---
+        print_status(">>> STEP 02: APERTURE CORRECTION", "TITLE")
         t0 = time.time()
         
         # Sub-task: Fetch Metadata (RC3 Sizes)
@@ -136,285 +138,301 @@ def run_pipeline():
         # Sub-task: Apply Correction
         step1b = Step1bApertureCorrection()
         step1b.run()
-        step_times['Step 1b'] = time.time() - t0
+        step_times['Step 02'] = time.time() - t0
         
         set_step_logger(pipeline_logger)
-        print_status("Step 1b (Aperture Correction) completed successfully.", "SUCCESS")
+        print_status("Step 02 (Aperture Correction) completed successfully.", "SUCCESS")
         
-        # --- Step 2: Stratification ---
-        print_status(">>> STEP 2: STRATIFICATION", "TITLE")
+        # --- Step 03: Stratification ---
+        print_status(">>> STEP 03: STRATIFICATION", "TITLE")
         t0 = time.time()
         step2 = Step2Stratification()
         step2.run()
-        step_times['Step 2'] = time.time() - t0
+        step_times['Step 03'] = time.time() - t0
         
         set_step_logger(pipeline_logger)
-        print_status("Step 2 (Stratification) completed successfully.", "SUCCESS")
+        print_status("Step 03 (Stratification) completed successfully.", "SUCCESS")
 
-        # --- Step 15: Hierarchical Sigma Measurement-Error Model ---
-        print_status(">>> STEP 15: HIERARCHICAL SIGMA MEASUREMENT-ERROR MODEL", "TITLE")
-        t0 = time.time()
-        Step15HierarchicalSigma().run()
-        step_times['Step 15'] = time.time() - t0
-
-        set_step_logger(pipeline_logger)
-        print_status("Step 15 (Hierarchical Sigma) completed successfully.", "SUCCESS")
-        
-        # --- Step 3: TEP Correction ---
-        print_status(">>> STEP 3: TEP CORRECTION", "TITLE")
+        # --- Step 04: TEP Correction ---
+        print_status(">>> STEP 04: TEP CORRECTION", "TITLE")
         t0 = time.time()
         step3 = Step3TEPCorrection()
         step3.run()
-        step_times['Step 3'] = time.time() - t0
+        step_times['Step 04'] = time.time() - t0
         
         set_step_logger(pipeline_logger)
-        print_status("Step 3 (Optimization) completed successfully.", "SUCCESS")
+        print_status("Step 04 (Optimization) completed successfully.", "SUCCESS")
 
-        # --- Step 14: Frozen TEP Prediction Table ---
-        print_status(">>> STEP 14: FROZEN TEP PREDICTION TABLE", "TITLE")
+        # --- Step 05: Frozen TEP Prediction Table ---
+        print_status(">>> STEP 05: FROZEN TEP PREDICTION TABLE", "TITLE")
         t0 = time.time()
         Step14FrozenPredictions().run()
-        step_times['Step 14'] = time.time() - t0
+        step_times['Step 05'] = time.time() - t0
 
         set_step_logger(pipeline_logger)
-        print_status("Step 14 (Frozen Predictions) completed successfully.", "SUCCESS")
+        print_status("Step 05 (Frozen Predictions) completed successfully.", "SUCCESS")
 
-        # --- Step 3b: Shear Suppression Visualization ---
-        # Must run after Step 3 because it uses tep_corrected_h0.csv
-        print_status(">>> STEP 3B: SHEAR SUPPRESSION VISUALIZATION", "TITLE")
+        # --- Step 06: Shear Suppression Visualization ---
+        print_status(">>> STEP 06: SHEAR SUPPRESSION VISUALIZATION", "TITLE")
         t0 = time.time()
         step2b_viz()
-        step_times['Step 3b'] = time.time() - t0
+        step_times['Step 06'] = time.time() - t0
         
         set_step_logger(pipeline_logger)
-        print_status("Step 3b (Shear Suppression Viz) completed successfully.", "SUCCESS")
+        print_status("Step 06 (Shear Suppression Viz) completed successfully.", "SUCCESS")
 
-        # --- Step 4: Robustness Checks ---
-        print_status(">>> STEP 4: ROBUSTNESS CHECKS", "TITLE")
+        # --- Step 07: Aperture Sensitivity Analysis ---
+        print_status(">>> STEP 07: APERTURE SENSITIVITY ANALYSIS", "TITLE")
         t0 = time.time()
-        
-        print_status("Running Aperture Sensitivity Analysis...", "PROCESS")
         Step4bApertureSensitivity().run()
-
-        # Step 4 consumes the sigma provenance table generated by Step 4b.
-        print_status("Running Jackknife and Bivariate Analysis...", "PROCESS")
-        Step4RobustnessChecks().run()
-
-        step_times['Step 4'] = time.time() - t0
+        step_times['Step 07'] = time.time() - t0
+        
         set_step_logger(pipeline_logger)
-        print_status("Step 4 (Robustness) completed successfully.", "SUCCESS")
+        print_status("Step 07 (Aperture Sensitivity) completed successfully.", "SUCCESS")
 
-        # --- Step 5: M31 Analysis ---
-        print_status(">>> STEP 5: M31 ANALYSIS", "TITLE")
+        # --- Step 08: Robustness Checks ---
+        print_status(">>> STEP 08: ROBUSTNESS CHECKS", "TITLE")
+        t0 = time.time()
+        Step4RobustnessChecks().run()
+        step_times['Step 08'] = time.time() - t0
+        
+        set_step_logger(pipeline_logger)
+        print_status("Step 08 (Robustness) completed successfully.", "SUCCESS")
+
+        # --- Step 09: Hierarchical Sigma Measurement-Error Model ---
+        print_status(">>> STEP 09: HIERARCHICAL SIGMA MEASUREMENT-ERROR MODEL", "TITLE")
+        t0 = time.time()
+        Step15HierarchicalSigma().run()
+        step_times['Step 09'] = time.time() - t0
+
+        set_step_logger(pipeline_logger)
+        print_status("Step 09 (Hierarchical Sigma) completed successfully.", "SUCCESS")
+
+        # --- Step 10: M31 Analysis ---
+        print_status(">>> STEP 10: M31 ANALYSIS", "TITLE")
         t0 = time.time()
         step5 = Step5M31Analysis()
         step5.run()
-        step_times['Step 5'] = time.time() - t0
+        step_times['Step 10'] = time.time() - t0
         
         set_step_logger(pipeline_logger)
-        print_status("Step 5 (M31 Differential Test) completed successfully.", "SUCCESS")
+        print_status("Step 10 (M31 Differential Test) completed successfully.", "SUCCESS")
 
-        # --- Step 6: Multivariate Analysis ---
-        print_status(">>> STEP 6: MULTIVARIATE ANALYSIS", "TITLE")
+        # --- Step 11: M31 Radial Suppression ---
+        print_status(">>> STEP 11: M31 RADIAL SUPPRESSION", "TITLE")
+        t0 = time.time()
+        step_11_m31_radial_suppression_main()
+        step_times['Step 11'] = time.time() - t0
+        
+        set_step_logger(pipeline_logger)
+        print_status("Step 11 (M31 Radial Suppression) completed successfully.", "SUCCESS")
+
+        # --- Step 12: Multivariate Analysis ---
+        print_status(">>> STEP 12: MULTIVARIATE ANALYSIS", "TITLE")
         t0 = time.time()
         step6 = Step6MultivariateAnalysis()
         step6.run()
-        step_times['Step 6'] = time.time() - t0
+        step_times['Step 12'] = time.time() - t0
         
         set_step_logger(pipeline_logger)
-        print_status("Step 6 (Multivariate Analysis) completed successfully.", "SUCCESS")
+        print_status("Step 12 (Multivariate Analysis) completed successfully.", "SUCCESS")
 
-        # --- Step 6b: Enhanced Robustness (Referee-Facing) ---
-        print_status(">>> STEP 6b: ENHANCED ROBUSTNESS", "TITLE")
+        # --- Step 13: Enhanced Robustness (Referee-Facing) ---
+        print_status(">>> STEP 13: ENHANCED ROBUSTNESS", "TITLE")
         t0 = time.time()
         Step6EnhancedRobustness().run()
-        step_times['Step 6b'] = time.time() - t0
+        step_times['Step 13'] = time.time() - t0
 
         set_step_logger(pipeline_logger)
-        print_status("Step 6b (Enhanced Robustness) completed successfully.", "SUCCESS")
+        print_status("Step 13 (Enhanced Robustness) completed successfully.", "SUCCESS")
 
-        # --- Step 7: LMC Replication ---
-        print_status(">>> STEP 7: LMC REPLICATION", "TITLE")
+        # --- Step 14: LMC Replication ---
+        print_status(">>> STEP 14: LMC REPLICATION", "TITLE")
         t0 = time.time()
         step7 = Step7LMCReplication()
         step7.run()
-        step_times['Step 7'] = time.time() - t0
+        step_times['Step 14'] = time.time() - t0
 
         set_step_logger(pipeline_logger)
-        print_status("Step 7 (LMC Replication) completed successfully.", "SUCCESS")
+        print_status("Step 14 (LMC Replication) completed successfully.", "SUCCESS")
 
-        # --- Step 7b: TRGB Comparison ---
-        print_status(">>> STEP 7b: TRGB COMPARISON", "TITLE")
+        # --- Step 15: TRGB Comparison ---
+        print_status(">>> STEP 15: TRGB COMPARISON", "TITLE")
         t0 = time.time()
         Step7TRGBComparison().run()
-        step_times['Step 7b'] = time.time() - t0
+        step_times['Step 15'] = time.time() - t0
 
         set_step_logger(pipeline_logger)
-        print_status("Step 7b (TRGB Comparison) completed successfully.", "SUCCESS")
+        print_status("Step 15 (TRGB Comparison) completed successfully.", "SUCCESS")
 
-        # --- Step 7c: TRGB Differential Reanalysis ---
-        print_status(">>> STEP 7c: TRGB DIFFERENTIAL REANALYSIS", "TITLE")
+        # --- Step 16: TRGB Differential Reanalysis ---
+        print_status(">>> STEP 16: TRGB DIFFERENTIAL REANALYSIS", "TITLE")
         t0 = time.time()
         Step7TRGBReanalysis().run()
-        step_times['Step 7c'] = time.time() - t0
-
-        set_step_logger(pipeline_logger)
-        print_status("Step 7c (TRGB Differential Reanalysis) completed successfully.", "SUCCESS")
-
-        # --- Step 16: Host-Mass Residual Test ---
-        print_status(">>> STEP 16: HOST-MASS RESIDUAL TEST", "TITLE")
-        t0 = time.time()
-        Step16HostMassResidual().run()
         step_times['Step 16'] = time.time() - t0
 
         set_step_logger(pipeline_logger)
-        print_status("Step 16 (Host-Mass Residual) completed successfully.", "SUCCESS")
+        print_status("Step 16 (TRGB Differential Reanalysis) completed successfully.", "SUCCESS")
 
-        # --- Step 17: Regressor Audit ---
-        print_status(">>> STEP 17: TEP REGRESSOR AUDIT", "TITLE")
+        # --- Step 17: Host-Mass Residual Test ---
+        print_status(">>> STEP 17: HOST-MASS RESIDUAL TEST", "TITLE")
+        t0 = time.time()
+        Step16HostMassResidual().run()
+        step_times['Step 17'] = time.time() - t0
+
+        set_step_logger(pipeline_logger)
+        print_status("Step 17 (Host-Mass Residual) completed successfully.", "SUCCESS")
+
+        # --- Step 18: Regressor Audit ---
+        print_status(">>> STEP 18: TEP REGRESSOR AUDIT", "TITLE")
         t0 = time.time()
         Step17RegressorAudit().run()
-        step_times['Step 17'] = time.time() - t0
-        set_step_logger(pipeline_logger)
-        print_status("Step 17 (Regressor Audit) completed successfully.", "SUCCESS")
-
-        # --- Step 18: Group Environment Model Comparison ---
-        print_status(">>> STEP 18: GROUP ENVIRONMENT MODEL COMPARISON", "TITLE")
-        t0 = time.time()
-        Step18GroupEnvModels().run()
         step_times['Step 18'] = time.time() - t0
         set_step_logger(pipeline_logger)
-        print_status("Step 18 (Group Env Models) completed successfully.", "SUCCESS")
+        print_status("Step 18 (Regressor Audit) completed successfully.", "SUCCESS")
 
-        # --- Step 19: Joint Cepheid+TRGB Indicator Model ---
-        print_status(">>> STEP 19: JOINT CEPHEID+TRGB INDICATOR MODEL", "TITLE")
+        # --- Step 19: Group Environment Model Comparison ---
+        print_status(">>> STEP 19: GROUP ENVIRONMENT MODEL COMPARISON", "TITLE")
         t0 = time.time()
-        Step19JointIndicatorModel().run()
+        Step18GroupEnvModels().run()
         step_times['Step 19'] = time.time() - t0
         set_step_logger(pipeline_logger)
-        print_status("Step 19 (Joint Indicator) completed successfully.", "SUCCESS")
+        print_status("Step 19 (Group Env Models) completed successfully.", "SUCCESS")
 
-        # --- Step 20: Physically Stratified Validation ---
-        print_status(">>> STEP 20: PHYSICALLY STRATIFIED VALIDATION", "TITLE")
+        # --- Step 20: Joint Cepheid+TRGB Indicator Model ---
+        print_status(">>> STEP 20: JOINT CEPHEID+TRGB INDICATOR MODEL", "TITLE")
         t0 = time.time()
-        Step20StratifiedValidation().run()
+        Step19JointIndicatorModel().run()
         step_times['Step 20'] = time.time() - t0
         set_step_logger(pipeline_logger)
-        print_status("Step 20 (Stratified Validation) completed successfully.", "SUCCESS")
+        print_status("Step 20 (Joint Indicator) completed successfully.", "SUCCESS")
 
-        # --- Step 21: Exact Anchor-Leverage Sigma_ref ---
-        print_status(">>> STEP 21: EXACT ANCHOR-LEVERAGE SIGMA_REF", "TITLE")
+        # --- Step 21: Physically Stratified Validation ---
+        print_status(">>> STEP 21: PHYSICALLY STRATIFIED VALIDATION", "TITLE")
         t0 = time.time()
-        Step21ExactSigmaRef().run()
+        Step20StratifiedValidation().run()
         step_times['Step 21'] = time.time() - t0
         set_step_logger(pipeline_logger)
-        print_status("Step 21 (Exact Sigma_ref) completed successfully.", "SUCCESS")
+        print_status("Step 21 (Stratified Validation) completed successfully.", "SUCCESS")
 
-        # --- Step 22: SN Ia Downstream Residual Test ---
-        print_status(">>> STEP 22: SN IA DOWNSTREAM RESIDUAL TEST", "TITLE")
+        # --- Step 22: Exact Anchor-Leverage Sigma_ref ---
+        print_status(">>> STEP 22: EXACT ANCHOR-LEVERAGE SIGMA_REF", "TITLE")
         t0 = time.time()
-        Step22SNResidualTest().run()
+        Step21ExactSigmaRef().run()
         step_times['Step 22'] = time.time() - t0
         set_step_logger(pipeline_logger)
-        print_status("Step 22 (SN Residual) completed successfully.", "SUCCESS")
+        print_status("Step 22 (Exact Sigma_ref) completed successfully.", "SUCCESS")
 
-        # --- Step 23: Synthetic Injection Recovery ---
-        print_status(">>> STEP 23: SYNTHETIC INJECTION RECOVERY", "TITLE")
+        # --- Step 23: SN Ia Downstream Residual Test ---
+        print_status(">>> STEP 23: SN IA DOWNSTREAM RESIDUAL TEST", "TITLE")
         t0 = time.time()
-        Step23SyntheticInjection().run()
+        Step22SNResidualTest().run()
         step_times['Step 23'] = time.time() - t0
         set_step_logger(pipeline_logger)
-        print_status("Step 23 (Synthetic Injection) completed successfully.", "SUCCESS")
+        print_status("Step 23 (SN Residual) completed successfully.", "SUCCESS")
 
-        # --- Step 24: Leave-One-Out Influence Analysis ---
-        print_status(">>> STEP 24: LEAVE-ONE-OUT INFLUENCE ANALYSIS", "TITLE")
+        # --- Step 24: Synthetic Injection Recovery ---
+        print_status(">>> STEP 24: SYNTHETIC INJECTION RECOVERY", "TITLE")
         t0 = time.time()
-        Step24LeaveOneOut().run()
+        Step23SyntheticInjection().run()
         step_times['Step 24'] = time.time() - t0
         set_step_logger(pipeline_logger)
-        print_status("Step 24 (Leave-One-Out) completed successfully.", "SUCCESS")
+        print_status("Step 24 (Synthetic Injection) completed successfully.", "SUCCESS")
 
-        # --- Step 8: M31 PHAT Analysis ---
-        print_status(">>> STEP 8: M31 PHAT ANALYSIS", "TITLE")
+        # --- Step 25: Leave-One-Out Influence Analysis ---
+        print_status(">>> STEP 25: LEAVE-ONE-OUT INFLUENCE ANALYSIS", "TITLE")
+        t0 = time.time()
+        Step24LeaveOneOut().run()
+        step_times['Step 25'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 25 (Leave-One-Out) completed successfully.", "SUCCESS")
+
+        # --- Step 26: M31 PHAT Analysis ---
+        print_status(">>> STEP 26: M31 PHAT ANALYSIS", "TITLE")
         t0 = time.time()
         step8 = Step8M31PHATAnalysis()
         step8.run()
-        step_times['Step 8'] = time.time() - t0
+        step_times['Step 26'] = time.time() - t0
 
         set_step_logger(pipeline_logger)
-        print_status("Step 8 (M31 PHAT Analysis) completed successfully.", "SUCCESS")
+        print_status("Step 26 (M31 PHAT Analysis) completed successfully.", "SUCCESS")
 
-        # --- Step 10: Anchor Stratification Test ---
-        # Must run before final synthesis because the synthesis report reads
-        # anchor_stratification_test.json.
-        print_status(">>> STEP 10: ANCHOR STRATIFICATION TEST", "TITLE")
+        # --- Step 27: Anchor Stratification Test ---
+        print_status(">>> STEP 27: ANCHOR STRATIFICATION TEST", "TITLE")
         t0 = time.time()
         step10 = AnchorStratificationStep()
         step10.run()
-        step_times['Step 10'] = time.time() - t0
+        step_times['Step 27'] = time.time() - t0
 
         set_step_logger(pipeline_logger)
-        print_status("Step 10 (Anchor Stratification) completed successfully.", "SUCCESS")
+        print_status("Step 27 (Anchor Stratification) completed successfully.", "SUCCESS")
 
-        # --- Step 10b: Local Gravity Closure ---
-        # Converts the fitted Cepheid clock response into an explicit local
-        # source-charge prediction and checks Cassini/MICROSCOPE margins.
-        print_status(">>> STEP 10b: LOCAL GRAVITY CLOSURE", "TITLE")
+        # --- Step 28: Local Gravity Closure ---
+        print_status(">>> STEP 28: LOCAL GRAVITY CLOSURE", "TITLE")
         t0 = time.time()
         Step10bLocalGravityClosure().run()
-        step_times['Step 10b'] = time.time() - t0
+        step_times['Step 28'] = time.time() - t0
 
         set_step_logger(pipeline_logger)
-        print_status("Step 10b (Local Gravity Closure) completed successfully.", "SUCCESS")
+        print_status("Step 28 (Local Gravity Closure) completed successfully.", "SUCCESS")
 
-        # --- Step 12: Cross-Channel Consistency ---
-        print_status(">>> STEP 12: CROSS-CHANNEL CONSISTENCY", "TITLE")
+        # --- Step 29: Cross-Channel Consistency ---
+        print_status(">>> STEP 29: CROSS-CHANNEL CONSISTENCY", "TITLE")
         t0 = time.time()
         Step12CrossChannel().run()
-        step_times['Step 12'] = time.time() - t0
+        step_times['Step 29'] = time.time() - t0
 
         set_step_logger(pipeline_logger)
-        print_status("Step 12 (Cross-Channel) completed successfully.", "SUCCESS")
+        print_status("Step 29 (Cross-Channel) completed successfully.", "SUCCESS")
 
-        # --- Step 9: Final Synthesis ---
-        print_status(">>> STEP 9: FINAL SYNTHESIS", "TITLE")
+        # --- Step 30: Cosmology Inference ---
+        print_status(">>> STEP 30: COSMOLOGY INFERENCE", "TITLE")
+        t0 = time.time()
+        step_12_cosmology_inference_main()
+        step_times['Step 30'] = time.time() - t0
+
+        set_step_logger(pipeline_logger)
+        print_status("Step 30 (Cosmology Inference) completed successfully.", "SUCCESS")
+
+        # --- Step 31: Final Synthesis ---
+        print_status(">>> STEP 31: FINAL SYNTHESIS", "TITLE")
         t0 = time.time()
         step9 = Step9FinalSynthesis()
         step9.run()
-        step_times['Step 9'] = time.time() - t0
+        step_times['Step 31'] = time.time() - t0
 
         set_step_logger(pipeline_logger)
-        print_status("Step 9 (Final Synthesis) completed successfully.", "SUCCESS")
+        print_status("Step 31 (Final Synthesis) completed successfully.", "SUCCESS")
 
-        # --- Step 11: Comprehensive Audit & Integrity Verification ---
+        # --- Step 32: Comprehensive Audit & Integrity Verification ---
         if not args.skip_audit:
-            print_status(">>> STEP 11: COMPREHENSIVE AUDIT & INTEGRITY VERIFICATION", "TITLE")
+            print_status(">>> STEP 32: COMPREHENSIVE AUDIT & INTEGRITY VERIFICATION", "TITLE")
             t0 = time.time()
             Step11ComprehensiveAudit().run()
-            step_times['Step 11'] = time.time() - t0
+            step_times['Step 32'] = time.time() - t0
             set_step_logger(pipeline_logger)
-            print_status("Step 11 (Comprehensive Audit) completed successfully.", "SUCCESS")
+            print_status("Step 32 (Comprehensive Audit) completed successfully.", "SUCCESS")
             
             # Lightweight pipeline self-check (legacy)
-            print_status(">>> STEP 11a: PIPELINE SELF-CHECK", "TITLE")
+            print_status(">>> STEP 32b: PIPELINE SELF-CHECK", "TITLE")
             t0 = time.time()
             report = audit(project_root=PROJECT_ROOT, write_report=True)
             if not report.get('summary', {}).get('ok', False):
                 n_fail = report.get('summary', {}).get('n_failed', -1)
                 raise RuntimeError(f"Pipeline Audit FAILED with {n_fail} errors. See results/outputs/pipeline_audit_report.json")
-            step_times['Step 11a'] = time.time() - t0
+            step_times['Step 32b'] = time.time() - t0
             set_step_logger(pipeline_logger)
-            print_status("Step 11a (Self-Check) PASSED: All outputs consistent.", "SUCCESS")
+            print_status("Step 32b (Self-Check) PASSED: All outputs consistent.", "SUCCESS")
 
-        # --- Step 13: Stellar Validation (Optional) ---
+        # --- Step 33: Stellar Validation (Optional) ---
         if args.run_stellar_validation:
-            print_status(">>> STEP 13: STELLAR VALIDATION OF SCALAR-BOUNDARY TRANSPORT", "TITLE")
+            print_status(">>> STEP 33: STELLAR VALIDATION OF SCALAR-BOUNDARY TRANSPORT", "TITLE")
             t0 = time.time()
             Step13StellarValidation().run()
-            step_times['Step 13'] = time.time() - t0
+            step_times['Step 33'] = time.time() - t0
 
             set_step_logger(pipeline_logger)
-            print_status("Step 13 (Stellar Validation) completed successfully.", "SUCCESS")
+            print_status("Step 33 (Stellar Validation) completed successfully.", "SUCCESS")
         
     except Exception as e:
         print_status(f"PIPELINE FAILED: {str(e)}", "CRITICAL")

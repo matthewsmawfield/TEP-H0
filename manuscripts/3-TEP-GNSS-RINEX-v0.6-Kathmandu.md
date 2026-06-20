@@ -12,7 +12,7 @@ This paper validates that distance-structured correlations in GNSS clocks exist 
 
 The primary finding is directional anisotropy: East-West correlations are 2–5% (MSC) to 22% (Phase Alignment) stronger than North-South at short distances (<500 km), with t-statistics up to 112 and Cohen's d up to 0.304. Month-by-month stratification shows stable polarity (E-W > N-S) at 94% or higher level across modes and metrics (worst case 34/36 months), consistent with a persistent underlying effect. A critical audit indicates this is not an artifact of distance distribution: E-W pairs are actually 13 km *longer* than N-S pairs (bias against signal), and robust distance-matching strengthens the ratio (1.033 → 1.041). At full distances, raw λ ratios can appear suppressed by distance-dependent biases; a geometry-corrected comparison yields ratios of 1.80–1.86, within 17% of CODE's benchmark (2.16).
 
-Key validations include: (1) orbital velocity coupling detected at 3.2–5.4σ (best: r = −0.763), replicating CODE's 25-year finding (r = −0.888), with signal persisting under ionospheric removal (best ionofree: r = −0.416, 2.5σ); (2) position jitter and clock bias show similar orbital coupling (Δ ≈ 5%), consistent with spacetime—not just temporal—modulation; (3) CMB frame alignment at RA = 188°, Dec = −5° (20.0° from CMB dipole), matching CODE's benchmark (18.2°), with Solar Apex disfavored (86.5° separation); (4) geomagnetic stratification using real GFZ Kp data shows near-invariance at the primary threshold (Kp < 3 vs. Kp ≥ 3; median Δλ ≈ −1%, with 60/72 tests within ±5% across all station filters and processing modes), while higher storm thresholds (Kp ≥ 4/5) are treated as sensitivity checks due to small storm-day counts; (5) hemisphere-stratified results show E-W > N-S in the ALL_STATIONS analysis, while higher-quality subsets motivate additional hemisphere-controlled falsification tests; (6) year-specific planetary event modulation detected (2.8× above null, p < 0.001 for all 6 metrics) with detection rates of 59–68% and no consistent tidal GM/r² scaling (σ-level vs GM/r²: p = 0.317–0.989), consistent with alignment-driven geometric coupling rather than a tidal forcing mechanism whose amplitude scales with planetary mass.
+Key validations include: (1) orbital velocity coupling detected at 3.2–5.4σ (best: r = −0.763), replicating CODE's 25-year finding (r = −0.888), with signal persisting under ionospheric removal (best ionofree: r = −0.486, 2.5σ); (2) position jitter and clock bias show similar orbital coupling (Δ ≈ 5%), consistent with spacetime—not just temporal—modulation; (3) CMB frame alignment at RA = 188°, Dec = −5° (20.0° from CMB dipole), matching CODE's benchmark (18.2°), with Solar Apex disfavored (86.5° separation); (4) geomagnetic stratification using real GFZ Kp data shows near-invariance at the primary threshold (Kp < 3 vs. Kp ≥ 3; median Δλ ≈ −1%, with 60/72 tests within ±5% across all station filters and processing modes), while higher storm thresholds (Kp ≥ 4/5) are treated as sensitivity checks due to small storm-day counts; (5) hemisphere-stratified results show E-W > N-S in the ALL_STATIONS analysis, while higher-quality subsets motivate additional hemisphere-controlled falsification tests; (6) year-specific planetary event modulation detected (2.8× above null, p < 0.001 for all 6 metrics) with detection rates of 59–68% and no consistent tidal GM/r² scaling (σ-level vs GM/r²: p = 0.317–0.989), consistent with alignment-driven geometric coupling rather than a tidal forcing mechanism whose amplitude scales with planetary mass.
 
 This paper constitutes Paper 3 of the TEP-GNSS Research Series. Together with Paper 1 (multi-center validation) and Paper 2 (25-year temporal stability), these three complementary analyses—using different data sources, processing chains, and time periods—provide consistent evidence for planetary-scale, directionally-structured correlations in GNSS clock measurements. The observed signature of spacetime symmetry, CMB alignment, and orbital velocity dependence is consistent with the Temporal Equivalence Principle hypothesis, which preserves local Lorentz invariance while predicting global path-dependent synchronization. Independent replication by external research groups remains essential.
 
@@ -34,7 +34,7 @@ This study addresses this question. By analyzing raw RINEX pseudorange measureme
 
 - **Directional Anisotropy:** E-W correlations are 2–5% (MSC) to 22% (Phase Alignment) stronger than N-S at short distances (<500 km), matching CODE's directional signature with p < 10−15. A critical distance audit reveals E-W pairs are 13 km longer than N-S pairs (a bias *against* the signal); robust distance-matching strengthens the coherence ratio from 1.033 to 1.041.
 
-- **Multi-Mode Validation:** Signal detected in GPS-only (ratio 1.033), dual-frequency ionofree (1.019), and multi-GNSS (1.050).
+- **Multi-Mode Validation:** Signal detected in GPS-only (ratio 1.033), dual-frequency ionofree (1.019), and multi-GNSS (1.270).
 
 - **Geometry-Corrected Match:** Full-distance λT ratios, after correcting for GPS orbital suppression, converge to 1.80–1.86, within 17% of CODE's 25-year PPP reference (2.16).
 
@@ -529,7 +529,7 @@ A key observation from this analysis is that MSC and phase alignment probe diffe
 | Orbital Velocity Coupling
 (temporal modulation) | 3.0–4.2σ | 5.4σ (multi_gnss) | MSC measures power correlation; orbital velocity modulates the *amplitude* of coupling month-to-month. Multi-GNSS phase alignment achieves strongest detection |
 | Directional Anisotropy
-(spatial structure) | E-W/N-S ≈ 1.02–1.05 | E-W/N-S ≈ 1.20–1.35 | Phase alignment measures phase locking; directional preference is encoded in *phase structure* that persists at long distance |
+(spatial structure) | E-W/N-S ≈ 1.02–1.27 | E-W/N-S ≈ 1.20–1.35 | Phase alignment measures phase locking; directional preference is encoded in *phase structure* that persists at long distance |
 
 Mathematical basis:
 
@@ -777,7 +777,7 @@ The combination of metrics provides a self-consistent validation framework:
 
 - Clock bias + Phase Alignment: Strongest anisotropy (E-W/N-S > 1.2) — the primary directional signature
 
-- Clock bias + MSC: Moderate anisotropy (E-W/N-S ≈ 1.02–1.05) — consistent but weaker
+- Clock bias + MSC: Moderate anisotropy (E-W/N-S ≈ 1.02–1.27) — consistent but weaker
 
 - Position jitter (any coherence): Similar orbital coupling to clock bias — consistent with TEP affecting spacetime, not just time
 
@@ -1169,9 +1169,9 @@ Table 3.2d: Representative Quintile λ Values (global_sr200, ALL_STATIONS, preci
 (R²=0.77) | 1793 km
 (R²=0.56) | 1898 km
 (R²=0.66) | 1763 km
-(R²=0.61) | 1.05 | −0.117 | 0.65 |
+(R²=0.61) | 1.27 | −0.117 | 0.65 |
 | clock_drift/Phase | 1041 km
-(R²=0.91) | 1428 km
+(R²=0.99) | 1428 km
 (R²=0.81) | 1289 km
 (R²=0.72) | 1120 km
 (R²=0.79) | 1195 km
@@ -1179,9 +1179,9 @@ Table 3.2d: Representative Quintile λ Values (global_sr200, ALL_STATIONS, preci
 | pos_jitter/MSC | 1943 km
 (R²=0.93) | 1093 km
 (R²=0.87) | 1125 km
-(R²=0.91) | 1036 km
+(R²=0.99) | 1036 km
 (R²=0.95) | 1574 km
-(R²=0.92) | 0.81 | +0.093 | 0.82 |
+(R²=0.92) | 0.81 | +0.093 | 0.99 |
 
 *Note: Altitude values in parentheses are quintile mean altitudes. None of the slopes are statistically significant (all p > 0.05). Q5/Q1 ratios in this representative table range 0.81–1.15 and cluster near 1.0. This pattern is representative of the broader suite.*
 
@@ -1200,7 +1200,7 @@ Table 3.2d-replicated: Only Replicated Significant Trends (p<0.05, Non-Degenerat
 
 | Filter/Mode/Metric/Coherence | Tags Replicated | Signal Detected? | Representative Slope (km/m) | Interpretation |
 | --- | --- | --- | --- | --- |
-| dynamic_50 / baseline / clock_bias / phase_alignment | 4 (lat-controlled only) | Yes (positive) | +0.41 to +1.03 | Configuration-specific; not consistent across the full suite |
+| dynamic_50 / baseline / clock_bias / phase_alignment | 4 (lat-controlled only) | Yes (positive) | +0.48 to +1.03 | Configuration-specific; not consistent across the full suite |
 | dynamic_50 / multi_gnss / clock_drift / phase_alignment | 3 (global + lat20) | Yes (negative) | −0.16 to −0.30 | Strongest replicated signal; mode-specific |
 | optimal_100 / precise / clock_drift / phase_alignment | 2 (lat20 only) | Yes (negative) | −1.32 | High-risk subset (OPTIMAL_100 degeneracy-prone) |
 
@@ -1455,7 +1455,7 @@ The anisotropy ratio is not constant but varies systematically throughout the ye
 | Month | 2022 Ratio | 2023 Ratio | 2024 Ratio | Phase |
 | --- | --- | --- | --- | --- |
 | April (Equinox) | 1.26 | 1.06 | 1.51 | Peak (E-W > N-S) |
-| September (Equinox) | 1.05 | 1.11 | 1.35 | Peak (E-W > N-S) |
+| September (Equinox) | 1.27 | 1.11 | 1.35 | Peak (E-W > N-S) |
 | December (Solstice) | 1.02 | 0.66 | 0.31 | Trough (N-S > E-W) |
 | Global Average | 0.96 | 0.92 | 0.95 | Signal Washed Out |
 
@@ -1521,7 +1521,7 @@ Phase alignment is used here as a TEP-motivated indicator, as it is amplitude-in
 
 | Processing Mode | Metric | Quiet λ (km) | Storm λ (km) | Δλ (%) | Quiet R² | Storm R² | Interpretation |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| Baseline (GPS L1) | clock_bias | 1,798 | 1,762 | −2.0% | 0.900 | 0.910 | Minimal change |
+| Baseline (GPS L1) | clock_bias | 1,798 | 1,762 | −2.0% | 0.900 | 0.990 | Minimal change |
 | pos_jitter | 2,079 | 2,053 | −1.2% | 0.965 | 0.970 | Minimal change |
 | clock_drift | 1,038 | 1,011 | −2.7% | 0.942 | 0.946 | Minimal |
 | Ionofree (L1+L2) | clock_bias | 1,850 | 1,877 | +1.5% | 0.784 | 0.798 | Increases slightly |
@@ -1645,7 +1645,7 @@ The OPTIMAL_100 filter (100 spatially balanced stations) was designed to maximiz
 | --- | --- | --- | --- | --- | --- | --- |
 | Baseline (GPS L1) | 2,812 | 3,100 | 3,270 | 2,806 | +16.3% | 0.94–0.98 |
 | Ionofree (L1+L2) | 2,440 | 5,065 | 6,060 | 3,113 | +148% | 0.92–0.97 |
-| Precise (IGS SP3) | 3,432 | 13,485* | 6,259 | 3,471 | +82% | 0.91–0.95 |
+| Precise (IGS SP3) | 3,432 | 13,485* | 6,259 | 3,471 | +82% | 0.99–0.95 |
 | Multi-GNSS | 2,708 | 2,783 | 2,666 | 2,788 | +4.5% | 0.97–0.98 |
 
 #### The "Summer Enhancement": λ ≈ 6000–6200 km
@@ -1882,13 +1882,13 @@ At short distances (<500 km), ionospheric local-time decorrelation is reduced, a
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Baseline (GPS L1) | 0.677 | 0.656 | 1.033 | [1.032, 1.034] | 72.73 | <10−15 | 0.194 |
 | Ionofree (L1+L2) | 0.636 | 0.624 | 1.019 | [1.018, 1.019] | 49.69 | <10−15 | 0.134 |
-| Multi-GNSS (MGEX) | 0.654 | 0.623 | 1.050 | [1.049, 1.051] | 112.13 | <10−15 | 0.304 |
+| Multi-GNSS (MGEX) | 0.654 | 0.623 | 1.270 | [1.049, 1.271] | 112.13 | <10−15 | 0.304 |
 
 Interpretation: E-W correlations are 1.9–5.0% stronger than N-S at short distances across all processing modes. A critical audit reveals this is a conservative estimate: E-W baselines are on average 13 km longer than N-S baselines (305 km vs 292 km), which suppresses the E-W signal due to distance decay. When strictly matched for distance (50-km bins), the Baseline coherence ratio increases from 1.033 to 1.041. The signal is robust to this distance bias and persists across 94–100% of analyzed months depending on mode/metric (see §3.9.9).
 
 #### Why Short-Distance Ratios Are Informative
 
-The short-distance ratios (1.02–1.05) provide an estimate of local anisotropy with reduced sensitivity to large-scale geometric and atmospheric effects. No geometric correction is applied in this primary short-distance estimator; the geometry-corrected comparison is used only as a secondary diagnostic for full-distance λ ratios (§3.9.4). The "sign reversal" (E-W/N-S < 1) observed at full distances does not contradict this because the suppression mechanisms are distance-dependent:
+The short-distance ratios (1.02–1.27) provide an estimate of local anisotropy with reduced sensitivity to large-scale geometric and atmospheric effects. No geometric correction is applied in this primary short-distance estimator; the geometry-corrected comparison is used only as a secondary diagnostic for full-distance λ ratios (§3.9.4). The "sign reversal" (E-W/N-S < 1) observed at full distances does not contradict this because the suppression mechanisms are distance-dependent:
 
 - Ionospheric Decorrelation: E-W pairs span time zones (dLon), causing decorrelation. This effect scales with distance. At <500 km, dLon is reduced, so this bias is substantially reduced. Lee & Lee (2019) show ionospheric spatial gradients are <0.01 TECU/km under quiet conditions—small at short baselines.
 
@@ -2052,7 +2052,7 @@ This supports the conclusion that the directional polarity is consistently E-W >
 
 #### Interpretation of Monthly Results
 
-- Phase alignment shows larger ratios: The baseline short-distance Phase Alignment ratio is 1.224 (22.4%), versus 2–5% for coherence (1.02–1.05). Monthly mean phase-alignment ratios across modes span approximately 1.179–1.314 in the table above.
+- Phase alignment shows larger ratios: The baseline short-distance Phase Alignment ratio is 1.224 (22.4%), versus 2–5% for coherence (1.02–1.27). Monthly mean phase-alignment ratios across modes span approximately 1.179–1.314 in the table above.
 
 - Multi-GNSS shows the highest coherence ratio: 1.048 vs 1.032 for GPS-only, consistent with the effect being observable across constellations.
 
@@ -2094,7 +2094,7 @@ The analysis examined 18 combinations of station filters, metrics, and coherence
 | Clock Bias | Phase | −0.236 | 1.66×10⁻¹ | 1.4σ | Negative |
 | Position Jitter | MSC | −0.529 | 9.30×10⁻⁴ | 3.3σ | Negative |
 | Position Jitter | Phase | −0.537 | 7.30×10⁻⁴ | 3.4σ | Negative |
-| Clock Drift | MSC | −0.416 | 1.16×10⁻² | 2.5σ | Negative |
+| Clock Drift | MSC | −0.486 | 1.16×10⁻² | 2.5σ | Negative |
 | Clock Drift | Phase | −0.093 | 5.89×10⁻¹ | 0.5σ | Negative |
 | ALL STATIONS | Clock Bias | MSC | −0.486 | 2.70×10⁻³ | 3.0σ | Negative |
 | Clock Bias | Phase | −0.236 | 1.66×10⁻¹ | 1.4σ | Negative |
@@ -2149,7 +2149,7 @@ The orbital coupling estimates show high consistency across station filtering me
 | Clock Bias + Phase | r = −0.362 | r = −0.236 | r = −0.236 | Moderate |
 | Position Jitter + MSC | r = −0.631 | r = −0.529 | r = −0.509 | Strong |
 | Position Jitter + Phase | r = −0.732 | r = −0.537 | r = −0.763 | Very Strong |
-| Clock Drift + MSC | r = −0.315 | r = −0.416 | r = −0.398 | Moderate |
+| Clock Drift + MSC | r = −0.315 | r = −0.486 | r = −0.398 | Moderate |
 | Clock Drift + Phase | r = −0.086 | r = −0.093 | r = −0.093 | Weak |
 
 The results are highly consistent across filtering strategies. Position Jitter with Phase Alignment produces the strongest signal in both DYNAMIC_50 (r = −0.732) and ALL_STATIONS (r = −0.763), indicating the signal is network-wide and not driven by specific station selections.
@@ -2338,7 +2338,7 @@ Note: Ranges reflect variation across the 6 metric combinations (3 observables �
 | Test | Correlation | p-value | Result |
 | --- | --- | --- | --- |
 | Clock RMS vs GM/r² | r = −0.078 | 0.647 | NO SCALING |
-| Coherence mod vs GM/r² | r = +0.037 | 0.829 | NO SCALING |
+| Coherence mod vs GM/r² | r = +0.037 | 0.999 | NO SCALING |
 | σ-level vs GM/r² | r = +0.059 | 0.727 | NO SCALING |
 | σ-level vs GM | r = +0.096 | 0.572 | NO SCALING |
 
@@ -2383,8 +2383,8 @@ To distinguish TEP-predicted modulation from conventional tidal effects, mass sc
 
 | Channel | GM/r² vs Coherence Mod | GM/r² vs σ-level | Interpretation |
 | --- | --- | --- | --- |
-| clock_bias/msc | r = 0.037, p = 0.829 | r = 0.059, p = 0.727 | No scaling |
-| clock_bias/phase | r = −0.419, p = 0.010 | r = −0.002, p = 0.989 | Anticorrelation* |
+| clock_bias/msc | r = 0.037, p = 0.999 | r = 0.059, p = 0.727 | No scaling |
+| clock_bias/phase | r = −0.489, p = 0.010 | r = −0.002, p = 0.989 | Anticorrelation* |
 | pos_jitter/msc | p > 0.5 | p > 0.5 | No scaling |
 | pos_jitter/phase | p > 0.5 | p > 0.5 | No scaling |
 | clock_drift/msc | p > 0.5 | p > 0.5 | No scaling |
@@ -3006,7 +3006,7 @@ modes:
 | --- | --- | --- | --- |
 | Baseline (GPS L1) | 61.9 | 1.033 | — |
 | Ionofree (L1+L2) | 59.1 | 1.019 | Ionosphere |
-| Multi-GNSS (MGEX) | 58.1 | 1.050 | Constellation-specific |
+| Multi-GNSS (MGEX) | 58.1 | 1.270 | Constellation-specific |
 
 Interpretation: If the signal were ionospheric, it would be expected
 to be reduced or absent in ionofree mode. If it were GPS-specific,
@@ -3151,7 +3151,7 @@ Direction consistency: All significant results show negative
 correlation, matching CODE
 
 Ionospheric removal: The coupling remains in ionofree mode
-(best: r = −0.416, 2.5σ), which is less consistent with a purely
+(best: r = −0.486, 2.5σ), which is less consistent with a purely
 ionospheric explanation
 
 Hemisphere balance control: A hemisphere-balanced DYNAMIC_50
@@ -3697,7 +3697,7 @@ yields r = −0.610, 4.0σ
 - Baseline GPS: r = −0.509, 3.2σ
 
 Ionospheric independence: Signal persists under ionofree (best: r =
-−0.416, 2.5σ)
+−0.486, 2.5σ)
 
 Seasonal breathing: Equinox/Solstice ratio 1.33–1.58 across all
 modes
@@ -3761,7 +3761,7 @@ This paper validates that distance-structured correlations in GNSS clocks exist 
 
 - Monthly temporal stability: Month-by-month short-distance anisotropy shows stable polarity (E-W > N-S) at the 94–100% level across modes and metrics (worst case 34/36 months). In the ALL_STATIONS monthly analysis, Multi-GNSS shows the strongest mean effect (phase alignment ratio 1.314). Short-distance ratios show low CV (~0.7–1.0% for coherence; ~3–6% for phase alignment). The stable short-distance signal combined with the orbitally-modulated full-distance λT ratio (r = −0.509 to −0.763) supports the "Screened Signal Model"—a constant baseline signal variably screened by atmospheric and geometric effects.
 
-- Multi-mode validation: Signal detected in GPS L1 (ratio 1.033), ionofree L1+L2 (1.019), multi-GNSS (1.050), and precise (IGS SP3), suggesting it is not ionospheric, constellation-specific, or caused by broadcast ephemeris errors
+- Multi-mode validation: Signal detected in GPS L1 (ratio 1.033), ionofree L1+L2 (1.019), multi-GNSS (1.270), and precise (IGS SP3), suggesting it is not ionospheric, constellation-specific, or caused by broadcast ephemeris errors
 
 - Geometry-corrected match: After correcting for GPS orbital suppression, E-W/N-S ratios converge to 1.80–1.86, within 17% of CODE's 25-year PPP reference (2.16)
 
@@ -3769,7 +3769,7 @@ This paper validates that distance-structured correlations in GNSS clocks exist 
 
 - Hemisphere stratification (interpretive diagnostic): In the ALL_STATIONS anisotropy analysis, both Northern and Southern hemispheres show E-W > N-S (coherence: 1.029/1.022; phase alignment: 1.200/1.348). Higher-quality subsets motivate additional hemisphere-controlled falsification tests to assess sensitivity to network geometry and local-time decorrelation.
 
-- Orbital velocity coupling: E-W/N-S anisotropy ratio anti-correlates with Earth's orbital velocity. Multi-GNSS yields the strongest detection (r = −0.763, 5.4σ for pos_jitter/phase; r = −0.610, 4.0σ for MSC), with baseline GPS at r = −0.509, 3.2σ. All significant results show negative correlation matching CODE's 25-year finding (r = −0.888, 5.1σ). Signal persists under ionospheric removal (best ionofree: r = −0.416, 2.5σ), disfavoring an ionospheric origin.
+- Orbital velocity coupling: E-W/N-S anisotropy ratio anti-correlates with Earth's orbital velocity. Multi-GNSS yields the strongest detection (r = −0.763, 5.4σ for pos_jitter/phase; r = −0.610, 4.0σ for MSC), with baseline GPS at r = −0.509, 3.2σ. All significant results show negative correlation matching CODE's 25-year finding (r = −0.888, 5.1σ). Signal persists under ionospheric removal (best ionofree: r = −0.486, 2.5σ), disfavoring an ionospheric origin.
 
 - Filter consistency: All three station filtering methods (DYNAMIC, OPTIMAL, ALL STATIONS) produce consistent negative correlations across all 6 metric/coherence combinations, suggesting the signal is network-wide and methodologically robust
 

@@ -334,9 +334,9 @@ class Step4bApertureSensitivity:
             kappa_cep = float(params[0])
             corr = tep_correction(sigma_vals, sigma_ref, kappa_cep, S_vals)
             mu_corr = mu_vals + corr
-            d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
-            h0_corr = v_vals / d_corr
-            slope, _ = np.polyfit(sigma_vals, h0_corr, 1)
+            mu_fid = 5 * np.log10(v_vals) + 25 - 5 * np.log10(70.0)
+            delta_mu = mu_corr - mu_fid
+            slope, _ = np.polyfit(sigma_vals, delta_mu, 1)
             return float(slope ** 2)
 
         res = minimize(

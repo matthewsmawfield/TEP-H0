@@ -77,10 +77,39 @@ class Step11ComprehensiveAudit:
         with open(self.results_dir / "tep_correction_results.json") as f:
             tep_json = json.load(f)
 
+        # Override hardcoded sigma_ref with the pipeline value
+        self.sigma_ref = float(tep_json.get("sigma_ref", self.sigma_ref))
+
         findings = []
         errors = []
 
-        # --- 1. Sample Consistency ---
+        # --- 0. Pipeline Freshness Check ---
+        # Warn if any downstream artifact is older than tep_correction_results.json,
+        # which indicates a partial rerun where downstream steps used stale kappa_cep.
+        tep_mtime = (self.results_dir / "tep_correction_results.json").stat().st_mtime
+        downstream_files = [
+            "covariance_robustness.json",
+            "cross_channel_consistency.json",
+            "local_gravity_closure.json",
+            "pipeline_audit_report.json",
+            "enhanced_robustness_results.json",
+        ]
+        stale_files = []
+        for fname in downstream_files:
+            fpath = self.results_dir / fname
+            if fpath.exists() and fpath.stat().st_mtime < tep_mtime:
+                stale_files.append(fname)
+        if stale_files:
+            msg = f"FRESHNESS_WARNING: {len(stale_files)} downstream files predate tep_correction_results.json: {stale_files}"
+            findings.append(msg)
+            print_status(msg, "WARNING")
+            print_status(
+                "Cross-step comparisons may be unreliable. Run full pipeline to refresh all artifacts.",
+                "WARNING",
+            )
+        else:
+            findings.append("FRESHNESS: all downstream files postdate tep_correction_results.json, PASS")
+            print_status("Freshness check: all downstream artifacts current, PASS", "SUCCESS")
         n = len(strat)
         z_min = strat["z_hd"].min()
         z_max = strat["z_hd"].max()
@@ -201,16 +230,44 @@ class Step11ComprehensiveAudit:
             print_status(f"ODR failed: {e}", "WARNING")
 
         # --- 8. Multiple-Testing Correction ---
-        p_values = sorted([0.0031, 0.0041, 0.0041, 0.0081, 0.0109, 0.0144, 0.0149, 0.0212, 0.0277, 0.0370, 0.0370, 0.0430])
-        n_p = len(p_values)
-        bonf_thresh = 0.05 / n_p
-        n_bonf = sum(1 for p in p_values if p < bonf_thresh)
-        findings.append(
-            f"MULTIPLE_TESTING: Bonferroni_thresh={bonf_thresh:.4f}, significant={n_bonf}/{n_p}"
-        )
-        print_status(
-            f"Bonferroni: {n_bonf}/{n_p} significant (thresh={bonf_thresh:.4f})", "INFO"
-        )
+        # Collect p-values dynamically from pipeline output files rather than hardcoding.
+        p_sources = []
+        # Primary: tep_correction_results.json
+        for key in ("pearson_p", "spearman_p", "bootstrap_permutation_p", "gls_p"):
+            v = tep_json.get(key)
+            if v is not None:
+                p_sources.append(float(v))
+        # Robustness tests
+        for fname, keys in [
+            ("enhanced_robustness_results.json", ("pearson_p", "spearman_p", "gls_p", "wls_p", "stellar_only_p", "covariate_p")),
+            ("stratification_results.json", ("stratification_p",)),
+            ("host_mass_residual_test.json", ("cepheid_mass_residual_p", "cepheid_both_residual_p")),
+            ("cross_channel_consistency.json", ("trgb_pearson_p", "differential_p")),
+            ("anchor_stratification_test.json", ("pearson_p",)),
+        ]:
+            try:
+                with open(self.results_dir / fname) as _f:
+                    _d = json.load(_f)
+                for k in keys:
+                    v = _d.get(k)
+                    if v is not None:
+                        p_sources.append(float(v))
+            except Exception:
+                pass
+        if p_sources:
+            p_values = sorted(p_sources)
+            n_p = len(p_values)
+            bonf_thresh = 0.05 / n_p
+            n_bonf = sum(1 for p in p_values if p < bonf_thresh)
+            findings.append(
+                f"MULTIPLE_TESTING: Bonferroni_thresh={bonf_thresh:.4f}, significant={n_bonf}/{n_p} (from {n_p} dynamic p-values)"
+            )
+            print_status(
+                f"Bonferroni: {n_bonf}/{n_p} significant (thresh={bonf_thresh:.4f})", "INFO"
+            )
+        else:
+            findings.append("MULTIPLE_TESTING: no p-values found in pipeline outputs")
+            print_status("Multiple-testing correction: no p-values available", "WARNING")
 
         # --- 9. Physical Correction Sizes ---
         kappa = tep_json["optimal_kappa_cep"]

@@ -15,38 +15,41 @@ This executes the full pipeline and populates `results/figures/` and `results/ou
 
 | Step | Script | Description |
 |------|--------|-------------|
-| 0 | `step_0_sigma_catalog.py` | Build and validate the velocity-dispersion compilation from literature and catalog sources. |
-| 1 | `step_1_data_ingestion.py` | Downloads SH0ES/Pantheon+ data, reconstructs catalogs, matches hosts. |
-| 1b | `step_1b_aperture_correction.py` | Fetches RC3 metadata and applies aperture normalization to velocity dispersions. |
-| 2 | `step_2_stratification.py` | Calculates H₀, stratifies by σ, and detects environmental bias. |
-| 2b | `step_2b_shear_suppression_viz.py` | Generates shear-suppression visualization. |
-| 15 | `step_15_hierarchical_sigma.py` | Hierarchical measurement-error model for σ (method-specific bias & scatter; ODR slope). |
-| 3 | `step_3_tep_correction.py` | Optimizes κ_Cep, applies the TEP correction, and unifies H₀. |
-| 14 | `step_14_frozen_predictions.py` | Generates frozen falsification-ready prediction table for prospective hosts. |
-| 3b | `step_3b_shear_suppression_viz.py` | Generates shear-suppression visualization. |
-| 4 | `step_4_robustness_checks.py` | Jackknife, Bootstrap, and Peculiar Velocity Monte Carlo tests. |
-| 4b | `step_4b_aperture_sensitivity.py` | Tests stability against aperture size and correction parameters. |
-| 5 | `step_5_m31_analysis.py` | Analyzes Inner vs Outer Cepheids in M31 (ground-based). |
-| 5b | `step_5b_m31_radial_suppression.py` | Continuous and step-function radial suppression models. |
-| 6 | `step_6_multivariate_analysis.py` | Controls for Age, Dust, and Stellar Mass confounds. |
-| 6e | `step_6_enhanced_robustness.py` | Enhanced robustness tests. |
-| 7 | `step_7_lmc_replication.py` | Replicates differential analysis in LMC (null control). |
-| 7t | `step_7_trgb_comparison.py` / `step_7_trgb_reanalysis.py` | TRGB differential-insensitivity analysis. |
-| 8 | `step_8_m31_phat_analysis.py` | High-resolution HST analysis of M31 Cepheids (PHAT). |
-| 9 | `step_9_final_synthesis.py` | Generates final manuscript figures and summary tables. |
-| 10 | `step_10_anchor_stratification.py` | Tests for TEP effects in geometric anchors (MW, LMC, NGC 4258). |
-| 10b | `step_10b_local_gravity_closure.py` | Converts fitted Cepheid response into explicit local source-charge prediction. |
-| 12 | `step_12_cross_channel.py` | Cross-channel consistency test (Cepheid + TRGB + pulsar). |
-| 11 | `step_11_comprehensive_audit.py` | Comprehensive audit: sample consistency, headline recomputation, covariance, provenance, ODR, multiple-testing. |
-| 11a | `scripts/utils/pipeline_audit.py` | Lightweight pipeline self-check (legacy). |
-| 13 | `step_13_stellar_validation.py` | MESA/RSP/GYRE stellar-structure validation (optional, post-pipeline). |
-| 16 | `step_16_host_mass_residual.py` | Host-mass residual test: isolates TEP-specific signal from shared systematics (Cepheid vs TRGB). |
-| 17 | `step_17_regressor_audit.py` | Primary TEP regressor audit: compares σ, σ², S_local·σ², S_total·σ², confounds, and null controls. |
-| 18 | `step_18_group_env_models.py` | Group environment model comparison: tests whether N_mb is a confound or a TEP screening mechanism. |
-| 19 | `step_19_joint_indicator_model.py` | Joint Cepheid+TRGB indicator model: separates common host systematics from indicator-specific clock bias. |
-| 20 | `step_20_stratified_validation.py` | Physically stratified validation: train on one physical regime, test on another. |
-| 21 | `step_21_exact_sigma_ref.py` | Exact anchor-leverage σ_ref reconstruction from multiple weighting schemes. |
-| 22 | `step_22_sn_residual_test.py` | SN Ia downstream residual test: does TEP correction remove σ dependence in corrected H0? |
+| 00 | `step_00_sigma_catalog.py` | Build and validate the velocity-dispersion compilation from literature and catalog sources. |
+| 01 | `step_01_data_ingestion.py` | Downloads SH0ES/Pantheon+ data, reconstructs catalogs, matches hosts. |
+| 02 | `step_02_aperture_correction.py` | Fetches RC3 metadata and applies aperture normalization to velocity dispersions. |
+| 03 | `step_03_stratification.py` | Calculates H₀, stratifies by σ, and detects environmental bias. |
+| 04 | `step_04_tep_correction.py` | Optimizes κ_Cep, applies the TEP correction, and unifies H₀. |
+| 05 | `step_05_frozen_predictions.py` | Generates frozen falsification-ready prediction table for prospective hosts. |
+| 06 | `step_06_shear_suppression_viz.py` | Generates shear-suppression visualization. |
+| 07 | `step_07_aperture_sensitivity.py` | Tests stability against aperture size and correction parameters. |
+| 08 | `step_08_robustness_checks.py` | Jackknife, Bootstrap, and Peculiar Velocity Monte Carlo tests. |
+| 09 | `step_09_hierarchical_sigma.py` | Hierarchical measurement-error model for σ (method-specific bias & scatter; ODR slope). |
+| 10 | `step_10_m31_analysis.py` | Analyzes Inner vs Outer Cepheids in M31 (ground-based). |
+| 11 | `step_11_m31_radial_suppression.py` | Continuous and step-function radial suppression models. |
+| 12 | `step_12_multivariate_analysis.py` | Controls for Age, Dust, and Stellar Mass confounds. |
+| 13 | `step_13_enhanced_robustness.py` | Enhanced robustness tests. |
+| 14 | `step_14_lmc_replication.py` | Replicates differential analysis in LMC (null control). |
+| 15 | `step_15_trgb_comparison.py` | TRGB differential-insensitivity analysis. |
+| 16 | `step_16_trgb_reanalysis.py` | TRGB differential-insensitivity reanalysis. |
+| 17 | `step_17_host_mass_residual.py` | Host-mass residual test: isolates TEP-specific signal from shared systematics (Cepheid vs TRGB). |
+| 18 | `step_18_regressor_audit.py` | Primary TEP regressor audit: compares σ, σ², S_local·σ², S_total·σ², confounds, and null controls. |
+| 19 | `step_19_group_env_models.py` | Group environment model comparison: tests whether N_mb is a confound or a TEP screening mechanism. |
+| 20 | `step_20_joint_indicator_model.py` | Joint Cepheid+TRGB indicator model: separates common host systematics from indicator-specific clock bias. |
+| 21 | `step_21_stratified_validation.py` | Physically stratified validation: train on one physical regime, test on another. |
+| 22 | `step_22_exact_sigma_ref.py` | Exact anchor-leverage σ_ref reconstruction from multiple weighting schemes. |
+| 23 | `step_23_sn_residual_test.py` | SN Ia downstream residual test: does TEP correction remove σ dependence in corrected H0? |
+| 24 | `step_24_synthetic_injection.py` | Synthetic signal injection and recovery test. |
+| 25 | `step_25_leave_one_out.py` | Leave-One-Out influence analysis. |
+| 26 | `step_26_m31_phat_analysis.py` | High-resolution HST analysis of M31 Cepheids (PHAT). |
+| 27 | `step_27_anchor_stratification.py` | Tests for TEP effects in geometric anchors (MW, LMC, NGC 4258). |
+| 28 | `step_28_local_gravity_closure.py` | Converts fitted Cepheid response into explicit local source-charge prediction. |
+| 29 | `step_29_cross_channel.py` | Cross-channel consistency test (Cepheid + TRGB + pulsar). |
+| 30 | `step_30_cosmology_inference.py` | Cosmological inference models and predictions. |
+| 31 | `step_31_final_synthesis.py` | Generates final manuscript figures and summary tables. |
+| 32 | `step_32_comprehensive_audit.py` | Comprehensive audit: sample consistency, headline recomputation, covariance, provenance, ODR, multiple-testing. |
+| 32b| `scripts/utils/pipeline_audit.py` | Lightweight pipeline self-check (legacy). |
+| 33 | `step_33_stellar_validation.py` | MESA/RSP/GYRE stellar-structure validation (optional, post-pipeline). |
 
 ## Options
 

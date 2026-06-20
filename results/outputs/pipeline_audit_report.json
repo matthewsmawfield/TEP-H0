@@ -413,71 +413,7 @@
     },
     {
       "details": {
-        "files_with_missing_critical_tokens": {
-          "11-TEP-H0-v0.7-KingstonUponHull.md": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ],
-          "README.md": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ],
-          "manuscripts/11-TEP-H0-v0.7-KingstonUponHull.md": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ],
-          "site/CITATION.cff": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ],
-          "site/codemeta.json": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ],
-          "site/components/1_abstract.html": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ],
-          "site/components/4_results.html": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ],
-          "site/components/5_discussion.html": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ],
-          "site/components/6_conclusion.html": [
-            "68.84",
-            "0.99"
-          ],
-          "site/dist/CITATION.cff": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ],
-          "site/dist/index.html": [
-            "68.84",
-            "0.99"
-          ],
-          "site/index.html": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ],
-          "zenodo.txt": [
-            "68.84",
-            "0.99",
-            "1.27"
-          ]
-        },
+        "files_with_missing_critical_tokens": {},
         "missing_tokens_global": [],
         "paths": [
           "README.md",
@@ -509,21 +445,11 @@
         ]
       },
       "name": "narrative_surfaces_include_current_headline_numbers",
-      "ok": false
+      "ok": true
     },
     {
       "details": {
-        "forbidden_hits": {
-          "11-TEP-H0-v0.7-KingstonUponHull.md": [
-            "decisive confirmation requires"
-          ],
-          "site/components/5_discussion.html": [
-            "decisive confirmation requires"
-          ],
-          "site/dist/index.html": [
-            "decisive confirmation requires"
-          ]
-        },
+        "forbidden_hits": {},
         "paths": [
           "README.md",
           "zenodo.txt",
@@ -542,7 +468,7 @@
         ]
       },
       "name": "narrative_surfaces_have_no_stale_framing_or_numbers",
-      "ok": false
+      "ok": true
     },
     {
       "details": {
@@ -561,16 +487,16 @@
     {
       "details": {
         "anchor": {
-          "chi2": 2.8970077404243786,
+          "chi2": 1.1742141839165596,
           "dof": 1,
-          "intercept": -5.874926374182812,
-          "intercept_err": 0.004690844357260576,
-          "kappa_anchor": 232119.89763634533,
-          "kappa_anchor_err": 193678.93842636046,
+          "intercept": -5.860363029076873,
+          "intercept_err": 0.009398138785988277,
+          "kappa_anchor": 246442.21361560377,
+          "kappa_anchor_err": 138653.37389942596,
           "kappa_host": 1272451.0192871094,
           "kappa_host_err": 479113.28125,
           "n_anchors": 3,
-          "p_pearson": 0.8018959043120335,
+          "p_pearson": 0.5381819555331222,
           "prediction_test": {
             "chi2": 9.629959584381401,
             "dof": 2,
@@ -650,9 +576,9 @@
               }
             ]
           },
-          "r_pearson": 0.306183306290876,
+          "r_pearson": 0.663451316128769,
           "sigma_ref_screened": 30.50738103825078,
-          "tension_with_host": 2.0131044106796905
+          "tension_with_host": 2.057066523490609
         },
         "host_comparison": {}
       },
@@ -711,7 +637,7 @@
       "spearman_rho": 0.5172413793103448
     },
     "n_checks": 20,
-    "n_failed": 2,
-    "ok": false
+    "n_failed": 0,
+    "ok": true
   }
 }

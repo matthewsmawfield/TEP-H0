@@ -89,21 +89,21 @@
   "subsample_tep": {
     "full_sample": {
       "n": 29,
-      "kappa_cep": 1256701.66015625,
-      "unified_h0": 68.8516394181665,
-      "h0_error": 1.2884796689819678
+      "kappa_cep": 1272448.73046875,
+      "unified_h0": 68.83788061646989,
+      "h0_error": 1.28910796023173
     },
     "stellar_only": {
       "n": 16,
-      "kappa_cep": 1199969.482421875,
-      "unified_h0": 66.98198018763117,
-      "h0_error": 1.6571959115014891
+      "kappa_cep": 1224230.95703125,
+      "unified_h0": 66.9417423646465,
+      "h0_error": 1.6580642211950676
     },
     "gold_standard": {
       "n": 7,
-      "kappa_cep": 1503778.076171875,
-      "unified_h0": 64.20563603442487,
-      "h0_error": 3.325064959788341
+      "kappa_cep": 1522259.521484375,
+      "unified_h0": 64.17765317861053,
+      "h0_error": 3.3280003576715074
     }
   },
   "convergence": {
@@ -167,8 +167,8 @@
       "n_low_sigma": 15,
       "raw_slope": 0.0851185150060325,
       "corrected_mean_full_kappa": 68.83787861896722,
-      "corrected_mean_refit_kappa": 68.8516394181665,
-      "refit_kappa": 1256701.66015625
+      "corrected_mean_refit_kappa": 68.83788061646989,
+      "refit_kappa": 1272448.73046875
     },
     {
       "tier": "Stellar only",
@@ -181,8 +181,8 @@
       "n_low_sigma": 7,
       "raw_slope": 0.08877575299390997,
       "corrected_mean_full_kappa": 66.86215537320248,
-      "corrected_mean_refit_kappa": 66.98198018763117,
-      "refit_kappa": 1199969.482421875
+      "corrected_mean_refit_kappa": 66.9417423646465,
+      "refit_kappa": 1224230.95703125
     },
     {
       "tier": "Gold standard",
@@ -195,8 +195,8 @@
       "n_low_sigma": 3,
       "raw_slope": 0.10985233389027711,
       "corrected_mean_full_kappa": 64.56287397650688,
-      "corrected_mean_refit_kappa": 64.20563603442487,
-      "refit_kappa": 1503778.076171875
+      "corrected_mean_refit_kappa": 64.17765317861053,
+      "refit_kappa": 1522259.521484375
     }
   ]
 }

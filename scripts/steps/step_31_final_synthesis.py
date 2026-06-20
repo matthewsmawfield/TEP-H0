@@ -64,6 +64,7 @@ class Step9FinalSynthesis:
         self.local_gravity_json = self.outputs_dir / "local_gravity_closure.json"
         self.cross_channel_json = self.outputs_dir / "cross_channel_consistency.json"
         self.stratification_json = self.outputs_dir / "stratification_results.json"
+        self.regressor_audit_json = self.outputs_dir / "regressor_audit_summary.json"
         
         # Output Files
         self.report_path = self.outputs_dir / "TEP_FINAL_ROBUSTNESS_REPORT.md"
@@ -94,6 +95,7 @@ class Step9FinalSynthesis:
         local_gravity = self.load_json(self.local_gravity_json)
         cross_channel = self.load_json(self.cross_channel_json)
         strat = self.load_json(self.stratification_json)
+        reg_audit = self.load_json(self.regressor_audit_json)
         
         if not all([m31_g, m31_p, lmc]):
             print_status("Critical input files missing. Cannot proceed with full synthesis.", "ERROR")
@@ -145,7 +147,7 @@ class Step9FinalSynthesis:
         self._plot_differential_comparison(metrics)
         
         # 4. Generate Report
-        self._write_report(m31_g, m31_p, lmc, h0_robust, tep, oos, trgb, anchor, local_gravity, cross_channel, strat)
+        self._write_report(m31_g, m31_p, lmc, h0_robust, tep, oos, trgb, anchor, local_gravity, cross_channel, strat, reg_audit)
         
         print_status("Step 9 Complete. Report generated.", "SUCCESS")
 
@@ -196,7 +198,7 @@ class Step9FinalSynthesis:
         shutil.copy(self.summary_plot_path, self.public_figures_dir / "figure_08_robustness_synthesis_plot.png")
         print_status(f"Saved comparison plot to {self.summary_plot_path}", "SUCCESS")
 
-    def _write_report(self, m31_g, m31_p, lmc, h0_robust, tep=None, oos=None, trgb=None, anchor=None, local_gravity=None, cross_channel=None, strat=None):
+    def _write_report(self, m31_g, m31_p, lmc, h0_robust, tep=None, oos=None, trgb=None, anchor=None, local_gravity=None, cross_channel=None, strat=None, reg_audit=None):
         """Generates the Markdown report."""
         
         with open(self.report_path, 'w') as f:
@@ -254,7 +256,9 @@ class Step9FinalSynthesis:
                         f.write(f"- **Uncorrected correlation:** Pearson $r = {corr_r:.3f}$; median $\\sigma = {median_sigma:.1f}$ km/s; $\\Delta H_0 = {delta_h0:.2f}$ km/s/Mpc.\n")
                     else:
                         f.write("- **Uncorrected correlation:** [Stratification results not available]\n")
-                    kappa_err_robust = tep.get('bootstrap_kappa_robust_std') or tep.get('wls_kappa_err_scaled') or tep.get('bootstrap_kappa_std', float('nan'))
+                    kappa_err_robust = (tep.get('bootstrap_kappa_robust_std') if tep.get('bootstrap_kappa_robust_std') is not None
+                            else tep.get('wls_kappa_err_scaled') if tep.get('wls_kappa_err_scaled') is not None
+                            else tep.get('bootstrap_kappa_std', float('nan')))
                     f.write(f"- **TEP response coefficient:** $\\kappa_{{\\rm Cep}} = ({tep['optimal_kappa_cep']/1e6:.2f} \\pm {kappa_err_robust/1e6:.2f}) \\times 10^6$ mag.\n")
                     f.write(f"- **Unified H0:** ${tep['unified_h0']:.2f}$ km/s/Mpc; bootstrap mean ${tep['bootstrap_h0_mean']:.2f} \\pm {tep['bootstrap_h0_std']:.2f}$ km/s/Mpc.\n")
                     f.write(f"- **Planck tension:** ${tep['tension_sigma']:.2f}\\sigma$ using the joint bootstrap uncertainty.\n\n")
@@ -280,7 +284,7 @@ class Step9FinalSynthesis:
                         f.write(f"- **Null model:** $H_0 = \\mathrm{{const}}$ ($k=1$).\n")
                         f.write(f"- **TEP model:** $H_0 = H_{{0,0}} + \\kappa_{{\\rm Cep}} \\cdot S(\\rho) \\cdot (\\sigma^2 - \\sigma_{{\\rm ref}}^2)/c^2$ ($k=2$).\n")
                         f.write(f"- **$\\Delta\\chi^2$ (null $-$ TEP):** {bc['delta_chi2']:.1f}.\n")
-                        f.write(f"- **$\\Delta$BIC:** {bc["projected"]["delta_bic"]:.1f} ({bc['evidence_strength']} evidence for TEP).\n")
+                        f.write(f"- **$\\Delta$BIC:** {bc.get('delta_bic', float('nan')):.1f} ({bc['evidence_strength']} evidence for TEP).\n")
                         f.write(f"- **Bayes factor:** $\\approx {bc['bayes_factor']:.1e}$.\n")
                         if 'gls_crosscheck' in bc:
                             f.write(f"- **GLS-covariance cross-check:** $\\Delta$BIC = {bc['gls_crosscheck']['delta_bic']:.1f} (free-intercept fit; matches the projected contrast to rounding).\n")
@@ -415,12 +419,23 @@ class Step9FinalSynthesis:
 
             f.write("\n## 9. Conclusion\n\n")
             kappa_mill = tep.get('optimal_kappa_cep', float('nan')) / 1e6
-            kappa_err_mill = (tep.get('bootstrap_kappa_robust_std') or tep.get('wls_kappa_err_scaled') or tep.get('bootstrap_kappa_std', float('nan'))) / 1e6
+            kappa_err_mill = (tep.get('bootstrap_kappa_robust_std') if tep.get('bootstrap_kappa_robust_std') is not None
+                              else tep.get('wls_kappa_err_scaled') if tep.get('wls_kappa_err_scaled') is not None
+                              else tep.get('bootstrap_kappa_std', float('nan'))) / 1e6
             # Compute actual tension with KAPPA_GAL, not Planck tension
             kappa_gal = KAPPA_GAL
             kappa_gal_err = KAPPA_GAL_UNCERTAINTY
             tension_kgal = abs(kappa_mill * 1e6 - kappa_gal) / np.sqrt((kappa_err_mill * 1e6)**2 + kappa_gal_err**2)
-            f.write(f"**Single-channel evidence (Cepheid) is strong.** SH0ES Hubble-flow Cepheid hosts show a significant H0-$\\sigma$ bias ($r=0.466$, $p=0.0109$; TEP-local $r=0.469$); the suppression-aware $\\kappa_{{\\rm Cep}}$ correction removes the trend; covariance-aware, stellar-only, density-control, redshift/flow, and out-of-sample tests preserve the signal. The fitted $\\kappa_{{\\rm Cep}} = ({kappa_mill:.2f} \\pm {kappa_err_mill:.2f}) \\times 10^6$ mag is consistent with the TEP theoretical prediction $\\kappa_{{\\rm gal}} = 9.7 \\times 10^5 \\pm 4.0 \\times 10^5$ mag at ${tension_kgal:.1f}\\sigma$.\n\n")
+            # reg_audit already loaded at top of run() from regressor_audit_summary.json
+            best_r = reg_audit.get("best_pearson_r", float("nan")) if reg_audit else float("nan")
+            best_p = reg_audit.get("best_pearson_p", float("nan")) if reg_audit else float("nan")
+            tep_local_r = float("nan")
+            if reg_audit and "all_results" in reg_audit:
+                for entry in reg_audit["all_results"]:
+                    if entry.get("regressor") == "S_local_sigma_sq":
+                        tep_local_r = entry.get("pearson_r", float("nan"))
+                        break
+            f.write(f"**Single-channel evidence (Cepheid) is strong.** SH0ES Hubble-flow Cepheid hosts show a significant H0-$\\sigma$ bias ($r={best_r:.3f}$, $p={best_p:.4f}$; TEP-local $r={tep_local_r:.3f}$); the suppression-aware $\\kappa_{{\\rm Cep}}$ correction removes the trend; covariance-aware, stellar-only, density-control, redshift/flow, and out-of-sample tests preserve the signal. The fitted $\\kappa_{{\\rm Cep}} = ({kappa_mill:.2f} \\pm {kappa_err_mill:.2f}) \\times 10^6$ mag is consistent with the TEP theoretical prediction $\\kappa_{{\\rm gal}} = 9.7 \\times 10^5 \\pm 4.0 \\times 10^5$ mag at ${tension_kgal:.1f}\\sigma$.\n\n")
             f.write("**Cross-channel evidence is suggestive but not definitive.** The TRGB comparison shows a weaker raw correlation ($r=0.41$, $p=0.09$) and the differential test (TRGB $-$ Cepheid vs $\\sigma$) is not significant ($r=0.088$, $p=0.36$). Applying the Cepheid $\\kappa$ to TRGB data produces a 58% slope reduction, which is directionally consistent with TEP (non-periodic indicators should couple more weakly), but a rigorous cross-channel consistency test requires additional channels—specifically SN Ia and pulsar spin-down measurements—to confirm the predicted channel hierarchy.\n\n")
             f.write("**Local-gravity closure is robust.** The fitted clock response maps through a Vainshtein-screening model that passes Cassini and MICROSCOPE bounds by several orders of magnitude.\n\n")
             f.write("**Summary:** The Cepheid channel alone provides strong evidence for an environmental bias that is physically consistent with the TEP mechanism. The cross-channel test is currently limited to one additional channel (TRGB) with weak signal. A definitive TEP framework confirmation awaits SN Ia and pulsar channel comparisons.\n")

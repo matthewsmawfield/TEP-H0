@@ -109,6 +109,9 @@ class Step7TRGBReanalysis:
         # Apply 1-tailed p-values because TEP makes a strict a priori directional prediction:
         # Cepheid periods dilate (appear shorter) -> inferred absolute magnitudes are fainter ->
         # inferred distance modulus is smaller -> mu_TRGB - mu_Ceph > 0.
+        p_two_tailed = float(p)       # save originals before in-place transformation
+        prho_two_tailed = float(prho)
+        p_val_two_tailed = float(p_val)
         if r > 0: p /= 2.0
         else: p = 1.0 - (p / 2.0)
         
@@ -150,16 +153,16 @@ class Step7TRGBReanalysis:
             'pearson_r': r,
             'pearson_p': p,
             'pearson_p_tail': 'one-tailed',
-            'pearson_p_raw_two_tailed': p * 2.0 if r > 0 else p,
+            'pearson_p_raw_two_tailed': p_two_tailed,
             'spearman_rho': rho,
             'spearman_p': prho,
             'spearman_p_tail': 'one-tailed',
-            'spearman_p_raw_two_tailed': prho * 2.0 if rho > 0 else prho,
+            'spearman_p_raw_two_tailed': prho_two_tailed,
             'slope': slope,
             'slope_err': std_err,
             'slope_p': p_val,
             'slope_p_tail': 'one-tailed',
-            'slope_p_raw_two_tailed': p_val * 2.0 if slope > 0 else p_val,
+            'slope_p_raw_two_tailed': p_val_two_tailed,
             'consistent_with_tep': bool(r > 0.3)
         }
         

@@ -87,7 +87,9 @@ class Step19JointIndicatorModel:
         # Compute TEP regressor: use SAME regressor as Step 12 cross-channel
         # Step 12 uses: R_m = S_local * (sigma^2 - sigma_ref^2) / c^2
         # NOT S_total = S_local * S_group (which adds noise for isolated hosts)
-        sigma = merged["sigma_inferred_trgb"].values
+        # Use the same sigma as Step 3/Step 12 (from stratified_h0.csv),
+        # not the TRGB-file sigma, to ensure regressor consistency.
+        sigma = merged["sigma_inferred_host"].values
         S_local = merged["shear_suppression"].values
         R_m = S_local * (sigma ** 2 - sigma_ref ** 2) / c2
 

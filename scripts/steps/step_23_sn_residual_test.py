@@ -56,12 +56,16 @@ class Step22SNResidualTest:
         corrected = pd.read_csv(self.results_dir / "tep_corrected_h0.csv")
         raw = pd.read_csv(self.results_dir / "stratified_h0.csv")
 
-        # Ensure same hosts
-        raw = raw[raw["normalized_name"].isin(corrected["normalized_name"])]
+        # Merge on normalized_name to guarantee row alignment between raw and corrected
+        merged = raw.merge(
+            corrected[["normalized_name", "h0_corrected"]],
+            on="normalized_name",
+            how="inner",
+        )
 
-        sigma = raw["sigma_inferred"].values
-        h0_raw = raw["h0_derived"].values
-        h0_corr = corrected["h0_corrected"].values
+        sigma = merged["sigma_inferred"].values
+        h0_raw = merged["h0_derived"].values
+        h0_corr = merged["h0_corrected"].values
 
         # Raw correlation
         r_raw, p_raw = stats.pearsonr(sigma, h0_raw)

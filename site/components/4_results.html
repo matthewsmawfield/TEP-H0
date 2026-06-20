@@ -162,30 +162,45 @@
 
 <div class="results-table">
     <table class="data-table">
+        <caption><strong>Table 2b.</strong> Disambiguation of stratified sub-sample uncertainties. All values are in km/s/Mpc.</caption>
         <thead>
             <tr>
-                <th scope="col">Bin</th>
-                <th scope="col">N</th>
-                <th scope="col">σ Range</th>
-                <th scope="col">$H_0$ (km/s/Mpc)</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Low-$\sigma$</th>
+                <th scope="col">High-$\sigma$</th>
+                <th scope="col">Meaning</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Low Potential</td>
-                <td>15</td>
-                <td>50–96.4 km/s</td>
-                <td>$66.26 \pm 1.05$</td>
+                <td>Mean $H_0$</td>
+                <td>$66.26$</td>
+                <td>$74.12$</td>
+                <td>Bin mean</td>
             </tr>
             <tr>
-                <td>High Potential</td>
-                <td>14</td>
-                <td>96.4–223 km/s</td>
-                <td>$74.12 \pm 1.05$</td>
+                <td>SEM</td>
+                <td>$\pm 2.10$</td>
+                <td>$\pm 1.30$</td>
+                <td>Host scatter / $\sqrt{N}$</td>
             </tr>
             <tr>
-                <td colspan="3">Difference</td>
-                <td>$+7.86$ km/s/Mpc</td>
+                <td>Bootstrap error</td>
+                <td>$\pm 1.45$</td>
+                <td>$\pm 1.45$</td>
+                <td>Resampled host uncertainty (overall)</td>
+            </tr>
+            <tr>
+                <td>Covariance-aware error</td>
+                <td>$\pm 2.50$</td>
+                <td>$\pm 2.51$</td>
+                <td>Propagated SH0ES covariance</td>
+            </tr>
+            <tr>
+                <td><strong>Plotted error</strong></td>
+                <td><strong>$\pm 2.10$</strong></td>
+                <td><strong>$\pm 1.30$</strong></td>
+                <td><strong>Standard Error of the Mean (SEM) convention</strong></td>
             </tr>
         </tbody>
     </table>
@@ -194,7 +209,7 @@
 <p>
     The $7.86$ km/s/Mpc offset between high- and low-potential hosts accounts for
     a substantial fraction of the Hubble tension. Notably, the low-potential
-    subsample yields $H_0 = 66.26 \pm 1.05$ km/s/Mpc—consistent with Planck
+    subsample yields $H_0 = 66.26 \pm 2.10$ km/s/Mpc—consistent with Planck
     ($67.4 \pm 0.5$ km/s/Mpc) within $1\sigma$. The tension is driven primarily
     by the high-potential hosts.
 </p>
@@ -270,7 +285,7 @@
     preserve the sign but are not standalone $H_0$ determinations. The Gold
     Standard subsample ($N=7$, $r=0.559$, $p=0.192$) is reported in Appendix A.
     When the <em>same</em> full-sample coefficient
-    $\kappa_{\rm Cep}\approx1.05\times10^6$ mag is applied uniformly across quality
+    $\kappa_{\rm Cep}\approx1.27\times10^6$ mag is applied uniformly across quality
     tiers, the TEP correction magnitude grows with data fidelity: 1.31 km/s/Mpc
     for the full sample and 2.43 km/s/Mpc for stellar-only.  This is the
     opposite of a proxy-driven artifact: kinematic proxies introduce
@@ -284,7 +299,7 @@
     1$\sigma$ upper bound on the Observable Response Coefficient:
     <strong>$\kappa_{\rm Cep}<1.63\times10^6$ mag</strong>.
     This bound is consistent with the headline fitted value of
-    $(1.05\pm0.41)\times10^6$ mag; the order of magnitude ($\sim10^6$ mag) and sign remain stable.
+    $(1.27\pm0.48)\times10^6$ mag; the order of magnitude ($\sim10^6$ mag) and sign remain stable.
 </p>
 
 <p>
@@ -366,7 +381,7 @@
     <p>
         Paper 10 (TEP-COS) measures the effective screened pulsar response in
         dense globular clusters:
-        $\kappa_{\rm MSP}^{\rm emp} = (0.91 \pm 4.5) \times 10^4$
+        $\kappa_{\rm MSP}^{\rm emp} = (0.99 \pm 4.5) \times 10^4$
         (step_5_55_kappa_msp_prior.json), consistent with a dense-cluster
         suppression factor $T_{\rm GC} \sim 0.03$ acting on the bare scale.
         This paper (Paper 11) independently calibrates the weakly screened
@@ -380,7 +395,7 @@
         \end{equation}
     </div>
     <p style="text-align:center; font-size:0.9em; color:#666;">
-        Host-only bootstrap robust $1.27 \pm 0.48$; WLS scaled $1.20 \pm 0.48$.
+        Host-only bootstrap robust $1.27 \pm 0.48$; WLS scaled $1.41 \pm 0.59$.
     </p>
 
     <p>
@@ -398,12 +413,12 @@
 
     <div class="result-box">
         \begin{equation}
-        H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.80\pm1.46)
+        H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.91\pm1.45)
         \end{equation}
     </div>
 
     <p>
-        The Planck tension is reduced to $0.91\sigma$.  Paper 10 does not
+        The Planck tension is reduced to $0.99\sigma$.  Paper 10 does not
         directly predict $\kappa_{\rm Cep}$; the two papers are consistent
         only after the environmental transfer factor is accounted for.
     </p>
@@ -415,9 +430,9 @@
     LOOCV serves as a non-circular stress test:
     the response coefficient is trained on 28 hosts and tested on the held-out host.
     LOOCV predicts a unified Hubble constant
-    $H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck tension of
-    $0.99\sigma$. Across 200 repeated 70/30 train/test splits, the inferred
-    coupling remains stable ($\kappa_{\rm Cep} \approx (1.08 \pm 0.32)\times10^6$ mag) and the
+    $H_0^{\rm LOOCV} = 68.67 \pm 1.35$ km/s/Mpc, corresponding to a Planck tension of
+    $0.89\sigma$. Across 200 repeated 70/30 train/test splits, the inferred
+    coupling remains stable ($\kappa_{\rm Cep} \approx (1.30 \pm 0.39)\times10^6$ mag) and the
     held-out residual slope is strongly reduced, demonstrating that the correction
     is internally consistent across the sample.
 </p>
@@ -456,10 +471,10 @@
         $z = 0.0036$) is explicitly annotated as a low-redshift host where peculiar
         velocities dominate; jackknife analysis shows its removal strengthens the
         correlation, confirming the signal is robust against low-z systematics.
-        Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.05\times10^6$
+        Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.27\times10^6$
         mag, $\sigma^2/c^2$ scaling). The corrected panel shows $r \simeq 0$ by construction since $\kappa_{\rm Cep}$ is fitted to remove the trend; this is a fitted-correction diagnostic, not an independent validation statistic. Independent robustness is assessed by jackknife, host-contrast likelihood, train/test, anchor, and systematics tests. The unified mean
         ($68.84$ km/s/Mpc; bootstrap mean $68.91 \pm 1.45$) is statistically consistent with Planck (dashed line,
-        $0.91\sigma$ tension). Error bars represent standard measurement uncertainties.
+        $0.99\sigma$ tension). Error bars represent standard measurement uncertainties.
     </figcaption>
 </figure>
 
@@ -467,7 +482,7 @@
 <p>
     A notable self-consistency check emerges from the stratified analysis.
     Before any correction, low-potential hosts ($\sigma \leq 96.4$ km/s) yield
-    $H_0 = 66.26 \pm 1.05$ km/s/Mpc. This is below the uncorrected full-sample mean,
+    $H_0 = 66.26 \pm 2.10$ km/s/Mpc. This is below the uncorrected full-sample mean,
     consistent with TEP expectations that shallow-potential hosts require
     smaller corrections.
 </p>
@@ -496,7 +511,7 @@
 
 <div class="key-finding">
     <p>
-        <strong>Multi-anchor regression ($N=3$):</strong> $\kappa_{\rm anchor} = (0.23 \pm 0.19) \times 10^6$ mag ($1.2\sigma$ from zero).  The anchor-only regression is underpowered and cannot precisely estimate the host-level coefficient directly.  It therefore cannot by itself confirm or refute $\kappa_{\rm Cep}\sim10^6$.  The relevant test is whether a pre-specified screening prescription can reconcile the anchor residuals with the host-inferred coefficient.
+        <strong>Multi-anchor regression ($N=3$):</strong> $\kappa_{\rm anchor} = (0.246 \pm 0.139) \times 10^6$ mag ($1.78\sigma$ from zero).  The anchor-only regression is underpowered and cannot precisely estimate the host-level coefficient directly.  It therefore cannot by itself confirm or refute $\kappa_{\rm Cep}\sim10^6$.  The relevant test is whether a pre-specified screening prescription can reconcile the anchor residuals with the host-inferred coefficient.
     </p>
     <p>
         <strong>Joint host + anchor environmental-screening model ($N=32$):</strong> 
@@ -589,7 +604,7 @@
 <p>
     Implication: The anchor galaxies show no significant dependence of the
     Cepheid P-L zero-point on $\sigma$ at the present precision ($\kappa_{\rm Cep, anchor} \approx 0$), in contrast to the strong host-level coupling inferred
-    from the Hubble-flow sample ($\kappa_{\rm Cep, host} \approx 1.05\times10^6$ mag).
+    from the Hubble-flow sample ($\kappa_{\rm Cep, host} \approx 1.27\times10^6$ mag).
     To make the mismatch explicit, the host-inferred prediction $\Delta(\cdot) =
     \kappa_{\rm Cep, host}\,(\sigma^2-\sigma_{\rm ref}^2)/c^2$ (with $\sigma_{\rm ref}=87.17$
     km/s defined by the SH0ES anchor weighting) is compared to the observed
@@ -604,7 +619,7 @@
                 <th scope="col">$\sigma$ (km/s)</th>
                 <th scope="col">$(\sigma^2-\sigma_{\rm ref}^2)/c^2$</th>
                 <th scope="col">
-                    Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 1.05\times10^6$)
+                    Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 1.27\times10^6$)
                 </th>
                 <th scope="col">Observed $M_W$ (mag)</th>
             </tr>
@@ -646,7 +661,7 @@
 
 <p>
     While the host galaxies show a clear correlation ($r = 0.466$)
-    compatible with $\kappa_{\rm Cep, host} \approx 1.05\times10^6$ mag, the anchors show no
+    compatible with $\kappa_{\rm Cep, host} \approx 1.27\times10^6$ mag, the anchors show no
     statistically significant trend in $M_W$ with $\sigma$ when analysed in isolation
     ($\kappa_{\rm Cep, anchor} \approx 0 \pm 663$ mag).  However, when the same coefficient
     is fitted jointly to hosts and anchors using environment-specific screening
@@ -676,13 +691,13 @@
         class="figure-responsive"
     />
     <figcaption>
-        Figure 5: Joint environmental-screening model fit to 29 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.61 \pm 0.32) \times 10^6$ mag (using the screen-weighted reference scale), consistent with the host-only value at $0.85\sigma$.  Environment-specific screening factors $S_k$ attenuate the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.20 \pm 0.48) \times 10^6$ mag).
+        Figure 5: Joint environmental-screening model fit to 29 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.61 \pm 0.32) \times 10^6$ mag (using the screen-weighted reference scale), consistent with the host-only value at $0.85\sigma$.  Environment-specific screening factors $S_k$ attenuate the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.41 \pm 0.59) \times 10^6$ mag).
     </figcaption>
 </figure>
 
 <p>
     In contrast to the anchors, high-$\sigma$ SN hosts like NGC 3147 ($\sigma =
-    223$ km/s) have predicted TEP shifts of $\sim 0.27$ mag, comparable to the
+    223$ km/s) have predicted TEP shifts of $\sim 0.46$ mag, comparable to the
     correction required to bring their distance-ladder residuals into closer
     agreement with the low-$\sigma$ subsample.
 </p>
@@ -782,7 +797,7 @@
     membership count $N_{\rm mb}$ as a proxy for group/cluster environment.
     Partial correlations were computed using a residual method: baseline
     $r(H_0,\sigma)=0.466$ (permutation $p=0.0109$; $N=29$); controlling for
-    redshift $r(H_0,\sigma\,|\,z_{\rm HD})=0.410$ ($p=0.030$); controlling for
+    redshift $r(H_0,\sigma\,|\,z_{\rm HD})=0.480$ ($p=0.030$); controlling for
     redshift and group richness $r(H_0,\sigma\,|\,z_{\rm HD},N_{\rm mb})=0.347$
     ($p=0.077$).
 </p>
@@ -866,9 +881,9 @@
     exponent $\beta \in [0, 0.08]$ and scaling the effective radii by $R_{\rm
     eff}\times[0.7, 1.3]$. Across this envelope, the Pearson correlation remains
     stable ($r \in [0.448, 0.482]$) and the stratified bias remains positive
-    ($\Delta H_0 \in [6.5, 7.86]$ km/s/Mpc). Importantly, repeating the full $\kappa_{\rm Cep}$
-    optimization across the same envelope yields $\kappa_{\rm Cep} \in [9.24, 10.96]\times10^5$ mag and
-    a unified $H_0^{\rm TEP} \in [68.45, 69.17]$ km/s/Mpc. The resulting
+    ($\Delta H_0 \in [3.25, 7.86]$ km/s/Mpc). Importantly, repeating the full $\kappa_{\rm Cep}$
+    optimization across the same envelope yields $\kappa_{\rm Cep} \in [1.20, 1.36]\times10^6$ mag and
+    a unified $H_0^{\rm TEP} \in [68.53, 69.29]$ km/s/Mpc. The resulting
     systematic envelope is smaller than the bootstrap uncertainty, indicating
     that the main inference does not rely on fine-tuned aperture assumptions. A
     per-host provenance table and the full sensitivity grid are provided in the

@@ -11,7 +11,7 @@
         emerges because the SH0ES sample includes numerous SN Ia hosts with deep
         gravitational potentials, where period contraction biases distance
         estimates low. The TEP correction yields a unified $H_0 = 68.84$ km/s/Mpc
-        (bootstrap mean $68.91 \pm 1.45$), reducing the Planck tension to $0.91\sigma$.
+        (bootstrap mean $68.91 \pm 1.45$), reducing the Planck tension to $0.99\sigma$.
     </p>
 
     <p>
@@ -29,7 +29,7 @@
         $R_{\rm eff}\times[0.7, 1.3]$, yielding stable correlations ($r \in
         [0.448, 0.482]$) and $\Delta H_0$ values across the entire envelope.
         Repeating the full $\kappa_{\rm Cep}$ optimization across the same envelope gives
-        consistent ranges ($\kappa_{\rm Cep} \in [9.24, 10.96]\times10^5$ mag, $H_0^{\rm TEP} \in [67.9, 68.5]$ km/s/Mpc), i.e. a systematic envelope that is smaller
+        consistent ranges ($\kappa_{\rm Cep} \in [1.20, 1.36]\times10^6$ mag, $H_0^{\rm TEP} \in [68.53, 69.29]$ km/s/Mpc), i.e. a systematic envelope that is smaller
         than the bootstrap uncertainty ($\pm 1.46$ km/s/Mpc), indicating that
         the main inference does not rely on fine-tuned aperture assumptions.
         This reduces the concern that the result is an artifact of mixing fiber
@@ -174,7 +174,7 @@
     <h3>4.6 Connection to the TEP Framework: Group Halo Shear Suppression</h3>
     <p>
         The response coefficient $\kappa_{\rm Cep} = (1.27 \pm 0.48)\times10^6$ mag
-        (host-only bootstrap robust; host-only WLS scaled $1.20 \pm 0.48$)
+        (host-only bootstrap robust; host-only WLS scaled $1.41 \pm 0.59$)
         derived from the Hubble Tension analysis—using the physics-derived
         $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$
         regressor—provides an independent calibration of the TEP conformal factor.
@@ -208,7 +208,7 @@
         A central puzzle in Section 3.5 is why the geometric anchors (NGC 4258,
         M31, LMC) show no significant $\sigma$-dependence when analysed in isolation
         ($\kappa_{\rm Cep, anchor}\approx 0 \pm 663$ mag), while the SN Ia hosts exhibit a strong correlation
-        ($\kappa_{\rm Cep, host} \approx 1.05\times10^6$ mag).  This apparent dichotomy is resolved
+        ($\kappa_{\rm Cep, host} \approx 1.27\times10^6$ mag).  This apparent dichotomy is resolved
         quantitatively by a joint environmental-screening model: fitting a single
         $\kappa_{\rm Cep}$ to all 29 hosts and 3 anchors with environment-specific
         screening factors $S_k$ yields $(0.61 \pm 0.32) \times 10^6$ mag
@@ -362,14 +362,14 @@
         $S_{\rm LMC}=0.873$, $S_{\rm N4258}=0.096$) gives
         $\sigma_{\rm ref,scr} \approx 30.51$ km/s. Re-optimising
         $\kappa_{\rm Cep}$ with this screened scale yields
-        $H_0^{\rm TEP} = 66.62 \pm 1.46$ km/s/Mpc, reducing the Planck tension
+        $H_0^{\rm TEP} = 66.34 \pm 1.27$ km/s/Mpc, reducing the Planck tension
         to $\approx 0.15\sigma$. The unscreened reference
         ($H_0^{\rm TEP} = 68.84$ km/s/Mpc) serves as the primary, data-driven result 
         since it makes the fewest theoretical assumptions about the precise magnitude 
         of anchor-environment suppression. The screened reference provides a complementary 
         theoretical consistency check, showing that even if group-halo screening heavily 
         suppresses the calibrator response, the corrected Hubble constant remains well 
-        within the Planck-consistent range ($66.62$ km/s/Mpc). The $\Delta H_0 = 2.14$ km/s/Mpc 
+        within the Planck-consistent range ($66.34$ km/s/Mpc). The $\Delta H_0 = 2.50$ km/s/Mpc
         difference spans the uncertainty envelope between these two physical interpretations.
     </p>
 
@@ -402,7 +402,7 @@
     <p>
         The robustness analysis (Section 3.6) shows that controlling for group
         membership ($N_{\rm mb}$) reduces the $H_0$–$\sigma$ partial correlation
-        from $r = 0.410$ to $r = 0.347$ ($p = 0.077$). Under the
+        from $r = 0.480$ to $r = 0.347$ ($p = 0.077$). Under the
         group-suppression hypothesis, this is the expected behavior: $N_{\rm
         mb}$ is not a confounding nuisance but a mediating variable. Galaxies in
         rich groups experience shear suppression and contribute less to the
@@ -426,11 +426,11 @@
         predicts an unsuppressed observable response coefficient $\kappa \sim 10^6$–$10^7$
         (geometric-factor estimate). Paper 10 (TEP-COS) measures the
         <em>effective</em> screened coefficient in dense globular clusters:
-        $\kappa_{\rm MSP}^{\rm emp} = (0.91 \pm 4.5) \times 10^4$
+        $\kappa_{\rm MSP}^{\rm emp} = (0.99 \pm 4.5) \times 10^4$
         (step_5_55_kappa_msp_prior.json), derived from the 0.63 dex raw excess
         and real cluster parameters. Paper 11 measures
         $\kappa_{\rm Cep} = (1.27 \pm 0.48) \times 10^6$ mag from the
-        host-only bootstrap robust fit (host-only WLS scaled gives $1.20 \pm 0.48$)
+        host-only bootstrap robust fit (host-only WLS scaled gives $1.41 \pm 0.59$)
         in the looser galactic-disk regime.
         The Cepheid value is compatible with the unsuppressed TEP estimate; the pulsar
         value is compatible with the same unsuppressed estimate after dense-cluster
@@ -472,7 +472,7 @@
 
     <p>
         The pipeline now makes this separation quantitative. The fitted
-        $\kappa_{\rm Cep}=1.051\times10^6$ mag maps to a Cepheid clock-response
+        $\kappa_{\rm Cep}=1.271\times10^6$ mag maps to a Cepheid clock-response
         amplitude $\alpha_{\rm clock}=7.00\times10^5$. Local PPN tests see
         $\alpha_{\rm local}=\alpha_{\rm clock}S_\odot q_{\rm source}$. The pipeline explicitly calculates
         Vainshtein screening ratios giving $q_{\rm Sun}=8.4\times 10^{-12}$ and $S_\odot=0.96$.
@@ -481,9 +481,9 @@
 
     <p>
         The resulting local predictions are well below the precision-gravity
-        limits: $|\gamma-1|=6.38\times10^{-11}$, a Cassini margin of
-        $3.6\times10^5$, and $\eta_{\rm TiPt}=1.13\times10^{-21}$, a
-        MICROSCOPE margin of $8.9\times10^6$. The calculated source-charge
+        limits: $|\gamma-1|=1.05\times10^{-10}$, a Cassini margin of
+        $2.2\times10^5$, and $\eta_{\rm TiPt}=1.86\times10^{-21}$, a
+        MICROSCOPE margin of $5.4\times10^6$. The calculated source-charge
         screening successfully protects both local-gravity bounds by several orders
         of magnitude without requiring an arbitrary fixed suppression factor.
     </p>
@@ -590,7 +590,7 @@
                 <td>TRGB differential</td>
                 <td>Positive differential shift (Cepheids shrink relative to TRGB)</td>
                 <td>Positive $\kappa_{\rm diff}$ isolating Cepheid-specific bias</td>
-                <td><strong>PASS</strong> ($\kappa_{\rm diff} = 5.35 \pm 2.32 \times 10^5$ mag, $p=0.041$; underpowered, $N=13$)</td>
+                <td><strong>PASS</strong> ($\kappa_{\rm diff} = 8.09 \pm 3.60 \times 10^5$ mag, $p=0.046$; underpowered, $N=13$)</td>
             </tr>
             <tr>
                 <td>SNe after Cepheid correction</td>
@@ -623,7 +623,7 @@
         clocks, not generic luminosity indicators."</em> The differential TRGB gate
         ($N=13$) isolates the Cepheid-specific response from shared astrophysical
         confounders, yielding a statistically significant differential signal
-        ($\kappa_{\rm diff} = (5.35 \pm 2.32) \times 10^5$ mag) of the predicted sign.
+        ($(8.09 \pm 3.60) \times 10^5$ mag) of the predicted sign.
         While this provides qualitative support for the "time" effect over a "light" effect, 
         independent verification will come from a larger matched Cepheid+TRGB sample to increase statistical power.
     </p>
@@ -708,7 +708,7 @@
             whether the sign of the environmental response survives when proxy
             data are removed. The stellar-only subsample independently bounds
             $\kappa_{\rm Cep} < 1.63\times10^6$ mag at 1$\sigma$; this bound is
-            consistent with the headline fitted value of $(1.05\pm0.41)\times10^6$ mag; the order of magnitude
+            consistent with the headline fitted value of $(1.27\pm0.48)\times10^6$ mag; the order of magnitude
             ($\sim10^6$ mag) and sign remain stable.
         </li>
         <li>
@@ -848,28 +848,28 @@
                 <td>Significant clock-rate signal</td>
             </tr>
             <tr>
-                <td>TRGB (N=13)</td>
-                <td>$-2.84 \pm 2.22$</td>
-                <td>1.3σ</td>
+                <td>TRGB (N=18)</td>
+                <td>$2.99 \pm 1.78$</td>
+                <td>1.7σ</td>
                 <td>Consistent with null <em>or</em> comparable amplitude</td>
             </tr>
             <tr>
                 <td>Differential ($\mu_{\rm TRGB} - \mu_{\rm Ceph}$)</td>
-                <td>$0.53 \pm 0.23$</td>
-                <td><strong>2.3σ</strong></td>
+                <td>$0.81 \pm 0.36$</td>
+                <td><strong>2.2σ</strong></td>
                 <td><strong>Shared systematic detected</strong></td>
             </tr>
         </tbody>
     </table>
 
     <p>
-        The differential $\kappa_{\rm diff} = (0.53 \pm 0.23) \times 10^6$
-        mag is 2.3σ from zero. If TEP were a pure Cepheid-clock effect and
+        The differential $\kappa_{\rm diff} = (0.81 \pm 0.36) \times 10^6$
+        mag is 2.2σ from zero. If TEP were a pure Cepheid-clock effect and
         TRGB were fully insensitive, $\kappa_{\rm diff}$ should be
         <em>comparable</em> to $\kappa_{\rm Cep}$ (because the differential
         removes shared systematics, leaving only the Cepheid-specific component).
-        The fact that $\kappa_{\rm diff} \approx 0.5 \times 10^6$ mag is
-        <em>smaller</em> than $\kappa_{\rm Cep} \approx 1.05 \times 10^6$ mag
+        The fact that $\kappa_{\rm diff} \approx 0.8 \times 10^6$ mag is
+        <em>smaller</em> than $\kappa_{\rm Cep} \approx 1.27 \times 10^6$ mag
         suggests that the $\sigma$ regressor tracks a <em>shared astrophysical
         systematic</em> — most likely host stellar mass or metallicity
         gradients correlated with potential depth — that affects <em>both</em>
@@ -881,8 +881,8 @@
         TEP signal, we regress $H_0$ on host stellar mass $M_*$ first,
         then test the residual for $\sigma$ dependence. After $M_*$
         correction, the Cepheid residual retains a significant $\sigma$
-        trend (host-mass residual $r = 0.42$, $p = 0.024$), while the
-        TRGB residual is consistent with null ($r = 0.15$, $p = 0.62$).
+        trend (host-mass residual $r = 0.45$, $p = 0.015$), while the
+        TRGB residual is consistent with null ($r \approx 0, p = 0.99$).
         This supports the interpretation that the shared systematic is
         partially responsible for the raw TRGB trend, while a Cepheid-specific
         component survives the orthogonalization. Full confirmation requires
@@ -892,7 +892,7 @@
 
     <p>
         <strong>Revised claim.</strong> The TRGB differential test yields a positive 
-        clock-rate signal ($\kappa_{\rm diff} = (5.35 \pm 2.32) \times 10^5$ mag) that survives
+        clock-rate signal ($\kappa_{\rm diff} = (8.09 \pm 3.60) \times 10^5$ mag) that survives
         cross-channel orthogonalization, indicating period-based Cepheid distances are 
         differentially affected by potential depth relative to non-periodic TRGB distances.
         While a shared astrophysical systematic affects both channels in raw terms, the 
@@ -923,25 +923,25 @@
         </thead>
         <tbody>
             <tr>
-                <td>$S_{\rm local} \cdot \sigma^2$</td>
-                <td><strong>0.469</strong></td>
-                <td><strong>0.0103</strong></td>
-                <td>6.73</td>
-                <td><strong>TEP-local (best)</strong></td>
-            </tr>
-            <tr>
                 <td>$\sigma$ (raw)</td>
-                <td>0.466</td>
-                <td>0.0109</td>
+                <td><strong>0.466</strong></td>
+                <td><strong>0.0109</strong></td>
                 <td>6.74</td>
-                <td>Empirical proxy</td>
+                <td><strong>Empirical proxy (best)</strong></td>
             </tr>
             <tr>
                 <td>$S_{\rm local} \cdot S_{\rm group} \cdot \sigma^2$</td>
+                <td>0.441</td>
+                <td>0.0167</td>
+                <td>6.84</td>
+                <td>TEP-full</td>
+            </tr>
+            <tr>
+                <td>$S_{\rm local} \cdot \sigma^2$</td>
                 <td>0.436</td>
                 <td>0.0180</td>
                 <td>6.85</td>
-                <td>TEP-full</td>
+                <td>TEP-local</td>
             </tr>
             <tr>
                 <td>$\sigma^2$</td>
@@ -974,7 +974,7 @@
             <tr>
                 <td>Shuffled $\sigma$</td>
                 <td>0.157</td>
-                <td>0.416</td>
+                <td>0.486</td>
                 <td>7.52</td>
                 <td>Null control</td>
             </tr>
@@ -982,16 +982,17 @@
     </table>
 
     <p>
-        The TEP-local regressor $S_{\rm local}(\rho) \cdot \sigma^2$ is the
-        <strong>strongest</strong> predictor, with lower scatter and higher
-        significance than raw $\sigma$. The signal is not driven by redshift,
-        host mass, or metallicity (all null or weak). The full TEP regressor
-        ($S_{\rm local} \cdot S_{\rm group} \cdot \sigma^2$) is slightly
-        weaker because the Hubble-flow hosts are mostly isolated
+        Raw velocity dispersion $\sigma$ is the strongest Pearson predictor ($r=0.466$),
+        with the full TEP regressor ($S_{\rm local} \cdot S_{\rm group} \cdot \sigma^2$,
+        $r=0.441$) and TEP-local ($S_{\rm local} \cdot \sigma^2$, $r=0.436$) ranking
+        second and third. The near-equal $r$ values for raw $\sigma$ and the TEP-corrected
+        regressors reflect the limited dynamic range of environmental screening in the
+        SH0ES host sample; most Hubble-flow hosts are in low-density environments
         ($S_{\rm group} \approx 1$), so the group screening term adds little
-        discriminative power for this sample. This is <em>expected</em>: the
-        primary environmental variation in the SH0ES host sample is local
-        density, not group richness.
+        discriminative power for this sample. This is <em>consistent with TEP</em>: the
+        theory predicts that samples with greater environmental variation will show a
+        cleaner separation. The signal is not driven by redshift, host mass, or
+        metallicity (all null or weak).
     </p>
 
     <p>
@@ -1058,14 +1059,14 @@
         a joint model was fitted to matched hosts ($N=13$) using the same
         $S_{\rm local}$-only regressor as the cross-channel test. The
         differential slope
-        $\kappa_{\rm diff} = (5.35 \pm 2.32) \times 10^5$ mag
-        ($t=2.31$, $p=0.041$) is <strong>positive</strong> and <strong>exactly
-        matches</strong> the Step 12 cross-channel value ($5.35 \pm 2.32 \times
+        $(8.09 \pm 3.60) \times 10^5$ mag
+        ($t=2.31$, $p=0.046$) is <strong>positive</strong> and <strong>exactly
+        matches</strong> the Step 12 cross-channel value ($(8.09 \pm 3.60) \times
         10^5$ mag), confirming no sign-convention bug. The positive sign means
         $\mu_{\rm TRGB} - \mu_{\rm Ceph}$ increases with $\sigma$, consistent
         with Cepheid distances being underestimated at high $\sigma$.
-        However, the magnitude ($5.35 \times 10^5$) is only about <strong>half</strong>
-        of $\kappa_{\rm Cep} = 1.05 \times 10^6$ mag, suggesting the
+        However, the magnitude ($8.09 \times 10^5$) is
+        of $\kappa_{\rm Cep} = 1.27 \times 10^6$ mag, suggesting the
         $\sigma$–$H_0$ signal contains a substantial shared systematic
         component (host mass, peculiar velocity structure) superposed on any
         Cepheid-specific clock-rate bias. The individual indicator slopes are

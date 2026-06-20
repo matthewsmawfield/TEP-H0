@@ -43,6 +43,8 @@ from .constants import (
     M_REF,
     ALPHA_LOG,
     BETA_GEOM,
+    KAPPA_GAL,
+    KAPPA_GAL_UNCERTAINTY,
     SCREENING_LENGTH_KM,
     LAMBDA_T_MGEX_KM,
     LAMBDA_T_MGEX_ERR_KM,

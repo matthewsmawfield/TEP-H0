@@ -8,8 +8,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from scripts.steps.step_3_tep_correction import Step3TEPCorrection
-from scripts.steps.step_4_robustness_checks import Step4RobustnessChecks
+from scripts.steps.step_04_tep_correction import Step3TEPCorrection
+from scripts.steps.step_08_robustness_checks import Step4RobustnessChecks
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 from scripts.utils.tep_correction import C_SQUARED_KM_S
 

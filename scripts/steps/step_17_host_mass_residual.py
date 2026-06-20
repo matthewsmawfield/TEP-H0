@@ -122,9 +122,9 @@ class Step16HostMassResidual:
                 h0_trgb_residual = valid_trgb["h0_trgb"] - (
                     slope_tm * valid_trgb["host_logmass"] + intercept_tm
                 )
-                r_trgb_part, p_trgb_part = stats.linregress(
+                r_trgb_part, p_trgb_part = stats.pearsonr(
                     valid_trgb["sigma_inferred"], h0_trgb_residual
-                )[:2]
+                )
                 print_status(
                     f"TRGB mass-residual: r={r_trgb_part:.3f}, p={p_trgb_part:.4f} (N={len(valid_trgb)})",
                     "INFO",

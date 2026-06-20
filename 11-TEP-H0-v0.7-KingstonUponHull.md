@@ -35,7 +35,7 @@ interpretability. Analysis of the Hubble-flow SH0ES Cepheid sample
 ($z_{\rm HD} > 0.0035$; $N=29$), stratified by host galaxy velocity dispersion
 (a TEP-independent kinematic observable), reveals a correlation between host
 potential depth and the residual (Spearman $\rho = 0.517$, $p = 0.0041$;
-Pearson $r = 0.466$, $p = 0.0109$). A median-split stratification at $\sigma_{\rm med} \approx 96.4$ km/s yields $H_0 = 66.26$ km/s/Mpc (low-$\sigma$; $N=15$) versus $74.12$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 7.86$ km/s/Mpc. Because published $\sigma$ values
+Pearson $r = 0.466$, $p = 0.0109$). A median-split stratification at $\sigma_{\rm med} \approx 96.4$ km/s yields $H_0 = 66.26 \pm 2.10$ km/s/Mpc (low-$\sigma$; $N=15$) versus $74.12 \pm 1.30$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 7.86$ km/s/Mpc. Because published $\sigma$ values
 are heterogeneous (direct stellar absorption and calibrated HI linewidth
 proxies), all values are fully traceable to original literature sources
 with ADS bibcodes. Measurement methodology is treated as a first-class
@@ -48,9 +48,9 @@ period-contraction combined with the virial relation $|\Phi|\propto\sigma^2$—w
 Observable Response Coefficient $\kappa_{\rm Cep} = (1.27 \pm 0.48) \times 10^6$ mag
 and effective calibrator reference $\sigma_{\rm ref} = 87.17$ km/s removes the
 host-potential dependence and brings the Cepheid-calibrated SH0ES ladder into
-agreement with the CMB scale ($H_0 = 68.84$ km/s/Mpc; Planck tension $0.91\sigma$).
+agreement with the CMB scale ($H_0 = 68.84$ km/s/Mpc; Planck tension $0.99\sigma$).
 Internal interpolation stability (leave-one-out cross-validation, LOOCV) gives
-$H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, Planck tension $0.99\sigma$.
+$H_0^{\rm LOOCV} = 68.67 \pm 1.35$ km/s/Mpc, Planck tension $0.89\sigma$.
 The correction survives covariance propagation, redshift cuts, peculiar-velocity
 perturbation, metallicity/dust controls, and velocity-dispersion provenance tests.
 A two-stage resolution claim is proposed: (i) the Cepheid ladder contains a
@@ -519,8 +519,8 @@ contribution scale $\sigma_{\rm ref,scr} \approx 30.51$ km/s is also defined. Th
 amplitude that down-weights each anchor's *contribution* by its
 environmental screening factor $S$; it is not a normalized weighted mean.
 Re-optimising $\kappa_{\rm Cep}$ with either reference yields headline
-$H_0$ values that differ by $\Delta H_0 = 2.14$ km/s/Mpc
-($H_0^{\rm std} = 68.84$ km/s/Mpc vs $H_0^{\rm scr} = 66.62$ km/s/Mpc),
+$H_0$ values that differ by $\Delta H_0 = 2.50$ km/s/Mpc
+($H_0^{\rm std} = 68.84$ km/s/Mpc vs $H_0^{\rm scr} = 66.34$ km/s/Mpc),
 showing the correction is consistent under both definitions at the level
 of the intrinsic uncertainty:
 
@@ -687,7 +687,7 @@ km/s/Mpc per km/s, approximately 2.8× steeper than the OLS slope
 ($0.085$ km/s/Mpc per km/s). Both estimates are statistically significant
 (ODR: $\sim$4.8$\sigma$; OLS: $p=0.011$), so the qualitative conclusion is
 robust; the OLS slope reported in the main text is a conservative
-(attenuated) lower bound on the true relationship. Synthetic injection recovery tests (simulating mock samples with known $\kappa$ biases) confirm that the ODR slope steepening is a physical expectation of error-in-variables regression on this dataset structure, not an implementation artefact.
+(attenuated) lower bound on the true relationship. ODR is reported for transparency; the measurement errors on $\sigma$ (mean $\sim$10 km/s) are comparable to the TEP regressor $S(\sigma^2-\sigma_{\rm ref}^2)/c^2$ over this sample, so the ODR slope should be treated as indicative rather than definitive.
 
 ## 3. Results
 
@@ -781,15 +781,17 @@ matrix (Section 2.7).
 Stratification of the sample at the median velocity dispersion ($\sigma_{\rm
 med} \approx 96.4$ km/s) reveals the following structure:
 
-| Bin | N | σ Range | $H_0$ (km/s/Mpc) |
+| Quantity | Low-$\sigma$ | High-$\sigma$ | Meaning |
 | --- | --- | --- | --- |
-| Low Potential | 15 | 50–96.4 km/s | $66.26 \pm 1.05$ |
-| High Potential | 14 | 96.4–223 km/s | $74.12 \pm 1.05$ |
-| Difference | $+7.86$ km/s/Mpc |  |  |
+| Mean $H_0$ | $66.26$ | $74.12$ | Bin mean |
+| SEM | $\pm 2.10$ | $\pm 1.30$ | Host scatter / $\sqrt{N}$ |
+| Bootstrap error | $\pm 1.45$ | $\pm 1.45$ | Resampled host uncertainty (overall) |
+| Covariance-aware error | $\pm 2.50$ | $\pm 2.51$ | Propagated SH0ES covariance |
+| Plotted error | $\pm 2.10$ | $\pm 1.30$ | Standard Error of the Mean (SEM) convention |
 
 The $7.86$ km/s/Mpc offset between high- and low-potential hosts accounts for
 a substantial fraction of the Hubble tension. Notably, the low-potential
-subsample yields $H_0 = 66.26 \pm 1.05$ km/s/Mpc—consistent with Planck
+subsample yields $H_0 = 66.26 \pm 2.10$ km/s/Mpc—consistent with Planck
 ($67.4 \pm 0.5$ km/s/Mpc) within $1\sigma$. The tension is driven primarily
 by the high-potential hosts.
 
@@ -830,7 +832,7 @@ proxy dispersions dilute rather than create the trend. Smaller quality tiers
 preserve the sign but are not standalone $H_0$ determinations. The Gold
 Standard subsample ($N=7$, $r=0.559$, $p=0.192$) is reported in Appendix A.
 When the *same* full-sample coefficient
-$\kappa_{\rm Cep}\approx1.05\times10^6$ mag is applied uniformly across quality
+$\kappa_{\rm Cep}\approx1.27\times10^6$ mag is applied uniformly across quality
 tiers, the TEP correction magnitude grows with data fidelity: 1.31 km/s/Mpc
 for the full sample and 2.43 km/s/Mpc for stellar-only.  This is the
 opposite of a proxy-driven artifact: kinematic proxies introduce
@@ -842,7 +844,7 @@ delivers $H_0^{\rm TEP}=66.82\pm1.60$ km/s/Mpc (refit $\kappa$) and yields an in
 1$\sigma$ upper bound on the Observable Response Coefficient:
 **$\kappa_{\rm Cep}<1.63\times10^6$ mag**.
 This bound is consistent with the headline fitted value of
-$(1.05\pm0.41)\times10^6$ mag; the order of magnitude ($\sim10^6$ mag) and sign remain stable.
+$(1.27\pm0.48)\times10^6$ mag; the order of magnitude ($\sim10^6$ mag) and sign remain stable.
 
 Furthermore, examination of the 13 kinematic-proxy hosts reveals they do not
 cluster anomalously but rather *follow the same physical trend* as
@@ -905,7 +907,7 @@ channel-specific Temporal Shear transfer factor $T_{\rm env}$:
 
 Paper 10 (TEP-COS) measures the effective screened pulsar response in
 dense globular clusters:
-$\kappa_{\rm MSP}^{\rm emp} = (0.91 \pm 4.5) \times 10^4$
+$\kappa_{\rm MSP}^{\rm emp} = (0.99 \pm 4.5) \times 10^4$
 (step_5_55_kappa_msp_prior.json), consistent with a dense-cluster
 suppression factor $T_{\rm GC} \sim 0.03$ acting on the bare scale.
 This paper (Paper 11) independently calibrates the weakly screened
@@ -916,7 +918,7 @@ galactic-disk response via Cepheid period-luminosity residuals:
 \label{eq:kappa_cep_result}
 \end{equation}
 
-Host-only bootstrap robust $1.27 \pm 0.48$; WLS scaled $1.20 \pm 0.48$.
+Host-only bootstrap robust $1.27 \pm 0.48$; WLS scaled $1.41 \pm 0.59$.
 
 The Cepheid value is consistent with the bare TEP geometric-factor
 estimate ($T_{\rm disk} \sim 1$); the pulsar value is consistent with
@@ -930,10 +932,10 @@ is $\langle \kappa_{\rm Cep} \cdot S
 this suppression-aware correction yields a unified Hubble constant:
 
 \begin{equation}
-H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.80\pm1.46)
+H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.91\pm1.45)
 \end{equation}
 
-The Planck tension is reduced to $0.91\sigma$.  Paper 10 does not
+The Planck tension is reduced to $0.99\sigma$.  Paper 10 does not
 directly predict $\kappa_{\rm Cep}$; the two papers are consistent
 only after the environmental transfer factor is accounted for.
 
@@ -942,9 +944,9 @@ internal interpolation-stability tests were performed (Section 2.8).
 LOOCV serves as a non-circular stress test:
 the response coefficient is trained on 28 hosts and tested on the held-out host.
 LOOCV predicts a unified Hubble constant
-$H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck tension of
-$0.99\sigma$. Across 200 repeated 70/30 train/test splits, the inferred
-coupling remains stable ($\kappa_{\rm Cep} \approx (1.08 \pm 0.32)\times10^6$ mag) and the
+$H_0^{\rm LOOCV} = 68.67 \pm 1.35$ km/s/Mpc, corresponding to a Planck tension of
+$0.89\sigma$. Across 200 repeated 70/30 train/test splits, the inferred
+coupling remains stable ($\kappa_{\rm Cep} \approx (1.30 \pm 0.39)\times10^6$ mag) and the
 held-out residual slope is strongly reduced, demonstrating that the correction
 is internally consistent across the sample.
 
@@ -973,16 +975,16 @@ the corrected data in the right panel. NGC 4639 ($H_0 \approx 47.3$ km/s/Mpc,
 $z = 0.0036$) is explicitly annotated as a low-redshift host where peculiar
 velocities dominate; jackknife analysis shows its removal strengthens the
 correlation, confirming the signal is robust against low-z systematics.
-Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.05\times10^6$
+Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.27\times10^6$
 mag, $\sigma^2/c^2$ scaling). The corrected panel shows $r \simeq 0$ by construction since $\kappa_{\rm Cep}$ is fitted to remove the trend; this is a fitted-correction diagnostic, not an independent validation statistic. Independent robustness is assessed by jackknife, host-contrast likelihood, train/test, anchor, and systematics tests. The unified mean
 ($68.84$ km/s/Mpc; bootstrap mean $68.91 \pm 1.45$) is statistically consistent with Planck (dashed line,
-$0.91\sigma$ tension). Error bars represent standard measurement uncertainties.
+$0.99\sigma$ tension). Error bars represent standard measurement uncertainties.
 
 ### 3.4 Self-Consistency Check
 
 A notable self-consistency check emerges from the stratified analysis.
 Before any correction, low-potential hosts ($\sigma \leq 96.4$ km/s) yield
-$H_0 = 66.26 \pm 1.05$ km/s/Mpc. This is below the uncorrected full-sample mean,
+$H_0 = 66.26 \pm 2.10$ km/s/Mpc. This is below the uncorrected full-sample mean,
 consistent with TEP expectations that shallow-potential hosts require
 smaller corrections.
 
@@ -1004,7 +1006,7 @@ calibration galaxy alongside LMC and NGC 4258, the multi-anchor regression
 yields:
 
 > 
-**Multi-anchor regression ($N=3$):** $\kappa_{\rm anchor} = (0.23 \pm 0.19) \times 10^6$ mag ($1.2\sigma$ from zero).  The anchor-only regression is underpowered and cannot precisely estimate the host-level coefficient directly.  It therefore cannot by itself confirm or refute $\kappa_{\rm Cep}\sim10^6$.  The relevant test is whether a pre-specified screening prescription can reconcile the anchor residuals with the host-inferred coefficient.
+**Multi-anchor regression ($N=3$):** $\kappa_{\rm anchor} = (0.246 \pm 0.139) \times 10^6$ mag ($1.78\sigma$ from zero).  The anchor-only regression is underpowered and cannot precisely estimate the host-level coefficient directly.  It therefore cannot by itself confirm or refute $\kappa_{\rm Cep}\sim10^6$.  The relevant test is whether a pre-specified screening prescription can reconcile the anchor residuals with the host-inferred coefficient.
 
 **Joint host + anchor environmental-screening model ($N=32$):**
 Fitting a single Observable Response Coefficient to all 29 SN Ia hosts and 3 geometric anchors clarifies the role of the anchor reference frame.
@@ -1056,13 +1058,13 @@ frame (Section 4.6).
 
 Implication: The anchor galaxies show no significant dependence of the
 Cepheid P-L zero-point on $\sigma$ at the present precision ($\kappa_{\rm Cep, anchor} \approx 0$), in contrast to the strong host-level coupling inferred
-from the Hubble-flow sample ($\kappa_{\rm Cep, host} \approx 1.05\times10^6$ mag).
+from the Hubble-flow sample ($\kappa_{\rm Cep, host} \approx 1.27\times10^6$ mag).
 To make the mismatch explicit, the host-inferred prediction $\Delta(\cdot) =
 \kappa_{\rm Cep, host}\,(\sigma^2-\sigma_{\rm ref}^2)/c^2$ (with $\sigma_{\rm ref}=87.17$
 km/s defined by the SH0ES anchor weighting) is compared to the observed
 anchor zero-points:
 
-| Anchor | $\sigma$ (km/s) | $(\sigma^2-\sigma_{\rm ref}^2)/c^2$ | Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 1.05\times10^6$) | Observed $M_W$ (mag) |
+| Anchor | $\sigma$ (km/s) | $(\sigma^2-\sigma_{\rm ref}^2)/c^2$ | Host-Predicted Shift ($\kappa_{\rm Cep, host}\approx 1.27\times10^6$) | Observed $M_W$ (mag) |
 | --- | --- | --- | --- | --- |
 | LMC | 24 | $-5.66\times10^{-8}$ | reference / negative shift | $-5.878 \pm 0.005$ |
 | NGC 4258 | 115 | $+8.40\times10^{-8}$ | $+0.088$ mag relative to LMC (naive) | $-5.837 \pm 0.022$ |
@@ -1076,7 +1078,7 @@ identical, and any mismatch should be treated as a possible contributor to
 the anchors-vs-hosts regime contrast.
 
 While the host galaxies show a clear correlation ($r = 0.466$)
-compatible with $\kappa_{\rm Cep, host} \approx 1.05\times10^6$ mag, the anchors show no
+compatible with $\kappa_{\rm Cep, host} \approx 1.27\times10^6$ mag, the anchors show no
 statistically significant trend in $M_W$ with $\sigma$ when analysed in isolation
 ($\kappa_{\rm Cep, anchor} \approx 0 \pm 663$ mag).  However, when the same coefficient
 is fitted jointly to hosts and anchors using environment-specific screening
@@ -1100,10 +1102,10 @@ The joint result is stable under reasonable variations of the anchor-screening f
 
 ![Joint environmental-screening model fit to 29 SN Ia hosts and 3 geometric anchors](public/figures/figure_05_joint_screening_model.png?v=2)
 
-Figure 5: Joint environmental-screening model fit to 29 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.61 \pm 0.32) \times 10^6$ mag (using the screen-weighted reference scale), consistent with the host-only value at $0.85\sigma$.  Environment-specific screening factors $S_k$ attenuate the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.20 \pm 0.48) \times 10^6$ mag).
+Figure 5: Joint environmental-screening model fit to 29 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.61 \pm 0.32) \times 10^6$ mag (using the screen-weighted reference scale), consistent with the host-only value at $0.85\sigma$.  Environment-specific screening factors $S_k$ attenuate the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.41 \pm 0.59) \times 10^6$ mag).
 
 In contrast to the anchors, high-$\sigma$ SN hosts like NGC 3147 ($\sigma =
-223$ km/s) have predicted TEP shifts of $\sim 0.27$ mag, comparable to the
+223$ km/s) have predicted TEP shifts of $\sim 0.46$ mag, comparable to the
 correction required to bring their distance-ladder residuals into closer
 agreement with the low-$\sigma$ subsample.
 
@@ -1158,7 +1160,7 @@ identifiers) to the 2MASS group catalog of Tully (2015), using the group
 membership count $N_{\rm mb}$ as a proxy for group/cluster environment.
 Partial correlations were computed using a residual method: baseline
 $r(H_0,\sigma)=0.466$ (permutation $p=0.0109$; $N=29$); controlling for
-redshift $r(H_0,\sigma\,|\,z_{\rm HD})=0.410$ ($p=0.030$); controlling for
+redshift $r(H_0,\sigma\,|\,z_{\rm HD})=0.480$ ($p=0.030$); controlling for
 redshift and group richness $r(H_0,\sigma\,|\,z_{\rm HD},N_{\rm mb})=0.347$
 ($p=0.077$).
 
@@ -1228,9 +1230,9 @@ aperture/size sensitivity envelope was computed by scanning the aperture
 exponent $\beta \in [0, 0.08]$ and scaling the effective radii by $R_{\rm
 eff}\times[0.7, 1.3]$. Across this envelope, the Pearson correlation remains
 stable ($r \in [0.448, 0.482]$) and the stratified bias remains positive
-($\Delta H_0 \in [6.5, 7.86]$ km/s/Mpc). Importantly, repeating the full $\kappa_{\rm Cep}$
-optimization across the same envelope yields $\kappa_{\rm Cep} \in [9.24, 10.96]\times10^5$ mag and
-a unified $H_0^{\rm TEP} \in [68.45, 69.17]$ km/s/Mpc. The resulting
+($\Delta H_0 \in [3.25, 7.86]$ km/s/Mpc). Importantly, repeating the full $\kappa_{\rm Cep}$
+optimization across the same envelope yields $\kappa_{\rm Cep} \in [1.20, 1.36]\times10^6$ mag and
+a unified $H_0^{\rm TEP} \in [68.53, 69.29]$ km/s/Mpc. The resulting
 systematic envelope is smaller than the bootstrap uncertainty, indicating
 that the main inference does not rely on fine-tuned aperture assumptions. A
 per-host provenance table and the full sensitivity grid are provided in the
@@ -1623,7 +1625,7 @@ environment-independent. Under the TEP framework, the $5\sigma$ discrepancy
 emerges because the SH0ES sample includes numerous SN Ia hosts with deep
 gravitational potentials, where period contraction biases distance
 estimates low. The TEP correction yields a unified $H_0 = 68.84$ km/s/Mpc
-(bootstrap mean $68.91 \pm 1.45$), reducing the Planck tension to $0.91\sigma$.
+(bootstrap mean $68.91 \pm 1.45$), reducing the Planck tension to $0.99\sigma$.
 
 The correlation detected (Spearman $\rho = 0.517$, $p = 0.0041$; Pearson $r = 0.466$, $p = 0.0109$) between
 host velocity dispersion and the distance-ladder residual displayed in $H_0$-equivalent units is notable for an
@@ -1639,7 +1641,7 @@ scanning $\beta \in [0, 0.08]$ and scaling the effective radii by
 $R_{\rm eff}\times[0.7, 1.3]$, yielding stable correlations ($r \in
 [0.448, 0.482]$) and $\Delta H_0$ values across the entire envelope.
 Repeating the full $\kappa_{\rm Cep}$ optimization across the same envelope gives
-consistent ranges ($\kappa_{\rm Cep} \in [9.24, 10.96]\times10^5$ mag, $H_0^{\rm TEP} \in [67.9, 68.5]$ km/s/Mpc), i.e. a systematic envelope that is smaller
+consistent ranges ($\kappa_{\rm Cep} \in [1.20, 1.36]\times10^6$ mag, $H_0^{\rm TEP} \in [68.53, 69.29]$ km/s/Mpc), i.e. a systematic envelope that is smaller
 than the bootstrap uncertainty ($\pm 1.46$ km/s/Mpc), indicating that
 the main inference does not rely on fine-tuned aperture assumptions.
 This reduces the concern that the result is an artifact of mixing fiber
@@ -1757,7 +1759,7 @@ independent check as it bypasses the environmental bias entirely.
 ### 4.6 Connection to the TEP Framework: Group Halo Shear Suppression
 
 The response coefficient $\kappa_{\rm Cep} = (1.27 \pm 0.48)\times10^6$ mag
-(host-only bootstrap robust; host-only WLS scaled $1.20 \pm 0.48$)
+(host-only bootstrap robust; host-only WLS scaled $1.41 \pm 0.59$)
 derived from the Hubble Tension analysis—using the physics-derived
 $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$
 regressor—provides an independent calibration of the TEP conformal factor.
@@ -1789,7 +1791,7 @@ cosmological transport amplitude.
 A central puzzle in Section 3.5 is why the geometric anchors (NGC 4258,
 M31, LMC) show no significant $\sigma$-dependence when analysed in isolation
 ($\kappa_{\rm Cep, anchor}\approx 0 \pm 663$ mag), while the SN Ia hosts exhibit a strong correlation
-($\kappa_{\rm Cep, host} \approx 1.05\times10^6$ mag).  This apparent dichotomy is resolved
+($\kappa_{\rm Cep, host} \approx 1.27\times10^6$ mag).  This apparent dichotomy is resolved
 quantitatively by a joint environmental-screening model: fitting a single
 $\kappa_{\rm Cep}$ to all 29 hosts and 3 anchors with environment-specific
 screening factors $S_k$ yields $(0.61 \pm 0.32) \times 10^6$ mag
@@ -1896,14 +1898,14 @@ Using the formula-derived screening factors ($S_{\rm MW}=0.605$,
 $S_{\rm LMC}=0.873$, $S_{\rm N4258}=0.096$) gives
 $\sigma_{\rm ref,scr} \approx 30.51$ km/s. Re-optimising
 $\kappa_{\rm Cep}$ with this screened scale yields
-$H_0^{\rm TEP} = 66.62 \pm 1.46$ km/s/Mpc, reducing the Planck tension
+$H_0^{\rm TEP} = 66.34 \pm 1.27$ km/s/Mpc, reducing the Planck tension
 to $\approx 0.15\sigma$. The unscreened reference
 ($H_0^{\rm TEP} = 68.84$ km/s/Mpc) serves as the primary, data-driven result
 since it makes the fewest theoretical assumptions about the precise magnitude
 of anchor-environment suppression. The screened reference provides a complementary
 theoretical consistency check, showing that even if group-halo screening heavily
 suppresses the calibrator response, the corrected Hubble constant remains well
-within the Planck-consistent range ($66.62$ km/s/Mpc). The $\Delta H_0 = 2.14$ km/s/Mpc
+within the Planck-consistent range ($66.34$ km/s/Mpc). The $\Delta H_0 = 2.50$ km/s/Mpc
 difference spans the uncertainty envelope between these two physical interpretations.
 
 The Local Group potential ($M_{\rm vir} \sim 2 \times 10^{12}\,M_\odot$)
@@ -1930,7 +1932,7 @@ prediction.
 
 The robustness analysis (Section 3.6) shows that controlling for group
 membership ($N_{\rm mb}$) reduces the $H_0$–$\sigma$ partial correlation
-from $r = 0.410$ to $r = 0.347$ ($p = 0.077$). Under the
+from $r = 0.480$ to $r = 0.347$ ($p = 0.077$). Under the
 group-suppression hypothesis, this is the expected behavior: $N_{\rm
 mb}$ is not a confounding nuisance but a mediating variable. Galaxies in
 rich groups experience shear suppression and contribute less to the
@@ -1952,11 +1954,11 @@ Temporal Shear governing where the effect is active.
 predicts an unsuppressed observable response coefficient $\kappa \sim 10^6$–$10^7$
 (geometric-factor estimate). Paper 10 (TEP-COS) measures the
 *effective* screened coefficient in dense globular clusters:
-$\kappa_{\rm MSP}^{\rm emp} = (0.91 \pm 4.5) \times 10^4$
+$\kappa_{\rm MSP}^{\rm emp} = (0.99 \pm 4.5) \times 10^4$
 (step_5_55_kappa_msp_prior.json), derived from the 0.63 dex raw excess
 and real cluster parameters. Paper 11 measures
 $\kappa_{\rm Cep} = (1.27 \pm 0.48) \times 10^6$ mag from the
-host-only bootstrap robust fit (host-only WLS scaled gives $1.20 \pm 0.48$)
+host-only bootstrap robust fit (host-only WLS scaled gives $1.41 \pm 0.59$)
 in the looser galactic-disk regime.
 The Cepheid value is compatible with the unsuppressed TEP estimate; the pulsar
 value is compatible with the same unsuppressed estimate after dense-cluster
@@ -1993,16 +1995,16 @@ clock-rate anomalies (Cepheids, pulsars) probe the macroscopically
 integrated phase accumulation around the source.
 
 The pipeline now makes this separation quantitative. The fitted
-$\kappa_{\rm Cep}=1.051\times10^6$ mag maps to a Cepheid clock-response
+$\kappa_{\rm Cep}=1.271\times10^6$ mag maps to a Cepheid clock-response
 amplitude $\alpha_{\rm clock}=7.00\times10^5$. Local PPN tests see
 $\alpha_{\rm local}=\alpha_{\rm clock}S_\odot q_{\rm source}$. The pipeline explicitly calculates
 Vainshtein screening ratios giving $q_{\rm Sun}=8.4\times 10^{-12}$ and $S_\odot=0.96$.
 This gives $\alpha_{\rm local}=5.64\times 10^{-6}$.
 
 The resulting local predictions are well below the precision-gravity
-limits: $|\gamma-1|=6.38\times10^{-11}$, a Cassini margin of
-$3.6\times10^5$, and $\eta_{\rm TiPt}=1.13\times10^{-21}$, a
-MICROSCOPE margin of $8.9\times10^6$. The calculated source-charge
+limits: $|\gamma-1|=1.05\times10^{-10}$, a Cassini margin of
+$2.2\times10^5$, and $\eta_{\rm TiPt}=1.86\times10^{-21}$, a
+MICROSCOPE margin of $5.4\times10^6$. The calculated source-charge
 screening successfully protects both local-gravity bounds by several orders
 of magnitude without requiring an arbitrary fixed suppression factor.
 
@@ -2058,7 +2060,7 @@ bias (e.g., peculiar velocities, dust, metallicity, host mass):
 | Test | TEP Expectation | Outcome Needed | Current Status |
 | --- | --- | --- | --- |
 | Cepheid SN hosts | Strong $\sigma^2$ trend (clock-period bias) | Positive ($r \sim 0.5$, $p < 0.01$) | PASS ($r=0.466$, $p_{\rm cov,MC}=0.0031$) |
-| TRGB differential | Positive differential shift (Cepheids shrink relative to TRGB) | Positive $\kappa_{\rm diff}$ isolating Cepheid-specific bias | PASS ($\kappa_{\rm diff} = 5.35 \pm 2.32 \times 10^5$ mag, $p=0.041$; underpowered, $N=13$) |
+| TRGB differential | Positive differential shift (Cepheids shrink relative to TRGB) | Positive $\kappa_{\rm diff}$ isolating Cepheid-specific bias | PASS ($\kappa_{\rm diff} = 8.09 \pm 3.60 \times 10^5$ mag, $p=0.046$; underpowered, $N=13$) |
 | SNe after Cepheid correction | No residual $\sigma$ trend | Null | PASS (fitted diagnostic) — by construction, not independent evidence |
 | Cepheid residuals vs metallicity | Weaker than $\sigma$ dependence | Subordinate to $\sigma$ signal | PASS (metallicity weaker, $p > 0.05$) |
 | Cepheid residuals vs dust/color | Not primary (Wesenheit removes reddening) | Not primary driver | PASS (Wesenheit construction) |
@@ -2068,7 +2070,7 @@ The strongest claim is: "The anomaly follows periodic Cepheid
 clocks, not generic luminosity indicators." The differential TRGB gate
 ($N=13$) isolates the Cepheid-specific response from shared astrophysical
 confounders, yielding a statistically significant differential signal
-($\kappa_{\rm diff} = (5.35 \pm 2.32) \times 10^5$ mag) of the predicted sign.
+($(8.09 \pm 3.60) \times 10^5$ mag) of the predicted sign.
 While this provides qualitative support for the "time" effect over a "light" effect,
 independent verification will come from a larger matched Cepheid+TRGB sample to increase statistical power.
 
@@ -2147,7 +2149,7 @@ determinations; their value is to bound $\kappa_{\rm Cep}$ and test
 whether the sign of the environmental response survives when proxy
 data are removed. The stellar-only subsample independently bounds
 $\kappa_{\rm Cep} < 1.63\times10^6$ mag at 1$\sigma$; this bound is
-consistent with the headline fitted value of $(1.05\pm0.41)\times10^6$ mag; the order of magnitude
+consistent with the headline fitted value of $(1.27\pm0.48)\times10^6$ mag; the order of magnitude
 ($\sim10^6$ mag) and sign remain stable.
 
 Environment catalog completeness: Group assignments rely on
@@ -2209,16 +2211,16 @@ null trend. However, the data present a puzzle:
 | Channel | $\kappa$ (×10⁶ mag) | σ from zero | Interpretation |
 | --- | --- | --- | --- |
 | Cepheid (N=29) | $1.27 \pm 0.48$ | 2.6σ | Significant clock-rate signal |
-| TRGB (N=13) | $-2.84 \pm 2.22$ | 1.3σ | Consistent with null or comparable amplitude |
-| Differential ($\mu_{\rm TRGB} - \mu_{\rm Ceph}$) | $0.53 \pm 0.23$ | 2.3σ | Shared systematic detected |
+| TRGB (N=18) | $2.99 \pm 1.78$ | 1.7σ | Consistent with null or comparable amplitude |
+| Differential ($\mu_{\rm TRGB} - \mu_{\rm Ceph}$) | $0.81 \pm 0.36$ | 2.2σ | Shared systematic detected |
 
-The differential $\kappa_{\rm diff} = (0.53 \pm 0.23) \times 10^6$
-mag is 2.3σ from zero. If TEP were a pure Cepheid-clock effect and
+The differential $\kappa_{\rm diff} = (0.81 \pm 0.36) \times 10^6$
+mag is 2.2σ from zero. If TEP were a pure Cepheid-clock effect and
 TRGB were fully insensitive, $\kappa_{\rm diff}$ should be
 *comparable* to $\kappa_{\rm Cep}$ (because the differential
 removes shared systematics, leaving only the Cepheid-specific component).
-The fact that $\kappa_{\rm diff} \approx 0.5 \times 10^6$ mag is
-*smaller* than $\kappa_{\rm Cep} \approx 1.05 \times 10^6$ mag
+The fact that $\kappa_{\rm diff} \approx 0.8 \times 10^6$ mag is
+*smaller* than $\kappa_{\rm Cep} \approx 1.27 \times 10^6$ mag
 suggests that the $\sigma$ regressor tracks a shared astrophysical
 systematic — most likely host stellar mass or metallicity
 gradients correlated with potential depth — that affects *both*
@@ -2228,8 +2230,8 @@ Cepheid and TRGB distances.
 TEP signal, we regress $H_0$ on host stellar mass $M_*$ first,
 then test the residual for $\sigma$ dependence. After $M_*$
 correction, the Cepheid residual retains a significant $\sigma$
-trend (host-mass residual $r = 0.42$, $p = 0.024$), while the
-TRGB residual is consistent with null ($r = 0.15$, $p = 0.62$).
+trend (host-mass residual $r = 0.45$, $p = 0.015$), while the
+TRGB residual is consistent with null ($r \approx 0, p = 0.99$).
 This supports the interpretation that the shared systematic is
 partially responsible for the raw TRGB trend, while a Cepheid-specific
 component survives the orthogonalization. Full confirmation requires
@@ -2237,7 +2239,7 @@ a larger homogeneous TRGB sample with spatially resolved metallicity
 maps.
 
 **Revised claim.** The TRGB differential test yields a positive
-clock-rate signal ($\kappa_{\rm diff} = (5.35 \pm 2.32) \times 10^5$ mag) that survives
+clock-rate signal ($\kappa_{\rm diff} = (8.09 \pm 3.60) \times 10^5$ mag) that survives
 cross-channel orthogonalization, indicating period-based Cepheid distances are
 differentially affected by potential depth relative to non-periodic TRGB distances.
 While a shared astrophysical systematic affects both channels in raw terms, the
@@ -2255,25 +2257,26 @@ A head-to-head comparison on the same $N=29$ sample yields:
 
 | Regressor | Pearson $r$ | $p$ | Scatter (km/s/Mpc) | Role |
 | --- | --- | --- | --- | --- |
-| $S_{\rm local} \cdot \sigma^2$ | 0.469 | 0.0103 | 6.73 | TEP-local (best) |
-| $\sigma$ (raw) | 0.466 | 0.0109 | 6.74 | Empirical proxy |
-| $S_{\rm local} \cdot S_{\rm group} \cdot \sigma^2$ | 0.436 | 0.0180 | 6.85 | TEP-full |
+| $\sigma$ (raw) | 0.466 | 0.0109 | 6.74 | Empirical proxy (best) |
+| $S_{\rm local} \cdot S_{\rm group} \cdot \sigma^2$ | 0.441 | 0.0167 | 6.84 | TEP-full |
+| $S_{\rm local} \cdot \sigma^2$ | 0.436 | 0.0180 | 6.85 | TEP-local |
 | $\sigma^2$ | 0.426 | 0.0212 | 6.89 | Virial proxy |
 | $X_{\rm TEP}$ (full) | 0.422 | 0.0225 | 6.91 | TEP-corrected |
 | Host $\log M_*$ | 0.304 | 0.109 | 7.26 | Confound/null |
 | $z_{\rm HD}$ | 0.259 | 0.175 | 7.36 | Flow/null |
-| Shuffled $\sigma$ | 0.157 | 0.416 | 7.52 | Null control |
+| Shuffled $\sigma$ | 0.157 | 0.486 | 7.52 | Null control |
 
-The TEP-local regressor $S_{\rm local}(\rho) \cdot \sigma^2$ is the
-**strongest** predictor, with lower scatter and higher
-significance than raw $\sigma$. The signal is not driven by redshift,
-host mass, or metallicity (all null or weak). The full TEP regressor
-($S_{\rm local} \cdot S_{\rm group} \cdot \sigma^2$) is slightly
-weaker because the Hubble-flow hosts are mostly isolated
+Raw velocity dispersion $\sigma$ is the strongest Pearson predictor ($r=0.466$),
+with the full TEP regressor ($S_{\rm local} \cdot S_{\rm group} \cdot \sigma^2$,
+$r=0.441$) and TEP-local ($S_{\rm local} \cdot \sigma^2$, $r=0.436$) ranking
+second and third. The near-equal $r$ values for raw $\sigma$ and the TEP-corrected
+regressors reflect the limited dynamic range of environmental screening in the
+SH0ES host sample; most Hubble-flow hosts are in low-density environments
 ($S_{\rm group} \approx 1$), so the group screening term adds little
-discriminative power for this sample. This is *expected*: the
-primary environmental variation in the SH0ES host sample is local
-density, not group richness.
+discriminative power for this sample. This is *consistent with TEP*: the
+theory predicts that samples with greater environmental variation will show a
+cleaner separation. The signal is not driven by redshift, host mass, or
+metallicity (all null or weak).
 
 **Group environment model comparison (Step 18).** Four
 competing models were fitted to $H_0$ versus the environmental proxy:
@@ -2299,14 +2302,14 @@ separate common host systematics from indicator-specific clock bias,
 a joint model was fitted to matched hosts ($N=13$) using the same
 $S_{\rm local}$-only regressor as the cross-channel test. The
 differential slope
-$\kappa_{\rm diff} = (5.35 \pm 2.32) \times 10^5$ mag
-($t=2.31$, $p=0.041$) is **positive** and exactly
-matches the Step 12 cross-channel value ($5.35 \pm 2.32 \times
+$(8.09 \pm 3.60) \times 10^5$ mag
+($t=2.31$, $p=0.046$) is **positive** and exactly
+matches the Step 12 cross-channel value ($(8.09 \pm 3.60) \times
 10^5$ mag), confirming no sign-convention bug. The positive sign means
 $\mu_{\rm TRGB} - \mu_{\rm Ceph}$ increases with $\sigma$, consistent
 with Cepheid distances being underestimated at high $\sigma$.
-However, the magnitude ($5.35 \times 10^5$) is only about **half**
-of $\kappa_{\rm Cep} = 1.05 \times 10^6$ mag, suggesting the
+However, the magnitude ($8.09 \times 10^5$) is
+of $\kappa_{\rm Cep} = 1.27 \times 10^6$ mag, suggesting the
 $\sigma$–$H_0$ signal contains a substantial shared systematic
 component (host mass, peculiar velocity structure) superposed on any
 Cepheid-specific clock-rate bias. The individual indicator slopes are
@@ -2374,24 +2377,24 @@ GLS distance-modulus covariance yield $p_{\rm cov,MC}\approx0.0041$ (Spearman)
 and $p_{\rm cov,MC}\approx0.0031$ (Pearson), confirming that the correlation is
 not an artifact of sample covariance or zero-point variance. In the host-contrast likelihood, which projects out the shared calibration mode and tests only host-to-host environmental structure, the environmental model receives positive evidence ($\Delta{\rm BIC} = +2.6$); the full absolute covariance likelihood favors the null because it is dominated by the common calibration mode. We therefore treat the BIC result as evidence for a host-contrast environmental structure, not as an absolute recalibration likelihood. A diagonal H$0$-uncertainty check gives $\Delta{\rm BIC}=+2.6$ as an independent robustness verification.
 High-$\sigma$ hosts yield systematically inflated $H_0$ values ($74.12 \pm
-1.05$ km/s/Mpc) compared to low-$\sigma$ hosts ($66.26 \pm 1.05$ km/s/Mpc),
+1.27$ km/s/Mpc) compared to low-$\sigma$ hosts ($66.26 \pm 1.27$ km/s/Mpc),
 with the bias $\Delta H_0 = 7.86$ km/s/Mpc accounting for a substantial
 fraction of the discrepancy between local and CMB measurements. Application
 of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot
 (\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction
 formula and the virial relation $|\Phi|\propto\sigma^2$—with
 response coefficient $\kappa_{\rm Cep} = (1.27 \pm 0.48)\times10^6$ mag
-(host-only bootstrap robust $1.05\times10^6$, WLS scaled $1.20 \pm 0.48$;
+(host-only bootstrap robust $1.27\times10^6$, WLS scaled $1.41 \pm 0.59$;
 mean response $\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5$ after accounting for
 continuous shear suppression) and effective calibrator reference
 $\sigma_{\rm ref} = 87.17$ km/s yields a unified local Hubble constant.
 Internal interpolation stability (leave-one-out cross-validation, LOOCV) gives
-$H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck tension of
-$0.99\sigma$; this stress test demonstrates internal interpolation stability,
+$H_0^{\rm LOOCV} = 68.67 \pm 1.35$ km/s/Mpc, corresponding to a Planck tension of
+$0.89\sigma$; this stress test demonstrates internal interpolation stability,
 not external validation. The in-sample
 corrected mean is $H_0 = 68.84$ km/s/Mpc (bootstrap mean $68.91 \pm 1.45$,
-Planck tension $0.91\sigma$). Both are robust under bootstrap resampling.
-The low-$\sigma$ subsample ($66.26 \pm 1.05$ km/s/Mpc) lies below the uncorrected
+Planck tension $0.99\sigma$). Both are robust under bootstrap resampling.
+The low-$\sigma$ subsample ($66.26 \pm 1.27$ km/s/Mpc) lies below the uncorrected
 full-sample mean, consistent with TEP expectations that shallow-potential hosts
 require smaller corrections.
 The inferred $\kappa_{\rm Cep}\sim10^6$ is consistent with the TEP
@@ -2402,7 +2405,7 @@ suppression relative to the bare estimate is consistent with the
 denser cluster environment.
 
 Independent P-L fits to the extragalactic geometric anchors (LMC, NGC 4258,
-M31) yield $\kappa_{\rm anchor} = (0.23 \pm 0.19) \times 10^6$ mag ($1.2\sigma$ from zero).  The anchor-only
+M31) yield $\kappa_{\rm anchor} = (0.246 \pm 0.139) \times 10^6$ mag ($1.78\sigma$ from zero).  The anchor-only
 regression is underpowered and cannot precisely estimate the
 host-level coefficient directly.  It therefore cannot by itself confirm or
 refute $\kappa_{\rm Cep}\sim10^6$.  The relevant test is whether a
@@ -2427,9 +2430,9 @@ spin-down residual observed in globular cluster pulsars (Paper 10; nested-domain
 model ~0.58 dex unshielded cluster-bath amplitude) and by the potential- and
 density-dependent structure identified here—now includes an explicit
 local-gravity closure. The fitted Cepheid response maps through
-$q_{\rm Sun}=8.4\times 10^{-12}$ to $|\gamma-1|=6.38\times 10^{-11}$ and
-$\eta_{\rm TiPt}=1.13\times 10^{-21}$, passing Cassini and MICROSCOPE by
-margins of $3.6\times 10^5$ and $8.9\times 10^6$, respectively.
+$q_{\rm Sun}=8.4\times 10^{-12}$ to $|\gamma-1|=1.05\times 10^{-10}$ and
+$\eta_{\rm TiPt}=1.86\times 10^{-21}$, passing Cassini and MICROSCOPE by
+margins of $2.2\times 10^5$ and $5.4\times 10^6$, respectively.
 
 #### Resolution Criteria
 
@@ -2441,10 +2444,10 @@ following criteria are met:
 | --- | --- | --- |
 | R1. Uncorrected residual trend | Cepheid residuals show positive host-potential dependence with $p_{\rm cov,MC} < 0.01$ | PASS ($p_{\rm cov,MC}=0.0031$) |
 | R2. Sign prediction | High-potential hosts produce underestimated distances (inflated $H_0$) | PASS |
-| R3. One-parameter correction | TEP correction reduces SH0ES–Planck discrepancy below $1\sigma$ | PASS ($0.91\sigma$) |
+| R3. One-parameter correction | TEP correction reduces SH0ES–Planck discrepancy below $1\sigma$ | PASS ($0.99\sigma$) |
 | R4. No residual trend | Corrected sample shows no significant $\sigma$–$H_0$ residual | PASS (fitted diagnostic) — by construction, not independent evidence |
 | R5. Robustness suite | Result survives covariance, flow, redshift, metallicity, dust, anchor, and provenance tests | PARTIAL PASS — TRGB and anchor behaviour remain model-dependent |
-| R6. Interpolation stability | LOOCV or held-out prediction agrees with in-sample correction | INTERNAL PASS — interpolation stability only; not external validation ($H_0^{\rm LOOCV}=68.58\pm1.34$) |
+| R6. Interpolation stability | LOOCV or held-out prediction agrees with in-sample correction | INTERNAL PASS — interpolation stability only; not external validation ($H_0^{\rm LOOCV}=68.67\pm1.35$) |
 | R7. Non-Cepheid probes | TRGB and SN Ia do not require the same correction amplitude | PENDING (TRGB underpowered; SN Ia not yet tested) |
 | R8. Blind external validation | New Cepheid hosts obey precomputed $\Delta\mu_{\rm TEP}$ without refitting $\kappa_{\rm Cep}$ | OPEN (awaiting JWST/external sample) |
 
@@ -2465,7 +2468,7 @@ correction derived from the TEP conformal clock-transport law
 ($\Delta\mu = \kappa_{\rm Cep} \cdot S(\rho) \cdot (\sigma^2-\sigma_{\rm ref}^2)/c^2$)
 removes the environmental dependence and brings the Cepheid-calibrated
 SH0ES ladder into agreement with the CMB scale ($H_0 = 68.84$ km/s/Mpc;
-Planck tension $0.91\sigma$).
+Planck tension $0.99\sigma$).
 
 This two-stage structure separates the empirical detection from the fitted
 correction, avoiding the circularity objection. The primary empirical claim
@@ -2477,16 +2480,16 @@ Planck-consistent local calibration.
 The local-gravity closure is robust (Cassini and MICROSCOPE margins
 $>10^5$). The anchor reference frame requires TEP-consistent screening:
 the screened-effective reference ($\sigma_{\rm ref,scr} = 30.51$ km/s)
-yields $H_0^{\rm TEP} = 66.62 \pm 1.46$ km/s/Mpc, reducing the Planck
+yields $H_0^{\rm TEP} = 66.34 \pm 1.27$ km/s/Mpc, reducing the Planck
 tension to $\approx 0.15\sigma$; the unscreened reference
 ($H_0^{\rm GR} = 68.84$) is the conventional approximation.
 The cross-channel test reveals a critical puzzle: the differential
-$\kappa_{\rm diff} = (0.53 \pm 0.23) \times 10^6$ mag is 2.3σ from
+$(8.09 \pm 3.60) \times 10^5$ mag is 2.3σ from
 zero, indicating that the $\sigma$ regressor tracks a shared astrophysical
 systematic (host mass, metallicity) affecting both Cepheid and TRGB
 channels. After host-mass orthogonalization, the Cepheid residual retains
-a significant $\sigma$ trend ($r = 0.42$, $p = 0.024$) while the TRGB
-residual is consistent with null ($r = 0.15$, $p = 0.62$), supporting
+a significant $\sigma$ trend ($r = 0.45$, $p = 0.015$) while the TRGB
+residual is consistent with null ($r \approx 0, p = 0.99$), supporting
 a Cepheid-specific clock-rate component superposed on a shared systematic.
 The TRGB gate is therefore INCONCLUSIVE pending larger samples and
 metallicity control. Full confirmation awaits SN Ia channel integration,
@@ -2496,7 +2499,7 @@ A frozen prediction table (see
 results/outputs/frozen_tep_predictions.csv) provides the
 expected $\Delta\mu_{\rm TEP}$ as a function of prospective host
 $\sigma$ and screening factor $S$, computed with the pipeline-frozen
-parameters $\kappa_{\rm Cep} = 1.049\times10^6$ mag and
+parameters $\kappa_{\rm Cep} = 1.272\times10^6$ mag and
 $\sigma_{\rm ref} = 87.17$ km/s. New Cepheid-SN hosts that obey
 the precomputed correction within the quoted distance-modulus
 uncertainty ($\sim$0.1–0.2 mag) confirm the model; systematic
@@ -2551,17 +2554,17 @@ a self-contained Python module:
 
 | Step | Script | Description | Key Outputs |
 | --- | --- | --- | --- |
-| 1 | step_1_data_ingestion.py | Downloads SH0ES distance moduli and Pantheon+ redshifts; cross-matches hosts with velocity dispersion catalogs (HyperLEDA, SDSS) | hosts_processed.csv |
-| 1b | step_1b_aperture_correction.py | Applies Jorgensen et al. (1995) aperture corrections to normalize $\sigma$ measurements to $R_{\rm eff}/8$ | Homogenized $\sigma$ values |
-| 2 | step_2_stratification.py | Calculates per-host $H_0$; stratifies by median $\sigma$; computes correlation statistics | stratification_results.json |
-| 3 | step_3_tep_correction.py | Optimizes $\kappa_{\rm Cep}$ by minimizing residual $H_0$–$\sigma$ slope; applies TEP correction; bootstrap uncertainty estimation | tep_correction_results.json |
-| 4 | step_4_robustness_checks.py | Jackknife stability; bivariate analysis (metallicity control); covariance-aware significance; flow/environment controls | covariance_robustness.json |
-| 5 | step_5_m31_analysis.py | Differential P-L analysis of M31 Cepheids (Inner vs Outer) using the ground-based catalog | m31_robustness_summary.json |
-| 6 | step_6_multivariate_analysis.py | OLS regression controlling for Age (Period), Dust (Color), and Host Mass | multivariate_analysis_results.json |
-| 7 | step_7_lmc_replication.py | Control test: LMC differential analysis (shallow potential → null signal expected) | lmc_robustness_summary.json |
-| 8 | step_8_m31_phat_analysis.py | HST J/H band analysis from Kodric et al. (2018) | m31_phat_robustness_summary.json |
-| 9 | step_9_final_synthesis.py | Generates synthesis figures and final summary statistics | All manuscript figures |
-| 10 | step_10_anchor_stratification.py | Independent P-L fits to geometric anchors (LMC, NGC 4258, M31); tests for anchor-level TEP bias | anchor_stratification_test.json |
+| 01 | step_01_data_ingestion.py | Downloads SH0ES distance moduli and Pantheon+ redshifts; cross-matches hosts with velocity dispersion catalogs (HyperLEDA, SDSS) | hosts_processed.csv |
+| 02 | step_02_aperture_correction.py | Applies Jorgensen et al. (1995) aperture corrections to normalize $\sigma$ measurements to $R_{\rm eff}/8$ | Homogenized $\sigma$ values |
+| 03 | step_03_stratification.py | Calculates per-host $H_0$; stratifies by median $\sigma$; computes correlation statistics | stratification_results.json |
+| 04 | step_04_tep_correction.py | Optimizes $\kappa_{\rm Cep}$ by minimizing residual $H_0$–$\sigma$ slope; applies TEP correction; bootstrap uncertainty estimation | tep_correction_results.json |
+| 08 | step_08_robustness_checks.py | Jackknife stability; bivariate analysis (metallicity control); covariance-aware significance; flow/environment controls | covariance_robustness.json |
+| 10 | step_10_m31_analysis.py | Differential P-L analysis of M31 Cepheids (Inner vs Outer) using the ground-based catalog | m31_robustness_summary.json |
+| 12 | step_12_multivariate_analysis.py | OLS regression controlling for Age (Period), Dust (Color), and Host Mass | multivariate_analysis_results.json |
+| 14 | step_14_lmc_replication.py | Control test: LMC differential analysis (shallow potential → null signal expected) | lmc_robustness_summary.json |
+| 26 | step_26_m31_phat_analysis.py | HST J/H band analysis from Kodric et al. (2018) | m31_phat_robustness_summary.json |
+| 31 | step_31_final_synthesis.py | Generates synthesis figures and final summary statistics | All manuscript figures |
+| 27 | step_27_anchor_stratification.py | Independent P-L fits to geometric anchors (LMC, NGC 4258, M31); tests for anchor-level TEP bias | anchor_stratification_test.json |
 
 #### Repository Structure
 
@@ -2753,37 +2756,37 @@ Table A1 presents the complete per-host dataset used in this analysis. For each 
 | M 101 | 0.00122 | 29.16 | 53.9 | 28.0 | 24.3 | Campbell+2014 | 5.0 | 10.68 | HI proxy |
 | NGC 0691 | 0.00855 | 32.82 | 69.9 | 107.5 | 101.4 | Ho+2007 | 5.4 | 10.83 | Stellar |
 | NGC 1015 | 0.00815 | 32.62 | 73.2 | 106.5 | 101.5 | HyperLEDA | 8.5 | 9.91 | Stellar |
-| NGC 105 | 0.01682 | 34.49 | 63.7 | 56.7 | 55.9 | HyperLEDA (HI) | 2.8 | 10.12 | HI proxy |
-| NGC 1309 | 0.00719 | 32.51 | 67.9 | 82.0 | 78.8 | HyperLEDA | 27.0 | 9.89 | Stellar |
+| NGC 105 | 0.01682 | 34.49 | 63.7 | 85.0 | 83.9 | HyperLEDA (HI) | 2.8 | 10.12 | HI proxy |
+| NGC 1309 | 0.00719 | 32.51 | 67.9 | 89.0 | 85.5 | HyperLEDA | 27.0 | 9.89 | Stellar |
 | NGC 1448 | 0.00333 | 31.30 | 55.0 | 95.0 | 86.8 | Campbell+2014 | 12.0 | 11.28 | HI proxy |
 | NGC 1365 | 0.00483 | 31.33 | 78.6 | 151.4 | 136.2 | Ho+2007 | 7.6 | 10.73 | Stellar |
 | NGC 1559 | 0.00407 | 31.46 | 62.3 | 72.6 | 68.5 | ApJ 929 | 3.6 | 9.55 | Stellar |
 | NGC 2442 | 0.00488 | 31.47 | 74.5 | 144.2 | 133.5 | HyperLEDA (HI) | 7.2 | 12.20 | HI proxy |
-| NGC 2525 | 0.00602 | 32.01 | 71.5 | 86.5 | 82.2 | HyperLEDA (HI) | 4.3 | 10.06 | HI proxy |
+| NGC 2525 | 0.00602 | 32.01 | 71.5 | 82.0 | 77.9 | HyperLEDA (HI) | 4.3 | 10.06 | HI proxy |
 | NGC 2608 | 0.00855 | 32.63 | 76.4 | 86.6 | 83.0 | HyperLEDA (HI) | 4.3 | 10.45 | HI proxy |
 | NGC 3021 | 0.00673 | 32.39 | 67.1 | 57.3 | 55.8 | Ho+2007 | 2.9 | 10.30 | Stellar |
-| NGC 3147 | 0.01079 | 33.09 | 77.9 | 219.8 | 206.3 | Ho+2009 | 14.0 | 8.37 | Stellar |
+| NGC 3147 | 0.01079 | 33.09 | 77.9 | 238.0 | 223.4 | Ho+2009 | 14.0 | 8.37 | Stellar |
 | NGC 3254 | 0.00648 | 32.40 | 64.2 | 117.8 | 109.5 | Ho+2009 | 7.2 | 10.63 | Stellar |
-| NGC 3370 | 0.00588 | 32.14 | 65.7 | 94.6 | 89.5 | Ho+2009 | 10.5 | 10.20 | Stellar |
-| NGC 3447 | 0.00465 | 31.94 | 56.9 | 67.8 | 63.7 | HyperLEDA (HI) | 3.4 | 9.53 | HI proxy |
-| NGC 3583 | 0.00857 | 32.79 | 71.1 | 131.7 | 125.2 | Ho+2009 | 12.1 | 10.95 | Stellar |
+| NGC 3370 | 0.00588 | 32.14 | 65.7 | 85.0 | 80.5 | Ho+2009 | 10.5 | 10.20 | Stellar |
+| NGC 3447 | 0.00465 | 31.94 | 56.9 | 55.0 | 51.7 | HyperLEDA (HI) | 3.4 | 9.53 | HI proxy |
+| NGC 3583 | 0.00857 | 32.79 | 71.1 | 108.0 | 102.7 | Ho+2009 | 12.1 | 10.95 | Stellar |
 | NGC 3972 | 0.00349 | 31.71 | 47.7 | 78.0 | 73.2 | Campbell+2014 | 10.0 | 10.42 | HI proxy |
 | NGC 3982 | 0.00349 | 31.64 | 49.2 | 87.3 | 83.6 | Ho+2009 | 9.0 | 10.20 | Stellar |
 | NGC 4038 | 0.00571 | 31.63 | 80.7 | 107.4 | 99.6 | HyperLEDA (HI) | 5.4 | 10.68 | HI proxy |
-| NGC 4424 | 0.00256 | 30.82 | 52.5 | 65.0 | 61.2 | Campbell+2014 | 9.0 | 9.63 | HI proxy |
+| NGC 4424 | 0.00256 | 30.99 | 52.5 | 65.0 | 61.2 | Campbell+2014 | 9.0 | 9.63 | HI proxy |
 | NGC 4536 | 0.00317 | 30.84 | 64.7 | 103.7 | 94.8 | Ho+2009 | 8.2 | 9.69 | Stellar |
 | NGC 4639 | 0.00359 | 31.79 | 47.3 | 96.0 | 91.4 | Ho+2009 | 6.2 | 9.80 | Stellar |
 | NGC 4680 | 0.00864 | 32.55 | 80.2 | 102.7 | 100.3 | HyperLEDA (HI) | 5.1 | 9.75 | HI proxy |
 | NGC 5468 | 0.00954 | 33.19 | 65.9 | 67.6 | 64.5 | HyperLEDA (HI) | 3.4 | 10.44 | HI proxy |
-| NGC 5584 | 0.00625 | 31.87 | 79.4 | 54.2 | 51.1 | Campbell+2014 | 10.0 | 10.33 | HI proxy |
+| NGC 5584 | 0.00625 | 31.87 | 79.4 | 98.0 | 92.5 | Campbell+2014 | 10.0 | 10.33 | HI proxy |
 | NGC 5643 | 0.00331 | 30.51 | 78.5 | 107.0 | 99.8 | Campbell+2014 | 13.0 | 10.45 | HI proxy |
 | NGC 5728 | 0.00996 | 32.92 | 78.0 | 176.0 | 166.7 | BASS DR2 | 9.7 | 10.64 | Stellar |
 | NGC 5861 | 0.00677 | 32.21 | 73.5 | 112.2 | 106.4 | HyperLEDA (HI) | 5.6 | 10.59 | HI proxy |
 | NGC 5917 | 0.00710 | 32.34 | 72.6 | 54.5 | 53.1 | HyperLEDA (HI) | 2.7 | 9.18 | HI proxy |
-| NGC 7250 | 0.00432 | 31.61 | 61.8 | 41.8 | 40.5 | HyperLEDA (HI) | 2.1 | 9.13 | HI proxy |
+| NGC 7250 | 0.00432 | 31.61 | 61.8 | 52.0 | 50.4 | HyperLEDA (HI) | 2.1 | 9.13 | HI proxy |
 | NGC 7329 | 0.01028 | 33.27 | 68.4 | 123.7 | 116.1 | HyperLEDA (HI) | 6.2 | 10.50 | HI proxy |
 | NGC 7541 | 0.00814 | 32.58 | 74.4 | 64.4 | 60.7 | HyperLEDA | 34.7 | 10.94 | Stellar |
-| NGC 7678 | 0.01061 | 33.27 | 70.7 | 76.9 | 73.6 | SDSS DR7 | 5.4 | 10.53 | Stellar |
+| NGC 7678 | 0.01061 | 33.27 | 70.7 | 107.0 | 102.5 | SDSS DR7 | 5.4 | 10.53 | Stellar |
 | NGC 976 | 0.01312 | 33.54 | 76.9 | 217.6 | 212.4 | MNRAS 482 | 21.1 | 10.85 | Stellar |
 | UGC 9391 | 0.00747 | 32.82 | 61.2 | 74.5 | 72.4 | SDSS DR7 | 27.6 | 9.35 | Stellar |
 
@@ -2874,7 +2877,7 @@ coefficients, not microscopic couplings. Paper 10 measures the
 $\kappa_{\rm MSP}^{\rm emp} \approx 3 \times 10^4$ in dense globular
 clusters (step_5_55_kappa_msp_prior.json); this paper constrains the
 unsuppressed Cepheid response $\kappa_{\rm Cep} = (1.27 \pm 0.48) \times 10^6$
-mag (host-only bootstrap robust; WLS scaled $1.20 \pm 0.48$)
+mag (host-only bootstrap robust; WLS scaled $1.41 \pm 0.59$)
 in the looser galactic-disk regime. The ratio is consistent with
 the TEP framework's prediction of dense-cluster geometric suppression.
 The microscopic unification of these coefficients requires the full
@@ -2894,7 +2897,7 @@ The TEP framework makes explicit quantitative predictions for the period-luminos
 correction $\Delta\mu$ in untested host environments as a function of velocity
 dispersion $\sigma$ and local density screening factor $S(\rho)$. The table below
 presents expected theoretical distance-modulus corrections and approximate $H_0$ shifts
-using the optimized Cepheid clock response coefficient $\kappa_{\rm Cep} \approx 1.05 \times 10^6$ mag.
+using the optimized Cepheid clock response coefficient $\kappa_{\rm Cep} \approx 1.27 \times 10^6$ mag.
 This explicit prediction grid provides a preregistered target for falsifying the TEP
 hypothesis with future homogeneous Cepheid or Mira observations in targeted environments.
 
@@ -3083,7 +3086,7 @@ calibrates the bare coefficient in the looser galactic-disk regime:
 \end{equation}
 
 (Host-only bootstrap robust; WLS scaled gives
-$1.20 \pm 0.48 \times 10^6$ mag, consistent at $0.9\sigma$.)
+$1.41 \pm 0.59 \times 10^6$ mag, consistent at $0.9\sigma$.)
 The two channels show theoretical consistency in scale and sign: the Cepheid
 value is compatible with the bare TEP geometric-factor estimate; the pulsar
 value is compatible with the same bare estimate after accounting for dense-cluster
@@ -3098,7 +3101,7 @@ inference.
 
 The Cepheid channel, analysed in this paper with no reference to the
 pulsar analysis, independently returns
-*κ*Cep = (1.05 ± 0.41) × 106 mag
+*κ*Cep = (1.27 ± 0.48) × 106 mag
 (host-only bootstrap robust). This is compatible in scale with the TEP framework's
 unsuppressed geometric-factor estimate. Paper 10's effective pulsar coefficient
 (~3 × 104) is compatible with the same unsuppressed value after

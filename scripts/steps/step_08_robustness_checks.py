@@ -277,8 +277,8 @@ class Step4RobustnessChecks:
 
         sigma_ref = self._load_sigma_ref_val()
         if sigma_ref is None:
-            sigma_ref = 30.51
-            print_status(f"σ_ref_screened missing; using fallback", "WARNING")
+            sigma_ref = 87.17
+            print_status("σ_ref missing from JSON; using standard fallback 87.17 km/s", "WARNING")
 
         # TEP regressor: S * (sigma^2 - sigma_ref^2) / c^2
         from scripts.utils.tep_correction import C_SQUARED_KM_S
@@ -527,16 +527,6 @@ class Step4RobustnessChecks:
         except Exception:
             return None
 
-    def _load_sigma_ref_val(self):
-        if not self.tep_results_path.exists():
-            return None
-        try:
-            with open(self.tep_results_path, 'r') as f:
-                d = json.load(f)
-            return float(d.get('sigma_ref')) if 'sigma_ref' in d else None
-        except Exception:
-            return None
-
     def _fit_kappa(self, df, sigma_ref):
         from scripts.utils.tep_correction import tep_correction
         sigma = df['sigma_inferred'].values.astype(float)
@@ -548,9 +538,9 @@ class Step4RobustnessChecks:
             kappa_cep = float(params[0])
             corr = tep_correction(sigma, sigma_ref, kappa_cep, S)
             mu_corr = mu + corr
-            d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
-            h0_corr = v / d_corr
-            slope, _ = np.polyfit(sigma, h0_corr, 1)
+            mu_fid = 5 * np.log10(v) + 25 - 5 * np.log10(70.0)
+            delta_mu = mu_corr - mu_fid
+            slope, _ = np.polyfit(sigma, delta_mu, 1)
             return float(slope * slope)
 
         res = minimize(
@@ -851,7 +841,7 @@ class Step4RobustnessChecks:
         cuts = [0.0, 0.0035, 0.004, 0.005, 0.007, 0.01, 0.015]
         rows = []
         
-        from scripts.steps.step_3_tep_correction import Step3TEPCorrection
+        from scripts.steps.step_04_tep_correction import Step3TEPCorrection
         from scripts.utils.tep_correction import C_SQUARED_KM_S
         step3 = Step3TEPCorrection()
         # Use the same logger
@@ -894,7 +884,7 @@ class Step4RobustnessChecks:
                 rss_null = np.sum((h0 - np.mean(h0))**2)
                 bic_null = n * np.log(rss_null / n) + 1 * np.log(n)
                 bic_model = n * np.log(rss_model / n) + 2 * np.log(n)
-                delta_bic = bic_model - bic_null
+                delta_bic = bic_null - bic_model  # positive = evidence for TEP (consistent with _bayesian_model_comparison convention)
             except Exception as e:
                 print_status(f"Error computing TEP stats for zcut {zcut}: {e}", "WARNING")
                 kappa = np.nan
@@ -1125,7 +1115,7 @@ class Step4RobustnessChecks:
         # Determine Stability
         r_min = min(r_values)
         r_max = max(r_values)
-        is_stable = (r_min > 0.3) and (min([p for p in r_values if p > 0]) > 0) # Basic check
+        is_stable = (r_min > 0.3) and all(r > 0 for r in r_values)  # all jackknife r positive and above floor
         
         print_status(f"Jackknife Range: r in [{r_min:.4f}, {r_max:.4f}]", "RESULT")
         
@@ -1417,7 +1407,7 @@ class Step4RobustnessChecks:
         if not prov_path.exists():
             print_status("Sigma provenance table missing; generating it via Step 4b.", "WARNING")
             try:
-                from scripts.steps.step_4b_aperture_sensitivity import Step4bApertureSensitivity
+                from scripts.steps.step_07_aperture_sensitivity import Step4bApertureSensitivity
 
                 Step4bApertureSensitivity().run()
                 set_step_logger(self.logger)
@@ -1470,8 +1460,8 @@ class Step4RobustnessChecks:
 
         sigma_ref = self._load_sigma_ref_val()
         if sigma_ref is None:
-            sigma_ref = 30.51
-            print_status(f"σ_ref_screened missing; using fallback", "WARNING")
+            sigma_ref = 87.17
+            print_status("σ_ref missing from JSON; using standard fallback 87.17 km/s", "WARNING")
 
         from scripts.utils.tep_correction import C_SQUARED_KM_S
         x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S

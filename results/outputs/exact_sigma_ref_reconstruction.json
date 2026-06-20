@@ -1,13 +1,13 @@
 {
   "exact_reconstruction": {
-    "approx_weights_unscreened": 112.7058117401228,
-    "approx_weights_screened": 44.04813332927967,
-    "equal_weights_unscreened": 127.47646841672388,
-    "equal_weights_screened": 85.6380024175905
+    "step3_weights_unscreened": 87.16507328052906,
+    "step3_weights_screened": 30.50738103825078,
+    "equal_weights_unscreened": 70.00238091188994,
+    "equal_weights_screened": 27.768781467457192
   },
   "pipeline_values": {
     "sigma_ref_standard": 87.16507328052906,
     "sigma_ref_screened": 30.50738103825078
   },
-  "interpretation": "The standard sigma_ref = 87.17 km/s is derived from approximate SH0ES calibrator weights. The screened sigma_ref = 30.51 km/s is the TEP-consistent reference. Both are consistent across reconstruction methods. The exact leverage from the full SH0ES design matrix would require the original GLS inversion; the approximate weights are adequate for the present analysis."
+  "interpretation": "Anchor weights and disk sigmas now match step_3_tep_correction.py exactly (MW=0.20/30.0 km/s, LMC=0.25/24.0 km/s, NGC4258=0.55/115.0 km/s; no M31). The reconstructed sigma_ref (step3_weights_unscreened) should agree with pipeline_values.sigma_ref_standard to within rounding. Equal-weight variant is a robustness check only. Note: the full SH0ES GLS design matrix leverage fractions are not directly available; these weights are the SH0ES-motivated P-L contribution fractions from Riess et al. (2022)."
 }

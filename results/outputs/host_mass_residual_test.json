@@ -10,8 +10,8 @@
   "trgb": {
     "raw_r": 0.3274753269146916,
     "raw_p": 0.27473086720429435,
-    "mass_residual_r": -0.0010981847291660519,
-    "mass_residual_p": 0.09774825690816868
+    "mass_residual_r": -0.0037004910557898764,
+    "mass_residual_p": 0.9904273985626698
   },
   "tep_prediction": "If TEP is real: Cepheid mass-residual r should remain significant; TRGB mass-residual r should collapse toward zero."
 }

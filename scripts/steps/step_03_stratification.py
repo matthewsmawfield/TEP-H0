@@ -649,7 +649,7 @@ class Step2Stratification:
                 linestyle="--",
                 linewidth=2.5,
                 alpha=0.9,
-                label="Pearson r=0.43",
+                label=f"Pearson r={corr_sq:.2f}",
                 zorder=4,
             )
 
@@ -683,6 +683,7 @@ class Step2Stratification:
 
         # Copy to public figures
         public_path = self.root_dir / "site" / "public" / "figures" / "figure_01_h0_vs_sigma.png"
+        public_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy(self.plot_path, public_path)
         print_status(f"Copied plot to {public_path}", "SUCCESS")
 

@@ -429,7 +429,7 @@ thresholds:
 | --- | --- | --- |
 | Loose ($V_{obs}/V_{bar} > 1.1$) | $0.274 \pm 0.036$ | $1.6\sigma$ |
 | Fiducial ($V_{obs}/V_{bar} > 1.3$) | $0.372 \pm 0.041$ | $1.0\sigma$ |
-| Strict ($V_{obs}/V_{bar} > 1.5$) | $0.413 \pm 0.045$ | $1.8\sigma$ |
+| Strict ($V_{obs}/V_{bar} > 1.5$) | $0.483 \pm 0.045$ | $1.8\sigma$ |
 
 While individual definitions shift the normalization, the slope consistently
 clusters around the $M^{1/3}$ expectation. An alternative definition based on

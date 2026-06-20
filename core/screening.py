@@ -57,6 +57,12 @@ def screening_factor(rho_local_g_cm3, rho_c=RHO_C):
     When rho_local << rho_c: suppression -> 1 (full TEP effect)
     When rho_local -> rho_c: suppression -> 0.5 (transition)
     When rho_local >> rho_c: suppression -> 0 (saturated, A -> 1)
+
+    WARNING: rho_c = 20.0 g/cm^3 is calibrated for lab/stellar-body densities.
+    For galactic-scale densities (~1e-17 g/cm^3), rho/rho_c ~ 5e-19 and this
+    function returns S ~ 1.0 for every galaxy, making it numerically useless as
+    an environmental discriminant. For galaxy-scale Cepheid-host screening, use
+    TEPCosmology.screening_function (rho_half ~ 0.5 M_sun/pc^3) instead.
     """
     return universal_screening_function(rho_local_g_cm3, rho_c, n=2.0, invert=False)
 

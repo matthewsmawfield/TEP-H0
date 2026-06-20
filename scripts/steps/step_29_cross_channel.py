@@ -64,13 +64,12 @@ class Step12CrossChannel:
         if len(sigma) < 5:
             return np.nan, np.nan, np.nan
 
-        def objective(kappa):
-            k = float(kappa[0]) if hasattr(kappa, "__len__") else float(kappa)
-            dmu = tep_correction(sigma, sigma_ref, k, S)
+        def objective(k):
+            dmu = tep_correction(sigma, sigma_ref, k[0], S)
             mu_c = mu + dmu
-            d_c = 10 ** ((mu_c - 25) / 5)
-            h0 = 299792.458 * z / d_c
-            slope, _, _, _, _ = stats.linregress(sigma, h0)
+            mu_fid = 5 * np.log10(299792.458 * z) + 25 - 5 * np.log10(70.0)
+            delta_mu = mu_c - mu_fid
+            slope, _, _, _, _ = stats.linregress(sigma, delta_mu)
             return slope ** 2
 
         result = minimize(
@@ -99,10 +98,9 @@ class Step12CrossChannel:
             if not np.isnan(k):
                 dmu = tep_correction(sigma, sigma_ref, k, S)
                 mu_c = mu + dmu
-                d_c = 10 ** ((mu_c - 25) / 5)
-                h0_c = 299792.458 * z / d_c
-                slope_c = stats.linregress(sigma, h0_c)[0]
-                obj = slope_c ** 2
+                mu_fid = 5 * np.log10(299792.458 * z) + 25 - 5 * np.log10(70.0)
+                delta_mu = mu_c - mu_fid
+                obj = stats.linregress(sigma, delta_mu)[0] ** 2
                 if obj < best_obj:
                     best_obj = obj
                     best_k = k
@@ -126,17 +124,17 @@ class Step12CrossChannel:
 
     def _finite_diff_kappa(self, sigma, mu, z, S, sigma_ref):
         """Estimate kappa and error from finite-difference slope cancellation."""
-        # Raw H0-sigma slope
-        d_raw = 10 ** ((mu - 25) / 5)
-        h0_raw = 299792.458 * z / d_raw
-        slope_raw, _, _, _, stderr_raw = stats.linregress(sigma, h0_raw)
+        # Raw delta_mu slope
+        mu_fid = 5 * np.log10(299792.458 * z) + 25 - 5 * np.log10(70.0)
+        delta_mu_raw = mu - mu_fid
+        slope_raw, _, _, _, stderr_raw = stats.linregress(sigma, delta_mu_raw)
 
         # Evaluate at two bracketing kappa values
         for k_test in [1e6, -1e6]:
             dmu = tep_correction(sigma, sigma_ref, k_test, S)
-            d_c = 10 ** ((mu + dmu - 25) / 5)
-            h0_c = 299792.458 * z / d_c
-            slope_c = stats.linregress(sigma, h0_c)[0]
+            mu_c = mu + dmu
+            delta_mu_c = mu_c - mu_fid
+            slope_c = stats.linregress(sigma, delta_mu_c)[0]
             if k_test == 1e6:
                 slope_pos = slope_c
             else:
@@ -202,7 +200,7 @@ class Step12CrossChannel:
             f"TRGB:  kappa = {kappa_trgb:.3e} +/- {kappa_trgb_err:.3e} (N={len(df_trgb)})",
             "INFO",
         )
-        print_status(f"TRGB raw H0-sigma slope: {raw_slope:.4f} +/- {raw_slope_err:.4f} (t={raw_slope_t:.2f})", "INFO")
+        print_status(f"TRGB raw delta_mu-sigma slope: {raw_slope:.4f} +/- {raw_slope_err:.4f} (t={raw_slope_t:.2f})", "INFO")
 
         # ============================================================
         # 3. DIFFERENTIAL REGRESSION (matched hosts, redshift-independent)

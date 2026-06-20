@@ -55,8 +55,11 @@ class Step1bApertureCorrection:
         print_status("Initializing Aperture Correction Protocol", "SECTION")
         
         if not self.hosts_path.exists() or not self.metadata_path.exists():
-            print_status("Input files missing. Run Step 1 and fetch_metadata.py first.", "ERROR")
-            return
+            missing = [p for p in [self.hosts_path, self.metadata_path] if not p.exists()]
+            raise FileNotFoundError(
+                f"Aperture correction inputs missing: {missing}. "
+                "Run Step 1 and fetch_metadata.py first."
+            )
 
         # Load Data
         hosts_df = pd.read_csv(self.hosts_path)

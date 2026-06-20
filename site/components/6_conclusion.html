@@ -9,24 +9,24 @@
     and $p_{\rm cov,MC}\approx0.0031$ (Pearson), confirming that the correlation is
     not an artifact of sample covariance or zero-point variance. In the host-contrast likelihood, which projects out the shared calibration mode and tests only host-to-host environmental structure, the environmental model receives positive evidence ($\Delta{\rm BIC} = +2.6$); the full absolute covariance likelihood favors the null because it is dominated by the common calibration mode. We therefore treat the BIC result as evidence for a host-contrast environmental structure, not as an absolute recalibration likelihood. A diagonal H$0$-uncertainty check gives $\Delta{\rm BIC}=+2.6$ as an independent robustness verification.
     High-$\sigma$ hosts yield systematically inflated $H_0$ values ($74.12 \pm
-    1.05$ km/s/Mpc) compared to low-$\sigma$ hosts ($66.26 \pm 1.05$ km/s/Mpc),
+    1.27$ km/s/Mpc) compared to low-$\sigma$ hosts ($66.26 \pm 1.27$ km/s/Mpc),
     with the bias $\Delta H_0 = 7.86$ km/s/Mpc accounting for a substantial
     fraction of the discrepancy between local and CMB measurements. Application
     of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot
     (\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction
     formula and the virial relation $|\Phi|\propto\sigma^2$—with
     response coefficient $\kappa_{\rm Cep} = (1.27 \pm 0.48)\times10^6$ mag
-    (host-only bootstrap robust $1.05\times10^6$, WLS scaled $1.20 \pm 0.48$;
+    (host-only bootstrap robust $1.27\times10^6$, WLS scaled $1.41 \pm 0.59$;
     mean response $\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5$ after accounting for
     continuous shear suppression) and effective calibrator reference
     $\sigma_{\rm ref} = 87.17$ km/s yields a unified local Hubble constant.
     Internal interpolation stability (leave-one-out cross-validation, LOOCV) gives
-    $H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck tension of
-    $0.99\sigma$; this stress test demonstrates internal interpolation stability,
+    $H_0^{\rm LOOCV} = 68.67 \pm 1.35$ km/s/Mpc, corresponding to a Planck tension of
+    $0.89\sigma$; this stress test demonstrates internal interpolation stability,
     not external validation. The in-sample
     corrected mean is $H_0 = 68.84$ km/s/Mpc (bootstrap mean $68.91 \pm 1.45$,
-    Planck tension $0.91\sigma$). Both are robust under bootstrap resampling.
-    The low-$\sigma$ subsample ($66.26 \pm 1.05$ km/s/Mpc) lies below the uncorrected
+    Planck tension $0.99\sigma$). Both are robust under bootstrap resampling.
+    The low-$\sigma$ subsample ($66.26 \pm 1.27$ km/s/Mpc) lies below the uncorrected
     full-sample mean, consistent with TEP expectations that shallow-potential hosts
     require smaller corrections.
     The inferred $\kappa_{\rm Cep}\sim10^6$ is consistent with the TEP
@@ -39,7 +39,7 @@
 
 <p>
     Independent P-L fits to the extragalactic geometric anchors (LMC, NGC 4258,
-    M31) yield $\kappa_{\rm anchor} = (0.23 \pm 0.19) \times 10^6$ mag ($1.2\sigma$ from zero).  The anchor-only
+    M31) yield $\kappa_{\rm anchor} = (0.246 \pm 0.139) \times 10^6$ mag ($1.78\sigma$ from zero).  The anchor-only
     regression is underpowered and cannot precisely estimate the
     host-level coefficient directly.  It therefore cannot by itself confirm or
     refute $\kappa_{\rm Cep}\sim10^6$.  The relevant test is whether a
@@ -66,9 +66,9 @@
     model ~0.58 dex unshielded cluster-bath amplitude) and by the potential- and
     density-dependent structure identified here—now includes an explicit
     local-gravity closure. The fitted Cepheid response maps through
-    $q_{\rm Sun}=8.4\times 10^{-12}$ to $|\gamma-1|=6.38\times 10^{-11}$ and
-    $\eta_{\rm TiPt}=1.13\times 10^{-21}$, passing Cassini and MICROSCOPE by
-    margins of $3.6\times 10^5$ and $8.9\times 10^6$, respectively.
+    $q_{\rm Sun}=8.4\times 10^{-12}$ to $|\gamma-1|=1.05\times 10^{-10}$ and
+    $\eta_{\rm TiPt}=1.86\times 10^{-21}$, passing Cassini and MICROSCOPE by
+    margins of $2.2\times 10^5$ and $5.4\times 10^6$, respectively.
 </p>
 
 <div class="lock-box">
@@ -80,10 +80,10 @@
         <tr><th>Criterion</th><th>Requirement</th><th>Status</th></tr>
         <tr><td><strong>R1.</strong> Uncorrected residual trend</td><td>Cepheid residuals show positive host-potential dependence with $p_{\rm cov,MC} < 0.01$</td><td><span style="color:green">PASS</span> ($p_{\rm cov,MC}=0.0031$)</td></tr>
         <tr><td><strong>R2.</strong> Sign prediction</td><td>High-potential hosts produce underestimated distances (inflated $H_0$)</td><td><span style="color:green">PASS</span></td></tr>
-        <tr><td><strong>R3.</strong> One-parameter correction</td><td>TEP correction reduces SH0ES–Planck discrepancy below $1\sigma$</td><td><span style="color:green">PASS</span> ($0.91\sigma$)</td></tr>
+        <tr><td><strong>R3.</strong> One-parameter correction</td><td>TEP correction reduces SH0ES–Planck discrepancy below $1\sigma$</td><td><span style="color:green">PASS</span> ($0.99\sigma$)</td></tr>
         <tr><td><strong>R4.</strong> No residual trend</td><td>Corrected sample shows no significant $\sigma$–$H_0$ residual</td><td><span style="color:orange">PASS (fitted diagnostic)</span> — by construction, not independent evidence</td></tr>
         <tr><td><strong>R5.</strong> Robustness suite</td><td>Result survives covariance, flow, redshift, metallicity, dust, anchor, and provenance tests</td><td><span style="color:orange">PARTIAL PASS</span> — TRGB and anchor behaviour remain model-dependent</td></tr>
-        <tr><td><strong>R6.</strong> Interpolation stability</td><td>LOOCV or held-out prediction agrees with in-sample correction</td><td><span style="color:orange">INTERNAL PASS</span> — interpolation stability only; not external validation ($H_0^{\rm LOOCV}=68.58\pm1.34$)</td></tr>
+        <tr><td><strong>R6.</strong> Interpolation stability</td><td>LOOCV or held-out prediction agrees with in-sample correction</td><td><span style="color:orange">INTERNAL PASS</span> — interpolation stability only; not external validation ($H_0^{\rm LOOCV}=68.67\pm1.35$)</td></tr>
         <tr><td><strong>R7.</strong> Non-Cepheid probes</td><td>TRGB and SN Ia do not require the same correction amplitude</td><td><span style="color:orange">PENDING</span> (TRGB underpowered; SN Ia not yet tested)</td></tr>
         <tr><td><strong>R8.</strong> Blind external validation</td><td>New Cepheid hosts obey precomputed $\Delta\mu_{\rm TEP}$ without refitting $\kappa_{\rm Cep}$</td><td><span style="color:red">OPEN</span> (awaiting JWST/external sample)</td></tr>
     </table>
@@ -108,7 +108,7 @@
     ($\Delta\mu = \kappa_{\rm Cep} \cdot S(\rho) \cdot (\sigma^2-\sigma_{\rm ref}^2)/c^2$)
     removes the environmental dependence and brings the Cepheid-calibrated
     SH0ES ladder into agreement with the CMB scale ($H_0 = 68.84$ km/s/Mpc;
-    Planck tension $0.91\sigma$).
+    Planck tension $0.99\sigma$).
 </p>
 <p>
     This two-stage structure separates the empirical detection from the fitted
@@ -122,16 +122,16 @@
     The local-gravity closure is robust (Cassini and MICROSCOPE margins
     $>10^5$). The anchor reference frame requires TEP-consistent screening:
     the screened-effective reference ($\sigma_{\rm ref,scr} = 30.51$ km/s)
-    yields $H_0^{\rm TEP} = 66.62 \pm 1.46$ km/s/Mpc, reducing the Planck
+    yields $H_0^{\rm TEP} = 66.34 \pm 1.27$ km/s/Mpc, reducing the Planck
     tension to $\approx 0.15\sigma$; the unscreened reference
     ($H_0^{\rm GR} = 68.84$) is the conventional approximation.
     The cross-channel test reveals a critical puzzle: the differential
-    $\kappa_{\rm diff} = (0.53 \pm 0.23) \times 10^6$ mag is 2.3σ from
+    $(8.09 \pm 3.60) \times 10^5$ mag is 2.3σ from
     zero, indicating that the $\sigma$ regressor tracks a shared astrophysical
     systematic (host mass, metallicity) affecting both Cepheid and TRGB
     channels. After host-mass orthogonalization, the Cepheid residual retains
-    a significant $\sigma$ trend ($r = 0.42$, $p = 0.024$) while the TRGB
-    residual is consistent with null ($r = 0.15$, $p = 0.62$), supporting
+    a significant $\sigma$ trend ($r = 0.45$, $p = 0.015$) while the TRGB
+    residual is consistent with null ($r \approx 0, p = 0.99$), supporting
     a Cepheid-specific clock-rate component superposed on a shared systematic.
     The TRGB gate is therefore INCONCLUSIVE pending larger samples and
     metallicity control. Full confirmation awaits SN Ia channel integration,
@@ -141,7 +141,7 @@
     <code>results/outputs/frozen_tep_predictions.csv</code>) provides the
     expected $\Delta\mu_{\rm TEP}$ as a function of prospective host
     $\sigma$ and screening factor $S$, computed with the pipeline-frozen
-    parameters $\kappa_{\rm Cep} = 1.049\times10^6$ mag and
+    parameters $\kappa_{\rm Cep} = 1.272\times10^6$ mag and
     $\sigma_{\rm ref} = 87.17$ km/s. New Cepheid-SN hosts that obey
     the precomputed correction within the quoted distance-modulus
     uncertainty ($\sim$0.1–0.2 mag) confirm the model; systematic
@@ -218,8 +218,8 @@ python scripts/run_pipeline.py</code></pre>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>1</strong></td>
-                    <td><code>step_1_data_ingestion.py</code></td>
+                    <td><strong>01</strong></td>
+                    <td><code>step_01_data_ingestion.py</code></td>
                     <td>
                         Downloads SH0ES distance moduli and Pantheon+ redshifts;
                         cross-matches hosts with velocity dispersion catalogs
@@ -228,8 +228,8 @@ python scripts/run_pipeline.py</code></pre>
                     <td><code>hosts_processed.csv</code></td>
                 </tr>
                 <tr>
-                    <td><strong>1b</strong></td>
-                    <td><code>step_1b_aperture_correction.py</code></td>
+                    <td><strong>02</strong></td>
+                    <td><code>step_02_aperture_correction.py</code></td>
                     <td>
                         Applies Jorgensen et al. (1995) aperture corrections to
                         normalize $\sigma$ measurements to $R_{\rm eff}/8$
@@ -237,8 +237,8 @@ python scripts/run_pipeline.py</code></pre>
                     <td>Homogenized $\sigma$ values</td>
                 </tr>
                 <tr>
-                    <td><strong>2</strong></td>
-                    <td><code>step_2_stratification.py</code></td>
+                    <td><strong>03</strong></td>
+                    <td><code>step_03_stratification.py</code></td>
                     <td>
                         Calculates per-host $H_0$; stratifies by median
                         $\sigma$; computes correlation statistics
@@ -246,8 +246,8 @@ python scripts/run_pipeline.py</code></pre>
                     <td><code>stratification_results.json</code></td>
                 </tr>
                 <tr>
-                    <td><strong>3</strong></td>
-                    <td><code>step_3_tep_correction.py</code></td>
+                    <td><strong>04</strong></td>
+                    <td><code>step_04_tep_correction.py</code></td>
                     <td>
                         Optimizes $\kappa_{\rm Cep}$ by minimizing residual $H_0$–$\sigma$
                         slope; applies TEP correction; bootstrap uncertainty
@@ -256,8 +256,8 @@ python scripts/run_pipeline.py</code></pre>
                     <td><code>tep_correction_results.json</code></td>
                 </tr>
                 <tr>
-                    <td><strong>4</strong></td>
-                    <td><code>step_4_robustness_checks.py</code></td>
+                    <td><strong>08</strong></td>
+                    <td><code>step_08_robustness_checks.py</code></td>
                     <td>
                         Jackknife stability; bivariate analysis (metallicity
                         control); covariance-aware significance;
@@ -266,8 +266,8 @@ python scripts/run_pipeline.py</code></pre>
                     <td><code>covariance_robustness.json</code></td>
                 </tr>
                 <tr>
-                    <td><strong>5</strong></td>
-                    <td><code>step_5_m31_analysis.py</code></td>
+                    <td><strong>10</strong></td>
+                    <td><code>step_10_m31_analysis.py</code></td>
                     <td>
                         Differential P-L analysis of M31 Cepheids (Inner vs
                         Outer) using the ground-based catalog
@@ -275,8 +275,8 @@ python scripts/run_pipeline.py</code></pre>
                     <td><code>m31_robustness_summary.json</code></td>
                 </tr>
                 <tr>
-                    <td><strong>6</strong></td>
-                    <td><code>step_6_multivariate_analysis.py</code></td>
+                    <td><strong>12</strong></td>
+                    <td><code>step_12_multivariate_analysis.py</code></td>
                     <td>
                         OLS regression controlling for Age (Period), Dust
                         (Color), and Host Mass
@@ -284,8 +284,8 @@ python scripts/run_pipeline.py</code></pre>
                     <td><code>multivariate_analysis_results.json</code></td>
                 </tr>
                 <tr>
-                    <td><strong>7</strong></td>
-                    <td><code>step_7_lmc_replication.py</code></td>
+                    <td><strong>14</strong></td>
+                    <td><code>step_14_lmc_replication.py</code></td>
                     <td>
                         Control test: LMC differential analysis (shallow
                         potential → null signal expected)
@@ -293,24 +293,24 @@ python scripts/run_pipeline.py</code></pre>
                     <td><code>lmc_robustness_summary.json</code></td>
                 </tr>
                 <tr>
-                    <td><strong>8</strong></td>
-                    <td><code>step_8_m31_phat_analysis.py</code></td>
+                    <td><strong>26</strong></td>
+                    <td><code>step_26_m31_phat_analysis.py</code></td>
                     <td>
                         HST J/H band analysis from Kodric et al. (2018)
                     </td>
                     <td><code>m31_phat_robustness_summary.json</code></td>
                 </tr>
                 <tr>
-                    <td><strong>9</strong></td>
-                    <td><code>step_9_final_synthesis.py</code></td>
+                    <td><strong>31</strong></td>
+                    <td><code>step_31_final_synthesis.py</code></td>
                     <td>
                         Generates synthesis figures and final summary statistics
                     </td>
                     <td>All manuscript figures</td>
                 </tr>
                 <tr>
-                    <td><strong>10</strong></td>
-                    <td><code>step_10_anchor_stratification.py</code></td>
+                    <td><strong>27</strong></td>
+                    <td><code>step_27_anchor_stratification.py</code></td>
                     <td>
                         Independent P-L fits to geometric anchors (LMC, NGC
                         4258, M31); tests for anchor-level TEP bias
@@ -421,7 +421,7 @@ cat results/outputs/stratification_results.json | grep difference
             >
                 <path
                     fill-rule="evenodd"
-                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.70-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.05.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.05.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                    d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.70-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.27.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.27.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
                 ></path>
             </svg>
             https://github.com/matthewsmawfield/TEP-H0

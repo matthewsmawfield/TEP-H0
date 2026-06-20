@@ -1,18 +1,18 @@
-[13:02:42] [INFO] 
-[13:02:42] [INFO] ================================================================================
-[13:02:42] [INFO]    >>> STEP 19: JOINT CEPHEID + TRGB INDICATOR MODEL
-[13:02:42] [INFO] ================================================================================
-[13:02:42] [INFO] 
-[13:02:42] [INFO] Matched hosts: N=13
-[13:02:42] [INFO] Joint indicator model results:
-[13:02:42] [INFO] Using S_local-only regressor (same as Step 12 cross-channel)
-[13:02:42] [INFO] +------------------------------+-----------+-----------+--------+---------+
-[13:02:42] [INFO] | Parameter                    | Estimate  | SE        | t-stat | p-value |
-[13:02:42] [INFO] +------------------------------+-----------+-----------+--------+---------+
-[13:02:42] [INFO] | B_Cepheid                    | 1.920e+05 | 4.615e+06 | 0.04   | 0.9676  |
-[13:02:42] [INFO] | B_TRGB                       | 1.001e+06 | 4.734e+06 | 0.21   | 0.8363  |
-[13:02:42] [INFO] | kappa_diff = B_TRGB - B_Ceph | 8.094e+05 | 3.602e+05 | 2.25   | 0.0461  |
-[13:02:42] [INFO] +------------------------------+-----------+-----------+--------+---------+
-[13:02:42] [INFO] Result: kappa_diff = 8.094e+05 ± 3.602e+05 (t=2.25, p=0.0461). Positive slope means mu_TRGB - mu_Ceph increases with sigma. Directionally consistent with TEP (Cepheids underestimated at high sigma). But magnitude (8.09e+05) is smaller than kappa_Cep (1.27e+06), suggesting shared systematic dominates.
-[13:02:42] [SUCCESS] Saved results to joint_indicator_model.json
-[13:02:42] [SUCCESS] Step 19 complete
+[14:21:50] [INFO] 
+[14:21:50] [INFO] ================================================================================
+[14:21:50] [INFO]    >>> STEP 19: JOINT CEPHEID + TRGB INDICATOR MODEL
+[14:21:50] [INFO] ================================================================================
+[14:21:50] [INFO] 
+[14:21:50] [INFO] Matched hosts: N=13
+[14:21:50] [INFO] Joint indicator model results:
+[14:21:50] [INFO] Using S_local-only regressor (same as Step 12 cross-channel)
+[14:21:50] [INFO] +------------------------------+-----------+-----------+--------+---------+
+[14:21:50] [INFO] | Parameter                    | Estimate  | SE        | t-stat | p-value |
+[14:21:50] [INFO] +------------------------------+-----------+-----------+--------+---------+
+[14:21:50] [INFO] | B_Cepheid                    | 1.920e+05 | 4.615e+06 | 0.04   | 0.9676  |
+[14:21:50] [INFO] | B_TRGB                       | 1.001e+06 | 4.734e+06 | 0.21   | 0.8363  |
+[14:21:50] [INFO] | kappa_diff = B_TRGB - B_Ceph | 8.094e+05 | 3.602e+05 | 2.25   | 0.0461  |
+[14:21:50] [INFO] +------------------------------+-----------+-----------+--------+---------+
+[14:21:50] [INFO] Result: kappa_diff = 8.094e+05 ± 3.602e+05 (t=2.25, p=0.0461). Positive slope means mu_TRGB - mu_Ceph increases with sigma. Directionally consistent with TEP (Cepheids underestimated at high sigma). But magnitude (8.09e+05) is smaller than kappa_Cep (1.27e+06), suggesting shared systematic dominates.
+[14:21:50] [SUCCESS] Saved results to joint_indicator_model.json
+[14:21:50] [SUCCESS] Step 19 complete

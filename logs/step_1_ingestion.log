@@ -1,49 +1,49 @@
-[13:00:50] [INFO] 
-[13:00:50] [INFO] ================================================================================
-[13:00:50] [INFO]    Starting Step 1: Data Ingestion
-[13:00:50] [INFO] ================================================================================
-[13:00:50] [INFO] 
-[13:00:50] [INFO] Reconstructing SH0ES Cepheid Catalog...
-[13:00:50] [INFO] Catalog Reconstruction Verification:
-[13:00:50] [INFO] SH0ES Cepheid Sample (First 3)
-[13:00:50] [INFO] +--------+------------+-------------+------------+
-[13:00:50] [INFO] | Source | Data (mag) | Period Term | Metal Term |
-[13:00:50] [INFO] +--------+------------+-------------+------------+
-[13:00:50] [INFO] | M101   | 23.691     | -0.164      | 0.053      |
-[13:00:50] [INFO] | M101   | 22.955     | -0.163      | 0.089      |
-[13:00:50] [INFO] | M101   | 23.535     | -0.157      | 0.089      |
-[13:00:50] [INFO] +--------+------------+-------------+------------+
-[13:00:50] [SUCCESS] Saved reconstructed catalog with 3130 Cepheids to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/reconstructed_shoes_cepheids.csv
-[13:00:50] [INFO] Calculating R22 Distances (GLS Solution)...
-[13:00:51] [INFO] Solving GLS system: 3490 observations, 46 parameters
-[13:00:51] [SUCCESS] Saved mu covariance matrix to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/r22_mu_covariance.npy
-[13:00:51] [SUCCESS] Saved mu covariance labels to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/r22_mu_covariance_labels.json
-[13:00:51] [INFO] Recovered Distance Moduli
-[13:00:51] [INFO] +---------+-----------------------+--------+
-[13:00:51] [INFO] | Host ID | Distance Modulus (mu) | Error  |
-[13:00:51] [INFO] +---------+-----------------------+--------+
-[13:00:51] [INFO] | M101    | 29.1595               | 0.0388 |
-[13:00:51] [INFO] | M1337   | 32.9156               | 0.0821 |
-[13:00:51] [INFO] | N0691   | 32.8222               | 0.0877 |
-[13:00:51] [INFO] +---------+-----------------------+--------+
-[13:00:51] [SUCCESS] Saved 40 distances to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/r22_distances.csv
-[13:00:51] [INFO] Using existing coordinates file.
-[13:00:51] [INFO] Checking for Pantheon+ Supernova Catalog...
-[13:00:51] [INFO] Pantheon+ dataset already exists locally.
-[13:00:51] [INFO] Cross-Matching & Property Enrichment...
-[13:00:51] [INFO] Matched 37 SH0ES hosts to Pantheon+ SN catalog.
-[13:00:51] [INFO] Loaded 41 velocity dispersions from literature CSV: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv
-[13:00:51] [INFO] Found measured σ for 42/42 hosts (TEP-independent).
-[13:00:51] [INFO] Processed Host Properties (Top 5)
-[13:00:51] [INFO] +----------+---------+---------+--------------+
-[13:00:51] [INFO] | Host     | z_HD    | LogMass | Sigma (km/s) |
-[13:00:51] [INFO] +----------+---------+---------+--------------+
-[13:00:51] [INFO] | LMC      | nan     | -       | 24.0         |
-[13:00:51] [INFO] | LMC      | nan     | -       | 24.0         |
-[13:00:51] [INFO] | M 101    | 0.00122 | 10.68   | 28.0         |
-[13:00:51] [INFO] | NGC 1337 | nan     | -       | 94.0         |
-[13:00:51] [INFO] | M 31     | nan     | -       | 160.0        |
-[13:00:51] [INFO] +----------+---------+---------+--------------+
-[13:00:51] [SUCCESS] Processed 42 hosts. Found Sigma for 42 hosts.
-[13:00:51] [SUCCESS] Saved processed host data to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_processed.csv
-[13:00:51] [SUCCESS] Step 1 Complete.
+[14:20:00] [INFO] 
+[14:20:00] [INFO] ================================================================================
+[14:20:00] [INFO]    Starting Step 1: Data Ingestion
+[14:20:00] [INFO] ================================================================================
+[14:20:00] [INFO] 
+[14:20:00] [INFO] Reconstructing SH0ES Cepheid Catalog...
+[14:20:00] [INFO] Catalog Reconstruction Verification:
+[14:20:00] [INFO] SH0ES Cepheid Sample (First 3)
+[14:20:00] [INFO] +--------+------------+-------------+------------+
+[14:20:00] [INFO] | Source | Data (mag) | Period Term | Metal Term |
+[14:20:00] [INFO] +--------+------------+-------------+------------+
+[14:20:00] [INFO] | M101   | 23.691     | -0.164      | 0.053      |
+[14:20:00] [INFO] | M101   | 22.955     | -0.163      | 0.089      |
+[14:20:00] [INFO] | M101   | 23.535     | -0.157      | 0.089      |
+[14:20:00] [INFO] +--------+------------+-------------+------------+
+[14:20:00] [SUCCESS] Saved reconstructed catalog with 3130 Cepheids to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/reconstructed_shoes_cepheids.csv
+[14:20:00] [INFO] Calculating R22 Distances (GLS Solution)...
+[14:20:00] [INFO] Solving GLS system: 3490 observations, 46 parameters
+[14:20:01] [SUCCESS] Saved mu covariance matrix to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/r22_mu_covariance.npy
+[14:20:01] [SUCCESS] Saved mu covariance labels to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/r22_mu_covariance_labels.json
+[14:20:01] [INFO] Recovered Distance Moduli
+[14:20:01] [INFO] +---------+-----------------------+--------+
+[14:20:01] [INFO] | Host ID | Distance Modulus (mu) | Error  |
+[14:20:01] [INFO] +---------+-----------------------+--------+
+[14:20:01] [INFO] | M101    | 29.1595               | 0.0388 |
+[14:20:01] [INFO] | M1337   | 32.9156               | 0.0821 |
+[14:20:01] [INFO] | N0691   | 32.8222               | 0.0877 |
+[14:20:01] [INFO] +---------+-----------------------+--------+
+[14:20:01] [SUCCESS] Saved 40 distances to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/interim/r22_distances.csv
+[14:20:01] [INFO] Using existing coordinates file.
+[14:20:01] [INFO] Checking for Pantheon+ Supernova Catalog...
+[14:20:01] [INFO] Pantheon+ dataset already exists locally.
+[14:20:01] [INFO] Cross-Matching & Property Enrichment...
+[14:20:01] [INFO] Matched 37 SH0ES hosts to Pantheon+ SN catalog.
+[14:20:01] [INFO] Loaded 41 velocity dispersions from literature CSV: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv
+[14:20:01] [INFO] Found measured σ for 42/42 hosts (TEP-independent).
+[14:20:01] [INFO] Processed Host Properties (Top 5)
+[14:20:01] [INFO] +----------+---------+---------+--------------+
+[14:20:01] [INFO] | Host     | z_HD    | LogMass | Sigma (km/s) |
+[14:20:01] [INFO] +----------+---------+---------+--------------+
+[14:20:01] [INFO] | LMC      | nan     | -       | 24.0         |
+[14:20:01] [INFO] | LMC      | nan     | -       | 24.0         |
+[14:20:01] [INFO] | M 101    | 0.00122 | 10.68   | 28.0         |
+[14:20:01] [INFO] | NGC 1337 | nan     | -       | 94.0         |
+[14:20:01] [INFO] | M 31     | nan     | -       | 160.0        |
+[14:20:01] [INFO] +----------+---------+---------+--------------+
+[14:20:01] [SUCCESS] Processed 42 hosts. Found Sigma for 42 hosts.
+[14:20:01] [SUCCESS] Saved processed host data to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_processed.csv
+[14:20:01] [SUCCESS] Step 1 Complete.

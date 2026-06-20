@@ -221,9 +221,11 @@ class AnchorStratificationStep:
         from scripts.utils.tep_correction import ANCHOR_SCREENING
         S_anchors = np.array([ANCHOR_SCREENING.get(n, 1.0) for n in anchor_names])
 
-        # Physics-derived regressor: (S * sigma^2 - sigma_ref_screened^2)/c^2
+        # Physics-derived regressor: S * (sigma^2 - sigma_ref^2) / c^2
+        # We must use the exact same formula as step 3 (tep_correction) with kappa=1.0.
+        sigma_ref_unscreened = 87.16507328052906
         c_km_s = 299792.458
-        sigma_regressor = (S_anchors * sigmas**2 - sigma_ref_screened**2) / c_km_s**2
+        sigma_regressor = S_anchors * (sigmas**2 - sigma_ref_unscreened**2) / c_km_s**2
         
         # Weighted least squares
         weights = 1.0 / M_W_errs**2

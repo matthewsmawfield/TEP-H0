@@ -67,14 +67,16 @@
     \end{equation}
     where $\mu_{i,\rm no\text{-}env}$ is the distance modulus inferred from
     the recession velocity under a fiducial Planck $H_0 = 67.4$ km/s/Mpc.
-    The primary test focuses on the relationship between $\sigma$ and the
-    distance-ladder residual displayed in $H_0$-equivalent units but avoids the interpretive step of treating each host as an
-    independent $H_0$ determination, it is the primary statistical variable.
-    For visualization and physical intuition, these residuals are converted into
-    host-level $H_0$-equivalent values via $H_{0,i} = c z_{\rm HD} / d_i
-    (with $d_i = 10^{(\mu_i-25)/5}$ Mpc). However, all parameter fitting and hypothesis
-    testing is performed strictly in distance modulus ($\delta\mu$) space. Host-level $H_0$-equivalent
-    values are used exclusively for physical intuition and plotting.
+    The primary statistical variable is the distance-ladder residual
+    $\delta_i$ (Equation 1), displayed in $H_0$-equivalent units for
+    physical intuition while avoiding the interpretive step of treating each
+    host as an independent $H_0$ determination.
+    For visualization, these residuals are converted into host-level
+    $H_0$-equivalent values via $H_{0,i} = c z_{\rm HD} / d_i$
+    (with $d_i = 10^{(\mu_i-25)/5}$ Mpc).
+    However, all parameter fitting and hypothesis testing is performed
+    strictly in distance-modulus ($\delta\mu$) space; host-level
+    $H_0$-equivalent values are used exclusively for plotting.
 </p>
 
 <p>
@@ -389,8 +391,8 @@
     amplitude that down-weights each anchor's <em>contribution</em> by its
     environmental screening factor $S$; it is not a normalized weighted mean.
     Re-optimising $\kappa_{\rm Cep}$ with either reference yields headline
-    $H_0$ values that differ by $\Delta H_0 = 2.14$ km/s/Mpc
-    ($H_0^{\rm std} = 68.84$ km/s/Mpc vs $H_0^{\rm scr} = 66.62$ km/s/Mpc),
+    $H_0$ values that differ by $\Delta H_0 = 2.50$ km/s/Mpc
+    ($H_0^{\rm std} = 68.84$ km/s/Mpc vs $H_0^{\rm scr} = 66.34$ km/s/Mpc),
     showing the correction is consistent under both definitions at the level
     of the intrinsic uncertainty:
 </p>
@@ -584,5 +586,5 @@
     ($0.085$ km/s/Mpc per km/s). Both estimates are statistically significant
     (ODR: $\sim$4.8$\sigma$; OLS: $p=0.011$), so the qualitative conclusion is
     robust; the OLS slope reported in the main text is a conservative
-    (attenuated) lower bound on the true relationship. Synthetic injection recovery tests (simulating mock samples with known $\kappa$ biases) confirm that the ODR slope steepening is a physical expectation of error-in-variables regression on this dataset structure, not an implementation artefact.
+    (attenuated) lower bound on the true relationship. ODR is reported for transparency; the measurement errors on $\sigma$ (mean $\sim$10 km/s) are comparable to the TEP regressor $S(\sigma^2-\sigma_{\rm ref}^2)/c^2$ over this sample, so the ODR slope should be treated as indicative rather than definitive.
 </p>

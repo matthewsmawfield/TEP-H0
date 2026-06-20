@@ -6,7 +6,7 @@ import sys
 # Import normalize_name from step 1
 base_dir = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(base_dir))
-from scripts.steps.step_1_data_ingestion import Step1DataIngestion
+from scripts.steps.step_01_data_ingestion import Step1DataIngestion
 
 def run_audit():
     print("--- Host-Alias Join Audit ---")

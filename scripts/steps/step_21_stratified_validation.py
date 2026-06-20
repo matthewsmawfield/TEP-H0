@@ -113,11 +113,11 @@ class Step20StratifiedValidation:
                 def objective(k):
                     dmu = tep_correction(sigma_train, sigma_ref, k[0], S_train)
                     mu_c = mu_train + dmu
-                    d_c = 10 ** ((mu_c - 25) / 5)
-                    h0_c = 299792.458 * z_train / d_c
-                    if len(h0_c) < 2:
+                    mu_fid = 5 * np.log10(299792.458 * z_train) + 25 - 5 * np.log10(70.0)
+                    delta_mu = mu_c - mu_fid
+                    if len(delta_mu) < 2:
                         return 1e10
-                    slope, _ = np.polyfit(sigma_train, h0_c, 1)
+                    slope, _ = np.polyfit(sigma_train, delta_mu, 1)
                     return slope ** 2
 
                 res = minimize(objective, x0=[1.0e6], method="Nelder-Mead",
@@ -131,14 +131,14 @@ class Step20StratifiedValidation:
             # Apply to test (no refitting)
             dmu_test = tep_correction(sigma[test_mask], sigma_ref, kappa_train, S[test_mask])
             mu_c_test = mu[test_mask] + dmu_test
-            d_c_test = 10 ** ((mu_c_test - 25) / 5)
-            h0_c_test = 299792.458 * z[test_mask] / d_c_test
+            mu_fid_test = 5 * np.log10(299792.458 * z[test_mask]) + 25 - 5 * np.log10(70.0)
+            delta_mu_test = mu_c_test - mu_fid_test
 
             # Test residual slope
-            if len(h0_c_test) > 2:
-                slope_test, _, _, _, _ = stats.linregress(sigma[test_mask], h0_c_test)
-                r_test, p_test = stats.pearsonr(sigma[test_mask], h0_c_test)
-                scatter_test = float(np.std(h0_c_test - np.mean(h0_c_test)))
+            if len(delta_mu_test) > 2:
+                slope_test, _, _, _, _ = stats.linregress(sigma[test_mask], delta_mu_test)
+                r_test, p_test = stats.pearsonr(sigma[test_mask], delta_mu_test)
+                scatter_test = float(np.std(delta_mu_test - np.mean(delta_mu_test)))
             else:
                 slope_test = r_test = p_test = scatter_test = np.nan
 

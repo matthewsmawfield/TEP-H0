@@ -383,9 +383,9 @@ class Step6EnhancedRobustness:
             def objective(kappa):
                 k = float(kappa[0]) if hasattr(kappa, '__len__') else float(kappa)
                 mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, k, S_arr)
-                d_corr = 10 ** ((mu_corr - 25) / 5)
-                h0_corr = 299792.458 * z_arr / d_corr
-                slope, _, _, _, _ = stats.linregress(sigma_arr, h0_corr)
+                mu_fid = 5 * np.log10(299792.458 * z_arr) + 25 - 5 * np.log10(70.0)
+                delta_mu = mu_corr - mu_fid
+                slope, _, _, _, _ = stats.linregress(sigma_arr, delta_mu)
                 return slope ** 2
             
             result = minimize(
@@ -486,7 +486,7 @@ class Step6EnhancedRobustness:
             print_status(f"Could not load tep_correction_results.json for sigma_ref: using default {sigma_ref}", "WARNING")
 
         # Use the FULL-SAMPLE fitted kappa (uniform across subsamples)
-        kappa_full = 1.611136e6
+        kappa_full = float('nan')  # must be loaded from JSON; no valid hardcoded fallback
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
@@ -495,7 +495,10 @@ class Step6EnhancedRobustness:
                 if isinstance(_tep, dict) and 'optimal_kappa_cep' in _tep:
                     kappa_full = float(_tep['optimal_kappa_cep'])
         except Exception:
-            print_status(f"Could not load optimal_kappa_cep from tep_correction_results.json: using default {kappa_full:.2e}", "WARNING")
+            pass
+        if not np.isfinite(kappa_full):
+            print_status("Could not load optimal_kappa_cep from tep_correction_results.json — skipping convergence analysis", "WARNING")
+            return
 
         # Build provenance masks
         prov = self._classified_sigma_provenance(sigma_prov)
@@ -632,7 +635,7 @@ class Step6EnhancedRobustness:
         from scripts.utils.tep_correction import tep_correction
 
         sigma_ref = 87.17
-        kappa_full = 1.611136e6
+        kappa_full = float('nan')  # must be loaded from JSON; no valid hardcoded fallback
         try:
             tep_path = self.outputs_dir / "tep_correction_results.json"
             if tep_path.exists():
@@ -640,9 +643,12 @@ class Step6EnhancedRobustness:
                     _tep = json.load(f)
                 if isinstance(_tep, dict):
                     sigma_ref = float(_tep.get("sigma_ref", 87.17))
-                    kappa_full = float(_tep.get("optimal_kappa_cep", kappa_full))
+                    kappa_full = float(_tep.get("optimal_kappa_cep", float('nan')))
         except Exception:
-            print_status("Could not load tep_correction_results.json: using default sigma_ref and kappa_full", "WARNING")
+            print_status("Could not load tep_correction_results.json: using default sigma_ref", "WARNING")
+        if not np.isfinite(kappa_full):
+            print_status("optimal_kappa_cep unavailable — skipping subset composition table", "WARNING")
+            return
 
         # Build provenance masks
         prov = self._classified_sigma_provenance(sigma_prov)
@@ -672,11 +678,11 @@ class Step6EnhancedRobustness:
             )
 
             def objective(kappa):
-                k = float(kappa[0]) if hasattr(kappa, "__len__") else float(kappa)
+                k = float(kappa[0]) if hasattr(kappa, '__len__') else float(kappa)
                 mu_corr = mu_arr + tep_correction(sigma_arr, sigma_ref, k, S_arr)
-                d_corr = 10 ** ((mu_corr - 25) / 5)
-                h0_corr = 299792.458 * z_arr / d_corr
-                slope, _, _, _, _ = stats.linregress(sigma_arr, h0_corr)
+                mu_fid = 5 * np.log10(299792.458 * z_arr) + 25 - 5 * np.log10(70.0)
+                delta_mu = mu_corr - mu_fid
+                slope, _, _, _, _ = stats.linregress(sigma_arr, delta_mu)
                 return slope ** 2
 
             result = minimize(

@@ -27,8 +27,8 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, print_status, set_step_logger
 from core.constants import RHO_C
-DEFAULT_KAPPA_CEP = 1.611136e6       # Current host-only κ_Cep from pipeline
-DEFAULT_H0 = 68.13222017543657       # Raw (uncorrected) H0 mean from Cepheid data
+DEFAULT_KAPPA_CEP = 1.272451e6       # Host-only κ_Cep from pipeline (Step 3)
+DEFAULT_H0 = 68.83787861896722       # Unified H0 from pipeline (Step 3)
 
 
 def _load_tep_headlines():
@@ -95,7 +95,7 @@ def calculate_geff_k(k, z, params):
     return enhancement
 
 def main():
-    logger = TEPLogger("step_12_cosmology", log_file_path=Path("logs/step_12_cosmology.log"))
+    logger = TEPLogger("step_12_cosmology", log_file_path=PROJECT_ROOT / "logs/step_12_cosmology.log")
     set_step_logger(logger)
     print_status("Starting TEP-H0 Step 12: Cosmological Inference Template", "TITLE")
     
@@ -118,7 +118,7 @@ def main():
     }
     
     import json
-    with open("results/outputs/cosmology_inference_template.json", "w") as f:
+    with open(PROJECT_ROOT / "results/outputs/cosmology_inference_template.json", "w") as f:
         json.dump(results, f, indent=4)
         
     print_status("Results saved to results/outputs/cosmology_inference_template.json", "INFO")

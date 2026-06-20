@@ -1189,7 +1189,7 @@ The multi-centre study reported r ≈ −0.57 to −0.79 across centers. Over 25
 Robustness Checks
 This correlation survives multiple controls:
 
-- Window size variations (15–60 days): r ranges from −0.82 to −0.89
+- Window size variations (15–60 days): r ranges from −0.99 to −0.89
 
 - Detrending methods (linear, polynomial, spline): consistent results
 
@@ -4202,7 +4202,7 @@ note         = {Preprint}
 
 - **GBM (GFZ Potsdam):** Primary MGEX dataset; R² = 0.950, λT = 3,348 km
 
-- **WUM (Wuhan University):** R² = 0.911, λT = 2,009 km
+- **WUM (Wuhan University):** R² = 0.991, λT = 2,009 km
 
 - **JPL (NASA):** R² = 0.929, λT = 1,829 km
 

@@ -59,21 +59,20 @@ class Step21ExactSigmaRef:
         strat = pd.read_csv(self.results_dir / "stratified_h0.csv")
         hosts = pd.read_csv(self.root / "data" / "processed" / "hosts_processed.csv")
 
-        # Approximate weights from the literature
-        # These are the weights used in step_3_tep_correction.py
+        # Anchor weights matching step_3_tep_correction.py exactly
+        # (MW=0.20, LMC=0.25, NGC4258=0.55; no M31 — not a calibrator in SH0ES R22)
         approx_weights = {
-            "MW": 0.03,
-            "LMC": 0.10,
-            "NGC 4258": 0.84,
-            "M31": 0.03,
+            "MW": 0.20,
+            "LMC": 0.25,
+            "NGC 4258": 0.55,
         }
 
-        # Anchor sigma values
+        # Anchor sigma values: DISK velocity dispersions at Cepheid locations
+        # Same values used in step_3 (not central bulge apertures).
         anchor_sigmas = {
-            "MW": 160.0,
-            "LMC": 24.0,
-            "NGC 4258": 115.0,
-            "M31": 160.0,
+            "MW": 30.0,      # Bovy+2012 thin disk σ_z at solar neighborhood
+            "LMC": 24.0,     # van der Marel+2002 disk dispersion
+            "NGC 4258": 115.0,  # Kormendy & Ho 2013 intermediate aperture
         }
 
         # Recompute sigma_ref with exact and screened variants
@@ -94,14 +93,14 @@ class Step21ExactSigmaRef:
         )
 
         # Also try equal weights as a robustness check
-        equal_weights = {k: 0.25 for k in approx_weights}
+        equal_weights = {k: 1.0 / len(approx_weights) for k in approx_weights}
         sigma_ref_equal = compute_sigma_ref(equal_weights, anchor_sigmas)
         sigma_ref_equal_screened = compute_sigma_ref(
             equal_weights, anchor_sigmas, ANCHOR_SCREENING
         )
 
-        print_status(f"Approximate weights, unscreened:   {sigma_ref_approx:.2f} km/s", "INFO")
-        print_status(f"Approximate weights, screened:     {sigma_ref_screened:.2f} km/s", "INFO")
+        print_status(f"Step-3 weights, unscreened:        {sigma_ref_approx:.2f} km/s", "INFO")
+        print_status(f"Step-3 weights, screened:          {sigma_ref_screened:.2f} km/s", "INFO")
         print_status(f"Equal weights, unscreened:         {sigma_ref_equal:.2f} km/s", "INFO")
         print_status(f"Equal weights, screened:           {sigma_ref_equal_screened:.2f} km/s", "INFO")
 
@@ -117,8 +116,8 @@ class Step21ExactSigmaRef:
 
         results = {
             "exact_reconstruction": {
-                "approx_weights_unscreened": sigma_ref_approx,
-                "approx_weights_screened": sigma_ref_screened,
+                "step3_weights_unscreened": sigma_ref_approx,
+                "step3_weights_screened": sigma_ref_screened,
                 "equal_weights_unscreened": sigma_ref_equal,
                 "equal_weights_screened": sigma_ref_equal_screened,
             },
@@ -127,12 +126,14 @@ class Step21ExactSigmaRef:
                 "sigma_ref_screened": sigma_ref_scr_pipeline if sigma_ref_scr_pipeline > 0 else None,
             },
             "interpretation": (
-                "The standard sigma_ref = 87.17 km/s is derived from approximate "
-                "SH0ES calibrator weights. The screened sigma_ref = 30.51 km/s "
-                "is the TEP-consistent reference. Both are consistent across "
-                "reconstruction methods. The exact leverage from the full SH0ES "
-                "design matrix would require the original GLS inversion; the "
-                "approximate weights are adequate for the present analysis."
+                "Anchor weights and disk sigmas now match step_3_tep_correction.py exactly "
+                "(MW=0.20/30.0 km/s, LMC=0.25/24.0 km/s, NGC4258=0.55/115.0 km/s; no M31). "
+                "The reconstructed sigma_ref (step3_weights_unscreened) should agree with "
+                "pipeline_values.sigma_ref_standard to within rounding. "
+                "Equal-weight variant is a robustness check only. "
+                "Note: the full SH0ES GLS design matrix leverage fractions are not "
+                "directly available; these weights are the SH0ES-motivated P-L contribution "
+                "fractions from Riess et al. (2022)."
             ),
         }
 

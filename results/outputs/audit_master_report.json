@@ -1,7 +1,8 @@
 {
   "findings": [
+    "FRESHNESS_WARNING: 1 downstream files predate tep_correction_results.json: ['pipeline_audit_report.json']",
     "SAMPLE: N=29, z\u2208[0.00359,0.01682], all z>0.0035=True, no_dups=True",
-    "KAPPA: recomputed=1.257e+06, json=1.272e+06, match=False",
+    "KAPPA: recomputed=1.272e+06, json=1.272e+06, match=True",
     "COV_ORDER: MATCH",
     "COV: shape=(29, 29), symmetric=True, PSD=True, min_eig=22.04",
     "PROVENANCE: stellar=16, proxy=13",

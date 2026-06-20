@@ -76,7 +76,7 @@ This hierarchy strengthens the inference by fixing what is being measured. The p
 
 The LLR Nordtvedt test in this paper probes a complementary aspect of TEP: through the suppressed PPN sector, the compactness-dependent effective coupling $\alpha_{\rm eff}$ could differ between Earth and Moon, producing a violation of the Strong Equivalence Principle. Earth's deeper gravitational potential ($\Phi_{\oplus}/c^2 \approx 7 \times 10^{-10}$) flattens Temporal Topology more strongly than the Moon's ($\Phi_{\rm Moon}/c^2 \approx 3 \times 10^{-11}$), suppressing Temporal Shear and yielding a smaller $\alpha_{\rm eff}$. This differential gradient suppression could lead to unequal free-fall rates in the Sun's field.
 
-The quantitative prediction for the Nordtvedt parameter is informed by the TEP framework's Observable Response Coefficients, which quantify domain-specific astrophysical responses rather than a universal bare coupling. Preliminary results from related work in the same TEP framework report $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag for Cepheid period-luminosity anomalies (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ for pulsar spin-down excess (Paper 10). These coefficients are distinct from the microscopic conformal coupling $\beta$ or scalar-tensor coupling $\alpha_0$, absorbing instead the full astrophysical response including environmental activation and transfer functions. The prediction $\eta \sim -10^{-4}$ emerges from the differential suppression geometry combined with the understanding that LLR operates in a more screened Solar System regime, yielding a smaller effective response than the unscreened galactic probes.
+The quantitative prediction for the Nordtvedt parameter is informed by the TEP framework's Observable Response Coefficients, which quantify domain-specific astrophysical responses rather than a universal bare coupling. Preliminary results from related work in the same TEP framework report $\kappa_{\rm Cep} = (1.27 \pm 0.43) \times 10^6$ mag for Cepheid period-luminosity anomalies (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ for pulsar spin-down excess (Paper 10). These coefficients are distinct from the microscopic conformal coupling $\beta$ or scalar-tensor coupling $\alpha_0$, absorbing instead the full astrophysical response including environmental activation and transfer functions. The prediction $\eta \sim -10^{-4}$ emerges from the differential suppression geometry combined with the understanding that LLR operates in a more screened Solar System regime, yielding a smaller effective response than the unscreened galactic probes.
 
 This analysis uses 26,207 raw LLR O-C residuals from five international laser ranging stations spanning 35 years of measurements (1984–2019), with 25,445 retained after 6σ-equivalent (MAD-based) outlier cleaning. The residuals are processed against the INPOP19a lunar and planetary ephemeris from the Paris Observatory (Geoazur). To eliminate synodic blurring and ensure millimeter-level coordinate precision, Moon-Sun elongation angles were computed using high-precision Skyfield/DE440 ephemerides rather than mean-phase approximations. The analysis searches for the predicted TEP Nordtvedt signal: a modulation of the form $\delta r = 13 \eta \cos(D)$, where $D$ is the Moon-Sun elongation angle.
 
@@ -499,7 +499,7 @@ Systematic error budget: raw amplitude versus cos($D$)-projected bias. All value
 | Solar radiation pressure (local mechanical) | $&lt; 10^{-9}$ | $&lt; 10^{-9}$ | 1.00 |
 | Atmospheric seeing (synodic-correlated) | 0.011 | 0.011 | 1.00 |
 
-Raw total (quadrature): 1.05 cm.  Projected total (quadrature): 0.37 cm.  The projected systematic uncertainty is comparable to the detected synodic signal amplitude ($\sim$0.5–0.9 cm), not an order of magnitude larger.  Atmospheric, instrumental, tidal, and thermal effects all have temporal structures that are largely orthogonal to the synodic signal, so their combined projected bias is only 0.08 cm — more than 10$\times$ smaller than their raw amplitude.  Ephemeris scatter (0.36 cm) is the dominant remaining systematic; it is addressed independently by cross-ephemeris consistency checks and the phase-locked differential analysis, which cancels all common-mode systematics by construction (Section 4.10).
+Raw total (quadrature): 1.27 cm.  Projected total (quadrature): 0.37 cm.  The projected systematic uncertainty is comparable to the detected synodic signal amplitude ($\sim$0.5–0.9 cm), not an order of magnitude larger.  Atmospheric, instrumental, tidal, and thermal effects all have temporal structures that are largely orthogonal to the synodic signal, so their combined projected bias is only 0.08 cm — more than 10$\times$ smaller than their raw amplitude.  Ephemeris scatter (0.36 cm) is the dominant remaining systematic; it is addressed independently by cross-ephemeris consistency checks and the phase-locked differential analysis, which cancels all common-mode systematics by construction (Section 4.10).
 
 An independent empirical cross-ephemeris bound is computed directly from the INPOP19a and DE430 archives on their matched time window (2014–2018). The cosD-only $\eta$ difference is $\Delta\eta = 2.46 \times 10^{-4}$ ($z = 0.52$, $p = 0.60$), consistent with the ephemeris scatter in the projected budget ($\delta\eta_{\rm sys} = 2.73 \times 10^{-4}$). The same comparison on the full-systematic model gives a slightly larger $\Delta\eta = 2.92 \times 10^{-4}$, showing the bound is model-dependent but in either case remains below the signal amplitude. This agreement anchors the systematic estimate to an observable ephemeris scatter rather than relying solely on residual-variance partitioning. The total uncertainty on the full-systematic OLS estimand is $\sigma_{\rm tot} = \sqrt{\sigma_{\rm stat}^2 + \sigma_{\rm sys}^2} = 2.18 \times 10^{-4}$, with a signal-to-total ratio of 2.1 and a systematic-to-statistical ratio of 3.1. Systematic errors dominate, but the signal remains above the total uncertainty threshold.
 
@@ -539,7 +539,7 @@ To test for temporal dependencies in the residuals that could affect statistical
 
 - Station-by-station analysis: Evaluates temporal dependencies for each observing station independently
 
-The full-systematic residual series shows first-order temporal autocorrelation ($\rho \approx 0.412$, Durbin-Watson $\approx 1.18$), as expected for LLR systematics. The unweighted full-systematic OLS and cluster-robust estimators are therefore complemented by full-model AR(1) GLS with cluster-robust standard errors; the precision-weighted headline $\eta$ and the Cook's leverage diagnostic remain consistent with these treatments and are not an artifact of neglected serial correlation alone.
+The full-systematic residual series shows first-order temporal autocorrelation ($\rho \approx 0.482$, Durbin-Watson $\approx 1.18$), as expected for LLR systematics. The unweighted full-systematic OLS and cluster-robust estimators are therefore complemented by full-model AR(1) GLS with cluster-robust standard errors; the precision-weighted headline $\eta$ and the Cook's leverage diagnostic remain consistent with these treatments and are not an artifact of neglected serial correlation alone.
 
 #### 3.4.21 Outlier Removal Criteria
 
@@ -693,7 +693,7 @@ where $\sigma_i$ is the published measurement uncertainty for the $i$-th normal 
 
 The reduced chi-square is computed as $\chi^2_{\rm red} = \sum_i (y_i - \hat{y}_i)^2 / \sigma_i^2 \,/\, \nu$, where $\nu = N - p$ is the residual degrees of freedom. Values near unity indicate that the model residuals are consistent with the stated measurement uncertainties. Values below unity indicate under-dispersion (the stated uncertainties are larger than the actual scatter); values above unity indicate over-dispersion (the stated uncertainties are too small or the model is missing structure).
 
-Coverage is reported under four residual-error models on the same fit: (i) WLS with published $\sigma_i$; (ii) homoskedastic OLS (${\rm MSE}$ only); (iii) WLS with the model-variance component scaled by the cluster-robust inflation factor from the cos($D$) coefficient; and (iv) the same with the combined cluster-robust + AR(1) inflation ($\rho \approx 0.41$). A global scale factor $c$ on $\sigma_i$ is also solved by bisection so that 68% nominal prediction-interval coverage is attained; this quantifies how conservative published uncertainties are relative to post-fit scatter.
+Coverage is reported under four residual-error models on the same fit: (i) WLS with published $\sigma_i$; (ii) homoskedastic OLS (${\rm MSE}$ only); (iii) WLS with the model-variance component scaled by the cluster-robust inflation factor from the cos($D$) coefficient; and (iv) the same with the combined cluster-robust + AR(1) inflation ($\rho \approx 0.48$). A global scale factor $c$ on $\sigma_i$ is also solved by bisection so that 68% nominal prediction-interval coverage is attained; this quantifies how conservative published uncertainties are relative to post-fit scatter.
 
 For the headline precision-weighted $\eta$, station-block bootstrap (2,000 resamples) and leave-one-station-out (LOSO) conformal intervals are computed on the same full-systematic design. These provide significance brackets that do not rely solely on the regression standard error $\sigma_\eta$, complementing the WLS and cluster-robust paths. The reduced $\chi^2$ from this analysis ($\chi^2_{\rm red} \approx 0.48$ on published $\sigma_m$) is not the same quantity as the Birge-regression $\chi^2_{\rm red} = 0.0038$ on the precision-weighted headline fit (Section 3.3.6); both indicate under-dispersion but on different variance definitions.
 
@@ -938,7 +938,7 @@ $\eta = -3.91 \times 10^{-4} \pm 5.63 \times 10^{-5}$
 
 - Effective sample size (Kish): $\approx 1.74 \times 10^{4}$ (heterogeneous weights)
 
-- AR(1) parameter on unweighted full-model residuals (context): $\rho = 0.412$, DW = 1.18
+- AR(1) parameter on unweighted full-model residuals (context): $\rho = 0.482$, DW = 1.18
 
 #### Leverage diagnostic: Cook's-Distance-excised full-systematic OLS
 
@@ -954,7 +954,7 @@ $\eta = -3.87 \times 10^{-4} \pm 4.95 \times 10^{-5}$
 
 - AIC: $-142{,}028$ on the excised sample (best among tested OLS variants)
 
-The synodic significance rises from $5.25\sigma$ ($\cos D$-only) to $6.17\sigma$ once annual, monthly, and thermal aliases are included in unweighted OLS, and to $6.94\sigma$ under precision weighting on the same full sample—the pattern expected when a genuine $\cos D$ component is partially diluted by co-fitted systematics while noisy epochs are down-weighted. Cook's-Distance excision on the unweighted full-systematic row reaches $7.82\sigma$ with a central value consistent with the headline, confirming that the signal is not driven solely by high-leverage outliers. The cosD-only AR(1) GLS estimate $\eta = -3.28 \times 10^{-4} \pm 9.36 \times 10^{-5}$ ($3.51\sigma$ cluster-robust; AR(1) GLS robustness check) is retained as a comparison but is superseded by the full-systematic model, which properly controls for confounding aliases that bias the $\cos D$ coefficient. Crucially, treating cluster-robust SEs and AR(1) corrections as separate checks is methodologically incomplete because the data exhibit both strong autocorrelation ($\rho \approx 0.412$, DW $\approx 1.18$) and station-level clustering. The combined cluster-robust + AR(1) estimator applies Cochrane-Orcutt pre-whitening followed by a cluster-robust sandwich on the transformed residuals. On the unweighted full-systematic model this yields $\eta = -4.45 \times 10^{-4} \pm 9.87 \times 10^{-5}$ at $4.51\sigma$ (cluster-robust on pre-whitened residuals), with effective sample size $N_{\rm eff} \approx 10{,}500$. The pure cluster-robust (no AR(1)) on the same unweighted design gives $\eta = -4.06 \times 10^{-4}$ at $6.52\sigma$, confirming that correcting for both forms of residual correlation is more conservative than either correction alone. The combined estimator disciplines the unweighted sensitivity row but does not replace the precision-weighted headline, which keeps every observation in the fit.
+The synodic significance rises from $5.25\sigma$ ($\cos D$-only) to $6.17\sigma$ once annual, monthly, and thermal aliases are included in unweighted OLS, and to $6.94\sigma$ under precision weighting on the same full sample—the pattern expected when a genuine $\cos D$ component is partially diluted by co-fitted systematics while noisy epochs are down-weighted. Cook's-Distance excision on the unweighted full-systematic row reaches $7.82\sigma$ with a central value consistent with the headline, confirming that the signal is not driven solely by high-leverage outliers. The cosD-only AR(1) GLS estimate $\eta = -3.28 \times 10^{-4} \pm 9.36 \times 10^{-5}$ ($3.51\sigma$ cluster-robust; AR(1) GLS robustness check) is retained as a comparison but is superseded by the full-systematic model, which properly controls for confounding aliases that bias the $\cos D$ coefficient. Crucially, treating cluster-robust SEs and AR(1) corrections as separate checks is methodologically incomplete because the data exhibit both strong autocorrelation ($\rho \approx 0.482$, DW $\approx 1.18$) and station-level clustering. The combined cluster-robust + AR(1) estimator applies Cochrane-Orcutt pre-whitening followed by a cluster-robust sandwich on the transformed residuals. On the unweighted full-systematic model this yields $\eta = -4.45 \times 10^{-4} \pm 9.87 \times 10^{-5}$ at $4.51\sigma$ (cluster-robust on pre-whitened residuals), with effective sample size $N_{\rm eff} \approx 10{,}500$. The pure cluster-robust (no AR(1)) on the same unweighted design gives $\eta = -4.06 \times 10^{-4}$ at $6.52\sigma$, confirming that correcting for both forms of residual correlation is more conservative than either correction alone. The combined estimator disciplines the unweighted sensitivity row but does not replace the precision-weighted headline, which keeps every observation in the fit.
 
 **Canonical estimator consensus.** The headline precision-weighted estimate is $\eta = -3.91 \times 10^{-4}$ ($6.94\sigma$; $6.78\sigma$ cluster-robust). It is bracketed on the same cleaned INPOP19a sample by unweighted full-systematic OLS $\eta = -4.06 \times 10^{-4}$ ($6.17\sigma$; $6.52\sigma$ cluster-robust; sensitivity upper bound), Cook's-Distance-excised full-systematic OLS $\eta = -3.87 \times 10^{-4}$ ($7.82\sigma$; leverage diagnostic), naïve $\cos D$-only OLS $\eta = -3.18 \times 10^{-4}$ ($5.25\sigma$), Cook's-distance leverage-excised cosD-only OLS $\eta = -3.31 \times 10^{-4}$ ($5.65\sigma$; $N = 25{,}176$), full-model AR(1) GLS $\eta = -4.45 \times 10^{-4}$ ($4.51\sigma$), weighted biweight M-estimator $\eta = -3.64 \times 10^{-4}$ ($9.15\sigma$ cluster-robust; a weighted biweight M-estimator), and Theil-Sen $\eta = -2.94 \times 10^{-4}$ (known to be biased toward zero under heteroskedasticity). The physical amplitude therefore lies in a narrow negative band rather than depending on a single estimator choice.
 
@@ -968,7 +968,7 @@ To test consistency across separate observatories and correctly account for per-
 
 #### 4.9.3 False-Positive Rate Simulation
 
-To quantify the exact probability that the observed $\eta$ could arise from correlated noise under the GR null, a parametric bootstrap simulation was performed. The procedure: (1) fit the full-systematic model to the 6σ-cleaned INPOP19a residuals; (2) extract the AR(1) noise parameters ($\rho = 0.413$, $\sigma_\epsilon = 5.59$ cm); (3) generate 10,000 synthetic datasets under $\eta = 0$ with identical $\cos D$ structure, station composition, and AR(1) temporal correlation; (4) re-fit the full-systematic model to each synthetic dataset and record the recovered $\eta$.
+To quantify the exact probability that the observed $\eta$ could arise from correlated noise under the GR null, a parametric bootstrap simulation was performed. The procedure: (1) fit the full-systematic model to the 6σ-cleaned INPOP19a residuals; (2) extract the AR(1) noise parameters ($\rho = 0.483$, $\sigma_\epsilon = 5.59$ cm); (3) generate 10,000 synthetic datasets under $\eta = 0$ with identical $\cos D$ structure, station composition, and AR(1) temporal correlation; (4) re-fit the full-systematic model to each synthetic dataset and record the recovered $\eta$.
 
 Results: the null distribution of $\eta$ is centred at $2.0 \times 10^{-6}$ (consistent with zero) with standard deviation $1.01 \times 10^{-4}$. The observed $|\eta_{\rm obs}| = 4.06 \times 10^{-4}$ exceeds *every* one of the 10,000 null realisations. The exact false-positive rate is therefore $p < 1/10{,}000 = 1.0 \times 10^{-4}$, with a 95% conservative upper bound of $3.0 \times 10^{-4}$. Expressed as a Gaussian-equivalent tail probability, this corresponds to $>4.0\sigma$. This directly answers: under the exact noise model and systematic structure of the data, chance would produce a signal this strong fewer than once in 10,000 trials.
 
@@ -1006,7 +1006,7 @@ A prediction-interval coverage test was performed on the 6σ-cleaned INPOP19a fu
 
 - 99% nominal: 99.8% observed ($+0.8$ pp)
 
-$\chi^2_{\rm red} = 0.477$ (df = 25,438): residuals are under-dispersed relative to published $\sigma$, so prediction intervals are conservative. The same over-coverage persists when the model-variance term is scaled by cluster-robust (68%: 84.6%) or cluster-robust + AR(1) inflation (68%: 86.3%; $\rho = 0.41$). Homoskedastic OLS intervals without $\sigma_i$ severely under-cover (68%: 2.2%), confirming that published $\sigma$ dominate the WLS calibration. Scaling all $\sigma_m$ by $c = 0.514$ restores 68% nominal coverage; under that calibration the headline WLS error would shrink and formal SNR would rise to $\approx 13.5\sigma$, so the reported $6.94\sigma$ is not inflated by underestimated errors.
+$\chi^2_{\rm red} = 0.477$ (df = 25,438): residuals are under-dispersed relative to published $\sigma$, so prediction intervals are conservative. The same over-coverage persists when the model-variance term is scaled by cluster-robust (68%: 84.6%) or cluster-robust + AR(1) inflation (68%: 86.3%; $\rho = 0.48$). Homoskedastic OLS intervals without $\sigma_i$ severely under-cover (68%: 2.2%), confirming that published $\sigma$ dominate the WLS calibration. Scaling all $\sigma_m$ by $c = 0.514$ restores 68% nominal coverage; under that calibration the headline WLS error would shrink and formal SNR would rise to $\approx 13.5\sigma$, so the reported $6.94\sigma$ is not inflated by underestimated errors.
 
 Headline $\eta$ intervals on the precision-weighted full-systematic model:
 
@@ -1216,7 +1216,7 @@ The appropriate robust alternative is a weighted M-estimator. The Tukey biweight
 
 A data-driven systematic error budget was constructed directly from the INPOP19a residuals and upstream pipeline outputs, replacing the previous hardcoded literature estimates (Table 2):
 
-Table 2: Data-driven systematic error budget: raw amplitude versus cos($D$)-projected bias. Only the component correlated with $\cos(D)$ can bias $\eta$; the orthogonal component contributes noise (already in the statistical error). Raw total: 1.05 cm; projected total: 0.37 cm. The operative systematic uncertainty is the projected 0.37 cm, comparable to the signal amplitude, not an order of magnitude larger.
+Table 2: Data-driven systematic error budget: raw amplitude versus cos($D$)-projected bias. Only the component correlated with $\cos(D)$ can bias $\eta$; the orthogonal component contributes noise (already in the statistical error). Raw total: 1.27 cm; projected total: 0.37 cm. The operative systematic uncertainty is the projected 0.37 cm, comparable to the signal amplitude, not an order of magnitude larger.
 
 | Error Source | Raw amplitude (cm) | Projected bias (cm) | Description |
 | --- | --- | --- | --- |
@@ -1228,7 +1228,7 @@ Table 2: Data-driven systematic error budget: raw amplitude versus cos($D$)-proj
 
 #### 4.14.2 Systematic Projection Analysis
 
-The raw RMS of systematic sources (1.05 cm) conflates the *noise* contribution (which broadens error bars) with the *bias* contribution (which shifts the fitted slope). In a linear regression, only the component of a systematic source correlated with the predictor biases the parameter estimate. For $\eta$, the systematic bias is given by Equation \eqref{eq:systematic_projection}:
+The raw RMS of systematic sources (1.27 cm) conflates the *noise* contribution (which broadens error bars) with the *bias* contribution (which shifts the fitted slope). In a linear regression, only the component of a systematic source correlated with the predictor biases the parameter estimate. For $\eta$, the systematic bias is given by Equation \eqref{eq:systematic_projection}:
 
 $\delta\eta_{\rm sys} = \mathrm{cov}(s, \cos D) / \mathrm{var}(\cos D) / 13$
 
@@ -1467,7 +1467,7 @@ gravitational mechanics rather than random noise:
 Rank 1 (26.83d): Mapped perfectly to $3D - 2l + 3l'$
 
 - 
-Rank 2 (30.91d | $0.955\nu$): Formally identified as the
+Rank 2 (30.99d | $0.955\nu$): Formally identified as the
 interaction $2D - 3l + 2F$
 
 - 
@@ -1632,7 +1632,7 @@ The TEP framework motivates testing whether a *fixed celestial axis* modulates t
 **Joint CMB anisotropy fit.** The model $\eta = \eta_0 + \eta_{v_\parallel} v_\parallel + \eta_\theta \cos\theta$ was fit to the residual amplitude, where $v_\parallel$ is the projection of Earth's orbital velocity onto the CMB dipole and $\cos\theta$ is the angle between the Earth-Moon vector and the CMB dipole. Both coefficients are individually significant:
 
 - 
-Velocity projection: $\eta_{v_\parallel} = -1.05 \times 10^{-5}$
+Velocity projection: $\eta_{v_\parallel} = -1.27 \times 10^{-5}$
 (km/s)$^{-1}$ ($t = -3.49$, $p = 4.20 \times 10^{-4}$)
 
 - 
@@ -1731,7 +1731,7 @@ The joint F-test for adding quadrupole + octupole to the dipole-only model gives
 
 - 
 CMB orientation: $\eta_\theta = -9.78 \times 10^{-4} \pm 8.26
-\times 10^{-5}$, 95% CI $[-1.13, -0.82] \times 10^{-3}$
+\times 10^{-5}$, 95% CI $[-1.13, -0.99] \times 10^{-3}$
 (excludes zero)
 
 - 
@@ -1903,7 +1903,7 @@ The differential evaluates to $\Delta\eta = -1.76 \times 10^{-3}$ at $7.92\sigma
 
 **CMB-phase annual signal.** Because the CMB dipole direction (ecliptic longitude $\approx 173^\circ$) is offset by approximately $70^\circ$ from the perihelion longitude ($\approx 103^\circ$), an annual signal at the CMB phase was tested using both sin and cos harmonics to remain phase-independent. The joint F-test gives $F(2, 25,441) = 5.79$ ($p = 0.0031$), indicating significant annual power at the CMB dipole phase beyond the synodic modulation. The sin component is $\eta = +2.71 \times 10^{-4}$ ($t = 3.07$, $p = 0.0022$; CMB-annual-signal robustness check), while the cos component is $\eta = +1.10 \times 10^{-4}$ ($t = 1.47$, $p = 0.14$; CMB-annual-signal robustness check). The dominance of the sin component reflects the ellipticity of Earth's orbit: for a circular orbit the signal would be purely cosinusoidal, but the $e \approx 0.017$ eccentricity introduces a strong quadrature term. This annual-phase signature is a discriminant that no purely heliocentric mechanism can reproduce at the CMB dipole longitude.
 
-**Binned anisotropy trend.** Eight bins in $\cos\theta_{\rm EM-CMB}$ yield a linear trend $d\eta/d\cos\theta = -1.05 \times 10^{-3} \pm 2.21 \times 10^{-4}$ (CMB-anisotropy-slope robustness check) ($t = -4.75$, $p = 0.0032$), confirming that the anisotropy is smooth and monotonic across the full range of orientations rather than confined to extreme bins.
+**Binned anisotropy trend.** Eight bins in $\cos\theta_{\rm EM-CMB}$ yield a linear trend $d\eta/d\cos\theta = -1.27 \times 10^{-3} \pm 2.21 \times 10^{-4}$ (CMB-anisotropy-slope robustness check) ($t = -4.75$, $p = 0.0032$), confirming that the anisotropy is smooth and monotonic across the full range of orientations rather than confined to extreme bins.
 
 #### 4.12.3 Canonical Full-Systematic Extraction
 
@@ -2074,11 +2074,11 @@ Rolling-window projections of an effective $\eta(t)$ and their environmental cor
 | --- | --- | --- | --- | --- |
 | Grasse | 19,390 | 1984–2019 | 9.9 | 0.439 |
 | APO | 2,595 | 2006–2017 | 3.2 | 0.517 |
-| McDonald2 | 3,139 | 1988–2014 | 9.6 | 0.411 |
+| McDonald2 | 3,139 | 1988–2014 | 9.6 | 0.481 |
 | Haleakala | 737 | 1984–1991 | 13.8 | 0.355 |
 | Matera | 346 | 2003–2019 | 6.2 | 0.252 |
 
-The metric mean $|\cos D|$ quantifies phase coverage quality: values near 0.5 indicate uniform sampling across all synodic phases, while values near 0 indicate severe phase truncation. Matera's mean $|\cos D| = 0.252$ reflects extreme phase truncation; McDonald2's mean $|\cos D| = 0.411$ indicates moderate truncation. Only APO (0.517) and Grasse (0.439) achieve near-uniform phase coverage.
+The metric mean $|\cos D|$ quantifies phase coverage quality: values near 0.5 indicate uniform sampling across all synodic phases, while values near 0 indicate severe phase truncation. Matera's mean $|\cos D| = 0.252$ reflects extreme phase truncation; McDonald2's mean $|\cos D| = 0.481$ indicates moderate truncation. Only APO (0.517) and Grasse (0.439) achieve near-uniform phase coverage.
 
 **Covariate Shift in Temporal Hold-Out.** A Kolmogorov-Smirnov test comparing elongation distributions pre- and post-2008 yields $D = 0.131$ ($p = 4.16 \times 10^{-98}$). The pre-2008 mean $|\cos D| = 0.406$; post-2008 mean $|\cos D| = 0.474$. This distributional difference means the model trained on one epoch's elongation distribution cannot extrapolate to the other. Covariate shift is therefore a documented contributor to the negative predictive $R^2$, degrading the transportability of nuisance coefficients even though the physical $\cos D$ signal is stable across epochs.
 
@@ -2211,7 +2211,7 @@ Quantitative derivation utilizes the TEP geometric Temporal Shear formalism and 
 
 Furthermore, the negative sign supports the interpretation that Earth-dominated gravitational potential scaling (suppression of Temporal Shear $\propto \Phi/c^2$) dominates over soliton-radius surface scaling.
 
-This internal consistency across the framework bridges different regimes: preliminary results from related work report $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag for Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ for globular cluster pulsars (Paper 10), while the LLR Nordtvedt parameter $\eta$ serves as the Solar System observable response coefficient, exhibiting a smaller magnitude consistent with stronger screening in dense environments. That the internal macroscopic potentials satisfy the parameter boundary isolated by the LLR C-SPAD dataset supports theoretical cohesion.
+This internal consistency across the framework bridges different regimes: preliminary results from related work report $\kappa_{\rm Cep} = (1.27 \pm 0.43) \times 10^6$ mag for Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ for globular cluster pulsars (Paper 10), while the LLR Nordtvedt parameter $\eta$ serves as the Solar System observable response coefficient, exhibiting a smaller magnitude consistent with stronger screening in dense environments. That the internal macroscopic potentials satisfy the parameter boundary isolated by the LLR C-SPAD dataset supports theoretical cohesion.
 
 ### 5.3 Implications for Modified Gravity
 
@@ -2473,7 +2473,7 @@ Known modeled artifact explanations are strongly constrained across multiple ind
 
 The measurement resolves any internal density profile ambiguity: the negative sign confirms that macroscopic potential scaling structurally dominates over topological soliton-radius interactions.
 
-The Observable Response Coefficient framework shows internal consistency across the author's body of work: preliminary $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag from Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ from globular cluster pulsars (Paper 10). The LLR Nordtvedt parameter $\eta \approx -3.91 \times 10^{-4}$ from the headline precision-weighted model serves as the Solar System observable response coefficient, exhibiting a substantially smaller magnitude consistent with the screening mechanism: Solar System environments experience stronger Temporal Shear suppression than galactic disks or globular clusters. This provides qualitative consistency across stellar dynamics and planetary ephemerides within the unified $\kappa$ framework.
+The Observable Response Coefficient framework shows internal consistency across the author's body of work: preliminary $\kappa_{\rm Cep} = (1.27 \pm 0.43) \times 10^6$ mag from Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ from globular cluster pulsars (Paper 10). The LLR Nordtvedt parameter $\eta \approx -3.91 \times 10^{-4}$ from the headline precision-weighted model serves as the Solar System observable response coefficient, exhibiting a substantially smaller magnitude consistent with the screening mechanism: Solar System environments experience stronger Temporal Shear suppression than galactic disks or globular clusters. This provides qualitative consistency across stellar dynamics and planetary ephemerides within the unified $\kappa$ framework.
 
 The coarse temporal $\chi^2/\mathrm{dof} \approx 33$ indicates bin-to-bin variance. Hardware epoch analysis provides the key mechanistic explanation: early-era 1980s PMT electronics possessed variance limits orders of magnitude above modern detectors that collapse to $\chi^2/\text{dof} \approx 6.2$ when correctly partitioned by hardware era.
 
@@ -2649,7 +2649,7 @@ The internal consistency across the framework—from Solar System ephemerides to
 | System / Observatory | Primary Observable | Observable Response Coefficient | Statistical Significance |
 | --- | --- | --- | --- |
 | LLR (This Work) | Synodic Nordtvedt Modulation | $\eta \approx -4 \times 10^{-4}$ (Solar System screened regime) | $6.17\sigma$ (full-systematic primary) |
-| Cepheids (Paper 11) | Period-Luminosity Distance Bias | $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag (preliminary) | Planck tension resolution |
+| Cepheids (Paper 11) | Period-Luminosity Distance Bias | $\kappa_{\rm Cep} = (1.27 \pm 0.43) \times 10^6$ mag (preliminary) | Planck tension resolution |
 | Globular Cluster Pulsars (Paper 10) | Spin-Down Excess | $\kappa_{\rm MSP} \sim 10^6$–$10^7$ (preliminary) | $p = 0.01$ |
 | GNSS Timing (Papers 2–4) | Synchronization Holonomy ($H$) | Screened regime response | $7$ Independent Signatures |
 | Gaia DR3 (Paper 13) | Wide Binary Dynamics | $\alpha_{\rm sat} = 0.366 \pm 0.012$ | Internal Consistency Only |
@@ -2688,7 +2688,7 @@ DE430 (short baseline, outlier sensitivity) is an independent cross-ephemeris st
 
 The extracted limit of $\eta \approx -4.06 \times 10^{-4}$ resolves the theoretical suppression ambiguity in TEP. The negative sign supports the interpretation that gravitational potential scaling (Temporal Shear suppression $\propto \Phi/c^2$) dominates over soliton-radius scaling in the Earth-Moon system.
 
-The Observable Response Coefficient framework shows internal consistency across the author's body of work: preliminary $\kappa_{\rm Cep} = (1.05 \pm 0.43) \times 10^6$ mag from Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ from globular cluster pulsars (Paper 10). The LLR Nordtvedt parameter $\eta \approx -4 \times 10^{-4}$ serves as the Solar System observable response coefficient, exhibiting a substantially smaller magnitude consistent with stronger screening in dense environments. Paper 13 (wide binaries) reports a saturation amplitude $\alpha_{\rm sat} = 0.366 \pm 0.012$, reflecting the specific dynamics of that regime.
+The Observable Response Coefficient framework shows internal consistency across the author's body of work: preliminary $\kappa_{\rm Cep} = (1.27 \pm 0.43) \times 10^6$ mag from Cepheid stellar dynamics (Paper 11) and $\kappa_{\rm MSP} \sim 10^6$–$10^7$ from globular cluster pulsars (Paper 10). The LLR Nordtvedt parameter $\eta \approx -4 \times 10^{-4}$ serves as the Solar System observable response coefficient, exhibiting a substantially smaller magnitude consistent with stronger screening in dense environments. Paper 13 (wide binaries) reports a saturation amplitude $\alpha_{\rm sat} = 0.366 \pm 0.012$, reflecting the specific dynamics of that regime.
 
 While TEP does not make a precise quantitative prediction for $\eta$ from a single universal coupling constant due to suppression model uncertainties and domain-specific astrophysical amplification, the observed Nordtvedt variance is within the order-of-magnitude parameter range expected from the formal TEP framework ($|\eta| \sim 10^{-4}$ to $10^{-2}$) and provides qualitative geometric parity across stellar dynamics, high-z galaxies, and planetary ephemerides.
 
@@ -3064,7 +3064,7 @@ To verify successful reproduction:
 
 - Key result: cosD-only AR(1) GLS robustness check $\eta = -3.28 \times 10^{-4} \pm 9.36 \times 10^{-5}$ (SNR = $3.51\sigma$ cluster-robust)
 
-- Key result: AR(1) parameter $\rho = 0.412$ (full model), $\rho = 0.416$ (cosD-only); significant temporal autocorrelation
+- Key result: AR(1) parameter $\rho = 0.482$ (full model), $\rho = 0.486$ (cosD-only); significant temporal autocorrelation
 
 - Key result: Bootstrap 95% CI = [-0.0411, -0.0197] (excludes zero)
 

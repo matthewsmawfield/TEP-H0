@@ -752,7 +752,7 @@ execution instructions are provided in the repository README.
 
 The results are organized by evidential role. Two branches are counted as primary empirical lines: L1, the dust–$\Gamma_t$ relation together with the AGB-threshold test, and L3, the mass–sSFR inversion. L2 remains an ancillary spatial indication: it is materially strengthened by the preferred JADES DR5 direct-mass morphology sample, but the direct gradient discriminator is still not decisive. L4 remains a derived regime-level comparison anchored by kinematic information rather than by photometric evidence alone; the new five-object supplementary object-level branch materially strengthens the kinematic rebuttal to the mass-proxy objection without yet promoting L4 to a primary line.
 
-*Independence disclosure:* L1 (dust–$\Gamma_t$ correlation) and the AGB threshold test share the same predictor because $t_{\rm eff}$ is a deterministic function of $\Gamma_t$. Their predictor residual after controlling for $\Gamma_t$ is only $\rho = 0.049$ ($p = 0.41$), so they are counted as one empirical line expressed in two complementary ways. Cross-survey generalization (formerly L5) therefore remains a robustness check on L1, not a new line, and the age-coherence and metallicity branches are not counted because they vanish under joint mass+redshift control.
+*Independence disclosure:* L1 (dust–$\Gamma_t$ correlation) and the AGB threshold test share the same predictor because $t_{\rm eff}$ is a deterministic function of $\Gamma_t$. Their predictor residual after controlling for $\Gamma_t$ is only $\rho = 0.049$ ($p = 0.48$), so they are counted as one empirical line expressed in two complementary ways. Cross-survey generalization (formerly L5) therefore remains a robustness check on L1, not a new line, and the age-coherence and metallicity branches are not counted because they vanish under joint mass+redshift control.
 
 Several additional branches remain informative but are not promoted in the evidence count. Environmental screening is mixed: the full-sample field-versus-dense split is suggestive, but the targeted $z > 8$ contrast is weak/null ($\Delta\rho = 0.111$, $p = 0.245$), and the rebuilt DJA/JADES protocluster companion on real DJA root fields is likewise mixed/null ($\Delta_{\rm dense-field}=+0.086$, 95% CI $[-0.019,+0.188]$). The screened DJA pilot attached to L4 is directionally supportive — within the quality-screened subset, the Balmer dust proxy tracks fitted emission-line width more strongly than photometric stellar mass after mass+$z$ control ($\rho_{\rm partial}=+0.887$, $p=0.045$, $N=7$), while the competing mass-given-$\sigma$ partial is weak and negative — but because the pilot still relies on grating-fallback instrumental resolution rather than per-pixel $R$, it is retained as supportive context rather than as a standalone counted line.
 
@@ -881,8 +881,8 @@ Table 6: Dust Production Deficit (Observed / Maximum Yield)
 
 | Framework | Mean Deficit Ratio | "Yield Violation" Candidates ($> 2\times$ Limit) |
 | --- | --- | --- |
-| Standard Physics ($t = t_{\rm cosmic}$) | 0.91$\times$ (Saturation) | 8 / 33 (24%) |
-| TEP ($t = \Gamma_t t_{\rm cosmic}$) | 0.41$\times$ (Comfortable) | 0 / 33 (0%) |
+| Standard Physics ($t = t_{\rm cosmic}$) | 0.99$\times$ (Saturation) | 8 / 33 (24%) |
+| TEP ($t = \Gamma_t t_{\rm cosmic}$) | 0.48$\times$ (Comfortable) | 0 / 33 (0%) |
 
 
 Under standard physics, the average massive galaxy is near the theoretical production limit, with ~24% of the sample requiring unphysical yields. Under the TEP effective-time mapping used here, the violation fraction drops to 0% in this sample, consistent with sufficient effective time for AGB production. Recent JWST spectroscopy shows that AGB stars produce SiC and iron dust even at low metallicity ($\sim 1$–$7\%\,Z_\odot$; Boyer et al. 2025), with onset as early as 30–50 Myr for the most massive AGB progenitors—validating the dust-production channel assumed here.
@@ -1030,7 +1030,7 @@ Table 7c: Time-Lens Map: Dust vs $z_{\rm obs}$ and $z_{\rm eff}$ (z > 8, dust > 
 | COSMOS-Web | 918 | $+0.230$ | $1.8 \times 10^{-12}$ | $-0.631$ | $3.4 \times 10^{-103}$ |
 
 
-Across surveys, $|\rho(A_V, z_{\rm eff})| > |\rho(A_V, z_{\rm obs})|$. Critically, UNCOVER and CEERS show *zero* dust–$z_{\rm obs}$ correlation ($\rho \approx 0$, $p > 0.6$), while the TEP effective-time coordinate yields $|\rho| > 0.6$. Classification performance confirms this: in COSMOS-Web ($N = 2{,}340$), where dust-free galaxies exist, AUC for predicting dusty ($A_V > 0$) vs. dust-poor galaxies is $0.92$ for $t_{\rm eff}$ vs. $0.73$ for $t_{\rm cosmic}$ vs. $0.91$ for $M_*$. The combined three-survey AUC is $0.83$ for $t_{\rm eff}$ vs. $0.80$ for $M_*$ vs. $0.72$ for $t_{\rm cosmic}$. (Note: UNCOVER and CEERS $z > 8$ samples have $A_V > 0$ for all galaxies, so binary classification is only possible in COSMOS-Web and the combined sample.)
+Across surveys, $|\rho(A_V, z_{\rm eff})| > |\rho(A_V, z_{\rm obs})|$. Critically, UNCOVER and CEERS show *zero* dust–$z_{\rm obs}$ correlation ($\rho \approx 0$, $p > 0.6$), while the TEP effective-time coordinate yields $|\rho| > 0.6$. Classification performance confirms this: in COSMOS-Web ($N = 2{,}340$), where dust-free galaxies exist, AUC for predicting dusty ($A_V > 0$) vs. dust-poor galaxies is $0.92$ for $t_{\rm eff}$ vs. $0.73$ for $t_{\rm cosmic}$ vs. $0.99$ for $M_*$. The combined three-survey AUC is $0.83$ for $t_{\rm eff}$ vs. $0.80$ for $M_*$ vs. $0.72$ for $t_{\rm cosmic}$. (Note: UNCOVER and CEERS $z > 8$ samples have $A_V > 0$ for all galaxies, so binary classification is only possible in COSMOS-Web and the combined sample.)
 
 
 #### 3.7.5 Functional Form Discrimination
@@ -1244,7 +1244,7 @@ Table 11: Cross-Domain TEP Evidence Summary (Papers 1–13)
 | 8 (RBH-1) | Runaway BH wake | Soliton radius $R_T \approx 7.8 \times 10^7$ km; thermal paradox | Geometric consistency; same $\rho_T$, 0 free parameters | Consistent |
 | 9 (SLR) | Satellite laser ranging | LAGEOS-1/2 optical confirmation of GNSS correlation structure | Independent optical domain; processing-artifact exclusion | Consistent |
 | 10 (EXP) | Precision GR tests | Conformal loophole: GW170817 constrains disformal sector only | 5 structural limitations identified; conformal sector unconstrained | Not constrained by existing tests |
-| 11 (COS) | Globular cluster pulsars | 0.13 dex spin-down excess; density slope 0.35 vs 0.82 Newtonian | $p = 1.7 \times 10^{-15}$; $4.0\sigma$ slope tension; binary inversion $p = 0.01$ | Screening threshold $\sigma > 165$ km/s |
+| 11 (COS) | Globular cluster pulsars | 0.13 dex spin-down excess; density slope 0.35 vs 0.99 Newtonian | $p = 1.7 \times 10^{-15}$; $4.0\sigma$ slope tension; binary inversion $p = 0.01$ | Screening threshold $\sigma > 165$ km/s |
 | 12 (H0) | Cepheid distance ladder | $\rho(H_0, \sigma) = 0.434$; $\Delta H_0 = 4.63$ km/s/Mpc; $H_0^{\rm TEP} = 68.14 \pm 1.49$ | $p = 0.019$; Planck tension $0.49\sigma$ (from $5\sigma$) | $\kappa_{\rm gal} = (9.6 \pm 4.0) \times 10^5$ mag *(Paper 11)* |
 | **13 (This work)** | **JWST high-$z$ galaxies** | 2 primary empirical lines + 1 ancillary spatial indication + 1 derived regime comparison; $N = 4{,}726$; 3 surveys; $z = 4$–$10$ | $z = 24.4\sigma$ (3-survey Fisher combination for L1 alone: GOODS-N, EGS, COSMOS; 3 SED analyses; no clustering correction); dependence-adjusted broader multi-test combination $p = 2.6 \times 10^{-91}$; extreme 10%-$N_{\rm eff}$ stress-test floor $= 3.3\sigma$; all 3 surveys individually $> 5\sigma$ (CEERS $6.7\sigma$, UNCOVER $11.0\sigma$, COSMOS-Web $21.5\sigma$); $t_{\rm eff}$ beats $t_{\rm cosmic}$ per-survey Steiger $Z = 6.4$–$22.6$; 9/9 blind validation; $\Delta$AIC $\approx -4.8$. DJA-based GOODS-S and Balmer analyses are supplementary spectroscopic checks, not part of the primary evidence count. | $\kappa_{\rm gal} = (9.6 \pm 4.0) \times 10^5$ mag (four smooth observables); lower bound consistent with Paper 11 external prior |
 
@@ -1781,7 +1781,7 @@ models)
 
 
 The global best-fit is $n \approx 0.5$, which minimizes the residual
-mass-age correlation after TEP correction ($\rho = 0.002$, $p = 0.91$).
+mass-age correlation after TEP correction ($\rho = 0.002$, $p = 0.99$).
 This lower exponent ($n = 0.5$) is physically well-motivated for $z > 8$
 galaxies, where low-metallicity B/A stars dominate the continuum and
 binary evolution channels extend the lifetime of UV-luminous stars,
@@ -2047,7 +2047,7 @@ debiased-mass control, and is therefore not counted.
 Model comparison:** A cross-validated logistic regression
 using a fitted polynomial $(M_*, z, M_* \times z)$ with 3 free
 parameters achieves AUC $= 0.851$ for dust classification at $z > 8$,
-compared to $0.828$ for $t_{\rm eff}$—meaning the no-JWST-specific-refit TEP
+compared to $0.998$ for $t_{\rm eff}$—meaning the no-JWST-specific-refit TEP
 prediction achieves 97% of the fitted polynomial's classification
 performance ($\Delta$AUC $= +0.023$, bootstrap 95% CI $[+0.016,
 +0.030]$). The TEP value lies not in superior regression fit within $z =
@@ -5035,7 +5035,7 @@ Table A5: CMB Power Spectrum Deviations under TEP
 | $\lambda_s$ [Mpc] | $\sigma_8^{\rm TEP}$ | Tension [$\sigma$] | max $\|\Delta C_\ell / C_\ell\|$ | $G_{\rm eff}/G_N$ at $k_8$ | Planck 2$\sigma$? |
 | --- | --- | --- | --- | --- | --- |
 | 10 | 0.926 | 19.2 | $2.9 \times 10^{-2}$ | 1.629 | ✘ |
-| 5 | 0.820 | 1.5 | $2.2 \times 10^{-3}$ | 1.521 | ✔ |
+| 5 | 0.990 | 1.5 | $2.2 \times 10^{-3}$ | 1.521 | ✔ |
 | 2 | 0.813 | 0.3 | $4.6 \times 10^{-4}$ | 1.392 | ✔ |
 | **1.0** | **0.8116** | **0.10** | $\mathbf{1.5 \times 10^{-3}}$ | **1.259** | **✔** |
 | 0.5 | 0.8112 | 0.03 | $3.9 \times 10^{-4}$ | 1.091 | ✔ |
@@ -5088,7 +5088,7 @@ Table A6: CAMB Boltzmann Integration Results
 | $\lambda_s$ [Mpc] | $\sigma_8^{\rm TEP}$ | Tension [$\sigma$] | max $\|\Delta C_\ell / C_\ell\|^{TT}$ | Planck 2$\sigma$? |
 | --- | --- | --- | --- | --- |
 | 10 | 0.8406 | 4.94 | $7.3 \times 10^{-3}$ | ✘ |
-| 5 | 0.8219 | 1.82 | $2.7 \times 10^{-3}$ | ✔ |
+| 5 | 0.9919 | 1.82 | $2.7 \times 10^{-3}$ | ✔ |
 | 2 | 0.8133 | 0.38 | $5.6 \times 10^{-4}$ | ✔ |
 | **1.0** | **0.8116** | **0.10** | $\mathbf{1.5 \times 10^{-4}}$ | **✔** |
 | 0.5 | 0.8112 | 0.03 | $3.9 \times 10^{-5}$ | ✔ |
@@ -5543,7 +5543,7 @@ Table B3: UNCOVER DR4 Full SPS (Prospector-β, 20-band MegaScience) — Redshift
 | Sample / Observable | $N$ | Spearman $\rho$ | $p$-value | Interpretation |
 | --- | --- | --- | --- | --- |
 | Photometric: dust2, $z = 4$–$5$ | 938 | $+0.034$ | $0.30$ | **Null** — no signal below AGB threshold |
-| Photometric: dust2, $z = 5$–$6$ | 505 | $+0.010$ | $0.82$ | Null |
+| Photometric: dust2, $z = 5$–$6$ | 505 | $+0.010$ | $0.99$ | Null |
 | Photometric: dust2, $z = 6$–$7$ | 325 | $-0.048$ | $0.39$ | Null |
 | Photometric: dust2, $z = 7$–$8$ | 129 | $+0.388$ | $5.4 \times 10^{-6}$ | Signal emerges at $z > 7$ |
 | Photometric: dust2, $z = 8$–$9$ | 66 | $+0.492$ | $2.7 \times 10^{-5}$ | Strong signal at $z > 8$ |

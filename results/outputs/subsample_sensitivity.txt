@@ -17,9 +17,9 @@ ENHANCED ROBUSTNESS ANALYSIS SUMMARY
    Partial r(H0, σ | log ρ) = 0.455 (p = 0.0132)
 
 4. TEP CORRECTION ON SUBSAMPLES
-   full_sample: κ_Cep = 1256701.660, H0 = 68.85 ± 1.29
-   stellar_only: κ_Cep = 1199969.482, H0 = 66.98 ± 1.66
-   gold_standard: κ_Cep = 1503778.076, H0 = 64.21 ± 3.33
+   full_sample: κ_Cep = 1272448.730, H0 = 68.84 ± 1.29
+   stellar_only: κ_Cep = 1224230.957, H0 = 66.94 ± 1.66
+   gold_standard: κ_Cep = 1522259.521, H0 = 64.18 ± 3.33
 
 5. σ-QUALITY CONVERGENCE (uniform κ)
    Full sample: N=29, raw H0=70.06, corrected H0=68.84, correction=1.22 km/s/Mpc
