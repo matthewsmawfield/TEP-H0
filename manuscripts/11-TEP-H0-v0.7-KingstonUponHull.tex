@@ -136,7 +136,7 @@ from the TEP period-contraction combined with the virial relation
 \(\kappa_{\rm Cep} = (1.05 \pm 0.41) \times 10^6\) mag and effective
 calibrator reference \(\sigma_{\rm ref} = 87.17\) km/s yields a unified
 local Hubble constant. Out-of-sample validation (leave-one-out
-cross-validation, LOOCV) predicts \(H_0^{\rm LOOCV} = 68.58 \pm 1.34\)
+cross-validation, LOOCV) predicts \(H_0^{\rm LOOCV} = 68.67 \pm 1.34\)
 km/s/Mpc, corresponding to a Planck tension of \(0.82\sigma\); this
 stress test confirms the correction generalises out of sample, with the
 response coefficient trained on 28 hosts and tested on the held-out
@@ -1092,10 +1092,10 @@ Restricting to direct stellar-absorption dispersions strengthens the
 effect size and gives \(r=0.549\), \(p=0.028\), supporting the
 interpretation that proxy dispersions dilute rather than create the
 trend. Smaller quality tiers preserve the sign but are not standalone
-\(H_0\) determinations. The Gold Standard subsample (\(N=9\),
-\(r=0.569\), \(p=0.110\)) is reported in Appendix A. When the
+\(H_0\) determinations. The Gold Standard subsample (\(N=7\),
+\(r=0.559\), \(p=0.192\)) is reported in Appendix A. When the
 \emph{same} full-sample coefficient
-\(\kappa_{\rm Cep}\approx1.05\times10^6\) mag is applied uniformly
+\(\kappa_{\rm Cep}\approx1.27\times10^6\) mag is applied uniformly
 across quality tiers, the TEP correction magnitude grows with data
 fidelity: 1.31 km/s/Mpc for the full sample and 2.43 km/s/Mpc for
 stellar-only. This is the opposite of a proxy-driven artifact: kinematic
@@ -1256,7 +1256,7 @@ slope, out-of-sample tests were performed to verify predictive power
 (Section 2.8). LOOCV serves as a non-circular stress test: the response
 coefficient is trained on 28 hosts and tested on the held-out host.
 LOOCV predicts a unified Hubble constant
-\(H_0^{\rm LOOCV} = 68.58 \pm 1.34\) km/s/Mpc, corresponding to a Planck
+\(H_0^{\rm LOOCV} = 68.67 \pm 1.34\) km/s/Mpc, corresponding to a Planck
 tension of \(0.82\sigma\). Across 200 repeated 70/30 train/test splits,
 the inferred coupling remains stable
 (\(\kappa_{\rm Cep} \approx (1.08 \pm 0.32)\times10^6\) mag) and the
@@ -2898,7 +2898,7 @@ response \(\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5\)
 after accounting for continuous shear suppression) and effective
 calibrator reference \(\sigma_{\rm ref} = 87.17\) km/s yields a unified
 local Hubble constant. Out-of-sample leave-one-out cross-validation
-(LOOCV) predicts \(H_0^{\rm LOOCV} = 68.58 \pm 1.34\) km/s/Mpc,
+(LOOCV) predicts \(H_0^{\rm LOOCV} = 68.67 \pm 1.34\) km/s/Mpc,
 corresponding to a Planck tension of \(0.82\sigma\); this stress test
 confirms out-of-sample generalisation. The in-sample corrected mean is
 \(H_0 = 68.75\) km/s/Mpc (bootstrap mean \(68.80 \pm 1.46\), Planck
@@ -3539,9 +3539,10 @@ full-sample result.
 \subsubsection{A.2 Gold Standard
 Subsample}\label{a.2-gold-standard-subsample}
 
-The highest-fidelity subsample comprises the nine hosts with \(\sigma\)
-measurements from Kormendy \& Ho (2013), SDSS DR7, or Ho et al.~(2009).
-Because \(N=9\) is underpowered for a standalone \(\kappa\) fit, this
+The highest-fidelity subsample comprises the seven hosts with \(\sigma\)
+measurements from Kormendy \& Ho (2013), SDSS DR7, or Ho et al.~(2009)
+that also satisfy the Hubble-flow cut \(z_{\rm HD}>0.0035\).
+Because \(N=7\) is underpowered for a standalone \(\kappa\) fit, this
 tier is reported in the appendix rather than the main text.
 
 {\def\LTcaptype{none} % do not increment counter
@@ -3570,13 +3571,13 @@ Corr. \(H_0^{\rm TEP}\) (uniform \(\kappa\))
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-Gold Standard & 9 & 0.569 & 0.110 & \(64.59 \pm 3.68\) &
-\(58.58 \pm 2.68\) \\
+Gold Standard & 7 & 0.559 & 0.192 & \(66.78 \pm 4.09\) &
+\(63.97 \pm 3.04\) \\
 \end{longtable}
 }
 
 The Gold Standard preserves the sign of the environmental response
-(\(r=0.569\)) but is too small for a decisive standalone fit. Its value
+(\(r=0.559\)) but is too small for a decisive standalone fit. Its value
 is to bound \(\kappa_{\rm Cep}\) and test whether the sign survives when
 all proxy data are removed.
 
