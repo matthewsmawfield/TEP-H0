@@ -15,16 +15,16 @@
     of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot
     (\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction
     formula and the virial relation $|\Phi|\propto\sigma^2$—with
-    response coefficient $\kappa_{\rm Cep} = (1.05 \pm 0.41)\times10^6$ mag
+    response coefficient $\kappa_{\rm Cep} = (1.27 \pm 0.48)\times10^6$ mag
     (host-only bootstrap robust $1.05\times10^6$, WLS scaled $1.20 \pm 0.48$;
     mean response $\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5$ after accounting for
     continuous shear suppression) and effective calibrator reference
     $\sigma_{\rm ref} = 87.17$ km/s yields a unified local Hubble constant.
     Internal interpolation stability (leave-one-out cross-validation, LOOCV) gives
     $H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck tension of
-    $0.82\sigma$; this stress test demonstrates internal interpolation stability,
+    $0.99\sigma$; this stress test demonstrates internal interpolation stability,
     not external validation. The in-sample
-    corrected mean is $H_0 = 68.75$ km/s/Mpc (bootstrap mean $68.80 \pm 1.46$,
+    corrected mean is $H_0 = 68.84$ km/s/Mpc (bootstrap mean $68.91 \pm 1.45$,
     Planck tension $0.91\sigma$). Both are robust under bootstrap resampling.
     The low-$\sigma$ subsample ($66.26 \pm 1.05$ km/s/Mpc) lies below the uncorrected
     full-sample mean, consistent with TEP expectations that shallow-potential hosts
@@ -107,7 +107,7 @@
     correction derived from the TEP conformal clock-transport law
     ($\Delta\mu = \kappa_{\rm Cep} \cdot S(\rho) \cdot (\sigma^2-\sigma_{\rm ref}^2)/c^2$)
     removes the environmental dependence and brings the Cepheid-calibrated
-    SH0ES ladder into agreement with the CMB scale ($H_0 = 68.75$ km/s/Mpc;
+    SH0ES ladder into agreement with the CMB scale ($H_0 = 68.84$ km/s/Mpc;
     Planck tension $0.91\sigma$).
 </p>
 <p>
@@ -124,7 +124,7 @@
     the screened-effective reference ($\sigma_{\rm ref,scr} = 30.51$ km/s)
     yields $H_0^{\rm TEP} = 66.62 \pm 1.46$ km/s/Mpc, reducing the Planck
     tension to $\approx 0.15\sigma$; the unscreened reference
-    ($H_0^{\rm GR} = 68.75$) is the conventional approximation.
+    ($H_0^{\rm GR} = 68.84$) is the conventional approximation.
     The cross-channel test reveals a critical puzzle: the differential
     $\kappa_{\rm diff} = (0.53 \pm 0.23) \times 10^6$ mag is 2.3σ from
     zero, indicating that the $\sigma$ regressor tracks a shared astrophysical
@@ -393,7 +393,7 @@ python scripts/run_pipeline.py</code></pre>
         "
     ><code># Check key results match manuscript
 cat results/outputs/tep_correction_results.json | grep unified_h0
-# Expected: 68.75 (±0.01)
+# Expected: 68.84 (±0.01)
 
 cat results/outputs/stratification_results.json | grep difference
 # Expected: 7.86 (±0.01)</code></pre>

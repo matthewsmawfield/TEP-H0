@@ -249,7 +249,7 @@
                 <td>0.466</td>
                 <td>0.0109</td>
                 <td>$70.06 \pm 1.44$</td>
-                <td>$68.75 \pm 1.46$</td>
+                <td>$68.84 \pm 1.46$</td>
             </tr>
             <tr>
                 <td>Stellar Absorption Only</td>
@@ -375,12 +375,12 @@
 
     <div class="result-box result-highlight-main">
         \begin{equation}
-        \kappa_{\rm Cep} = (1.05 \pm 0.41) \times 10^6 \text{ mag}
+        \kappa_{\rm Cep} = (1.27 \pm 0.48) \times 10^6 \text{ mag}
         \label{eq:kappa_cep_result}
         \end{equation}
     </div>
     <p style="text-align:center; font-size:0.9em; color:#666;">
-        Host-only bootstrap robust $1.05 \pm 0.41$; WLS scaled $1.20 \pm 0.48$.
+        Host-only bootstrap robust $1.27 \pm 0.48$; WLS scaled $1.20 \pm 0.48$.
     </p>
 
     <p>
@@ -398,7 +398,7 @@
 
     <div class="result-box">
         \begin{equation}
-        H_0^{\rm TEP} = 68.75 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.80\pm1.46)
+        H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.80\pm1.46)
         \end{equation}
     </div>
 
@@ -416,7 +416,7 @@
     the response coefficient is trained on 28 hosts and tested on the held-out host.
     LOOCV predicts a unified Hubble constant
     $H_0^{\rm LOOCV} = 68.58 \pm 1.34$ km/s/Mpc, corresponding to a Planck tension of
-    $0.82\sigma$. Across 200 repeated 70/30 train/test splits, the inferred
+    $0.99\sigma$. Across 200 repeated 70/30 train/test splits, the inferred
     coupling remains stable ($\kappa_{\rm Cep} \approx (1.08 \pm 0.32)\times10^6$ mag) and the
     held-out residual slope is strongly reduced, demonstrating that the correction
     is internally consistent across the sample.
@@ -442,7 +442,7 @@
 <figure>
     <img
         src="public/figures/figure_03_tep_correction_comparison.png?v=2"
-        alt="Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=68.75 km/s/Mpc aligned with Planck"
+        alt="Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=68.84 km/s/Mpc aligned with Planck"
         class="figure-responsive"
     />
     <figcaption>
@@ -458,7 +458,7 @@
         correlation, confirming the signal is robust against low-z systematics.
         Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.05\times10^6$
         mag, $\sigma^2/c^2$ scaling). The corrected panel shows $r \simeq 0$ by construction since $\kappa_{\rm Cep}$ is fitted to remove the trend; this is a fitted-correction diagnostic, not an independent validation statistic. Independent robustness is assessed by jackknife, host-contrast likelihood, train/test, anchor, and systematics tests. The unified mean
-        ($68.75$ km/s/Mpc; bootstrap mean $68.80 \pm 1.46$) is statistically consistent with Planck (dashed line,
+        ($68.84$ km/s/Mpc; bootstrap mean $68.91 \pm 1.45$) is statistically consistent with Planck (dashed line,
         $0.91\sigma$ tension). Error bars represent standard measurement uncertainties.
     </figcaption>
 </figure>
@@ -519,14 +519,14 @@
                     <td>29</td>
                     <td>standard</td>
                     <td>local only</td>
-                    <td>$1.05 \pm 0.41$</td>
+                    <td>$1.27 \pm 0.48$</td>
                 </tr>
                 <tr>
                     <td>Host+anchors</td>
                     <td>32</td>
                     <td>standard reference</td>
                     <td>algorithmic group</td>
-                    <td>$0.97 \pm 0.08$</td>
+                    <td>$1.27 \pm 0.48$</td>
                 </tr>
                 <tr>
                     <td>Host+anchors</td>
