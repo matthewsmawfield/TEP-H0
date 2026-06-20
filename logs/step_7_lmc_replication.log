@@ -1,35 +1,35 @@
-[23:57:08] [INFO] 
-[23:57:08] [INFO] ================================================================================
-[23:57:08] [INFO]    Starting Step 7: LMC Replication
-[23:57:08] [INFO] ================================================================================
-[23:57:08] [INFO] 
-[23:57:08] [INFO] Initiating LMC replication (OGLE classical Cepheids)
-[23:57:08] [PROCESS] Fetching OGLE-IV Cepheid catalog from VizieR...
-[23:57:08] [SUCCESS] Retrieved 4706 OGLE objects (raw table).
-[23:57:08] [INFO] After LMC sky cut (<= 12.0 deg): N=4705
-[23:57:08] [INFO] After fundamental-mode filter: N=2314
-[23:57:08] [INFO] After period cut (2.5 < P < 100.0 d): N=2093
-[23:57:08] [INFO] LMC Subsamples
-[23:57:08] [INFO] +--------+--------------------------+--------------+
-[23:57:08] [INFO] | Region | Radius selection         | N (Cepheids) |
-[23:57:08] [INFO] +--------+--------------------------+--------------+
-[23:57:08] [INFO] | Inner  | R_kpc <= 0.92 (20th pct) | 419          |
-[23:57:08] [INFO] | Outer  | R_kpc >= 2.93 (80th pct) | 419          |
-[23:57:08] [INFO] +--------+--------------------------+--------------+
-[23:57:08] [INFO] Detected Offset (Inner - Outer): +0.0284 mag (3.3 sigma)
-[23:57:08] [SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_results.csv
-[23:57:08] [INFO] Running LMC robustness suite...
-[23:57:37] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_robustness_summary.csv
-[23:57:37] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_robustness_summary.json
-[23:57:37] [INFO] LMC Differential Robustness Summary
-[23:57:37] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
-[23:57:37] [INFO] | Test               | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |
-[23:57:37] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
-[23:57:37] [INFO] | Baseline           | 419  | 419   | -         | +0.0284     | 0.0086  | -                  |
-[23:57:37] [INFO] | Matched logP       | 419  | 419   | 340.0     | +0.0285     | 0.0092  | [+0.0191, +0.0378] |
-[23:57:37] [INFO] | Matched logP+color | 419  | 419   | 300.0     | +0.0361     | 0.0076  | [+0.0285, +0.0437] |
-[23:57:37] [INFO] | MV match (Type)    | 419  | 419   | 414       | +0.0304     | 0.0054  | [+0.0251, +0.0358] |
-[23:57:37] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
-[23:57:37] [PROCESS] Generating LMC differential P–L plot...
-[23:57:37] [PROCESS] Generating LMC robustness plot...
-[23:57:37] [SUCCESS] Step 7 Complete.
+[01:14:48] [INFO] 
+[01:14:48] [INFO] ================================================================================
+[01:14:48] [INFO]    Starting Step 7: LMC Replication
+[01:14:48] [INFO] ================================================================================
+[01:14:48] [INFO] 
+[01:14:48] [INFO] Initiating LMC replication (OGLE classical Cepheids)
+[01:14:48] [PROCESS] Fetching OGLE-IV Cepheid catalog from VizieR...
+[01:14:49] [SUCCESS] Retrieved 4706 OGLE objects (raw table).
+[01:14:49] [INFO] After LMC sky cut (<= 12.0 deg): N=4705
+[01:14:49] [INFO] After fundamental-mode filter: N=2314
+[01:14:49] [INFO] After period cut (2.5 < P < 100.0 d): N=2093
+[01:14:49] [INFO] LMC Subsamples
+[01:14:49] [INFO] +--------+--------------------------+--------------+
+[01:14:49] [INFO] | Region | Radius selection         | N (Cepheids) |
+[01:14:49] [INFO] +--------+--------------------------+--------------+
+[01:14:49] [INFO] | Inner  | R_kpc <= 0.92 (20th pct) | 419          |
+[01:14:49] [INFO] | Outer  | R_kpc >= 2.93 (80th pct) | 419          |
+[01:14:49] [INFO] +--------+--------------------------+--------------+
+[01:14:49] [INFO] Detected Offset (Inner - Outer): +0.0284 mag (3.3 sigma)
+[01:14:49] [SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_results.csv
+[01:14:49] [INFO] Running LMC robustness suite...
+[01:15:23] [SUCCESS] Saved robustness summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_robustness_summary.csv
+[01:15:23] [SUCCESS] Saved robustness summary JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/lmc_robustness_summary.json
+[01:15:23] [INFO] LMC Differential Robustness Summary
+[01:15:23] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
+[01:15:23] [INFO] | Test               | N_in | N_out | N_matched | Delta (mag) | Std/Err | Central 68%        |
+[01:15:23] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
+[01:15:23] [INFO] | Baseline           | 419  | 419   | -         | +0.0284     | 0.0086  | -                  |
+[01:15:23] [INFO] | Matched logP       | 419  | 419   | 340.0     | +0.0285     | 0.0092  | [+0.0191, +0.0378] |
+[01:15:23] [INFO] | Matched logP+color | 419  | 419   | 300.0     | +0.0361     | 0.0076  | [+0.0285, +0.0437] |
+[01:15:23] [INFO] | MV match (Type)    | 419  | 419   | 414       | +0.0304     | 0.0054  | [+0.0251, +0.0358] |
+[01:15:23] [INFO] +--------------------+------+-------+-----------+-------------+---------+--------------------+
+[01:15:23] [PROCESS] Generating LMC differential P–L plot...
+[01:15:23] [PROCESS] Generating LMC robustness plot...
+[01:15:23] [SUCCESS] Step 7 Complete.

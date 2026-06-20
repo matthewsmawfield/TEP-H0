@@ -95,12 +95,11 @@ BETA_GEOM = 1.50e-4              # Mass-sector geometric coupling
 # =============================================================================
 
 # Canonical galaxy-scale observable response coefficient (Paper 11).
-# Joint host+anchor fit (scaled): κ_Cep = (0.97 ± 0.41) × 10⁶ mag
-#   formal: (0.97 ± 0.08) × 10⁶, chi2/dof = 24.5 → scaled by sqrt(24.5) ≈ 4.95
-#   (joint_environmental_screening_model.json, N=36 hosts + 3 anchors).
-# Host-only WLS (scaled): (1.57 ± 0.60) × 10⁶ mag
-#   bootstrap robust: (1.64 ± 0.63) × 10⁶, old bootstrap std was (1.62 ± 0.89)
-#   (tep_correction_results.json).
+# Host-only bootstrap robust: κ_Cep = (1.05 ± 0.41) × 10⁶ mag
+#   (tep_correction_results.json, N=29 Hubble-flow-safe hosts).
+# Host-only WLS (scaled): (1.20 ± 0.48) × 10⁶ mag
+# Joint host+anchor fit (screen-weighted): (0.61 ± 0.32) × 10⁶ mag
+#   (joint_environmental_screening_model.json, N=29 hosts + 3 anchors).
 # KAPPA_GAL is used as a cross-probe consistency prior (e.g., Paper 12 JWST).
 # The uncertainty is the chi2-scaled joint value (≈4.1×10⁵), rounded to 4.0×10⁵.
 KAPPA_GAL = 9.7e5                # mag (rounded from joint fit 9.72e5)

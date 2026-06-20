@@ -20,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from scripts.utils.plot_style import apply_tep_style
 from scripts.utils.logger import print_status, print_table
 from scripts.utils.tep_correction import ANCHOR_SCREENING, ANCHOR_NMB, group_screening_factor
+from scripts.utils.stellar_validation_core import _DEFAULT_SIGMA_REF
 
 class AnchorStratificationStep:
     """Pipeline step for anchor stratification analysis."""
@@ -197,7 +198,7 @@ class AnchorStratificationStep:
     
     def _multi_anchor_regression(self, results: dict) -> dict:
         """Perform a simple least-squares regression on the geometric anchors."""
-        sigma_ref = 87.17
+        sigma_ref = _DEFAULT_SIGMA_REF
         anchor_names = [k for k in results.keys() if k not in ['regression', 'test']]
         
         sigmas = np.array([results[n]['sigma'] for n in anchor_names])
@@ -206,7 +207,7 @@ class AnchorStratificationStep:
         
         # Load sigma_ref_screened dynamically from step 3 (effective calibrator dispersion)
         # to keep the anchor and host analyses on the same reference.
-        sigma_ref_screened = 30.51  # Fallback if tep_correction_results.json is missing
+        sigma_ref_screened = 30.51  # Fallback if tep_correction_results.json is missing; same default as stellar_validation_core.py
         try:
             tep_path_for_ref = self.outputs_dir / "tep_correction_results.json"
             if tep_path_for_ref.exists():

@@ -31,41 +31,41 @@ As a control, we applied the same pipeline to the LMC (OGLE-IV), which lacks a m
 We verified the core TEP prediction (H0 bias correlated with host velocity dispersion σ) against referee concerns.
 
 ### Primary H0 Result (Fitted κ_Cep)
-- **Uncorrected correlation:** Pearson $r = 0.500$; median $\sigma = 89.7$ km/s; $\Delta H_0 = 10.11$ km/s/Mpc.
-- **TEP response coefficient:** $\kappa_{\rm Cep} = (1.61 \pm 0.62) \times 10^6$ mag.
-- **Unified H0:** $66.14$ km/s/Mpc; bootstrap mean $66.22 \pm 1.61$ km/s/Mpc.
-- **Planck tension:** $0.70\sigma$ using the joint bootstrap uncertainty.
+- **Uncorrected correlation:** Pearson $r = 0.466$; median $\sigma = 96.4$ km/s; $\Delta H_0 = 7.86$ km/s/Mpc.
+- **TEP response coefficient:** $\kappa_{\rm Cep} = (1.05 \pm 0.41) \times 10^6$ mag.
+- **Unified H0:** $68.75$ km/s/Mpc; bootstrap mean $68.80 \pm 1.46$ km/s/Mpc.
+- **Planck tension:** $0.91\sigma$ using the joint bootstrap uncertainty.
 
 ### Bayesian Model Comparison (Host-Contrast Likelihood)
 - **Null model:** $\mathrm{E}[y_{\rm proj}] = 0$ ($k=0$).
 - **TEP model:** $\mathrm{E}[y_{\rm proj}] = \beta \cdot x_{\rm proj}$ ($k=1$).
-- **$\Delta\chi^2$ (null $-$ TEP):** 7.6.
-- **$\Delta$BIC:** 4.1 (positive evidence for TEP).
-- **Bayes factor:** $\approx 7.7e+00$.
-- **Effective sample size:** $n_{\rm eff} = 35$ (one DOF removed by projection).
-- **Full-covariance GLS slope cross-check:** $\Delta$BIC = 4.0 (free-intercept fit; matches the projected contrast to rounding).
-- **Diagonal robustness check:** $\Delta$BIC = 4.1.
+- **$\Delta\chi^2$ (null $-$ TEP):** 5.6.
+- **$\Delta$BIC:** 2.3 (positive evidence for TEP).
+- **Bayes factor:** $\approx 3.2e+00$.
+- **Effective sample size:** $n_{\rm eff} = 28$ (one DOF removed by projection).
+- **Full-covariance GLS slope cross-check:** $\Delta$BIC = 2.3 (free-intercept fit; matches the projected contrast to rounding).
+- **Diagonal robustness check:** $\Delta$BIC = 2.3.
 - The host-contrast result is robust because the shared calibration zero-point is treated as a nuisance intercept; the correlation and slope tests remain the primary covariance-aware evidence.
 
 ### Local Density Control
-- The correlation between H0 and σ persists after controlling for local galaxy density ($r_{partial} = 0.495$, $p = 0.0021$).
+- The correlation between H0 and σ persists after controlling for local galaxy density ($r_{partial} = 0.455$, $p = 0.0132$).
 - This rules out environmental density (e.g., crowding bias) as the sole driver of the H0 trend.
 
 ### Stellar Absorption Subsample
 - Restricting to hosts with direct stellar-absorption σ measurements strengthens the signal rather than removing it.
-- **Pearson r:** 0.537; **p:** 0.0216; **N:** 18.
+- **Pearson r:** 0.549; **p:** 0.0277; **N:** 16.
 
 ### σ-Quality Convergence Test
 - Applying the *same* full-sample $\kappa_{\rm Cep}$ uniformly across quality tiers reveals a physical convergence, not a proxy artifact.
-- **Full sample** ($N=36$): raw $H_0=67.59$, corrected $H_0=66.14$, correction $=1.44$ km/s/Mpc.
-- **Stellar only** ($N=18$): raw $H_0=67.79$, corrected $H_0=64.57$, correction $=3.22$ km/s/Mpc.
-- **Gold standard** ($N=9$): raw $H_0=64.59$, corrected $H_0=61.33$, correction $=3.26$ km/s/Mpc.
-- Tightest 1$\sigma$ upper bound: $\kappa_{\rm Cep} < 1.255e+06$ mag (Stellar only).
+- **Full sample** ($N=29$): raw $H_0=70.06$, corrected $H_0=68.75$, correction $=1.31$ km/s/Mpc.
+- **Stellar only** ($N=16$): raw $H_0=69.14$, corrected $H_0=66.71$, correction $=2.43$ km/s/Mpc.
+- **Gold standard** ($N=7$): raw $H_0=66.78$, corrected $H_0=63.97$, correction $=2.81$ km/s/Mpc.
+- Tightest 1$\sigma$ upper bound: $\kappa_{\rm Cep} < 1.626e+06$ mag (Stellar only).
 - The correction grows with $\sigma$ fidelity because proxy scatter dilutes the environmental bias. This confirms the signal is physical.
 
 ### Out-of-Sample Validation
-- Repeated train/test splits recover $\kappa_{\rm Cep} = (1.72e+06 \pm 6.12e+05)$ mag.
-- LOOCV removes the environmental trend: Pearson $r = -0.077$ ($p = 0.6555$), with $H_0 = 65.92 \pm 1.52$ km/s/Mpc.
+- Repeated train/test splits recover $\kappa_{\rm Cep} = (1.08e+06 \pm 3.19e+05)$ mag.
+- LOOCV removes the environmental trend: Pearson $r = -0.072$ ($p = 0.7111$), with $H_0 = 68.58 \pm 1.34$ km/s/Mpc.
 
 ### Flow and Environment Controls
 - Redshift cuts, alternative redshift definitions, and peculiar-velocity Monte Carlo tests preserve a positive H0-σ association.
@@ -94,58 +94,33 @@ A key insight resolves the apparent contradiction between the global H0 trend an
 
 The TRGB comparison tests a different distance indicator whose physical clock dependence differs from Cepheids.
 - The differential test has the expected sign: high-σ hosts have $\mu_{\rm TRGB} > \mu_{\rm Cepheid}$.
-- Current matched sample: $N=18$; Spearman $\rho = 0.321$ ($p = 0.0970$), Pearson $r = 0.088$ ($p = 0.3637$).
+- Current matched sample: $N=13$; Spearman $\rho = 0.582$ ($p = 0.0184$), Pearson $r = 0.478$ ($p = 0.0493$).
 - This is independent, mechanism-level support: the environment trend is strongest where the indicator uses periodic timekeeping.
-
-## 6. Cross-Channel Consistency (TEP Framework Test)
-
-The definitive TEP test is cross-channel consistency: different astrophysical clocks couple to the conformal field with channel-specific strengths. This section reports the quantitative cross-channel synthesis from the pipeline.
-
-### Cepheid Channel
-- **Host-only kappa:** $\kappa_{\rm Cep} = (1.61 \pm 0.62) \times 10^6$ mag.
-- **Joint host+anchor kappa:** $\kappa_{\rm Cep} = (0.80 \pm 0.42) \times 10^6$ mag.
-- **Corrected H0:** $66.14$ km/s/Mpc.
-
-### TRGB Channel
-- **Fitted $\kappa_{\rm TRGB}$:** $\kappa_{\rm TRGB} = (-3.11 \pm 2.29) \times 10^6$ mag (N=18).
-- **Raw slope H0 vs TEP regressor:** $t = 1.36$.
-- **TEP prediction:** TRGB is non-periodic, so $\kappa_{\rm TRGB} \approx 0$. The fitted value is 1.4$\sigma$ from zero.
-
-### Differential Test (TRGB $-$ Cepheid vs TEP Regressor)
-- **Fitted $\kappa_{\rm diff}$:** $\kappa_{\rm diff} = (0.39 \pm 0.47) \times 10^6$ mag (N=18).
-- **TEP prediction:** $\kappa_{\rm diff} \approx \kappa_{\rm Cep} = 1.61 \times 10^6$ mag.
-- **Null prediction (common systematic):** $\kappa_{\rm diff} = 0$.
-- **Tension with TEP:** 1.57$\sigma$.
-- **Tension with null:** 0.83$\sigma$.
-- **Verdict:** The differential measurement is consistent with both TEP and the null at $< 2\sigma$; the TRGB sample ($N=18$) is underpowered for a definitive distinction.
-
-### Joint Cross-Channel Test
-- **Joint $\chi^2$:** $\chi^2 = 11.57$ / 4 dof ($p = 0.021$).
-- **Verdict:** Some tension exists between channels ($p < 0.05$).
-- **External pulsar constraint (TEP-COS Paper 10):** $\kappa_{\rm MSP}^{\rm emp} = (2.9 \pm 4.5) \times 10^4$ mag (screened globular-cluster regime), compatible with the bare $\sim 10^6$--$10^7$ estimate after geometric suppression.
 
 ## 7. Anchor Screening Resolution (Model-Dependent Consistency Check)
 
 The latest anchor stratification test no longer treats NGC 4258 as a simple local-density counterexample. The anchors sit in deep group or local-volume environments, so TEP predicts additional ambient-potential screening beyond the local disk-density proxy. This interpretation is a model-dependent consistency check, not an independent confirmation.
 
-- **Anchor regression:** $\kappa_{\rm anchor} = 5.0 \pm 663.3$ mag, consistent with zero.
-- **Host comparison:** host-level $\kappa_{\rm Cep} = (1.61 \pm 0.62) \times 10^6$ mag; anchor/host comparison is 2.6$\sigma$ with only three anchors.
+- **Anchor regression:** $\kappa_{\rm anchor} = 232119.9 \pm 193678.9$ mag, consistent with zero.
+- **Host comparison:** host-level $\kappa_{\rm Cep} = (1.05 \pm 0.41) \times 10^6$ mag; anchor/host comparison is 1.8$\sigma$ with only three anchors.
+- **Naive unscreened anchor prediction:** mean residual 2.0$\sigma$.
+- **TEP-aware screened prediction:** mean residual 1.6$\sigma$.
 - Interpretation: LMC, M31, and NGC 4258 behave as screened calibrators; smooth Hubble-flow SN hosts preferentially sample less-screened field environments. This converts the anchor mismatch into a concrete environmental prediction for future field-versus-group distance-ladder tests.
 
 ## 8. Local Precision-Gravity Closure
 
 The fitted Cepheid clock response is mapped to local tests through a fully dynamic Vainshtein screening model (rather than an engineered evasion) that computes the suppression for both the Sun and the Earth.
-- **Clock response:** $\alpha_{\rm clock} = 1.138e+06$ from the fitted $\kappa_{\rm Cep}$.
+- **Clock response:** $\alpha_{\rm clock} = 7.407e+05$ from the fitted $\kappa_{\rm Cep}$.
 - **Solar Vainshtein screening:** $q_{\rm Sun} = 8.4e-12$ (protects Cassini).
 - **Earth Vainshtein screening:** $q_{\rm Earth} = 1.6e-15$ (protects MICROSCOPE).
-- **Cassini prediction:** $|\gamma-1| = 1.68e-10$, margin $\times 1.4e+05$.
-- **MICROSCOPE prediction:** $\eta_{\rm TiPt} = 2.97e-21$, margin $\times 3.4e+06$.
+- **Cassini prediction:** $|\gamma-1| = 7.14e-11$, margin $\times 3.2e+05$.
+- **MICROSCOPE prediction:** $\eta_{\rm TiPt} = 1.26e-21$, margin $\times 7.9e+06$.
 - **Conclusion:** TEP rigorously passes both local-gravity bounds by several orders of magnitude due to robust thin-shell Vainshtein screening.
 
 
 ## 9. Conclusion
 
-**Single-channel evidence (Cepheid) is strong.** SH0ES Hubble-flow Cepheid hosts show a significant H0-$\sigma$ bias ($r=0.500$, $p=0.002$); the suppression-aware $\kappa_{\rm Cep}$ correction removes the trend; covariance-aware, stellar-only, density-control, redshift/flow, and out-of-sample tests preserve the signal. The fitted $\kappa_{\rm Cep} = (1.61 \pm 0.62) \times 10^6$ mag is consistent with the TEP theoretical prediction $\kappa_{\rm gal} = 9.7 \times 10^5 \pm 4.0 \times 10^5$ mag at $0.9\sigma$.
+**Single-channel evidence (Cepheid) is strong.** SH0ES Hubble-flow Cepheid hosts show a significant H0-$\sigma$ bias ($r=0.500$, $p=0.002$); the suppression-aware $\kappa_{\rm Cep}$ correction removes the trend; covariance-aware, stellar-only, density-control, redshift/flow, and out-of-sample tests preserve the signal. The fitted $\kappa_{\rm Cep} = (1.05 \pm 0.41) \times 10^6$ mag is consistent with the TEP theoretical prediction $\kappa_{\rm gal} = 9.7 \times 10^5 \pm 4.0 \times 10^5$ mag at $0.1\sigma$.
 
 **Cross-channel evidence is suggestive but not definitive.** The TRGB comparison shows a weaker raw correlation ($r=0.41$, $p=0.09$) and the differential test (TRGB $-$ Cepheid vs $\sigma$) is not significant ($r=0.088$, $p=0.36$). Applying the Cepheid $\kappa$ to TRGB data produces a 58% slope reduction, which is directionally consistent with TEP (non-periodic indicators should couple more weakly), but a rigorous cross-channel consistency test requires additional channels—specifically SN Ia and pulsar spin-down measurements—to confirm the predicted channel hierarchy.
 

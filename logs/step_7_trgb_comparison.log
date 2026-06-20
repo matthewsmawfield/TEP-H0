@@ -1,57 +1,57 @@
-[23:57:37] [INFO] STEP 7: TRGB-CEPHEID COMPARATIVE ANALYSIS
-[23:57:37] [INFO] Comparing H0-σ correlations across distance indicators
-[23:57:37] [INFO] Loading TRGB distances from Freedman et al. (2024) from CSV
-[23:57:37] [INFO] Loaded 20 TRGB distances from traceable CCHP CSV catalog
-[23:57:37] [INFO] 
+[01:15:23] [INFO] STEP 7: TRGB-CEPHEID COMPARATIVE ANALYSIS
+[01:15:23] [INFO] Comparing H0-σ correlations across distance indicators
+[01:15:23] [INFO] Loading TRGB distances from Freedman et al. (2024) from CSV
+[01:15:23] [INFO] Loaded 20 TRGB distances from traceable CCHP CSV catalog
+[01:15:23] [INFO] 
 --- CROSS-MATCHING TRGB HOSTS WITH σ DATA ---
-[23:57:37] [INFO] Unmatched TRGB hosts: NGC 4039, NGC 4526
-[23:57:37] [INFO] Matched 18/20 TRGB hosts with σ data
-[23:57:37] [INFO] 
+[01:15:23] [INFO] Unmatched TRGB hosts: NGC 4039, NGC 4526
+[01:15:23] [INFO] Matched 18/20 TRGB hosts with σ data
+[01:15:23] [INFO] 
 --- COMPUTING H0 FROM TRGB DISTANCES ---
-[23:57:37] [INFO] TRGB H0 range: 47.0 - 81.6 km/s/Mpc
-[23:57:37] [INFO] TRGB H0 mean: 66.75 ± 11.18 km/s/Mpc
-[23:57:37] [INFO] TRGB host data saved to: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_hosts_data.csv
-[23:57:37] [INFO] 
+[01:15:23] [INFO] TRGB H0 range: 47.0 - 81.6 km/s/Mpc
+[01:15:23] [INFO] TRGB H0 mean: 66.75 ± 11.18 km/s/Mpc
+[01:15:23] [INFO] TRGB host data saved to: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_hosts_data.csv
+[01:15:23] [INFO] 
 --- TRGB H0-σ CORRELATION ANALYSIS ---
-[23:57:37] [INFO] TRGB H0-σ Correlation Results
-[23:57:37] [INFO] +------------------+----------------+-----------------+
-[23:57:37] [INFO] | Metric           | Value          | Interpretation  |
-[23:57:37] [INFO] +------------------+----------------+-----------------+
-[23:57:37] [INFO] | N hosts          | 18             |                 |
-[23:57:37] [INFO] | Pearson r        | 0.410          | Moderate        |
-[23:57:37] [INFO] | Pearson p        | 0.0915         | Not significant |
-[23:57:37] [INFO] | Spearman ρ       | 0.467          | Moderate        |
-[23:57:37] [INFO] | Spearman p       | 0.0504         | Not significant |
-[23:57:37] [INFO] | ΔH0 (high-low σ) | 10.31 km/s/Mpc | Large           |
-[23:57:37] [INFO] +------------------+----------------+-----------------+
-[23:57:37] [INFO] 
+[01:15:23] [INFO] TRGB H0-σ Correlation Results
+[01:15:23] [INFO] +------------------+----------------+-----------------+
+[01:15:23] [INFO] | Metric           | Value          | Interpretation  |
+[01:15:23] [INFO] +------------------+----------------+-----------------+
+[01:15:23] [INFO] | N hosts          | 18             |                 |
+[01:15:23] [INFO] | Pearson r        | 0.410          | Moderate        |
+[01:15:23] [INFO] | Pearson p        | 0.0915         | Not significant |
+[01:15:23] [INFO] | Spearman ρ       | 0.467          | Moderate        |
+[01:15:23] [INFO] | Spearman p       | 0.0504         | Not significant |
+[01:15:23] [INFO] | ΔH0 (high-low σ) | 10.31 km/s/Mpc | Large           |
+[01:15:23] [INFO] +------------------+----------------+-----------------+
+[01:15:23] [INFO] 
 --- COMPARISON: TRGB vs CEPHEIDS ---
-[23:57:37] [INFO] +-----------------+------------+---------+----------------+--------------+
-[23:57:37] [INFO] | Indicator       | Spearman ρ | p-value | ΔH0 (km/s/Mpc) | Significant? |
-[23:57:37] [INFO] +-----------------+------------+---------+----------------+--------------+
-[23:57:37] [INFO] | Cepheids (N=36) | 0.549      | 0.0005  | 10.11          | YES          |
-[23:57:37] [INFO] | TRGB (N=18)     | 0.467      | 0.0504  | 10.31          | NO           |
-[23:57:37] [INFO] +-----------------+------------+---------+----------------+--------------+
-[23:57:37] [INFO] 
+[01:15:23] [INFO] +-----------------+------------+---------+----------------+--------------+
+[01:15:23] [INFO] | Indicator       | Spearman ρ | p-value | ΔH0 (km/s/Mpc) | Significant? |
+[01:15:23] [INFO] +-----------------+------------+---------+----------------+--------------+
+[01:15:23] [INFO] | Cepheids (N=29) | 0.517      | 0.0041  | 7.86           | YES          |
+[01:15:23] [INFO] | TRGB (N=18)     | 0.467      | 0.0504  | 10.31          | NO           |
+[01:15:23] [INFO] +-----------------+------------+---------+----------------+--------------+
+[01:15:23] [INFO] 
 ============================================================
-[23:57:37] [INFO] COMPARATIVE ANALYSIS CONCLUSION
-[23:57:37] [INFO] ============================================================
-[23:57:37] [SUCCESS] ✓ Cepheids show significant H0-σ correlation
-[23:57:37] [INFO] • TRGB does not show significant H0-σ correlation
-[23:57:37] [INFO] 
-[23:57:37] [INFO]   INTERPRETATION:
-[23:57:37] [INFO]   ───────────────
-[23:57:37] [INFO]   This pattern is consistent with TWO superimposed effects:
-[23:57:37] [INFO] 
-[23:57:37] [INFO]   1. COMMON EFFECT (can affect multiple indicators):
-[23:57:37] [INFO]      → Peculiar velocities correlate with host mass/σ
-[23:57:37] [INFO]      → Can induce baseline H0-σ structure in multiple indicators
-[23:57:37] [INFO] 
-[23:57:37] [INFO]   2. CEPHEID-SPECIFIC EFFECT (TEP):
-[23:57:37] [INFO]      → Period contraction in high-σ environments
-[23:57:37] [INFO]      → Isolated by DIFFERENTIAL test: Δμ = μ_TRGB - μ_Ceph
-[23:57:37] [INFO]      → See step_7_trgb_reanalysis.py for differential analysis
-[23:57:37] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_comparison_results.json
-[23:57:37] [INFO] ============================================================
-[23:57:37] [INFO] TRGB-CEPHEID COMPARISON COMPLETE
-[23:57:37] [INFO] ============================================================
+[01:15:23] [INFO] COMPARATIVE ANALYSIS CONCLUSION
+[01:15:23] [INFO] ============================================================
+[01:15:23] [SUCCESS] ✓ Cepheids show significant H0-σ correlation
+[01:15:23] [INFO] • TRGB does not show significant H0-σ correlation
+[01:15:23] [INFO] 
+[01:15:23] [INFO]   INTERPRETATION:
+[01:15:23] [INFO]   ───────────────
+[01:15:23] [INFO]   This pattern is consistent with TWO superimposed effects:
+[01:15:23] [INFO] 
+[01:15:23] [INFO]   1. COMMON EFFECT (can affect multiple indicators):
+[01:15:23] [INFO]      → Peculiar velocities correlate with host mass/σ
+[01:15:23] [INFO]      → Can induce baseline H0-σ structure in multiple indicators
+[01:15:23] [INFO] 
+[01:15:23] [INFO]   2. CEPHEID-SPECIFIC EFFECT (TEP):
+[01:15:23] [INFO]      → Period contraction in high-σ environments
+[01:15:23] [INFO]      → Isolated by DIFFERENTIAL test: Δμ = μ_TRGB - μ_Ceph
+[01:15:23] [INFO]      → See step_7_trgb_reanalysis.py for differential analysis
+[01:15:23] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_comparison_results.json
+[01:15:23] [INFO] ============================================================
+[01:15:23] [INFO] TRGB-CEPHEID COMPARISON COMPLETE
+[01:15:23] [INFO] ============================================================

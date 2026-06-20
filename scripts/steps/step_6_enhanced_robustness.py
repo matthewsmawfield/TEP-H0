@@ -367,7 +367,7 @@ class Step6EnhancedRobustness:
                 if isinstance(_tep, dict) and 'sigma_ref' in _tep:
                     sigma_ref = float(_tep['sigma_ref'])
         except Exception:
-            pass
+            print_status(f"Could not load tep_correction_results.json for sigma_ref: using default {sigma_ref}", "WARNING")
         
         def optimize_kappa(subset_df):
             """Optimize kappa_cep for a subset."""
@@ -483,7 +483,7 @@ class Step6EnhancedRobustness:
                 if isinstance(_tep, dict) and 'sigma_ref' in _tep:
                     sigma_ref = float(_tep['sigma_ref'])
         except Exception:
-            pass
+            print_status(f"Could not load tep_correction_results.json for sigma_ref: using default {sigma_ref}", "WARNING")
 
         # Use the FULL-SAMPLE fitted kappa (uniform across subsamples)
         kappa_full = 1.611136e6
@@ -495,7 +495,7 @@ class Step6EnhancedRobustness:
                 if isinstance(_tep, dict) and 'optimal_kappa_cep' in _tep:
                     kappa_full = float(_tep['optimal_kappa_cep'])
         except Exception:
-            pass
+            print_status(f"Could not load optimal_kappa_cep from tep_correction_results.json: using default {kappa_full:.2e}", "WARNING")
 
         # Build provenance masks
         prov = self._classified_sigma_provenance(sigma_prov)
@@ -642,7 +642,7 @@ class Step6EnhancedRobustness:
                     sigma_ref = float(_tep.get("sigma_ref", 87.17))
                     kappa_full = float(_tep.get("optimal_kappa_cep", kappa_full))
         except Exception:
-            pass
+            print_status("Could not load tep_correction_results.json: using default sigma_ref and kappa_full", "WARNING")
 
         # Build provenance masks
         prov = self._classified_sigma_provenance(sigma_prov)

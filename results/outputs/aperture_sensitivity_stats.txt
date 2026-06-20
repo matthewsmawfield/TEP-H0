@@ -1,13 +1,13 @@
 Aperture Correction Sensitivity Analysis
 ========================================
-N: 36
-Corrected r: 0.4998 (p=0.00191)
-Raw r:       0.5047 (p=0.00169)
+N: 29
+Corrected r: 0.4659 (p=0.01086)
+Raw r:       0.4817 (p=0.00814)
 
 Sensitivity Grid Summary
 ------------------------
 Beta range: 0.000 .. 0.080
 R_eff scale range: 0.700 .. 1.300
-r range across grid: 0.4926 .. 0.5047
-slope range across grid: 0.113788 .. 0.126606
-delta_H0 range across grid: 10.1094 .. 10.1094
+r range across grid: 0.4478 .. 0.4817
+slope range across grid: 0.082729 .. 0.088526
+delta_H0 range across grid: 3.2460 .. 7.8601

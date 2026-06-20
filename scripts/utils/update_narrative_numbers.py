@@ -1,35 +1,36 @@
 #!/usr/bin/env python3
 """
-Bulk-update narrative surface files with current pipeline headline numbers.
-Run after pipeline completion to synchronize manuscript/site text with results.
+DEPRECATED — use scripts/utils/sync_narrative_numbers.py instead,
+which reads directly from results/outputs/*.json and does not require
+manual hardcoding of target values.
 
-WARNING: This script uses hardcoded replacement strings. After any pipeline change,
-verify that NEW and REPLACEMENTS match the actual latest JSON outputs before
-running, or stale numbers will be re-injected into the narrative.
+This script is kept only for historical reference. Running it with the
+hardcoded REPLACEMENTS below may inject intermediate stale values if
+the narrative still contains very old patterns (pre-N=29-sync).
 """
 import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
-# New headline numbers from latest pipeline run (TEP-H0 N=36, v0.7 Kingston upon Hull)
+# New headline numbers from latest pipeline run (TEP-H0 N=29 Hubble-flow-safe, v0.7 Kingston upon Hull)
 NEW = {
-    "spearman_rho": "0.549",
-    "spearman_p": "0.0005",
-    "pearson_r": "0.500",
-    "pearson_p": "0.0019",
-    "unified_h0": "65.22",
-    "bootstrap_h0_mean": "65.09",
-    "bootstrap_h0_std": "1.70",
-    "tension_sigma": "1.23",
-    "kappa_million": "1.62",
-    "kappa_std_million": "0.89",
-    "median_sigma": "89.7",
-    "low_mean_h0": "62.53",
-    "low_std_err": "2.02",
-    "high_mean_h0": "72.64",
-    "high_std_err": "1.92",
-    "delta_h0": "10.11",
+    "spearman_rho": "0.517",
+    "spearman_p": "0.0041",
+    "pearson_r": "0.466",
+    "pearson_p": "0.0109",
+    "unified_h0": "68.75",
+    "bootstrap_h0_mean": "68.80",
+    "bootstrap_h0_std": "1.46",
+    "tension_sigma": "0.91",
+    "kappa_million": "1.05",
+    "kappa_std_million": "0.41",
+    "median_sigma": "96.4",
+    "low_mean_h0": "66.26",
+    "low_std_err": "1.05",
+    "high_mean_h0": "74.12",
+    "high_std_err": "1.05",
+    "delta_h0": "7.86",
 }
 
 # Ordered replacements: longer/more specific strings first to avoid partial matches

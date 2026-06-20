@@ -27,8 +27,8 @@ abstract: 'The Hubble Tension—the persistent 5σ discrepancy between local dis
   dispersion (a TEP-independent kinematic observable), reveals a statistically significant
   correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.517$,
   $p = 0.0041$; Pearson $r = 0.466$, $p = 0.0109$). A median-split stratification
-  at $\sigma_{\rm med} \approx 96$ km/s yields $H_0 = 66.26 \pm 2.10$ km/s/Mpc (low-$\sigma$;
-  $N=15$) versus $74.12 \pm 1.30$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta
+  at $\sigma_{\rm med} \approx 96.4$ km/s yields $H_0 = 66.26 \pm 1.05$ km/s/Mpc (low-$\sigma$;
+  $N=15$) versus $74.12 \pm 1.05$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta
   H_0 = 7.86$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct
   stellar absorption and calibrated HI linewidth proxies), measurement methodology
   is treated as a first-class provenance variable and covariance-aware significance
@@ -37,23 +37,23 @@ abstract: 'The Hubble Tension—the persistent 5σ discrepancy between local dis
   in the
   host-contrast likelihood—which is the appropriate host-to-host slope test
   because the shared calibration zero-point is a nuisance parameter with
-  dominant common-mode variance—yields $\Delta{\rm BIC}=127.9$.
+  dominant common-mode variance—yields $\Delta{\rm BIC}=+2.6$ (positive evidence).
   The equivalent full-covariance GLS slope test with a free calibration intercept
   gives the same $\Delta{\rm BIC}$ to rounding, confirming that the shared
   calibration covariance is treated as a nuisance mode rather than as evidence
   against the host-to-host slope. A diagonal H$0$-uncertainty check gives
-  $\Delta{\rm BIC}=+132.8$ as an independent robustness verification.
+  $\Delta{\rm BIC}=+2.6$ as an independent robustness verification.
 
   Application of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm
   ref}^2)/c^2$—derived from the TEP period-contraction combined with the virial relation
   $|\Phi|\propto\sigma^2$—with Observable Response Coefficient $\kappa_{\rm Cep} =
-  (0.99 \pm 0.56) \times 10^6$ mag and effective calibrator reference $\sigma_{\rm
-  ref} = 75.25$ km/s yields a unified local Hubble constant. Out-of-sample validation
-  (leave-one-out cross-validation, LOOCV) predicts $H_0^{\rm LOOCV} = 67.95 \pm 1.32$
-  km/s/Mpc, corresponding to a Planck tension of $0.39\sigma$; this is the primary
+  (1.05 \pm 0.41) \times 10^6$ mag and effective calibrator reference $\sigma_{\rm
+  ref} = 87.17$ km/s yields a unified local Hubble constant. Out-of-sample validation
+  (leave-one-out cross-validation, LOOCV) predicts $H_0^{\rm LOOCV} = 68.58 \pm 1.34$
+  km/s/Mpc, corresponding to a Planck tension of $0.82\sigma$; this is the primary
   non-circular validation because the response coefficient is trained on 28 hosts and
-  tested on the held-out host. The in-sample corrected mean is $H_0 = 68.13$ km/s/Mpc
-  (bootstrap mean $68.06 \pm 1.49$), with the corrected $r \simeq 0$ a fitted-correction
+  tested on the held-out host. The in-sample corrected mean is $H_0 = 68.75$ km/s/Mpc
+  (bootstrap mean $68.80 \pm 1.46$), with the corrected $r \simeq 0$ a fitted-correction
   diagnostic rather than an independent validation statistic. A differential analysis within
   M31 yields an "Inner Fainter"
   signal in HST photometry consistent with density-dependent
@@ -67,7 +67,7 @@ abstract: 'The Hubble Tension—the persistent 5σ discrepancy between local dis
   '
 license: CC-BY-4.0
 version: v0.7 (Kingston upon Hull)
-date-released: 2026-06-18
+date-released: 2026-06-20
 keywords:
 - Temporal Equivalence Principle
 - Temporal Shear

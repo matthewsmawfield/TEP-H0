@@ -23,13 +23,13 @@ abstract: 'The Hubble Tension—the persistent 5σ discrepancy between local dis
   a universal Period-Luminosity relation, this clock-rate anomaly would mimic diminished
   luminosity, leading to underestimated distances and an inflated local Hubble constant.
 
-  Analysis of the SH0ES Cepheid sample ($N=36$), stratified by host galaxy velocity
+  Analysis of the SH0ES Cepheid sample ($N=29$), stratified by host galaxy velocity
   dispersion (a TEP-independent kinematic observable), reveals a statistically significant
   correlation between host potential depth and derived $H_0$ (Spearman $\rho = 0.549$,
   $p = 0.0005$; Pearson $r = 0.500$, $p = 0.0019$). A median-split stratification
-  at $\sigma_{\rm med} \approx 89.7$ km/s yields $H_0 = 62.53 \pm 2.02$ km/s/Mpc (low-$\sigma$;
-  $N=18$) versus $72.64 \pm 1.92$ km/s/Mpc (high-$\sigma$; $N=18$), implying $\Delta
-  H_0 = 10.11$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct
+  at $\sigma_{\rm med} \approx 96.4$ km/s yields $H_0 = 66.26 \pm 1.05$ km/s/Mpc (low-$\sigma$;
+  $N=15$) versus $74.12 \pm 1.05$ km/s/Mpc (high-$\sigma$; $N=15$), implying $\Delta
+  H_0 = 7.86$ km/s/Mpc. Because published $\sigma$ values are heterogeneous (direct
   stellar absorption and calibrated HI linewidth proxies), measurement methodology
   is treated as a first-class provenance variable and covariance-aware significance
   tests are reported using the full SH0ES GLS distance-modulus covariance. A Bayesian model comparison
@@ -51,8 +51,8 @@ abstract: 'The Hubble Tension—the persistent 5σ discrepancy between local dis
   (leave-one-out cross-validation, LOOCV) predicts $H_0^{\rm LOOCV} = 64.99 \pm 1.50$
   km/s/Mpc, corresponding to a Planck tension of $1.53\sigma$; this stress test confirms
   the correction generalises out of sample, with the response coefficient trained on 35 hosts and
-  tested on the held-out host. The in-sample corrected mean is $H_0 = 66.14$ km/s/Mpc
-  (bootstrap mean $66.22 \pm 1.61$, Planck tension $0.70\sigma$), with the corrected $r \simeq 0$ a fitted-correction
+  tested on the held-out host. The in-sample corrected mean is $H_0 = 68.75$ km/s/Mpc
+  (bootstrap mean $68.80 \pm 1.05$, Planck tension $0.91\sigma$), with the corrected $r \simeq 0$ a fitted-correction
   diagnostic rather than an independent validation statistic. A differential analysis within
   M31 yields an "Inner Fainter"
   signal in HST photometry consistent with density-dependent

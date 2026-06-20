@@ -1,16 +1,18 @@
-[23:57:37] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
-[23:57:37] [INFO] Matched 18 hosts for differential analysis
-[23:57:37] [INFO] 
+[01:15:23] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
+[01:15:23] [INFO] Matched 13 hosts for differential analysis
+[01:15:23] [INFO] 
 Differential Modulus (TRGB - Cepheid) vs Sigma:
-[23:57:37] [INFO] +-----------------+---------------+--------------+
-[23:57:37] [INFO] | Metric          | Value         | Significance |
-[23:57:37] [INFO] +-----------------+---------------+--------------+
-[23:57:37] [INFO] | Pearson r       | 0.088         | p=0.3637     |
-[23:57:37] [INFO] | Spearman ρ      | 0.321         | p=0.0970     |
-[23:57:37] [INFO] | Slope (mag/dex) | 0.056 ± 0.147 | p=0.3542     |
-[23:57:37] [INFO] +-----------------+---------------+--------------+
-[23:57:37] [INFO] 
+[01:15:23] [INFO] +-----------------+---------------+--------------+
+[01:15:23] [INFO] | Metric          | Value         | Significance |
+[01:15:23] [INFO] +-----------------+---------------+--------------+
+[01:15:23] [INFO] | Pearson r       | 0.478         | p=0.0493     |
+[01:15:23] [INFO] | Spearman ρ      | 0.582         | p=0.0184     |
+[01:15:23] [INFO] | Slope (mag/dex) | 0.141 ± 0.076 | p=0.0457     |
+[01:15:23] [INFO] +-----------------+---------------+--------------+
+[01:15:23] [INFO] 
 Interpretation Check:
-[23:57:37] [INFO]   No significant positive correlation.
-[23:57:37] [WARNING]   → INCONCLUSIVE / TENSION.
-[23:57:37] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json
+[01:15:23] [INFO]   POSITIVE correlation detected.
+[01:15:23] [INFO]   High-σ hosts have μ_TRGB > μ_Ceph.
+[01:15:23] [INFO]   Implies μ_Ceph is UNDERESTIMATED at high σ.
+[01:15:23] [SUCCESS]   → CONSISTENT WITH TEP PREDICTION.
+[01:15:23] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/trgb_differential_results.json

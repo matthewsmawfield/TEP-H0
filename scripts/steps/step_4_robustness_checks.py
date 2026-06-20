@@ -268,14 +268,14 @@ class Step4RobustnessChecks:
         )
         n = len(y)
 
-        sigma_ref_screened = self._load_sigma_ref_screened()
-        if sigma_ref_screened is None:
-            sigma_ref_screened = 30.51
+        sigma_ref = self._load_sigma_ref_val()
+        if sigma_ref is None:
+            sigma_ref = 30.51
             print_status(f"σ_ref_screened missing; using fallback", "WARNING")
 
-        # TEP regressor: S * (sigma^2 - sigma_ref_screened^2) / c^2
+        # TEP regressor: S * (sigma^2 - sigma_ref^2) / c^2
         from scripts.utils.tep_correction import C_SQUARED_KM_S
-        x = S * (sigma**2 - sigma_ref_screened**2) / C_SQUARED_KM_S
+        x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
 
         # --- Diagonal H0 uncertainties from distance-modulus errors + peculiar velocity ---
         # sigma_H0^2 = (H0 * ln(10)/5 * sigma_mu)^2 + (vpecerr / d)^2
@@ -490,7 +490,7 @@ class Step4RobustnessChecks:
 
         result = {
             "n": int(n),
-            "sigma_ref_screened": float(sigma_ref_screened),
+            "sigma_ref": float(sigma_ref),
             "null_chi2": float(chi2_null_diag),
             "null_bic": float(bic_null_diag),
             "tep_chi2": float(chi2_tep_diag),
@@ -510,17 +510,7 @@ class Step4RobustnessChecks:
             result["projected"] = proj_results
         return result
 
-    def _load_sigma_ref_screened(self):
-        if not self.tep_results_path.exists():
-            return None
-        try:
-            with open(self.tep_results_path, 'r') as f:
-                d = json.load(f)
-            return float(d.get('sigma_ref_screened')) if 'sigma_ref_screened' in d else None
-        except Exception:
-            return None
-
-    def _load_sigma_ref(self):
+    def _load_sigma_ref_val(self):
         if not self.tep_results_path.exists():
             return None
         try:
@@ -530,7 +520,17 @@ class Step4RobustnessChecks:
         except Exception:
             return None
 
-    def _fit_kappa(self, df, sigma_ref_screened):
+    def _load_sigma_ref_val(self):
+        if not self.tep_results_path.exists():
+            return None
+        try:
+            with open(self.tep_results_path, 'r') as f:
+                d = json.load(f)
+            return float(d.get('sigma_ref')) if 'sigma_ref' in d else None
+        except Exception:
+            return None
+
+    def _fit_kappa(self, df, sigma_ref):
         from scripts.utils.tep_correction import tep_correction
         sigma = df['sigma_inferred'].values.astype(float)
         mu = df['value'].values.astype(float)
@@ -539,7 +539,7 @@ class Step4RobustnessChecks:
 
         def objective(params):
             kappa_cep = float(params[0])
-            corr = tep_correction(sigma, sigma_ref_screened, kappa_cep, S)
+            corr = tep_correction(sigma, sigma_ref, kappa_cep, S)
             mu_corr = mu + corr
             d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
             h0_corr = v / d_corr
@@ -554,13 +554,13 @@ class Step4RobustnessChecks:
         )
         return float(res.x[0])
 
-    def _apply_kappa(self, df, kappa_cep, sigma_ref_screened):
+    def _apply_kappa(self, df, kappa_cep, sigma_ref):
         from scripts.utils.tep_correction import tep_correction
         sigma = df['sigma_inferred'].values.astype(float)
         mu = df['value'].values.astype(float)
         v = df['velocity'].values.astype(float)
         S = df['shear_suppression'].values.astype(float) if 'shear_suppression' in df.columns else np.ones(len(df))
-        corr = tep_correction(sigma, float(sigma_ref_screened), float(kappa_cep), S)
+        corr = tep_correction(sigma, float(sigma_ref), float(kappa_cep), S)
         mu_corr = mu + corr
         d_corr = 10 ** ((mu_corr - 25.0) / 5.0)
         return v / d_corr
@@ -572,7 +572,7 @@ class Step4RobustnessChecks:
             print_status("Stratified data missing. Run Step 2 first.", "ERROR")
             return
 
-        sigma_ref = self._load_sigma_ref()
+        sigma_ref = self._load_sigma_ref_val()
         if sigma_ref is None:
             print_status("Could not load sigma_ref from Step 3 results. Run Step 3 first.", "ERROR")
             return
@@ -847,9 +847,9 @@ class Step4RobustnessChecks:
         from scripts.steps.step_3_tep_correction import Step3TEPCorrection
         from scripts.utils.tep_correction import C_SQUARED_KM_S
         step3 = Step3TEPCorrection()
-        # Suppress logging for step3 loop
-        step3.logger = TEPLogger("temp", log_to_console=False) 
-        sigma_ref, sigma_ref_screened = step3.calculate_effective_calibrator_sigma()
+        # Use the same logger
+        step3.logger = self.logger
+        sigma_ref, _ = step3.calculate_effective_calibrator_sigma()
         
         for zcut in cuts:
             sub = df_full[(pd.to_numeric(df_full['z_hd'], errors='coerce') >= zcut)].copy()
@@ -861,8 +861,8 @@ class Step4RobustnessChecks:
             
             # TEP Correction
             try:
-                kappa = step3.optimize_correction(sub, sigma_ref_screened)
-                sub_corr, _, _ = step3.apply_correction(sub, kappa, sigma_ref_screened)
+                kappa = step3.optimize_correction(sub, sigma_ref)
+                sub_corr, _, _ = step3.apply_correction(sub, kappa, sigma_ref)
                 unified_h0 = sub_corr['h0_corrected'].mean()
                 
                 # LOOCV
@@ -871,16 +871,16 @@ class Step4RobustnessChecks:
                 for i in range(n):
                     train = sub.drop(sub.index[i])
                     test = sub.iloc[[i]].copy()
-                    k_train = step3.optimize_correction(train, sigma_ref_screened)
+                    k_train = step3.optimize_correction(train, sigma_ref)
                     S_test = test["shear_suppression"].values[0]
                     sig_test = test["sigma_inferred"].values[0]
-                    mu_corr = test["value"].values[0] + S_test * k_train * (sig_test**2 - sigma_ref_screened**2) / C_SQUARED_KM_S
+                    mu_corr = test["value"].values[0] + S_test * k_train * (sig_test**2 - sigma_ref**2) / C_SQUARED_KM_S
                     d_corr = 10 ** ((mu_corr - 25) / 5)
                     loocv_preds.append(test["velocity"].values[0] / d_corr)
                 loocv_h0 = np.mean(loocv_preds)
                 
                 # BIC
-                x = sub_corr["shear_suppression"].values * (sub_corr["sigma_inferred"].values**2 - sigma_ref_screened**2) / C_SQUARED_KM_S
+                x = sub_corr["shear_suppression"].values * (sub_corr["sigma_inferred"].values**2 - sigma_ref**2) / C_SQUARED_KM_S
                 h0 = sub_corr["h0_derived"].values
                 slope, intercept, r_val, p_val, std_err = stats.linregress(x, h0)
                 rss_model = np.sum((h0 - (intercept + slope * x))**2)
@@ -1461,13 +1461,13 @@ class Step4RobustnessChecks:
             else np.ones(len(merged))
         )
 
-        sigma_ref_screened = self._load_sigma_ref_screened()
-        if sigma_ref_screened is None:
-            sigma_ref_screened = 30.51
+        sigma_ref = self._load_sigma_ref_val()
+        if sigma_ref is None:
+            sigma_ref = 30.51
             print_status(f"σ_ref_screened missing; using fallback", "WARNING")
 
         from scripts.utils.tep_correction import C_SQUARED_KM_S
-        x = S * (sigma**2 - sigma_ref_screened**2) / C_SQUARED_KM_S
+        x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
 
         is_hi = (merged["method_class"] == "HI_linewidth").astype(float).values
         is_rot = (merged["method_class"] == "rotation_proxy").astype(float).values

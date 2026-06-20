@@ -1,24 +1,24 @@
-[23:57:37] [INFO] ============================================================
-[23:57:37] [INFO] STEP 12: CROSS-CHANNEL CONSISTENCY
-[23:57:37] [INFO] The definitive TEP framework test
-[23:57:37] [INFO] ============================================================
-[23:57:39] [INFO] Cepheid host-only: kappa = 1.611e+06 +/- 8.878e+05
-[23:57:39] [INFO] TRGB:  kappa = 2.790e+06 +/- 1.554e+06 (N=18)
-[23:57:39] [INFO] TRGB raw H0-sigma slope: 0.1848 +/- 0.1029 (t=1.80)
-[23:57:39] [INFO] Differential: kappa_diff = 2.715e+05 +/- 4.732e+05 (N=18)
-[23:57:39] [INFO] Joint chi2 = 6.22 / 4 (p = 0.183)
-[23:57:39] [SUCCESS] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/cross_channel_consistency.json
-[23:57:39] [INFO] 
+[01:15:23] [INFO] ============================================================
+[01:15:23] [INFO] STEP 12: CROSS-CHANNEL CONSISTENCY
+[01:15:23] [INFO] The definitive TEP framework test
+[01:15:23] [INFO] ============================================================
+[01:15:25] [INFO] Cepheid host-only: kappa = 1.049e+06 +/- 6.370e+05
+[01:15:25] [INFO] TRGB:  kappa = 2.790e+06 +/- 1.554e+06 (N=18)
+[01:15:25] [INFO] TRGB raw H0-sigma slope: 0.1848 +/- 0.1029 (t=1.80)
+[01:15:25] [INFO] Differential: kappa_diff = 5.345e+05 +/- 2.316e+05 (N=13)
+[01:15:25] [INFO] Joint chi2 = 3.83 / 4 (p = 0.430)
+[01:15:25] [SUCCESS] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/cross_channel_consistency.json
+[01:15:25] [INFO] 
 --- CROSS-CHANNEL SUMMARY ---
-[23:57:39] [INFO] +-------------------+-----------+-----------+
-[23:57:39] [INFO] | Quantity          | Value     | Error     |
-[23:57:39] [INFO] +-------------------+-----------+-----------+
-[23:57:39] [INFO] | kappa_Cep (host)  | 1.611e+06 | 8.878e+05 |
-[23:57:39] [INFO] | kappa_Cep (joint) | 1.611e+06 | 6.191e+05 |
-[23:57:39] [INFO] | kappa_TRGB        | 2.790e+06 | 1.554e+06 |
-[23:57:39] [INFO] | kappa_diff        | 2.715e+05 | 4.732e+05 |
-[23:57:39] [INFO] | Joint chi2        | 6.22      | p=0.183   |
-[23:57:39] [INFO] +-------------------+-----------+-----------+
-[23:57:39] [INFO] ============================================================
-[23:57:39] [INFO] STEP 12 COMPLETE
-[23:57:39] [INFO] ============================================================
+[01:15:25] [INFO] +-------------------+-----------+-----------+
+[01:15:25] [INFO] | Quantity          | Value     | Error     |
+[01:15:25] [INFO] +-------------------+-----------+-----------+
+[01:15:25] [INFO] | kappa_Cep (host)  | 1.049e+06 | 6.370e+05 |
+[01:15:25] [INFO] | kappa_Cep (joint) | 1.049e+06 | 4.081e+05 |
+[01:15:25] [INFO] | kappa_TRGB        | 2.790e+06 | 1.554e+06 |
+[01:15:25] [INFO] | kappa_diff        | 5.345e+05 | 2.316e+05 |
+[01:15:25] [INFO] | Joint chi2        | 3.83      | p=0.430   |
+[01:15:25] [INFO] +-------------------+-----------+-----------+
+[01:15:25] [INFO] ============================================================
+[01:15:25] [INFO] STEP 12 COMPLETE
+[01:15:25] [INFO] ============================================================

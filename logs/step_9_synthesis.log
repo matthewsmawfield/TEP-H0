@@ -1,8 +1,9 @@
-[00:01:06] [INFO] 
-[00:01:06] [INFO] ================================================================================
-[00:01:06] [INFO]    Starting Step 9: Final Synthesis
-[00:01:06] [INFO] ================================================================================
-[00:01:06] [INFO] 
-[00:01:07] [SUCCESS] Saved comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/figure_08_robustness_synthesis_plot.png
-[00:01:07] [SUCCESS] Report written to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/TEP_FINAL_ROBUSTNESS_REPORT.md
-[00:01:07] [SUCCESS] Step 9 Complete. Report generated.
+[01:15:25] [INFO] 
+[01:15:25] [INFO] ================================================================================
+[01:15:25] [INFO]    Starting Step 9: Final Synthesis
+[01:15:25] [INFO] ================================================================================
+[01:15:25] [INFO] 
+[01:15:25] [WARNING] Missing input file: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/cross_channel_kappa_consistency.json
+[01:15:25] [SUCCESS] Saved comparison plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/figure_08_robustness_synthesis_plot.png
+[01:15:25] [SUCCESS] Report written to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/TEP_FINAL_ROBUSTNESS_REPORT.md
+[01:15:25] [SUCCESS] Step 9 Complete. Report generated.

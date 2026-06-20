@@ -379,7 +379,8 @@ class Step9FinalSynthesis:
                 f.write("- **Null prediction (common systematic):** $\\kappa_{\\rm diff} = 0$.\n")
                 f.write(f"- **Tension with TEP:** {tests.get('tension_kappa_diff_vs_kappa_cep', float('nan')):.2f}$\\sigma$.\n")
                 f.write(f"- **Tension with null:** {tests.get('tension_kappa_diff_vs_zero', float('nan')):.2f}$\\sigma$.\n")
-                f.write("- **Verdict:** The differential measurement is consistent with both TEP and the null at $< 2\\sigma$; the TRGB sample ($N=18$) is underpowered for a definitive distinction.\n\n")
+                n_diff = kd.get('n_diff', 'N/A')
+                f.write(f"- **Verdict:** The differential measurement is consistent with both TEP and the null at $< 2\\sigma$; the TRGB sample ($N={n_diff}$) is underpowered for a definitive distinction.\n\n")
 
                 f.write("### Joint Cross-Channel Test\n")
                 f.write(f"- **Joint $\\chi^2$:** $\\chi^2 = {tests.get('joint_chi2', float('nan')):.2f}$ / {tests.get('joint_dof', 4)} dof ($p = {tests.get('joint_pvalue', float('nan')):.3f}$).\n")

@@ -1019,7 +1019,7 @@ class Step5M31Analysis:
                     columns={"RAJ2000": "RA", "DEJ2000": "DEC", "Pr": "P"}, inplace=True
                 )
                 print_status("Retrieved main table with Wmag.", "SUCCESS")
-            except:
+            except Exception:
                 print_status("Could not retrieve Wmag. Aborting analysis.", "ERROR")
                 return
 
@@ -2001,7 +2001,7 @@ class Step5M31Analysis:
                     ax1.plot(
                         x_grid, kde(x_grid), color=plot_colors["blue"], linewidth=2
                     )
-                except:
+                except Exception:
                     pass
 
                 ax1.axvline(
