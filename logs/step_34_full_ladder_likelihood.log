@@ -148,3 +148,42 @@
 [19:02:03] [INFO]   cepheid_plus_sn           kappaSN_6    injected=9.700e+05 recovered=9.666e+05 frac=0.997
 [19:02:03] [SUCCESS] Saved injection tests to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_injection_tests_all_models.csv
 [19:02:03] [INFO] Running TEP Model Grid
+[19:02:14] [SUCCESS] Saved model grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_model_grid.csv
+[19:02:14] [INFO] Model Grid Summary (key results):
+[19:02:14] [INFO]   cepheid_offset                      centered           H0=73.12 dchi2=0.10 kappa0_6=-6.67e+04 kappaP_6=nan kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_period                      centered           H0=73.60 dchi2=2.92 kappa0_6=nan kappaP_6=-3.69e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_period          centered           H0=73.53 dchi2=3.47 kappa0_6=1.88e+05 kappaP_6=-4.75e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_metallicity     centered           H0=73.19 dchi2=0.26 kappa0_6=-6.22e+04 kappaP_6=nan kappaZ_6=3.05e+05 kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   sn_offset                           centered           H0=73.14 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=1.78e+05 kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_plus_sn                     centered           H0=72.96 dchi2=0.94 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=4.38e+05 kappaCep_6=2.62e+05
+[19:02:14] [INFO]   cepheid_offset                      centered           H0=73.14 dchi2=0.54 kappa0_6=-1.78e+05 kappaP_6=nan kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_period                      centered           H0=73.10 dchi2=0.21 kappa0_6=nan kappaP_6=-1.52e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_period          centered           H0=73.11 dchi2=0.80 kappa0_6=-4.43e+05 kappaP_6=3.97e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_metallicity     centered           H0=73.17 dchi2=1.83 kappa0_6=-2.41e+05 kappaP_6=nan kappaZ_6=1.65e+06 kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   sn_offset                           centered           H0=73.14 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=1.78e+05 kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_plus_sn                     centered           H0=73.14 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=-1.58e+07 kappaCep_6=-1.60e+07
+[19:02:14] [INFO]   cepheid_offset                      raw_sigma2         H0=73.23 dchi2=0.12 kappa0_6=-7.25e+04 kappaP_6=nan kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_period                      raw_sigma2         H0=73.60 dchi2=2.92 kappa0_6=nan kappaP_6=-3.69e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_period          raw_sigma2         H0=73.27 dchi2=3.51 kappa0_6=1.94e+05 kappaP_6=-4.86e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_metallicity     raw_sigma2         H0=73.31 dchi2=0.31 kappa0_6=-7.03e+04 kappaP_6=nan kappaZ_6=3.52e+05 kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   sn_offset                           raw_sigma2         H0=73.65 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=1.78e+05 kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_plus_sn                     raw_sigma2         H0=73.81 dchi2=0.81 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=3.78e+05 kappaCep_6=2.00e+05
+[19:02:14] [INFO]   cepheid_offset                      raw_sigma2         H0=73.65 dchi2=0.54 kappa0_6=-1.78e+05 kappaP_6=nan kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_period                      raw_sigma2         H0=74.09 dchi2=2.71 kappa0_6=nan kappaP_6=-4.80e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_period          raw_sigma2         H0=73.55 dchi2=3.81 kappa0_6=4.42e+05 kappaP_6=-9.15e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_metallicity     raw_sigma2         H0=73.59 dchi2=0.56 kappa0_6=-1.73e+05 kappaP_6=nan kappaZ_6=-1.04e+05 kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   sn_offset                           raw_sigma2         H0=73.65 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=1.78e+05 kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_plus_sn                     raw_sigma2         H0=73.65 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=-4.70e+07 kappaCep_6=-4.72e+07
+[19:02:14] [INFO]   cepheid_offset                      unscreened_centered H0=73.12 dchi2=0.10 kappa0_6=-6.67e+04 kappaP_6=nan kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_period                      unscreened_centered H0=73.60 dchi2=2.92 kappa0_6=nan kappaP_6=-3.69e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_period          unscreened_centered H0=73.53 dchi2=3.47 kappa0_6=1.88e+05 kappaP_6=-4.75e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_metallicity     unscreened_centered H0=73.19 dchi2=0.26 kappa0_6=-6.22e+04 kappaP_6=nan kappaZ_6=3.05e+05 kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   sn_offset                           unscreened_centered H0=73.14 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=1.78e+05 kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_plus_sn                     unscreened_centered H0=72.96 dchi2=0.94 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=4.38e+05 kappaCep_6=2.62e+05
+[19:02:14] [INFO]   cepheid_offset                      unscreened_centered H0=73.14 dchi2=0.54 kappa0_6=-1.78e+05 kappaP_6=nan kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_period                      unscreened_centered H0=73.10 dchi2=0.21 kappa0_6=nan kappaP_6=-1.52e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_period          unscreened_centered H0=73.11 dchi2=0.80 kappa0_6=-4.43e+05 kappaP_6=3.97e+05 kappaZ_6=nan kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_offset_plus_metallicity     unscreened_centered H0=73.17 dchi2=1.83 kappa0_6=-2.41e+05 kappaP_6=nan kappaZ_6=1.65e+06 kappaSN_6=nan kappaCep_6=nan
+[19:02:14] [INFO]   sn_offset                           unscreened_centered H0=73.14 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=1.78e+05 kappaCep_6=nan
+[19:02:14] [INFO]   cepheid_plus_sn                     unscreened_centered H0=73.14 dchi2=0.54 kappa0_6=nan kappaP_6=nan kappaZ_6=nan kappaSN_6=-1.58e+07 kappaCep_6=-1.60e+07
+[19:02:14] [INFO] Leave-One-Host-Out Diagnostic
