@@ -140,3 +140,11 @@
 [19:02:02] [INFO] Injected:  9.700e+05
 [19:02:02] [INFO] Recovered: 9.683e+05 +/- 2.103e+05
 [19:02:02] [INFO] Recovery fraction: 0.998
+[19:02:02] [INFO] Negative injection: injected -9.700e+05, recovered -9.735e+05
+[19:02:02] [INFO] Injection Tests for All Model Classes
+[19:02:03] [INFO]   cepheid_offset            kappa0_6     injected=9.700e+05 recovered=9.712e+05 frac=1.001
+[19:02:03] [INFO]   sn_offset                 kappaSN_6    injected=9.700e+05 recovered=9.715e+05 frac=1.002
+[19:02:03] [INFO]   cepheid_plus_sn           kappaCep_6   injected=9.700e+05 recovered=9.682e+05 frac=0.998
+[19:02:03] [INFO]   cepheid_plus_sn           kappaSN_6    injected=9.700e+05 recovered=9.666e+05 frac=0.997
+[19:02:03] [SUCCESS] Saved injection tests to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_injection_tests_all_models.csv
+[19:02:03] [INFO] Running TEP Model Grid
