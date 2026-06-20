@@ -1032,13 +1032,13 @@ class Step4RobustnessChecks:
         
         # Bootstrap p-value for Pearson correlation (non-parametric significance)
         n_bootstrap = 10000
-        np.random.seed(42)
+        rng = np.random.default_rng(42)
         bootstrap_r = []
         sigma_vals = df['sigma_inferred'].values
         h0_vals = df['h0_derived'].values
         for _ in range(n_bootstrap):
             # Permute one variable to break correlation (null hypothesis)
-            perm_idx = np.random.permutation(n)
+            perm_idx = rng.permutation(n)
             r_perm, _ = stats.pearsonr(sigma_vals[perm_idx], h0_vals)
             bootstrap_r.append(r_perm)
         bootstrap_r = np.array(bootstrap_r)

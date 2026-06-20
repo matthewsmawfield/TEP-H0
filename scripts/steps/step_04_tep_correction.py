@@ -383,7 +383,7 @@ class Step3TEPCorrection:
         print_status(f"Joint Bootstrap (kappa refit + H0): N={n_boot}...", "SECTION")
 
         # Set seed for reproducibility
-        np.random.seed(42)
+        rng = np.random.default_rng(42)
 
         # Suppress optimization warnings
         import warnings
@@ -401,7 +401,7 @@ class Step3TEPCorrection:
             S_sample = sample["shear_suppression"].values
             sigma_sample = sample["sigma_inferred"].values
             # Perturb distance moduli by measurement noise (parametric bootstrap)
-            mu_noise = np.random.normal(0, sample["error"].values)
+            mu_noise = rng.normal(0, sample["error"].values)
             mu_sample = sample["value"].values + mu_noise
             v_sample = sample["velocity"].values
 
