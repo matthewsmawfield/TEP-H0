@@ -47,5 +47,31 @@
       "tep_bic_matched": 20.985857598805108,
       "delta_bic_matched": 2.3732283970813945
     }
+  },
+  "provenance_eiv": {
+    "beta": [
+      53.43599701785996,
+      584901638.8835797,
+      25.278308586558733,
+      0.0
+    ],
+    "beta_se": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "beta1_t": null,
+    "beta1_p": null,
+    "gamma_HI": 25.278308586558733,
+    "gamma_HI_se": 0.0,
+    "gamma_rotation": 0.0,
+    "gamma_rotation_se": 0.0,
+    "n_stellar": 16,
+    "n_hi": 13,
+    "n_rot": 0,
+    "mean_x_err_stellar": 3.531101617959294e-08,
+    "mean_x_err_hi": 1.8991618909840668e-08,
+    "mean_x_err_rot": null
   }
 }

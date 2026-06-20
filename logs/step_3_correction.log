@@ -645,3 +645,25 @@
 [13:01:12] [INFO] | 0.0070 | 16 | 0.525     | 0.391      | 70.40   | 70.33    | 0.5530       | -2.24 |
 [13:01:12] [INFO] +--------+----+-----------+------------+---------+----------+--------------+-------+
 [13:01:12] [INFO] Flow/Environment Confound Robustness...
+[13:01:17] [SUCCESS] Saved flow/environment robustness results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/flow_environment_robustness.txt
+[13:01:17] [INFO] Flow + Environment Controls
+[13:01:17] [INFO] +-----------------------------+-----------+---------+----+
+[13:01:17] [INFO] | Test                        | Statistic | p-value | N  |
+[13:01:17] [INFO] +-----------------------------+-----------+---------+----+
+[13:01:17] [INFO] | Baseline r(H0,Sigma)        | 0.466     | 0.0126  | 29 |
+[13:01:17] [INFO] | Partial r(H0,Sigma|z)       | 0.410     | 0.0304  | 29 |
+[13:01:17] [INFO] | Partial r(H0,Sigma|z,Nmb)   | 0.347     | 0.0766  | 29 |
+[13:01:17] [INFO] | Partial r(H0,Sigma|z,logpK) | 0.535     | 0.0071  | 26 |
+[13:01:17] [INFO] +-----------------------------+-----------+---------+----+
+[13:01:17] [INFO] Provenance-Aware Errors-in-Variables Model
+[13:01:17] [INFO] +--------------------+-----------+-----------+---+---+
+[13:01:17] [INFO] | Parameter          | Estimate  | SE        | t | p |
+[13:01:17] [INFO] +--------------------+-----------+-----------+---+---+
+[13:01:17] [INFO] | β0 (intercept)     | 53.44     | 0.00      | - | - |
+[13:01:17] [INFO] | β1 (X_TEP slope)   | 5.849e+08 | 0.000e+00 | - | - |
+[13:01:17] [INFO] | γ_HI (HI offset)   | 25.28     | 0.00      | - | - |
+[13:01:17] [INFO] | γ_rot (rot offset) | 0.00      | 0.00      | - | - |
+[13:01:17] [INFO] +--------------------+-----------+-----------+---+---+
+[13:01:17] [INFO] Method counts: stellar=16, HI=13, rot=0
+[13:01:17] [INFO] Mean X_TEP uncertainty from σ error: HI=1.90e-08, rot=N/A
+[13:01:17] [SUCCESS] Step 4 Complete.
