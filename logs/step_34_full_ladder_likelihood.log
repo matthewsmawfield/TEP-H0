@@ -214,3 +214,42 @@
 [19:02:25] [INFO]   r(H0, fraction logP > 1.5      ) = +nan (p=nan)
 [19:02:25] [SUCCESS] Saved host covariate table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_host_covariate_table.csv
 [19:02:25] [INFO] Nested Absorption Test (P6) — Decomposition
+[19:02:25] [INFO]   full_baseline       : r=+0.466 rho=+0.517 dH0= +7.86  (Full baseline (mu_i + all corrections))
+[19:02:25] [INFO]   no_period           : r=+0.402 rho=+0.398 dH0=+12.27  (Remove period correction)
+[19:02:25] [INFO]   no_Z                : r=+0.507 rho=+0.557 dH0= +8.61  (Remove metallicity correction)
+[19:02:25] [INFO]   no_PZ               : r=+0.428 rho=+0.434 dH0=+13.07  (Remove period + metallicity)
+[19:02:25] [INFO]   → Removing period correction weakens the H0-sigma trend
+[19:02:25] [INFO]   → Period distribution contributes to the apparent trend
+[19:02:25] [WARNING]   → Removing metallicity correction STRENGTHENS the H0-sigma trend
+[19:02:25] [WARNING]   → Z_W was SUPPRESSING an environmental signal
+[19:02:25] [SUCCESS] Saved nested absorption test to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_nested_absorption_test.csv
+[19:02:25] [INFO] SN-Channel Scope Validation (C)
+[19:02:25] [INFO] SN calibrator rows total:           77
+[19:02:25] [INFO] SN calibrator rows with X_SN != 0:  77
+[19:02:25] [INFO] SN Hubble rows total:               0
+[19:02:25] [INFO] SN Hubble rows with X_SN != 0:      0
+[19:02:25] [INFO] TEP–Metallicity Disentanglement (A)
+[19:02:27] [INFO]   Orthogonalization: X = +4.815e-02 + +3.364e-01 * Z_mean
+[19:02:27] [INFO]   r(host_X, host_Z_mean) = +0.402
+[19:02:27] [INFO] Disentanglement Results:
+[19:02:27] [INFO] Model                     n_par     H0       chi2    dchi2       kappa0   sig0       kappaZ   sigZ
+[19:02:27] [INFO]   1_baseline                 46  73.04    3552.71    +0.00          n/a    n/a          n/a    n/a
+[19:02:27] [INFO]   2_noZ_plus_TEP             46   1.07    3575.18   -22.48    +1.41e+05    0.7          n/a    n/a
+[19:02:27] [INFO]   3_baseline_plus_TEP        47  73.12    3552.61    +0.10    -6.67e+04    0.3          n/a    n/a
+[19:02:27] [INFO]   4_baseline_TEP_Zint        48  73.19    3552.45    +0.26    -6.22e+04    0.3    +3.05e+05    0.4
+[19:02:27] [INFO]   6_orthogonalized_TEP       47  72.99    3552.59    +0.11    -8.16e+04    0.3          n/a    n/a
+[19:02:27] [SUCCESS] Saved disentanglement results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_tep_metallicity_disentanglement.csv
+[19:02:27] [INFO] Generating Comparison Table...
+[19:02:27] [SUCCESS] Saved comparison table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_ladder_likelihood_comparison.csv
+[19:02:27] [INFO] Full-Ladder Likelihood Comparison
+[19:02:27] [INFO] +----------------------------------+--------------------+--------------------+---------------------+-------------------+--------------------+--------------------+------+--------------------+------------------------+------------------------------------------------+
+[19:02:27] [INFO] | model                            | kappa_Cep          | kappa_err          | kappa_significance  | H0                | H0_err             | chi2               | dof  | chi2_reduced       | delta_chi2_vs_baseline | notes                                          |
+[19:02:27] [INFO] +----------------------------------+--------------------+--------------------+---------------------+-------------------+--------------------+--------------------+------+--------------------+------------------------+------------------------------------------------+
+[19:02:27] [INFO] | Baseline SH0ES                   | 0.0                | 0.0                | 0                   | 73.0434215754375  | 1.0071562538179564 | 3552.706270469558  | 3444 | 1.031563957743774  | 0                      | Standard SH0ES                                 |
+[19:02:27] [INFO] | TEP Summary Likelihood (Stage 1) | 2750371.0730964756 | 109848.63318825097 | 25.037826992194617  | —                 | —                  | 20927.51062104372  | 36   | 581.3197394734366  | —                      | Discarded: model broken                        |
+[19:02:27] [INFO] | Variant A: Free kappa            | -66654.76095201241 | 210262.03802276557 | 0.31700806088826905 | 73.1224746708568  | —                  | 3552.6057763588924 | 3443 | 1.0318343817481535 | —                      | kappa=-6.7e4+/-2.1e5 (0.3sigma; opposite sign) |
+[19:02:27] [INFO] | Variant B: Prior kappa           | 157774.05356363475 | 186115.36388053387 | —                   | 72.8566406526538  | 1.0283992548480665 | 3553.745069523117  | 3443 | 1.0321652830447623 | —                      | Prior dominates                                |
+[19:02:27] [INFO] | Variant C: Fixed kappa           | 970000.0           | 0.0                | —                   | 71.90261815779357 | 0.9914263321949617 | 3576.913626705653  | 3444 | 1.0385928068251025 | -24.20735623609471     | Sensitivity test only                          |
+[19:02:27] [INFO] +----------------------------------+--------------------+--------------------+---------------------+-------------------+--------------------+--------------------+------+--------------------+------------------------+------------------------------------------------+
+[19:02:27] [SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_full_ladder_likelihood_results.json
+[19:02:27] [SUCCESS] Full-Ladder Likelihood Analysis Complete

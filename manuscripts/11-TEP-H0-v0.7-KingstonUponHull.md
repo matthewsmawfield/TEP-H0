@@ -1097,7 +1097,7 @@ The $z>0.01$ subsample ($N=5$) yields a positive coefficient,
 not a standalone significance test, but a sign-stability check showing that
 the correlation does not reverse under the strictest redshift cut, with the
 response remaining robustly positive. Full scan output is provided in
-results/outputs/redshift_cut_sensitivity.csv.
+results/outputs/step_08_redshift_cut_sensitivity.txt.
 
 Large-scale environment was quantified by crossmatching each host (via PGC
 identifiers) to the 2MASS group catalog of Tully (2015), using the group
@@ -1132,7 +1132,7 @@ In addition, repeating the definition $H_0 = cz/d$ using alternative
 Pantheon+ redshifts yields consistent positive correlations: $r=0.442$ using
 $z_{\rm CMB}$ and $r=0.395$ using $z_{\rm HEL}$ (both
 permutation-significant). Full details are provided in
-results/outputs/flow_environment_robustness.txt.
+results/outputs/step_08_flow_environment_robustness.txt.
 
 Finally, a Monte Carlo test was performed in which velocities were perturbed
 by residual peculiar-velocity uncertainty using the Pantheon+ $v_{\rm pec}$
@@ -1165,8 +1165,8 @@ systematic envelope is smaller than the bootstrap uncertainty, indicating
 that the main inference does not rely on fine-tuned aperture assumptions. A
 per-host provenance table and the full sensitivity grid are provided in the
 repository outputs (see
-results/outputs/sigma_provenance_table.csv and
-results/outputs/aperture_sensitivity_grid.csv).
+results/outputs/step_07_sigma_provenance_table.csv and
+results/outputs/step_07_aperture_sensitivity_grid.csv).
 
 To further test whether the signal could arise from unmodeled
 environment-dependent systematics, a partial correlation was computed
@@ -1189,7 +1189,7 @@ that the $H_0$–$\sigma$ association is not a byproduct of local density
 systematics. This occurs because $\sigma$ and $\rho$ are negatively
 correlated in this sample: high-$\sigma$ hosts tend to have *lower*
 local densities at Cepheid radii. Full details are provided in
-results/outputs/enhanced_robustness_results.json.
+results/outputs/step_13_enhanced_robustness_results.json.
 
 ### 3.7 TRGB Differential Test
 
@@ -2249,9 +2249,9 @@ a self-contained Python module:
 | --- | --- | --- | --- |
 | 1 | step_1_data_ingestion.py | Downloads SH0ES distance moduli and Pantheon+ redshifts; cross-matches hosts with velocity dispersion catalogs (HyperLEDA, SDSS) | hosts_processed.csv |
 | 1b | step_1b_aperture_correction.py | Applies Jorgensen et al. (1995) aperture corrections to normalize $\sigma$ measurements to $R_{\rm eff}/8$ | Homogenized $\sigma$ values |
-| 2 | step_2_stratification.py | Calculates per-host $H_0$; stratifies by median $\sigma$; computes correlation statistics | stratification_results.json |
-| 3 | step_3_tep_correction.py | Optimizes $\kappa_{\rm Cep}$ by minimizing residual $H_0$–$\sigma$ slope; applies TEP correction; bootstrap uncertainty estimation | tep_correction_results.json |
-| 4 | step_4_robustness_checks.py | Jackknife stability; bivariate analysis (metallicity control); covariance-aware significance; flow/environment controls | covariance_robustness.json |
+| 2 | step_2_stratification.py | Calculates per-host $H_0$; stratifies by median $\sigma$; computes correlation statistics | step_03_stratification_results.json |
+| 3 | step_3_tep_correction.py | Optimizes $\kappa_{\rm Cep}$ by minimizing residual $H_0$–$\sigma$ slope; applies TEP correction; bootstrap uncertainty estimation | step_04_tep_correction_results.json |
+| 4 | step_4_robustness_checks.py | Jackknife stability; bivariate analysis (metallicity control); covariance-aware significance; flow/environment controls | step_08_covariance_robustness.json |
 | 5 | step_5_m31_analysis.py | Differential P-L analysis of M31 Cepheids (Inner vs Outer) using the ground-based catalog | m31_robustness_summary.json |
 | 6 | step_6_multivariate_analysis.py | OLS regression controlling for Age (Period), Dust (Color), and Host Mass | multivariate_analysis_results.json |
 | 7 | step_7_lmc_replication.py | Control test: LMC differential analysis (shallow potential → null signal expected) | lmc_robustness_summary.json |
@@ -2276,16 +2276,16 @@ TEP-H0/
 └── site/                        # Manuscript HTML and website
 #### Key Output Files
 
-[tep_correction_results.json](results/outputs/tep_correction_results.json) — Unified
+[tep_correction_results.json](results/outputs/step_04_tep_correction_results.json) — Unified
 $H_0$, optimal $\kappa_{\rm Cep}$, Planck tension
 
-results/outputs/stratification_results.json —
+results/outputs/step_03_stratification_results.json —
 High/low-$\sigma$ stratification statistics
 
-results/outputs/covariance_robustness.json —
+results/outputs/step_08_covariance_robustness.json —
 Covariance-aware p-values and $N_{\rm eff}$
 
-results/outputs/out_of_sample_validation.json —
+results/outputs/step_08_out_of_sample_validation.json —
 Train/test and LOOCV results
 
 data/processed/hosts_processed.csv — Complete host
@@ -2313,9 +2313,9 @@ installable via pip):
 After running the pipeline, verify reproduction by checking:
 
 # Check key results match manuscript
-cat results/outputs/tep_correction_results.json | grep unified_h0
+cat results/outputs/step_04_tep_correction_results.json | grep unified_h0
 # Expected: 68.84 (±0.01)
-cat results/outputs/stratification_results.json | grep difference
+cat results/outputs/step_03_stratification_results.json | grep difference
 # Expected: 7.86 (±0.01)
 
 https://github.com/matthewsmawfield/TEP-H0
