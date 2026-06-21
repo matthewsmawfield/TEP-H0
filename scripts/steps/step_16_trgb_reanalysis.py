@@ -72,7 +72,7 @@ class Step7TRGBReanalysis:
         self.ceph_data_path = self.outputs_dir / "step_03_stratified_h0.csv"
         
     def run(self):
-        print_status("STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)", "SECTION")
+        print_status("Step 7: TRGB re-analysis (differential test)", "SECTION")
         
         # Load data
         if not self.trgb_data_path.exists():
@@ -134,13 +134,13 @@ class Step7TRGBReanalysis:
         # 5. Interpretation
         print_status("\nInterpretation Check:", "INFO")
         if r > 0.3:
-            print_status("  POSITIVE correlation detected.", "RESULT")
+            print_status("  Positive correlation detected.", "RESULT")
             print_status("  High-σ hosts have μ_TRGB > μ_Ceph.", "INFO")
-            print_status("  Implies μ_Ceph is UNDERESTIMATED at high σ.", "INFO")
-            print_status("  → CONSISTENT WITH TEP PREDICTION.", "SUCCESS")
+            print_status("  Implies μ_Ceph is underestimated at high σ.", "INFO")
+            print_status("  → Consistent with TEP prediction.", "SUCCESS")
         else:
             print_status("  No significant positive correlation.", "RESULT")
-            print_status("  → INCONCLUSIVE / TENSION.", "WARNING")
+            print_status("  → Inconclusive / tension.", "INFO")
             
         # 6. Save Plot
         self._plot_differential(merged, slope, intercept, r, p, std_err, len(merged))
@@ -193,7 +193,7 @@ class Step7TRGBReanalysis:
         # Filter out non-positive sigma values (log scale requires positive data)
         plot_df = df[df['sigma'] > 0].copy()
         if len(plot_df) == 0:
-            print_status("No positive sigma values available for plot; skipping.", "WARNING")
+            print_status("No positive sigma values available for plot; skipping.", "INFO")
             plt.close()
             return
         

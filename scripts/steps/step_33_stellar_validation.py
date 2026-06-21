@@ -150,11 +150,11 @@ class Step13StellarValidation:
                     print_status(f"Extracted P_MESA = {period:.6f} d", "SUCCESS")
                     return float(period)
                 except Exception as exc:
-                    print_status(f"MESA history read failed: {exc}", "WARNING")
+                    print_status(f"MESA history read failed: {exc}", "INFO")
                     break
 
         print_status(
-            f"MESA/RSP not detected. Using canonical literature placeholder "
+            f"MESA/RSP not detected. Using canonical literature value "
             f"P_MESA = {P_MESA_CANONICAL_DAYS} d.  For first-principles "
             f"reproduction, install MESA and run: "
             f"bash stellar_validation/run_rsp_baseline.sh",
@@ -222,9 +222,9 @@ class Step13StellarValidation:
             print_status(f"Relative error     = {rel_err:.6e}", "INFO")
 
         if max_diff < 1e-9:
-            print_status("Closure test PASSED.", "SUCCESS")
+            print_status("Closure test passed.", "SUCCESS")
         else:
-            print_status("Closure test FAILED (discrepancy > 1e-9 mag).", "ERROR")
+            print_status("Closure test failed (discrepancy > 1e-9 mag).", "ERROR")
 
         save_validation_json(
             self.closure_json_path,

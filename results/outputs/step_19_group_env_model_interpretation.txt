@@ -1,4 +1,4 @@
-GROUP ENVIRONMENT MODEL COMPARISON
+Group environment model comparison
 ============================================================
 
 TEP prediction: Model 'tep_full' should be preferred.

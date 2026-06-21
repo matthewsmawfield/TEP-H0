@@ -621,7 +621,7 @@ class Step7LMCReplication:
                 df['Type'] = 'FU'
                 print_status(f"After fundamental-mode filter: N={len(df)}", "INFO")
             else:
-                print_status("Mode labels not recognized for a strict FU filter; proceeding without type filtering.", "WARNING")
+                print_status("Mode labels not recognized for a strict FU filter; proceeding without type filtering.", "INFO")
 
         p_min_log = float(np.log10(self.period_min_days))
         p_max_log = float(np.log10(self.period_max_days))
@@ -629,7 +629,7 @@ class Step7LMCReplication:
         print_status(f"After period cut ({self.period_min_days:.1f} < P < {self.period_max_days:.1f} d): N={len(df)}", "INFO")
 
         if len(df) < 200:
-            print_status(f"After basic filters, sample is small (N={len(df)}). Consider widening the period range.", "WARNING")
+            print_status(f"After basic filters, sample is small (N={len(df)}). Consider widening the period range.", "INFO")
 
         D_kpc = 49.6
         theta = self._angsep_rad(df['RA'].values, df['DEC'].values, RA0, DEC0)
@@ -649,7 +649,7 @@ class Step7LMCReplication:
         print_table(headers, rows, title="LMC Subsamples")
 
         if len(inner_df) < int(self.min_region_n) or len(outer_df) < int(self.min_region_n):
-            print_status("Insufficient samples after inner/outer selection; aborting.", "WARNING")
+            print_status("Insufficient samples after inner/outer selection; aborting.", "INFO")
             return
 
         fixed_slope = -3.3

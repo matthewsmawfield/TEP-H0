@@ -19,7 +19,7 @@ NEW = {
     "spearman_p": "0.0041",
     "pearson_r": "0.466",
     "pearson_p": "0.0109",
-    "unified_h0": "68.75",
+    "unified_h0": "68.84",
     "bootstrap_h0_mean": "68.80",
     "bootstrap_h0_std": "1.46",
     "tension_sigma": "0.91",

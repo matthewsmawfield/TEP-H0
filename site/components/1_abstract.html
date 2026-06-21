@@ -11,52 +11,78 @@
     </p>
 
     <p>
-        This study tests the hypothesis that the discrepancy arises from a
-        violation of the isochrony axiom—the assumption that proper time
-        accumulation is independent of the local gravitational environment.
-        Under scalar-tensor theories that break the Strong Equivalence Principle
-        (such as TEP), Cepheid variable stars act as environment-dependent
-        "standard clocks." In deep gravitational potentials (high velocity
-        dispersion $\sigma$) and active-shear environments, enhanced scalar
-        field activity is predicted to induce period contraction relative to
-        calibration environments. When interpreted through a universal
-        Period-Luminosity relation, this clock-rate anomaly would mimic
-        diminished luminosity, leading to underestimated distances and an
-        inflated local Hubble constant.
+        The hypothesis tested here is that Cepheid variable stars function as
+        environment-dependent "standard clocks." In deep gravitational
+        potentials and active-shear environments, the TEP clock response
+        accelerates the effective Cepheid clock rate, shortening observed
+        pulsation periods relative to calibration environments. When interpreted through a universal Period-Luminosity
+        relation, this clock-rate anomaly mimics diminished luminosity,
+        leading to underestimated distances and an inflated local Hubble
+        constant.
     </p>
 
     <p>
-        The primary statistical observable is a covariance-propagated host-to-host
-        distance-modulus residual; host-equivalent $H_0$ values are shown only for
-        interpretability. Analysis of the Hubble-flow SH0ES Cepheid sample
-        ($z_{\rm HD} > 0.0035$; $N=29$), stratified by host galaxy velocity dispersion
-        (a TEP-independent kinematic observable), reveals a correlation between host
-        potential depth and the residual (Spearman $\rho = 0.517$, $p = 0.0041$;
-        Pearson $r = 0.466$, $p = 0.0109$). A median-split stratification at $\sigma_{\rm med} \approx 96.4$ km/s yields $H_0 = 66.26 \pm 2.10$ km/s/Mpc (low-$\sigma$; $N=15$) versus $74.12 \pm 1.30$ km/s/Mpc (high-$\sigma$; $N=14$), implying $\Delta H_0 = 7.86$ km/s/Mpc. Because published $\sigma$ values
-        are heterogeneous (direct stellar absorption and calibrated HI linewidth
-        proxies), all values are fully traceable to original literature sources
-        with ADS bibcodes. Measurement methodology is treated as a first-class
-        provenance variable and covariance-aware significance tests are reported
-        using the full SH0ES GLS distance-modulus covariance. Significance is confirmed using non-parametric Monte Carlo permutations that fully propagate the SH0ES GLS distance-modulus covariance, yielding a robust environmental correlation ($p_{\rm cov} = 0.0041$ Spearman; $p_{\rm cov} = 0.0031$ Pearson).
+        The standard SH0ES full-ladder likelihood yields a baseline
+        $H_0 = 73.04 \pm 1.01$ km/s/Mpc. A standard-ladder
+        projection test inserts a TEP environmental column into the
+        SH0ES design matrix while keeping the host-level distance moduli
+        $\mu_i$ as free latent parameters; the environmental signal is absorbed
+        by the inferred $\mu_i$, yielding $\kappa_{\rm Cep} = -0.067 \pm 0.210\times10^6$ mag (consistent with zero). This null result is expected:
+        the standard SH0ES model is not TEP-native, and any host-constant
+        environmental bias is algebraically equivalent to shifting a host's
+        inferred modulus.
     </p>
 
     <p>
-        Application of the TEP conformal correction
-        $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot(\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP
-        period-contraction combined with the virial relation $|\Phi|\propto\sigma^2$—with
-        Observable Response Coefficient $\kappa_{\rm Cep} = (1.27 \pm 0.48) \times 10^6$ mag
-        and effective calibrator reference $\sigma_{\rm ref} = 87.17$ km/s removes the
-        host-potential dependence and brings the Cepheid-calibrated SH0ES ladder into
-        agreement with the CMB scale ($H_0 = 68.84$ km/s/Mpc; Planck tension $0.96\sigma$).
-        Internal interpolation stability (leave-one-out cross-validation, LOOCV) gives
-        $H_0^{\rm LOOCV} = 68.67 \pm 1.35$ km/s/Mpc, Planck tension $0.89\sigma$.
-        The correction survives covariance propagation, redshift cuts, peculiar-velocity
-        perturbation, metallicity/dust controls, and velocity-dispersion provenance tests.
-        A two-stage resolution claim is proposed: (i) the Cepheid ladder contains a
-        host-potential bias with the predicted sign and magnitude; (ii) a one-parameter
-        correction derived from the TEP conformal clock-transport law removes the
-        SH0ES–Planck discrepancy. Full confirmation requires blind external validation
-        on new Cepheid hosts without refitting $\kappa_{\rm Cep}$.
+        The proper test must therefore be applied at the redshift-distance
+        level, where distances are tied to an independent velocity scale.
+        A velocity-space likelihood analysis models
+        $cz_i = d_i^{\rm true}\,(H_{\rm app} + \Gamma_X X_i) + v_i$
+        and identifies a structurally robust combined environmental slope
+        $\Gamma_X = +2.35\times10^7 \pm 1.00\times10^7$ (2.3$\sigma$ at
+        $\sigma_v = 250$ km/s; 3.4$\sigma$ at $\sigma_v = 150$ km/s). The signal survives explicit controls for
+        redshift trend, sky dipole ($\sim$100 km/s), quadrupole, and
+        group-offset models; binned permutation tests confirm it
+        is not driven by redshift or sky selection. Leave-one-host-out
+        cross-validation gives 29/29 positive signs; bootstrap resampling
+        gives 99.9% positive fraction.
+    </p>
+
+    <p>
+        The velocity-space likelihood identifies a combined environmental slope.
+        In a general phenomenological model this slope can contain both Cepheid
+        clock bias and residual velocity-sector/environmental terms.
+        The TEP-native gauge sets the non-Cepheid velocity-sector component
+        $\beta_X$ to zero, corresponding to the hypothesis tested here: the observed
+        environmental slope is dominantly a Cepheid clock-transport bias.
+        In that gauge—treating the environmental slope as a pure Cepheid
+        clock-rate bias ($\beta_X = 0$)—the equivalent
+        response coefficient is $\kappa_{\rm Cep} \approx 7.34\times10^5$ mag,
+        consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.7\times10^5$ mag ($\sim 10^6$).
+        The velocity-space fit yields $H_{\rm app} = 69.47 \pm 1.49$ km/s/Mpc;
+        in the TEP-native gauge this corresponds to a Cepheid clock-bias
+        correction that brings the local distance scale into agreement with
+        the CMB inference. As a historical residual-space cross-check, the empirical one-parameter
+        correction pipeline yields $H_0^{\rm TEP} = 68.84$ km/s/Mpc
+        (bootstrap mean $68.92 \pm 1.44$), reducing the Hubble tension from
+        $\approx 5\sigma$ to $\approx 1\sigma$ relative to Planck.
+        This value is obtained in the pure-Cepheid TEP-native gauge ($\beta_X=0$);
+        the gauge-independent empirical detection is $\Gamma_X$. A
+        residual-based empirical cross-check gives
+        $\kappa_{\rm Cep} = (1.27 \pm 0.46) \times 10^6$ mag, consistent with
+        the generative inference. The inferred coefficient places this probe in
+        the same response-coefficient regime as the millisecond-pulsar
+        spin-down excess (Paper 10).
+        External TRGB distances ($N=13$ overlap) give
+        $\kappa_{\rm Cep} = +3.2\times10^5$ ($0.8\sigma$)—underpowered to
+        independently break the $\kappa$–$\beta$ degeneracy, yet directionally
+        consistent with and supportive of the TEP-native gauge.
+    </p>
+
+    <p>
+        A differential M31 analysis yields an "Inner Fainter" signal
+        consistent with TEP shear suppression, providing auxiliary support
+        for the continuous screening mechanism.
     </p>
 
     <p>

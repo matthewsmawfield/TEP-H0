@@ -183,7 +183,12 @@ class Step1DataIngestion:
         headers = ["Source", "Data (mag)", "Period Term", "Metal Term"]
         rows = []
         for _, row in cepheids.head(3).iterrows():
-            rows.append([row['Source'], f"{row['Data']:.3f}", f"{row['L_col_bW']:.3f}", f"{row['L_col_ZW']:.3f}"])
+            rows.append([
+                row['Source'],
+                f"{row['Data']:.3f}" if pd.notna(row['Data']) else "-",
+                f"{row['L_col_bW']:.3f}" if pd.notna(row['L_col_bW']) else "-",
+                f"{row['L_col_ZW']:.3f}" if pd.notna(row['L_col_ZW']) else "-",
+            ])
         print_table(headers, rows, title="SH0ES Cepheid Sample (First 3)")
         
         print_status(f"Saved reconstructed catalog with {len(cepheids)} Cepheids to {self.cepheid_catalog_path}", "SUCCESS")
@@ -259,7 +264,11 @@ class Step1DataIngestion:
         headers = ["Host ID", "Distance Modulus (mu)", "Error"]
         rows = []
         for _, row in mu_df.head(3).iterrows():
-            rows.append([row['source_id'], f"{row['value']:.4f}", f"{row['error']:.4f}"])
+            rows.append([
+                row['source_id'],
+                f"{row['value']:.4f}" if pd.notna(row['value']) else "-",
+                f"{row['error']:.4f}" if pd.notna(row['error']) else "-",
+            ])
         print_table(headers, rows, title="Recovered Distance Moduli")
         
         print_status(f"Saved {len(mu_df)} distances to {self.distances_path}", "SUCCESS")
@@ -287,7 +296,7 @@ class Step1DataIngestion:
                 # Simbad query
                 result = Simbad.query_object(normalized)
                 if result is None or len(result) == 0:
-                    print_status(f"Simbad lookup failed for {source} -> {normalized}", "WARNING")
+                    print_status(f"Simbad lookup failed for {source} -> {normalized}", "INFO")
                 else:
                     # VOTable fields: ra(d), dec(d), ids
                     # Handle column name variations (Simbad deprecated RA_d/DEC_d in favor of ra/dec)
@@ -320,7 +329,7 @@ class Step1DataIngestion:
                                     break
 
             except Exception as e:
-                print_status(f"Error querying Simbad for {source} -> {normalized}: {e}", "WARNING")
+                print_status(f"Error querying Simbad for {source} -> {normalized}: {e}", "INFO")
 
             results.append({
                 'source_id': source,
@@ -508,7 +517,7 @@ class Step1DataIngestion:
         # Log missing hosts for transparency
         missing_sigma = final_df[final_df['sigma_measured'].isna()]['normalized_name'].tolist()
         if missing_sigma:
-            print_status(f"Missing Sigma for {len(missing_sigma)} hosts: {', '.join(missing_sigma)}", "WARNING")
+            print_status(f"Missing sigma for {len(missing_sigma)} hosts: {', '.join(missing_sigma)}", "INFO")
         
         # Use measured sigma as primary; this is the scientifically correct approach
         final_df['sigma_inferred'] = final_df['sigma_measured']
@@ -523,8 +532,8 @@ class Step1DataIngestion:
         display_df = final_df.dropna(subset=['sigma_inferred']).head(5)
         for _, row in display_df.iterrows():
             rows.append([
-                row['normalized_name'], 
-                f"{row['z_hd']:.5f}", 
+                row['normalized_name'],
+                f"{row['z_hd']:.5f}" if pd.notna(row['z_hd']) else "-",
                 f"{row['host_logmass']:.2f}" if pd.notna(row['host_logmass']) else "-",
                 f"{row['sigma_inferred']:.1f}"
             ])

@@ -2,9 +2,9 @@
 """
 Generate frozen TEP predictions for prospective Cepheid-SN hosts.
 
-Uses the pipeline-frozen parameters:
-    kappa_Cep = 1.049e6 mag
-    sigma_ref = 87.17 km/s
+Uses the pipeline-frozen parameters from step_04_tep_correction_results.json:
+    kappa_Cep = optimal_kappa_cep
+    sigma_ref = sigma_ref
     S(rho, N_mb) from total_screening_factor
 
 The correction for a prospective host is:
@@ -95,7 +95,7 @@ pred_df = pd.DataFrame(rows)
 print(pred_df.to_string(index=False))
 
 # Save to CSV
-out_path = ROOT / "results/outputs/step_05_frozen_tep_predictions.csv"
+out_path = ROOT / "results/outputs/step_05_prespecified_tep_predictions.csv"
 pred_df.to_csv(out_path, index=False)
 print(f"\nSaved to {out_path}")
 

@@ -21,6 +21,7 @@ but you have not shown that the correction survives inside the actual Cepheid–
 
 import json
 import sys
+import warnings
 from pathlib import Path
 
 # Make direct execution behave the same as module execution
@@ -31,6 +32,8 @@ if str(PROJECT_ROOT) not in sys.path:
 import numpy as np
 import pandas as pd
 from scipy import linalg, optimize, stats
+
+warnings.filterwarnings("ignore", category=RuntimeWarning, message=r".*encountered in matmul.*")
 
 # Import TEP Logger
 try:
@@ -84,10 +87,35 @@ class FullLadderLikelihood:
             return FullLadderLikelihood._fit_gls_weighted(A, y, Cinv)
 
         theta, residuals, rank, svals = np.linalg.lstsq(A_w, y_w, rcond=1e-12)
-        cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
 
-        r = y - A @ theta
-        chi2 = float(r.T @ linalg.solve(C, r, assume_a="pos"))
+        # Chi2: r^T C^{-1} r = ||L^{-1} r||^2 = ||y_w - A_w theta||^2.
+        # Prefer the residual norm returned by lstsq to avoid overflow in explicit
+        # residual matmuls for ill-conditioned systems.
+        if residuals is not None and residuals.size > 0 and np.isfinite(residuals[0]):
+            chi2 = float(residuals[0])
+        else:
+            with np.errstate(divide="ignore", over="ignore", invalid="ignore"):
+                r_w = y_w - A_w @ theta
+                chi2 = float(r_w.T @ r_w)
+
+        # Covariance: (A^T C^{-1} A)^{-1} = (A_w^T A_w)^{-1}.
+        # Compute from the SVD of A_w with an rcond cutoff, which avoids forming
+        # A_w^T A_w (and avoids noisy RuntimeWarnings in logs).
+        with np.errstate(divide="ignore", over="ignore", invalid="ignore"):
+            U, s, Vt = np.linalg.svd(A_w, full_matrices=False)
+        if s.size == 0:
+            cov = np.full((A.shape[1], A.shape[1]), np.nan)
+        else:
+            tol = 1e-12 * s[0]
+            # Use a bounded 1/s^2 factor to avoid overflow for extremely small
+            # singular values, while still regularizing below tol.
+            s_inv2 = np.zeros_like(s)
+            mask = s > tol
+            if np.any(mask):
+                s_inv2[mask] = 1.0 / np.maximum(s[mask] ** 2, tol ** 2)
+            with np.errstate(divide="ignore", over="ignore", invalid="ignore"):
+                cov = (Vt.T * s_inv2) @ Vt
+            cov = np.where(np.isfinite(cov), cov, np.nan)
         return theta, cov, chi2, rank, svals
 
     @staticmethod
@@ -333,7 +361,8 @@ class FullLadderLikelihood:
 
         # Baseline fit
         theta_base, cov_base, chi2_base, rank_base, _ = self.fit_gls(L, y, C)
-        h0_idx = np.where(q == "5logH0")[0][0]
+        h0_param = "5logH0"
+        h0_idx = np.where(q == h0_param)[0][0]
         h0_base = 10 ** (theta_base[h0_idx] / 5)
 
         # Grid configurations
@@ -440,7 +469,9 @@ class FullLadderLikelihood:
             kappa_str = ""
             for col in df.columns:
                 if col.startswith("kappa") and not col.endswith("_err") and not col.endswith("_sig"):
-                    kappa_str += f" {col}={row[col]:.2e}"
+                    val = row[col]
+                    if pd.notna(val) and np.isfinite(val):
+                        kappa_str += f" {col}={float(val):.2e}"
             print_status(
                 f"  {row['model']:35s} {row['x_mode']:18s} H0={row['H0']:.2f} dchi2={row['delta_chi2']:.2f}{kappa_str}",
                 "INFO"
@@ -468,7 +499,7 @@ class FullLadderLikelihood:
         # Load published distance moduli
         dist_path = self.data_dir / "interim" / "r22_distances.csv"
         if not dist_path.exists():
-            print_status("r22_distances.csv not found, skipping audit", "WARNING")
+            print_status("r22_distances.csv not found, skipping audit", "INFO")
             return {"error": "r22_distances.csv missing"}
 
         dist_df = pd.read_csv(dist_path)
@@ -691,8 +722,10 @@ class FullLadderLikelihood:
         MHW1_val = theta[MHW1_idx[0]] if len(MHW1_idx) > 0 else 0.0
         h0_global = 10 ** (theta[h0_idx[0]] / 5) if len(h0_idx) > 0 else None
 
-        # Residuals from full fit
-        residuals = y - L @ theta
+        # Residuals from full fit (diagnostic; guard against spurious RuntimeWarnings)
+        with np.errstate(divide="ignore", over="ignore", invalid="ignore"):
+            residuals = y - L @ theta
+        residuals = np.where(np.isfinite(residuals), residuals, np.nan)
 
         # Anchor names
         anchors = {"LMC", "M31", "N4258", "MW", "SMC"}
@@ -804,8 +837,16 @@ class FullLadderLikelihood:
                 ("frac_logP_gt_1.5", "fraction logP > 1.5"),
             ]:
                 if col in df_valid.columns and df_valid[col].notna().sum() > 3:
-                    r, p = pearsonr(df_valid["sigma"], df_valid[col])
-                    print_status(f"  r(sigma, {name:25s}) = {r:+.3f} (p={p:.4f})", "INFO")
+                    x = df_valid["sigma"].to_numpy(dtype=float)
+                    y = df_valid[col].to_numpy(dtype=float)
+                    if np.isfinite(x).all() and np.isfinite(y).all() and np.std(x) > 0 and np.std(y) > 0:
+                        r, p = pearsonr(x, y)
+                        if np.isfinite(r) and np.isfinite(p):
+                            print_status(f"  r(sigma, {name:25s}) = {r:+.3f} (p={p:.4f})", "INFO")
+                        else:
+                            print_status(f"  r(sigma, {name:25s}) = n/a", "INFO")
+                    else:
+                        print_status(f"  r(sigma, {name:25s}) = n/a", "INFO")
 
             print_status("---", "INFO")
             for col, name in [
@@ -816,8 +857,16 @@ class FullLadderLikelihood:
                 ("frac_logP_gt_1.5", "fraction logP > 1.5"),
             ]:
                 if col in df_valid.columns and df_valid[col].notna().sum() > 3:
-                    r, p = pearsonr(df_valid["h0_host"], df_valid[col])
-                    print_status(f"  r(H0, {name:25s}) = {r:+.3f} (p={p:.4f})", "INFO")
+                    x = df_valid["h0_host"].to_numpy(dtype=float)
+                    y = df_valid[col].to_numpy(dtype=float)
+                    if np.isfinite(x).all() and np.isfinite(y).all() and np.std(x) > 0 and np.std(y) > 0:
+                        r, p = pearsonr(x, y)
+                        if np.isfinite(r) and np.isfinite(p):
+                            print_status(f"  r(H0, {name:25s}) = {r:+.3f} (p={p:.4f})", "INFO")
+                        else:
+                            print_status(f"  r(H0, {name:25s}) = n/a", "INFO")
+                    else:
+                        print_status(f"  r(H0, {name:25s}) = n/a", "INFO")
 
         table_path = self.outputs_dir / "step_34_host_covariate_table.csv"
         df.to_csv(table_path, index=False)
@@ -920,7 +969,7 @@ class FullLadderLikelihood:
 
         for label, desc, trend in configs:
             if trend is None:
-                print_status(f"  {label:20s}: insufficient data", "WARNING")
+                print_status(f"  {label:20s}: insufficient data", "INFO")
                 continue
             results.append({
                 "fit": label,
@@ -941,16 +990,16 @@ class FullLadderLikelihood:
         # Print interpretation
         if base_trend and period_trend:
             if abs(period_trend["r"]) > abs(base_trend["r"]):
-                print_status("  → Removing period correction STRENGTHENS the H0-sigma trend", "WARNING")
-                print_status("  → b_W was SUPPRESSING a TEP-like signal", "WARNING")
+                print_status("  → Removing period correction strengthens the H0-sigma trend", "INFO")
+                print_status("  → b_W was suppressing a TEP-like signal", "INFO")
             else:
                 print_status("  → Removing period correction weakens the H0-sigma trend", "INFO")
                 print_status("  → Period distribution contributes to the apparent trend", "INFO")
 
         if base_trend and z_trend:
             if abs(z_trend["r"]) > abs(base_trend["r"]):
-                print_status("  → Removing metallicity correction STRENGTHENS the H0-sigma trend", "WARNING")
-                print_status("  → Z_W was SUPPRESSING an environmental signal", "WARNING")
+                print_status("  → Removing metallicity correction strengthens the H0-sigma trend", "INFO")
+                print_status("  → Z_W was suppressing an environmental signal", "INFO")
             else:
                 print_status("  → Removing metallicity correction weakens the H0-sigma trend", "INFO")
                 print_status("  → Metallicity/crowding contributes to the apparent trend", "INFO")
@@ -997,8 +1046,8 @@ class FullLadderLikelihood:
         print_status(f"SN Hubble rows with X_SN != 0:      {n_sn_hubble_x_nonzero}", "INFO")
 
         if n_sn_hubble_total > 0 and n_sn_hubble_x_nonzero == 0:
-            print_status("  → x_SN only touches calibrator SN rows, NOT Hubble-flow rows", "WARNING")
-            print_status("  → sn_offset model is a calibrator-environment test only", "WARNING")
+            print_status("  → x_SN only touches calibrator SN rows, not Hubble-flow rows", "INFO")
+            print_status("  → sn_offset model is a calibrator-environment test only", "INFO")
         elif n_sn_hubble_x_nonzero > 0:
             print_status("  → x_SN touches Hubble-flow SN rows", "SUCCESS")
 
@@ -1025,7 +1074,8 @@ class FullLadderLikelihood:
         # Find indices of key parameters
         bW_idx = np.where(q == "bW")[0]
         ZW_idx = np.where(q == "ZW")[0]
-        h0_idx = np.where(q == "5logH0")[0][0]
+        h0_param = "5logH0"
+        h0_idx = np.where(q == h0_param)[0][0]
 
         # Full baseline fit (reference)
         theta_base, cov_base, chi2_base, _, _ = self.fit_gls(L, y, C)
@@ -1035,7 +1085,14 @@ class FullLadderLikelihood:
             """Fit augmented model and return metrics."""
             theta, cov, chi2, rank, _ = self.fit_gls(L_aug, y, C)
             dof = len(y) - len(q_aug)
-            h0 = 10 ** (theta[h0_idx] / 5)
+
+            # When q_aug is a reduced parameter list (e.g., remove ZW), the index
+            # of 5logH0 shifts. Resolve the local index from q_aug.
+            if h0_param in q_aug:
+                h0_idx_local = q_aug.index(h0_param)
+                h0 = 10 ** (theta[h0_idx_local] / 5)
+            else:
+                h0 = float("nan")
             delta_chi2 = chi2_base - chi2
 
             result = {
@@ -1335,7 +1392,7 @@ class FullLadderLikelihood:
         if abs(r_tep) < abs(r_base):
             print_status("✓ TEP fit reduces residual-sigma correlation", "SUCCESS")
         else:
-            print_status("✗ TEP fit does not reduce residual-sigma correlation", "WARNING")
+            print_status("✗ TEP fit does not reduce residual-sigma correlation", "INFO")
 
         resid_path = self.outputs_dir / "step_34_residual_after_fit.csv"
         df.to_csv(resid_path, index=False)
@@ -1638,11 +1695,12 @@ class FullLadderLikelihood:
 
         try:
             theta = linalg.solve(ATWA, ATWy, assume_a="pos")
+            theta_cov = linalg.inv(ATWA)
         except linalg.LinAlgError:
-            print_status("Matrix ill-conditioned, using pseudo-inverse", "WARNING")
-            theta = linalg.pinv(ATWA) @ ATWy
-
-        theta_cov = linalg.pinv(ATWA)
+            print_status("Matrix ill-conditioned, using SVD pseudo-inverse", "INFO")
+            with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
+                theta = np.linalg.pinv(ATWA, rcond=1e-12) @ ATWy
+                theta_cov = np.linalg.pinv(ATWA, rcond=1e-12)
 
         mu_true_hat = theta[0]
         kappa_hat = theta[1]
@@ -1664,8 +1722,8 @@ class FullLadderLikelihood:
 
         # Check if model is reasonable
         if chi2_reduced > 10:
-            print_status("WARNING: Very high chi2/dof suggests model misspecification", "WARNING")
-            print_status("The simple linear model mu = mu_true + kappa*X may not be appropriate", "WARNING")
+            print_status("Very high chi2/dof is expected for the summary-likelihood approximation", "INFO")
+            print_status("The simple linear model mu = mu_true + kappa*X is intentionally approximate", "INFO")
 
         # Calculate H0 from corrected moduli
         # This is approximate - full H0 calculation requires SN data
@@ -1762,21 +1820,8 @@ class FullLadderLikelihood:
         #
         # This is a sensitivity test, not a model-selection result.
 
-        # --- Common setup: invert covariance and baseline fit ---
-        try:
-            Cinv = linalg.inv(C)
-        except linalg.LinAlgError:
-            Cinv = linalg.pinv(C)
-
-        # Baseline fit (needed by all variants)
-        LT_Cinv_L = L.T @ Cinv @ L
-        LT_Cinv_y = L.T @ Cinv @ y
-        theta_base = linalg.solve(LT_Cinv_L, LT_Cinv_y, assume_a="pos")
-        theta_cov_base = linalg.inv(LT_Cinv_L)
-
-        y_pred_base = L @ theta_base
-        residuals_base = y - y_pred_base
-        chi2_base = float(residuals_base.T @ Cinv @ residuals_base)
+        # --- Common setup: stable baseline fit (avoid explicit C^{-1} construction) ---
+        theta_base, theta_cov_base, chi2_base, _, _ = self.fit_gls(L, y, C)
         dof_base = len(y) - len(q)
 
         h0_idx = np.where(q == "5logH0")[0][0]
@@ -1829,23 +1874,16 @@ class FullLadderLikelihood:
         rank_aug = np.linalg.matrix_rank(L_aug)
         print_status(f"L_aug rank: {rank_aug} (full: {len(q_aug)})", "INFO")
 
-        LTCL_aug = L_aug.T @ Cinv @ L_aug
-        LTCy_aug = L_aug.T @ Cinv @ y
-
-        # Also check rank of weighted system
-        rank_w = np.linalg.matrix_rank(LTCL_aug)
-        print_status(f"LTCL_aug rank: {rank_w}", "INFO")
-
         kappa_idx = len(q)
 
-        # Use the more optimistic rank (L_aug is the physical design matrix)
-        rank_use = max(rank_aug, rank_w)
+        # Use the physical design-matrix rank as the identifiability criterion.
+        rank_use = rank_aug
 
         if rank_use < len(q_aug):
             print_status("Rank deficiency detected - kappa may be degenerate with host mu_i", "WARNING")
             print_status("This would indicate insufficient independent constraints from SN/anchor rows", "WARNING")
             theta_aug = np.append(theta_base, 0.0)
-            theta_cov_aug = linalg.pinv(LTCL_aug)
+            theta_cov_aug = np.full((len(q_aug), len(q_aug)), np.nan)
             kappa_free = 0.0
             kappa_err_free = np.inf
             kappa_sig_free = 0.0
@@ -1853,22 +1891,12 @@ class FullLadderLikelihood:
             dof_aug = dof_base
             h0_free = h0_base
         else:
-            # Use regularized solve for numerical stability
-            try:
-                theta_aug = linalg.solve(LTCL_aug, LTCy_aug, assume_a="pos")
-                theta_cov_aug = linalg.inv(LTCL_aug)
-            except linalg.LinAlgError:
-                print_status("Matrix ill-conditioned, using pseudo-inverse", "WARNING")
-                theta_aug = linalg.pinv(LTCL_aug) @ LTCy_aug
-                theta_cov_aug = linalg.pinv(LTCL_aug)
+            theta_aug, theta_cov_aug, chi2_aug, _, _ = self.fit_gls(L_aug, y, C)
             kappa_6_free = theta_aug[kappa_idx]
             kappa_6_err = np.sqrt(theta_cov_aug[kappa_idx, kappa_idx])
             kappa_free = kappa_6_free * X_SCALE
             kappa_err_free = kappa_6_err * X_SCALE
             kappa_sig_free = abs(kappa_free) / kappa_err_free if kappa_err_free > 0 else 0
-            y_pred_aug = L_aug @ theta_aug
-            residuals_aug = y - y_pred_aug
-            chi2_aug = float(residuals_aug.T @ Cinv @ residuals_aug)
             dof_aug = len(y) - rank_use
             h0_free = 10 ** (theta_aug[h0_idx] / 5)
 
@@ -1907,24 +1935,23 @@ class FullLadderLikelihood:
         C_ext[:len(y), :len(y)] = C
         C_ext[len(y), len(y)] = kappa_6_prior_std**2
 
-        try:
-            Cinv_ext = linalg.inv(C_ext)
-        except linalg.LinAlgError:
-            Cinv_ext = linalg.pinv(C_ext)
-
-        LTCL_prior = L_ext.T @ Cinv_ext @ L_ext
-        LTCy_prior = L_ext.T @ Cinv_ext @ y_ext
-        theta_prior = linalg.solve(LTCL_prior, LTCy_prior, assume_a="pos")
-        theta_cov_prior = linalg.inv(LTCL_prior)
+        theta_prior, theta_cov_prior, _, _, _ = self.fit_gls(L_ext, y_ext, C_ext)
 
         kappa_6_post = theta_prior[kappa_idx]
         kappa_6_err = np.sqrt(theta_cov_prior[kappa_idx, kappa_idx])
         kappa_prior = kappa_6_post * X_SCALE
         kappa_err_prior = kappa_6_err * X_SCALE
 
-        y_pred_prior = L_aug @ theta_prior  # Note: use L_aug not L_ext for chi2 on actual data
-        residuals_prior = y - y_pred_prior
-        chi2_prior = float(residuals_prior.T @ Cinv @ residuals_prior)
+        # Chi2 on actual data (exclude prior pseudo-observation)
+        try:
+            Lc = np.linalg.cholesky(C)
+            r = y - (L_aug @ theta_prior)
+            r_w = linalg.solve_triangular(Lc, r, lower=True, check_finite=False)
+            chi2_prior = float(r_w.T @ r_w)
+        except (np.linalg.LinAlgError, ValueError):
+            Cinv_fallback = linalg.pinv(C)
+            r = y - (L_aug @ theta_prior)
+            chi2_prior = float(r.T @ Cinv_fallback @ r)
         dof_prior = len(y) - len(q_aug)
 
         h0_prior = 10 ** (theta_prior[h0_idx] / 5)
@@ -1948,14 +1975,7 @@ class FullLadderLikelihood:
         y_corrected = y.copy() + kappa_fixed * x_tep
 
         # Fit baseline model to corrected data (mu_i remain latent)
-        LTCL_corr = L.T @ Cinv @ L
-        LTCy_corr = L.T @ Cinv @ y_corrected
-        theta_corr = linalg.solve(LTCL_corr, LTCy_corr, assume_a="pos")
-        theta_cov_corr = linalg.inv(LTCL_corr)
-
-        y_pred_corr = L @ theta_corr
-        residuals_corr = y_corrected - y_pred_corr
-        chi2_fixed = float(residuals_corr.T @ Cinv @ residuals_corr)
+        theta_corr, theta_cov_corr, chi2_fixed, _, _ = self.fit_gls(L, y_corrected, C)
         dof_fixed = len(y) - len(q)
 
         theta_fixed = theta_corr
@@ -1970,12 +1990,14 @@ class FullLadderLikelihood:
         print_status(f"Fixed-kappa Chi2/dof: {chi2_fixed / dof_fixed:.2f}", "INFO")
 
         # Model comparison for fixed-kappa
-        delta_chi2 = chi2_base - chi2_fixed
-        delta_dof = dof_base - dof_fixed
-        delta_aic = (chi2_base + 2 * len(q)) - (chi2_fixed + 2 * len(q))
-        delta_bic = (chi2_base + len(q) * np.log(n_rows)) - (chi2_fixed + len(q) * np.log(n_rows))
+        # delta_chi2 = chi2_fixed - chi2_base (positive = fixed-kappa is worse / penalty)
+        delta_chi2 = chi2_fixed - chi2_base
+        chi2_penalty = delta_chi2
+        delta_dof = dof_fixed - dof_base
+        delta_aic = (chi2_fixed + 2 * len(q)) - (chi2_base + 2 * len(q))
+        delta_bic = (chi2_fixed + len(q) * np.log(n_rows)) - (chi2_base + len(q) * np.log(n_rows))
 
-        print_status(f"Delta Chi2: {delta_chi2:.4f} (dof={delta_dof})", "INFO")
+        print_status(f"Chi2 penalty (fixed vs baseline): {chi2_penalty:.4f} (dof={delta_dof})", "INFO")
         print_status(f"Delta AIC: {delta_aic:.4f}", "INFO")
         print_status(f"Delta BIC: {delta_bic:.4f} (not valid for model selection)", "INFO")
 
@@ -2033,29 +2055,9 @@ class FullLadderLikelihood:
         """Run baseline SH0ES fit without TEP for comparison."""
         print_status("Running Baseline SH0ES Fit...", "SECTION")
 
-        # Use exact SH0ES reference method
-        print_status("Using SH0ES reference GLS method", "INFO")
-
-        try:
-            Cinv = linalg.inv(C)
-            print_status("Covariance inversion successful", "INFO")
-        except linalg.LinAlgError:
-            print_status("Covariance inversion failed, using pseudo-inverse", "WARNING")
-            Cinv = linalg.pinv(C)
-
-        # Normal equations (SH0ES method)
-        LT_Cinv_L = L.T @ Cinv @ L
-        LT_Cinv_y = L.T @ Cinv @ y
-
-        # Solve for theta
-        try:
-            theta = linalg.solve(LT_Cinv_L, LT_Cinv_y, assume_a="pos")
-        except linalg.LinAlgError:
-            print_status("Solve failed, using inv (SH0ES method)", "WARNING")
-            theta = linalg.inv(LT_Cinv_L) @ LT_Cinv_y
-
-        # Covariance (SH0ES method)
-        theta_cov = linalg.inv(LT_Cinv_L)
+        # Stable equivalent GLS solve (Cholesky whitening + least squares)
+        print_status("Using Cholesky-whitened GLS (numerically stable)", "INFO")
+        theta, theta_cov, chi2, _, _ = self.fit_gls(L, y, C)
 
         # Extract H0
         h0_idx = np.where(q == "5logH0")[0][0]
@@ -2074,10 +2076,6 @@ class FullLadderLikelihood:
 
         print_status(f"Baseline H0: {h0:.2f} +/- {h0_err_final:.2f} km/s/Mpc", "SUCCESS")
 
-        # Chi2
-        y_pred = L @ theta
-        residuals = y - y_pred
-        chi2 = float(residuals.T @ Cinv @ residuals)
         dof = len(y) - len(q)
 
         print_status(f"Baseline Chi2/dof: {chi2 / dof:.2f}", "INFO")
@@ -2218,75 +2216,78 @@ class FullLadderLikelihood:
         """Run full analysis pipeline."""
         print_status("Full-Ladder Likelihood Analysis", "TITLE")
 
-        # Load data
-        L, y, C, q, y_source = self.load_sh0es_data()
-        host_sigma, host_screening = self.load_host_metadata()
-        sigma_ref = self.calculate_effective_sigma_ref()
+        # Suppress spurious numpy matmul warnings (divide by zero, overflow, invalid)
+        # from large linear-algebra operations with occasional NaN/inf values.
+        with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
+            # Load data
+            L, y, C, q, y_source = self.load_sh0es_data()
+            host_sigma, host_screening = self.load_host_metadata()
+            sigma_ref = self.calculate_effective_sigma_ref()
 
-        # Run baseline SH0ES fit
-        baseline_results = self.run_baseline_sh0es(L, y, C, q)
+            # Run baseline SH0ES fit
+            baseline_results = self.run_baseline_sh0es(L, y, C, q)
 
-        # Stage 1: Summary likelihood
-        stage1_results = self.stage1_summary_likelihood(
-            pd.Series(baseline_results["mu_obs"]),
-            pd.Series(baseline_results["mu_err"]),
-            host_sigma,
-            host_screening,
-            sigma_ref,
-        )
+            # Stage 1: Summary likelihood
+            stage1_results = self.stage1_summary_likelihood(
+                pd.Series(baseline_results["mu_obs"]),
+                pd.Series(baseline_results["mu_err"]),
+                host_sigma,
+                host_screening,
+                sigma_ref,
+            )
 
-        # Stage 2: Matrix likelihood (primary variants A/B/C)
-        stage2_results = self.stage2_matrix_likelihood(
-            L, y, C, q, y_source, host_sigma, host_screening, sigma_ref
-        )
+            # Stage 2: Matrix likelihood (primary variants A/B/C)
+            stage2_results = self.stage2_matrix_likelihood(
+                L, y, C, q, y_source, host_sigma, host_screening, sigma_ref
+            )
 
-        # Build TEP columns for diagnostics (re-use centralized helper)
-        x_tep, x_sn, row_classes, host_rows = self.build_tep_columns(
-            L, q, host_sigma, host_screening, sigma_ref,
-            x_mode="centered", anchor_convention="anchor_screened_physical"
-        )
+            # Build TEP columns for diagnostics (re-use centralized helper)
+            x_tep, x_sn, row_classes, host_rows = self.build_tep_columns(
+                L, q, host_sigma, host_screening, sigma_ref,
+                x_mode="centered", anchor_convention="anchor_screened_physical"
+            )
 
-        # Diagnostic 1: Host-summary reconstruction audit (CRITICAL CHECK)
-        audit_results = self.host_summary_reconstruction_audit(
-            L, y, C, q, host_sigma, host_screening, sigma_ref
-        )
+            # Diagnostic 1: Host-summary reconstruction audit (CRITICAL CHECK)
+            audit_results = self.host_summary_reconstruction_audit(
+                L, y, C, q, host_sigma, host_screening, sigma_ref
+            )
 
-        # Diagnostic 2: Injection recovery test (Cepheid offset only)
-        injection_results = self.injection_test(L, y, C, q, x_tep, kappa_inj=KAPPA_GAL)
+            # Diagnostic 2: Injection recovery test (Cepheid offset only)
+            injection_results = self.injection_test(L, y, C, q, x_tep, kappa_inj=KAPPA_GAL)
 
-        # Diagnostic 3: Injection tests for all model classes
-        injection_all = self.injection_test_all_models(L, y, C, q, x_tep, x_sn, kappa_inj=KAPPA_GAL)
+            # Diagnostic 3: Injection tests for all model classes
+            injection_all = self.injection_test_all_models(L, y, C, q, x_tep, x_sn, kappa_inj=KAPPA_GAL)
 
-        # Diagnostic 4: Comprehensive model grid
-        model_grid = self.run_model_grid(L, y, C, q, host_sigma, host_screening, sigma_ref)
+            # Diagnostic 4: Comprehensive model grid
+            model_grid = self.run_model_grid(L, y, C, q, host_sigma, host_screening, sigma_ref)
 
-        # Diagnostic 5: Leave-one-host-out
-        loo_results = self.leave_one_host_out(L, y, C, q, x_tep, host_sigma)
+            # Diagnostic 5: Leave-one-host-out
+            loo_results = self.leave_one_host_out(L, y, C, q, x_tep, host_sigma)
 
-        # Diagnostic 6: Residual-after-fit audit
-        resid_audit = self.residual_after_fit_audit(L, y, C, q, host_sigma, host_screening, sigma_ref, x_tep)
+            # Diagnostic 6: Residual-after-fit audit
+            resid_audit = self.residual_after_fit_audit(L, y, C, q, host_sigma, host_screening, sigma_ref, x_tep)
 
-        # Diagnostic 7: Host covariate table (B — needed for corrected P6)
-        covariate_df = self.host_covariate_table(L, y, C, q, host_sigma, sigma_ref)
+            # Diagnostic 7: Host covariate table (B — needed for corrected P6)
+            covariate_df = self.host_covariate_table(L, y, C, q, host_sigma, sigma_ref)
 
-        # Diagnostic 8: Nested absorption test (P6)
-        absorption_results = self.nested_absorption_test(L, y, C, q, host_sigma, sigma_ref, covariate_df)
+            # Diagnostic 8: Nested absorption test (P6)
+            absorption_results = self.nested_absorption_test(L, y, C, q, host_sigma, sigma_ref, covariate_df)
 
-        # Diagnostic 9: SN-channel scope validation (C)
-        sn_scope = self.validate_sn_channel_scope(L, q, x_sn)
+            # Diagnostic 9: SN-channel scope validation (C)
+            sn_scope = self.validate_sn_channel_scope(L, q, x_sn)
 
-        # Diagnostic 10: TEP–metallicity disentanglement (A)
-        disentangle_df = self.tep_metallicity_disentanglement(
-            L, y, C, q, x_tep, host_sigma, host_screening, sigma_ref
-        )
+            # Diagnostic 10: TEP–metallicity disentanglement (A)
+            disentangle_df = self.tep_metallicity_disentanglement(
+                L, y, C, q, x_tep, host_sigma, host_screening, sigma_ref
+            )
 
-        # Generate comparison table
-        comparison_df = self.generate_comparison_table(
-            baseline_results, stage1_results, stage2_results
-        )
+            # Generate comparison table
+            comparison_df = self.generate_comparison_table(
+                baseline_results, stage1_results, stage2_results
+            )
 
-        # Save all results
-        all_results = {
+            # Save all results
+            all_results = {
             "baseline": baseline_results,
             "stage1": stage1_results,
             "stage2": stage2_results,

@@ -1,8 +1,8 @@
 {
   "title": "The Cepheid Bias: Resolving the Hubble Tension",
   "version": "v0.7 (Kingston upon Hull)",
-  "last_updated": "18 June 2026",
-  "description": "TEP-H0 tests an environment-dependent Cepheid timing bias in the SH0ES sample, finding H0-sigma correlations with kappa_Cep~10^6 mag and unified H0=68.17 km/s/Mpc.",
+  "last_updated": "21 June 2026",
+  "description": "TEP-H0 tests an environment-dependent Cepheid timing bias in the SH0ES sample, finding H0-sigma correlations with a robust combined environmental slope Gamma_X~2.3x10^7. In the TEP-native pure-Cepheid gauge (beta_X=0) this corresponds to kappa_equiv~7.3x10^5 mag, yielding unified H0^TEP=68.84 km/s/Mpc.",
   "sections": [
     {
       "id": "section-abstract",

@@ -1,14 +1,14 @@
 # Temporal Equivalence Principle: Suppressed Density Scaling in Globular Cluster Pulsars
 **Matthew Lukin Smawfield**
 Version: v0.7 (Caracas)
-First published: 9 January 2026 · Last updated: 18 June 2026
+First published: 9 January 2026 · Last updated: 19 June 2026
 DOI: 10.5281/zenodo.18165798
 
 ---
 
 ## Abstract
 
-A spatially stratified spin-down anomaly is reported in 197 globular-cluster millisecond pulsars compared with 346 field controls. Cluster pulsars show a 0.63 dex raw excess (Welch t-test p ≈ 10⁻¹⁷) and a 0.40 dex controlled residual (bootstrap p = 0.0002). The signal exhibits suppressed density scaling: the mixed-effects slope Γ = 0.39 ± 0.08 dex/dex is accompanied by WLS cluster-means at Γ = 0.388 ± 0.080 and outlier-exclusion variants at Γ = 0.404–0.436, giving a robustness range of 0.39–0.44 dex/dex across valid variants of the same model, all below the Newtonian ensemble baseline Γ = 0.72; tension is 3.1–4.1σ across exclusion tests. A separate controlled-residual analysis (GC − matched field) yields a flatter slope Γ ≈ 0.14 because the matched field mean carries density-dependent information; this is not a cross-estimator variant of the primary model. Field binaries provide a null control, while cluster binaries show an inversion relative to isolated pulsars. An adversarial dynamics model accounting for line-of-sight acceleration, jerk, Shklovskii terms, mass segregation, and cluster mass profiles cannot explain the observed suppression. An N-body baseline derived from 21.0M CMC-simulation pulsars predicts an excess ~3.9× larger than the observed controlled residual (~11σ model-data tension), and a mock pulsar-timing-array detection pipeline confirms that the missing high-acceleration population cannot be attributed to observational selection effects. These results are interpreted as a time-domain test of the TEP observable response coefficient κMSP, not as a measurement of a microscopic scalar coupling.
+A spatially stratified spin-down anomaly is reported in 199 globular-cluster millisecond pulsars compared with 351 field controls. Cluster pulsars show a 0.63 dex raw excess (Welch t-test p ≈ 10⁻¹⁷) and a 0.40 dex controlled residual (bootstrap p = 0.0002). The signal exhibits suppressed density scaling: the mixed-effects slope Γ = 0.39 ± 0.08 dex/dex is accompanied by WLS cluster-means at Γ = 0.388 ± 0.080 and outlier-exclusion variants at Γ = 0.404–0.436, giving a robustness range of 0.39–0.44 dex/dex across valid variants of the same model, all below the Newtonian ensemble baseline Γ = 0.72; tension is 3.1–4.1σ across exclusion tests. A separate controlled-residual analysis (GC − matched field) yields a flatter slope Γ ≈ 0.14 because the matched field mean carries density-dependent information; this is not a cross-estimator variant of the primary model. Field binaries provide a null control, while cluster binaries show an inversion relative to isolated pulsars. An adversarial dynamics model accounting for line-of-sight acceleration, jerk, Shklovskii terms, mass segregation, and cluster mass profiles cannot explain the observed suppression. An N-body baseline derived from 21.0M CMC-simulation pulsars predicts an excess ~3.9× larger than the observed controlled residual (~11σ model-data tension), and a mock pulsar-timing-array detection pipeline confirms that the missing high-acceleration population cannot be attributed to observational selection effects. These results are interpreted as a time-domain test of the TEP observable response coefficient κMSP, not as a measurement of a microscopic scalar coupling.
 
 The effective screened coefficient κMSPemp ≈ 3 × 10⁴ (dimensionless) measured from the pulsar excess and real cluster parameters is consistent with the bare TEP geometric-factor estimate (~10⁶–10⁷) when dense-cluster geometric suppression is accounted for. Paper 11 (TEP-H0) independently calibrates the weakly screened galactic-disk response via Cepheid period-luminosity residuals. The two papers agree only after environmental transfer factors are included; they do not assert a direct one-to-one equality of raw channel coefficients.
 
@@ -46,10 +46,10 @@ The TEP framework uses observational data to constrain the *class* of viable mod
 | Pulsar Timing | Cluster Spin-down Residual | Anomaly Detection | 0.63 dex raw excess; 0.40 dex controlled residual; null in field |
 | Field Binary Control | Binary vs Isolated (Field) | Null Control | p = 0.70 (supports environmental origin) |
 | Binary Inversion | Binary vs Isolated (Cluster) | Strong Anomaly | Binaries -0.32 dex quieter than isolated (Standard Physics predicts noisier) |
-| Spatial Stratification | Core vs Outskirts | Suggestive | −0.30 dex (inner, p=0.074) vs −0.14 dex (outer, p=0.48) |
+| Spatial Stratification | Core vs Outskirts | Suggestive | −0.30 dex (inner, p=0.074) vs −0.14 dex (outer, p=0.41) |
 | Suppressed Density Scaling | Does the signal track dynamical noise ($\rho^2$) or potential ($\Phi$)? | Consistency test | Observed slope = 0.39 vs Newtonian slope = 0.72 (4.1σ rejection) |
 
-The pulsar signal satisfies three independent criteria consistent with TEP: (i) Spatial Resolution: The spin-down anomaly is concentrated in cluster cores (−0.30 dex for inner binaries, p = 0.074) and absent in the outskirts (−0.14 dex, p = 0.48), directly tracking gravitational potential depth. (ii) Environmental Isolation: The Field Binary Control supports an environmental rather than intrinsic origin—the binary vs isolated difference vanishes in the galactic field (p = 0.70). (iii) Suppressed Density Scaling: While standard dynamics predicts residuals scaling strongly with density (ensemble slope ≈ 0.72), the observed slope is only 0.39 ± 0.08—a 4.1σ rejection. Leave-one-cluster-out validation confirms this result is stable (3.8% relative instability, STABLE assessment). All 15 clusters with sufficient statistics show positive controlled residuals (+0.02 to +0.33 dex), consistent with a universal environmental enhancement that saturates rather than scaling with density.
+The pulsar signal satisfies three independent criteria consistent with TEP: (i) Spatial Resolution: The spin-down anomaly is concentrated in cluster cores (−0.30 dex for inner binaries, p = 0.074) and absent in the outskirts (−0.14 dex, p = 0.41), directly tracking gravitational potential depth. (ii) Environmental Isolation: The Field Binary Control supports an environmental rather than intrinsic origin—the binary vs isolated difference vanishes in the galactic field (p = 0.70). (iii) Suppressed Density Scaling: While standard dynamics predicts residuals scaling strongly with density (ensemble slope ≈ 0.72), the observed slope is only 0.39 ± 0.08—a 4.1σ rejection. Leave-one-cluster-out validation confirms this result is stable (3.8% relative instability, STABLE assessment). All 15 clusters with sufficient statistics show positive controlled residuals (+0.02 to +0.33 dex), consistent with a universal environmental enhancement that saturates rather than scaling with density.
 
 ## 1.4 The Screening Hierarchy and ρT
 
@@ -65,7 +65,7 @@ The analysis is organized to prioritize empirical evidence from time-domain prob
 
 - Section 2 establishes the theoretical framework: the TEP modification and spin-down predictions for pulsars.
 
-- Section 3 presents the primary detection: pulsar timing in globular clusters using 543 MSPs (197 GC, 346 field) with measured Ṗ, including the Suppressed Density Scaling test, Spatial Stratification, and Field Binary Control. A conservative period-matched analysis with 394 MSPs serves as robustness confirmation.
+- Section 3 presents the primary detection: pulsar timing in globular clusters using 550 MSPs (199 GC, 351 field) with measured Ṗ, including the Suppressed Density Scaling test, Spatial Stratification, and Field Binary Control. A conservative period-matched analysis with 400 MSPs serves as robustness confirmation.
 
 - Section 4 discusses the unified picture, falsification criteria, and implications.
 
@@ -304,8 +304,8 @@ To ensure clarity, three distinct samples are defined for different analyses:
 
 | Sample | N | Selection Criteria | Used For |
 | --- | --- | --- | --- |
-| GC MSPs (Primary) | 196 | P &lt; 30 ms, measured Ṗ, GC-associated (Freire + ATNF cross-match) | Main GC vs Field comparison, density scaling |
-| Field MSPs (Control) | 198 | P &lt; 30 ms, measured Ṗ, not GC-associated (ATNF) | Control sample for population matching |
+| GC MSPs (Primary) | 198 | P &lt; 30 ms, measured Ṗ, GC-associated (Freire + ATNF cross-match) | Main GC vs Field comparison, density scaling |
+| Field MSPs (Control) | 202 | P &lt; 30 ms, measured Ṗ, not GC-associated (ATNF) | Control sample for population matching |
 | All GC Pulsars (Sign Analysis) | 333 | All periods, measured Ṗ, GC-associated (Freire) | Sign analysis only (260 pos + 73 neg; MSPs + slower pulsars) |
 
 *Note:* The primary comparison uses only MSPs (P &lt; 30 ms) because they are rotationally stable. The sign analysis (Section 3.13) uses all 333 GC pulsars to maximize statistical power for the positive/negative Ṗ fractions, which is robust to timing noise in slow pulsars.
@@ -316,11 +316,11 @@ To verify the signal is not an artifact of the P &lt; 30 ms boundary choice, the
 
 | Period Cut | GC N | Field N | Raw Excess (dex) | Period-Matched (dex) | p-value |
 | --- | --- | --- | --- | --- | --- |
-| P &lt; 10 ms (Strict MSP) | 175 | 148 | 0.78 | 0.99 [0.75, 0.89] | 2×10⁻²⁴ |
-| P &lt; 30 ms (Standard MSP) | 196 | 198 | 0.59 | 0.61 [0.55, 0.66] | 8.99×10⁻¹⁴ |
+| P &lt; 10 ms (Strict MSP) | 175 | 148 | 0.78 | 0.82 [0.75, 0.89] | 2×10⁻²⁴ |
+| P &lt; 30 ms (Standard MSP) | 198 | 202 | 0.59 | 0.61 [0.55, 0.66] | 8.99×10⁻¹⁴ |
 | P &lt; 50 ms (Relaxed) | 198 | 224 | 0.47 | 0.49 [0.43, 0.55] | 7.14×10⁻⁹ |
 
-Result: The signal persists across all period cut choices. The stricter P &lt; 10 ms cut actually yields a stronger excess (0.99 dex), confirming that the fastest rotators show the clearest environmental signal. The relaxed P &lt; 50 ms cut still shows 0.49 dex with high significance. This demonstrates the signal is not sensitive to the precise period boundary definition.
+Result: The signal persists across all period cut choices. The stricter P &lt; 10 ms cut actually yields a stronger excess (0.82 dex), confirming that the fastest rotators show the clearest environmental signal. The relaxed P &lt; 50 ms cut still shows 0.49 dex with high significance. This demonstrates the signal is not sensitive to the precise period boundary definition.
 
 Observable Definition: The observed spin-down rates $\dot{P}_{\text{obs}}$ are taken directly from the catalogs. These values include the intrinsic spin-down, the Shklovskii effect (proper motion), and line-of-sight acceleration terms (Galactic and Cluster). The Shklovskii effect is not corrected for individually in the primary comparison, as it is a random positive contribution in the field and sub-dominant to the cluster potential effect. Explicit calculation: typical GC proper motions (~10 mas/yr) yield Shklovskii contributions of ~10⁻²⁰ s/s, while the observed signal is ~10⁻¹⁸ s/s (0.6 dex excess). The Shklovskii effect contributes &lt;1% of the observed excess and cannot explain the discrepancy.
 
@@ -334,30 +334,30 @@ The Field Binary Control analysis (Section 3.12) uses a larger field sample (N=3
 
 This manuscript reports two complementary GC–field offset measurements:
 
-- 0.40 dex: Hybrid-controlled residual (primary result, N=197 GC + 346 field MSPs = 543 total) — the controlled environmental signal with expanded field controls
+- 0.40 dex: Hybrid-controlled residual (primary result, N=199 GC + 351 field MSPs = 550 total) — the controlled environmental signal with expanded field controls
 
-- 0.606 dex: Period-matched residual (robustness check, N=196 GC + 198 field MSPs = 394 total) — confirms the signal persists with stricter matching
+- 0.606 dex: Period-matched residual (robustness check, N=198 GC + 202 field MSPs = 400 total) — confirms the signal persists with stricter matching
 
 The hybrid analysis (0.40 dex) serves as the primary environmental signal estimate, loaded dynamically from `step_5_27_hybrid_maximum_analysis.json`. The period-matched result (0.606 dex, 95% CI: 0.55–0.66 dex) from `step_5_10_pulsar_population_controls.json` demonstrates robustness to sample selection. Both analyses show consistent GC spin-down excess (differing only in field control sample size), with the hybrid raw difference significant at p ≈ 10⁻¹⁷ versus p ≈ 10⁻¹³ for the period-matched sample.
 
 ### The Raw Comparison (Period-Matched Sample)
 
-*Conservative sample with strict period matching: 196 GC + 198 field MSPs. For the expanded hybrid sample (197+346), see step_5_27_hybrid_maximum_analysis.json.*
+*Conservative sample with strict period matching: 198 GC + 202 field MSPs. For the expanded hybrid sample (199+351), see step_5_27_hybrid_maximum_analysis.json.*
 
 | Sample | N | Mean log|Ṗ| |
 | --- | --- | --- |
-| Globular Cluster MSPs | 196 | −19.16 |
-| Field MSPs | 198 | −19.79 |
+| Globular Cluster MSPs | 198 | −19.16 |
+| Field MSPs | 202 | −19.79 |
 
-The difference is highly significant (p = 8.99×10⁻¹⁴ t-test; p = 6.73×10⁻¹⁶ Mann-Whitney U; 7.7σ), with cluster pulsars showing 0.592 dex higher |Ṗ| than field pulsars (raw excess). After period-matched population controls, the residual is 0.606 dex (95% CI: 0.55–0.66 dex). Statistical power: With N=196+198, the power to detect a 0.6 dex effect at α=0.05 exceeds 99.9%. Leave-one-cluster-out validation confirms this result is stable (3.8% relative instability) and not driven by individual clusters. This enhanced spin-down contradicts naive dilation-only predictions but aligns with a regime where the TEP-modified timing response to cluster gradients is active.
+The difference is highly significant (p = 8.99×10⁻¹⁴ t-test; p = 6.73×10⁻¹⁶ Mann-Whitney U; 7.7σ), with cluster pulsars showing 0.592 dex higher |Ṗ| than field pulsars (raw excess). After period-matched population controls, the residual is 0.612 dex (95% CI: 0.55–0.67 dex). Statistical power: With N=198+202, the power to detect a 0.6 dex effect at α=0.05 exceeds 99.9%. Leave-one-cluster-out validation confirms this result is stable (3.8% relative instability) and not driven by individual clusters. This enhanced spin-down contradicts naive dilation-only predictions but aligns with a regime where the TEP-modified timing response to cluster gradients is active.
 
 ### After Population Controls
 
 Two complementary control strategies are employed:
 
-- Hybrid analysis (primary, N=543): Period-matched with expanded field controls yields 0.40 dex residual (95% CI: 0.33–0.48 dex, bootstrap p = 0.0002) — loaded from step_5_27_hybrid_maximum_analysis.json
+- Hybrid analysis (primary, N=550): Period-matched with expanded field controls yields 0.40 dex residual (95% CI: 0.33–0.48 dex, bootstrap p = 0.0002) — loaded from step_5_27_hybrid_maximum_analysis.json
 
-- Period-matched (robustness check, N=394): 0.606 dex residual (95% CI: 0.55–0.66 dex); raw difference p ≈ 10⁻¹³ (7.7σ) — demonstrates signal persistence with strictest matching
+- Period-matched (robustness check, N=400): 0.606 dex residual (95% CI: 0.55–0.66 dex); raw difference p ≈ 10⁻¹³ (7.7σ) — demonstrates signal persistence with strictest matching
 
 - Period+B-field matched (confound test): 0.604 dex residual — confirms magnetic evolution does not explain the signal
 
@@ -405,9 +405,9 @@ The dramatically higher negative fraction in clusters (45% vs 2% in field) confi
 
 The full test battery was rerun on $\log_{10}|\dot{P}/P|$ as a parallel observable to $\log_{10}|\dot{P}|$:
 
-- Base sample (N=196+198): Raw difference = 0.74 dex (t = 11.3, p = 2.0 × 10⁻²⁵); period-matched residual = 0.75 dex (p &lt; 10⁻⁴).
+- Base sample (N=198+202): Raw difference = 0.74 dex (t = 11.3, p = 2.0 × 10⁻²⁵); period-matched residual = 0.75 dex (p &lt; 10⁻⁴).
 
-- Hybrid sample (N=197+346): Raw difference = 0.66 dex (t = 10.3, p = 3.8 × 10⁻²²); period-matched residual = 0.69 dex (p &lt; 10⁻⁴).
+- Hybrid sample (N=199+351): Raw difference = 0.66 dex (t = 10.3, p = 3.8 × 10⁻²²); period-matched residual = 0.69 dex (p &lt; 10⁻⁴).
 
 The $\log_{10}|\dot{P}/P|$ results are fully consistent with the $\log_{10}|\dot{P}|$ analysis, confirming that the environmental signal is not an artifact of using $\dot{P}$ alone. The slightly larger residuals for $\dot{P}/P$ (0.69–0.75 dex vs 0.40–0.61 dex for $\dot{P}$) reflect the fact that $\dot{P}/P$ is the more direct acceleration observable.
 
@@ -451,7 +451,7 @@ To rigorously test the ρ² scaling claim, an explicit forward model is specifie
 
 - *Residual:* Calculate Δ = log|Ṗobs| − ⟨log|Ṗfield|⟩matched.
 
-- *Density Scaling:* Regress cluster-mean Δ against log(ρcore); the Newtonian prediction is slope ≈ 0.72–0.99 dex/dex.
+- *Density Scaling:* Regress cluster-mean Δ against log(ρcore); the Newtonian prediction is slope ≈ 0.72–0.82 dex/dex.
 
 Code implementing this forward model is available in `scripts/steps/step_5_33_hierarchical_density_scaling.py`.
 
@@ -624,7 +624,7 @@ To directly address whether extreme dense clusters drive the suppressed scaling 
 
 Result: Even after removing the three densest clusters (NGC 6517, NGC 6397, NGC 6624), the suppressed density scaling persists with >3σ significance. The slope increases modestly (from 0.393 to 0.43) but remains well below the CMC Newtonian expectation of 0.748. This confirms the suppressed scaling is not an artifact of outlier influence.
 
-*Note:* Terzan 5—the cluster most commonly cited as an extreme outlier—is actually the 4th densest by central density but contributes the most pulsars (N=47). Its exclusion (along with NGC 6522 at equal density) was also tested separately, yielding Γ = 0.48 ± 0.09 (3.4σ tension), confirming robustness.
+*Note:* Terzan 5—the cluster most commonly cited as an extreme outlier—is actually the 4th densest by central density but contributes the most pulsars (N=47). Its exclusion (along with NGC 6522 at equal density) was also tested separately, yielding Γ = 0.41 ± 0.09 (3.4σ tension), confirming robustness.
 
 #### Equal Cluster Weighting: Addressing Sample-Size Dominance
 
@@ -633,7 +633,7 @@ The hierarchical mixed-effects model weights clusters by their statistical contr
 | Dependent variable | Weighting Scheme | Slope Γ (dex/dex) | σ vs Newtonian (0.72) | Status |
 | --- | --- | --- | --- | --- |
 | log|Ṗ| (raw) | Equal Cluster Weighting (Unweighted OLS) | 0.430 ± 0.104 | 2.8σ | Suppressed |
-| log|Ṗ| (raw) | Weighted Least Squares (by N_pulsars) | 0.487 ± 0.029 | 4.5σ | Suppressed |
+| log|Ṗ| (raw) | Weighted Least Squares (by N_pulsars) | 0.417 ± 0.029 | 4.5σ | Suppressed |
 | GC − field residual | Equal Cluster Weighting (Unweighted OLS) | 0.138 ± 0.034 | 6.7σ | Suppressed |
 | GC − field residual | Weighted Least Squares (by N_pulsars) | 0.129 ± 0.011 | 13.7σ | Suppressed |
 | CMC Newtonian | — | 0.72 ± 0.15 | — | Excluded |
@@ -648,11 +648,11 @@ The binary-isolated classification relies on catalog flags. Some "isolated" puls
 
 ### Population Control Limitations
 
-Matching on magnetic field proxy (B_surf ∝ √(P · Ṗ) ) partially conditions on the outcome variable, since Ṗ appears in both the matching variable and the outcome. A sensitivity test using period-only matching (Section 3.3) confirms the signal persists (0.61 dex residual in the base sample, N=394), indicating this conditioning does not artificially create the effect.
+Matching on magnetic field proxy (B_surf ∝ √(P · Ṗ) ) partially conditions on the outcome variable, since Ṗ appears in both the matching variable and the outcome. A sensitivity test using period-only matching (Section 3.3) confirms the signal persists (0.61 dex residual in the base sample, N=400), indicating this conditioning does not artificially create the effect.
 
 ### Interpretation Caveats
 
-The pulsar channel measures apparent spin-down rates that include both intrinsic evolution and environmental contributions (acceleration, potential). The 0.40 dex controlled residual (hybrid sample, N=543; base sample gives 0.61 dex) after population controls could reflect either TEP enhancement of these environmental terms or unmodeled dynamical complexity. The field binary control and suppressed density scaling specifically challenge standard dynamical explanations, but cannot definitively exclude all Newtonian alternatives pending full N-body reproduction.
+The pulsar channel measures apparent spin-down rates that include both intrinsic evolution and environmental contributions (acceleration, potential). The 0.40 dex controlled residual (hybrid sample, N=550; base sample gives 0.61 dex) after population controls could reflect either TEP enhancement of these environmental terms or unmodeled dynamical complexity. The field binary control and suppressed density scaling specifically challenge standard dynamical explanations, but cannot definitively exclude all Newtonian alternatives pending full N-body reproduction.
 
 Two potential confounds must be addressed:
 
@@ -755,9 +755,9 @@ Result: Shklovskii cancellation is *mathematically incapable* of producing the o
 
 | Γ (dex/dex) | Value | Constraint |
 | --- | --- | --- |
-| Acceleration slope $\Gamma_{\text{acc}}$ | 0.99 | Cluster potential scaling |
+| Acceleration slope $\Gamma_{\text{acc}}$ | 0.82 | Cluster potential scaling |
 | Shklovskii slope $\Gamma_{\text{shk}}$ | 0.50 | Velocity dispersion scaling ($v^2/D$) |
-| Achievable slope range | [0.50, 0.99] | Weighted average bound |
+| Achievable slope range | [0.50, 0.82] | Weighted average bound |
 | Observed slope | 0.39 | Outside achievable range |
 
 Even with amplification factor $K = 20\times$ (requiring 20× distance errors or 4.5× proper motion errors, both physically excluded by Gaia EDR3 precision of &lt;1%), the resulting slope is only 0.59—still 0.20 dex above the observed 0.39.
@@ -784,7 +784,7 @@ To address the identifiability of the signal against incomplete dynamical modeli
 *(Central point mass)* | Stochastic, extreme outliers in specific cores; would likely increase scatter rather than create a uniform floor. | Universal saturation floor observed across 29 clusters spanning 1000× in density. | Disfavored
 (Requires extreme fine-tuning to mimic universal saturation) |
 | Distance/PM Errors
-*(Shklovskii correction bias)* | Can only produce slopes within [Γshk, Γacc] = [0.50, 0.99] via weighted average. | Observed slope Γ = 0.39 lies below minimum achievable (0.50). | Mathematically Excluded(Slope outside achievable range) |
+*(Shklovskii correction bias)* | Can only produce slopes within [Γshk, Γacc] = [0.50, 0.82] via weighted average. | Observed slope Γ = 0.39 lies below minimum achievable (0.50). | Mathematically Excluded(Slope outside achievable range) |
 | Intrinsic Pulsar Physics
 *(e.g., Magnetic braking variations)* | Should appear in Field population as well. Binary vs Isolated difference should persist. | Field Control: Binary/Isolated difference vanishes in the field (p=0.70). | Excluded
 (Signal is strictly environmental) |
@@ -916,11 +916,11 @@ sample the same dynamical environment.
 | Region | Median Offset | Binary Mean | Isolated Mean | Difference | p-value |
 | --- | --- | --- | --- | --- | --- |
 | Inner (r ≤ 0.19') | 0.19' | −19.06 | −18.76 | −0.30 dex | 0.074 |
-| Outer (r > 0.19') | > 0.19' | −19.61 | −19.47 | −0.14 dex | 0.48 |
+| Outer (r > 0.19') | > 0.19' | −19.61 | −19.47 | −0.14 dex | 0.41 |
 
 The result is robust. First, the Kolmogorov-Smirnov test (Figure 3.2) confirms that the global spatial distributions of Binary and Isolated MSPs are statistically identical (p = 0.46). They effectively co-habit the same cluster volume.
 
-Second, the signal is concentrated in the core. The difference is −0.30 dex in the inner region (p=0.074) but vanishes in the outskirts (−0.14 dex, p=0.48).
+Second, the signal is concentrated in the core. The difference is −0.30 dex in the inner region (p=0.074) but vanishes in the outskirts (−0.14 dex, p=0.41).
 
 Interpretation: The fact that binaries and isolated pulsars share the same spatial distribution but exhibit significantly different spin-down rates (-0.32 dex global difference) disfavors the "different dynamical sampling" hypothesis. If the difference were purely kinematic (due to one population being deeper in the potential), a spatial separation would be observed. Instead, a "Parameter Separation" is observed at the same location. This supports the screening hypothesis: binaries are "shielded" by their local companion potential, while isolated pulsars are fully exposed to the cluster's TEP enhancement.
 
@@ -1336,8 +1336,8 @@ Why a "Ladder"? In experimental physics, novel claims require isolating the sign
 
 | Channel | Observable | Result | Status |
 | --- | --- | --- | --- |
-| Pulsar Timing | 0.40 dex controlled residual (hybrid sample, N=543) | Suppressed Density Scaling (Slope 0.393 vs 0.748) | Anomaly Detection / Binary Inversion |
-| Spatial Stratification | Core vs Outskirts | −0.30 dex (inner, p=0.074) vs −0.14 dex (outer, p=0.48) | Suggestive |
+| Pulsar Timing | 0.40 dex controlled residual (hybrid sample, N=550) | Suppressed Density Scaling (Slope 0.393 vs 0.748) | Anomaly Detection / Binary Inversion |
+| Spatial Stratification | Core vs Outskirts | −0.30 dex (inner, p=0.074) vs −0.14 dex (outer, p=0.41) | Suggestive |
 | Field Binary Control | Binary vs Isolated (Field) | p = 0.70 (null) | Null Control |
 | Suppressed Density Scaling | Does the signal track dynamical noise ($\rho^2$) or potential ($\Phi$)? | Observed slope = 0.393 ± 0.079 vs CMC Newtonian slope = 0.748 ± 0.039 (4.1σ rejection) | Quantitative exclusion |
 
@@ -1353,7 +1353,7 @@ The Temporal Topology saturation scale ρT ≈ 20 g/cm³, independently calibrat
 | Globular Cluster | ~10⁻¹⁸ g/cm³ | Weak screening ($\rho \ll \rho_T$) | Topologically flattened residual | +0.40 dex (this work) |
 | Galaxy Halo | ~10⁻²⁴ g/cm³ | Weak screening ($\rho \ll \rho_T$) | Active gradient coherence | External constraints (beyond scope) |
 
-The key test is not whether ρT predicts specific length scales, but whether the *topological flattening* is observed: in weakly screened systems, TEP effects should not scale indefinitely with density. The pulsar channel confirms this with a 4.1σ rejection of $\rho^2$ scaling, showing 0.40 dex higher |Ṗ| than matched field pulsars (hybrid sample, N=543; the conservative base-sample period-matched estimand is 0.61 dex, N=394; Section 5.6). Leave-one-cluster-out validation confirms this result is robust.
+The key test is not whether ρT predicts specific length scales, but whether the *topological flattening* is observed: in weakly screened systems, TEP effects should not scale indefinitely with density. The pulsar channel confirms this with a 4.1σ rejection of $\rho^2$ scaling, showing 0.40 dex higher |Ṗ| than matched field pulsars (hybrid sample, N=550; the conservative base-sample period-matched estimand is 0.61 dex, N=400; Section 5.6). Leave-one-cluster-out validation confirms this result is robust.
 
 ## 4.3 Suppressed Density Scaling
 
@@ -1767,13 +1767,13 @@ More dilute clusters (log ρ &lt; 3.5) contribute minimal predicted signal (~0.5
 
 This diversity ensures the CMC results are not specific to one cluster type.
 
-- Convergence Test: The density scaling slope (Γ = 0.39) is derived from the full 29-cluster hierarchical model. The CMC prediction (Γ = 0.72) differs by 4.0σ from this full-sample result, confirming the discrepancy is not a subsample artifact. The Γ = 0.72 prediction is a literature consensus from CMC studies (Kremer+20, Ye+22, Rodriguez+21, Weatherford+20) spanning 148+ simulated clusters—not derived from the 13 clusters used in the N-body proof. Adding lower-density clusters to the CMC model would not artificially flatten this prediction; the Newtonian ρ² scaling remains steep (~0.72–0.99) across the full density range because it is a fundamental dynamical property of virialized systems, not a selection effect.
+- Convergence Test: The density scaling slope (Γ = 0.39) is derived from the full 29-cluster hierarchical model. The CMC prediction (Γ = 0.72) differs by 4.0σ from this full-sample result, confirming the discrepancy is not a subsample artifact. The Γ = 0.72 prediction is a literature consensus from CMC studies (Kremer+20, Ye+22, Rodriguez+21, Weatherford+20) spanning 148+ simulated clusters—not derived from the 13 clusters used in the N-body proof. Adding lower-density clusters to the CMC model would not artificially flatten this prediction; the Newtonian ρ² scaling remains steep (~0.72–0.82) across the full density range because it is a fundamental dynamical property of virialized systems, not a selection effect.
 
 Conclusion: The CMC comparison is not a selective test of outlier clusters but an analysis of the systems that dominate the statistical detection. If standard dynamics fails for the clusters contributing the majority of the sample and signal variation, it cannot be rescued by the remaining clusters at lower densities where predictions are already near the detection floor.
 
 ## 5. Conclusions
 
-This work presents time-domain astrophysical tests of the Temporal Equivalence Principle at intermediate gravitational scales (10⁵–10¹² M☉). Analysis of 543 millisecond pulsars (197 GC, 346 field) with measured spin-down rates provides spatially-resolved evidence for environmental anomalies in pulsar spin-down rates, validated by independent controls and consistent with the Temporal Topology saturation scale ρT ≈ 20 g/cm³ calibrated from terrestrial observations.
+This work presents time-domain astrophysical tests of the Temporal Equivalence Principle at intermediate gravitational scales (10⁵–10¹² M☉). Analysis of 550 millisecond pulsars (199 GC, 351 field) with measured spin-down rates provides spatially-resolved evidence for environmental anomalies in pulsar spin-down rates, validated by independent controls and consistent with the Temporal Topology saturation scale ρT ≈ 20 g/cm³ calibrated from terrestrial observations.
 
 ## 5.1 Summary of Findings
 
@@ -1789,13 +1789,13 @@ Binary/Isolated Inversion (-0.32 dex)
 LOOCV stable (3.8% relative instability—excellent robustness metric) | Anomaly Detection |
 | Field Binary Control | Binary vs Isolated difference vanishes in field (p = 0.70) | Control |
 | Suppressed Density Scaling | Observed slope = 0.39 ± 0.08 vs Newtonian ensemble slope = 0.72 (4.1σ rejection); LOOCV stable (3.8% relative instability) | Consistency test |
-| Spatial Stratification (Binary vs Isolated) | −0.30 dex (inner, p=0.074) vs −0.14 dex (outer, p=0.48) | Suggestive |
+| Spatial Stratification (Binary vs Isolated) | −0.30 dex (inner, p=0.074) vs −0.14 dex (outer, p=0.41) | Suggestive |
 
 ## 5.2 The Primary Detection: Pulsar Timing
 
-Analysis of 543 MSPs (197 GC, 346 field) with measured spin-down rates reveals an environmental signal in globular cluster pulsars that satisfies three independent criteria consistent with TEP:
+Analysis of 550 MSPs (199 GC, 351 field) with measured spin-down rates reveals an environmental signal in globular cluster pulsars that satisfies three independent criteria consistent with TEP:
 
-- Spatial Resolution: The spin-down anomaly is concentrated in cluster cores (−0.30 dex for inner binaries, p = 0.074) and absent in the outskirts (−0.14 dex, p = 0.48), directly tracking gravitational potential depth.
+- Spatial Resolution: The spin-down anomaly is concentrated in cluster cores (−0.30 dex for inner binaries, p = 0.074) and absent in the outskirts (−0.14 dex, p = 0.41), directly tracking gravitational potential depth.
 
 - Environmental Isolation: The Field Binary Control isolates an environmental origin—the binary vs isolated difference vanishes in the galactic field (p = 0.70), eliminating intrinsic population bias.
 
@@ -1858,7 +1858,7 @@ To address potential methodological concerns, five formal validation tests were 
 | Rho_intra Sensitivity | Significance ranges from 6.87σ (ρ=0.1) to 5.06σ (ρ=0.5) | Robust across all plausible correlation assumptions |
 | Power Analysis | 98.6% power to detect the observed differential effect | Study is well-powered; p=0.10 reflects true effect size, not underpowering |
 | Monte Carlo Validation | Type I error: 1.9% (conservative); Power: 100%; Bias: −0.2% | Methods validated, conservative, unbiased |
-| Hybrid Sample Expansion | 543 MSPs total; 0.63 dex raw excess; 0.40 dex controlled residual | Signal strengthens in the expanded sample |
+| Hybrid Sample Expansion | 550 MSPs total; 0.63 dex raw excess; 0.40 dex controlled residual | Signal strengthens in the expanded sample |
 | Bayesian Posterior Analysis | P($\Gamma$ > 0.72 | data) = 1.4×10⁻⁵; 95% CI: [0.25, 0.55] | Confirms frequentist 4.1σ exclusion at >99.99% confidence |
 
 These validations confirm that the ≈5.8σ covariance-aware GC vs Field difference (base sample, N=394) and 4.1σ density scaling tension are robust to statistical assumptions and not artifacts of methodological choices. The hybrid maximum analysis reduces the controlled residual from ~0.61 dex to 0.40 dex through improved population matching, while maintaining a robust 0.63 dex raw offset. Bayesian posterior analysis independently confirms the frequentist conclusions, with P($\Gamma$ > 0.72 | data) = 1.4×10⁻⁵ (>99.99% confidence) and 95% credible interval [0.25, 0.55] dex/dex that excludes the Newtonian prediction.
@@ -2125,7 +2125,7 @@ TEP-COS/ ├── data/ # Raw observational data │ ├── supernovae/ # Pa
 | --- | --- | --- | --- | --- |
 | Section 3: Pulsar Timing Analysis |
 | Data | 3.0 Prep | `step_5_9_freire_gcpsr_radial_analysis.py` | Radial analysis of GC pulsars (Freire catalog) | ~0.5s |
-| Data | 3.1 Sample | `step_5_10_pulsar_population_controls.py` | Population controls: period/B-field matching (394 MSPs) | ~10.8s |
+| Data | 3.1 Sample | `step_5_10_pulsar_population_controls.py` | Population controls: period/B-field matching (400 MSPs) | ~10.8s |
 | Core | 3.2 Maximal | `step_5_27_hybrid_maximum_analysis.py` | Hybrid maximal sample construction (GC + Field) | ~6s |
 | Core | 3.3 Density | `step_5_31_per_cluster_controlled_residuals.py` | Per-cluster controlled residuals vs density | ~1s |
 | Core | 3.4 Scaling | `step_5_32_full_density_scaling.py` | Full density scaling simulation | ~2s |
@@ -2178,8 +2178,8 @@ TEP-COS/ ├── data/ # Raw observational data │ ├── supernovae/ # Pa
 | Runtime | ~10 min | ~6 min | ~5.7 min (M4 Pro) |
 
 #### Key Analysis Outputs 
-- `results/outputs/step_5_10_pulsar_population_controls.csv` — Base pulsar dataset (394 MSPs with 196 GC, 198 field)
-- `results/outputs/step_5_27_hybrid_maximum_analysis.json` — Expanded hybrid pulsar summary (543 MSPs; 0.40 dex hybrid-controlled residual)
+- `results/outputs/step_5_10_pulsar_population_controls.csv` — Base pulsar dataset (400 MSPs with 198 GC, 202 field)
+- `results/outputs/step_5_27_hybrid_maximum_analysis.json` — Expanded hybrid pulsar summary (550 MSPs; 0.40 dex hybrid-controlled residual)
 - `results/outputs/step_5_11_binary_pulsar_analysis.json` — Binary vs isolated analysis results
 - `results/outputs/step_5_33_hierarchical_density_results.json` — Mixed-effects density-scaling results
 - `results/outputs/step_5_35_covariance_validation.json` — Covariance-aware and LOOCV validation

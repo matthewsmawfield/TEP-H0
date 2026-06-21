@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 # NOTE: These replacements are from an intermediate pipeline state.
 # Current values (v0.7, N=29 Hubble-flow-safe):
 #   κ_Cep = (1.05 ± 0.41) × 10⁶ mag, σ_ref = 87.17 km/s
-#   H0 = 68.75 km/s/Mpc, bootstrap 68.80 ± 1.46
+#   H0 = 68.84 km/s/Mpc, bootstrap 68.80 ± 1.46
 #   LOOCV = 68.58 ± 1.34 km/s/Mpc, tension 0.82σ
 #   ΔBIC = +2.6
 

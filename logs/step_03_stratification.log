@@ -1,55 +1,55 @@
-[18:34:41] [INFO] 
-[18:34:41] [INFO] ================================================================================
-[18:34:41] [INFO]    Starting Step 2: Stratification
-[18:34:41] [INFO] ================================================================================
-[18:34:41] [INFO] 
-[18:34:41] [INFO] Loading and Merging Datasets...
-[18:34:41] [INFO] Merged 39 galaxies (Distances + Properties).
-[18:34:41] [INFO] Calculating Individual H0 Values (3-Rung Ladder)...
-[18:34:41] [SUCCESS] Final Sample Size: 29 SN Ia Hosts (7 removed by z_HD > 0.0035 cut)
-[18:34:41] [INFO] Sample H0 Calculations
-[18:34:41] [INFO] +----------+--------+----------+---------+---------------+
-[18:34:41] [INFO] | Host     | z_HD   | mu (mag) | D (Mpc) | H0 (km/s/Mpc) |
-[18:34:41] [INFO] +----------+--------+----------+---------+---------------+
-[18:34:41] [INFO] | NGC 0691 | 0.0086 | 32.822   | 36.7    | 69.88         |
-[18:34:41] [INFO] | NGC 1015 | 0.0081 | 32.618   | 33.4    | 73.19         |
-[18:34:41] [INFO] | NGC 105  | 0.0168 | 34.493   | 79.2    | 63.68         |
-[18:34:41] [INFO] | NGC 1309 | 0.0072 | 32.509   | 31.8    | 67.88         |
-[18:34:41] [INFO] | NGC 1365 | 0.0048 | 31.325   | 18.4    | 78.65         |
-[18:34:41] [INFO] +----------+--------+----------+---------+---------------+
-[18:34:41] [INFO] Annotating Large-Scale Environment (Tully 2015 groups)...
-[18:34:41] [INFO] Matched 26/29 hosts to Tully 2015 group catalog.
-[18:34:41] [INFO] Estimating Host Environmental Densities & Shear Suppression...
-[18:34:41] [INFO] Calculated densities for 29 hosts.
-[18:34:41] [INFO] Mean Host Density: 0.1790 M_sun/pc^3
-[18:34:41] [INFO] Density Range: [0.0001, 1.7591]
-[18:34:41] [INFO] Mean Shear Suppression (S): 0.778
-[18:34:41] [INFO] Suppression Range: [0.045, 0.940]
-[18:34:41] [WARNING] Hosts with appreciable shear suppression (S < 0.8, N=9):
-[18:34:41] [WARNING]   - NGC 0691: rho=0.046, S=0.600
-[18:34:41] [WARNING]   - NGC 1365: rho=0.009, S=0.129
-[18:34:41] [WARNING]   - NGC 2442: rho=1.759, S=0.045
-[18:34:41] [WARNING]   - NGC 3021: rho=0.256, S=0.692
-[18:34:41] [WARNING]   - NGC 3147: rho=0.000, S=0.750
-[18:34:41] [WARNING]   - NGC 3254: rho=0.017, S=0.749
-[18:34:41] [WARNING]   - NGC 4639: rho=1.722, S=0.068
-[18:34:41] [WARNING]   - NGC 7541: rho=0.305, S=0.637
-[18:34:41] [WARNING]   - NGC 976: rho=0.231, S=0.667
-[18:34:41] [INFO] Stratification Analysis (Low vs High Potential)
-[18:34:41] [INFO] Stratified H0 Results
-[18:34:41] [INFO] +----------------+-------------+----+---------+---------+
-[18:34:41] [INFO] | Bin            | Sigma Range | N  | Mean H0 | Std Err |
-[18:34:41] [INFO] +----------------+-------------+----+---------+---------+
-[18:34:41] [INFO] | Low Potential  | <= 96.4     | 15 | 66.26   | 2.50    |
-[18:34:41] [INFO] | High Potential | > 96.4      | 14 | 74.12   | 2.51    |
-[18:34:41] [INFO] | Difference     | -           | -  | +7.86   | -       |
-[18:34:41] [INFO] +----------------+-------------+----+---------+---------+
-[18:34:41] [INFO] Median Velocity Dispersion: 96.40 km/s
-[18:34:41] [TEST] Correlation (Sigma vs H0): r = 0.466
-[18:34:41] [WARNING] Significant Environmental Bias Detected (+7.86 km/s/Mpc)
-[18:34:41] [SUCCESS] Saved stratified data to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_03_stratified_h0.csv
-[18:34:41] [SUCCESS] Saved analysis metrics to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_03_stratification_results.json
-[18:34:41] [PROCESS] Generating Diagnostic Plots...
-[18:34:41] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/step_03_figure_01_h0_vs_sigma.png
-[18:34:41] [SUCCESS] Copied plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/step_03_figure_01_h0_vs_sigma.png
-[18:34:42] [SUCCESS] Step 2 Complete.
+[01:37:50] [INFO] 
+[01:37:50] [INFO] ================================================================================
+[01:37:50] [INFO]    Starting Step 2: Stratification
+[01:37:50] [INFO] ================================================================================
+[01:37:50] [INFO] 
+[01:37:50] [INFO] Loading and Merging Datasets...
+[01:37:50] [INFO] Merged 39 galaxies (Distances + Properties).
+[01:37:50] [INFO] Calculating Individual H0 Values (3-Rung Ladder)...
+[01:37:50] [SUCCESS] Final Sample Size: 29 SN Ia Hosts (7 removed by z_HD > 0.0035 cut)
+[01:37:50] [INFO] Sample H0 Calculations
+[01:37:50] [INFO] +----------+--------+----------+---------+---------------+
+[01:37:50] [INFO] | Host     | z_HD   | mu (mag) | D (Mpc) | H0 (km/s/Mpc) |
+[01:37:50] [INFO] +----------+--------+----------+---------+---------------+
+[01:37:50] [INFO] | NGC 0691 | 0.0086 | 32.822   | 36.7    | 69.88         |
+[01:37:50] [INFO] | NGC 1015 | 0.0081 | 32.618   | 33.4    | 73.19         |
+[01:37:50] [INFO] | NGC 105  | 0.0168 | 34.493   | 79.2    | 63.68         |
+[01:37:50] [INFO] | NGC 1309 | 0.0072 | 32.509   | 31.8    | 67.88         |
+[01:37:50] [INFO] | NGC 1365 | 0.0048 | 31.325   | 18.4    | 78.65         |
+[01:37:50] [INFO] +----------+--------+----------+---------+---------------+
+[01:37:50] [INFO] Annotating Large-Scale Environment (Tully 2015 groups)...
+[01:37:50] [INFO] Matched 26/29 hosts to Tully 2015 group catalog.
+[01:37:50] [INFO] Estimating Host Environmental Densities & Shear Suppression...
+[01:37:50] [INFO] Calculated densities for 29 hosts.
+[01:37:50] [INFO] Mean Host Density: 0.1790 M_sun/pc^3
+[01:37:50] [INFO] Density Range: [0.0001, 1.7591]
+[01:37:50] [INFO] Mean Shear Suppression (S): 0.778
+[01:37:50] [INFO] Suppression Range: [0.045, 0.940]
+[01:37:50] [INFO] Hosts with appreciable shear suppression (S < 0.8, N=9):
+[01:37:50] [INFO]   - NGC 0691: rho=0.046, S=0.600
+[01:37:50] [INFO]   - NGC 1365: rho=0.009, S=0.129
+[01:37:50] [INFO]   - NGC 2442: rho=1.759, S=0.045
+[01:37:50] [INFO]   - NGC 3021: rho=0.256, S=0.692
+[01:37:50] [INFO]   - NGC 3147: rho=0.000, S=0.750
+[01:37:50] [INFO]   - NGC 3254: rho=0.017, S=0.749
+[01:37:50] [INFO]   - NGC 4639: rho=1.722, S=0.068
+[01:37:50] [INFO]   - NGC 7541: rho=0.305, S=0.637
+[01:37:50] [INFO]   - NGC 976: rho=0.231, S=0.667
+[01:37:50] [INFO] Stratification Analysis (Low vs High Potential)
+[01:37:50] [INFO] Stratified H0 Results
+[01:37:50] [INFO] +----------------+-------------+----+---------+---------+
+[01:37:50] [INFO] | Bin            | Sigma Range | N  | Mean H0 | Std Err |
+[01:37:50] [INFO] +----------------+-------------+----+---------+---------+
+[01:37:50] [INFO] | Low Potential  | <= 96.4     | 15 | 66.26   | 2.50    |
+[01:37:50] [INFO] | High Potential | > 96.4      | 14 | 74.12   | 2.51    |
+[01:37:50] [INFO] | Difference     | -           | -  | +7.86   | -       |
+[01:37:50] [INFO] +----------------+-------------+----+---------+---------+
+[01:37:50] [INFO] Median Velocity Dispersion: 96.40 km/s
+[01:37:50] [TEST] Correlation (Sigma vs H0): r = 0.466
+[01:37:50] [SUCCESS] Significant Environmental Bias Detected (+7.86 km/s/Mpc)
+[01:37:50] [SUCCESS] Saved stratified data to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_03_stratified_h0.csv
+[01:37:50] [SUCCESS] Saved analysis metrics to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_03_stratification_results.json
+[01:37:50] [PROCESS] Generating Diagnostic Plots...
+[01:37:50] [SUCCESS] Saved plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/figures/step_03_figure_01_h0_vs_sigma.png
+[01:37:50] [SUCCESS] Copied plot to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/site/public/figures/step_03_figure_01_h0_vs_sigma.png
+[01:37:50] [SUCCESS] Step 2 Complete.

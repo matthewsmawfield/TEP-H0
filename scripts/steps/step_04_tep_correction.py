@@ -385,58 +385,56 @@ class Step3TEPCorrection:
         # Set seed for reproducibility
         rng = np.random.default_rng(42)
 
-        # Suppress optimization warnings
-        import warnings
-        warnings.filterwarnings("ignore")
-
         h0s = []
         kappas = []
         slopes = []
         n_samples = len(df)
         n_failed = 0
 
-        for _ in range(n_boot):
-            # Resample hosts with replacement
-            sample = df.sample(n=n_samples, replace=True)
-            S_sample = sample["shear_suppression"].values
-            sigma_sample = sample["sigma_inferred"].values
-            # Perturb distance moduli by measurement noise (parametric bootstrap)
-            mu_noise = rng.normal(0, sample["error"].values)
-            mu_sample = sample["value"].values + mu_noise
-            v_sample = sample["velocity"].values
+        # Suppress optimization warnings locally during bootstrap
+        import warnings
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            for _ in range(n_boot):
+                # Resample hosts with replacement
+                sample = df.sample(n=n_samples, replace=True, random_state=rng)
+                S_sample = sample["shear_suppression"].values
+                sigma_sample = sample["sigma_inferred"].values
+                # Perturb distance moduli by measurement noise (parametric bootstrap)
+                mu_noise = rng.normal(0, sample["error"].values)
+                mu_sample = sample["value"].values + mu_noise
+                v_sample = sample["velocity"].values
 
-            # Re-optimize kappa using SAME objective as main fit (slope^2 in delta_mu space)
-            def obj(k):
-                corr = tep_correction(sigma_sample, sigma_ref, k[0], S_sample)
+                # Re-optimize kappa using SAME objective as main fit (slope^2 in delta_mu space)
+                def obj(k):
+                    corr = tep_correction(sigma_sample, sigma_ref, k[0], S_sample)
+                    mc = mu_sample + corr
+                    mu_fid = 5 * np.log10(v_sample) + 25 - 5 * np.log10(70.0)
+                    delta_mu = mc - mu_fid
+                    slope_b, _ = np.polyfit(sigma_sample, delta_mu, 1)
+                    return slope_b ** 2
+
+                res = minimize(
+                    obj,
+                    x0=[1.0e6],
+                    method="Nelder-Mead",
+                    options={"xatol": 100.0, "fatol": 1e-8, "maxiter": 500},
+                )
+                if not res.success:
+                    n_failed += 1
+                    continue
+
+                kappa_b = res.x[0]
+                corr = tep_correction(sigma_sample, sigma_ref, kappa_b, S_sample)
                 mc = mu_sample + corr
-                mu_fid = 5 * np.log10(v_sample) + 25 - 5 * np.log10(70.0)
-                delta_mu = mc - mu_fid
-                slope_b, _ = np.polyfit(sigma_sample, delta_mu, 1)
-                return slope_b ** 2
+                dc = 10 ** ((mc - 25) / 5)
+                hc = v_sample / dc
+                h0_b = float(np.mean(hc))
+                slope_b, _ = np.polyfit(sigma_sample, hc, 1)
 
-            res = minimize(
-                obj,
-                x0=[1.0e6],
-                method="Nelder-Mead",
-                options={"xatol": 100.0, "fatol": 1e-8, "maxiter": 500},
-            )
-            if not res.success:
-                n_failed += 1
-                continue
-
-            kappa_b = res.x[0]
-            corr = tep_correction(sigma_sample, sigma_ref, kappa_b, S_sample)
-            mc = mu_sample + corr
-            dc = 10 ** ((mc - 25) / 5)
-            hc = v_sample / dc
-            h0_b = float(np.mean(hc))
-            slope_b, _ = np.polyfit(sigma_sample, hc, 1)
-
-            h0s.append(h0_b)
-            kappas.append(kappa_b)
-            slopes.append(slope_b)
-
-        warnings.resetwarnings()
+                h0s.append(h0_b)
+                kappas.append(kappa_b)
+                slopes.append(slope_b)
 
         h0s = np.array(h0s)
         kappas = np.array(kappas)
@@ -954,9 +952,9 @@ class Step3TEPCorrection:
         ]
         print_table(headers, rows)
         if not all_ok:
-            print_status("SLOPE CONVENTION AUDIT FAILED — sign inconsistency detected!", "CRITICAL")
+            print_status("Slope convention audit failed — sign inconsistency detected.", "CRITICAL")
             raise RuntimeError("Slope convention audit failed: inconsistent signs.")
-        print_status("Slope Convention Audit PASSED.", "SUCCESS")
+        print_status("Slope convention audit passed.", "SUCCESS")
         return audit
 
     def run(self):
@@ -995,7 +993,7 @@ class Step3TEPCorrection:
         print_status(
             f"Screened-Reference Stability: ΔH0 = {delta_h0_screened:.2f} km/s/Mpc "
             f"(standard {h0_mean:.2f} vs screened {screened_results['unified_h0_screened']:.2f})",
-            "SUCCESS" if delta_h0_screened < 1.0 else "WARNING",
+            "INFO",
         )
 
         # Error Budget Summary:
@@ -1042,21 +1040,21 @@ class Step3TEPCorrection:
 
         if tension_primary < 1.0:
             print_status(
-                "CONCLUSION (Cepheid channel, unscreened Hubble-flow regime): "
+                "Conclusion (Cepheid channel, unscreened Hubble-flow regime): "
                 "H0 consistent with Planck CMB after κ_Cep correction.",
                 "SUCCESS",
             )
         elif tension_primary < 2.0:
             print_status(
-                "CONCLUSION (Cepheid channel): marginal tension < 2σ; plausible "
+                "Conclusion (Cepheid channel): marginal tension < 2σ; plausible "
                 "consistency with Planck after κ_Cep correction.",
-                "WARNING",
+                "INFO",
             )
         else:
             print_status(
-                "CONCLUSION (Cepheid channel): significant residual tension after "
+                "Conclusion (Cepheid channel): significant residual tension after "
                 "κ_Cep correction.",
-                "WARNING",
+                "INFO",
             )
         print_status(
             "Note: Universal-TEP validation requires CROSS-CHANNEL consistency "

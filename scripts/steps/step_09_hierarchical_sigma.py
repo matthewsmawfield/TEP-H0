@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 15: Hierarchical Sigma Measurement-Error Model
+Step 09: Hierarchical Sigma Measurement-Error Model
 ====================================================
 
 Fits a hierarchical measurement-error model for velocity dispersion:
@@ -42,7 +42,7 @@ if str(PROJECT_ROOT) not in sys.path:
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
 
 
-class Step15HierarchicalSigma:
+class Step09HierarchicalSigma:
     """Formal pipeline step: hierarchical measurement-error model for sigma."""
 
     def __init__(self):
@@ -52,14 +52,14 @@ class Step15HierarchicalSigma:
         self.logs_dir.mkdir(exist_ok=True)
 
         self.logger = TEPLogger(
-            "step_15_sigma",
+            "step_09_sigma",
             log_file_path=self.logs_dir / "step_09_hierarchical_sigma.log",
         )
         set_step_logger(self.logger)
 
     def run(self):
         print_status(
-            ">>> STEP 15: HIERARCHICAL SIGMA MEASUREMENT-ERROR MODEL", "TITLE"
+            ">>> STEP 09: Hierarchical sigma measurement-error model", "TITLE"
         )
 
         prov = pd.read_csv(self.results_dir / "step_07_sigma_provenance_table.csv")
@@ -144,7 +144,7 @@ class Step15HierarchicalSigma:
         ) as f:
             json.dump(out, f, indent=2)
 
-        print_status("Step 15 complete", "SUCCESS")
+        print_status("Step 09 complete", "SUCCESS")
 
     def _compute_odr_slope(self, sigma_vals, h0_vals, sigma_errs, h0_errs):
         try:
@@ -163,4 +163,4 @@ class Step15HierarchicalSigma:
 
 
 if __name__ == "__main__":
-    Step15HierarchicalSigma().run()
+    Step09HierarchicalSigma().run()

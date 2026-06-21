@@ -218,7 +218,7 @@ class Step5M31Analysis:
 
             return df[["ra_deg", "dec_deg", "Inst", "Filter"]]
         except Exception as e:
-            print_status(f"Failed to fetch PHAT footprint: {e}", "WARNING")
+            print_status(f"Failed to fetch PHAT footprint: {e}", "INFO")
             return pd.DataFrame()
 
     def _tag_phat_overlap(
@@ -1150,7 +1150,7 @@ class Step5M31Analysis:
         )
 
         if len(inner_df) < 10 or len(outer_df) < 10:
-            print_status("Insufficient samples after cuts.", "WARNING")
+            print_status("Insufficient samples after cuts.", "INFO")
             return
 
         # Fit P-L Relations
@@ -1196,10 +1196,10 @@ class Step5M31Analysis:
 
         if sigma_significance > 2.0:
             print_status(
-                "CONCLUSION: Significant environmental P-L offset detected.", "SUCCESS"
+                "Conclusion: significant environmental P-L offset detected.", "SUCCESS"
             )
         else:
-            print_status("CONCLUSION: No significant offset detected.", "INFO")
+            print_status("Conclusion: no significant offset detected.", "INFO")
 
         # Save Results
         results = pd.DataFrame(
@@ -1818,7 +1818,7 @@ class Step5M31Analysis:
                     f"[{boot_logp['delta_p16']:+.4f}, {boot_logp['delta_p84']:+.4f}]",
                 ]
             )
-        print_status("Note: Multidimensional matched tests (logP+color, logP+eW, MV match) have been removed from the robustness suite.", "WARNING")
+        print_status("Note: Multidimensional matched tests (logP+color, logP+eW, MV match) have been removed from the robustness suite.", "INFO")
         print_status("  Under TEP, time dilation alters the observed period but preserves the intrinsic photometric color.", "INFO")
         print_status("  Matching Cepheids on both observed period AND color forces the selection of intrinsically dissimilar stars,", "INFO")
         print_status("  fundamentally destroying the absolute magnitude comparison and artificially hiding the TEP signal.", "INFO")

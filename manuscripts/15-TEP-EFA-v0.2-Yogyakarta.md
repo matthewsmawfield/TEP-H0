@@ -775,7 +775,7 @@ The restricted model is the scientifically important tier because every quantity
 
 #### Temporal Shear Impulse Consistency Verification
 
-The fitted $\beta_A$ values provide a direct probe of the TEP scalar force structure through the temporal shear impulse diagnostic. The temporal shear impulse $\mathcal{I} = \int_{\rm path} \mathbf{F}_\phi \cdot d\mathbf{r}$ measures the net work-like accumulation of the scalar force along the flyby trajectory. In the TEP framework, the predicted velocity shift relates to the impulse via $\Delta v_{\rm TEP} \propto \beta_{A,\rm eff} \cdot \mathcal{I}$, modulated by trajectory geometry and disformal coupling. The consistent mapping between fitted $\beta_A$ values and the geometric impulse computed from each flyby's 3D trajectory (using JPL Horizons ephemerides) supports the conclusion that the scalar force model respects the fundamental field structure of the TEP equations. The correlation between impulse magnitude and fitted $\beta_A$ ($r = 0.99$) demonstrates that the force model is structurally consistent with TEP theory.
+The fitted $\beta_A$ values provide a direct probe of the TEP scalar force structure through the temporal shear impulse diagnostic. The temporal shear impulse $\mathcal{I} = \int_{\rm path} \mathbf{F}_\phi \cdot d\mathbf{r}$ measures the net work-like accumulation of the scalar force along the flyby trajectory. In the TEP framework, the predicted velocity shift relates to the impulse via $\Delta v_{\rm TEP} \propto \beta_{A,\rm eff} \cdot \mathcal{I}$, modulated by trajectory geometry and disformal coupling. The consistent mapping between fitted $\beta_A$ values and the geometric impulse computed from each flyby's 3D trajectory (using JPL Horizons ephemerides) supports the conclusion that the scalar force model respects the fundamental field structure of the TEP equations. The correlation between impulse magnitude and fitted $\beta_A$ ($r = 0.91$) demonstrates that the force model is structurally consistent with TEP theory.
 
 All gated fitted $β$ values satisfy the Cassini PPN bound ($|γ - 1| < 2.3 \times 10^{-5}$). The ensemble weighted mean yields $β = 1.73 \times 10^{-3} \pm 6.82 \times 10^{-5}$, with screened $\beta_{A,\rm eff}$ giving $|γ - 1| \approx 7.3 \times 10^{-7}$ for the weighted mean. The corrected Earth-screened PPN estimates remain below the Cassini bound by factors of roughly $3 \times 10^{1}$ to $3 \times 10^{2}$. The conservative solar-path check in Section 4.6.1a gives $|γ - 1|_{\odot} \approx 6.6\times 10^{-6}$ for the largest gated coupling, below the Cassini bound by a factor of about 3.5. Together these checks support Temporal Topology screening in both terrestrial and solar environments without overstating the solar margin.
 
@@ -809,7 +809,7 @@ The screened PPN deviations above apply the Earth-screening factor $S_{\oplus} \
 The Cassini Shapiro-delay measurement constrains the scalar field along the radio path during solar conjunction, not at Earth's surface. Applying the same UCD saturation model to the Sun:
 
 \begin{equation}
-R_{\rm sol,\odot} = \left(\frac{3M_{\odot}}{4\pi\rho_T}\right)^{1/3} \approx 2.87 \times 10^{5}\ {\rm km} \approx 0.48\,R_{\odot}
+R_{\rm sol,\odot} = \left(\frac{3M_{\odot}}{4\pi\rho_T}\right)^{1/3} \approx 2.87 \times 10^{5}\ {\rm km} \approx 0.41\,R_{\odot}
 \end{equation}
 
 with $M_{\odot} = 1.989\times 10^{30}$ kg and $R_{\odot} = 6.96\times 10^{5}$ km. During the 2002 Cassini solar conjunction, the radio path passed well outside the solar surface ($r \gtrsim 4\,R_{\odot}$), far beyond $R_{\rm sol,\odot}$. Extending the radial suppression ansatz $S(r) = (r - R_{\rm sol})/r$ to the solar environment, the screening factor at the path location is $S_{\odot}(r) \gtrsim 0.90$. The effective solar coupling is therefore:
@@ -1116,7 +1116,7 @@ Table 8: Cosmographic Modulation Parameters and Residual Ratios
 | Mission | *r*AU | *v*rad (km/s) | cos *θ*SC-CMB | *v*SC,CMB (km/s) | *f*enh | Both Aligned | Obs (mm/s) | Pred (mm/s) | Ratio |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | NEAR | 0.984 | +0.178 | +0.244 | +3.10 | 973 | **YES** | 13.46 | 3.676 | **3.66** |
-| Galileo 1990 | 0.985 | -0.217 | +0.261 | +3.57 | 866 | **YES** | 3.92 | 0.481 | **9.54** |
+| Galileo 1990 | 0.985 | -0.217 | +0.261 | +3.57 | 866 | **YES** | 3.92 | 0.411 | **9.54** |
 | Cassini | 1.012 | -0.342 | -0.957 | -18.07 | 324 | no | 0.11 | -0.023 | **-4.71** |
 | Galileo 1992 | 0.985 | -0.227 | +0.864 | +12.12 | 861 | **YES** | 0.00 | 0.001 | **0.00** |
 | Rosetta 2005 | 0.992 | +0.445 | -0.573 | -6.02 | 1243 | no | 1.82 | 0.542 | **3.36** |
@@ -1160,7 +1160,7 @@ A multivariate ordinary least squares regression was fitted to test whether a li
 
 ratio = *b*0 + *b*1 cos *θ*SC-CMB + *b*2 (vEarth · nCMB / 30) + *b*3 (SC-orbital alignment) + *ε*
 
-The fitted coefficients are *b*0 = +24.03, *b*1 = −7.13, *b*2 = +81.49, *b*3 = −80.99. The model achieves *R*2 = 0.20 and reduces the residual standard deviation from 75.96 to 67.89 mm/s, a 10.6% reduction. The adjusted *R*2 = −0.28 indicates that with *n* = 8 and four parameters (including intercept), the regression does not explain residual variance at conventional significance.
+The fitted coefficients are *b*0 = +24.03, *b*1 = −7.13, *b*2 = +81.49, *b*3 = −80.91. The model achieves *R*2 = 0.20 and reduces the residual standard deviation from 75.96 to 67.89 mm/s, a 10.6% reduction. The adjusted *R*2 = −0.28 indicates that with *n* = 8 and four parameters (including intercept), the regression does not explain residual variance at conventional significance.
 
 Table 9b lists observed-to-predicted ratios for the eight flybys with usable 3D vectors. The multivariate fit is reported for transparency; it should not be over-interpreted at this sample size.
 

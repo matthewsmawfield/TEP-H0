@@ -5,7 +5,7 @@ p = Path(fpath)
 content = p.read_text()
 
 # Meta description replacements
-content = content.replace("66.14", "68.75")
+content = content.replace("66.14", "68.84")
 content = content.replace("66.22", "68.80")
 content = content.replace("± 1.61 km/s/Mpc", "± 1.46 km/s/Mpc")
 content = content.replace("0.70 sigma", "0.91 sigma")

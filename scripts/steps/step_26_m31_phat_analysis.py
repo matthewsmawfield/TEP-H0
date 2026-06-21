@@ -161,7 +161,7 @@ class Step8M31PHATAnalysis:
             return
         
         # 4. Baseline differential analysis
-        print_status("=== BASELINE ANALYSIS (No Color Matching) ===", "SECTION")
+        print_status("=== Baseline analysis (no color matching) ===", "SECTION")
         
         fixed_slope = -3.3
         ai, ei = self._weighted_intercept(inner['logP'].values, inner['W_H'].values, fixed_slope)
@@ -171,11 +171,11 @@ class Step8M31PHATAnalysis:
         err_baseline = np.sqrt(ei**2 + eo**2)
         sig_baseline = abs(delta_baseline) / err_baseline
         
-        sign_str = "INNER BRIGHTER" if delta_baseline < 0 else "INNER FAINTER"
+        sign_str = "Inner brighter" if delta_baseline < 0 else "Inner fainter"
         print_status(f"Baseline: ΔW = {delta_baseline:+.3f} ± {err_baseline:.3f} mag ({sig_baseline:.1f}σ) [{sign_str}]", "RESULT")
         
         # 5. Color-matched analysis (metallicity/crowding control)
-        print_status("=== 2D MULTIDIMENSIONAL MATCHING (logP + Color) ===", "SECTION")
+        print_status("=== 2D multidimensional matching (logP + color) ===", "SECTION")
         
         # Normalize the matching parameters so distance is meaningful
         logp_std = df['logP'].std()
@@ -209,7 +209,7 @@ class Step8M31PHATAnalysis:
             delta_matched = np.nan
             err_matched = np.nan
             sig_matched = np.nan
-            match_str = "INCONCLUSIVE"
+            match_str = "Inconclusive"
         else:
             # We matched on period, so we can just compare magnitudes directly!
             # Let's still use the slope offset to be totally rigorous against small logP diffs
@@ -223,13 +223,13 @@ class Step8M31PHATAnalysis:
             err_matched = np.std(dm_corrected, ddof=1) / np.sqrt(len(dm_corrected))
             sig_matched = abs(delta_matched) / err_matched
             
-            match_str = "INNER BRIGHTER" if delta_matched < 0 else "INNER FAINTER"
+            match_str = "Inner brighter" if delta_matched < 0 else "Inner fainter"
             print_status(f"Found {len(matched_inner)} tight 2D matches.", "INFO")
             print_status(f"Matched: ΔW = {delta_matched:+.3f} ± {err_matched:.3f} mag ({sig_matched:.1f}σ) [{match_str}]", "RESULT")
         
         # 6. Summary
         print_status("=" * 60, "INFO")
-        print_status("SUMMARY", "TITLE")
+        print_status("Summary", "TITLE")
         print_status(f"Baseline (Confounded): ΔW = {delta_baseline:+.3f} ± {err_baseline:.3f} mag [{sign_str}]", "RESULT")
         if not np.isnan(delta_matched):
             print_status(f"Matched (Controlled):  ΔW = {delta_matched:+.3f} ± {err_matched:.3f} mag [{match_str}]", "RESULT")
@@ -237,21 +237,21 @@ class Step8M31PHATAnalysis:
         # Interpret result
         if np.isnan(delta_matched) or sig_matched < 2.0:
             print_status("", "INFO")
-            print_status("*** M31 HST SIGNAL VANISHED UNDER METALLICITY/COLOR CONTROL ***", "WARNING")
-            print_status("The 'Inner Brighter' signal is overwhelmingly driven by standard astrophysical", "WARNING")
-            print_status("crowding/metallicity in the central bulge, not TEP time dilation.", "WARNING")
+            print_status("M31 HST signal vanished under metallicity/color control.", "INFO")
+            print_status("The 'Inner Brighter' signal is overwhelmingly driven by standard astrophysical", "INFO")
+            print_status("crowding/metallicity in the central bulge, not TEP time dilation.", "INFO")
             interpretation = "Signal eliminated by color control; Evidence of Confounding."
-            sign_str = "CONFOUNDED"
+            sign_str = "Confounded"
         elif delta_matched < 0:
             print_status("", "INFO")
-            print_status("*** M31 HST shows ROBUST INNER BRIGHTER - CONSISTENT WITH UNSCREENED TEP ***", "SUCCESS")
-            interpretation = "Robust Inner BRIGHTER - Consistent with Unscreened TEP"
-            sign_str = "INNER BRIGHTER"
+            print_status("M31 HST shows robust inner brighter — consistent with unscreened TEP.", "SUCCESS")
+            interpretation = "Robust inner brighter — consistent with unscreened TEP"
+            sign_str = "Inner brighter"
         else:
             print_status("", "INFO")
-            print_status("*** M31 HST shows ROBUST INNER FAINTER - CONSISTENT WITH SCREENED TEP ***", "SUCCESS")
-            interpretation = "Robust Inner FAINTER - Consistent with Screened TEP (Inversion)"
-            sign_str = "INNER FAINTER"
+            print_status("M31 HST shows robust inner fainter — consistent with screened TEP.", "SUCCESS")
+            interpretation = "Robust inner fainter — consistent with screened TEP (inversion)"
+            sign_str = "Inner fainter"
         
         # 7. Save results
         results = {

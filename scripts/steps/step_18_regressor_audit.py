@@ -57,7 +57,7 @@ class Step17RegressorAudit:
         set_step_logger(self.logger)
 
     def run(self):
-        print_status(">>> STEP 17: PRIMARY TEP REGRESSOR AUDIT", "TITLE"
+        print_status(">>> STEP 17: Primary TEP regressor audit", "TITLE"
         )
 
         strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")

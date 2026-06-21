@@ -59,7 +59,7 @@ class Step20StratifiedValidation:
         set_step_logger(self.logger)
 
     def run(self):
-        print_status(">>> STEP 20: PHYSICALLY STRATIFIED VALIDATION", "TITLE")
+        print_status(">>> STEP 21: Physically stratified validation", "TITLE")
 
         strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
         prov = pd.read_csv(self.results_dir / "step_07_sigma_provenance_table.csv")
@@ -105,7 +105,7 @@ class Step20StratifiedValidation:
             n_test = test_mask.sum()
 
             if n_train < 5 or n_test < 5:
-                print_status(f"{name}: insufficient data (train={n_train}, test={n_test}), skipping", "WARNING")
+                print_status(f"{name}: insufficient data (train={n_train}, test={n_test}), skipping", "INFO")
                 continue
 
             # Fit kappa on train
@@ -158,7 +158,7 @@ class Step20StratifiedValidation:
 
         print_status("Physically stratified validation results:", "INFO")
         print_table(
-            ["Split", "N_train", "N_test", "κ_train", "Test r", "Test p", "Pass?"],
+            ["Split", "N_train", "N_test", "κ_train", "Test r", "Test p", "Criterion met?"],
             [
                 [
                     r["split"],
@@ -167,7 +167,7 @@ class Step20StratifiedValidation:
                     f"{r['kappa_train']:.2e}",
                     f"{r['test_r']:.3f}",
                     f"{r['test_p']:.4f}",
-                    "PASS" if r["passes"] else "FAIL",
+                    "YES" if r["passes"] else "NO",
                 ]
                 for _, r in df.iterrows()
             ],
@@ -175,15 +175,12 @@ class Step20StratifiedValidation:
         )
 
         n_pass = sum(1 for r in results if r["passes"])
-        print_status(
-            f"Passed {n_pass}/{len(results)} stratified validation splits",
-            "SUCCESS" if n_pass >= len(results) * 0.5 else "WARNING",
-        )
+        print_status(f"Passed {n_pass}/{len(results)} stratified validation splits", "INFO")
 
         with open(self.results_dir / "step_21_stratified_validation.json", "w") as f:
             json.dump(results, f, indent=2)
 
-        print_status("Step 20 complete", "SUCCESS")
+        print_status("Step 21 complete", "SUCCESS")
 
 
 if __name__ == "__main__":

@@ -8,9 +8,9 @@
   },
   "closure": {
     "kappa_cep": 1272451.0192871094,
-    "kappa_cep_err": 448900.390625,
+    "kappa_cep_err": 462535.1562499999,
     "alpha_clock": 898750.5363728765,
-    "alpha_clock_err": 317064.8305804691,
+    "alpha_clock_err": 326695.2625051907,
     "solar_neighborhood_screening": 0.96,
     "solar_source_charge_ratio": 8.401791547411366e-12,
     "earth_source_charge_ratio": 1.578651683697185e-15,

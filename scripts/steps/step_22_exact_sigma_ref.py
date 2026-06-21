@@ -52,7 +52,7 @@ class Step21ExactSigmaRef:
         set_step_logger(self.logger)
 
     def run(self):
-        print_status(">>> STEP 21: EXACT ANCHOR-LEVERAGE SIGMA_REF", "TITLE")
+        print_status(">>> STEP 21: Exact anchor-leverage sigma_ref", "TITLE")
 
         # Load anchor data from stratified file (anchors have h0_derived but
         # are not in the primary sample)

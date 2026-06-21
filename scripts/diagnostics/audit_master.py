@@ -182,7 +182,7 @@ def audit_h0_contradictions(data):
         findings.append(f"Aperture sensitivity: unified_H0 in [{h0_min:.2f}, {h0_max:.2f}]")
         if h0_min is not None and h0_max is not None:
             if h0_max < 66.5 or h0_min > 69.0:
-                findings.append("  NOTE: Aperture range does not include 68.75; this is expected because aperture varies the correction amplitude.")
+                findings.append("  NOTE: Aperture range does not include 68.84; this is expected because aperture varies the correction amplitude.")
 
     # From redshift sensitivity
     if REDZ_SENS_PATH.exists():

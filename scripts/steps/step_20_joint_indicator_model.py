@@ -58,7 +58,7 @@ class Step19JointIndicatorModel:
         set_step_logger(self.logger)
 
     def run(self):
-        print_status(">>> STEP 19: JOINT CEPHEID + TRGB INDICATOR MODEL", "TITLE"
+        print_status(">>> STEP 19: Joint Cepheid + TRGB indicator model", "TITLE"
         )
 
         strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
@@ -81,7 +81,7 @@ class Step19JointIndicatorModel:
         print_status(f"Matched hosts: N={n_match}", "INFO")
 
         if n_match < 5:
-            print_status("Too few matched hosts; skipping", "WARNING")
+            print_status("Too few matched hosts; skipping", "INFO")
             return
 
         # Compute TEP regressor: use SAME regressor as Step 12 cross-channel

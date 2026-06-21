@@ -132,9 +132,9 @@ class Step4bApertureSensitivity:
         
         # Conclusion
         if abs(r_raw - r_corr) < 0.1 and r_raw > 0.3:
-            print_status("CONCLUSION: The signal is ROBUST. It exists independently of aperture corrections.", "SUCCESS")
+            print_status("Conclusion: the signal is robust. It exists independently of aperture corrections.", "SUCCESS")
         else:
-            print_status("CONCLUSION: Aperture corrections significantly alter the signal.", "WARNING")
+            print_status("Conclusion: aperture corrections significantly alter the signal.", "INFO")
         
         # Save Stats
         with open(self.output_stats_path, "w") as f:

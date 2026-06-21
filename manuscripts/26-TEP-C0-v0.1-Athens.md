@@ -1,7 +1,7 @@
 # Temporal Equivalence Principle: A Covariant Alternative to Cosmic Expansion
 **Matthew Lukin Smawfield**
 Version: v0.1 (Athens)
-First published: 18 June 2026 - Last updated: 18 June 2026
+First published: 18 June 2026 - Last updated: 20 June 2026
 DOI: 10.5281/zenodo.20370144
 
 ---
@@ -148,7 +148,7 @@ This dual-fit architecture is not a statistical relaxation, but a mandatory, fal
 
 ## 3.3 The Transport MCMC Engine
 
-The full analysis pipeline contains 58 deterministic steps; the core Bayesian model-comparison engine is implemented within the Stage-3 inference module utilizing the `emcee` ensemble sampler and `dynesty` nested sampling for evidence calculation. TEP-HC (Paper 18) provides the authoritative hi_class native `tep_mode` implementation used for Boltzmann-level acoustic-scale verification; the present pipeline uses the analytically equivalent Jordan-frame background factor $M(z) = A/(1-\alpha_A)$ documented in `core/cosmology.py`. To ensure the Bayes Factor is not artificially inflated by a restrictive prior volume, the SNe-only nested sampling evaluates the temporal shear mixing fraction $\epsilon_{\text{shear}}^{\text{los}}$ under a broad, weakly informative uniform prior ($\mathcal{U}[0, 2.0]$), while the global MCMC uses a focused prior ($\mathcal{U}[-0.4, 0.4]$) to precisely explore the global background constraint. The likelihood function incorporates the non-integrable transport kernel $\mathcal{K}_T$, mapping the observed redshift to the accumulated Temporal Shear along each null geodesic. The current joint MCMC evaluates the conformal background and acoustic-anchor projection using the patched TEP-CLASS/hi_class background mapping. It does not yet evolve an independent active $\delta\phi$ perturbation variable through the full Einstein–Boltzmann hierarchy. The resumed joint Cobaya MCMC completed after 120,960 accepted steps, reaching a final Gelman$\unicode{x2013}$Rubin diagnostic $R-1 = 0.0165$; this cleanly meets the publication-grade target $R-1 \leq 0.02$ and is sufficient for the macroscopic-bound interpretation of $\epsilon_T$ adopted in Section 4. The SNe-only nested-sampling component achieves $\text{nlive} = 500$ with $\Delta\ln\mathcal{Z} \leq 0.17$ across all models, yielding research-grade Bayes factors.
+The full analysis pipeline contains 58 deterministic steps; the core Bayesian model-comparison engine is implemented within the Stage-3 inference module utilizing the `emcee` ensemble sampler and `dynesty` nested sampling for evidence calculation. TEP-HC (Paper 18) provides the authoritative hi_class native `tep_mode` implementation used for Boltzmann-level acoustic-scale verification; the present pipeline uses the analytically equivalent Jordan-frame background factor $M(z) = A/(1-\alpha_A)$ documented in `core/cosmology.py`. To ensure the Bayes Factor is not artificially inflated by a restrictive prior volume, the SNe-only nested sampling evaluates the temporal shear mixing fraction $\epsilon_{\text{shear}}^{\text{los}}$ under a broad, weakly informative uniform prior ($\mathcal{U}[0, 2.0]$), while the global MCMC uses a focused prior ($\mathcal{U}[-0.4, 0.4]$) to precisely explore the global background constraint. The likelihood function incorporates the non-integrable transport kernel $\mathcal{K}_T$, mapping the observed redshift to the accumulated Temporal Shear along each null geodesic. The current joint MCMC evaluates the conformal background and acoustic-anchor projection using the patched TEP-CLASS/hi_class background mapping. It does not yet evolve an independent active $\delta\phi$ perturbation variable through the full Einstein–Boltzmann hierarchy. The joint Cobaya MCMC converged cleanly with publication-grade Gelman$\unicode{x2013}$Rubin diagnostics meeting $R-1 \leq 0.02$, sufficient for the macroscopic-bound interpretation of $\epsilon_T$ adopted in Section 4. The SNe-only nested-sampling component achieves $\text{nlive} = 500$ with $\Delta\ln\mathcal{Z} \leq 0.17$ across all models, yielding research-grade Bayes factors.
 
 The current implementation should therefore be interpreted as a background-plus-acoustic-anchor cosmological inference, not as the final perturbative TEP closure. The corresponding native hi_class implementation is documented in TEP-HC (Paper 18), where the scalar perturbation sector is explicitly identified as requiring closure through $f_B(\phi,X)$, $f_K(\phi,X)$, sound speed, no-ghost conditions, and matter-frame conservation. The minimal conformal perturbation closure is therefore treated as a companion implementation target, documented in TEP-HC and not used as an independent active perturbation fit in the present C0 likelihood.
 
@@ -162,9 +162,9 @@ Crucially, the intrinsic absolute magnitude ($\mathcal{M}$) of the supernovae is
 
 The Expansion Falsifier protocol targets the Distance Duality Relation and the Tolman Surface Brightness scaling. By directly analyzing the residuals of the real Pantheon+ dataset against the transport-corrected model, the deviation factor $\Xi_T$ is quantified. This allows for a physical discrimination between kinematic metric expansion and emergent temporal transport.
 
-## 3.6 Audit Integrity
+## 3.6 Claim Consistency Validation
 
-The entire analytical chain is governed by an automated Claim Consistency Audit, which mandates that every theoretical assertion in this manuscript be supported by a validated, data-driven pipeline result. The implemented C0 evidence gates for background-level cosmological observables, including FLRW recovery, CMB blackbody preservation at the conformal-mapping level, and BAO ruler recovery, are recorded by the deterministic pipeline.
+The entire analytical chain is governed by an automated claim consistency check, which mandates that every theoretical assertion in this manuscript be supported by a validated, data-driven pipeline result. The implemented C0 evidence gates for background-level cosmological observables, including FLRW recovery, CMB blackbody preservation at the conformal-mapping level, and BAO ruler recovery, are recorded by the deterministic pipeline.
 
 # 4. Results: Empirical Evidence for the Temporal Equivalence Principle
 
@@ -182,15 +182,59 @@ This physical M1 TEP branch achieves $\ln\mathcal L=646.50$, actively improving 
 
 ![Pantheon+ Hubble Diagram and Residuals](results/figures/hubble_residuals.png)
 
-Figure 1: Pantheon+ Likelihood Improvement: TEP M1 vs. $\Lambda$CDM. **Panel A** shows the Hubble diagram with Pantheon+ SH0ES data, the $\Lambda$CDM best fit, and the TEP M1 best fit (using $\epsilon_{\rm shear}^{\rm los} \approx 0.83$). **Panel B** shows binned residuals relative to $\Lambda$CDM; the TEP predicted residual curve (blue dashed) traces the systematic trend in the binned data. **Panel C** shows the cumulative diagonal $\Delta\chi^2( 30$) never occurs under the LCDM null.
+Figure 1: Pantheon+ Likelihood Improvement: TEP M1 vs. $\Lambda$CDM. **Panel A** shows the Hubble diagram with Pantheon+ SH0ES data, the $\Lambda$CDM best fit, and the TEP M1 best fit (using $\epsilon_{\rm shear}^{\rm los} \approx 0.83$). **Panel B** shows binned residuals relative to $\Lambda$CDM; the TEP predicted residual curve (blue dashed) traces the systematic trend in the binned data. **Panel C** shows the cumulative diagonal $\Delta\chi^2$ as a function of redshift, making the TEP preference visually traceable. The final diagonal $\Delta\chi^2$ value is annotated, with the full-covariance result from Section 4.2 noted separately.
+
+## 4.3 Evidence and comparator models
+
+Because the physical M1 TEP branch utilizes the line-of-sight transport exponent ($\epsilon_{\text{shear}}^{\text{los}} \approx 0.8265$), nested sampling evaluations are reported both with a fixed $z_T=100$ and with $z_T$ treated as a free parameter to mitigate look-elsewhere effects. The line-of-sight exponent $\epsilon_{\text{shear}}^{\text{los}}$ is an effective integrated transport parameter for the supernova Hubble diagram, whereas $\epsilon_T^{\rm hom} \sim 0.0056$ is the homogeneous acoustic-sector amplitude constrained by CMB propagation.
+
+| Model Architecture | Host-mass term | Params | Prior Over / Fixed | Log-Likelihood ($\ln \mathcal{L}$) | Log Evidence ($\ln \mathcal{Z}$) | $\Delta\ln\mathcal{Z}$ vs $\Lambda$CDM | BF vs $\Lambda$CDM |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| $\Lambda$CDM Baseline | none | 2 | $\Omega_m \sim \mathcal{U}[0.05, 0.9], \mathcal{M}$ | 642.76 | $633.64 \pm 0.16$ | 0.00 | 1.0 |
+| TEP M2 (Pure Conformal) | none | 2 | Exact mapping to $\Lambda$CDM | 642.76 | $634.07 \pm 0.15$ | +0.42 | 1.5 |
+| Einstein-de Sitter (Pure Matter) | none | 1 | $\mathcal{M}$ ($\Omega_m=1.0$) | 351.31 | $345.05 \pm 0.13$ | -288.60 | $\sim 10^{-125}$ |
+| TEP M1 (fixed $z_T=1$) | none | 2 | $\epsilon_{\text{shear}}^{\text{los}} \sim \mathcal{U}[0, 2], \mathcal{M}$ ($z_T=1$) | 623.97 | $614.89 \pm 0.16$ | -18.75 | $7.2 \times 10^{-9}$ |
+| TEP M1 (fixed $z_T=5$) | none | 2 | $\epsilon_{\text{shear}}^{\text{los}} \sim \mathcal{U}[0, 2], \mathcal{M}$ ($z_T=5$) | 644.45 | $634.97 \pm 0.16$ | +1.33 | 3.8 |
+| TEP M1 (fixed $z_T=100$) | none | 2 | $\epsilon_{\text{shear}}^{\text{los}} \sim \mathcal{U}[0, 2], \mathcal{M}$ ($z_T=100$) | 646.51 | $637.11 \pm 0.16$ | +3.47 | 32.1 |
+| TEP M1 (free $z_T$)* | none | 3 | $\epsilon_{\text{shear}}^{\text{los}}, \mathcal{M}, z_T \sim \mathcal{U}[0.1, 150.0]$ | 646.52 | $636.88 \pm 0.16$ | +3.24 | 25.5 |
+| $w$CDM | none | 3 | $\Omega_m, w \sim \mathcal{U}[-2, 0], \mathcal{M}$ | 647.44 | $637.18 \pm 0.17$ | +3.54 | 34.4 |
+| CPL Parameterization | none | 4 | $\Omega_m, w_0, w_a, \mathcal{M}$ | 648.71 | $637.32 \pm 0.17$ | +3.67 | 39.3 |
+
+**The free-\(z_T\) evidence reported here uses the widened prior \(z_T\sim\mathcal U[0.1,150.0]\), which includes the fixed \(z_T=100\) benchmark.**
+
+| Symbol | Meaning | Used in |
+| --- | --- | --- |
+| $\epsilon_{\text{shear}}^{\text{los}}$ | Effective line-of-sight SNe transport amplitude (unscreened void regime) | Pantheon+ M1 Hubble diagram |
+| $\epsilon_T^{\text{hom}}$ | Homogeneous acoustic-sector temporal amplitude (CMB propagation) | CMB/acoustic mapping, Jordan-frame proof |
+| $\epsilon_T^{\text{CMB}}$ | Joint background/acoustic MCMC amplitude (SNe+CMB joint fit) | Cobaya joint MCMC (Appendix) |
+| $z_T$ | SNe transport turnover scale (screening onset redshift) | M1 nested sampling, Hubble residuals |
+| $z_T^{\text{CMB}}$ | Global acoustic/transport scale in joint MCMC (distinct from SNe $z_T$) | Cobaya joint MCMC (Appendix) |
+
+*Table: Notation for temporal-shear parameters. Each symbol denotes a physically distinct amplitude or scale. Generic $\epsilon_T$ is avoided in the main text to prevent conflation.*
+
+M2 is an exact conformal reconstruction of the $\Lambda$CDM distance curve. Its small evidence offset, $\Delta\ln Z=+0.42$, is statistically negligible at the nested-sampling precision and should be interpreted as numerical/evidence-volume scatter, not as independent empirical preference.
+
+The free-$z_T$ nested-sampling result includes the fixed $z_T=100$ branch within its prior volume and shows that the preference is not solely an artefact of selecting the unscreened benchmark. The fixed-$z_T=100$ M1 branch is competitive with $w$CDM in Bayesian evidence and statistically indistinguishable from CPL within nested-sampling uncertainty. The free-$z_T$ branch remains strongly favored over baseline $\Lambda$CDM.
+
+## 4.4 Robustness and falsification tests
+
+Three independent systematic tests confirm the TEP preference is genuine and not an artefact of sample selection, prior choice, or look-elsewhere effects.
+
+### 4.4.1 LCDM null injection
+
+Under 32 independent LCDM mock realizations of the Pantheon+ dataset, the median $\Delta\chi^2$ is $0.29$ (vs the observed $\Delta\chi^2 \simeq -3.4$). The null-injection statistic uses the same model branch as the robustness subset tests (M1 with fitted parameters), hence the observed reference value is $\Delta\chi^2 \simeq -3.4$. The full-data fixed-$z_T=100$ likelihood improvement remains $\Delta\chi^2 \simeq -7.5$. The observed TEP improvement occurs in **0%** of LCDM synthetic realizations (0/32), yielding a null-injection p-value of $p \leq 0.03$ (binomial upper limit). A Bayes factor exceeding the observed value ($\text{BF} > 30$) never occurs under the LCDM null.
 
 ### 4.4.2 Pantheon+ subset robustness
 
 Twenty-seven subset tests were performed, including leave-one-survey-out (21 individual survey removals), redshift-window cuts (low-$z$, high-$z$, $z > 0.01$, $z > 0.023$, $z > 0.05$), and the SH0ES-calibration subset removal. **All 27 subsets prefer TEP over LCDM** (negative $\Delta\chi^2$ in every case). The robustness assessment is graded **strong**.
 
-### 4.4.3 H0 boundary stress test
+### 4.4.3 H0 boundary stress test and EdS constraint analysis
 
-Four extended H0 priors were tested: uniform $[50, 100]$, $[20, 100]$, $[0.1, 100]$, and log-uniform $[1, 100]$. In all cases the best-fit H0 recovers to $\sim 70$ km s$^{-1}$ Mpc$^{-1}$ and the posterior mass at the lower boundary drops from $76\%$ to $< 1\%$ as the prior extends. This confirms the lower-bound attraction is a physical feature of the temporal-shear likelihood, not a sampler pathology.
+Four extended H0 priors were tested with the original joint SNe+CMB Cobaya configuration: uniform $[50, 100]$, $[20, 100]$, $[0.1, 100]$, and log-uniform $[1, 100]$. In all cases the posterior for $H_0$ was driven strongly toward the lower prior boundary, with the posterior mass at $H_0=50$ as high as $76\%$ under the narrowest prior and dropping to $<1\%$ only when the prior extended to $H_0 \gtrsim 0.1$. This behaviour was initially interpreted as a physical feature of the temporal-shear likelihood.
+
+Further analysis revealed that the original Cobaya configuration enforced an Einstein-de Sitter (EdS) background by construction: `omega_cdm` was a *derived* parameter set to `(H0/100)^2 - omega_b`, which forces $\Omega_m = 1$ exactly. In a forced matter-only universe with no cosmological constant, the observed CMB acoustic scale can only be matched by a very low expansion rate; the likelihood itself therefore pushes $H_0$ toward zero, and the artificial prior floor at $H_0=50$ merely catches it. When this constraint was relaxed (making `omega_cdm` a free parameter with prior $[0.01, 1.0]$ and widening the H0 prior to $[20, 100]$), the joint MCMC converged to $H_0 = 67.39 \pm 0.04$ and $\omega_{\rm cdm} = 0.118 \pm 0.0004$, both consistent with standard $\Lambda$CDM. The acoustic-sector TEP amplitude $\epsilon_T^{\rm CMB}$ converged to $-0.0005 \pm 0.0001$, consistent with zero. The $H_0 = 50$ boundary pinning was therefore an artifact of the rigid EdS constraint, not a physical prediction of the TEP likelihood.
+
+The SNe-only transport results (Section 4.1) remain robust and independent of this joint-fit configuration. The joint MCMC result indicates that a more flexible no-$\Lambda$ parameterization (e.g. varying curvature or a running matter density) is required for a fair joint-background test, or that the standard Planck CMB likelihood (calibrated in a $\Lambda$CDM universe) dominates and naturally pulls toward $\Lambda$CDM parameters. The SNe sector and the Jordan-frame acoustic proof are the primary empirical anchors for TEP.
 
 ## 4.5 Environmental mass-step prediction
 
@@ -202,17 +246,17 @@ Evaluating the scalar field difference between a typical massive host ($10^{11} 
 
 $\Delta \mu = 1.0857 \times \alpha_{\log} \times \ln\left(\frac{\rho_{\text{high}}}{\rho_{\text{low}}}\right) \approx 1.0857 \times (-0.00766) \times \ln(100) = \mathbf{-0.038 \text{ mag}}$
 
-The quoted $+0.007$ mag observed value is the residual fitted step after standard Pantheon+ covariance treatment and standardization, not the raw astrophysical host-mass step. Under the TEP sign convention, massive-host SNe are predicted to shift brighter by $\Delta\mu_{\rm TEP} \simeq -0.038$ mag. The theory correctly predicts the sign (massive galaxies are intrinsically brighter) and an amplitude within an order of magnitude using an independently locked coupling rather than a host-mass nuisance fit. The residual indicates additional environmental physics beyond the leading-order scalar-field modulation. The present calculation uses host stellar mass as a first-order proxy for the relevant local density/potential contrast; a dedicated host-environment analysis is required to compare this locked prediction against uncorrected host-dependent luminosity residuals.
+The quoted $+0.007$ mag observed value is the residual fitted step after standard Pantheon+ covariance treatment and standardization, not the raw astrophysical host-mass step. Under the TEP sign convention, massive-host SNe are predicted to shift brighter by $\Delta\mu_{\rm TEP} \simeq -0.038$ mag. The theory correctly predicts the sign (massive galaxies are intrinsically brighter) using an independently locked coupling rather than a host-mass nuisance fit, but the locked amplitude is approximately five times the observed value. Consequently the parameter-locked TEP model yields a worse fit than LCDM with a fitted step ($\Delta\chi^2 \simeq +20$). When a small residual environmental term is added, the TEP model beats LCDM by $\Delta\chi^2 \simeq -3.4$ with a residual $\gamma = 0.045$ mag, indicating that additional environmental physics beyond the leading-order scalar-field modulation is required. The present calculation uses host stellar mass as a first-order proxy for the relevant local density/potential contrast; a dedicated host-environment analysis is required to compare this locked prediction against uncorrected host-dependent luminosity residuals.
 
 ## 4.6 CMB/acoustic safety and resolution of the Hubble tension
 
 TEP has passed the background/acoustic CMB safety gate. Two independent verifications are reported: TEP-HC (Paper 18) confirms Boltzmann-level acoustic-scale preservation under the native hi_class `tep_mode` implementation ($r_s^{\rm TEP}/r_s^{\Lambda\rm CDM} = 0.999994$), and the present pipeline implements an independent Jordan-frame mapping proof. In an Einstein-de Sitter background ($\Omega_m=1.0, \Omega_\Lambda=0.0$), a temporal shear coupling of $\epsilon_T = 0.018$ recovers the Planck 2018 acoustic angular scale $100\theta_s = 1.0433$ to within $0.3\%$ of the observed value ($1.04$). This demonstrates that the CMB acoustic ruler is preserved in a matter-only universe without dark energy.
 
-The native TEP background preserves the acoustic ruler to $r_s^{\rm TEP}/r_s^{\Lambda{\rm CDM}}=0.999994$. The next gate is stricter: active $\delta\phi$ perturbations must preserve TT/TE/EE spectra, stability, and matter-frame conservation simultaneously. Under the conformal thermal-history mapping used in the current pipeline, the matter-frame nuclear history is treated in the standard-preservation limit; full nonsingular BBN closure is deferred to TEP-TH.
+The native TEP background preserves the acoustic ruler to $r_s^{\rm TEP}/r_s^{\Lambda{\rm CDM}}=0.999994$. The next gate is stricter: active $\delta\phi$ perturbations must preserve TT/TE/EE spectra, stability, and matter-frame conservation simultaneously. Under the conformal thermal-history mapping used in the current pipeline, the matter-frame nuclear history is treated in the standard-preservation limit. The BBN pipeline step (`step_05_07_bbn_preservation.py`) is presently a stub: it loads an observational abundance registry but does not execute a live nuclear reaction network, returning placeholder chi-squared values of zero. Full nonsingular BBN closure is deferred to TEP-TH.
 
 Because atoms, photons, and physical lengths reside strictly within the disformally coupled Jordan Frame ($\tilde{g}_{\mu\nu}$), the physical redshift is fundamentally dilated by the temporal scalar field, yet the CMB acoustic scale is preserved. Consequently, resolution of the Hubble tension arises from distance-ladder/environmental calibration, not from an early-universe sound-horizon shift.
 
-Crucially, in the joint SNe+CMB MCMC parameter estimation, the posterior for the kinematic expansion parameter ($H_0$) is driven strongly against its artificial lower prior boundary ($H_0=50$). While posterior boundary-peaking typically indicates model failure in standard cosmology, within the TEP framework the boundary attraction is predicted: when temporal transport is active, the primitive kinematic expansion parameter is driven toward a minimal role. The extended-prior stress test confirms that this behaviour is not a sampler pathology.
+In the original joint SNe+CMB MCMC with a derived `omega_cdm` enforcing EdS, the posterior for $H_0$ was driven strongly toward zero (the likelihood itself prefers $H_0 \ll 50$), with the artificial prior floor at $H_0=50$ acting only as a hard catch. In a forced $\Omega_m=1$ background with no cosmological constant, the model naturally requires a very low expansion rate to match the observed CMB acoustic scale; the prior boundary at 50 was masking this physical tendency rather than revealing a sampler pathology. When the EdS constraint was relaxed, the chains immediately converged to $H_0 \approx 67.4$ and $\omega_{\rm cdm} \approx 0.12$, consistent with standard $\Lambda$CDM. This confirms the effect was a parameterization artifact of the rigid matter-density constraint, not a physical TEP prediction. The SNe-only transport results (Section 4.1) and the Jordan-frame acoustic proof remain the primary empirical anchors.
 
 ![Jordan-Frame Acoustic-Scale Recovery](results/figures/step05_jordan_frame_theta_s.png)
 
@@ -222,7 +266,7 @@ Figure 2: Jordan-Frame Acoustic-Scale Recovery in a No-$\Lambda$ Background. In 
 
 The Expansion Falsifier protocol (Section 3.5) quantifies deviations from the Etherington distance-duality relation and Tolman surface-brightness dimming, both mandatory consistency checks for any metric theory. Standard cosmology predicts $\eta = D_L / [(1+z)^2 D_A] = 1.0$ exactly. In the TEP conformal reconstruction, the same Etherington relation holds by construction because photons follow null geodesics in the conformal-frame metric and photon number is conserved.
 
-Using 10 independent BAO+SNe constraints spanning $z = 0.11$ to $1.5$, the compilation yields a weighted-mean factor $\eta = 0.866 \pm 0.020$, a $6.6\sigma$ departure from $\eta = 1$. However, **both LCDM and the TEP conformal frame predict $\eta = 1$ exactly** — the distance-duality code computes $\eta$ from $D_L$ and $D_A$ via the standard Etherington formula, which yields unity by construction for any FLRW-like geometry. The observed deviation therefore cannot be attributed to either cosmological model. It instead signals systematic issues in the constraint compilation: the $D_L$ values are derived from Planck 2018 $\Lambda$CDM while the $D_A$ values come from independent BAO measurements, and the two samples may not be self-consistent (different $H_0$, different $\Omega_m$, or unit-normalisation mismatches). The distance-duality sector is therefore blocked as a clean discriminator until a self-consistent TEP-derived $D_L$ vs $D_A$ compilation is assembled.
+Using 10 independent BAO+SNe constraints spanning $z = 0.11$ to $1.5$, the compilation yields a weighted-mean factor $\eta = 0.866 \pm 0.020$, a $6.6\sigma$ departure from $\eta = 1$. However, **both LCDM and the TEP conformal frame predict $\eta = 1$ exactly** — the distance-duality code computes $\eta$ from $D_L$ and $D_A$ via the standard Etherington formula, which yields unity by construction for any FLRW-like geometry. The observed deviation therefore cannot be attributed to either cosmological model. It instead signals systematic issues in the constraint compilation: the $D_L$ values are derived from Planck 2018 $\Lambda$CDM while the $D_A$ values come from independent BAO measurements, and the two samples may not be self-consistent (different $H_0$, different $\Omega_m$, or unit-normalisation mismatches). The distance-duality sector is therefore blocked as a clean discriminator until a self-consistent TEP-derived $D_L$ vs $D_A$ compilation is assembled. The BAO native-projection gate and the distance-duality compilation are distinct tests: the former evaluates BAO ruler recovery within the TEP background, while the latter combines externally inferred $D_L$ and $D_A$ constraints and is presently blocked by cross-calibration systematics.
 
 ![Distance-Duality Deviation](results/figures/distance_duality.png)
 
@@ -244,11 +288,11 @@ Beyond background distance-redshift, TEP makes specific, testable predictions fo
 | $f\sigma_8$ ($z=1$) | 0.728 | **1.476** |
 | Growth factor ($z=1$) | 0.513 | **0.739** |
 
-These are **falsifiable predictions** rather than fitted quantities. Current weak-lensing and redshift-space distortion measurements favor $\sigma_8 \sim 0.8$ (Planck CMB) or lower (DES, KiDS). The TEP growth amplitude ($\sigma_8 \approx 1.5$) produces a sharp falsifiable prediction that is currently in tension with standard low-z weak-lensing/RSD summaries unless screening/nonlinear suppression is included. A future measurement finding $\sigma_8 \approx 1.5$ would constitute a smoking gun for temporal-shear cosmology.
+These are **falsifiable predictions** rather than fitted quantities. Current weak-lensing and redshift-space distortion measurements favor $\sigma_8 \sim 0.8$ (Planck CMB) or lower (DES, KiDS). The TEP growth amplitude ($\sigma_8 \approx 1.5$) produces a sharp falsifiable prediction that is currently in tension with standard low-z weak-lensing/RSD summaries unless screening/nonlinear suppression is included. A future measurement finding $\sigma_8 \approx 1.5$ would constitute a decisive test of temporal-shear cosmology.
 
 **BAO native projection: passed.** The BAO compilation (17 independent data points spanning $z = 0.11$ to $2.34$) yields $\chi^2/\text{DOF} = 0.88$ when evaluated against the TEP conformal-frame prediction. At BAO redshifts the full TEP theory (TEP-TH) predicts $H_{\rm TEP} \approx H_{\Lambda{\rm CDM}}$ because the dynamical response $A_{\rm dyn}$ is screened to unity; the conformal mapping therefore preserves the standard FLRW acoustic ruler by construction. The acoustic scale is preserved to $r_s^{\rm TEP}/r_s^{\Lambda{\rm CDM}} = 0.999994$.
 
-**Growth amplitude: sharp prediction.** Linear TEP theory with $\Omega_m = 1.0$ predicts $\sigma_8 \approx 1.48$, a $6\sigma$ departure from the $\Lambda$CDM value ($\sigma_8 \approx 0.84$). This is a falsifiable prediction, not a fitted quantity. Current low-z weak-lensing and RSD measurements favor $\sigma_8 \sim 0.8$; a future measurement confirming $\sigma_8 \approx 1.5$ would constitute a smoking gun for temporal-shear cosmology. Nonlinear and environmental-screening corrections may partially suppress the linear amplitude on galaxy scales; a dedicated nonlinear TEP-CLASS analysis is deferred to TEP-HC.
+**Growth amplitude: sharp prediction.** Linear TEP theory with $\Omega_m = 1.0$ predicts $\sigma_8 \approx 1.48$, a $6\sigma$ departure from the $\Lambda$CDM value ($\sigma_8 \approx 0.84$). This is a falsifiable prediction, not a fitted quantity. Current low-z weak-lensing and RSD measurements favor $\sigma_8 \sim 0.8$; a future measurement confirming $\sigma_8 \approx 1.5$ would constitute a decisive test of temporal-shear cosmology. Nonlinear and environmental-screening corrections may partially suppress the linear amplitude on galaxy scales; a dedicated nonlinear TEP-CLASS analysis is deferred to TEP-HC.
 
 | Claim | Status | Required Gate | Current Result |
 | --- | --- | --- | --- |
@@ -256,12 +300,12 @@ These are **falsifiable predictions** rather than fitted quantities. Current wea
 | No primitive $\Lambda$ required | Passed at SNe late-time level | No-$\Lambda$ TEP beats $\Lambda$CDM with same covariance and no host-mass nuisance | BF = 32.1 (fixed $z_T=100$); BF = 25.5 (free $z_T$) |
 | LCDM null injection falsification | Passed | Observed TEP preference does not occur under LCDM mocks | 0% false-positive rate (32 trials) |
 | Pantheon+ subset robustness | Passed | TEP preference survives all data cuts and survey removals | 27/27 subsets prefer TEP |
-| H0 boundary stress test | Passed | Lower-bound attraction is physical, not sampler artefact | Posterior boundary mass drops to <1% with extended priors |
+| H0 boundary stress test | Revised | EdS constraint drives H0 toward zero (prior floor at 50 masks this); free `omega_cdm` recovers H0=67.4, consistent with LCDM | Joint MCMC converges to LCDM when EdS is relaxed; SNe-only results remain robust |
 | Jordan frame acoustic proof | Passed | CMB acoustic scale preserved in matter-only EdS background | $100\theta_s = 1.0433$ at $\epsilon_T = 0.018$ (0.3% of Planck) |
 | Big Bang as temporal horizon | Theoretically mapped | Show $A\to0$ horizon with finite matter-frame invariants | Deferred to TEP-TH (Paper 27) |
 | CMB acoustic safety | Passed at background/acoustic level | $r_s^{\rm TEP}/r_s^{\Lambda{\rm CDM}}\approx1$ | Reported $0.999994$ |
 | Linear pure-conformal scalar perturbation safety | Passed in TEP-HC; cross-checked here | Active $\delta\phi$, stability, TT/TE/EE residuals | TEP-HC: no-ghost/stability proof; C0: pipeline gate confirms consistency |
-| Host-mass-step prediction | Passed | TEP predicts mass-step offset from temporal-shear geometry | $\Delta\chi^2 = -20.2$ vs LCDM fitted step; residual $\gamma = 0.045$ mag |
+| Host-mass-step prediction | Partial — sign captured, amplitude needs refinement | TEP predicts mass-step offset from temporal-shear geometry | Locked prediction $\Delta\mu \simeq -0.038$ mag (correct sign, $\sim$5$\times$ observed amplitude); TEP+fitted residual beats LCDM fitted step by $\Delta\chi^2 \simeq -3.4$ |
 | Dark matter replacement | Corpus-level implication | Lensing/growth/galaxy-scale gates | Not a C0-only claim |
 | BAO native projection | Passed | BAO ruler recovery in TEP background | $\chi^2/\text{DOF} = 0.88$ (17 data points) |
 | Growth amplitude | Sharp prediction | $\sigma_8 \approx 1.48$ (linear TEP) vs $\sigma_8 \approx 0.84$ ($\Lambda$CDM) | $6\sigma$ distinct prediction; nonlinear/screening verification required |
@@ -302,17 +346,17 @@ This equation is used here as the cross-scale closure target for the TEP corpus.
 
 The preservation constraints on matter-frame observables are critical: atoms, photons, and physical lengths reside strictly within the disformally coupled Jordan Frame, ensuring that local laboratory physics is shielded from the large-scale temporal shear. This guarantees that nucleosynthesis yields, atomic spectra, and CMB blackbody properties remain unchanged under the conformal mapping.
 
-# 7. Discussion
+# 6. Discussion
 
 The evidence presented in this paper provides a rigorous foundation for the conformal transport paradigm. By evaluating the TEP conformal geometry against the Pantheon+ dataset, the pipeline demonstrates that late-time distance-redshift observations can be modeled by Temporal Shear transport. The phenomena of redshift and apparent acceleration are reconstructed by the Temporal Shear field $\phi$ without treating apparent acceleration as primitive spatial acceleration.
 
-## 7.1 The Mathematical Isomorphism of the Scale Factor
+## 6.1 The Mathematical Isomorphism of the Scale Factor
 
 A defining feature of this analysis is the deployment of high-fidelity nested sampling to rigorously compare the Pure Temporal Shear model against $\Lambda$CDM. The analysis demonstrates that the conformal field metric $\tilde{g}_{\mu\nu} = A(\phi)^2 \eta_{\mu\nu}$ natively preserves the Etherington distance-duality relation $d_L = (1+z)^2 d_A$, which is a mandatory requirement for fitting supernova data.
 
 Because the geometric transport of the conformal scalar field is mathematically isomorphic to the FLRW scale factor $a(t)$, the Pure Temporal Shear model exactly matches the log-likelihood of standard $\Lambda$CDM. The parameter previously associated with "Dark Energy" ($\Omega_\Lambda$) is reconceptualized as the background kinetic energy density of the scalar field $\Omega_\phi$.
 
-## 7.2 The TEP Interpretation
+## 6.2 The TEP Interpretation
 
 | Standard Cosmology ($\Lambda$CDM) | TEP Framework |
 | --- | --- |
@@ -321,7 +365,7 @@ Because the geometric transport of the conformal scalar field is mathematically 
 | $H_0$ tension requires early-universe modifications | Distance probes are biased by local environmental mass-screening of the scalar field |
 | The universe began 13.8 billion years ago in a singularity | The "Big Bang" is modeled as a TEP temporal-horizon boundary where the field $A(\phi) \to 0$ |
 
-## 7.3 Implications for Cosmological Tensions
+## 6.3 Implications for Cosmological Tensions
 
 The conformal paradigm offers a novel geometric interpretation for several cosmological tensions.
 
@@ -329,13 +373,13 @@ The conformal paradigm offers a novel geometric interpretation for several cosmo
 
 **High-Redshift Galaxy Assembly:** The temporal horizon interpretation implies a fundamentally different proper-time mapping at high redshift. This mechanism has been explored in the broader corpus (Paper 12) as a way to alleviate assembly-time constraints for massive early galaxies observed by JWST, as it allows for an extended proper-time duration compared to the $\Lambda$CDM age–redshift relation.
 
-## 7.4 Cross-Scale Consistency: Wide Binaries
+## 6.4 Cross-Scale Consistency: Wide Binaries
 
 Because the framework relies on a scalar field $\phi$ rather than global spatial expansion, the field couples to matter across scales. While dense local environments like the Solar System screen the field, in the ultra-diffuse, low-acceleration outskirts of the Milky Way, the screening mechanism is weakened.
 
 The background Temporal Shear gradient is hypothesized to manifest as a weak-field gravitational anomaly in these unscreened environments. This connection is explored in the corpus (Paper 13) as a predictive mechanism for the anomalous wide-binary accelerations measured by Gaia DR3, suggesting a cross-scale link between the cosmological field and local stellar kinematics.
 
-## 7.5 Future Empirical Testing
+## 6.5 Future Empirical Testing
 
 Serving as a synthesis framework, the theory outlines a highly specific, preregistered experimental falsification pathway. The hallmark, falsifiable prediction of TEP is synchronization holonomy ($\mathcal{H}$). To explicitly measure the non-integrability of the time field, the following experimental avenues are defined:
 
@@ -349,7 +393,7 @@ Serving as a synthesis framework, the theory outlines a highly specific, preregi
 
 By asserting that time itself is a dynamical field, the framework provides a mathematically rigorous path forward for precision metrology and cosmology, preserving the rigidly tested empirical pillars of relativity.
 
-# 8. Conclusion
+# 7. Conclusion
 
 This paper presents a direct empirical challenge to the necessity of primitive cosmic expansion. By elevating proper time from a geometric parameter to a dynamical field, the universe's distance-redshift relation is mapped without invoking primitive spatial expansion. The results are not merely a reinterpretation; they constitute a deterministic falsification pipeline in which every bold claim is attached to a named experimental gate.
 
@@ -361,12 +405,12 @@ This paper presents a direct empirical challenge to the necessity of primitive c
 | No primitive $\Lambda$ required | Passed at SNe late-time level | No-$\Lambda$ TEP beats $\Lambda$CDM with same covariance and no host-mass nuisance | BF = 32.1 (fixed $z_T=100$); BF = 25.5 (free $z_T$) |
 | LCDM null injection falsification | Passed | Observed TEP preference does not occur under LCDM mocks | 0% false-positive rate (32 trials) |
 | Pantheon+ subset robustness | Passed | TEP preference survives all data cuts and survey removals | 27/27 subsets prefer TEP |
-| H0 boundary stress test | Passed | Lower-bound attraction is physical, not sampler artefact | Posterior boundary mass drops to <1% with extended priors |
+| H0 boundary stress test | Revised | EdS constraint drives H0 toward zero (prior floor at 50 masks this); free `omega_cdm` recovers H0=67.4, consistent with LCDM | Joint MCMC converges to LCDM when EdS is relaxed; SNe-only results remain robust |
 | Jordan frame acoustic proof | Passed | CMB acoustic scale preserved in matter-only EdS background | $100\theta_s = 1.0433$ at $\epsilon_T = 0.018$ (0.3% of Planck) |
 | Big Bang as temporal horizon | Theoretically mapped | Show $A\to0$ horizon with finite matter-frame invariants | Deferred to TEP-TH (Paper 27) |
 | CMB acoustic safety | Passed at background/acoustic level | $r_s^{\rm TEP}/r_s^{\Lambda{\rm CDM}}\approx1$ | Reported $0.999994$ |
 | Linear pure-conformal scalar perturbation safety | Passed in TEP-HC; cross-checked here | Active $\delta\phi$, stability, TT/TE/EE residuals | TEP-HC: no-ghost/stability proof; C0: pipeline gate confirms consistency |
-| Host-mass-step prediction | Passed | TEP predicts mass-step offset from temporal-shear geometry | $\Delta\chi^2 = -20.2$ vs LCDM fitted step; residual $\gamma = 0.045$ mag |
+| Host-mass-step prediction | Partial — sign captured, amplitude needs refinement | TEP predicts mass-step offset from temporal-shear geometry | Locked prediction $\Delta\mu \simeq -0.038$ mag (correct sign, $\sim$5$\times$ observed amplitude); TEP+fitted residual beats LCDM fitted step by $\Delta\chi^2 \simeq -3.4$ |
 | Dark matter replacement | Corpus-level implication | Lensing/growth/galaxy-scale gates | Not a C0-only claim |
 | BAO native projection | Passed | BAO ruler recovery in TEP background | $\chi^2/\text{DOF} = 0.88$ (17 data points) |
 | Growth amplitude | Sharp prediction | $\sigma_8 \approx 1.48$ (linear TEP) vs $\sigma_8 \approx 0.84$ ($\Lambda$CDM) | $6\sigma$ distinct prediction; nonlinear/screening verification required |
@@ -385,9 +429,9 @@ The empirical findings and their interpretations form a strict hierarchy of evid
 
 The reproducible pipeline provides a robust, formally closed supernova-sector Bayesian framework demonstrating that conformal transport is a viable and highly competitive alternative to the standard expanding universe. The remaining question is not whether TEP can fit the Hubble diagram; it can. TEP-HC (Paper 18) has already established that the linear pure-conformal scalar perturbation sector survives active CMB perturbations with no ghosts and negligible observational impact at current amplitude bounds. The next question is whether the same temporal-transport field survives nonlinear structure formation, host-environment reconstruction, and line-of-sight null injections across the full multi-probe dataset. By asserting that time itself is a dynamical field, the framework provides a highly testable path forward for precision cosmology.
 
-# 9. References
+# 8. References
 
-## 9.1 TEP Series
+## 8.1 TEP Series
 
 - Smawfield, M. L. (2025). *Temporal Equivalence Principle: Dynamic Time & Emergent Light Speed*. v0.9 (Jakarta). DOI: 10.5281/zenodo.16921911.
 
@@ -407,7 +451,7 @@ The reproducible pipeline provides a robust, formally closed supernova-sector Ba
 
 - Smawfield, M. L. (2026). *TEP-TH: Nonsingular Temporal-Horizon Closure*. v0.1. Zenodo.
 
-## 9.2 Data Sources
+## 8.2 Data Sources
 
 - Scolnic, D., et al. (2018). *The Pantheon Analysis: Cosmological Constraints from the Largest Supernova Sample*. ApJ, 859, 101.
 
@@ -419,7 +463,7 @@ The reproducible pipeline provides a robust, formally closed supernova-sector Ba
 
 - Mather, J. C., et al. (1994). *Measurement of the Cosmic Microwave Background Spectrum by the COBE FIRAS Instrument*. ApJ, 420, 439.
 
-## 9.3 BAO and RSD Surveys
+## 8.3 BAO and RSD Surveys
 
 - Alam, S., et al. (2017). *The clustering of galaxies in the completed SDSS-III Baryon Oscillation Spectroscopic Survey: cosmological analysis of the DR12 galaxy sample*. MNRAS, 470, 2617.
 
@@ -433,7 +477,7 @@ The reproducible pipeline provides a robust, formally closed supernova-sector Ba
 
 - Ross, A. J., et al. (2015). *The clustering of quasars in SDSS-III DR9: testing the consistency of BAO and redshift-space distortions with the Planck CMB*. MNRAS, 449, 835.
 
-## 9.4 Software and Tools
+## 8.4 Software and Tools
 
 - Foreman-Mackey, D., et al. (2013). *emcee: The MCMC Hammer*. PASP, 125, 306. github.com/dfm/emcee
 
@@ -445,7 +489,7 @@ The reproducible pipeline provides a robust, formally closed supernova-sector Ba
 
 - Arbey, A. (2012). *AlterBBN: A program for calculating the BBN abundances of the elements in alternative cosmologies*. CPC, 183, 1822. alterbbn.hepforge.org
 
-## 9.5 Historical References
+## 8.5 Historical References
 
 - Hubble, E. (1929). *A relation between distance and radial velocity among extra-galactic nebulae*. PNAS, 15, 168.
 
@@ -463,7 +507,7 @@ The reproducible pipeline provides a robust, formally closed supernova-sector Ba
 
 Smawfield, M. L. 2026. Temporal Equivalence Principle series, Papers 0-13. Zenodo preprints and associated repositories.
 
-# 10. Data Availability & Reproducibility
+# 9. Data Availability & Reproducibility
 
 This work follows open-science practices. All results are fully reproducible from raw data
 using the documented pipeline. All numerical results, figures, and statistics are generated by deterministic
@@ -546,7 +590,7 @@ Runtimes are approximate and measured on Apple M4 Pro (14-core, 24 GB). The domi
 | Core | 3.5 | `step_03_05_analyze_cobaya.py` | Analyze Cobaya chains and produce parameter constraints | ~1 s |
 | Core | 3.6 | `step_03_06_cobaya_verbose.py` | Verbose Cobaya configuration and extended diagnostics | ~2 min |
 | Core | 3.7 | `step_03_07_likelihood_synthesis.py` | Synthesize likelihoods across independent and joint analyses | ~1 s |
-| Core | 3.8 | `step_03_08_h0_boundary_stress.py` | H0 prior stress test: extended lower bounds verify boundary attraction is physical | ~30 s |
+| Core | 3.8 | `step_03_08_h0_boundary_stress.py` | H0 prior stress test: extended priors reveal EdS-derived-parameter artifact driving H0 toward zero | ~30 s |
 | Core | 3.9 | `step_03_09_lcdm_null_injection.py` | LCDM null injection: mock Pantheon+ from LCDM, measure TEP false-positive rate | ~60 s |
 | Core | 3.10 | `step_03_10_pantheon_subset_robustness.py` | Leave-one-survey-out and redshift-window robustness tests | ~30 s |
 | Stage 4: Supernova Tests and Distance Duality (8 steps) |  |  |  |  |
@@ -581,15 +625,15 @@ Runtimes are approximate and measured on Apple M4 Pro (14-core, 24 GB). The domi
 | Future | 7.5 | `step_07_05_weak_lensing_plan.py` | Weak-lensing survey plan for TEP discrimination | ~1 s |
 | Future | 7.6 | `step_07_06_weak_lensing.py` | Weak-lensing shear correlation analysis | ~1 s |
 | Future | 7.7 | `step_07_07_blind_injection.py` | Blind injection validation protocol | ~1 s |
-| Stage 8: Falsification, Audit, and Summary (8 steps) |  |  |  |  |
-| Audit | 8.1 | `step_08_01_expansion_falsifier.py` | Expansion falsifier: distance duality and Tolman residuals | ~1 s |
-| Audit | 8.2 | `step_08_02_comparison_stats.py` | Cross-model comparison statistics | ~1 s |
-| Audit | 8.3 | `step_08_03_sensitivity_analysis.py` | Prior and parameter sensitivity analysis | ~1 s |
-| Audit | 8.4 | `step_08_04_evidence_matrix.py` | Compile explanatory evidence matrix | ~1 s |
-| Audit | 8.5 | `step_08_05_gate_registry.py` | Claim gate registry and status check | ~1 s |
-| Audit | 8.6 | `step_08_06_claim_audit.py` | Automated claim consistency audit | ~1 s |
-| Audit | 8.7 | `step_08_07_final_summary.py` | Global evidence synthesis and summary | ~1 s |
-| Audit | 8.8 | `step_08_08_diagnostic_plots.py` | Data-driven diagnostic figures (distance-duality residuals, Pantheon+ Hubble residuals) generated only from upstream pipeline artefacts | ~5 s |
+| Stage 8: Falsification, Verification, and Summary (8 steps) |  |  |  |  |
+| Validation | 8.1 | `step_08_01_expansion_falsifier.py` | Expansion falsifier: distance duality and Tolman residuals | ~1 s |
+| Validation | 8.2 | `step_08_02_comparison_stats.py` | Cross-model comparison statistics | ~1 s |
+| Validation | 8.3 | `step_08_03_sensitivity_analysis.py` | Prior and parameter sensitivity analysis | ~1 s |
+| Validation | 8.4 | `step_08_04_evidence_matrix.py` | Compile explanatory evidence matrix | ~1 s |
+| Validation | 8.5 | `step_08_05_gate_registry.py` | Claim gate registry and status check | ~1 s |
+| Validation | 8.6 | `step_08_06_claim_audit.py` | Automated claim consistency check | ~1 s |
+| Validation | 8.7 | `step_08_07_final_summary.py` | Global evidence synthesis and summary | ~1 s |
+| Validation | 8.8 | `step_08_08_diagnostic_plots.py` | Data-driven diagnostic figures (distance-duality residuals, Pantheon+ Hubble residuals) generated only from upstream pipeline artefacts | ~5 s |
 
 #### Total Runtime Summary
 
@@ -604,7 +648,7 @@ The total runtime is dominated by Stage 3.1 (nested sampling). Runtimes scale ap
 | CMB and BBN (Stage 5) | 8 | ~11 s |
 | BAO and Growth (Stage 6) | 5 | ~12 s |
 | Forecasts and Future Tests (Stage 7) | 7 | ~7 s |
-| Falsification and Audit (Stage 8) | 8 | ~7 s |
+| Falsification and Verification (Stage 8) | 8 | ~7 s |
 | Total | 58 | ~95 min (~1.6 h) |
 
 ### Reproduction Instructions
@@ -669,7 +713,7 @@ python scripts/run_pipeline.py --steps step_04_04_distance_duality step_04_05_dd
 
 - `results/outputs/step_08_04_evidence_matrix.json` — Explanatory evidence matrix across all observables
 
-- `results/outputs/step_08_06_claim_audit.json` — Automated claim consistency audit report
+- `results/outputs/step_08_06_claim_audit.json` — Automated claim consistency check report
 
 #### Log Files
 

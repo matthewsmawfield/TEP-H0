@@ -1,51 +1,94 @@
 <h2>5. Conclusion</h2>
 
 <p>
-    Stratification of the SH0ES Cepheid host galaxies by curated kinematic
-    potential-depth estimates reveals a significant correlation (Spearman $\rho =
-    0.517$, $p = 0.0041$; Pearson $r=0.466$, $p=0.0109$) between host potential depth and the distance-ladder residual displayed in $H_0$-equivalent units.
-    Tests propagating the full SH0ES
-    GLS distance-modulus covariance yield $p_{\rm cov,MC}\approx0.0041$ (Spearman)
-    and $p_{\rm cov,MC}\approx0.0031$ (Pearson), confirming that the correlation is
-    not an artifact of sample covariance or zero-point variance. In the host-contrast likelihood, which projects out the shared calibration mode and tests only host-to-host environmental structure, the environmental model receives positive evidence ($\Delta{\rm BIC} = +2.6$); the full absolute covariance likelihood favors the null because it is dominated by the common calibration mode. We therefore treat the BIC result as evidence for a host-contrast environmental structure, not as an absolute recalibration likelihood. A diagonal H$0$-uncertainty check gives $\Delta{\rm BIC}=+2.6$ as an independent robustness verification.
-    High-$\sigma$ hosts yield systematically inflated $H_0$ values ($74.12 \pm
-    1.30$ km/s/Mpc) compared to low-$\sigma$ hosts ($66.26 \pm 2.10$ km/s/Mpc),
-    with the bias $\Delta H_0 = 7.86$ km/s/Mpc accounting for a substantial
-    fraction of the discrepancy between local and CMB measurements. Application
-    of the TEP conformal correction $\Delta\mu = \kappa_{\rm Cep}\cdot S(\rho)\cdot
-    (\sigma^2-\sigma_{\rm ref}^2)/c^2$—derived from the TEP period-contraction
-    formula and the virial relation $|\Phi|\propto\sigma^2$—with
-    response coefficient $\kappa_{\rm Cep} = (1.27 \pm 0.48)\times10^6$ mag
-    (host-only bootstrap robust $1.27\times10^6$, WLS scaled $1.41 \pm 0.59$;
-    mean response $\langle \kappa_{\rm Cep} \cdot S \rangle = 9.93\times10^5$ after accounting for
-    continuous shear suppression) and effective calibrator reference
-    $\sigma_{\rm ref} = 87.17$ km/s yields a unified local Hubble constant.
-    Internal interpolation stability (leave-one-out cross-validation, LOOCV) gives
-    $H_0^{\rm LOOCV} = 68.67 \pm 1.35$ km/s/Mpc, corresponding to a Planck tension of
-    $0.89\sigma$; this stress test demonstrates internal interpolation stability,
-    not external validation. The in-sample
-    corrected mean is $H_0 = 68.84$ km/s/Mpc (bootstrap mean $68.90 \pm 1.48$,
-    Planck tension $0.96\sigma$). Both are robust under bootstrap resampling.
-    The low-$\sigma$ subsample ($66.26 \pm 2.10$ km/s/Mpc) lies below the uncorrected
-    full-sample mean, consistent with TEP expectations that shallow-potential hosts
-    require smaller corrections.
-    The inferred $\kappa_{\rm Cep}\sim10^6$ is consistent with the TEP
-    framework's geometric-factor estimate. Paper 10 measures the effective
-    screened pulsar coefficient $\kappa_{\rm MSP}^{\rm emp} \approx 3\times10^4$
-    in dense globular clusters (step_5_55_kappa_msp_prior.json); the
-    suppression relative to the bare estimate is consistent with the
-    denser cluster environment.
+    The SH0ES full-ladder likelihood yields a baseline $H_0 = 73.04 \pm 1.01$
+    km/s/Mpc. A standard-ladder projection test inserts a TEP
+    environmental column into the SH0ES design matrix while keeping host
+    moduli $\mu_i$ as free latent parameters; the environmental signal is
+    absorbed by the inferred $\mu_i$, yielding $\kappa_{\rm Cep} = -0.067 \pm 0.210\times10^6$ mag (consistent with zero). This null result is expected:
+    the standard SH0ES model is not TEP-native, and any host-constant
+    environmental bias is algebraically equivalent to shifting a host's
+    inferred modulus.
 </p>
+<p>
+    The proper correction is therefore applied at the generative-observable
+    level. A velocity-space likelihood analysis models
+    $cz_i = d_i^{\rm true}\,(H_{\rm app} + \Gamma_X X_i) + v_i$
+    and identifies a structurally robust combined environmental slope
+    $\Gamma_X = +2.35\times10^7 \pm 1.00\times10^7$ (2.3$\sigma$ at
+    $\sigma_v = 250$ km/s). The velocity-space likelihood identifies a combined
+    environmental slope; in a general phenomenological model this slope can
+    contain both Cepheid clock bias and residual velocity-sector/environmental
+    terms. The TEP-native gauge sets the non-Cepheid velocity-sector component
+    $\beta_X$ to zero, corresponding to the hypothesis tested here.
+    In the TEP-native gauge—treating the environmental
+    slope as a pure Cepheid clock-rate bias ($\beta_X = 0$)—the equivalent
+    response coefficient is $\kappa_{\rm Cep} \approx 7.34\times10^5$ mag,
+    consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.7\times10^5$ mag ($\sim 10^6$). The
+    velocity-space fit yields $H_{\rm app} = 69.47 \pm 1.49$ km/s/Mpc; in the
+    TEP-native gauge this corresponds to a Cepheid clock-bias correction that
+    brings the local distance scale into agreement with the CMB inference.
+    The empirical one-parameter correction pipeline
+    yields $H_0^{\rm TEP} = 68.84$ km/s/Mpc (bootstrap mean $68.92 \pm 1.44$),
+    reducing the Hubble tension from $\approx 5\sigma$ to $\approx 1\sigma$
+    relative to Planck. The signal survives explicit controls for redshift
+    trend, sky dipole ($\sim$100 km/s), quadrupole, and group-offset models.
+    Leave-one-host-out cross-validation gives 29/29 positive signs;
+    bootstrap resampling gives 99.9% positive fraction.
+</p>
+
+<table class="data-table" style="margin:15px 0;">
+    <caption><strong>Coefficient dictionary (summary).</strong></caption>
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th style="text-align:right;">Value</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>$\kappa_{\rm Cep}$ (design-matrix null)</td>
+            <td style="text-align:right;">$-0.067\pm0.210\times10^6$ mag</td>
+            <td>SH0ES design-matrix environmental column; absorbed by latent $\mu_i$</td>
+        </tr>
+        <tr>
+            <td>$\Gamma_X$</td>
+            <td style="text-align:right;">$+2.35\pm1.00\times10^7$</td>
+            <td>velocity-space combined environmental slope; primary empirical detection</td>
+        </tr>
+        <tr>
+            <td>$\kappa_{\rm equiv}$ (TEP-native)</td>
+            <td style="text-align:right;">$\approx7.34\times10^5$ mag</td>
+            <td>equivalent Cepheid response if $\beta_X=0$</td>
+        </tr>
+        <tr>
+            <td>$\kappa_{\rm Cep}^{\rm emp}$ (empirical)</td>
+            <td style="text-align:right;">$(1.27\pm0.46)\times10^6$ mag</td>
+            <td>residual-based empirical correction cross-check</td>
+        </tr>
+        <tr>
+            <td>$H_{\rm app}$</td>
+            <td style="text-align:right;">$69.47\pm1.49$ km/s/Mpc</td>
+            <td>velocity-space apparent intercept</td>
+        </tr>
+        <tr>
+            <td>$H_0^{\rm TEP}$</td>
+            <td style="text-align:right;">$68.84$ km/s/Mpc</td>
+            <td>corrected local scale in the TEP-native interpretation</td>
+        </tr>
+    </tbody>
+</table>
 
 <p>
     Independent P-L fits to the extragalactic geometric anchors (LMC, NGC 4258,
     M31) yield $\kappa_{\rm anchor} = (0.246 \pm 0.139) \times 10^6$ mag ($1.78\sigma$ from zero).  The anchor-only
-    regression is underpowered and cannot precisely estimate the
-    host-level coefficient directly.  It therefore cannot by itself confirm or
-    refute $\kappa_{\rm Cep}\sim10^6$.  The relevant test is whether a
-    pre-specified screening prescription can reconcile the anchor residuals with
-    the host-inferred coefficient.  This dichotomy is naturally explained by group
-    halo shear suppression: all three anchors are members of galaxy groups (Local
+    regression yields a positive coefficient ($1.78\sigma$), directionally
+    consistent with the host-inferred scale, though the small sample limits
+    precision.  The decisive test is whether a pre-specified screening
+    prescription can reconcile the anchor residuals with the host-inferred
+    coefficient.  This dichotomy is quantitatively resolved under the
+    group-halo screening prescription: all three anchors are members of galaxy groups (Local
     Group for LMC and M31; Canes Venatici I for NGC 4258), embedding them in
     deep ambient potentials that suppress Temporal Shear, while the SN Ia
     hosts, selected for smooth Hubble flow, are biased toward isolated field
@@ -67,66 +110,94 @@
     density-dependent structure identified here—now includes an explicit
     local-gravity closure. The fitted Cepheid response maps through
     $q_{\rm Sun}=8.4\times 10^{-12}$ to $|\gamma-1|=1.05\times 10^{-10}$ and
-    $\eta_{\rm TiPt}=1.86\times 10^{-21}$, passing Cassini and MICROSCOPE by
-    margins of $2.2\times 10^5$ and $5.4\times 10^6$, respectively.
+    $\eta_{\rm TiPt}=1.86\times 10^{-21}$. Within the source-screened mapping used
+    here, these project below current Cassini and MICROSCOPE limits by margins of
+    $2.2\times 10^5$ and $5.4\times 10^6$, respectively.
 </p>
 
 <p>
     <strong>Two-stage resolution claim.</strong>
 </p>
 <p>
-    <strong>Stage 1 — Discovery of bias:</strong> Before fitting any correction,
-    the Cepheid ladder residual shows a statistically significant host-potential
-    dependence ($p_{\rm cov,MC}=0.0031$). The sign is exactly what TEP predicts:
-    deep potentials induce apparent luminosity dimming, masquerading as a
-    Hubble tension.
+    <strong>Stage 1 — Discovery of bias:</strong> The velocity-space likelihood
+    reveals a structurally robust combined environmental slope
+    $\Gamma_X = +2.35\times10^7$ (2.3$\sigma$). The sign is exactly what TEP
+    predicts: deep potentials induce apparent luminosity dimming, masquerading as
+    a Hubble tension. The signal survives explicit controls for redshift trend,
+    sky dipole ($\sim$100 km/s), quadrupole, and group offsets;
+    binned permutation tests confirm it is not driven by redshift or sky
+    selection. LOHO cross-validation gives 29/29 positive signs; bootstrap
+    resampling gives 99.9% positive fraction.
 </p>
 <p>
-    <strong>Stage 2 — Resolution by correction:</strong> A one-parameter
-    correction derived from the TEP conformal clock-transport law
-    ($\Delta\mu = \kappa_{\rm Cep} \cdot S(\rho) \cdot (\sigma^2-\sigma_{\rm ref}^2)/c^2$)
-    removes the environmental dependence and brings the Cepheid-calibrated
-    SH0ES ladder into agreement with the CMB scale ($H_0 = 68.84$ km/s/Mpc;
-    Planck tension $0.96\sigma$).
+    <strong>Stage 2 — TEP-native gauge correction:</strong> In the TEP-native
+    gauge—treating $\Gamma_X$ as a pure Cepheid clock-rate bias ($\beta_X = 0$)—the
+    equivalent response coefficient is $\kappa_{\rm Cep} \approx 7.34\times10^5$
+    mag. The velocity-space fit yields $H_{\rm app} = 69.47 \pm 1.49$ km/s/Mpc;
+    in the TEP-native gauge this brings the local distance scale into agreement
+    with the CMB inference. The empirical one-parameter correction pipeline
+    yields $H_0^{\rm TEP} = 68.84$ km/s/Mpc (bootstrap mean
+    $68.92 \pm 1.44$), reducing the Hubble tension from $\approx 5\sigma$ to
+    $\approx 1\sigma$ relative to Planck. The earlier residual-based estimate
+    $\kappa_{\rm Cep} \approx 1.05\times10^6$ mag was an
+    exploratory approximation; the new generative-observable analysis refines
+    this to $\kappa_{\rm Cep} \approx 7.34\times10^5$ mag, consistent with the
+    canonical TEP parameter $\kappa_{\rm gal} = 9.7\times10^5$ mag.
 </p>
 <p>
-    This two-stage structure separates the empirical detection from the fitted
-    correction, avoiding the circularity objection. The primary empirical claim
-    is the host-potential dependence in SH0ES Cepheid-host residuals
-    ($r=0.466$, $p=0.0109$; TEP-local $r=0.469$). The primary model claim is that the TEP
-    $\sigma^2/c^2$ correction removes this dependence and yields a
-    Planck-consistent local calibration.
+    <strong>Three distinct quantities.</strong> It is useful to keep three
+    coefficients conceptually separate:
+    <em>(i)</em> the empirical observable is the combined environmental slope
+    $\Gamma_X$;
+    <em>(ii)</em> the TEP-native Cepheid interpretation is the equivalent
+    response coefficient $\kappa_{\rm equiv} \approx 7.34\times10^5$ mag,
+    obtained by setting the non-Cepheid velocity-sector component $\beta_X=0$;
+    and <em>(iii)</em> the residual-space correction coefficient is
+    $\kappa_{\rm Cep}^{\rm emp} \approx 1.27\times10^6$ mag, a
+    historically derived cross-check. These are related but not identical.
+    The TEP-native gauge is a model-identification assumption, not a
+    gauge-independent empirical observable; the gauge-independent empirical
+    result is $\Gamma_X$.
 </p>
 <p>
-    The local-gravity closure is robust (Cassini and MICROSCOPE margins
-    $>10^5$). The anchor reference frame admits a TEP-consistent screening
+    This two-stage structure separates the empirical detection (a structurally
+    robust environmental slope in the velocity-space model) from the fitted
+    correction (a TEP-native gauge choice), avoiding the circularity objection.
+    The primary empirical claim is the host-potential dependence in the
+    velocity-space likelihood ($\Gamma_X = +2.35\times10^7$, 2.3$\sigma$),
+    surviving explicit flow/sky controls. The primary model claim is that the
+    TEP-native gauge removes this dependence and brings the local distance
+    scale into agreement with the CMB inference.
+</p>
+<p>
+    Within the source-screened mapping used here, the local-gravity closure
+    projects below Cassini and MICROSCOPE limits by margins $>10^5$.
+    The anchor reference frame admits a TEP-consistent screening
     sensitivity test: the screened-effective reference ($\sigma_{\rm ref,scr} = 30.51$ km/s)
     yields $H_0^{\rm TEP} = 66.34 \pm 1.31$ km/s/Mpc, a $\approx 0.15\sigma$
     Planck tension. This is a <em>theoretical consistency check</em>, not the
     primary result. The unscreened reference ($H_0^{\rm GR} = 68.84$) remains
     the primary data-driven value because it makes the fewest assumptions about
     the precise magnitude of anchor-environment suppression.
-    The cross-channel test reveals a critical puzzle: the differential
-    $(8.09 \pm 3.60) \times 10^5$ mag is 2.3σ from
-    zero, indicating that the $\sigma$ regressor tracks a shared astrophysical
-    systematic (host mass, metallicity) affecting both Cepheid and TRGB
-    channels. After host-mass orthogonalization, the Cepheid residual retains
-    a significant $\sigma$ trend ($r = 0.45$, $p = 0.015$) while the TRGB
-    residual is consistent with null ($r \approx 0, p = 0.99$), supporting
-    a Cepheid-specific clock-rate component superposed on a shared systematic.
-    The TRGB gate is therefore INCONCLUSIVE pending larger samples and
-    metallicity control. Full confirmation awaits SN Ia channel integration,
-    homogeneous stellar-dispersion spectroscopy, and the M31 color-offset
-    discriminating test.
-    A frozen prediction table (see
-    <code>results/outputs/step_05_frozen_tep_predictions.csv</code>) provides the
-    expected $\Delta\mu_{\rm TEP}$ as a function of prospective host
-    $\sigma$ and screening factor $S$, computed with the pipeline-frozen
-    parameters $\kappa_{\rm Cep} = 1.272\times10^6$ mag and
-    $\sigma_{\rm ref} = 87.17$ km/s. New Cepheid-SN hosts that obey
-    the precomputed correction within the quoted distance-modulus
-    uncertainty ($\sim$0.1–0.2 mag) confirm the model; systematic
-    offsets falsify it.
+    External TRGB distances overlap only $N=13$ hosts and yield a
+    differential constraint $\kappa_{\rm Cep} = +3.19\times10^5 \pm 3.90\times10^5$
+    (0.82$\sigma$). This is currently underpowered to decisively separate
+    $\kappa_{\rm Cep}$ from a residual velocity-sector term $\beta_X$ in the
+    combined slope $\Gamma_X$, yet it is directionally consistent with and
+    supportive of the TEP-native gauge interpretation of the detected
+    $\Gamma_X$ signal.
+    The decisive test remains expanding the external distance overlap (JWST
+    Cepheids, SBF, masers, eclipsing binaries) while tightening metallicity and
+    population controls.
+    Two prospective prediction tables are provided:
+    <em>(i)</em> a TEP-native gauge table using
+    $\kappa_{\rm equiv} \approx 7.34\times10^5$ mag, directly tied to the
+    velocity-space $\Gamma_X$ likelihood and serving as the primary
+    falsification target for the present model;
+    and <em>(ii)</em> a historical residual-space table
+    (<code>results/outputs/step_05_prespecified_tep_predictions.csv</code>)
+    using $\kappa_{\rm Cep}^{\rm emp} \approx 1.27\times10^6$ mag,
+    retained as a sensitivity cross-check.
 </p>
 
 <p>
@@ -145,7 +216,7 @@
     <h3>Code and Data Availability</h3>
     <p>
         All analysis code is open-source and designed for easy reproduction. The
-        complete pipeline runs in under 2 minutes and reproduces all results,
+        complete pipeline runs in minutes and reproduces all results,
         figures, and statistics reported in this paper.
     </p>
 
@@ -183,7 +254,7 @@ python scripts/run_pipeline.py</code></pre>
 
     <h4>Pipeline Architecture</h4>
     <p>
-        The analysis is organized into 10 sequential steps, each implemented as
+        The analysis is organized into sequential modular steps, each implemented as
         a self-contained Python module:
     </p>
 

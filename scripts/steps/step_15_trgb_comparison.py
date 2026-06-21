@@ -289,7 +289,7 @@ class Step7TRGBComparison:
         """
         Execute the TRGB-Cepheid comparative analysis.
         """
-        print_status("STEP 7: TRGB-CEPHEID COMPARATIVE ANALYSIS", "SECTION")
+        print_status("Step 7: TRGB-Cepheid comparative analysis", "SECTION")
         print_status("Comparing H0-σ correlations across distance indicators", "INFO")
         
         # 1. Load TRGB data
@@ -303,7 +303,7 @@ class Step7TRGBComparison:
         hosts_df = pd.read_csv(self.hosts_path)
         
         # 3. Cross-match
-        print_status("\n--- CROSS-MATCHING TRGB HOSTS WITH σ DATA ---", "INFO")
+        print_status("\n--- Cross-matching TRGB hosts with σ data ---", "INFO")
         matched_df = self._match_with_sigma(trgb_df, hosts_df)
         
         if len(matched_df) < 5:
@@ -311,7 +311,7 @@ class Step7TRGBComparison:
             return None
         
         # 4. Compute H0 from TRGB
-        print_status("\n--- COMPUTING H0 FROM TRGB DISTANCES ---", "INFO")
+        print_status("\n--- Computing H0 from TRGB distances ---", "INFO")
         matched_df = self._compute_h0_from_trgb(matched_df)
         
         # 5. Save matched data
@@ -319,7 +319,7 @@ class Step7TRGBComparison:
         print_status(f"TRGB host data saved to: {self.trgb_data_path}", "INFO")
         
         # 6. Analyze correlation
-        print_status("\n--- TRGB H0-σ CORRELATION ANALYSIS ---", "INFO")
+        print_status("\n--- TRGB H0-σ correlation analysis ---", "INFO")
         results = self._analyze_correlation(matched_df)
         
         # Display results
@@ -339,7 +339,7 @@ class Step7TRGBComparison:
         print_table(headers, rows, title="TRGB H0-σ Correlation Results")
         
         # 7. Compare with Cepheids
-        print_status("\n--- COMPARISON: TRGB vs CEPHEIDS ---", "INFO")
+        print_status("\n--- Comparison: TRGB vs Cepheids ---", "INFO")
         comparison = self._compare_with_cepheids(results)
         
         if comparison:
@@ -361,7 +361,7 @@ class Step7TRGBComparison:
         
         # 8. Interpretation - Key insight: BOTH showing correlation SUPPORTS TEP!
         print_status("\n" + "=" * 60, "INFO")
-        print_status("COMPARATIVE ANALYSIS CONCLUSION", "INFO")
+        print_status("Comparative analysis conclusion", "INFO")
         print_status("=" * 60, "INFO")
         
         # Both indicators showing H0-σ correlation is actually SUPPORTIVE of TEP!
@@ -379,7 +379,7 @@ class Step7TRGBComparison:
             if cepheid_sig:
                 print_status("✓ Cepheids show significant H0-σ correlation", "SUCCESS")
             else:
-                print_status("• Cepheids do not show significant H0-σ correlation", "WARNING")
+                print_status("• Cepheids do not show significant H0-σ correlation", "INFO")
 
             if trgb_sig:
                 print_status("✓ TRGB shows significant H0-σ correlation", "SUCCESS")
@@ -387,19 +387,19 @@ class Step7TRGBComparison:
                 print_status("• TRGB does not show significant H0-σ correlation", "INFO")
 
             print_status("", "INFO")
-            print_status("  INTERPRETATION:", "INFO")
+            print_status("  Interpretation:", "INFO")
             print_status("  ───────────────", "INFO")
 
             if cepheid_sig and (trgb_pos or trgb_sig):
                 print_status("  This pattern is consistent with TWO superimposed effects:", "INFO")
                 print_status("", "INFO")
-                print_status("  1. COMMON EFFECT (can affect multiple indicators):", "INFO")
+                print_status("  1. Common effect (can affect multiple indicators):", "INFO")
                 print_status("     → Peculiar velocities correlate with host mass/σ", "INFO")
                 print_status("     → Can induce baseline H0-σ structure in multiple indicators", "INFO")
                 print_status("", "INFO")
-                print_status("  2. CEPHEID-SPECIFIC EFFECT (TEP):", "INFO")
+                print_status("  2. Cepheid-specific effect (TEP):", "INFO")
                 print_status("     → Period contraction in high-σ environments", "INFO")
-                print_status("     → Isolated by DIFFERENTIAL test: Δμ = μ_TRGB - μ_Ceph", "INFO")
+                print_status("     → Isolated by differential test: Δμ = μ_TRGB - μ_Ceph", "INFO")
                 print_status("     → See step_7_trgb_reanalysis.py for differential analysis", "INFO")
                 results['interpretation'] = 'supports_tep_two_effects'
             else:
@@ -407,7 +407,7 @@ class Step7TRGBComparison:
                 print_status("  See step_7_trgb_reanalysis.py for the differential Δμ test.", "INFO")
                 results['interpretation'] = 'inconclusive'
         else:
-            print_status("• Unable to compare - Cepheid data not available", "WARNING")
+            print_status("• Unable to compare — Cepheid data not available", "INFO")
             results['interpretation'] = 'no_comparison'
         
         # 9. Generate plot
@@ -420,7 +420,7 @@ class Step7TRGBComparison:
         print_status(f"Results saved to {self.results_path}", "INFO")
         
         print_status("=" * 60, "INFO")
-        print_status("TRGB-CEPHEID COMPARISON COMPLETE", "INFO")
+        print_status("TRGB-Cepheid comparison complete", "INFO")
         print_status("=" * 60, "INFO")
         
         return results

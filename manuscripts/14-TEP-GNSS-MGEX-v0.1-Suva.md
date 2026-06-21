@@ -288,7 +288,7 @@ geometry-robust comparison.
 | Storm-excluded (Kp < 5) | 1395 | 0.496 |
 | Distance-matched | 1847 | 0.677 |
 | Northern hemisphere | 1026 | 0.480 |
-| Southern hemisphere | 2330 | 0.488 |
+| Southern hemisphere | 2330 | 0.418 |
 
 ### 4.6 Null Tests
 

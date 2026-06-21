@@ -1866,7 +1866,7 @@ modulation remains unconstrained by multi-messenger observations.
 | Probe | Predicted in advance (sign/shape/ordering) | Fitted (amplitude) | Coefficient |
 | --- | --- | --- | --- |
 | GNSS λ (Papers 1–3, 14) | Exponential decay; EW>NS polarity; orbital-velocity sign | Decay length (metric-dependent, 1396–4549 km) | λ_T |
-| Cepheid H₀ (Paper 11) | Sign of potential-depth correlation | Response amplitude | κ_Cep ≈ 1.27×10⁶ |
+| Cepheid H₀ (Paper 11) | Sign of potential-depth correlation | Response amplitude | κ_Cep ≈ 1.05×10⁶ |
 | MSP spin-down (Paper 10) | Suppression direction vs Newtonian; field-binary null | Response amplitude | κ_MSP ~ 10⁶ |
 | LLR (Paper 17) | Synodic phase; sideband structure | η = −3.91×10⁻⁴ | η (Solar-System ORC) |
 | Wide binaries (Paper 13) | Transition existence; environmental ordering (high-|Z| | α_sat = 0.366; R_s = 2646 AU | α_sat, M_screen |

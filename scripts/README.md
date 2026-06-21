@@ -20,7 +20,7 @@ This executes the full pipeline and populates `results/figures/` and `results/ou
 | 02 | `step_02_aperture_correction.py` | Fetches RC3 metadata and applies aperture normalization to velocity dispersions. |
 | 03 | `step_03_stratification.py` | Calculates H₀, stratifies by σ, and detects environmental bias. |
 | 04 | `step_04_tep_correction.py` | Optimizes κ_Cep, applies the TEP correction, and unifies H₀. |
-| 05 | `step_05_frozen_predictions.py` | Generates frozen falsification-ready prediction table for prospective hosts. |
+| 05 | `step_05_prespecified_predictions.py` | Generates prespecified falsification-ready prediction table for prospective hosts. |
 | 06 | `step_06_shear_suppression_viz.py` | Generates shear-suppression visualization. |
 | 07 | `step_07_aperture_sensitivity.py` | Tests stability against aperture size and correction parameters. |
 | 08 | `step_08_robustness_checks.py` | Jackknife, Bootstrap, and Peculiar Velocity Monte Carlo tests. |

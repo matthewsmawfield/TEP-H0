@@ -1,18 +1,18 @@
-[18:36:38] [INFO] STEP 7: TRGB RE-ANALYSIS (DIFFERENTIAL TEST)
-[18:36:38] [INFO] Matched 13 hosts for differential analysis
-[18:36:38] [INFO] 
+[01:39:47] [INFO] Step 7: TRGB re-analysis (differential test)
+[01:39:47] [INFO] Matched 13 hosts for differential analysis
+[01:39:47] [INFO] 
 Differential Modulus (TRGB - Cepheid) vs Sigma:
-[18:36:38] [INFO] +-----------------+---------------+--------------+
-[18:36:38] [INFO] | Metric          | Value         | Significance |
-[18:36:38] [INFO] +-----------------+---------------+--------------+
-[18:36:38] [INFO] | Pearson r       | 0.478         | p=0.0493     |
-[18:36:38] [INFO] | Spearman ρ      | 0.582         | p=0.0184     |
-[18:36:38] [INFO] | Slope (mag/dex) | 0.141 ± 0.076 | p=0.0457     |
-[18:36:38] [INFO] +-----------------+---------------+--------------+
-[18:36:38] [INFO] 
+[01:39:47] [INFO] +-----------------+---------------+--------------+
+[01:39:47] [INFO] | Metric          | Value         | Significance |
+[01:39:47] [INFO] +-----------------+---------------+--------------+
+[01:39:47] [INFO] | Pearson r       | 0.478         | p=0.0493     |
+[01:39:47] [INFO] | Spearman ρ      | 0.582         | p=0.0184     |
+[01:39:47] [INFO] | Slope (mag/dex) | 0.141 ± 0.076 | p=0.0457     |
+[01:39:47] [INFO] +-----------------+---------------+--------------+
+[01:39:47] [INFO] 
 Interpretation Check:
-[18:36:38] [INFO]   POSITIVE correlation detected.
-[18:36:38] [INFO]   High-σ hosts have μ_TRGB > μ_Ceph.
-[18:36:38] [INFO]   Implies μ_Ceph is UNDERESTIMATED at high σ.
-[18:36:38] [SUCCESS]   → CONSISTENT WITH TEP PREDICTION.
-[18:36:38] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_16_trgb_differential_results.json
+[01:39:47] [INFO]   Positive correlation detected.
+[01:39:47] [INFO]   High-σ hosts have μ_TRGB > μ_Ceph.
+[01:39:47] [INFO]   Implies μ_Ceph is underestimated at high σ.
+[01:39:47] [SUCCESS]   → Consistent with TEP prediction.
+[01:39:47] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_16_trgb_differential_results.json

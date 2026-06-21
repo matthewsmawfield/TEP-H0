@@ -1,0 +1,25 @@
+{
+  "seed": 43,
+  "primary_z_cut": 0.0035,
+  "N_primary": 29,
+  "injection": {
+    "H_app_true": 73.04,
+    "kappa_Cep_injected": 698652.8152194972,
+    "Gamma_X_injected": 23500000.0,
+    "sigma_v_true": 250.0
+  },
+  "design_matrix": {
+    "kappa_Cep_recovered": -2.0892619217793e-08,
+    "kappa_Cep_err": 210262.0380227695,
+    "kappa_Cep_sig": 9.936467568877325e-14
+  },
+  "velocity_space": {
+    "Gamma_X_recovered": 24999794.462396298,
+    "Gamma_X_err": 11091469.042623347,
+    "Gamma_X_sig": 2.253966031580192
+  },
+  "outputs": {
+    "json": "results/outputs/step_43_toy_recovery_experiment.json",
+    "figure": "results/figures/step_43_figure_01_toy_recovery_experiment.png"
+  }
+}

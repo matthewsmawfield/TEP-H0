@@ -1,12 +1,12 @@
-[18:35:08] [INFO] 
-[18:35:08] [INFO] ================================================================================
-[18:35:08] [INFO]    >>> STEP 15: HIERARCHICAL SIGMA MEASUREMENT-ERROR MODEL
-[18:35:08] [INFO] ================================================================================
-[18:35:08] [INFO] 
-[18:35:08] [INFO] Method-specific bias and scatter:
-[18:35:08] [INFO]   stellar absorption: N=16, bias=+4.75 km/s, scatter=16.50 km/s
-[18:35:08] [INFO]   HI linewidth proxy: N=13, bias=+3.59 km/s, scatter=7.00 km/s
-[18:35:08] [INFO] OLS slope: 0.0851
-[18:35:08] [INFO] ODR slope: 0.2346 ± 0.0486 (2.76x OLS)
-[18:35:08] [INFO] Stellar-only: N=16, r=0.549, p=0.028
-[18:35:08] [SUCCESS] Step 15 complete
+[01:38:16] [INFO] 
+[01:38:16] [INFO] ================================================================================
+[01:38:16] [INFO]    >>> STEP 09: Hierarchical sigma measurement-error model
+[01:38:16] [INFO] ================================================================================
+[01:38:16] [INFO] 
+[01:38:16] [INFO] Method-specific bias and scatter:
+[01:38:16] [INFO]   stellar absorption: N=16, bias=+4.75 km/s, scatter=16.50 km/s
+[01:38:16] [INFO]   HI linewidth proxy: N=13, bias=+3.59 km/s, scatter=7.00 km/s
+[01:38:16] [INFO] OLS slope: 0.0851
+[01:38:16] [INFO] ODR slope: 0.2346 ± 0.0486 (2.76x OLS)
+[01:38:16] [INFO] Stellar-only: N=16, r=0.549, p=0.028
+[01:38:16] [SUCCESS] Step 09 complete

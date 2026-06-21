@@ -53,7 +53,7 @@ class Step18GroupEnvModels:
         set_step_logger(self.logger)
 
     def run(self):
-        print_status(">>> STEP 18: GROUP ENVIRONMENT MODEL COMPARISON", "TITLE")
+        print_status(">>> STEP 18: Group environment model comparison", "TITLE")
 
         strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
         n = len(strat)
@@ -188,7 +188,7 @@ class Step18GroupEnvModels:
 
         # Also save interpretation
         with open(self.results_dir / "step_19_group_env_model_interpretation.txt", "w") as f:
-            f.write("GROUP ENVIRONMENT MODEL COMPARISON\n")
+            f.write("Group environment model comparison\n")
             f.write("=" * 60 + "\n\n")
             f.write("TEP prediction: Model 'tep_full' should be preferred.\n")
             f.write("Confound prediction: Model 'confound_nmb' should be preferred.\n\n")

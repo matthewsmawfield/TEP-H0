@@ -95,15 +95,16 @@ BETA_GEOM = 1.50e-4              # Mass-sector geometric coupling
 # =============================================================================
 
 # Canonical galaxy-scale observable response coefficient (Paper 11).
-# Host-only bootstrap robust: κ_Cep = (1.05 ± 0.41) × 10⁶ mag
-#   (step_04_tep_correction_results.json, N=29 Hubble-flow-safe hosts).
-# Host-only WLS (scaled): (1.20 ± 0.48) × 10⁶ mag
+# Host-only (N=29, step_04_tep_correction_results.json):
+#   optimal_kappa_cep:   1.27 × 10⁶ mag  (GLS through origin)
+#   bootstrap (robust):  1.27 × 10⁶ ± 0.45 × 10⁶ mag
+#   WLS (scaled):        1.41 × 10⁶ ± 0.59 × 10⁶ mag
 # Joint host+anchor fit (screen-weighted): (0.61 ± 0.32) × 10⁶ mag
 #   (step_20_joint_environmental_screening_model.json, N=29 hosts + 3 anchors).
 # KAPPA_GAL is the TEP theoretical prediction for the Cepheid observable
 # response coefficient, derived from geometric-factor and virial estimates
 # (see Appendix C of Paper 11). It is consistent with the fitted host-only
-# bootstrap value (1.05±0.41)×10⁶ at 0.2σ.
+# optimal value (1.27×10⁶) at ~0.7σ.
 # The uncertainty (4.0×10⁵) reflects the theoretical prior width.
 KAPPA_GAL = 9.7e5                # mag (theoretical prior, Paper 11 Appendix C)
 KAPPA_GAL_UNCERTAINTY = 4.0e5    # mag (theoretical prior width)

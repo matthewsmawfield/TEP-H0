@@ -434,12 +434,12 @@ class Step2Stratification:
             if len(suppressed) > 0:
                 print_status(
                     f"Hosts with appreciable shear suppression (S < 0.8, N={len(suppressed)}):",
-                    "WARNING",
+                    "INFO",
                 )
                 for _, row in suppressed.iterrows():
                     print_status(
                         f"  - {row['normalized_name']}: rho={row['rho_local']:.3f}, S={row['shear_suppression']:.3f}",
-                        "WARNING",
+                        "INFO",
                     )
             else:
                 print_status(
@@ -550,7 +550,7 @@ class Step2Stratification:
         if diff > 3.0:
             print_status(
                 f"Significant Environmental Bias Detected (+{diff:.2f} km/s/Mpc)",
-                "WARNING",
+                "SUCCESS",
             )
 
         metrics = {

@@ -17,6 +17,6 @@
     "delta_err": 0.2768858076004691,
     "significance_sigma": 2.1811623329460508
   },
-  "interpretation": "INNER FAINTER",
-  "conclusion": "Robust Inner FAINTER - Consistent with Screened TEP (Inversion)"
+  "interpretation": "Inner fainter",
+  "conclusion": "Robust inner fainter \u2014 consistent with screened TEP (inversion)"
 }

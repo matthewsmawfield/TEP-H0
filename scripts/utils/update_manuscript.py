@@ -21,7 +21,7 @@ text = text.replace("$0.71$ km/s/Mpc", "$1.52$ km/s/Mpc")
 
 # H0 values
 text = text.replace("$H_0^{\\rm std} = 68.17$ km/s/Mpc", "$H_0^{\\rm std} = 68.13$ km/s/Mpc")
-text = text.replace("$H_0^{\\rm scr} = 67.46$ km/s/Mpc", "$H_0^{\\rm scr} = 66.62$ km/s/Mpc")
+text = text.replace("$H_0^{\\rm scr} = 67.46$ km/s/Mpc", "$H_0^{\\rm scr} = 66.34$ km/s/Mpc")
 text = text.replace("mean H0=68.17 km/s/Mpc", "mean H0=68.13 km/s/Mpc")
 
 # Planck tension

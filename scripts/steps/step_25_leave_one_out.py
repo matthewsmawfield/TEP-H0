@@ -92,7 +92,7 @@ class Step24LeaveOneOut:
         def get_kappa_val(x):
             try:
                 return float(x.split("\\times")[0])
-            except:
+            except Exception:
                 return 0.0
         out_df["kappa_val"] = out_df["$\\Delta \\kappa$"].apply(get_kappa_val)
         out_df = out_df.sort_values(by="kappa_val", ascending=False).drop(columns=["kappa_val"])

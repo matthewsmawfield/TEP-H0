@@ -206,23 +206,23 @@
             "MW": 0.6053983587536133,
             "NGC 4258": 0.09568098445277634
           },
-          "bootstrap_h0_ci_lower": 65.87812302990373,
-          "bootstrap_h0_ci_upper": 71.71952984500459,
-          "bootstrap_h0_mean": 68.89918478983842,
-          "bootstrap_h0_median": 68.97473531251501,
-          "bootstrap_h0_robust_std": 1.4282396881625274,
-          "bootstrap_h0_std": 1.4790147059547696,
-          "bootstrap_kappa_ci_lower": 630290.52734375,
-          "bootstrap_kappa_ci_upper": 3389233.398437499,
-          "bootstrap_kappa_mean": 1440407.71484375,
-          "bootstrap_kappa_median": 1276562.5,
+          "bootstrap_h0_ci_lower": 66.06337797479077,
+          "bootstrap_h0_ci_upper": 71.71297429701002,
+          "bootstrap_h0_mean": 68.91706791469349,
+          "bootstrap_h0_median": 68.94811147526914,
+          "bootstrap_h0_robust_std": 1.4482562806313481,
+          "bootstrap_h0_std": 1.4388252083123816,
+          "bootstrap_kappa_ci_lower": 655490.72265625,
+          "bootstrap_kappa_ci_upper": 3899589.8437499995,
+          "bootstrap_kappa_mean": 1476458.49609375,
+          "bootstrap_kappa_median": 1294238.28125,
           "bootstrap_kappa_n_negative": 0,
-          "bootstrap_kappa_robust_std": 448900.390625,
-          "bootstrap_kappa_skewness": 3.1431112724245405,
-          "bootstrap_kappa_std": 737991.4971948254,
+          "bootstrap_kappa_robust_std": 462535.1562499999,
+          "bootstrap_kappa_skewness": 2.918356799761519,
+          "bootstrap_kappa_std": 762227.5654538446,
           "bootstrap_n_converged": 1000,
           "bootstrap_n_failed": 0,
-          "bootstrap_residual_slope_mean": 0.0017440288566485868,
+          "bootstrap_residual_slope_mean": 0.0017694554149417685,
           "delta_h0_screened": 2.4971337712861015,
           "h0_screened_sem": 1.2731906596265927,
           "h0_sem": 1.3119258982092847,
@@ -244,7 +244,7 @@
             "raw_slope_H0_sigma_positive": true,
             "raw_slope_value": 0.08511851500603197
           },
-          "tension_sigma": 0.9602498234600322,
+          "tension_sigma": 0.9959570939857124,
           "tension_statistical": 1.0241473294991124,
           "unified_h0": 68.83787861896722,
           "unified_h0_screened": 66.34074484768112,
@@ -254,7 +254,7 @@
           "wls_kappa_err": 159498.18790314713,
           "wls_kappa_err_scaled": 589341.2284366533
         },
-        "recomputed_tension_bootstrap": 0.9602498234600322,
+        "recomputed_tension_bootstrap": 0.9959570939857124,
         "recomputed_tension_sem": 1.0241473294991124
       },
       "name": "tep_correction_internal_consistency",
@@ -437,11 +437,11 @@
           "0.466",
           "0.0109",
           "68.84",
-          "68.90",
-          "1.48",
-          "0.96",
+          "68.92",
+          "1.44",
+          "1.00",
           "1.27",
-          "0.45"
+          "0.46"
         ]
       },
       "name": "narrative_surfaces_include_current_headline_numbers",
@@ -494,35 +494,35 @@
           "kappa_anchor": 246442.21361560377,
           "kappa_anchor_err": 138653.37389942596,
           "kappa_host": 1272451.0192871094,
-          "kappa_host_err": 448900.390625,
+          "kappa_host_err": 462535.1562499999,
           "n_anchors": 3,
           "p_pearson": 0.5381819555331222,
           "prediction_test": {
-            "chi2": 10.880431367119566,
+            "chi2": 10.288250512000436,
             "dof": 2,
-            "mean_abs_tension_sigma": 2.3205430466484502,
-            "naive_chi2": 10.880431367119566,
-            "naive_mean_abs_tension_sigma": 2.3205430466484502,
+            "mean_abs_tension_sigma": 2.2567407054040034,
+            "naive_chi2": 10.288250512000436,
+            "naive_mean_abs_tension_sigma": 2.2567407054040034,
             "naive_predictions": [
               {
                 "M_W_obs": -5.8382610325460895,
                 "M_W_pred": -5.6986751442036665,
                 "anchor": "NGC 4258",
-                "d_mu_err": 0.06317783947566388,
+                "d_mu_err": 0.06509678419465867,
                 "d_mu_pred": 0.17908361836183437,
                 "residual": -0.13958588834242303,
                 "sigma": 115.0,
-                "tension_sigma": -2.085392770843143
+                "tension_sigma": -2.0303634879706713
               },
               {
                 "M_W_obs": -5.8491945771974265,
                 "M_W_pred": -5.523470797834174,
                 "anchor": "M31",
-                "d_mu_err": 0.12498713376859932,
+                "d_mu_err": 0.1287834554262897,
                 "d_mu_pred": 0.35428796473132607,
                 "residual": -0.32572377936325214,
                 "sigma": 160.0,
-                "tension_sigma": -2.5556933224537577
+                "tension_sigma": -2.483117922837336
               }
             ],
             "predictions": [
@@ -530,55 +530,55 @@
                 "M_W_obs": -5.8382610325460895,
                 "M_W_pred": -5.6986751442036665,
                 "anchor": "NGC 4258",
-                "d_mu_err": 0.06317783947566388,
+                "d_mu_err": 0.06509678419465867,
                 "d_mu_pred": 0.17908361836183437,
                 "residual": -0.13958588834242303,
                 "sigma": 115.0,
-                "tension_sigma": -2.085392770843143
+                "tension_sigma": -2.0303634879706713
               },
               {
                 "M_W_obs": -5.8491945771974265,
                 "M_W_pred": -5.523470797834174,
                 "anchor": "M31",
-                "d_mu_err": 0.12498713376859932,
+                "d_mu_err": 0.1287834554262897,
                 "d_mu_pred": 0.35428796473132607,
                 "residual": -0.32572377936325214,
                 "sigma": 160.0,
-                "tension_sigma": -2.5556933224537577
+                "tension_sigma": -2.483117922837336
               }
             ],
             "reference_S_assumed": 0.8733960595416025,
             "reference_anchor": "LMC",
-            "tep_screened_chi2": 6.253048167794776,
-            "tep_screened_mean_abs_tension_sigma": 1.7139731288145135,
+            "tep_screened_chi2": 6.0220414129474165,
+            "tep_screened_mean_abs_tension_sigma": 1.6865273199428512,
             "tep_screened_predictions": [
               {
                 "M_W_obs": -5.8382610325460895,
                 "M_W_pred": -5.866966105609732,
                 "S_anchor_assumed": 0.09568098445277634,
                 "anchor": "NGC 4258",
-                "d_mu_err": 0.0038074769479459554,
+                "d_mu_err": 0.003923124109080196,
                 "d_mu_pred": 0.010792656955768278,
                 "residual": 0.028705073063642672,
                 "sigma": 115.0,
-                "tension_sigma": 1.279438668041636
+                "tension_sigma": 1.2783039674015109
               },
               {
                 "M_W_obs": -5.8491945771974265,
                 "M_W_pred": -5.714011880454236,
                 "S_anchor_assumed": 0.4714380741611139,
                 "anchor": "M31",
-                "d_mu_err": 0.0577672839498014,
+                "d_mu_err": 0.05952189008046601,
                 "d_mu_pred": 0.16374688211126498,
                 "residual": -0.1351826967431906,
                 "sigma": 160.0,
-                "tension_sigma": -2.148507589587391
+                "tension_sigma": -2.094750672484192
               }
             ]
           },
           "r_pearson": 0.663451316128769,
           "sigma_ref_screened": 30.50738103825078,
-          "tension_with_host": 2.183806681021834
+          "tension_with_host": 2.12481331070451
         },
         "host_comparison": {}
       },
@@ -590,13 +590,13 @@
         "local_gravity": {
           "closure": {
             "alpha_clock": 898750.5363728765,
-            "alpha_clock_err": 317064.8305804691,
+            "alpha_clock_err": 326695.2625051907,
             "cassini_gamma_minus_one_limit": 2.3e-05,
             "cassini_gamma_minus_one_predicted": 1.0509803385086155e-10,
             "cassini_margin": 218843.294753144,
             "earth_source_charge_ratio": 1.578651683697185e-15,
             "kappa_cep": 1272451.0192871094,
-            "kappa_cep_err": 448900.390625,
+            "kappa_cep_err": 462535.1562499999,
             "microscope_eta_limit": 1e-14,
             "microscope_eta_predicted": 1.8552114904732585e-21,
             "microscope_margin": 5390221.034826079,

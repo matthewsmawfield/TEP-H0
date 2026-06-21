@@ -61,7 +61,7 @@ def load_anchor_data():
 def build_joint_dataset(host_df, anchor_json, sigma_ref_screened_sq=30.51**2):
     """Build unified dataset in the common Δμ frame."""
     c2 = C_SQUARED_KM_S
-    h0_tep = anchor_json["regression"].get("kappa_host", 1.049548e6)
+    h0_tep = anchor_json["regression"].get("kappa_host", 1.272451e6)
     # Use mean corrected H0 from host data as TEP baseline
     h0_base = host_df["h0_corrected"].mean()
 
@@ -269,16 +269,25 @@ def create_figure(data, fit_results, output_path):
         zorder=2,
     )
 
-    # Shade: host-only fitted κ band (from step 3 step_04_tep_correction_results.json)
-    kappa_host = 1.611137e6
-    kappa_host_err = 0.619e6  # WLS scaled uncertainty
+    # Shade: host-only fitted κ band (from step_04_tep_correction_results.json)
+    _tep_path = PROJECT_ROOT / "results" / "outputs" / "step_04_tep_correction_results.json"
+    try:
+        with open(_tep_path) as _f:
+            _tep = json.load(_f)
+        kappa_host = float(_tep["optimal_kappa_cep"])
+        kappa_host_err = float(
+            _tep.get("wls_kappa_err_scaled", _tep.get("bootstrap_kappa_robust_std", 0))
+        )
+    except (OSError, KeyError, TypeError, ValueError):
+        kappa_host = 1.272e6
+        kappa_host_err = 0.59e6
     ax.fill_between(
         x_line,
         (kappa_host - kappa_host_err) * x_line,
         (kappa_host + kappa_host_err) * x_line,
         color=colors["blue"],
         alpha=0.15,
-        label=r"Host-only $\kappa_\mathrm{Cep}$ ($1.61 \pm 0.62) \times 10^6$ mag)",
+        label=rf"Host-only $\kappa_\mathrm{{Cep}}$ $({kappa_host/1e6:.2f} \pm {kappa_host_err/1e6:.2f}) \times 10^6$ mag)",
         zorder=1,
     )
 

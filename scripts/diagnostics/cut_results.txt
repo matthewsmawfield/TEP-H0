@@ -213,7 +213,7 @@ Delta BIC:    -4.78 (negative means TEP favoured)
 [0;37m[00:36:00] [INFO] | NGC 976  | 212.7 | 0.775  | 76.91    | +0.4077    | 63.74    |[0m
 [0;37m[00:36:00] [INFO] +----------+-------+--------+----------+------------+----------+[0m
 [0;37m[00:36:00] [INFO] ------------------------------------------------------------[0m
-[1;32m[00:36:00] [SUCCESS] UNIFIED H0 (Statistical): 66.62 +/- 1.25 km/s/Mpc[0m
+[1;32m[00:36:00] [SUCCESS] UNIFIED H0 (Statistical): 66.34 +/- 1.25 km/s/Mpc[0m
 [0;37m[00:36:00] [INFO] Note: This error (SEM) assumes κ_Cep is fixed/known perfectly.[0m
 [0;37m[00:36:00] [INFO] ------------------------------------------------------------[0m
 [0;37m[00:36:00] [INFO] Optimizing TEP Coupling (κ_Cep)...[0m
@@ -332,7 +332,7 @@ Delta BIC:    -4.78 (negative means TEP favoured)
 [0;37m[00:36:00] [INFO] Optimization converged: True[0m
 [1;32m[00:36:00] [SUCCESS] Optimal Observable Response Coefficient (κ_Cep): 1.015e+06 mag[0m
 [0;37m[00:36:00] [INFO] Mean effective coupling (κ_Cep·⟨S⟩): 8.618e+05[0m
-Corrected H0: 66.62
+Corrected H0: 66.34
 kappa_cep:    1.0672 * 10^6
 LOOCV H0:     66.41
 Delta BIC:    -3.71 (negative means TEP favoured)
@@ -624,6 +624,6 @@ Delta BIC:    -3.38 (negative means TEP favoured)
 Sample                              | N    | H0_corr  | Kappa    | LOOCV    | dBIC    
 --------------------------------------------------------------------------------
 Full Sample (N=36)                  | 36   | 62.98    | 1.6490   | 62.72    | -4.78   
-Hubble-flow (z>0.0035, N=29)        | 29   | 66.62    | 1.0672   | 66.41    | -3.71   
+Hubble-flow (z>0.0035, N=29)        | 29   | 66.34    | 1.0672   | 66.41    | -3.71   
 Strict flow (z>0.005, N=23)         | 23   | 69.40    | 0.6254   | 69.31    | -1.29   
 z>0.0035 without NGC 4639 (N=28)    | 28   | 67.37    | 1.0490   | 67.13    | -3.38   

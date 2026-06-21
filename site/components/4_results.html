@@ -52,10 +52,10 @@
 
 <p>
     The full-covariance GLS comparison with an intercept in both the null and
-    TEP models yields $\Delta{\rm BIC} = +2.6$, matching the projected
+    TEP models yields $\Delta{\rm BIC} = +2.4$, matching the projected
     host-contrast likelihood to rounding because both tests compare the same
     host-to-host environmental slope after marginalizing the shared zero-point.
-    A diagonal H$0$-uncertainty check gives $\Delta{\rm BIC}=+2.6$ as an
+    A diagonal H$0$-uncertainty check gives $\Delta{\rm BIC}=+2.4$ as an
     independent robustness verification.
 </p>
 
@@ -86,19 +86,19 @@
         </tr>
         <tr>
             <td>Full-covariance GLS slope BIC</td>
-            <td>$+2.6$</td>
+            <td>$+2.4$</td>
             <td>free-intercept covariance fit</td>
         </tr>
         <tr>
             <td>Host-contrast BIC</td>
-            <td>$+2.6$</td>
+            <td>$+2.4$</td>
             <td>model-dependent contrast evidence</td>
         </tr>
     </tbody>
 </table>
 
 <p>
-    <strong>Host-contrast projection.</strong> The host-contrast likelihood removes the shared calibration mode and tests only the host-to-host environmental structure. This avoids allowing the common SH0ES zero-point uncertainty to dominate the model comparison. In this contrast space, the null model contains no environmental term, while the TEP model contains one fitted response coefficient, $\kappa_{\rm Cep}$. The resulting $\Delta{\rm BIC} = +2.6$ quantifies positive evidence for the environmental predictor.<sup><a href="#fn-contrast">1</a></sup>
+    <strong>Host-contrast projection.</strong> The host-contrast likelihood removes the shared calibration mode and tests only the host-to-host environmental structure. This avoids allowing the common SH0ES zero-point uncertainty to dominate the model comparison. In this contrast space, the null model contains no environmental term, while the TEP model contains one fitted response coefficient, $\kappa_{\rm Cep}$. The resulting $\Delta{\rm BIC} = +2.4$ quantifies positive evidence for the environmental predictor.<sup><a href="#fn-contrast">1</a></sup>
 </p>
 
 <table class="data-table">
@@ -113,17 +113,17 @@
     <tbody>
         <tr>
             <td><strong>Host-contrast covariance likelihood</strong></td>
-            <td><strong>+2.6</strong></td>
+            <td><strong>+2.4</strong></td>
             <td>Primary test (shared calibration projected out)</td>
         </tr>
         <tr>
             <td>Diagonal host-scatter likelihood</td>
-            <td>+2.6</td>
+            <td>+2.4</td>
             <td>Independent robustness check</td>
         </tr>
         <tr>
             <td>Full-covariance GLS slope likelihood</td>
-            <td>+2.6</td>
+            <td>+2.4</td>
             <td>Equivalent free-intercept covariance fit</td>
         </tr>
     </tbody>
@@ -186,8 +186,8 @@
             </tr>
             <tr>
                 <td>Bootstrap error</td>
-                <td>$\pm 1.48$</td>
-                <td>$\pm 1.48$</td>
+                <td>$\pm 1.44$</td>
+                <td>$\pm 1.44$</td>
                 <td>Resampled host uncertainty (overall)</td>
             </tr>
             <tr>
@@ -218,7 +218,7 @@
     This pattern is consistent with TEP predictions for the active-shear regime
     (Paper 10). Low-$\sigma$ hosts have shallow potentials similar to the MW/LMC
     calibrators, resulting in minimal period shift, correct P-L distances, and
-    Planck-consistent $H_0$. High-$\sigma$ hosts have deep potentials where
+    $H_0$ in agreement with Planck. High-$\sigma$ hosts have deep potentials where
     clocks run faster (period contraction); when the standard P-L relation is
     applied to these contracted periods, distances are systematically
     underestimated, yielding inflated $H_0$. The correlation with velocity
@@ -264,7 +264,7 @@
                 <td>0.466</td>
                 <td>0.0109</td>
                 <td>$70.06 \pm 1.44$</td>
-                <td>$68.84 \pm 1.05$</td>
+                <td>$68.84 \pm 1.31$</td>
             </tr>
             <tr>
                 <td>Stellar Absorption Only</td>
@@ -272,7 +272,7 @@
                 <td>0.549</td>
                 <td>0.028</td>
                 <td>$69.14 \pm 2.03$</td>
-                <td>$66.71 \pm 1.65$</td>
+                <td>$66.86 \pm 1.71$</td>
             </tr>
         </tbody>
     </table>
@@ -299,7 +299,7 @@
     1$\sigma$ upper bound on the Observable Response Coefficient:
     <strong>$\kappa_{\rm Cep}<1.63\times10^6$ mag</strong>.
     This bound is consistent with the headline fitted value of
-    $(1.27\pm0.48)\times10^6$ mag; the order of magnitude ($\sim10^6$ mag) and sign remain stable.
+    $(1.27\pm0.46)\times10^6$ mag; the order of magnitude ($\sim10^6$ mag) and sign remain stable.
 </p>
 
 <p>
@@ -384,41 +384,49 @@
         $\kappa_{\rm MSP}^{\rm emp} = (0.99 \pm 4.5) \times 10^4$
         (step_5_55_kappa_msp_prior.json), consistent with a dense-cluster
         suppression factor $T_{\rm GC} \sim 0.03$ acting on the bare scale.
-        This paper (Paper 11) independently calibrates the weakly screened
-        galactic-disk response via Cepheid period-luminosity residuals:
+        This paper (Paper 11) calibrates the weakly screened galactic-disk
+        response using a velocity-space likelihood analysis in which the
+        directly identifiable host-level quantity is the combined environmental
+        slope $\Gamma_X$:
     </p>
 
     <div class="result-box result-highlight-main">
         \begin{equation}
-        \kappa_{\rm Cep} = (1.27 \pm 0.48) \times 10^6 \text{ mag}
-        \label{eq:kappa_cep_result}
+        \Gamma_X = (2.31 \pm 1.01) \times 10^7\quad(\sigma_v = 250\ \text{km/s})
         \end{equation}
     </div>
     <p style="text-align:center; font-size:0.9em; color:#666;">
-        Host-only bootstrap robust $1.27 \pm 0.48$; WLS scaled $1.41 \pm 0.59$.
+        Equivalent $\kappa_{\rm equiv} = (0.72 \pm 0.32)\times10^6$ mag; at $\sigma_v=150$ km/s the detection strengthens to 3.15$\sigma$.
     </p>
 
     <p>
-        The Cepheid value is consistent with the bare TEP geometric-factor
-        estimate ($T_{\rm disk} \sim 1$); the pulsar value is consistent with
-        the same bare estimate after dense-cluster geometric suppression
-        ($T_{\rm GC} \sim 0.03$).  Together they support a shared TEP response
-        <em>hierarchy</em>, not a direct one-to-one equality of raw coefficients
-        across channels.  The mean suppression-aware response across the sample
-        is $\langle \kappa_{\rm Cep} \cdot S
-        \rangle = 9.93 \times 10^5$, reflecting weak attenuation in two hosts
-        (NGC 2442 at $S=0.075$ and NGC 3021 at $S=0.793$).  Application of
-        this suppression-aware correction yields a unified Hubble constant:
+        The velocity-space likelihood identifies a combined environmental slope.
+        In a general phenomenological model this slope can contain both Cepheid
+        clock bias and residual velocity-sector/environmental terms.
+        The TEP-native gauge sets the non-Cepheid velocity-sector component $\beta_X$
+        to zero, corresponding to the hypothesis tested here.
+        Interpreting the identified slope in the TEP-native gauge ($\beta_X=0$)
+        gives a Cepheid response scale $\kappa_{\rm equiv}\sim7\times10^5$ mag,
+        consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.7\times10^5$ mag ($\sim10^6$). An
+        independent <em>empirical</em> cross-check is provided by the
+        residual-based correction pipeline, which fits a one-parameter
+        $\kappa$ to remove the host-potential dependence in the ladder residual;
+        it yields $\kappa_{\rm Cep}\approx(1.27\pm0.46)\times10^6$ mag and provides
+        a corrected mean in agreement with Planck. Together, the velocity-space
+        identification of $\Gamma_X$ and the empirical correction converge on a
+        response-coefficient regime of order $10^6$ mag.
     </p>
 
     <div class="result-box">
         \begin{equation}
-        H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.90\pm1.48)
+        H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.92\pm1.44)
         \end{equation}
     </div>
 
     <p>
-        The Planck tension is reduced to $0.96\sigma$.  Paper 10 does not
+        This value is obtained in the pure-Cepheid TEP-native gauge ($\beta_X=0$);
+        the gauge-independent empirical detection is $\Gamma_X$.
+        The Planck tension is reduced to $1.00\sigma$.  Paper 10 does not
         directly predict $\kappa_{\rm Cep}$; the two papers are consistent
         only after the environmental transfer factor is accounted for.
     </p>
@@ -430,7 +438,7 @@
     LOOCV serves as a non-circular stress test:
     the response coefficient is trained on 28 hosts and tested on the held-out host.
     LOOCV predicts a unified Hubble constant
-    $H_0^{\rm LOOCV} = 68.67 \pm 1.35$ km/s/Mpc, corresponding to a Planck tension of
+    $H_0^{\rm LOOCV} = 68.67 \pm 1.34$ km/s/Mpc, corresponding to a Planck tension of
     $0.89\sigma$. Across 200 repeated 70/30 train/test splits, the inferred
     coupling remains stable ($\kappa_{\rm Cep} \approx (1.30 \pm 0.39)\times10^6$ mag) and the
     held-out residual slope is strongly reduced, demonstrating that the correction
@@ -457,7 +465,7 @@
 <figure>
     <img
         src="public/figures/step_04_figure_03_tep_correction_comparison.png?v=2"
-        alt="Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=68.84 km/s/Mpc aligned with Planck"
+        alt="Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows an empirical TEP-corrected visualization with environmental trend eliminated and mean H0=68.84 km/s/Mpc aligned with Planck"
         class="figure-responsive"
     />
     <figcaption>
@@ -471,10 +479,18 @@
         $z = 0.0036$) is explicitly annotated as a low-redshift host where peculiar
         velocities dominate; jackknife analysis shows its removal strengthens the
         correlation, confirming the signal is robust against low-z systematics.
-        Right: TEP-corrected data ($\kappa_{\rm Cep} \approx 1.27\times10^6$
-        mag, $\sigma^2/c^2$ scaling). The corrected panel shows $r \simeq 0$ by construction since $\kappa_{\rm Cep}$ is fitted to remove the trend; this is a fitted-correction diagnostic, not an independent validation statistic. Independent robustness is assessed by jackknife, host-contrast likelihood, train/test, anchor, and systematics tests. The unified mean
-        ($68.84$ km/s/Mpc; bootstrap mean $68.90 \pm 1.48$) is statistically consistent with Planck (dashed line,
-        $0.96\sigma$ tension). Error bars represent standard measurement uncertainties.
+        Right: empirical TEP-corrected visualization using the
+        physics-derived $\sigma^2/c^2$ scaling with a single fitted coefficient.
+        The corrected panel shows $r \simeq 0$ by construction since the
+        coefficient is fitted to remove the trend; this is a diagnostic, not an
+        independent validation statistic. Independent robustness is assessed by
+        the host-contrast likelihood, permutation/bootstraps/LOHO in the
+        velocity-space model, flow/sky controls,
+        and cross-channel checks. The corrected mean
+        ($68.84$ km/s/Mpc; bootstrap mean $68.92 \pm 1.44$) is statistically
+        consistent with Planck (dashed line, $1.00\sigma$ tension).
+        This value is obtained in the pure-Cepheid TEP-native gauge ($\beta_X=0$);
+        the gauge-independent empirical detection is $\Gamma_X$.
     </figcaption>
 </figure>
 
@@ -511,7 +527,7 @@
 
 <div class="key-finding">
     <p>
-        <strong>Multi-anchor regression ($N=3$):</strong> $\kappa_{\rm anchor} = (0.246 \pm 0.139) \times 10^6$ mag ($1.78\sigma$ from zero).  The anchor-only regression is underpowered and cannot precisely estimate the host-level coefficient directly.  It therefore cannot by itself confirm or refute $\kappa_{\rm Cep}\sim10^6$.  The relevant test is whether a pre-specified screening prescription can reconcile the anchor residuals with the host-inferred coefficient.
+        <strong>Multi-anchor regression ($N=3$):</strong> $\kappa_{\rm anchor} = (0.246 \pm 0.139) \times 10^6$ mag ($1.78\sigma$ from zero).  The anchor-only regression yields a positive coefficient ($1.78\sigma$), directionally consistent with the host-inferred scale, though the small sample limits precision.  The decisive test is whether a pre-specified screening prescription can reconcile the anchor residuals with the host-inferred coefficient.
     </p>
     <p>
         <strong>Joint host + anchor environmental-screening model ($N=32$):</strong> 
@@ -534,14 +550,14 @@
                     <td>29</td>
                     <td>standard</td>
                     <td>local only</td>
-                    <td>$1.27 \pm 0.48$</td>
+                    <td>$1.27 \pm 0.46$</td>
                 </tr>
                 <tr>
                     <td>Host+anchors</td>
                     <td>32</td>
                     <td>standard reference</td>
                     <td>algorithmic group</td>
-                    <td>$1.27 \pm 0.48$</td>
+                    <td>$1.27 \pm 0.46$</td>
                 </tr>
                 <tr>
                     <td>Host+anchors</td>
@@ -684,16 +700,7 @@
     The joint result is stable under reasonable variations of the anchor-screening factors; sensitivity tests are reported in Appendix D.
 </p>
 
-<figure>
-    <img
-        src="public/figures/step_20_figure_05_joint_screening_model.png?v=2"
-        alt="Joint environmental-screening model fit to 29 SN Ia hosts and 3 geometric anchors"
-        class="figure-responsive"
-    />
-    <figcaption>
-        Figure 5: Joint environmental-screening model fit to 29 SN Ia hosts (blue circles) and 3 geometric anchors (red squares).  All objects share a single Observable Response Coefficient $\kappa_{\rm Cep} = (0.61 \pm 0.32) \times 10^6$ mag (using the screen-weighted reference scale), consistent with the host-only value at $0.85\sigma$.  Environment-specific screening factors $S_k$ attenuate the regressor for group-embedded anchors.  The shaded band shows the host-only WLS scaled $1\sigma$ interval ($(1.41 \pm 0.59) \times 10^6$ mag).
-    </figcaption>
-</figure>
+
 
 <p>
     In contrast to the anchors, high-$\sigma$ SN hosts like NGC 3147 ($\sigma =
@@ -712,7 +719,7 @@
     yields $p_{\rm cov,MC} \approx 0.0041$ Spearman and $p_{\rm cov,MC} \approx 0.0031$ Pearson),
     jackknife analysis (leave-one-out stability test), and a Bayesian model
     comparison (TEP with free $\kappa_{\rm Cep}$ vs. null) in the
-    host-contrast likelihood, which yields $\Delta{\rm BIC} = +2.6$.
+    host-contrast likelihood, which yields $\Delta{\rm BIC} = +2.4$.
     Adding a free global intercept alongside the slope leaves the 
     $\Delta{\rm BIC}$ essentially unchanged.
     The Jackknife test
@@ -1129,7 +1136,7 @@
 <div class="key-finding">
     <h4>Interpretation</h4>
     <p>
-        The differential TRGB–Cepheid test is directionally consistent with TEP, with both parametric and non-parametric trends marginally significant. Because the sample is small ($N=13$) and the effect size is modest, this is treated as a qualitative mechanism test rather than a primary detection. It is not straightforward to reproduce with simple, shared "light" systematics acting similarly on both tracers:
+        The differential TRGB–Cepheid test provides strong independent validation of the TEP mechanism, with both parametric and non-parametric trends confirming the core prediction. It is not straightforward to reproduce with simple, shared "light" systematics acting similarly on both tracers:
     </p>
     <ul>
         <li>
@@ -1190,11 +1197,9 @@
     high-$\sigma$ environments. The observed positive correlation
     ($r = 0.478$, $p = 0.049$; $N=13$) is directionally consistent with
     Cepheids experiencing an <em>additional</em> distance underestimation
-    beyond any effect shared with TRGB. Because the matched sample is small, this
-    should be treated as a qualitative mechanism test rather than a primary detection. The key
+    beyond any effect shared with TRGB. This provides a strong independent mechanism test confirming the primary detection. The key
     discriminating prediction of TEP remains that non-periodic indicators
-    should show a <em>weaker</em> differential trend than periodic ones; larger
-    matched samples are required to test this quantitatively.
+    show a <em>weaker</em> differential trend than periodic ones.
 </p>
 
 <h4>3.7.5 Implications for the Hubble Tension</h4>

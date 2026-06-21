@@ -54,7 +54,7 @@ class Step16HostMassResidual:
         set_step_logger(self.logger)
 
     def run(self):
-        print_status(">>> STEP 16: HOST-MASS RESIDUAL TEST (TEP-SPECIFIC BIAS ISOLATION)", "TITLE"
+        print_status(">>> STEP 16: Host-mass residual test (TEP-specific bias isolation)", "TITLE"
         )
 
         strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
@@ -96,7 +96,7 @@ class Step16HostMassResidual:
             )
         else:
             r_part = p_part = r_both = p_both = np.nan
-            print_status("host_logmass missing or insufficient; skipping", "WARNING")
+            print_status("host_logmass missing or insufficient; skipping", "INFO")
 
         # --- 2. TRGB Host-Mass Partial Correlation ---
         print_status("TRGB: Host-mass partial correlation", "SECTION")
@@ -133,7 +133,7 @@ class Step16HostMassResidual:
                 r_trgb_part = p_trgb_part = np.nan
         else:
             r_trgb_raw = p_trgb_raw = r_trgb_part = p_trgb_part = np.nan
-            print_status("TRGB mass data insufficient; skipping", "WARNING")
+            print_status("TRGB mass data insufficient; skipping", "INFO")
 
         # --- 3. Summary ---
         print_status("--- SUMMARY ---", "SECTION")

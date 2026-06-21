@@ -55,7 +55,7 @@ class Step23SyntheticInjection:
         set_step_logger(self.logger)
 
     def run(self):
-        print_status(">>> STEP 23: SYNTHETIC INJECTION RECOVERY TEST", "TITLE")
+        print_status(">>> STEP 24: Synthetic injection recovery test", "TITLE")
 
         df = pd.read_csv(self.results_dir / "step_04_tep_corrected_h0.csv")
         df = df[df["z_hd"] > 0.0035].copy()
@@ -132,8 +132,8 @@ class Step23SyntheticInjection:
         odr_reliable = sx_xtep_ratio < 0.5
         print_status(
             f"ODR reliability: mean sx/X_tep = {sx_xtep_ratio:.2f}x "
-            f"({'reliable' if odr_reliable else 'UNRELIABLE — measurement errors exceed signal; ODR disabled'})",
-            "INFO" if odr_reliable else "WARNING",
+            f"({'reliable' if odr_reliable else 'not reliable (measurement errors exceed signal); ODR disabled'})",
+            "INFO",
         )
 
         injections = [0.0, 0.5e6, 1.0e6, 1.5e6]
@@ -159,7 +159,7 @@ class Step23SyntheticInjection:
                     slope_odr = float(out.beta[0]) * SCALE
                 except Exception as exc:
                     slope_odr = float("nan")
-                    print_status(f"ODR failed at kappa_inj={kappa_inj:.1e}: {exc}", "WARNING")
+                    print_status(f"ODR failed at kappa_inj={kappa_inj:.1e}: {exc}", "INFO")
             else:
                 slope_odr = float("nan")
 
@@ -194,7 +194,7 @@ class Step23SyntheticInjection:
         out_df = pd.DataFrame(results)
         out_df.to_csv(self.results_dir / "step_24_synthetic_injection.csv", index=False)
         print_status("Synthetic injection table saved to step_24_synthetic_injection.csv", "SUCCESS")
-        print_status("Step 23 complete", "SUCCESS")
+        print_status("Step 24 complete", "SUCCESS")
 
 
 if __name__ == "__main__":

@@ -113,7 +113,8 @@ def fit_null(logp, w):
     """Model A: W = a + b*logP (standard P-L, no environment)."""
     X = np.column_stack([np.ones_like(logp), logp])
     beta, *_ = np.linalg.lstsq(X, w, rcond=None)
-    resid = w - X @ beta
+    with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
+        resid = w - X @ beta
     chi2 = float(np.sum(resid**2))
     return {"a": float(beta[0]), "b": float(beta[1]), "chi2": chi2, "k": 2}
 
@@ -123,7 +124,8 @@ def fit_step(logp, w, r_kpc, r_cut=5.0):
     is_inner = (r_kpc < r_cut).astype(float)
     X = np.column_stack([np.ones_like(logp), logp, is_inner])
     beta, *_ = np.linalg.lstsq(X, w, rcond=None)
-    resid = w - X @ beta
+    with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
+        resid = w - X @ beta
     chi2 = float(np.sum(resid**2))
     return {
         "a_outer": float(beta[0]),
@@ -139,7 +141,8 @@ def fit_continuous(logp, w, s):
     one_minus_s = 1.0 - s
     X = np.column_stack([np.ones_like(logp), logp, one_minus_s])
     beta, *_ = np.linalg.lstsq(X, w, rcond=None)
-    resid = w - X @ beta
+    with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
+        resid = w - X @ beta
     chi2 = float(np.sum(resid**2))
     return {
         "a_active": float(beta[0]),
@@ -179,7 +182,7 @@ def main():
     set_step_logger(logger)
 
     print_status("=" * 70, "INFO")
-    print_status("STEP 5b: M31 RADIAL SHEAR-SUPPRESSION MODEL", "SECTION")
+    print_status("Step 5b: M31 radial shear-suppression model", "SECTION")
     print_status("=" * 70, "INFO")
 
     # ------------------------------------------------------------------
@@ -266,7 +269,7 @@ def main():
         n_hst = int(df["is_hst"].sum())
         print_status(f"Cross-matched {n_hst} HST Cepheids (2 arcsec tol).", "SUCCESS")
     except Exception as e:
-        print_status(f"HST cross-match failed: {e}. Using R<5 kpc proxy.", "WARNING")
+        print_status(f"HST cross-match failed: {e}. Using R<5 kpc proxy.", "INFO")
         df["is_hst"] = df["R_kpc"] < 5.0
 
     logp = df["logP"].values.astype(float)

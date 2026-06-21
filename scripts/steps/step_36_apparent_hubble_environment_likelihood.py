@@ -414,9 +414,9 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
 
         # Get covariance for mu
         try:
-            cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
-            mu_err = np.sqrt(cov[mu_idx, mu_idx])
-        except:
+            A_w_pinv = np.linalg.pinv(A_w, rcond=1e-12)
+            mu_err = float(np.linalg.norm(A_w_pinv[mu_idx, :]))
+        except Exception:
             mu_err = 0.05
 
         hosts.append(host_name)

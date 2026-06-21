@@ -17,7 +17,7 @@ readme = re.sub(r"κ_Cep ≈ [\d\.]+ × 10⁶", "κ_Cep ≈ 1.05 × 10⁶", read
 # Fix Planck tension
 readme = re.sub(r"tension from 5σ to [\d\.]+σ", "tension from 5σ to 0.91σ", readme)
 # Fix H0
-readme = re.sub(r"unified H₀ = [\d\.]+ km/s/Mpc", "unified H₀ = 68.75 km/s/Mpc", readme)
+readme = re.sub(r"unified H₀ = [\d\.]+ km/s/Mpc", "unified H₀ = 68.84 km/s/Mpc", readme)
 
 with open("README.md", "w") as f:
     f.write(readme)

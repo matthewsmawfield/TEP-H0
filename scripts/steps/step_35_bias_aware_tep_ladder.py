@@ -39,7 +39,7 @@ from scipy import stats
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
-BASE_DIR = Path("/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0")
+BASE_DIR = Path(__file__).resolve().parents[2]
 DATA_DIR = BASE_DIR / "data"
 SH0ES_DIR = DATA_DIR / "raw" / "external" / "Cepheid-Distance-Ladder-Data" / "SH0ES2022"
 HOSTS_PATH = DATA_DIR / "processed" / "hosts_processed.csv"
@@ -200,34 +200,45 @@ def fit_gls(A, y, C):
     from scipy import linalg
 
     C = np.atleast_1d(C)
+    use_cholesky = False
     if C.ndim == 1:
-        Cinv = np.diag(1.0 / C)
-        # Whitening: divide by sqrt(variance), not multiply
+        # Whitening: divide by sqrt(variance)
         sqrt_C = np.sqrt(C)
-        A_w = np.diag(1.0 / sqrt_C) @ A
-        y_w = np.diag(1.0 / sqrt_C) @ y
+        A_w = A / sqrt_C[:, None]
+        y_w = y / sqrt_C
     else:
         try:
             Lc = np.linalg.cholesky(C)
             A_w = linalg.solve_triangular(Lc, A, lower=True, check_finite=False)
             y_w = linalg.solve_triangular(Lc, y, lower=True, check_finite=False)
-            Cinv = linalg.solve(C, np.eye(C.shape[0]), assume_a="pos")
+            use_cholesky = True
         except (linalg.LinAlgError, ValueError):
-            Cinv = linalg.pinv(C)
             A_w = A.copy()
             y_w = y.copy()
 
-    # Solve via SVD
-    theta, residuals, rank, s = np.linalg.lstsq(A_w, y_w, rcond=None)
+    theta, residuals, rank, svals = np.linalg.lstsq(A_w, y_w, rcond=1e-12)
 
-    # Covariance from whitened normal equations
-    try:
-        cov = np.linalg.inv(A_w.T @ A_w)
-    except np.linalg.LinAlgError:
-        cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
+    # Chi2 = ||y_w - A_w theta||^2
+    if residuals is not None and residuals.size > 0 and np.isfinite(residuals[0]):
+        chi2 = float(residuals[0])
+    else:
+        with np.errstate(divide="ignore", over="ignore", invalid="ignore"):
+            r_w = y_w - A_w @ theta
+            chi2 = float(r_w.T @ r_w)
 
-    r = y - A @ theta
-    chi2 = float(r.T @ Cinv @ r)
+    # Covariance from SVD of whitened design matrix (avoids A_w.T @ A_w overflow)
+    with np.errstate(divide="ignore", over="ignore", invalid="ignore"):
+        _, s, Vt = np.linalg.svd(A_w, full_matrices=False)
+    if s.size == 0:
+        cov = np.full((A.shape[1], A.shape[1]), np.nan)
+    else:
+        tol = 1e-12 * s[0]
+        s_inv2 = np.zeros_like(s)
+        mask = s > tol
+        if np.any(mask):
+            s_inv2[mask] = 1.0 / np.maximum(s[mask] ** 2, tol ** 2)
+        cov = (Vt.T * s_inv2) @ Vt
+        cov = np.where(np.isfinite(cov), cov, np.nan)
 
     return theta, cov, chi2, rank
 
@@ -294,7 +305,7 @@ def build_redshift_priors(L, q, y, C, y_source, host_z, sigma_vpec=SIGMA_VPEC_KM
             n_skipped_noisy += 1
             print_status(
                 f"Skipping {host_name}: z={z:.5f}, sigma_mu(vpec)={dm:.3f} mag > 0.5 mag",
-                "WARNING",
+                "INFO",
             )
             continue
 
@@ -320,7 +331,7 @@ def build_redshift_priors(L, q, y, C, y_source, host_z, sigma_vpec=SIGMA_VPEC_KM
     )
 
     if n_added == 0:
-        print_status("No redshift priors could be added", "WARNING")
+        print_status("No redshift priors could be added", "INFO")
         return L, y, C, q, y_source
 
     # Stack design matrix and data vector
@@ -587,7 +598,7 @@ def run():
 
         n_prior = len(y_p) - len(y)
         if n_prior == 0:
-            print_status("No priors added — skipping this sigma_v", "WARNING")
+            print_status("No priors added — skipping this sigma_v", "INFO")
             continue
 
         x_c_aug = np.hstack([x_cepheid, np.zeros(n_prior)])

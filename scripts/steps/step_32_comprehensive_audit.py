@@ -69,7 +69,7 @@ class Step11ComprehensiveAudit:
         self.sigma_ref = 87.16507328052906
 
     def run(self):
-        print_status(">>> STEP 11: COMPREHENSIVE AUDIT & INTEGRITY VERIFICATION", "TITLE"
+        print_status(">>> STEP 32: Comprehensive audit & integrity verification", "TITLE"
         )
 
         strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
@@ -91,7 +91,6 @@ class Step11ComprehensiveAudit:
             "step_08_covariance_robustness.json",
             "step_29_cross_channel_consistency.json",
             "step_28_local_gravity_closure.json",
-            "step_32_pipeline_audit_report.json",
             "step_13_enhanced_robustness_results.json",
         ]
         stale_files = []
@@ -153,7 +152,7 @@ class Step11ComprehensiveAudit:
         host_order_sha256 = hashlib.sha256(host_order_str.encode('utf-8')).hexdigest()
         
         if cov_labels != df_labels:
-            print_status("CRITICAL: Covariance labels do not match DataFrame host order!", "ERROR")
+            print_status("Covariance labels do not match DataFrame host order.", "ERROR")
             findings.append("COV_ORDER: MISMATCH")
             errors.append("covariance order mismatch")
         else:
@@ -267,7 +266,7 @@ class Step11ComprehensiveAudit:
             )
         else:
             findings.append("MULTIPLE_TESTING: no p-values found in pipeline outputs")
-            print_status("Multiple-testing correction: no p-values available", "WARNING")
+            print_status("Multiple-testing correction: no p-values available (skipped)", "INFO")
 
         # --- 9. Physical Correction Sizes ---
         kappa = tep_json["optimal_kappa_cep"]
@@ -311,10 +310,10 @@ class Step11ComprehensiveAudit:
         if errors:
             findings.append(f"UNIT_TESTS: FAIL ({len(errors)} errors)")
             for e in errors:
-                print_status(f"Unit test FAIL: {e}", "WARNING")
+                print_status(f"Unit test failed: {e}", "WARNING")
         else:
             findings.append("UNIT_TESTS: PASS")
-            print_status("Unit tests: PASS", "SUCCESS")
+            print_status("Unit tests: pass", "SUCCESS")
 
         # --- Save Report ---
         report = {

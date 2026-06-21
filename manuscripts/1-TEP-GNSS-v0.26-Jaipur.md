@@ -1237,7 +1237,7 @@ environmental dependencies.
 Elevation dependence: Systematic quintile stratification from Q1
 (-81 to 79m: λT = 3,174 km, R² = 0.83) through Q2 (79 to 189m: λT
 = 4,470 km), Q3 (189 to 379m: λT = 5,287 km), Q4 (379 to 713m: λT
-= 7,688 km, R² = 0.99), to Q5 (>713m: λT = 4,980 km), showing
+= 7,688 km, R² = 0.82), to Q5 (>713m: λT = 4,980 km), showing
 systematic elevation effects with complex high-altitude
 patterns.
 
@@ -1277,8 +1277,8 @@ coupling rather than simple proportional relationships
 Mesh dance dynamics: Coordinated network behavior across all
 analysis centers, with 35 beat patterns detected spanning
 0.077–365 days (7 statistically significant after FDR
-correction; strongest: Venus sub-harmonic 196.9d R²=0.99–0.86,
-lunar fortnight 14.8d R²=0.60–0.99) and 9–11 robust relative
+correction; strongest: Venus sub-harmonic 196.9d R²=0.82–0.86,
+lunar fortnight 14.8d R²=0.60–0.82) and 9–11 robust relative
 motion coupling patterns per center (all significant), plus
 strong base mesh coherence (0.643–0.644) and annual oscillation
 period (365.25 days)
@@ -1322,7 +1322,7 @@ by bootstrap validation ranges of 1,198–5,918 km (CODE), 2,532–3,984 km (ESA
 Final), and 3,197–4,871 km (IGS Combined) and is robust across different
 analysis strategies. Primary pooled fits on bin means show R² = 0.92–0.97
 (distance-bin means, Neff ≈ 25–28 bins used from 40 attempted).
-Sensitivity subset analyses (elevation/geomagnetic): R² = 0.70–0.99.
+Sensitivity subset analyses (elevation/geomagnetic): R² = 0.70–0.91.
 Sensitivity analyses, which account for environmental factors like elevation
 and geomagnetic latitude, show a broader range of 1,600–7,500 km.
 
@@ -1348,8 +1348,8 @@ spatial organization of correlations.
 
 | Center | λ Range (km) | R² Range (subset fits; not the primary pooled fit) | Geomag | Pairs |
 | --- | --- | --- | --- | --- |
-| CODE | 3,225–7,499 | 0.70–0.99 | 100% | 39.0M |
-| ESA Final | 1,600–3,914 | 0.81–0.99 | 100% | 10.8M |
+| CODE | 3,225–7,499 | 0.70–0.91 | 100% | 39.0M |
+| ESA Final | 1,600–3,914 | 0.81–0.91 | 100% | 10.8M |
 | IGS Combined | 2,616–5,453 | 0.78–0.88 | 100% | 12.9M |
 
 Table 1. Correlation Parameters by Analysis Center (Sensitivity
@@ -1459,7 +1459,7 @@ correlation length dependence on station elevation.
 | Q1 (Sea Level) | -81 to 79 | 3,174 | 0.83 | ~7.8M |
 | Q2 (Low) | 79 to 189 | 4,470 | 0.80 | ~7.8M |
 | Q3 (Medium) | 189 to 379 | 5,287 | 0.73 | ~7.8M |
-| Q4 (High) | 379 to 713 | 7,688 | 0.99 | ~7.8M |
+| Q4 (High) | 379 to 713 | 7,688 | 0.82 | ~7.8M |
 | Q5 (Very High) | >713 | 4,980 | 0.80 | ~7.8M |
 
 Elevation dependence: Correlation length shows systematic variation with
@@ -1785,7 +1785,7 @@ terrestrial rotation, orbital motion, and polar axis wandering:
 | Frequency Type | Interference Period (days) a | CODE (r) | IGS Combined (r) | ESA (r) |
 | --- | --- | --- | --- | --- |
 | M2–S2 (beat/difference) | 14.8 | 0.646 | 0.652 | 0.598 |
-| Chandler + Annual (combination/sum) | 198.13 | 0.999 | 0.717 | 0.864 |
+| Chandler + Annual (combination/sum) | 198.13 | 0.919 | 0.717 | 0.864 |
 | Chandler + Semiannual (combination/sum) | 127.9 | 0.933 | 0.887 | 0.894 |
 | Annual + Semiannual (combination/sum) | 121.8 | 0.962 | 0.877 | 0.903 |
 
@@ -1863,9 +1863,9 @@ significance across all centers:
 
 | Pattern Period | R² Range | Physical Interpretation | Multi-Center |
 | --- | --- | --- | --- |
-| **196.9 days** | **0.99-0.86** | Venus sub-harmonic (~1/2 synodic period) | ✓ Strong |
+| **196.9 days** | **0.82-0.86** | Venus sub-harmonic (~1/2 synodic period) | ✓ Strong |
 | **127.9 days** | **0.62** | Mercury synodic period resonance | ✓ Moderate |
-| **14.765 days** | **0.60-0.99** | Lunar fortnight (half synodic month) | ✓ Strong |
+| **14.765 days** | **0.60-0.82** | Lunar fortnight (half synodic month) | ✓ Strong |
 | **0.517 days** | **0.56** | Semi-diurnal cycle (12.4 hours) | ✓ Moderate |
 
 ### Multi-Scale Temporal Coupling
@@ -2017,7 +2017,7 @@ modulations:
 
 - IGS: +0.298 ± 0.534%
 
-- ESA: +0.489 ± 0.300%
+- ESA: +0.419 ± 0.300%
 
 Range: -3.17% to +2.04% (ΔR² = 0.85-0.93 relative to control-band
 baseline at 1000–1500 μHz)
@@ -2318,7 +2318,7 @@ the observed correlations:
 | Median Enhancement | 124.4× | Consistent with mean (symmetric) |
 | Enhancement Range | 22.8× - 226.0× | All centers show strong enhancement |
 | Standard Deviation | 101.6× | Substantial variation across centers |
-| Coefficient of Variation | 0.99 | Moderate relative uncertainty |
+| Coefficient of Variation | 0.82 | Moderate relative uncertainty |
 
 #### Physical Interpretation
 
@@ -3023,7 +3023,7 @@ distribution effects.
 Result: 94.8-97.9% signal preservation (average 96.7%) when switching
 from logarithmic to equal-count binning. R² differences remain small
 (0.021-0.052), with equal-count binning producing R² = 0.933 (CODE),
-0.894 (IGS Combined), 0.994 (ESA), demonstrating robust exponential
+0.894 (IGS Combined), 0.914 (ESA), demonstrating robust exponential
 correlation independent of distance distribution effects.
 
 Interpretation: The correlations represent genuine physical signals, not
@@ -3055,7 +3055,7 @@ fit (weighted by pair count, by sqrt(pair count), or unweighted).
 Result: The key parameters (λT and R²) demonstrate good stability. The
 correlation length λT remains within a tight cluster (~4350–4450 km)
 across different bin counts and strategies, with R² consistently
-exceeding 0.99. The analysis confirms that weighting the fit by the
+exceeding 0.91. The analysis confirms that weighting the fit by the
 number of pairs per bin is appropriate, but the result is not highly
 sensitive to the specific weighting function (count vs. sqrt(count)).
 
@@ -3113,14 +3113,14 @@ stratification with systematic λ ranges (CODE: 3,225–7,499 km, IGS
 Combined: 2,616–5,453 km, ESA: 1,600–3,914 km). Primary pooled fits show
 R² = 0.92–0.97 (distance-bin means, Neff ≈ 25–28 bins used
 from 40 attempted). Sensitivity subsets (elevation/geomagnetic): R² =
-0.70–0.99. This range (1,600–7,500 km) is a result of sensitivity
+0.70–0.91. This range (1,600–7,500 km) is a result of sensitivity
 analysis and is distinct from the primary finding.
 
 Interpretation: TEP correlations are robust across different statistical
 sampling densities, ruling out sample-size-dependent artifacts. The
 consistent elevation dependence and geomagnetic stratification patterns
 across all centers demonstrate signal authenticity. ESA Final achieves
-excellent fits (R² = 0.81–0.99) despite having the smallest dataset
+excellent fits (R² = 0.81–0.91) despite having the smallest dataset
 (10.8M pairs), while CODE shows systematic elevation trends across the
 largest dataset (39.0M pairs).
 
@@ -4827,7 +4827,7 @@ Analysis of 62.7 million station pair measurements from 364 unique stations (249
 | Beat Frequency Detection | 11 of 12 Earth motion patterns | R² up to 0.899, multi-center consistent |
 | Mesh Dance Dynamics | Annual oscillation (p | High network synchronization across individual components |
 | 3D Spatial Structure | Anisotropy strength = 1.98 | Dipole: 5,715 km, Quadrupole: 5,660 km, 6.6× dynamic range |
-| Multi-Frequency Beat Patterns | 35 detected, 7 FDR significant | Venus sub-harmonic (196.9d, R²=0.99-0.86), lunar fortnight (14.8d, R²=0.60-0.99); hierarchical strength pattern validates genuine signal |
+| Multi-Frequency Beat Patterns | 35 detected, 7 FDR significant | Venus sub-harmonic (196.9d, R²=0.82-0.86), lunar fortnight (14.8d, R²=0.60-0.82); hierarchical strength pattern validates genuine signal |
 | Signal Enhancement Factor | Mean: 124.4× over null | Range: 22.8–226.0×, indicates non-linear coupling mechanism |
 | Seasonal Time Modulation | Spring maximum effects | Seasonal-peak day/night ratios: 1.074-1.292, synchronized peaks |
 | TID Contamination | 21–23% improvement potential | Quantified and correctable, Venus 2f harmonic identified (Section 3.3.2) |
@@ -4854,7 +4854,7 @@ The signal's authenticity is supported by a multi-layered validation framework:
 
 - 3D Spatial Structure Validation: Complete spherical harmonic decomposition reveals anisotropy strength of 1.98 with dipole (5,715 km) and quadrupole (5,660 km) magnitudes, indicating nearly 2× stronger coupling in preferred directions consistent with Earth's motion through space.
 
-- Multi-Scale Temporal Coupling: Detection of 35 distinct beat frequency patterns spanning four orders of magnitude (0.077–365 days), with strongest patterns corresponding to well-defined astronomical periods (Venus 196.9d: R²=0.99–0.86, lunar fortnight 14.8d: R²=0.60–0.99), demonstrating genuine multi-scale coupling to gravitational field geometry.
+- Multi-Scale Temporal Coupling: Detection of 35 distinct beat frequency patterns spanning four orders of magnitude (0.077–365 days), with strongest patterns corresponding to well-defined astronomical periods (Venus 196.9d: R²=0.82–0.86, lunar fortnight 14.8d: R²=0.60–0.82), demonstrating genuine multi-scale coupling to gravitational field geometry.
 
 ### 5.3 Signal Robustness and Processing Effects
 

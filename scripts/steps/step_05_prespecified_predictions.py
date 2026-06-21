@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-Step 14: Frozen TEP Prediction Table
-=====================================
+Step 14: Prespecified TEP Prediction Table
+=============================================
 
 Generates a falsification-ready prediction table for prospective Cepheid-SN hosts
-using the pipeline-frozen parameters (no refitting).
+using the pipeline-prespecified parameters (no refitting).
 
 The correction for a prospective host is:
     Delta_mu = kappa_Cep * S(rho, N_mb) * (sigma^2 - sigma_ref^2) / c^2
 
-Parameters are frozen at pipeline values:
-    kappa_Cep = 1.049e6 mag  (from step_04_tep_correction_results.json)
-    sigma_ref = 87.17 km/s   (from step_04_tep_correction_results.json)
+Parameters are prespecified at pipeline values:
+    kappa_Cep = step_04_tep_correction_results.json (optimal_kappa_cep)
+    sigma_ref = step_04_tep_correction_results.json (sigma_ref)
     S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}
 
 This is a formal pipeline step. The output prediction table is a
@@ -38,7 +38,7 @@ from scripts.utils.tep_correction import C_SQUARED_KM_S, tep_correction
 
 
 class Step14FrozenPredictions:
-    """Formal pipeline step: generate frozen TEP prediction table."""
+    """Formal pipeline step: generate prespecified TEP prediction table."""
 
     def __init__(self):
         self.root = PROJECT_ROOT
@@ -48,14 +48,14 @@ class Step14FrozenPredictions:
 
         self.logger = TEPLogger(
             "step_14_predictions",
-            log_file_path=self.logs_dir / "step_05_frozen_predictions.log",
+            log_file_path=self.logs_dir / "step_05_prespecified_predictions.log",
         )
         set_step_logger(self.logger)
 
     def run(self):
-        print_status(">>> STEP 14: FROZEN TEP PREDICTION TABLE", "TITLE")
+        print_status(">>> STEP 14: Prespecified TEP prediction table", "TITLE")
 
-        # Load frozen parameters from pipeline output
+        # Load prespecified parameters from pipeline output
         with open(self.results_dir / "step_04_tep_correction_results.json") as f:
             tep_json = json.load(f)
 
@@ -63,8 +63,8 @@ class Step14FrozenPredictions:
         SIGMA_REF = float(tep_json["sigma_ref"])
         C2 = C_SQUARED_KM_S
 
-        print_status(f"Frozen kappa_Cep: {KAPPA_CEP:.3e} mag", "INFO")
-        print_status(f"Frozen sigma_ref: {SIGMA_REF:.2f} km/s", "INFO")
+        print_status(f"Prespecified kappa_Cep: {KAPPA_CEP:.3e} mag", "INFO")
+        print_status(f"Prespecified sigma_ref: {SIGMA_REF:.2f} km/s", "INFO")
 
         # Verification: existing N=29 hosts
         strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
@@ -98,7 +98,7 @@ class Step14FrozenPredictions:
                 )
 
         pred_df = pd.DataFrame(rows)
-        pred_df.to_csv(self.results_dir / "step_05_frozen_tep_predictions.csv", index=False)
+        pred_df.to_csv(self.results_dir / "step_05_prespecified_tep_predictions.csv", index=False)
         print_status(
             f"Saved prediction grid: {len(pred_df)} rows", "SUCCESS"
         )
@@ -121,7 +121,72 @@ class Step14FrozenPredictions:
             ),
         }
 
-        with open(self.results_dir / "step_05_frozen_tep_prediction_manifest.json", "w") as f:
+        with open(self.results_dir / "step_05_prespecified_tep_prediction_manifest.json", "w") as f:
+            json.dump(manifest, f, indent=2)
+
+        print_status("Saved prediction manifest", "SUCCESS")
+        # ------------------------------------------------------------------
+        # TEP-native gauge variant: kappa_equiv from velocity-space likelihood
+        # ------------------------------------------------------------------
+        kappa_equiv = None
+        try:
+            with open(self.results_dir / "step_39_environment_slope_decomposition.json") as f:
+                s39 = json.load(f)
+            # Select primary sample, sigma_v=250, z_cut=0
+            for rec in s39:
+                if (rec.get("sample") == "primary"
+                        and rec.get("sigma_v") == 250
+                        and rec.get("z_cut", 0) == 0):
+                    kappa_equiv = float(rec["kappa_equiv"])
+                    break
+        except Exception:
+            pass
+
+        if kappa_equiv is not None and np.isfinite(kappa_equiv):
+            print_status(
+                f"TEP-native gauge kappa_equiv: {kappa_equiv:.3e} mag", "INFO"
+            )
+            rows_native = []
+            for s in sigma_grid:
+                for S in S_grid:
+                    dmu = kappa_equiv * S * (s ** 2 - SIGMA_REF ** 2) / C2
+                    rows_native.append(
+                        {
+                            "sigma_kms": s,
+                            "S": S,
+                            "Delta_mu_mag": dmu,
+                            "Delta_H0_approx_kms_mpc": -dmu * np.log(10) * 70 / 5,
+                        }
+                    )
+            pred_native = pd.DataFrame(rows_native)
+            pred_native.to_csv(
+                self.results_dir / "step_05_prespecified_tep_predictions_native.csv",
+                index=False,
+            )
+            print_status(
+                f"Saved TEP-native prediction grid: {len(pred_native)} rows",
+                "SUCCESS",
+            )
+
+            # Update manifest
+            manifest["kappa_equiv_native"] = kappa_equiv
+            manifest["kappa_equiv_source"] = (
+                "step_39_environment_slope_decomposition.json "
+                "(primary, sigma_v=250, z_cut=0)"
+            )
+            manifest["gauge_note"] = (
+                "The empirical Step 04 table uses kappa_Cep from the host-residual "
+                "correction. The TEP-native table uses kappa_equiv = Gamma_X / "
+                "((ln 10 / 5) * H_app), the coefficient that would produce the "
+                "velocity-space environmental slope under the TEP-native gauge."
+            )
+        else:
+            print_status(
+                "TEP-native kappa_equiv not available; skipping native prediction table",
+                "INFO",
+            )
+
+        with open(self.results_dir / "step_05_prespecified_tep_prediction_manifest.json", "w") as f:
             json.dump(manifest, f, indent=2)
 
         print_status("Saved prediction manifest", "SUCCESS")

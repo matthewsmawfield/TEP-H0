@@ -16,7 +16,10 @@ from pathlib import Path
 import json
 import sys
 
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+# Ensure project root is in path (avoid collisions with any external 'scripts' package)
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 from scripts.utils.plot_style import apply_tep_style
 from scripts.utils.logger import print_status, print_table
 from scripts.utils.tep_correction import ANCHOR_SCREENING, ANCHOR_NMB, group_screening_factor
@@ -65,7 +68,7 @@ class AnchorStratificationStep:
     def run(self):
         """Execute the anchor stratification test."""
         print_status("=" * 70, "INFO")
-        print_status("STEP 10: ANCHOR STRATIFICATION TEST", "SECTION")
+        print_status("Step 27: Anchor stratification test", "SECTION")
         print_status("Testing for internal P-L tension in geometric anchors", "INFO")
         print_status("=" * 70, "INFO")
 
@@ -599,9 +602,9 @@ class AnchorStratificationStep:
                     )
         elif np.isfinite(tension):
             print_status(
-                f"Marginal anchor/host κ comparison ({tension:.1f}σ) — anchor sample (N=3) "
+                f"Limited anchor/host κ comparison ({tension:.1f}σ) — anchor sample (N=3) is "
                 "insufficient to discriminate screening regimes.",
-                "WARNING",
+                "INFO",
             )
         else:
             print_status(

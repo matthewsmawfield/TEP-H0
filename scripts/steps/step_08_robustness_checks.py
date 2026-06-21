@@ -278,7 +278,7 @@ class Step4RobustnessChecks:
         sigma_ref = self._load_sigma_ref_val()
         if sigma_ref is None:
             sigma_ref = 87.17
-            print_status("σ_ref missing from JSON; using standard fallback 87.17 km/s", "WARNING")
+            print_status("σ_ref missing from JSON; using standard fallback 87.17 km/s", "INFO")
 
         # TEP regressor: S * (sigma^2 - sigma_ref^2) / c^2
         from scripts.utils.tep_correction import C_SQUARED_KM_S
@@ -579,7 +579,7 @@ class Step4RobustnessChecks:
         df = df.dropna(subset=required).reset_index(drop=True)
         n = len(df)
         if n < 10:
-            print_status("Insufficient sample size for out-of-sample validation.", "WARNING")
+            print_status("Insufficient sample size for out-of-sample validation.", "INFO")
             return
 
         sigma_all = df['sigma_inferred'].values
@@ -1086,11 +1086,11 @@ class Step4RobustnessChecks:
             print_status(f"Saved covariance-aware results to {self.covariance_results_path}", "SUCCESS")
         
         if p_bootstrap < 0.01:
-            print_status(f"Bootstrap p = {p_bootstrap:.4f} < 0.01: Correlation is HIGHLY SIGNIFICANT.", "SUCCESS")
+            print_status(f"Bootstrap p = {p_bootstrap:.4f} < 0.01: Correlation is highly significant.", "SUCCESS")
         elif p_bootstrap < 0.05:
-            print_status(f"Bootstrap p = {p_bootstrap:.4f} < 0.05: Correlation is SIGNIFICANT.", "SUCCESS")
+            print_status(f"Bootstrap p = {p_bootstrap:.4f} < 0.05: Correlation is significant.", "SUCCESS")
         else:
-            print_status(f"Bootstrap p = {p_bootstrap:.4f}: Correlation is NOT significant.", "WARNING")
+            print_status(f"Bootstrap p = {p_bootstrap:.4f}: Correlation is not significant.", "INFO")
 
         # 2. Jackknife Loop
         r_values = []
@@ -1120,9 +1120,9 @@ class Step4RobustnessChecks:
         print_status(f"Jackknife Range: r in [{r_min:.4f}, {r_max:.4f}]", "RESULT")
         
         if r_min > 0.4:
-            print_status("CONCLUSION: Correlation is ROBUST. No single host drives the trend.", "SUCCESS")
+            print_status("Conclusion: correlation is robust. No single host drives the trend.", "SUCCESS")
         else:
-            print_status("CONCLUSION: Correlation is somewhat fragile.", "WARNING")
+            print_status("Conclusion: correlation is somewhat fragile.", "INFO")
             
         # Display Most Influential Points (Top 3 reducers of r)
         # If removing them drops r significantly, they are supporting the trend strongly.
@@ -1405,17 +1405,17 @@ class Step4RobustnessChecks:
 
         prov_path = self.outputs_dir / "step_07_sigma_provenance_table.csv"
         if not prov_path.exists():
-            print_status("Sigma provenance table missing; generating it via Step 4b.", "WARNING")
+            print_status("Sigma provenance table missing; generating it via Step 4b.", "INFO")
             try:
                 from scripts.steps.step_07_aperture_sensitivity import Step4bApertureSensitivity
 
                 Step4bApertureSensitivity().run()
                 set_step_logger(self.logger)
             except Exception as exc:
-                print_status(f"Could not generate sigma provenance table: {exc}", "WARNING")
+                print_status(f"Could not generate sigma provenance table: {exc}", "INFO")
                 return None
             if not prov_path.exists():
-                print_status("Sigma provenance table still missing; skipping EIV model.", "WARNING")
+                print_status("Sigma provenance table still missing; skipping EIV model.", "INFO")
                 return None
 
         prov = pd.read_csv(prov_path)
@@ -1461,7 +1461,7 @@ class Step4RobustnessChecks:
         sigma_ref = self._load_sigma_ref_val()
         if sigma_ref is None:
             sigma_ref = 87.17
-            print_status("σ_ref missing from JSON; using standard fallback 87.17 km/s", "WARNING")
+            print_status("σ_ref missing from JSON; using standard fallback 87.17 km/s", "INFO")
 
         from scripts.utils.tep_correction import C_SQUARED_KM_S
         x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S

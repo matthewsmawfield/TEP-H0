@@ -3,7 +3,7 @@
     "kappa_host": 1272448.73046875,
     "kappa_host_err": 786040.9378865366,
     "kappa_joint": 1272451.0192871094,
-    "kappa_joint_err": 448900.390625,
+    "kappa_joint_err": 462535.1562499999,
     "unified_h0": 68.83787861896722
   },
   "kappa_trgb": {
@@ -21,9 +21,9 @@
     "tension_kappa_diff_vs_kappa_cep": -0.5355457274230383,
     "tension_kappa_diff_vs_zero": 2.2471907478777164,
     "tension_kappa_trgb_vs_zero": 1.6729702691762134,
-    "joint_chi2": 3.4562765414000034,
+    "joint_chi2": 3.4478672179283807,
     "joint_dof": 4,
-    "joint_pvalue": 0.4845576596034571
+    "joint_pvalue": 0.48584939322027265
   },
   "theory": {
     "kappa_gal": 970000.0,

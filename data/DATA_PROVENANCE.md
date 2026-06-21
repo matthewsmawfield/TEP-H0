@@ -189,5 +189,5 @@ python -c "from scripts.steps.step_7_trgb_comparison import FREEDMAN_2024_TRGB; 
 
 ---
 
-*Last updated: 2026-06-18*
+*Last updated: 2026-06-21*
 *Pipeline version: v0.7*

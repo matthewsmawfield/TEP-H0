@@ -1,0 +1,24 @@
+{
+  "permutation": {
+    "permutation_p": 0.0216,
+    "gamma_true": 23089394.67307847,
+    "gamma_perm_mean": 8575705.444433825,
+    "gamma_perm_std": 6040840.515403856
+  },
+  "bootstrap": {
+    "Gamma_X_boot_mean": 26759117.000138566,
+    "Gamma_X_boot_std": 10888835.360156232,
+    "Gamma_X_ci_low": 15995247.76883298,
+    "Gamma_X_ci_high": 56986032.999066025,
+    "frac_positive": 0.999
+  },
+  "loho": {
+    "Gamma_X_mean": 23158209.64283158,
+    "Gamma_X_std": 957100.0022197975,
+    "Gamma_X_min": 21516319.478610307,
+    "Gamma_X_max": 25896770.566675343,
+    "n_positive": 29,
+    "N_hosts": 29,
+    "most_influential_host": "N976A"
+  }
+}

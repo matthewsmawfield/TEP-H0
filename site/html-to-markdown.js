@@ -105,10 +105,13 @@ class HTMLToMarkdownConverter {
             if (!mainMatch) throw new Error('Could not find manuscript content.');
             
             const today = new Date().toISOString().split('T')[0];
+            const [year, month, day] = today.split('-');
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const formattedDate = `${parseInt(day)} ${monthNames[parseInt(month) - 1]} ${year}`;
             const header = `# The Cepheid Bias: Resolving the Hubble Tension
 **Matthew Lukin Smawfield**  
 Version: v0.7 (Kingston upon Hull)  
-First published: 11 January 2026 · Last updated: 18 June 2026  
+First published: 11 January 2026 · Last updated: ${formattedDate}  
 DOI: 10.5281/zenodo.18209702
 
 ---

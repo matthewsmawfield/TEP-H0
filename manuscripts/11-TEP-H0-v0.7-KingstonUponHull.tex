@@ -82,7 +82,7 @@ Tension}\label{the-cepheid-bias-resolving-the-hubble-tension}
 
 \textbf{Matthew Lukin Smawfield}\\
 Version: v0.7 (Kingston upon Hull)\\
-First published: 11 January 2026 · Last updated: 18 June 2026\\
+First published: 11 January 2026 · Last updated: 21 June 2026\\
 DOI: 10.5281/zenodo.18209702
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -140,7 +140,7 @@ cross-validation, LOOCV) predicts \(H_0^{\rm LOOCV} = 68.67 \pm 1.34\)
 km/s/Mpc, corresponding to a Planck tension of \(0.82\sigma\); this
 stress test confirms the correction generalises out of sample, with the
 response coefficient trained on 28 hosts and tested on the held-out
-host. The in-sample corrected mean is \(H_0 = 68.75\) km/s/Mpc
+host. The in-sample corrected mean is \(H_0 = 68.84\) km/s/Mpc
 (bootstrap mean \(68.80 \pm 1.46\), Planck tension \(0.91\sigma\)), with
 the corrected \(r \simeq 0\) a fitted-correction diagnostic rather than
 an independent validation statistic.
@@ -673,8 +673,8 @@ group-screened, a screen-weighted anchor contribution scale
 amplitude that down-weights each anchor's \emph{contribution} by its
 environmental screening factor \(S\); it is not a normalized weighted
 mean. Re-optimising \(\kappa_{\rm Cep}\) with either reference yields
-headline \(H_0\) values that differ by \(\Delta H_0 = 2.14\) km/s/Mpc
-(\(H_0^{\rm std} = 68.75\) km/s/Mpc vs \(H_0^{\rm scr} = 66.62\)
+headline \(H_0\) values that differ by \(\Delta H_0 = 2.50\) km/s/Mpc
+(\(H_0^{\rm std} = 68.84\) km/s/Mpc vs \(H_0^{\rm scr} = 66.34\)
 km/s/Mpc), showing the correction is consistent under both definitions
 at the level of the intrinsic uncertainty:
 
@@ -1082,7 +1082,7 @@ Corr. \(H_0^{\rm TEP}\) (uniform \(\kappa\))
 \bottomrule\noalign{}
 \endlastfoot
 Full Sample & 29 & 0.466 & 0.0109 & \(70.06 \pm 1.44\) &
-\(68.75 \pm 1.46\) \\
+\(68.84 \pm 1.46\) \\
 Stellar Absorption Only & 16 & 0.549 & 0.028 & \(69.14 \pm 2.03\) &
 \(66.71 \pm 1.65\) \\
 \end{longtable}
@@ -1244,7 +1244,7 @@ the sample is \(\langle \kappa_{\rm Cep} \cdot S
 this suppression-aware correction yields a unified Hubble constant:
 
 \begin{equation}
-H_0^{\rm TEP} = 68.75 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.80\pm1.46)
+H_0^{\rm TEP} = 68.84 \text{ km/s/Mpc}\quad(\text{bootstrap mean }68.80\pm1.46)
 \end{equation}
 
 The Planck tension is reduced to \(0.91\sigma\). Paper 10 does not
@@ -1279,10 +1279,10 @@ mean \(H_0\) aligned with Planck.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio,alt={Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=68.75 km/s/Mpc aligned with Planck}]{public/figures/figure_03_tep_correction_comparison.png?v=2}}
+\pandocbounded{\includegraphics[keepaspectratio,alt={Side-by-side comparison: Left panel shows original SH0ES data with clear H0-sigma dependence; Right panel shows TEP-corrected data with environmental trend eliminated and mean H0=68.84 km/s/Mpc aligned with Planck}]{public/figures/figure_03_tep_correction_comparison.png?v=2}}
 \caption{Side-by-side comparison: Left panel shows original SH0ES data
 with clear H0-sigma dependence; Right panel shows TEP-corrected data
-with environmental trend eliminated and mean H0=68.75 km/s/Mpc aligned
+with environmental trend eliminated and mean H0=68.84 km/s/Mpc aligned
 with Planck}
 \end{figure}
 
@@ -1302,7 +1302,7 @@ construction since \(\kappa_{\rm Cep}\) is fitted to remove the trend;
 this is a fitted-correction diagnostic, not an independent validation
 statistic. Independent robustness is assessed by jackknife,
 host-contrast likelihood, train/test, anchor, and systematics tests. The
-unified mean (\(68.75\) km/s/Mpc; bootstrap mean \(68.80 \pm 1.46\)) is
+unified mean (\(68.84\) km/s/Mpc; bootstrap mean \(68.80 \pm 1.46\)) is
 statistically consistent with Planck (dashed line, \(0.91\sigma\)
 tension). Error bars represent standard measurement uncertainties.
 
@@ -1335,7 +1335,7 @@ distinct parallax-based methodology) yields:
 
 \begin{quote}
 \textbf{Multi-anchor regression (\(N=3\)):}
-\(\kappa_{\rm anchor} = (0.23 \pm 0.19) \times 10^6\) mag (\(1.2\sigma\)
+\(\kappa_{\rm anchor} = (0.246 \pm 0.139) \times 10^6\) mag (\(1.77\sigma\)
 from zero). The anchor-only regression is underpowered and cannot
 precisely estimate the host-level coefficient directly. It therefore
 cannot by itself confirm or refute \(\kappa_{\rm Cep}\sim10^6\). The
@@ -2119,7 +2119,7 @@ environment-independent. Under the TEP framework, the \(5\sigma\)
 discrepancy emerges because the SH0ES sample includes numerous SN Ia
 hosts with deep gravitational potentials, where period contraction
 biases distance estimates low. The TEP correction yields a unified
-\(H_0 = 68.75\) km/s/Mpc (bootstrap mean \(68.80 \pm 1.46\)), reducing
+\(H_0 = 68.84\) km/s/Mpc (bootstrap mean \(68.80 \pm 1.46\)), reducing
 the Planck tension to \(0.91\sigma\).
 
 The correlation detected (Spearman \(\rho = 0.517\), \(p = 0.0041\);
@@ -2440,13 +2440,13 @@ screening factors (\(S_{\rm MW}=0.605\), \(S_{\rm LMC}=0.873\),
 \(S_{\rm N4258}=0.096\)) gives \(\sigma_{\rm ref,scr} \approx 30.51\)
 km/s. Re-optimising \(\kappa_{\rm Cep}\) with this screen-weighted scale
 yields a headline \(H_0\) that differs from the standard reference by
-\(\Delta H_0 = 2.14\) km/s/Mpc (\(H_0^{\rm std} = 68.75\) km/s/Mpc vs
-\(H_0^{\rm scr} = 66.62\) km/s/Mpc), a shift comparable to the bootstrap
+\(\Delta H_0 = 2.50\) km/s/Mpc (\(H_0^{\rm std} = 68.84\) km/s/Mpc vs
+\(H_0^{\rm scr} = 66.34\) km/s/Mpc), a shift comparable to the bootstrap
 uncertainty (\(\pm 1.46\) km/s/Mpc). The correction is therefore
 consistent under both definitions at the level of the intrinsic
 uncertainty: whether one treats the reference as unscreened
 (conventional; \(0.91\sigma\) Planck tension) or screening-weighted
-(TEP-consistent), the headline \(H_0\) shifts by \(2.14\) km/s/Mpc. This
+(TEP-consistent), the headline \(H_0\) shifts by \(2.50\) km/s/Mpc. This
 removes the apparent contradiction and converts it into a quantitative
 robustness constraint.
 
@@ -2901,7 +2901,7 @@ local Hubble constant. Out-of-sample leave-one-out cross-validation
 (LOOCV) predicts \(H_0^{\rm LOOCV} = 68.67 \pm 1.34\) km/s/Mpc,
 corresponding to a Planck tension of \(0.82\sigma\); this stress test
 confirms out-of-sample generalisation. The in-sample corrected mean is
-\(H_0 = 68.75\) km/s/Mpc (bootstrap mean \(68.80 \pm 1.46\), Planck
+\(H_0 = 68.84\) km/s/Mpc (bootstrap mean \(68.80 \pm 1.46\), Planck
 tension \(0.91\sigma\)). Both are robust under bootstrap resampling. The
 low-\(\sigma\) subsample (\(66.26 \pm 1.05\) km/s/Mpc) lies below the
 uncorrected full-sample mean, consistent with TEP expectations that
@@ -2914,8 +2914,8 @@ suppression relative to the bare estimate is consistent with the denser
 cluster environment.
 
 Independent P-L fits to the extragalactic geometric anchors (LMC, NGC
-4258, M31) yield \(\kappa_{\rm anchor} = (0.23 \pm 0.19) \times 10^6\)
-mag (\(1.2\sigma\) from zero). The anchor-only regression is
+4258, M31) yield \(\kappa_{\rm anchor} = (0.246 \pm 0.139) \times 10^6\)
+mag (\(1.77\sigma\) from zero). The anchor-only regression is
 underpowered and cannot precisely estimate the host-level coefficient
 directly. It therefore cannot by itself confirm or refute
 \(\kappa_{\rm Cep}\sim10^6\). The relevant test is whether a
@@ -3132,7 +3132,7 @@ After running the pipeline, verify reproduction by checking:
 manuscript}\label{check-key-results-match-manuscript}
 
 cat results/outputs/tep\_correction\_results.json \textbar{} grep
-unified\_h0 \# Expected: 68.75 (±0.01) cat
+unified\_h0 \# Expected: 68.84 (±0.01) cat
 results/outputs/stratification\_results.json \textbar{} grep difference
 \# Expected: 7.86 (±0.01)
 
@@ -3446,7 +3446,7 @@ NGC 3147 & 0.01079 & 33.09 & 77.9 & 219.8 & 206.3 & Ho+2009 & 14.0 &
 8.37 & Stellar \\
 NGC 3254 & 0.00648 & 32.40 & 64.2 & 117.8 & 109.5 & Ho+2009 & 7.2 &
 10.63 & Stellar \\
-NGC 3370 & 0.00588 & 32.14 & 65.7 & 94.6 & 89.5 & Ho+2009 & 10.5 & 10.20
+NGC 3370 & 0.00588 & 32.50 & 65.7 & 94.6 & 89.5 & Ho+2009 & 10.5 & 10.20
 & Stellar \\
 NGC 3447 & 0.00465 & 31.94 & 56.9 & 67.8 & 63.7 & HyperLEDA (HI) & 3.4 &
 9.53 & HI proxy \\

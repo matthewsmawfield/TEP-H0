@@ -62,7 +62,7 @@ class Step6EnhancedRobustness:
     def run(self):
         """Execute enhanced robustness analysis."""
         print_status("=" * 60, "SECTION")
-        print_status("STEP 6: ENHANCED ROBUSTNESS ANALYSIS", "SECTION")
+        print_status("Step 6: Enhanced robustness analysis", "SECTION")
         print_status("Addressing referee concerns on σ heterogeneity and environment", "INFO")
         print_status("=" * 60, "SECTION")
         
@@ -101,7 +101,7 @@ class Step6EnhancedRobustness:
         self._write_summary(results)
         
         print_status("=" * 60, "SECTION")
-        print_status("ENHANCED ROBUSTNESS ANALYSIS COMPLETE", "SECTION")
+        print_status("Enhanced robustness analysis complete", "SECTION")
         print_status("=" * 60, "SECTION")
         
         return results
@@ -282,7 +282,7 @@ class Step6EnhancedRobustness:
         
         # Check if rho_local is available
         if 'rho_local' not in df.columns:
-            print_status("rho_local column not found - skipping density control", "WARNING")
+            print_status("rho_local column not found — skipping density control", "INFO")
             return {'available': False}
         
         # Filter to hosts with valid rho_local
@@ -290,7 +290,7 @@ class Step6EnhancedRobustness:
         print_status(f"Hosts with valid local density: {len(df_valid)}/{len(df)}", "INFO")
         
         if len(df_valid) < 10:
-            print_status("Insufficient hosts with valid density for partial correlation", "WARNING")
+            print_status("Insufficient hosts with valid density for partial correlation", "INFO")
             return {'available': False, 'n_valid': len(df_valid)}
         
         # Log transform density for better distribution
@@ -367,7 +367,7 @@ class Step6EnhancedRobustness:
                 if isinstance(_tep, dict) and 'sigma_ref' in _tep:
                     sigma_ref = float(_tep['sigma_ref'])
         except Exception:
-            print_status(f"Could not load step_04_tep_correction_results.json for sigma_ref: using default {sigma_ref}", "WARNING")
+            print_status(f"Could not load step_04_tep_correction_results.json for sigma_ref: using default {sigma_ref}", "INFO")
         
         def optimize_kappa(subset_df):
             """Optimize kappa_cep for a subset."""
@@ -483,7 +483,7 @@ class Step6EnhancedRobustness:
                 if isinstance(_tep, dict) and 'sigma_ref' in _tep:
                     sigma_ref = float(_tep['sigma_ref'])
         except Exception:
-            print_status(f"Could not load step_04_tep_correction_results.json for sigma_ref: using default {sigma_ref}", "WARNING")
+            print_status(f"Could not load step_04_tep_correction_results.json for sigma_ref: using default {sigma_ref}", "INFO")
 
         # Use the FULL-SAMPLE fitted kappa (uniform across subsamples)
         kappa_full = float('nan')  # must be loaded from JSON; no valid hardcoded fallback
@@ -497,7 +497,7 @@ class Step6EnhancedRobustness:
         except Exception:
             pass
         if not np.isfinite(kappa_full):
-            print_status("Could not load optimal_kappa_cep from step_04_tep_correction_results.json — skipping convergence analysis", "WARNING")
+            print_status("Could not load optimal_kappa_cep from step_04_tep_correction_results.json — skipping convergence analysis", "INFO")
             return
 
         # Build provenance masks
@@ -645,9 +645,9 @@ class Step6EnhancedRobustness:
                     sigma_ref = float(_tep.get("sigma_ref", 87.17))
                     kappa_full = float(_tep.get("optimal_kappa_cep", float('nan')))
         except Exception:
-            print_status("Could not load step_04_tep_correction_results.json: using default sigma_ref", "WARNING")
+            print_status("Could not load step_04_tep_correction_results.json: using default sigma_ref", "INFO")
         if not np.isfinite(kappa_full):
-            print_status("optimal_kappa_cep unavailable — skipping subset composition table", "WARNING")
+            print_status("optimal_kappa_cep unavailable — skipping subset composition table", "INFO")
             return
 
         # Build provenance masks
@@ -783,12 +783,12 @@ class Step6EnhancedRobustness:
     def _write_summary(self, results):
         """Write summary to text file."""
         with open(self.subsample_stats_path, 'w') as f:
-            f.write("ENHANCED ROBUSTNESS ANALYSIS SUMMARY\n")
+            f.write("Enhanced robustness analysis summary\n")
             f.write("=" * 50 + "\n\n")
             
             # Stellar absorption
             sa = results['stellar_absorption']
-            f.write("1. STELLAR ABSORPTION SUBSAMPLE\n")
+            f.write("1. Stellar absorption subsample\n")
             f.write(f"   N_stellar = {sa['n_stellar']}, N_HI = {sa['n_hi']}\n")
             if sa['stellar_only']['pearson_r'] is not None:
                 f.write(f"   Pearson r = {sa['stellar_only']['pearson_r']:.3f} (p = {sa['stellar_only']['pearson_p']:.4f})\n")
@@ -798,7 +798,7 @@ class Step6EnhancedRobustness:
             
             # Gold standard
             gs = results['gold_standard']
-            f.write("2. GOLD STANDARD σ SUBSAMPLE\n")
+            f.write("2. Gold standard σ subsample\n")
             f.write(f"   N = {gs['n_gold']} (sources: {', '.join(gs['gold_sources'])})\n")
             if gs['pearson_r'] is not None:
                 f.write(f"   Pearson r = {gs['pearson_r']:.3f} (p = {gs['pearson_p']:.4f})\n")
@@ -806,7 +806,7 @@ class Step6EnhancedRobustness:
             
             # Density control
             dc = results['density_control']
-            f.write("3. LOCAL DENSITY CONTROL\n")
+            f.write("3. Local density control\n")
             if dc.get('available'):
                 f.write(f"   N with valid density = {dc['n_valid']}\n")
                 f.write(f"   Baseline r(H0, σ) = {dc['baseline_r']:.3f} (p = {dc['baseline_p']:.4f})\n")
@@ -817,7 +817,7 @@ class Step6EnhancedRobustness:
             
             # TEP on subsamples
             tep = results['subsample_tep']
-            f.write("4. TEP CORRECTION ON SUBSAMPLES\n")
+            f.write("4. TEP correction on subsamples\n")
             for name, data in tep.items():
                 if data['unified_h0'] is not None:
                     f.write(f"   {name}: κ_Cep = {data['kappa_cep']:.3f}, H0 = {data['unified_h0']:.2f} ± {data['h0_error']:.2f}\n")
@@ -825,7 +825,7 @@ class Step6EnhancedRobustness:
             
             # Convergence analysis
             conv = results.get('convergence', {})
-            f.write("5. σ-QUALITY CONVERGENCE (uniform κ)\n")
+            f.write("5. σ-quality convergence (uniform κ)\n")
             for tier in conv.get('tiers', []):
                 f.write(f"   {tier['tier']}: N={tier['n']}, raw H0={tier['h0_raw']:.2f}, corrected H0={tier['h0_corrected']:.2f}, correction={tier['correction_kms']:.2f} km/s/Mpc\n")
             if conv.get('tightest_bound') is not None:

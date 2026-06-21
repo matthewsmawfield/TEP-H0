@@ -1,27 +1,27 @@
-ENHANCED ROBUSTNESS ANALYSIS SUMMARY
+Enhanced robustness analysis summary
 ==================================================
 
-1. STELLAR ABSORPTION SUBSAMPLE
+1. Stellar absorption subsample
    N_stellar = 16, N_HI = 13
    Pearson r = 0.549 (p = 0.0277)
    Spearman ρ = 0.618 (p = 0.0108)
    ΔH0 (high - low σ) = 8.54 km/s/Mpc
 
-2. GOLD STANDARD σ SUBSAMPLE
+2. Gold standard σ subsample
    N = 7 (sources: Kormendy&Ho2013, SDSS DR7, Ho+2009)
    Pearson r = 0.559 (p = 0.1922)
 
-3. LOCAL DENSITY CONTROL
+3. Local density control
    N with valid density = 29
    Baseline r(H0, σ) = 0.466 (p = 0.0109)
    Partial r(H0, σ | log ρ) = 0.455 (p = 0.0132)
 
-4. TEP CORRECTION ON SUBSAMPLES
+4. TEP correction on subsamples
    full_sample: κ_Cep = 1272448.730, H0 = 68.84 ± 1.29
    stellar_only: κ_Cep = 1224230.957, H0 = 66.94 ± 1.66
    gold_standard: κ_Cep = 1522259.521, H0 = 64.18 ± 3.33
 
-5. σ-QUALITY CONVERGENCE (uniform κ)
+5. σ-quality convergence (uniform κ)
    Full sample: N=29, raw H0=70.06, corrected H0=68.84, correction=1.22 km/s/Mpc
    Stellar only: N=16, raw H0=69.14, corrected H0=66.86, correction=2.28 km/s/Mpc
    Gold standard: N=7, raw H0=66.78, corrected H0=64.56, correction=2.22 km/s/Mpc

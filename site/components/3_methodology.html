@@ -55,6 +55,11 @@
         <tr><td>Primary $p$-value</td><td>$p_{\rm cov,MC} = 0.0031$ (Pearson); $p_{\rm cov,MC} = 0.0041$ (Spearman)</td></tr>
         <tr><td>Frozen before looking at corrected $H_0$</td><td>Yes — sample mask, redshift cut, and test statistic are fixed before $\kappa_{\rm Cep}$ is inspected</td></tr>
     </table>
+    <p style="font-size:0.9em; margin-top:8px;">
+        Here "frozen" refers only to pre-specified pipeline choices, sample
+        masks, and prediction-table parameters; no frozen prior on
+        $\kappa_{\rm Cep}$ is used in the primary velocity-space likelihood.
+    </p>
 </div>
 
 <p>
@@ -301,8 +306,8 @@
     that absorbs the intrinsic coupling $\beta_A$, the virial proportionality
     between $|\Phi|$ and $\sigma^2$, the P-L slope $b$, the factor $1/\ln 10$,
     stellar physics, environmental activation, and transfer functions. This is
-    distinct from a bare scalar coupling: Cassini bounds the bare coupling
-    $\beta_A \lesssim 10^{-3}$, while $\kappa_{\rm Cep} \sim 10^6$ is an
+    distinct from a bare scalar coupling: Cassini bounds the bare scalar-tensor coupling
+    $\alpha_0 \lesssim 3\times10^{-3}$, while $\kappa_{\rm Cep} \sim 10^6$ is an
     <em>observable response</em> that includes all astrophysical amplification
     mechanisms. $S(\rho)$ encodes the environment-dependent attenuation of Temporal
     Shear. In this convention $\kappa_{\rm Cep}$ has units of magnitude, and with
@@ -310,9 +315,11 @@
     placing the distance-ladder response in the same <em>response hierarchy</em> as the
     millisecond-pulsar response coefficient of Paper 10 after environmental
     transfer factors are applied. For the SN Ia host
-    sample, the mean suppression is weak ($\langle S \rangle = 0.946$), with
-    only two hosts (NGC 2442 and NGC 3021) showing appreciable attenuation ($S <
-    0.8$); the correction is therefore dominated by the unsuppressed Cepheid response coefficient, while
+    sample, the mean suppression is moderate ($\langle S \rangle = 0.778$), with
+    the majority of hosts remaining in the active-shear regime ($S > 0.8$ for 20 of
+    29) and only three hosts (NGC 2442, NGC 4639, and NGC 1365) showing strong
+    attenuation ($S < 0.2$); the correction is therefore still dominated by the
+    unsuppressed Cepheid response coefficient, while
     the continuous $S(\rho)$ factor ensures that anomalously dense hosts receive
     appropriately attenuated corrections.
 </p>
@@ -419,7 +426,7 @@
     (0.55/0.25/0.20 for NGC 4258/LMC/MW) are inferred from the relative
     roles of the anchors in the published ladder structure, not from a
     single verbatim table. A comprehensive sensitivity scan demonstrates
-    that the corrected $H_0$ remains Planck-consistent for any reference
+    that the corrected $H_0$ remains in agreement with Planck for any reference
     value $\sigma_{\rm ref} \in [55, 95]$ km/s, so the exact value is secondary to the
     demonstrated robustness. No $H_0$ information enters $\sigma_{\rm ref}$;
     the only fitted response parameter in the TEP correction model is
@@ -441,10 +448,13 @@
     law is derived in Appendix C.
 </p>
 
-<h3>2.5 Optimization Procedure</h3>
+<h3>2.5 Historical Residual-Space Optimization (Cross-Check)</h3>
 <p>
     The period-luminosity response coefficient $\kappa_{\rm Cep}$ is
     determined by optimizing the TEP correction against the host residuals.
+    This is the Step 04 residual-space method, retained as an empirical
+    cross-check; the primary generative inference is the velocity-space
+    $\Gamma_X$ likelihood in Steps 36–42.
     To avoid circularity, $\kappa_{\rm Cep}$ is fitted by minimizing the slope
     of the corrected host residuals in distance-modulus space:
 </p>
@@ -555,7 +565,7 @@
     test set, and the residual $H_0$–$\sigma$ trend and held-out mean $H_0$ are
     recorded. Leave-one-out cross validation (LOOCV) refits $\kappa_{\rm Cep}$ on 28 hosts and uses it to predict the corrected $H_0$ for the
     excluded host; repeating this for all hosts yields a fully out-of-sample
-    corrected $H_0$ vector. Furthermore, a leave-one-host influence analysis confirms that the detection is not driven by any single outlier host simulating a spurious signal. Dropping the highest-dispersion host (NGC 3147, $\sigma \approx 223$ km/s) actually *increases* the optimal coupling by $\sim$41%, indicating the sample attenuates rather than creates the effect. These procedures directly address the concern that $\kappa_{\rm Cep}$ could merely reparameterize the existing dataset by testing whether the correction trained on one subset predicts the absence of environmental trend and the Planck-consistent mean on unseen hosts.
+    corrected $H_0$ vector. Furthermore, a leave-one-host influence analysis confirms that the detection is not driven by any single outlier host simulating a spurious signal. Dropping the highest-dispersion host (NGC 3147, $\sigma \approx 223$ km/s) actually *increases* the optimal coupling by $\sim$41%, indicating the sample attenuates rather than creates the effect. These procedures directly address the concern that $\kappa_{\rm Cep}$ could merely reparameterize the existing dataset by testing whether the correction trained on one subset predicts the absence of environmental trend and a mean in agreement with Planck on unseen hosts.
 </p>
 
 <h3>2.9 Primary Statistical Model: Covariance-Aware GLS Regression</h3>
@@ -609,5 +619,5 @@
     ($0.085$ km/s/Mpc per km/s). Both estimates are statistically significant
     (ODR: $\sim$4.8$\sigma$; OLS: $p=0.011$), so the qualitative conclusion is
     robust; the OLS slope reported in the main text is a conservative
-    (attenuated) lower bound on the true relationship. ODR is reported for transparency; the measurement errors on $\sigma$ (mean $\sim$10 km/s) are comparable to the TEP regressor $S(\sigma^2-\sigma_{\rm ref}^2)/c^2$ over this sample, so the ODR slope should be treated as indicative rather than definitive.
+    (attenuated) lower bound on the true relationship. The ODR estimate is reported as a measurement-error-aware slope diagnostic. Because the sample remains small and the velocity-dispersion provenance is heterogeneous, ODR is treated as a robustness check rather than as the definitive estimator.
 </p>

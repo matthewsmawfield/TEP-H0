@@ -49,7 +49,7 @@ class Step22SNResidualTest:
         set_step_logger(self.logger)
 
     def run(self):
-        print_status(">>> STEP 22: SN IA DOWNSTREAM RESIDUAL TEST", "TITLE"
+        print_status(">>> STEP 22: SN Ia downstream residual test", "TITLE"
         )
 
         # Load corrected data

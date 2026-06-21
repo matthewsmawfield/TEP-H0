@@ -22,7 +22,7 @@ for fpath in files_to_sync:
     content = re.sub(r"1\.62 \\times 10\^6", r"1.05 \\times 10^6", content)
     content = re.sub(r"tension from 5σ to [\d\.]+σ", r"tension from 5σ to 0.91σ", content)
     content = re.sub(r"tension from 5\\sigma to [\d\.]+\\sigma", r"tension from 5\\sigma to 0.91\\sigma", content)
-    content = re.sub(r"unified H₀ = [\d\.]+ km/s/Mpc", "unified H₀ = 68.75 km/s/Mpc", content)
+    content = re.sub(r"unified H₀ = [\d\.]+ km/s/Mpc", "unified H₀ = 68.84 km/s/Mpc", content)
     
     # In citation and metadata
     content = re.sub(r"1\.46", "1.05", content) # just for kappa if it's there

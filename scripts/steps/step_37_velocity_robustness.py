@@ -147,9 +147,9 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
         if not has_ceph:
             continue
         try:
-            cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
-            mu_err = np.sqrt(cov[mu_idx, mu_idx])
-        except:
+            A_w_pinv = np.linalg.pinv(A_w, rcond=1e-12)
+            mu_err = float(np.linalg.norm(A_w_pinv[mu_idx, :]))
+        except Exception:
             mu_err = 0.05
         hosts.append(host_name)
         mus.append(mu_fit)
@@ -252,10 +252,11 @@ def fit_student_t(X, y, sigma_base, nu=4.0):
     sigma_int = res.x[p]
     # Approximate covariance from Hessian
     try:
-        hess = optimize.approx_fprime(res.x, lambda x: optimize.approx_fprime(x, neg_logL, 1e-5), 1e-5)
-        cov = np.linalg.pinv(hess, rcond=1e-12)
-        se = np.sqrt(np.diag(cov))
-    except:
+        with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
+            hess = optimize.approx_fprime(res.x, lambda x: optimize.approx_fprime(x, neg_logL, 1e-5), 1e-5)
+            cov = np.linalg.pinv(hess, rcond=1e-12)
+            se = np.sqrt(np.diag(cov))
+    except Exception:
         se = np.full(p, np.nan)
     return beta, sigma_int, se
 
@@ -674,7 +675,7 @@ def run():
         comp_csv = OUT_DIR / "step_37_old_vs_patched_comparison.csv"
         df_comp.to_csv(comp_csv, index=False)
         print_status(f"Saved comparison to {comp_csv}", "SUCCESS")
-        print_status(df_comp.to_string(index=False), "INFO")
+        print_status(df_comp.to_string(index=False, na_rep="—"), "INFO")
 
     # Save full results
     df_out = pd.DataFrame(results)
@@ -707,7 +708,7 @@ def run():
         f"Primary standard model 1_X has N_hosts != 29: {set(primary_rows['N_hosts'])}"
     assert np.all(primary_rows["beta_X"] > 0), \
         f"Primary standard model 1_X has non-positive beta_X: {primary_rows['beta_X'].values}"
-    print_status("CSV/JSON consistency assertions PASSED", "SUCCESS")
+    print_status("CSV/JSON consistency assertions passed", "SUCCESS")
 
     return results
 

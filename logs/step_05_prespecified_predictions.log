@@ -1,0 +1,14 @@
+[01:37:52] [INFO] 
+[01:37:52] [INFO] ================================================================================
+[01:37:52] [INFO]    >>> STEP 14: Prespecified TEP prediction table
+[01:37:52] [INFO] ================================================================================
+[01:37:52] [INFO] 
+[01:37:52] [INFO] Prespecified kappa_Cep: 1.272e+06 mag
+[01:37:52] [INFO] Prespecified sigma_ref: 87.17 km/s
+[01:37:52] [PROCESS] Verifying predictions against 29 existing hosts
+[01:37:52] [INFO] Max prediction residual: 0.449412 mag
+[01:37:52] [SUCCESS] Saved prediction grid: 54 rows
+[01:37:52] [SUCCESS] Saved prediction manifest
+[01:37:52] [INFO] TEP-native kappa_equiv not available; skipping native prediction table
+[01:37:52] [SUCCESS] Saved prediction manifest
+[01:37:52] [SUCCESS] Step 14 complete

@@ -150,7 +150,7 @@ class Step12CrossChannel:
 
     def run(self):
         print_status("=" * 60, "SECTION")
-        print_status("STEP 12: CROSS-CHANNEL CONSISTENCY", "SECTION")
+        print_status("Step 12: Cross-channel consistency", "SECTION")
         print_status("The definitive TEP framework test", "INFO")
         print_status("=" * 60, "SECTION")
 

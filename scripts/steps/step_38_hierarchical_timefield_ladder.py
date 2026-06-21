@@ -186,9 +186,10 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
         if not has_ceph:
             continue
         try:
-            cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
-            mu_err = np.sqrt(cov[mu_idx, mu_idx])
-        except:
+            with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
+                A_w_pinv = np.linalg.pinv(A_w, rcond=1e-12)
+            mu_err = float(np.linalg.norm(A_w_pinv[mu_idx, :]))
+        except Exception:
             mu_err = 0.05
         hosts.append(host_name)
         mus.append(mu_fit)
@@ -385,18 +386,19 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, sigma_int_guess=5
 
     # Compute Hessian for uncertainties (in scaled parameter space)
     try:
-        hess = optimize.approx_fprime(
-            res.x,
-            lambda x: optimize.approx_fprime(
-                x,
-                lambda p: _neg_logL_velocity(p, cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, sigma_int_guess),
+        with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
+            hess = optimize.approx_fprime(
+                res.x,
+                lambda x: optimize.approx_fprime(
+                    x,
+                    lambda p: _neg_logL_velocity(p, cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, sigma_int_guess),
+                    1e-5,
+                ),
                 1e-5,
-            ),
-            1e-5,
-        )
-        cov = np.linalg.pinv(hess, rcond=1e-12)
-        se_scaled = np.sqrt(np.maximum(np.diag(cov), 0))
-    except:
+            )
+            cov = np.linalg.pinv(hess, rcond=1e-12)
+            se_scaled = np.sqrt(np.maximum(np.diag(cov), 0))
+    except Exception:
         se_scaled = np.full(len(res.x), np.nan)
 
     # Convert uncertainties back to physical units
@@ -533,23 +535,24 @@ def parameter_correlation(cz_obs, d_obs, X, sigma_mu, sigma_v):
     ])
 
     try:
-        hess = optimize.approx_fprime(
-            x_mle,
-            lambda x: optimize.approx_fprime(
-                x,
-                lambda p: _neg_logL_velocity(p, cz_obs, d_obs, X, sigma_mu, sigma_v, "Kβ"),
+        with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
+            hess = optimize.approx_fprime(
+                x_mle,
+                lambda x: optimize.approx_fprime(
+                    x,
+                    lambda p: _neg_logL_velocity(p, cz_obs, d_obs, X, sigma_mu, sigma_v, "Kβ"),
+                    1e-5,
+                ),
                 1e-5,
-            ),
-            1e-5,
-        )
-        cov = np.linalg.pinv(hess, rcond=1e-12)
-        corr = np.zeros((4, 4))
-        for i in range(4):
-            for j in range(4):
-                if cov[i, i] > 0 and cov[j, j] > 0:
-                    corr[i, j] = cov[i, j] / np.sqrt(cov[i, i] * cov[j, j])
-        kappa_beta_corr = float(corr[1, 2])
-    except:
+            )
+            cov = np.linalg.pinv(hess, rcond=1e-12)
+            corr = np.zeros((4, 4))
+            for i in range(4):
+                for j in range(4):
+                    if cov[i, i] > 0 and cov[j, j] > 0:
+                        corr[i, j] = cov[i, j] / np.sqrt(cov[i, i] * cov[j, j])
+            kappa_beta_corr = float(corr[1, 2])
+    except Exception:
         kappa_beta_corr = np.nan
 
     return {
@@ -656,13 +659,15 @@ def run():
                 bx = res.get("beta_X", np.nan)
                 bx_err = res.get("beta_X_err", np.nan)
                 sig = abs(bx) / bx_err if bx_err and bx_err > 0 else np.nan
+                sig_str = f"{sig:.1f}σ" if np.isfinite(sig) else "n/a"
                 kx = res.get("kappa_Cep", np.nan)
                 kx_err = res.get("kappa_Cep_err", np.nan)
                 k_sig = abs(kx) / kx_err if kx_err and kx_err > 0 else np.nan
+                k_sig_str = f"{k_sig:.1f}σ" if np.isfinite(k_sig) else "n/a"
                 print_status(
                     f"    {model_type}: H0={res['H_app']:.2f}, "
-                    f"beta_X={bx:+.3e} ({sig:.1f}σ), "
-                    f"kappa={kx:.3e} ({k_sig:.1f}σ), "
+                    f"beta_X={bx:+.3e} ({sig_str}), "
+                    f"kappa={kx:.3e} ({k_sig_str}), "
                     f"sigma_int_v={res['sigma_int_v']:.2f}, "
                     f"chi2/dof={res['chi2']:.1f}/{res['dof']}",
                     "INFO",
@@ -765,10 +770,12 @@ def run():
         b = r.get("beta_X", np.nan)
         b_err = r.get("beta_X_err", np.nan)
         b_sig = abs(b) / b_err if b_err and b_err > 0 else np.nan
+        k_sig_str = f"{k_sig:.1f}σ" if np.isfinite(k_sig) else "n/a"
+        b_sig_str = f"{b_sig:.1f}σ" if np.isfinite(b_sig) else "n/a"
         print_status(
             f"  {r['model']:7s}: H0={r['H_app']:.2f}, "
-            f"kappa={k:+.3e} ({k_sig:.1f}σ), "
-            f"beta={b:+.3e} ({b_sig:.1f}σ), "
+            f"kappa={k:+.3e} ({k_sig_str}), "
+            f"beta={b:+.3e} ({b_sig_str}), "
             f"chi2/dof={r['chi2']:.1f}/{r['dof']}",
             "INFO",
         )
