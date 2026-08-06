@@ -1,7 +1,7 @@
 # The Cepheid Bias: Resolving the Hubble Tension
 **Matthew Lukin Smawfield**  
 Version: v0.7 (Kingston upon Hull)  
-First published: 11 January 2026 · Last updated: 21 June 2026  
+First published: 11 January 2026 · Last updated: 2 July 2026  
 DOI: 10.5281/zenodo.18209702
 
 ---
@@ -57,7 +57,7 @@ environmental slope is dominantly a Cepheid clock-transport bias.
 In that gauge—treating the environmental slope as a pure Cepheid
 clock-rate bias ($\beta_X = 0$)—the equivalent
 response coefficient is $\kappa_{\rm Cep} \approx 7.34\times10^5$ mag,
-consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.7\times10^5$ mag ($\sim 10^6$).
+consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.6\times10^5$ mag ($\sim 10^6$).
 The velocity-space fit yields $H_{\rm app} = 69.47 \pm 1.49$ km/s/Mpc;
 in the TEP-native gauge this corresponds to a Cepheid clock-bias
 correction that brings the local distance scale into agreement with
@@ -181,6 +181,8 @@ theorem: $\sigma^2 \propto GM/R \propto |\Phi|$. Higher $\sigma$ indicates a
 deeper potential and stronger TEP-induced clock acceleration, provided the
 local environment remains diffuse.
 
+The host-galaxy mass and local density parameters utilized to calculate the Cepheid environmental bias serve as macroscopic realizations of the abstract environmental operator $\mathcal{S}_\Sigma(\mathcal{E})$ defined in the foundational TEP framework. In this domain, galactic stellar density acts as an empirical proxy for the continuous saturation of Temporal Topology, anchoring the local clock rate without committing to specific chameleon or symmetron microphysics.
+
 ### 1.3 Cepheids as Environmental Clocks
 
 Cepheid variable stars function not merely as standard candles, but as
@@ -234,7 +236,7 @@ observations required to decisively confirm or refute the mechanism.
 
 ### 1.5 Scope and Structure
 
-In this paper, "resolving the Hubble tension" refers specifically to resolving the Cepheid-calibrated SH0ES local excess relative to the CMB scale, not to exhausting every possible late-universe or early-universe $H_0$ observable. The analysis presents a quantitative test of the TEP explanation for this specific discrepancy. Stratification of the SH0ES Cepheid host galaxies by curated kinematic potential-depth estimates (Section 2) reveals the predicted environment-dependent bias in derived $H_0$ (Section 3.1). Application of the TEP correction then unifies the sample (Section 3.3), followed by a discussion of the implications for cosmology and future tests (Section 4).
+In this paper, "resolving the Hubble tension" refers specifically to resolving the Cepheid-calibrated SH0ES local excess relative to the CMB scale, not to exhausting every possible late-universe or early-universe $H_0$ observable. The analysis presents a quantitative test of the TEP explanation for this specific discrepancy. Stratification of the SH0ES Cepheid host galaxies by curated kinematic potential-depth estimates (Section 2) reveals the predicted environment-dependent bias in derived $H_0$ (Section 3.1). Application of the TEP correction then unifies the sample (Section 3.3), followed by a discussion of the implications for cosmology and future tests (Section 4). The claim-discipline framework for the TEP corpus, including the scope limitations of canonical precision tests, is established in TEP-EXP (Paper 9).
 
 ## 2. Methodology
 
@@ -754,6 +756,23 @@ $\delta_i = \mu_{i,\rm SH0ES} - \mu_{i,\rm no\text{-}env}$ (Section 2.1);
 for visualization, this is converted into a host-level $H_0$-equivalent
 value via:
 
+Screening in TEP is represented at the theory level by the environmental operator
+*S*&Sigma;(*&Epsilon;*).
+Quantities such as
+&rho;T,
+*R*T(*M*),
+*S*&oplus;(*r*),
+compactness &Phi;/*c*2,
+local stellar density,
+geometric coherence length,
+and channel-specific response coefficients
+are domain-specific projections of *&Epsilon;*,
+not independent screening mechanisms
+and not interchangeable universal thresholds.
+Each is an observational transfer model
+that parameterizes the same underlying operator
+in a regime-appropriate form.
+
 \begin{equation}
 H_{0,i} = \frac{c \cdot z_{\rm HD}}{d_i},
 \qquad d_i = 10^{(\mu_i - 25)/5}\ {\rm Mpc}.
@@ -982,7 +1001,7 @@ The TEP-native gauge sets the non-Cepheid velocity-sector component $\beta_X$
 to zero, corresponding to the hypothesis tested here.
 Interpreting the identified slope in the TEP-native gauge ($\beta_X=0$)
 gives a Cepheid response scale $\kappa_{\rm equiv}\sim7\times10^5$ mag,
-consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.7\times10^5$ mag ($\sim10^6$). An
+consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.6\times10^5$ mag ($\sim10^6$). An
 independent *empirical* cross-check is provided by the
 residual-based correction pipeline, which fits a one-parameter
 $\kappa$ to remove the host-potential dependence in the ladder residual;
@@ -2489,7 +2508,7 @@ $\beta_X$ to zero, corresponding to the hypothesis tested here.
 In the TEP-native gauge—treating the environmental
 slope as a pure Cepheid clock-rate bias ($\beta_X = 0$)—the equivalent
 response coefficient is $\kappa_{\rm Cep} \approx 7.34\times10^5$ mag,
-consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.7\times10^5$ mag ($\sim 10^6$). The
+consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.6\times10^5$ mag ($\sim 10^6$). The
 velocity-space fit yields $H_{\rm app} = 69.47 \pm 1.49$ km/s/Mpc; in the
 TEP-native gauge this corresponds to a Cepheid clock-bias correction that
 brings the local distance scale into agreement with the CMB inference.
@@ -2565,7 +2584,7 @@ $\approx 1\sigma$ relative to Planck. The earlier residual-based estimate
 $\kappa_{\rm Cep} \approx 1.05\times10^6$ mag was an
 exploratory approximation; the new generative-observable analysis refines
 this to $\kappa_{\rm Cep} \approx 7.34\times10^5$ mag, consistent with the
-canonical TEP parameter $\kappa_{\rm gal} = 9.7\times10^5$ mag.
+canonical TEP parameter $\kappa_{\rm gal} = 9.6\times10^5$ mag.
 
 **Three distinct quantities.** It is useful to keep three
 coefficients conceptually separate:
@@ -2819,7 +2838,7 @@ Smawfield, M. L. (2025). *Temporal-Spatial Coupling in Gravitational Lensing: A 
 
 Smawfield, M. L. (2025). *Global Time Echoes: Empirical Synthesis*. Preprint v0.4 (Singapore). Zenodo. DOI: [10.5281/zenodo.18004832](https://doi.org/10.5281/zenodo.18004832) (Paper 5)
 
-Smawfield, M. L. (2025). *Universal Critical Density: Cross-Scale Consistency of ρ_T*. Preprint v0.6 (New Delhi). Zenodo. DOI: [10.5281/zenodo.18064365](https://doi.org/10.5281/zenodo.18064365) (Paper 6)
+Smawfield, M. L. (2025). *Temporal Topology Saturation Scale: Cross-Scale Consistency of ρ_T*. Preprint v0.6 (New Delhi). Zenodo. DOI: [10.5281/zenodo.18064365](https://doi.org/10.5281/zenodo.18064365) (Paper 6)
 
 Smawfield, M. L. (2025). *The Soliton Wake: Exploring RBH-1 as a Temporal Topology Candidate*. Preprint v0.3 (Blantyre). Zenodo. DOI: [10.5281/zenodo.18059250](https://doi.org/10.5281/zenodo.18059250) (Paper 7)
 
@@ -3237,7 +3256,7 @@ pulsar-specific self-screening. Paper 11 (this work) identifies the
 primary generative observable as the combined environmental slope
 $\Gamma_X$ in the velocity-space likelihood (Steps 36–42). In the
 TEP-native gauge this implies $\kappa_{\rm equiv} \approx 7.34\times10^5$
-mag, consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.7\times10^5$ mag ($\sim10^6$). An
+mag, consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.6\times10^5$ mag ($\sim10^6$). An
 independent empirical cross-check (Step 04, residual-based correction)
 yields:
 
