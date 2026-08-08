@@ -3,7 +3,7 @@
 TEP Cosmological Distance Models
 =================================
 
-Version: TEP v0.9 (Jakarta)
+Version: TEP v0.10 (Jakarta)
 
 Provides the luminosity-distance--redshift relation for competing hypotheses,
 used by standard-siren and cosmology analyses across the TEP corpus.
@@ -39,6 +39,9 @@ C_KM_S = 299792.458  # speed of light, km/s
 C_KMS = C_KM_S  # alias for backward compatibility
 
 _Z_CAP_FACTOR = 3.0
+# Numerical guardrail for exploratory parameter scans. The validated native
+# TEP parameter ranges stay well above this floor; hitting it means the scan is
+# outside the calibrated EFT regime rather than a new physical branch.
 _A_MIN = 0.1
 
 
@@ -62,6 +65,13 @@ def _validate_tep_params(z_T, n_T, epsilon_T=None):
 def _z_effective(z, z_T):
     z_arr = _as_array(z)
     cap = z_T * _Z_CAP_FACTOR
+    if np.any(z_arr > cap):
+        import warnings
+        warnings.warn(
+            f"_z_effective: z values above {cap} capped to {cap} for numerical stability. "
+            "High-z physics may differ from full TEP model.",
+            RuntimeWarning, stacklevel=3
+        )
     return np.where(z_arr > cap, cap, z_arr)
 
 
@@ -120,7 +130,10 @@ def conformal_factor_native(z, epsilon_T, z_T, n_T):
 
 def alpha_A_native(z, epsilon_T, z_T, n_T):
     """
-    Jordan-frame coupling alpha_A = d ln A / d ln(1+z).
+    Jordan-frame coupling alpha_A = d ln A / d ln a_J.
+
+    Since a_J = 1 / (1 + z), this is the negative of
+    d ln A / d ln(1+z).
 
     Matches hi_class ``tep_M_factor`` intermediate.
     """
@@ -178,7 +191,12 @@ def E_of_z(z, Om=0.315):
     """Dimensionless Hubble parameter E(z) = H(z)/H0 for a flat universe."""
     if Om < 0.0 or Om > 1.0:
         raise ValueError("Om must be in the interval [0, 1] for a flat LCDM model")
-    return np.sqrt(Om * (1.0 + z) ** 3 + (1.0 - Om))
+    if z < -1.0:
+        raise ValueError("Redshift z must be >= -1")
+    arg = Om * (1.0 + z) ** 3 + (1.0 - Om)
+    if arg < 0:
+        raise ValueError(f"Negative argument to sqrt in E_of_z: {arg}")
+    return np.sqrt(arg)
 
 
 def comoving_distance(z, H0, Om=0.315):

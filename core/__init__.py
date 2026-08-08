@@ -1,6 +1,6 @@
 """TEP Core — canonical Python package for the Temporal Equivalence Principle.
 
-Version: TEP v0.9 (Jakarta)
+Version: TEP v0.10 (Jakarta)
 
 This package provides the shared physics layer used by all TEP papers:
   - constants: physical and phenomenological parameters
@@ -38,13 +38,15 @@ from .constants import (
     M_SUN,
     MPC_TO_M,
     BETA_A,
+    RHO_T,
     RHO_C,
+    ILLUSTRATIVE_BETA_A,
+    KG_M3_TO_G_CM3,
+    G_CM3_TO_KG_M3,
     LAB_COHERENCE_LENGTH_M,
     M_REF,
     ALPHA_LOG,
     BETA_GEOM,
-    KAPPA_GAL,
-    KAPPA_GAL_UNCERTAINTY,
     SCREENING_LENGTH_KM,
     LAMBDA_T_MGEX_KM,
     LAMBDA_T_MGEX_ERR_KM,

@@ -3,7 +3,7 @@
 TEP Screening Module
 ====================
 
-Version: TEP v0.9 (Jakarta)
+Version: TEP v0.10 (Jakarta)
 
 Environment-dependent Temporal Shear suppression for the Temporal Equivalence Principle.
 
@@ -43,6 +43,12 @@ def universal_screening_function(rho, rho_scale, n=2.0, invert=False):
         Used for chameleon coupling screening (suppressed at low density).
     """
     rho = np.asarray(rho, dtype=float)
+    if np.any(rho <= 0):
+        raise ValueError("rho must be strictly positive")
+    if rho_scale <= 0:
+        raise ValueError("rho_scale must be strictly positive")
+    if n <= 0:
+        raise ValueError("n must be strictly positive")
     if invert:
         ratio = rho_scale / rho
     else:
@@ -62,7 +68,7 @@ def screening_factor(rho_local_g_cm3, rho_c=RHO_C):
     For galactic-scale densities (~1e-17 g/cm^3), rho/rho_c ~ 5e-19 and this
     function returns S ~ 1.0 for every galaxy, making it numerically useless as
     an environmental discriminant. For galaxy-scale Cepheid-host screening, use
-    TEPCosmology.screening_function (rho_half ~ 0.5 M_sun/pc^3) instead.
+    the galactic-onset density rho_half ~ 0.5 M_sun/pc^3 (see TEPCosmology).
     """
     return universal_screening_function(rho_local_g_cm3, rho_c, n=2.0, invert=False)
 
