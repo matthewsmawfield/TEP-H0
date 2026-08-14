@@ -459,7 +459,7 @@
 
 <div class="equation">
     \begin{equation}
-    \kappa_{\rm Cep} \equiv \frac{|b|q_P + 2.5\chi_L}{\ln 10}\,\alpha_{\rm clock} .
+    \kappa_{\rm Cep} \equiv \frac{|b|q_P + 2.5\chi_L}{\ln 10}\,\alpha_{\rm clock}\,T_{\rm disk} ,
     \end{equation}
 </div>
 
@@ -475,12 +475,13 @@
 
 <p>
     This is the correction used in TEP-H0. The full pulsation model shows that
-    $\kappa_{\rm Cep}$ contains three separable pieces:
+    $\kappa_{\rm Cep}$ contains three separable pieces (with $T_{\rm disk} \sim 1$
+    for galactic disks, consistent with Section 2.3):
 </p>
 
 <div class="equation">
     \begin{equation}
-    \kappa_{\rm Cep} = \underbrace{\alpha_{\rm clock}}_{\text{TEP clock response}} \times \underbrace{\frac{|b|q_P + 2.5\chi_L}{\ln 10}}_{\text{Cepheid P--L transfer}} .
+    \kappa_{\rm Cep} = \underbrace{\alpha_{\rm clock}}_{\text{TEP clock response}} \times \underbrace{\frac{|b|q_P + 2.5\chi_L}{\ln 10}}_{\text{Cepheid P--L transfer}} \times \underbrace{T_{\rm disk}}_{\text{disk transfer}} .
     \end{equation}
 </div>
 
@@ -491,7 +492,7 @@
 
 <div class="equation">
     \begin{equation}
-    \boxed{\kappa_{\rm Cep} \simeq \frac{|b|}{\ln 10}\,\alpha_{\rm clock}} .
+    \boxed{\kappa_{\rm Cep} \simeq \frac{|b|}{\ln 10}\,\alpha_{\rm clock}\,T_{\rm disk}} .
     \end{equation}
 </div>
 
@@ -630,8 +631,8 @@
         active-shear hosts.
     </li>
     <li>
-        Non-periodic indicators such as TRGB, JAGB, SBF, and megamasers acquire
-        the same environmental response as Cepheids, eliminating the
+        Non-periodic indicators such as TRGB, JAGB, SBF, and megamasers show
+        environmental response amplitudes comparable to Cepheids, eliminating the
         period-vs-nonperiodic differential signature.
     </li>
     <li>
@@ -659,7 +660,7 @@
 
 <div class="equation">
     \begin{equation}
-    \kappa_{\rm Cep} = \frac{|b|q_P + 2.5\chi_L}{\ln 10}\,\alpha_{\rm clock} ,
+    \kappa_{\rm Cep} = \frac{|b|q_P + 2.5\chi_L}{\ln 10}\,\alpha_{\rm clock}\,T_{\rm disk} ,
     \end{equation}
 </div>
 
@@ -669,12 +670,12 @@
 
 <div class="equation">
     \begin{equation}
-    \boxed{q_P \simeq 1,\qquad \chi_L \simeq 0,\qquad \kappa_{\rm Cep} \simeq \frac{|b|}{\ln 10}\alpha_{\rm clock}} .
+    \boxed{q_P \simeq 1,\qquad \chi_L \simeq 0,\qquad \kappa_{\rm Cep} \simeq \frac{|b|}{\ln 10}\,\alpha_{\rm clock}\,T_{\rm disk}} .
     \end{equation}
 </div>
 
 <p>
-    Thus the empirical $\kappa_{\rm Cep}$ measured in TEP-H0 is not a bare
+    Thus the empirical $\kappa_{\rm Cep}$ measured in TEP-H0 is not an unsuppressed
     scalar coupling. It is the product of the underlying TEP clock-response
     scale and the Cepheid P–L transfer factor. The theory predicts that
     high-potential active-shear Cepheids have shortened observed periods, are

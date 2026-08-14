@@ -25,6 +25,7 @@ Includes permutation test, bootstrap, redshift-cut sensitivity, and LOHO.
 """
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -35,6 +36,8 @@ from scipy import optimize, stats
 # Paths
 # ---------------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(BASE_DIR))
+from core.constants import KAPPA_GAL, KAPPA_GAL_UNCERTAINTY
 DATA_DIR = BASE_DIR / "data"
 SH0ES_DIR = DATA_DIR / "raw" / "external" / "Cepheid-Distance-Ladder-Data" / "SH0ES2022"
 HOSTS_PATH = DATA_DIR / "processed" / "hosts_processed.csv"
@@ -43,9 +46,9 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 C_KM_S = 299792.458
 LN10_OVER_5 = np.log(10) / 5.0
-KAPPA_CANONICAL = 970000.0
-KAPPA_PRIOR_MEAN = 960000.0
-KAPPA_PRIOR_SIGMA = 400000.0
+KAPPA_CANONICAL = KAPPA_GAL  # from core.constants
+KAPPA_PRIOR_MEAN = KAPPA_GAL  # from core.constants
+KAPPA_PRIOR_SIGMA = KAPPA_GAL_UNCERTAINTY  # from core.constants
 
 
 def print_status(msg, level="INFO"):

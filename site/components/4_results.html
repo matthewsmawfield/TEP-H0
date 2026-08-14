@@ -9,6 +9,9 @@
     for visualization, this is converted into a host-level $H_0$-equivalent
     value via:
 </p>
+
+<!-- include: screening_projection_notice.html -->
+
 <div class="equation">
     \begin{equation}
     H_{0,i} = \frac{c \cdot z_{\rm HD}}{d_i},
@@ -60,7 +63,7 @@
 </p>
 
 <table class="data-table">
-    <caption><strong>Table 2a.</strong> Summary of statistical tests.</caption>
+    <caption><strong>Table 2.</strong> Summary of statistical tests.</caption>
     <thead>
         <tr>
             <th>Test</th>
@@ -98,11 +101,13 @@
 </table>
 
 <p>
-    <strong>Host-contrast projection.</strong> The host-contrast likelihood removes the shared calibration mode and tests only the host-to-host environmental structure. This avoids allowing the common SH0ES zero-point uncertainty to dominate the model comparison. In this contrast space, the null model contains no environmental term, while the TEP model contains one fitted response coefficient, $\kappa_{\rm Cep}$. The resulting $\Delta{\rm BIC} = +2.4$ quantifies positive evidence for the environmental predictor.<sup><a href="#fn-contrast">1</a></sup>
+    <strong>Host-contrast projection.</strong> The host-contrast likelihood removes the shared calibration mode and tests only the host-to-host environmental structure. This avoids allowing the common SH0ES zero-point uncertainty to dominate the model comparison. In this contrast space, the null model contains no environmental term, while the TEP model contains one fitted response coefficient, $\kappa_{\rm Cep}$.    Defining $\Delta{\rm BIC}\equiv{\rm BIC}_{\rm null}-{\rm BIC}_{\rm TEP}$, the resulting
+    $\Delta{\rm BIC} = +2.4$ provides positive evidence for the environmental predictor.
+    Here the projected covariance is evaluated on the non-singular contrast subspace; equivalently, determinant terms are computed after removing the common calibration direction.
 </p>
 
 <table class="data-table">
-    <caption><strong>Table 2.</strong> Bayesian model comparison under three likelihood specifications.</caption>
+    <caption><strong>Table 3.</strong> Bayesian model comparison under three likelihood specifications.</caption>
     <thead>
         <tr>
             <th>Likelihood</th>
@@ -162,7 +167,7 @@
 
 <div class="results-table">
     <table class="data-table">
-        <caption><strong>Table 2b.</strong> Disambiguation of stratified sub-sample uncertainties. All values are in km/s/Mpc.</caption>
+        <caption><strong>Table 4.</strong> Disambiguation of stratified sub-sample uncertainties. All values are in km/s/Mpc.</caption>
         <thead>
             <tr>
                 <th scope="col">Quantity</th>
@@ -366,24 +371,30 @@
 <div class="key-finding">
     <h3>3.3 Cross-Probe Consistency: Cepheid and Pulsar Channels</h3>
     <p>
-        The TEP framework predicts a bare observable response coefficient
-        $\kappa_{\rm bare} \sim 10^6$–$10^7$ mag from geometric compactness factors.
+        The TEP framework predicts an unsuppressed observable response coefficient
+        $\kappa_{\rm unsupp} \sim 10^6$–$10^7$ (dimensionless) from geometric compactness factors.
         In any given environment the <em>effective</em> coefficient is modulated by a
         channel-specific Temporal Shear transfer factor $T_{\rm env}$:
     </p>
 
     <div class="equation">
         \begin{equation}
-        \kappa_{\rm eff,channel} = T_{\rm env,channel} \, \kappa_{\rm bare}
+        \kappa_{\rm eff,channel} = T_{\rm env,channel} \, \kappa_{\rm unsupp}
         \end{equation}
     </div>
 
     <p>
         Paper 10 (TEP-COS) measures the effective screened pulsar response in
         dense globular clusters:
-        $\kappa_{\rm MSP}^{\rm emp} = (0.99 \pm 4.5) \times 10^4$
-        (step_5_55_kappa_msp_prior.json), consistent with a dense-cluster
-        suppression factor $T_{\rm GC} \sim 0.03$ acting on the bare scale.
+        $\tilde\kappa_{\rm MSP} = (2.9 \pm 4.5) \times 10^4$
+        (step_44_kappa_msp_prior.json), consistent with a dense-cluster
+        suppression factor $T_{\rm GC} \sim 0.03$ acting on the unsuppressed scale.
+        This full response coefficient $\tilde\kappa_{\rm MSP}$ — which absorbs
+        the potential and acceleration normalisation into a single
+        dimensionless number — is distinct from Paper 10's in-equation
+        in-equation coupling $\kappa_{\rm MSP}^{\rm emp} \approx 0.05$;
+        both trace back to the same underlying conformal clock-response sector $\sim\!10^6$ with
+        different screening normalisations (Appendix~B).
         This paper (Paper 11) calibrates the weakly screened galactic-disk
         response using a velocity-space likelihood analysis in which the
         directly identifiable host-level quantity is the combined environmental
@@ -407,7 +418,7 @@
         to zero, corresponding to the hypothesis tested here.
         Interpreting the identified slope in the TEP-native gauge ($\beta_X=0$)
         gives a Cepheid response scale $\kappa_{\rm equiv}\sim7\times10^5$ mag,
-        consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.7\times10^5$ mag ($\sim10^6$). An
+        consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.6\times10^5$ mag ($\sim10^6$). An
         independent <em>empirical</em> cross-check is provided by the
         residual-based correction pipeline, which fits a one-parameter
         $\kappa$ to remove the host-potential dependence in the ladder residual;
@@ -446,7 +457,7 @@
 </p>
 
 <p>
-    The local and early-universe measurements become consistent within
+    The local distance-ladder and CMB-inferred observational scales become consistent within
     uncertainties. A comprehensive sensitivity analysis scanned the effective
     calibrator velocity dispersion $\sigma_{\rm ref}$ across the range
     $30$–$130$ km/s. The unified $H_0$ remains statistically consistent with
@@ -573,8 +584,8 @@
         The difference between the joint models isolates the sensitivity of $\kappa_{\rm Cep}$ 
         to the precise definition of the anchor calibration scale under deep group-halo suppression. 
         In both joint configurations, the coefficient remains positive, structurally 
-        consistent with the host-only value, and resolves the anchors-vs-hosts dichotomy 
-        under the TEP group-screening prescription. M31 remains a stress test of the current group-screening model.
+        consistent with the host-only value, and renders the anchors-vs-hosts dichotomy
+        quantitatively compatible with the TEP group-screening prescription. M31 remains a stress test of the current group-screening model.
     </p>
     <p>
         Critically, M31 (highest $\sigma = 160$ km/s) shows $M_W = -5.849$ mag,
@@ -689,14 +700,15 @@
     coefficient, but they can be made compatible with it under a pre-specified
     group-screening prescription. This makes anchor behaviour a constraint on the
     screening sector rather than a direct detection of the Cepheid-bias effect.
-    This anchors-vs-hosts dichotomy therefore finds a quantitative resolution in
+    This anchors-vs-hosts dichotomy therefore finds a quantitative consistency explanation under
     the group halo shear suppression hypothesis: all three anchors are members of
     galaxy groups (Local Group for LMC and M31; Canes Venatici I for NGC 4258),
     while the SN Ia hosts are selected for smooth Hubble flow and are biased
     toward isolated field galaxies where Temporal Shear remains active.
-    Local disk density controls source-region suppression; group-halo embedding
-    controls ambient-field suppression. The effective screening factor is the
-    envelope of both effects.
+    Local density controls source-region suppression, while group-halo embedding
+    controls ambient-field suppression. Their combined effect is represented by the
+    multiplicative operator $S_{\rm total}=S_{\rm local}\,S_{\rm group}\,S_{\rm source}$,
+    as defined in Section 4.6.
     The joint result is stable under reasonable variations of the anchor-screening factors; sensitivity tests are reported in Appendix D.
 </p>
 
@@ -977,8 +989,9 @@
 
 <p>
     TEP predicts something categorically different: a "time" effect that
-    selectively biases <em>periodic phenomena</em> while leaving non-periodic
-    luminosity indicators unaffected. The distinction is fundamental:
+    selectively biases <em>periodic phenomena</em> while non-periodic
+    luminosity indicators lack the leading period-transport term and should be
+    comparatively less affected. The distinction is fundamental:
 </p>
 
 <div class="results-table">
@@ -1025,7 +1038,7 @@
             </tr>
             <tr>
                 <td><strong>SBF</strong></td>
-                <td>Stellar fluctuation amplitude (geometric)</td>
+                <td>Stellar fluctuation amplitude (non-periodic stellar-population)</td>
                 <td>
                     <strong>LOW</strong> — Statistical property, not periodic
                 </td>
@@ -1136,7 +1149,7 @@
 <div class="key-finding">
     <h4>Interpretation</h4>
     <p>
-        The differential TRGB–Cepheid test provides strong independent validation of the TEP mechanism, with both parametric and non-parametric trends confirming the core prediction. It is not straightforward to reproduce with simple, shared "light" systematics acting similarly on both tracers:
+        The differential TRGB–Cepheid test provides supportive evidence consistent with the TEP mechanism, with both parametric and non-parametric trends showing the predicted sign. It is not straightforward to reproduce with simple, shared "light" systematics acting similarly on both tracers:
     </p>
     <ul>
         <li>
@@ -1172,8 +1185,8 @@
     so this result should be interpreted with appropriate caution. However, it
     represents a qualitatively different type of evidence than the
     $H_0$–$\sigma$ correlation alone, as it directly tests the
-    <em>mechanism</em>: periodic indicators (clocks) would be biased while
-    non-periodic indicators (thermodynamic thresholds) would not. If confirmed
+    <em>mechanism</em>: periodic indicators would carry the leading clock-transport bias,
+    whereas non-periodic thermodynamic indicators would lack that leading term. If confirmed
     with larger samples, this would be the signature of a "time" effect, not a
     "light" effect.
 </p>
@@ -1195,9 +1208,14 @@
     —performed on the 13 hosts with both indicators—is the primary
     discriminating statistic: it asks whether the two indicators diverge in
     high-$\sigma$ environments. The observed positive correlation
-    ($r = 0.478$, $p = 0.049$; $N=13$) is directionally consistent with
+    ($r = 0.478$, $p = 0.049$; $N=13$; exploratory correlation statistic)
+    is directionally consistent with
     Cepheids experiencing an <em>additional</em> distance underestimation
-    beyond any effect shared with TRGB. This provides a strong independent mechanism test confirming the primary detection. The key
+    beyond any effect shared with TRGB. This differential test has the
+    predicted positive sign and is qualitatively consistent with a
+    Cepheid-specific contribution. At the present ($N=13$) overlap,
+    however, the preferred physical-regressor estimate is $0.82\sigma$
+    and does not yet independently confirm the mechanism. The key
     discriminating prediction of TEP remains that non-periodic indicators
     show a <em>weaker</em> differential trend than periodic ones.
 </p>
@@ -1268,21 +1286,18 @@
     </p>
 
     <p>
-        <strong>Color-offset prediction (future test).</strong> If the Inner
-        Fainter signal is due to TEP period contraction (not dust extinction),
-        then at a <em>matched observed period</em> $P_{\rm obs}$, inner bulge
-        Cepheids (screened, longer true periods) and outer disk Cepheids
-        (unscreened, shorter true periods) are actually stars of different
-        intrinsic masses. By the mass–luminosity–color relation, longer-period
-        Cepheids are cooler. TEP therefore predicts a systematic color offset
-        $\Delta(V-I)$ at matched $P_{\rm obs}$: inner Cepheids should be
-        systematically redder than outer Cepheids. A measured $\Delta(V-I)$
-        consistent with the predicted sign and magnitude would definitively
-        rule out dust as the primary confounder, because dust makes stars
-        <em>redder and fainter</em> while TEP makes them <em>redder at fixed
-        $P_{\rm obs}$ but not fainter</em> (the luminosity difference is carried
-        by the period shift, not the color). This test requires HST-quality
-        color photometry for the matched subsample and is planned as a follow-up.
+        <strong>Color-offset prediction (future test).</strong> At matched
+        observed period, inner screened Cepheids have approximately
+        $P_{\rm true}\simeq P_{\rm obs}$, whereas outer active-shear Cepheids
+        have $P_{\rm true}=P_{\rm obs}e^{\Delta\Theta}>P_{\rm obs}$. The outer
+        Cepheids therefore correspond to intrinsically longer-period, brighter
+        and—subject to instability-strip population effects—relatively redder
+        stars. Inner Cepheids should be fainter and relatively bluer after
+        extinction correction. Dust instead predicts inner Cepheids that are
+        both fainter and redder. The sign of the extinction-corrected color
+        offset therefore provides a discriminating test. This test requires
+        HST-quality color photometry for the matched subsample and is planned
+        as a follow-up.
     </p>
 
     <p>
@@ -1300,7 +1315,7 @@
         class="figure-responsive"
     />
     <figcaption>
-        Figure 8: Synthesis of environmental differential tests. Both
+        Figure 4: Synthesis of environmental differential tests. Both
         ground-based and HST M31 data show 'Inner Fainter' offsets consistent
         with TEP shear suppression (inner bulge more suppressed → less period
         contraction). The LMC control shows no large offset (~0.03 mag),
@@ -1392,8 +1407,11 @@
     <p>
         Is the half-suppression density $\rho_{\rm half}$ tuned to fit M31?
         No—it is derived independently from the SPARC rotation curve
-        database (Paper 6) as the galactic-scale manifestation of the
-        series-level saturation scale $\rho_{\rm T}$. The galaxy
+        database (Paper 6). The function $S(\rho)$ used here is its
+        channel-specific galactic projection; $\rho_{\rm half}$ and $\rho_{\rm T}$
+        are scale-dependent phenomenological projections of the same nonlinear
+        Temporal-Topology response and are not numerically interchangeable.
+        The galaxy
         scaling $R_{\rm DM} \propto M^{1/3}$ normalizes to $\rho_{\rm half}
         \approx 0.5\,M_\odot/\text{pc}^3$. This independent scale is
         explicitly compared to the study environments:
@@ -1456,6 +1474,3 @@
     is not driven by this edge case.
 </p>
 
-<div class="footnote" id="fn-contrast">
-    <sup>1</sup>The projected covariance is evaluated on the non-singular contrast subspace; equivalently, determinant terms are computed after removing the common calibration direction.
-</div>

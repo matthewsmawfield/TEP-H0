@@ -6,8 +6,8 @@
 ![TEP-H0: Cepheid Bias](site/public/image.webp)
 
 **Author:** Matthew Lukin Smawfield  
-**Version:** v0.7 (Kingston upon Hull)  
-**Date:** First published: 11 January 2026 · Last updated: 21 June 2026  
+**Version:** v0.8 (Kingston upon Hull)  
+**Date:** First published: 11 January 2026 · Last updated: 14 August 2026
 **Status:** Preprint (Open for Collaboration)  
 **DOI:** [10.5281/zenodo.18209702](https://doi.org/10.5281/zenodo.18209702)  
 **Website:** [https://mlsmawfield.com/tep/h0/](https://mlsmawfield.com/tep/h0/)  
@@ -15,21 +15,93 @@
 
 ## Abstract
 
-The Hubble Tension—the persistent 5σ discrepancy between local distance-ladder measurements (H₀ ≈ 73 km/s/Mpc) and early-universe CMB inference (H₀ = 67.4 ± 0.5 km/s/Mpc)—represents a significant challenge in precision cosmology. This paper tests whether a component of the Hubble tension can be represented as an environment-dependent Cepheid clock bias, as predicted by the Temporal Equivalence Principle (TEP).
 
-This study tests the hypothesis that the discrepancy arises from a violation of the isochrony axiom—the assumption that proper time accumulation is independent of the local gravitational environment. Under scalar-tensor theories that break the Strong Equivalence Principle (such as TEP), Cepheid variable stars act as environment-dependent "standard clocks." In deep gravitational potentials (high velocity dispersion σ) and active-shear environments, enhanced scalar field activity is predicted to induce period contraction relative to calibration environments. When interpreted through a universal Period-Luminosity relation, this clock-rate anomaly would mimic diminished luminosity, leading to underestimated distances and an inflated local Hubble constant.
+The Hubble Tension—the persistent $5\sigma$ discrepancy between local
+distance-ladder measurements ($H_0 \approx 73$ km/s/Mpc) and
+early-universe CMB inference ($H_0 = 67.4 \pm 0.5$ km/s/Mpc)—represents
+a significant challenge in precision cosmology. This paper tests whether
+a component of the Hubble tension can be represented as an environment-dependent
+Cepheid clock bias, as predicted by the Temporal Equivalence
+Principle (TEP).
 
-The standard SH0ES full-ladder likelihood yields a baseline H₀ = 73.04 ± 1.01 km/s/Mpc. A standard-ladder projection test inserts a TEP environmental column into the SH0ES design matrix while keeping the host-level distance moduli μᵢ as free latent parameters; the environmental signal is absorbed by the inferred μᵢ, yielding κ_Cep = -0.067 ± 0.210×10⁶ mag (consistent with zero). This null result is expected: the standard SH0ES model is not TEP-native, and any host-constant environmental bias is algebraically equivalent to shifting a host's inferred modulus.
+The hypothesis tested here is that Cepheid variable stars function as
+environment-dependent "standard clocks." In deep gravitational
+potentials where Temporal Shear remains active, the TEP clock response
+accelerates the effective Cepheid clock rate, shortening observed
+pulsation periods relative to calibration environments. Potential depth
+controls the amplitude and sign of the clock response conditional on
+active Temporal Shear; a deep potential in a strongly suppressed
+environmental state need not exhibit a large observable TEP correction.
+When interpreted through a universal Period-Luminosity
+relation, this clock-rate anomaly mimics diminished luminosity,
+leading to underestimated distances and an inflated local Hubble
+constant.
 
-The proper test must therefore be applied at the redshift-distance level, where distances are tied to an independent velocity scale. A velocity-space likelihood analysis models czᵢ = dᵢ^true (H_app + Γ_X Xᵢ) + vᵢ and identifies a structurally robust combined environmental slope Γ_X = +2.35×10⁷ ± 1.00×10⁷ (2.3σ at σ_v = 250 km/s; 3.4σ at σ_v = 150 km/s). The signal survives explicit controls for redshift trend, sky dipole (~100 km/s), quadrupole, and group-offset models; binned permutation tests confirm it is not driven by redshift or sky selection. Leave-one-host-out cross-validation gives 29/29 positive signs; bootstrap resampling gives 99.9% positive fraction.
+The standard SH0ES full-ladder likelihood yields a baseline
+$H_0 = 73.04 \pm 1.01$ km/s/Mpc. A standard-ladder
+projection test inserts a TEP environmental column into the
+SH0ES design matrix while keeping the host-level distance moduli
+$\mu_i$ as free latent parameters; the environmental signal is absorbed
+by the inferred $\mu_i$, yielding $\kappa_{\rm Cep} = -0.067 \pm 0.210\times10^6$ mag (consistent with zero). This null result is expected:
+the standard SH0ES model is not TEP-native, and any host-constant
+environmental bias is algebraically equivalent to shifting a host's
+inferred modulus.
 
-The velocity-space likelihood identifies a combined environmental slope. In a general phenomenological model this slope can contain both Cepheid clock bias and residual velocity-sector/environmental terms. The TEP-native gauge sets the non-Cepheid velocity-sector component β_X to zero, corresponding to the hypothesis tested here: the observed environmental slope is dominantly a Cepheid clock-transport bias. In that gauge—treating the environmental slope as a pure Cepheid clock-rate bias (β_X = 0)—the equivalent response coefficient is κ_Cep ≈ 7.34×10⁵ mag, consistent with the canonical TEP parameter κ_gal = 9.7×10⁵ mag (~10⁶). The velocity-space fit yields H_app = 69.47 ± 1.49 km/s/Mpc; in the TEP-native gauge this corresponds to a Cepheid clock-bias correction that brings the local distance scale into agreement with the CMB inference. As a historical residual-space cross-check, the empirical one-parameter correction pipeline yields H₀^TEP = 68.84 km/s/Mpc (bootstrap mean 68.92 ± 1.44), reducing the Hubble tension from ≈5σ to ≈1σ relative to Planck. This value is obtained in the pure-Cepheid TEP-native gauge (β_X=0); the gauge-independent empirical detection is Γ_X. A residual-based empirical cross-check gives κ_Cep = (1.27 ± 0.46) × 10⁶ mag, consistent with the generative inference. The inferred coefficient places this probe in the same response-coefficient regime as the millisecond-pulsar spin-down excess (Paper 10). External TRGB distances (N=13 overlap) give κ_Cep = +3.2×10⁵ (0.8σ)—underpowered to independently break the κ–β degeneracy, yet directionally consistent with and supportive of the TEP-native gauge.
+The proper test must therefore be applied at the redshift-distance
+level, where distances are tied to an independent velocity scale.
+Here $cz_{\rm HD}$ is used as the conventional low-redshift redshift
+coordinate supplied by the Hubble-diagram analysis; within TEP this
+operational variable does not imply literal spatial recession or expansion.
+A velocity-space likelihood analysis models
+$cz_i = d_i^{\rm true}\,(H_{\rm app} + \Gamma_X X_i) + v_i$
+and identifies a structurally robust combined environmental slope
+$\Gamma_X = +2.31\times10^7 \pm 1.01\times10^7$ (2.3$\sigma$ at
+$\sigma_v = 250$ km/s; 3.15$\sigma$ at $\sigma_v = 150$ km/s). The signal survives explicit controls for
+redshift trend, sky dipole ($\sim$100 km/s), quadrupole, and
+group-offset models; binned permutation tests confirm it
+is not driven by redshift or sky selection. Leave-one-host-out
+cross-validation gives 29/29 positive signs; bootstrap resampling
+gives 99.9% positive fraction.
 
-A differential M31 analysis yields an "Inner Fainter" signal consistent with TEP shear suppression, providing auxiliary support for the continuous screening mechanism.
+The velocity-space likelihood identifies a combined environmental slope.
+In a general phenomenological model this slope can contain both Cepheid
+clock bias and residual velocity-sector/environmental terms.
+The TEP-native gauge sets the non-Cepheid velocity-sector component
+$\beta_X$ to zero, corresponding to the hypothesis tested here: the observed
+environmental slope is dominantly a Cepheid clock-transport bias.
+In that gauge—treating the environmental slope as a pure Cepheid
+clock-rate bias ($\beta_X = 0$)—the equivalent
+response coefficient is $\kappa_{\rm Cep} \approx 7.21\times10^5$ mag,
+consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.6\times10^5$ mag ($\sim 10^6$).
+The velocity-space fit yields $H_{\rm app} = 69.54 \pm 1.50$ km/s/Mpc;
+in the TEP-native gauge this corresponds to a Cepheid clock-bias
+correction that brings the local distance scale into agreement with
+the CMB inference. As a historical residual-space cross-check, the empirical one-parameter
+correction pipeline yields $H_0^{\rm TEP} = 68.84$ km/s/Mpc
+(bootstrap mean $68.92 \pm 1.44$), reducing the Hubble tension from
+$\approx 5\sigma$ to $\approx 1\sigma$ relative to Planck.
+This value is obtained in the pure-Cepheid TEP-native gauge ($\beta_X=0$);
+the gauge-independent empirical detection is $\Gamma_X$. A
+residual-based empirical cross-check gives
+$\kappa_{\rm Cep} = (1.27 \pm 0.46) \times 10^6$ mag, consistent with
+the generative inference. The inferred coefficient places this probe in
+the same response-coefficient regime as the millisecond-pulsar
+spin-down excess (Paper 10).
+External TRGB distances ($N=13$ overlap) give
+$\kappa_{\rm Cep} = +3.2\times10^5$ ($0.82\sigma$)—underpowered to
+independently break the $\kappa$–$\beta$ degeneracy, yet directionally
+consistent with and supportive of the TEP-native gauge.
 
+A differential M31 analysis yields an "Inner Fainter" signal
+consistent with TEP shear suppression, providing auxiliary support
+for the continuous screening mechanism.
+
+*Keywords:* Hubble tension – Cepheid variables – distance ladder
+– velocity dispersion – temporal equivalence principle – gravitational
+time dilation
 ## Key Findings
 
-Analysis of 29 SH0ES Cepheid hosts reveals a correlation between derived H₀ and host galaxy velocity dispersion (ρ = 0.517, p = 0.0041; Pearson r = 0.466, p = 0.0109). A velocity-space likelihood analysis identifies a robust combined environmental slope Γ_X ≈ +2.35×10⁷ (2.3σ). In the TEP-native pure-Cepheid gauge (β_X = 0), this corresponds to an equivalent Cepheid response coefficient κ_equiv ≈ 7.34×10⁵ mag, consistent with the canonical TEP parameter κ_gal = 9.7×10⁵ mag. The empirical one-parameter residual-space correction gives κ_Cep^emp ≈ (1.27 ± 0.46) × 10⁶ mag and H₀^TEP = 68.84 km/s/Mpc, reducing the Planck tension from ≈5σ to ≈1σ. A standard-ladder projection test demonstrates that environmental signal is absorbed by free latent host moduli in the non-native SH0ES gauge, validating the need for the generative-observable correction.
+Analysis of 29 SH0ES Cepheid hosts reveals a correlation between derived H₀ and host galaxy velocity dispersion (ρ = 0.517, p = 0.0041; Pearson r = 0.466, p = 0.0109). A velocity-space likelihood analysis identifies a robust combined environmental slope Γ_X ≈ +2.31×10⁷ (2.3σ). In the TEP-native pure-Cepheid gauge (β_X = 0), this corresponds to an equivalent Cepheid response coefficient κ_equiv ≈ 7.21×10⁵ mag, consistent with the canonical TEP parameter κ_gal = 9.6×10⁵ mag. The empirical one-parameter residual-space correction gives κ_Cep^emp ≈ (1.27 ± 0.46) × 10⁶ mag and H₀^TEP = 68.84 km/s/Mpc, reducing the Planck tension from ≈5σ to ≈1σ. A standard-ladder projection test demonstrates that environmental signal is absorbed by free latent host moduli in the non-native SH0ES gauge, validating the need for the generative-observable correction.
 
 ---
 
@@ -73,7 +145,7 @@ TEP-H0/
 ├── site/
 │   ├── components/                # Manuscript HTML sections
 │   └── public/                    # Static assets
-├── 11-TEP-H0-v0.7-KingstonUponHull.md  # Full manuscript (Markdown)
+├── 11-TEP-H0-v0.8-KingstonUponHull.md  # Full manuscript (Markdown)
 └── requirements.txt               # Python dependencies
 ```
 
@@ -114,7 +186,7 @@ The analysis pipeline is fully automated and reproducible. The master script `sc
 | **4.2** | Multivariate | `step_6_multivariate_analysis.py` | Controls for Age, Dust, and Stellar Mass confounds. |
 | **3.8** | LMC Control | `step_7_lmc_replication.py` | Replicates differential analysis in LMC (Null Control). |
 | **4.8** | M31 PHAT | `step_8_m31_phat_analysis.py` | High-resolution HST analysis of M31 Cepheids. |
-| **Fig 1-9** | Final Synthesis | `step_9_final_synthesis.py` | Generates final manuscript figures and summary tables. |
+| **Fig 1-5** | Final Synthesis | `step_9_final_synthesis.py` | Generates final manuscript figures and summary tables. |
 | **3.5** | Anchor Test | `step_10_anchor_stratification.py` | Tests for TEP effects in geometric anchors (MW, LMC, NGC 4258). |
 
 ### Running the Pipeline
@@ -160,7 +232,7 @@ The analysis demonstrates a statistically significant host-level H₀–σ corre
   journal={Zenodo},
   year={2026},
   doi={10.5281/zenodo.18209702},
-  note={Preprint v0.7 (Kingston upon Hull)}
+  note={Preprint v0.8 (Kingston upon Hull)}
 }
 ```
 

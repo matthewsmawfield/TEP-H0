@@ -301,7 +301,7 @@ class FullLadderLikelihood:
         q_aug = list(q) + names
         return L_aug, q_aug
 
-    def injection_test(self, L, y, C, q, x_cepheid, kappa_inj=9.7e5):
+    def injection_test(self, L, y, C, q, x_cepheid, kappa_inj=KAPPA_GAL):
         """Test that the pipeline can recover a known injected TEP signal."""
         print_status(f"Injection test: kappa_inj = {kappa_inj:.3e} mag", "SECTION")
 
@@ -1272,7 +1272,7 @@ class FullLadderLikelihood:
 
         return df
 
-    def injection_test_all_models(self, L, y, C, q, x_cepheid, x_sn, kappa_inj=9.7e5):
+    def injection_test_all_models(self, L, y, C, q, x_cepheid, x_sn, kappa_inj=KAPPA_GAL):
         """Run injection-recovery tests for all model classes."""
         print_status("Injection Tests for All Model Classes", "SECTION")
 

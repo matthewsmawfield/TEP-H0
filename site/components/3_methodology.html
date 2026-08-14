@@ -217,14 +217,18 @@
     response ($\chi_L \simeq 0$ at leading order), and $T_{\rm disk} \sim 1$
     for galactic disks (Appendix C gives the full pulsation derivation). The
     companion paper TEP-COS (Paper 10) measures the effective screened pulsar
-    response $\kappa_{\rm MSP}^{\rm emp} \approx 3 \times 10^4$ in dense
-    globular clusters. The correct cross-paper comparison is through the
+    full response coefficient $\tilde\kappa_{\rm MSP} \approx 3 \times 10^4$ in dense
+    globular clusters (step_44_kappa_msp_prior.json). This is distinct from
+    Paper 10's in-equation coupling
+    $\kappa_{\rm MSP}^{\rm emp} \approx 0.05$; both derive from the same underlying
+    conformal clock-response sector $\sim\!10^6$ but with different normalisations
+    (Appendix~B). The correct cross-paper comparison is through the
     shared $\alpha_{\rm clock}$, not by direct equality of raw coefficients:
 </p>
 <div class="equation">
     \begin{equation}
     \kappa_{\rm Cep} = \frac{|b|\,q_P}{\ln 10}\,\alpha_{\rm clock}\,T_{\rm disk}, \qquad
-    \kappa_{\rm MSP}^{\rm emp} = \alpha_{\rm clock}\,T_{\rm GC} ,
+    \tilde\kappa_{\rm MSP} = \alpha_{\rm clock}\,T_{\rm GC} ,
     \end{equation}
 </div>
 <p>
@@ -252,12 +256,11 @@
 </p>
 
 <div class="footnote" id="fn-screening">
-    <sup>1</sup>The screening factor $S(\rho)$ derives from the canonical
-    Temporal Topology of the scalar time field (Paper 0, v0.9 Jakarta), where
-    the continuous spatial profile suppresses the locally active Temporal Shear
-    sector in dense environments. Chameleon, Vainshtein, Galileon, DBI, and
-    symmetron mechanisms may be studied as candidate microscopic completions, but
-    they are not the defining ontology of TEP. See Paper 6, Box 6.5 for the
+    <sup>1</sup>The microscopic completion is not specified in this analysis.
+    The operative TEP mechanism is continuous environmental suppression of
+    Temporal Shear, represented by the corpus-level operator
+    $S_\Sigma(\mathcal{E})$. The function $S(\rho)$ used here is its
+    channel-specific galactic projection. See Paper 6, Box 6.5 for the
     soliton derivation and the $R_{\rm sol} \propto M^{1/3}$ scaling from the
     canonical action with saturation potential $V(\phi)$.
 </div>
@@ -273,9 +276,11 @@
     the transition. $S = 1$ corresponds to fully active shear (unsuppressed),
     while $S \rightarrow 0$ indicates deep suppression in dense environments.
     The Temporal Topology saturation scale $\rho_{\rm T}$ (Paper 6) remains
-    the series-level saturation scale; $\rho_{\rm half}$ is its
-    galactic-scale manifestation derived from SPARC rotation-curve
-    normalizations.
+    the series-level saturation scale; $\rho_{\rm half}$ and $\rho_T$
+    are scale-dependent phenomenological projections of the same nonlinear
+    Temporal-Topology response and are not numerically interchangeable.
+    The value $\rho_{\rm half} \approx 0.5 \, M_\odot/\text{pc}^3$ is
+    derived from SPARC rotation-curve normalizations.
 </p>
 
 <p>
@@ -301,15 +306,25 @@
     \end{equation}
 </div>
 <p>
+    In the primary host-contrast parameterization, $S(\rho)$ is the
+    environmental transfer factor for the complete host-to-reference
+    potential contrast. It is therefore applied to
+    $\sigma_{\rm host}^2 - \sigma_{\rm ref}^2$, rather than separately
+    to two absolute endpoint responses. The screen-weighted anchor
+    prescription of Equation 12 is reported as an alternative
+    sensitivity model.
+</p>
+<p>
     where $\kappa_{\rm Cep}$ is the <strong>Observable Response Coefficient</strong>
     for Cepheid period-luminosity anomalies—an astrophysical response parameter
     that absorbs the intrinsic coupling $\beta_A$, the virial proportionality
     between $|\Phi|$ and $\sigma^2$, the P-L slope $b$, the factor $1/\ln 10$,
     stellar physics, environmental activation, and transfer functions. This is
-    distinct from a bare scalar coupling: Cassini bounds the bare scalar-tensor coupling
-    $\alpha_0 \lesssim 3\times10^{-3}$, while $\kappa_{\rm Cep} \sim 10^6$ is an
-    <em>observable response</em> that includes all astrophysical amplification
-    mechanisms. $S(\rho)$ encodes the environment-dependent attenuation of Temporal
+    distinct from the microscopic conformal coupling: local PPN and
+    equivalence-principle experiments constrain the environmentally projected,
+    source-screened local scalar response, whereas $\kappa_{\rm Cep}$ is a
+    channel-level observable response incorporating astrophysical and
+    environmental transfer. $S(\rho)$ encodes the environment-dependent attenuation of Temporal
     Shear. In this convention $\kappa_{\rm Cep}$ has units of magnitude, and with
     $\sigma^2/c^2 \sim 10^{-7}$ it naturally takes values of order $10^6$,
     placing the distance-ladder response in the same <em>response hierarchy</em> as the
@@ -333,8 +348,9 @@
     $\log_{10}(\sigma/\sigma_{\rm ref})$ scaling. The log form was an empirical
     approximation that could mimic the full TEP prediction only over a narrow
     range of $\sigma$ and did not permit direct numerical comparison with
-    independent TEP probes. The physics-derived form used here is the unique
-    linear-order prediction of the TEP mechanism combined with the virial
+    independent TEP probes. The physics-derived form used here is the leading
+    linear-order prediction of the TEP mechanism under the adopted galactic
+    transfer closure, combined with the virial
     theorem, and it enables a quantitative, unit-consistent comparison of
     $\alpha$ across probes.
 </p>
@@ -437,15 +453,18 @@
 
 <p>
     The large Observable Response Coefficient $\kappa_{\rm Cep} \sim 10^6$ mag applies to the
-    clock-rate sector in unscreened Cepheid environments. It does not map directly
-    onto a bare scalar coupling constrained by Cassini, MICROSCOPE, or GW170817.
-    Those experiments constrain different observable projections: local source charge,
-    photon-cone propagation, equivalence-principle violation, and screened solar-system
-    gradients. The present coefficient is a channel-level Cepheid period-response
-    coefficient. The mapping from the bare scalar coupling $\beta_A$ to the
-    observable response coefficient $\kappa_{\rm Cep}$ is parameterized and
-    constrained by the data; the leading scalar-boundary Cepheid period-transport
-    law is derived in Appendix C.
+    conformal clock-rate sector in unsuppressed Cepheid environments. It does not map directly
+    onto the microscopic conformal coupling. Cassini and MICROSCOPE constrain local,
+    source-screened PPN and equivalence-principle projections of the scalar sector.
+    GW170817/GRB170817A instead constrains differential GW–photon propagation: in the
+    pure-conformal branch, $A^2(\phi)\,g_{\mu\nu}$ preserves the null cone of $g_{\mu\nu}$,
+    so common-mode same-path conformal transport does not generate a relative
+    GW–photon propagation delay. The multimessenger bound therefore constrains any
+    disformal ($B(\phi)$)-induced cone splitting. The present $\kappa_{\rm Cep}$ is
+    instead a channel-level conformal clock-response coefficient. The mapping from the
+    unsuppressed conformal coupling $\beta_A$ to the observable response coefficient
+    $\kappa_{\rm Cep}$ is parameterized and constrained by the data; the leading
+    scalar-boundary Cepheid period-transport law is derived in Appendix C.
 </p>
 
 <h3>2.5 Historical Residual-Space Optimization (Cross-Check)</h3>

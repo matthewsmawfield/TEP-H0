@@ -1,9 +1,10 @@
 {
-  "version": "0.7",
+  "version": "0.8",
   "codename": "Kingston upon Hull",
-  "date": "2026-06-21",
+  "date": "2026-08-08",
   "doi": "10.5281/zenodo.18209702",
   "status": "Preprint",
   "description": "Paper 11: The Cepheid Bias: Resolving the Hubble Tension",
-  "previous_version": "0.6"
+  "previous_version": "0.7",
+  "paper": "11"
 }

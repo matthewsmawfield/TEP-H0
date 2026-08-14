@@ -44,9 +44,9 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 C_KM_S = 299792.458
 LN10_OVER_5 = np.log(10) / 5.0
-KAPPA_CANONICAL = 970000.0  # mag, from TEP canonical value
-KAPPA_PRIOR_MEAN = 960000.0  # mag
-KAPPA_PRIOR_SIGMA = 400000.0  # mag
+KAPPA_CANONICAL = KAPPA_GAL  # from core.constants
+KAPPA_PRIOR_MEAN = KAPPA_GAL  # from core.constants
+KAPPA_PRIOR_SIGMA = KAPPA_GAL_UNCERTAINTY  # from core.constants
 
 
 def print_status(msg, level="INFO"):

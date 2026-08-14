@@ -89,7 +89,9 @@ class HTMLToMarkdownConverter {
             const trimmed = content.replace(/^\s+/gm, '').replace(/\s+$/gm, '').trim();
             return '- ' + trimmed + '\n';
         });
-        html = html.replace(/<\/?[A-Za-z][^>]*>/g, '');
+        html = html.replace(/<sub[^>]*>(.*?)<\/sub>/gi, '<sub>$1</sub>');
+        html = html.replace(/<sup[^>]*>(.*?)<\/sup>/gi, '<sup>$1</sup>');
+        html = html.replace(/<\/?(?!sub|sup)[A-Za-z][^>]*>/g, '');
         // Clean up: remove indentation from lines, collapse multiple blank lines
         html = html.replace(/^[ \t]+/gm, '');
         return html.replace(/\n{3,}/g, '\n\n').trim();
@@ -104,13 +106,12 @@ class HTMLToMarkdownConverter {
             const mainMatch = html.match(/<div[^>]*id=["']manuscript-content["'][^>]*>([\s\S]*?)<\/main>/i);
             if (!mainMatch) throw new Error('Could not find manuscript content.');
             
-            const today = new Date().toISOString().split('T')[0];
-            const [year, month, day] = today.split('-');
-            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            const formattedDate = `${parseInt(day)} ${monthNames[parseInt(month) - 1]} ${year}`;
+            const manifestPath = path.join(__dirname, 'manifest.json');
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const formattedDate = manifest.last_updated || new Date().toISOString().split('T')[0];
             const header = `# The Cepheid Bias: Resolving the Hubble Tension
 **Matthew Lukin Smawfield**  
-Version: v0.7 (Kingston upon Hull)  
+Version: v0.8 (Kingston upon Hull)
 First published: 11 January 2026 · Last updated: ${formattedDate}  
 DOI: 10.5281/zenodo.18209702
 

@@ -65,7 +65,7 @@
 <p>The velocity dispersion compilation draws from multiple sources with heterogeneous methodology:</p>
 <ul>
     <li><strong>Stellar absorption (direct):</strong> 16 hosts have $\sigma$ measured from stellar absorption line broadening, the gold-standard method. Sources include HyperLEDA, SDSS DR7, Ho et al. (2007, 2009), BASS DR2, and MNRAS 482:1427.</li>
-    <li><strong>HI linewidth proxy:</strong> 13 hosts use HI 21-cm linewidth measurements calibrated via $\sigma = 0.467 \times V_{\rm max} + 42.9$ km/s (HyperLEDA calibrated_vmax mode). This introduces additional scatter but preserves the kinematic nature of the observable.</li>
+    <li><strong>HI linewidth proxy:</strong> 13 hosts use HI 21-cm linewidth measurements calibrated via $\sigma = 0.467 \times V_{\rm max} + 40.91$ km/s (HyperLEDA calibrated_vmax). This introduces additional scatter but preserves the kinematic nature of the observable.</li>
 </ul>
 <p>The correlation coefficient strengthens when restricting to stellar-absorption-only hosts ($N=16$, Pearson $r = 0.549$, $p = 0.028$). Critically, the 13 HI-proxy hosts do not cluster anomalously—they span the full $\sigma$–$H_0$ distribution and follow the same physical trend as stellar hosts (see Section 3.2). Application of the TEP correction to the stellar-only subsample yields a unified $H_0 = 66.82 \pm 1.60$ km/s/Mpc, consistent with the full-sample result.</p>
 
@@ -165,15 +165,16 @@
 <p>
     The source-charge ratio is dynamically calculated as $q_{\rm Sun}=8.4\times 10^{-12}$.
     This allows the closure to pass precision-gravity tests without identifying
-    the Cepheid response coefficient directly with the bare PPN coupling.
+    the Cepheid response coefficient directly with the unsuppressed PPN coupling.
 </p>
 
 <p><strong>A.3.4 Cross-probe comparison.</strong>
     The useful cross-probe comparison is between observable response
-    coefficients, not microscopic couplings. Paper 10 measures the
-    <em>effective</em> screened pulsar response coefficient
-    $\kappa_{\rm MSP}^{\rm emp} \approx 3 \times 10^4$ in dense globular
-    clusters (step_5_55_kappa_msp_prior.json); this paper constrains the
+    coefficients, not microscopic couplings. Paper 10's pipeline
+    (step_44_kappa_msp_prior.json) measures the
+    <em>effective</em> screened pulsar full response coefficient
+    $\tilde\kappa_{\rm MSP} \approx 3 \times 10^4$ in dense globular
+    clusters; this paper constrains the
     unsuppressed Cepheid response $\kappa_{\rm Cep} = (1.27 \pm 0.46) \times 10^6$
     mag (host-only bootstrap robust; WLS scaled $1.41 \pm 0.59$)
     in the looser galactic-disk regime. The ratio is consistent with
@@ -268,7 +269,7 @@
         $\Gamma_X \simeq (\ln 10/5)\,H_{\rm app}\,\kappa_{\rm Cep}$ in the redshift–distance
         relation. Fitting the velocity-space likelihood recovers
         $\Gamma_X = 2.50 \times 10^7 \pm 1.11 \times 10^7$ km/s/Mpc per unit $X$
-        (injected $\Gamma_X = 2.35 \times 10^7$), a recovery fraction of $\sim 1.06$.
+        (injected $\Gamma_X = 2.31 \times 10^7$), a recovery fraction of $\sim 1.08$.
     </li>
 </ul>
 

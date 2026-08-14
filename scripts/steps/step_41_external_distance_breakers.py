@@ -24,6 +24,7 @@ Model grid:
 """
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -31,6 +32,8 @@ import pandas as pd
 from scipy import optimize, stats
 
 BASE_DIR = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(BASE_DIR))
+from core.constants import KAPPA_GAL, KAPPA_GAL_UNCERTAINTY
 DATA_DIR = BASE_DIR / "data"
 SH0ES_DIR = DATA_DIR / "raw" / "external" / "Cepheid-Distance-Ladder-Data" / "SH0ES2022"
 HOSTS_PATH = DATA_DIR / "processed" / "hosts_processed.csv"
@@ -42,8 +45,8 @@ C_KM_S = 299792.458
 LN10_OVER_5 = np.log(10) / 5.0
 GAMMA_SCALE = 1e7
 KAPPA_SCALE = 1e5
-KAPPA_CANONICAL = 9.7e5
-KAPPA_PRIOR_SIGMA = 4.0e5
+KAPPA_CANONICAL = KAPPA_GAL  # from core.constants
+KAPPA_PRIOR_SIGMA = KAPPA_GAL_UNCERTAINTY  # from core.constants
 
 
 def print_status(msg, level="INFO"):
