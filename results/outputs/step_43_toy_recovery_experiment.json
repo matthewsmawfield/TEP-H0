@@ -1,22 +1,23 @@
 {
   "seed": 43,
   "primary_z_cut": 0.0035,
-  "N_primary": 29,
+  "N_primary": 30,
   "injection": {
+    "target": "latent_host_moduli_not_cepheid_rows",
     "H_app_true": 73.04,
     "kappa_Cep_injected": 698652.8152194972,
     "Gamma_X_injected": 23500000.0,
     "sigma_v_true": 250.0
   },
   "design_matrix": {
-    "kappa_Cep_recovered": -2.0892619217793e-08,
-    "kappa_Cep_err": 210262.0380227695,
-    "kappa_Cep_sig": 9.936467568877325e-14
+    "kappa_Cep_recovered": -3.787410720096531e-08,
+    "kappa_Cep_err": 206849.96050984174,
+    "kappa_Cep_sig": 1.8309941712153867e-13
   },
   "velocity_space": {
-    "Gamma_X_recovered": 24999794.462396298,
-    "Gamma_X_err": 11091469.042623347,
-    "Gamma_X_sig": 2.253966031580192
+    "Gamma_X_recovered": 25547086.441564117,
+    "Gamma_X_err": 10971360.735026732,
+    "Gamma_X_sig": 2.328524880236915
   },
   "outputs": {
     "json": "results/outputs/step_43_toy_recovery_experiment.json",

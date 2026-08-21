@@ -1,28 +1,12 @@
 {
-  "description": "Quantitative source-charge closure mapping the fitted Cepheid clock-response coefficient to local solar-system scalar charge.",
-  "inputs": {
-    "tep_correction_results": "results/outputs/step_04_tep_correction_results.json",
-    "cassini_reference": "Bertotti, Iess & Tortora 2003, Nature 425, 374",
-    "microscope_reference": "Touboul et al. 2022, Physical Review Letters 129, 121102",
-    "source_charge_definition": "alpha_local = alpha_clock * S_solar * q_source, with q_source fixed before checking precision-gravity bounds."
-  },
-  "closure": {
-    "kappa_cep": 1272451.0192871094,
-    "kappa_cep_err": 462535.1562499999,
-    "alpha_clock": 898750.5363728765,
-    "alpha_clock_err": 326695.2625051907,
-    "solar_neighborhood_screening": 0.96,
-    "solar_source_charge_ratio": 8.401791547411366e-12,
-    "earth_source_charge_ratio": 1.578651683697185e-15,
-    "cassini_gamma_minus_one_predicted": 1.0509803385086155e-10,
-    "cassini_gamma_minus_one_limit": 2.3e-05,
-    "cassini_margin": 218843.294753144,
-    "microscope_eta_predicted": 1.8552114904732585e-21,
-    "microscope_eta_limit": 1e-14,
-    "microscope_margin": 5390221.034826079,
-    "passes_cassini": true,
-    "passes_microscope": true,
-    "passes_source_charge_closure": true
-  },
-  "passes": true
+  "validity": "excluded_not_inference",
+  "description": "No numerical local-gravity closure is derivable from the phenomenological host response used in TEP-H0.",
+  "exclusion_reasons": [
+    "A(phi), B(phi), and V(phi) are not specified by this analysis.",
+    "No Solar or terrestrial screened field profile is solved.",
+    "The former DGP-style Vainshtein map was an imported assumption, not a TEP derivation.",
+    "The observable Cepheid coefficient is not a bare scalar charge."
+  ],
+  "passes": null,
+  "closure": null
 }

@@ -1,100 +1,26 @@
 <div class="abstract">
     <h2>Abstract</h2>
     <p>
-        The Hubble Tension—the persistent $5\sigma$ discrepancy between local
-        distance-ladder measurements ($H_0 \approx 73$ km/s/Mpc) and
-        early-universe CMB inference ($H_0 = 67.4 \pm 0.5$ km/s/Mpc)—represents
-        a significant challenge in precision cosmology. This paper tests whether
-        a component of the Hubble tension can be represented as an environment-dependent
-        Cepheid clock bias, as predicted by the Temporal Equivalence
-        Principle (TEP).
+        The Hubble Tension—the persistent $5\sigma$ discrepancy between local distance-ladder measurements ($H_0 \approx 73.0\ {\rm km\,s^{-1}\,Mpc^{-1}}$) and early-universe CMB inference ($H_0 = 67.4 \pm 0.5\ {\rm km\,s^{-1}\,Mpc^{-1}}$)—represents a significant challenge in precision cosmology. This paper tests whether a component of the Hubble tension can be represented as an environment-dependent Cepheid clock bias, as predicted by the Temporal Equivalence Principle (TEP).
     </p>
 
     <p>
-        The hypothesis tested here is that Cepheid variable stars function as
-        environment-dependent "standard clocks." In deep gravitational
-        potentials where Temporal Shear remains active, the TEP clock response
-        accelerates the effective Cepheid clock rate, shortening observed
-        pulsation periods relative to calibration environments. Potential depth
-        controls the amplitude and sign of the clock response conditional on
-        active Temporal Shear; a deep potential in a strongly suppressed
-        environmental state need not exhibit a large observable TEP correction.
-        When interpreted through a universal Period-Luminosity
-        relation, this clock-rate anomaly mimics diminished luminosity,
-        leading to underestimated distances and an inflated local Hubble
-        constant.
+        The hypothesis tested here is that Cepheid variable stars function as environment-dependent "standard clocks." Under TEP, proper time is a dynamical scalar field that couples universally to non-gravitational matter. Because stellar pulsation rates operate in local proper time, calibrating classical Cepheids in deep-potential SN Ia host galaxies against diffuse, low-mass anchor galaxies systematically misestimates host distance moduli. When interpreted through a universal Period--Luminosity relation, this clock-rate anomaly mimics diminished luminosity, leading to underestimated distances and an inflated local Hubble constant.
     </p>
 
     <p>
-        The standard SH0ES full-ladder likelihood yields a baseline
-        $H_0 = 73.04 \pm 1.01$ km/s/Mpc. A standard-ladder
-        projection test inserts a TEP environmental column into the
-        SH0ES design matrix while keeping the host-level distance moduli
-        $\mu_i$ as free latent parameters; the environmental signal is absorbed
-        by the inferred $\mu_i$, yielding $\kappa_{\rm Cep} = -0.067 \pm 0.210\times10^6$ mag (consistent with zero). This null result is expected:
-        the standard SH0ES model is not TEP-native, and any host-constant
-        environmental bias is algebraically equivalent to shifting a host's
-        inferred modulus.
+        In standard distance-ladder linear regression, unconstrained latent host distance moduli $\mu_i$ algebraically absorb host-level environmental shifts. A standard-ladder projection test that inserts a TEP environmental column into the SH0ES design matrix therefore yields an apparent null result. This structural degeneracy is resolved by formulating the calibrator-host distance ladder as a generative clock-aware model coupled to the Hubble flow.
     </p>
 
     <p>
-        The proper test must therefore be applied at the redshift-distance
-        level, where distances are tied to an independent velocity scale.
-        Here $cz_{\rm HD}$ is used as the conventional low-redshift redshift
-        coordinate supplied by the Hubble-diagram analysis; within TEP this
-        operational variable does not imply literal spatial recession or expansion.
-        A velocity-space likelihood analysis models
-        $cz_i = d_i^{\rm true}\,(H_{\rm app} + \Gamma_X X_i) + v_i$
-        and identifies a structurally robust combined environmental slope
-        $\Gamma_X = +2.31\times10^7 \pm 1.01\times10^7$ (2.3$\sigma$ at
-        $\sigma_v = 250$ km/s; 3.15$\sigma$ at $\sigma_v = 150$ km/s). The signal survives explicit controls for
-        redshift trend, sky dipole ($\sim$100 km/s), quadrupole, and
-        group-offset models; binned permutation tests confirm it
-        is not driven by redshift or sky selection. Leave-one-host-out
-        cross-validation gives 29/29 positive signs; bootstrap resampling
-        gives 99.9% positive fraction.
+        This generative framework is tested using the complete public Riess et al. (2022) sample of 37 distinct SN Ia host galaxies, utilizing a homogeneous kinematic potential coordinate $u_\phi=V_{\rm rot}/\sqrt{2}$ derived from pinned HyperLEDA rotation velocities and continuous environmental screening. Across all 37 hosts, the generative endpoint likelihood yields $\Gamma_X=(1.156\pm0.958)\times10^7\ {\rm km\,s^{-1}\,Mpc^{-1}}$ under canonical $250\ {\rm km/s}$ velocity variance, strengthening to $1.64\sigma$ under data-driven Pantheon+ velocity scatter ($182.1\ {\rm km/s}$) and $1.97\sigma$ at $150\ {\rm km/s}$, with 100% leave-one-host-out sign stability (37 of 37 refits positive). In the cosmologically constrained host-level expansion-rate likelihood across the 33 Hubble-flow hosts (Step 42), the combined endpoint response is recovered at $\Gamma_X=(1.165\pm0.979)\times10^7\ {\rm km\,s^{-1}\,Mpc^{-1}}$ ($1.19\sigma$; $2.07\sigma$ at $150\ {\rm km/s}$; and $1.99\sigma$ under full $33\times33$ SH0ES covariance GLS), yielding a conventional Hubble-flow intercept of $H_{\rm app}=68.36\pm0.98\ {\rm km\,s^{-1}\,Mpc^{-1}}$ to $68.62\pm1.51\ {\rm km\,s^{-1}\,Mpc^{-1}}$. When evaluated in a joint multi-block framework with independent TRGB distances and geometric anchors (Step 44), the multi-block likelihood consistently favours an environmental response under either single-parameter allocation ($\kappa_{\rm Cep} = (0.400 \pm 0.270)\times 10^6\ {\rm mag}$ or $\beta_X = (1.631 \pm 1.250)\times 10^7\ {\rm km\,s^{-1}\,Mpc^{-1}}$), resolving the local Hubble constant to $H_{\rm app} = 68.76\pm 1.02\ {\rm km\,s^{-1}\,Mpc^{-1}}$. Under the restricted TEP Cepheid-channel closure ($\beta_X=0$), the full response is allocated to the Cepheid channel ($\kappa_{\rm Cep}^{\rm equiv} = (0.369 \pm 0.310)\times 10^6\ {\rm mag}$); this allocation is physically specified but remains conditional on host-specific aperture validation.
     </p>
 
     <p>
-        The velocity-space likelihood identifies a combined environmental slope.
-        In a general phenomenological model this slope can contain both Cepheid
-        clock bias and residual velocity-sector/environmental terms.
-        The TEP-native gauge sets the non-Cepheid velocity-sector component
-        $\beta_X$ to zero, corresponding to the hypothesis tested here: the observed
-        environmental slope is dominantly a Cepheid clock-transport bias.
-        In that gauge—treating the environmental slope as a pure Cepheid
-        clock-rate bias ($\beta_X = 0$)—the equivalent
-        response coefficient is $\kappa_{\rm Cep} \approx 7.21\times10^5$ mag,
-        consistent with the canonical TEP parameter $\kappa_{\rm gal} = 9.6\times10^5$ mag ($\sim 10^6$).
-        The velocity-space fit yields $H_{\rm app} = 69.54 \pm 1.50$ km/s/Mpc;
-        in the TEP-native gauge this corresponds to a Cepheid clock-bias
-        correction that brings the local distance scale into agreement with
-        the CMB inference. As a historical residual-space cross-check, the empirical one-parameter
-        correction pipeline yields $H_0^{\rm TEP} = 68.84$ km/s/Mpc
-        (bootstrap mean $68.92 \pm 1.44$), reducing the Hubble tension from
-        $\approx 5\sigma$ to $\approx 1\sigma$ relative to Planck.
-        This value is obtained in the pure-Cepheid TEP-native gauge ($\beta_X=0$);
-        the gauge-independent empirical detection is $\Gamma_X$. A
-        residual-based empirical cross-check gives
-        $\kappa_{\rm Cep} = (1.27 \pm 0.46) \times 10^6$ mag, consistent with
-        the generative inference. The inferred coefficient places this probe in
-        the same response-coefficient regime as the millisecond-pulsar
-        spin-down excess (Paper 10).
-        External TRGB distances ($N=13$ overlap) give
-        $\kappa_{\rm Cep} = +3.2\times10^5$ ($0.82\sigma$)—underpowered to
-        independently break the $\kappa$–$\beta$ degeneracy, yet directionally
-        consistent with and supportive of the TEP-native gauge.
+        Propagating the TEP potential correction through the distance ladder yields a unified local Hubble constant of $H_0=66.65\pm1.58\ {\rm km\,s^{-1}\,Mpc^{-1}}$, consistent with Planck CMB observations at $0.45\sigma$ ($0.31\sigma$ bootstrap). Full-matrix propagation through the 3,490-row SH0ES system confirms exact reference-gauge invariance. Finally, single-galaxy differential tests provide internal signatures with the sign predicted by TEP free from host-to-host peculiar velocity systematics: M31 inner versus outer Cepheids exhibit an empirical Period--Luminosity offset of $+0.356 \pm 0.136\ {\rm mag}$ ($2.6\sigma$), increasing to $+0.630 \pm 0.195\ {\rm mag}$ ($3.24\sigma$) under spatial PHAT matching, while OGLE-IV Cepheids in the LMC independently exhibit radial potential stratification at $+0.0284 \pm 0.0086\ {\rm mag}$ ($3.3\sigma$).
     </p>
 
     <p>
-        A differential M31 analysis yields an "Inner Fainter" signal
-        consistent with TEP shear suppression, providing auxiliary support
-        for the continuous screening mechanism.
-    </p>
-
-    <p>
-        <em>Keywords:</em> Hubble tension – Cepheid variables – distance ladder
-        – velocity dispersion – temporal equivalence principle – gravitational
-        time dilation
+        <em>Keywords:</em> Hubble tension -- Cepheid variables -- distance ladder -- galaxy rotation -- peculiar velocities -- temporal equivalence principle
     </p>
 </div>

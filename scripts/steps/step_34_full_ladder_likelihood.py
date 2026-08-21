@@ -54,10 +54,13 @@ except ImportError:
 
 from core.constants import KAPPA_GAL
 
+from scripts.utils.sample_selection import hubble_flow_mask
 from scripts.utils.tep_correction import (
     tep_correction,
     C_SQUARED_KM_S,
     ANCHOR_SCREENING,
+    build_host_screening_map,
+    compute_anchor_sigma_ref,
 )
 
 
@@ -158,7 +161,7 @@ class FullLadderLikelihood:
         S = host_screening.get(host_name, 1.0)
 
         if mode == "centered":
-            return S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
+            return (S * sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
         if mode == "raw_sigma2":
             return S * sigma**2 / C_SQUARED_KM_S
         if mode == "unscreened_centered":
@@ -169,7 +172,8 @@ class FullLadderLikelihood:
         raise ValueError(f"Unknown X mode: {mode}")
 
     def build_tep_columns(self, L, q, host_sigma, host_screening, sigma_ref,
-                          x_mode="centered", anchor_convention="anchor_screened_physical"):
+                          x_mode="centered", anchor_convention="anchor_screened_physical",
+                          y_source=None):
         """Build TEP regressor columns for Cepheid and optionally SN rows.
 
         Returns:
@@ -186,16 +190,25 @@ class FullLadderLikelihood:
         x_sn = np.zeros(n_rows)
         row_classes = []
         host_rows = {}
-        anchor_hosts = {"N4258", "LMC", "M31"}
+        anchor_hosts = {"N4258", "LMC", "M31", "MW", "SMC"}
 
         for i in range(n_rows):
             cls = self.classify_row(i, L, q)
             row_classes.append(cls)
 
-            # Find host for this row
             host = None
+            if cls == "Cepheid" and y_source is not None:
+                source = str(y_source[i])
+                if source.startswith("LMC_"):
+                    host = "LMC"
+                elif source.startswith("MHW1_"):
+                    host = "MW"
+                elif source and source not in {"nan", "None"}:
+                    host = source
+
+            # Fall back to the row's distance-modulus parameter.
             for idx, mu_param in zip(mu_indices, mu_names):
-                if abs(L[i, idx]) > 0.01:
+                if host is None and abs(L[i, idx]) > 0.01:
                     host = mu_param.replace("mu_", "")
                     break
 
@@ -352,7 +365,8 @@ class FullLadderLikelihood:
 
         return result
 
-    def run_model_grid(self, L, y, C, q, host_sigma, host_screening, sigma_ref):
+    def run_model_grid(self, L, y, C, q, host_sigma, host_screening, sigma_ref,
+                       y_source=None):
         """Run comprehensive model grid: TEP projections, reference frames, anchor conventions."""
         print_status("Running TEP Model Grid", "SECTION")
 
@@ -381,7 +395,8 @@ class FullLadderLikelihood:
             for anchor_conv in anchor_conventions:
                 x_c, x_s, row_classes, host_rows = self.build_tep_columns(
                     L, q, host_sigma, host_screening, sigma_ref,
-                    x_mode=x_mode, anchor_convention=anchor_conv
+                    x_mode=x_mode, anchor_convention=anchor_conv,
+                    y_source=y_source,
                 )
 
                 for model_name in models:
@@ -510,6 +525,7 @@ class FullLadderLikelihood:
         hosts_df = pd.read_csv(self.data_dir / "processed" / "hosts_processed.csv")
         # Use first non-NaN z_hd per source_id
         z_map = hosts_df.dropna(subset=["z_hd"]).drop_duplicates("source_id").set_index("source_id")["z_hd"].to_dict()
+        z_cmb_map = hosts_df.dropna(subset=["z_cmb"]).drop_duplicates("source_id").set_index("source_id")["z_cmb"].to_dict()
 
         # Fit baseline SH0ES to extract matrix-fitted mu_i
         theta_base, cov_base, _, _, _ = self.fit_gls(L, y, C)
@@ -565,6 +581,7 @@ class FullLadderLikelihood:
                 "host": host,
                 "is_anchor": host in anchors,
                 "z_hd": z_hd,
+                "z_cmb": z_cmb_map.get(host, np.nan),
                 "sigma": host_sigma[host],
                 "mu_published": mu_pub,
                 "mu_published_err": mu_pub_err,
@@ -579,16 +596,17 @@ class FullLadderLikelihood:
 
         df_all = pd.DataFrame(rows)
 
-        # Sample selection: exclude anchors, z > 0.0035
+        # Sample selection: exclude anchors, apply Hubble-flow cut
+        from scripts.utils.sample_selection import apply_hubble_flow_cut
         df_sample = df_all[~df_all["is_anchor"]].copy()
-        df_sample = df_sample[df_sample["z_hd"] > 0.0035].copy()
+        df_sample = apply_hubble_flow_cut(df_sample)
         df_sample = df_sample.dropna(subset=["sigma", "h0_published", "h0_matrix"])
 
         n_all = len(df_all)
         n_sample = len(df_sample)
 
         print_status(f"Total hosts with both published and matrix mu: {n_all}", "INFO")
-        print_status(f"After anchor exclusion and z>0.0035 cut: {n_sample}", "INFO")
+        print_status(f"After anchor exclusion and Hubble-flow cut: {n_sample}", "INFO")
 
         if n_sample == 0:
             print_status("No valid hosts in sample after cuts", "ERROR")
@@ -707,6 +725,7 @@ class FullLadderLikelihood:
         # Load host redshifts
         hosts_df = pd.read_csv(self.data_dir / "processed" / "hosts_processed.csv")
         z_map = hosts_df.dropna(subset=["z_hd"]).drop_duplicates("source_id").set_index("source_id")["z_hd"].to_dict()
+        z_cmb_map = hosts_df.dropna(subset=["z_cmb"]).drop_duplicates("source_id").set_index("source_id")["z_cmb"].to_dict()
 
         # Fit FULL baseline
         theta, cov, chi2, rank, _ = self.fit_gls(L, y, C)
@@ -805,6 +824,7 @@ class FullLadderLikelihood:
                 "host": host,
                 "sigma": host_sigma.get(host, np.nan),
                 "z_hd": z_hd,
+                "z_cmb": z_cmb_map.get(host, np.nan),
                 "is_anchor": is_anchor,
                 "mu_full": float(mu_fit),
                 "mu_full_err": float(np.sqrt(cov[i, i])),
@@ -827,7 +847,7 @@ class FullLadderLikelihood:
 
         # Correlations
         print_status("Host-level correlations:", "INFO")
-        df_valid = df[(~df["is_anchor"]) & (df["z_hd"] > 0.0035)].dropna()
+        df_valid = df[(~df["is_anchor"]) & hubble_flow_mask(df)].dropna()
         if len(df_valid) > 3:
             for col, name in [
                 ("mean_period_term", "mean period term"),
@@ -888,6 +908,7 @@ class FullLadderLikelihood:
         # Load host redshifts
         hosts_df = pd.read_csv(self.data_dir / "processed" / "hosts_processed.csv")
         z_map = hosts_df.dropna(subset=["z_hd"]).drop_duplicates("source_id").set_index("source_id")["z_hd"].to_dict()
+        z_cmb_map = hosts_df.dropna(subset=["z_cmb"]).drop_duplicates("source_id").set_index("source_id")["z_cmb"].to_dict()
 
         # Fit FULL baseline
         theta, cov, chi2, rank, _ = self.fit_gls(L, y, C)
@@ -898,7 +919,7 @@ class FullLadderLikelihood:
         anchors = {"LMC", "M31", "N4258", "MW", "SMC"}
 
         # Global means for reference
-        df_valid = covariate_df[(~covariate_df["is_anchor"]) & (covariate_df["z_hd"] > 0.0035)].dropna()
+        df_valid = covariate_df[(~covariate_df["is_anchor"]) & hubble_flow_mask(covariate_df)].dropna()
         global_mean_period = df_valid["mean_period_term"].mean()
         global_mean_z = df_valid["mean_Z_term"].mean()
 
@@ -929,7 +950,7 @@ class FullLadderLikelihood:
         mu_full = covariate_df["mu_full"].values
         sigma_vals = covariate_df["sigma"].values
         z_vals = covariate_df["z_hd"].values
-        is_valid = (~covariate_df["is_anchor"]) & (covariate_df["z_hd"] > 0.0035)
+        is_valid = (~covariate_df["is_anchor"]) & hubble_flow_mask(covariate_df)
 
         base_trend = compute_h0_trend(
             mu_full[is_valid], sigma_vals[is_valid], z_vals[is_valid]
@@ -1533,6 +1554,7 @@ class FullLadderLikelihood:
 
         df = pd.read_csv(self.hosts_path)
         print_status(f"Loaded {len(df)} hosts", "INFO")
+        screening_map = build_host_screening_map(df, self.root_dir)
 
         # Create mapping from normalized_name to sigma_inferred
         # Also create alternative name mappings for SH0ES compatibility
@@ -1541,7 +1563,7 @@ class FullLadderLikelihood:
         for _, row in df.iterrows():
             name = row["normalized_name"]
             sigma = row["sigma_inferred"]
-            S = row.get("shear_suppression", 1.0)
+            S = screening_map.get(name, 1.0)
 
             # Store under normalized name
             host_sigma[name] = sigma
@@ -1577,10 +1599,10 @@ class FullLadderLikelihood:
                 host_sigma[ngc_name] = sigma
                 host_screening[ngc_name] = S
 
-        # Add explicit mappings for known SH0ES name mismatches
-        # SH0ES uses M1337 for NGC 1337 (M catalog doesn't go this high)
+        # Add explicit mappings for known SH0ES name mismatches.
+        # SH0ES M1337 is Mrk 1337 (PGC 43690), the host of SN 2006D.
         explicit_mappings = {
-            "M1337": "N1337",      # NGC 1337
+            "M1337": "Mrk1337",
             "N105A": "N105",       # NGC 105A likely refers to NGC 105
             "N976A": "N976",       # NGC 976A likely refers to NGC 976
         }
@@ -1590,28 +1612,27 @@ class FullLadderLikelihood:
                 host_screening[sh0es_name] = host_screening[csv_name]
                 print_status(f"Mapped {sh0es_name} -> {csv_name}", "INFO")
 
+        calibrators = {
+            "MW": (30.0, ANCHOR_SCREENING["MW"]),
+            "LMC": (24.0, ANCHOR_SCREENING["LMC"]),
+            "SMC": (22.0, ANCHOR_SCREENING["SMC"]),
+            "M31": (160.0, ANCHOR_SCREENING["M31"]),
+            "N4258": (115.0, ANCHOR_SCREENING["NGC 4258"]),
+        }
+        for name, (sigma, screening) in calibrators.items():
+            host_sigma[name] = sigma
+            host_screening[name] = screening
+
         print_status(f"Created {len(host_sigma)} name mappings", "INFO")
 
         return host_sigma, host_screening
 
     def calculate_effective_sigma_ref(self):
-        """Calculate effective calibrator sigma (same as step_04)."""
+        """Calculate the square root of the screened anchor endpoint."""
         print_status("Calculating Effective Calibrator Sigma...", "SECTION")
 
-        anchors = [
-            {"ID": "MW", "Sigma": 30.0, "Weight": 0.20},
-            {"ID": "LMC", "Sigma": 24.0, "Weight": 0.25},
-            {"ID": "NGC 4258", "Sigma": 115.0, "Weight": 0.55},
-        ]
-
-        numerator_sq = 0.0
-        denominator = 0.0
-        for a in anchors:
-            numerator_sq += (a["Sigma"] ** 2) * a["Weight"]
-            denominator += a["Weight"]
-
-        sigma_ref = np.sqrt(numerator_sq / denominator)
-        print_status(f"Effective sigma_ref: {sigma_ref:.2f} km/s", "SUCCESS")
+        sigma_ref = compute_anchor_sigma_ref(screened=True)
+        print_status(f"Anchor active-response scale: {sigma_ref:.2f} km/s", "SUCCESS")
 
         return sigma_ref
 
@@ -1620,7 +1641,7 @@ class FullLadderLikelihood:
         Stage 1: Summary-likelihood version.
 
         Fit: mu_obs = mu_true + kappa_Cep * X + epsilon
-        where X = S * (sigma^2 - sigma_ref^2) / c^2
+        where X = (S * sigma^2 - sigma_ref^2) / c^2
 
         This uses the recovered host distance moduli and their covariance.
         """
@@ -1663,7 +1684,7 @@ class FullLadderLikelihood:
                 S = host_screening.get(name, 1.0)
 
             if sigma is not None and sigma > 0:
-                x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
+                x = (S * sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
                 X.append(x)
                 mu_vals.append(mu_obs[f"mu_{name}"])
                 mu_errs.append(mu_err[f"mu_{name}"])
@@ -1778,32 +1799,11 @@ class FullLadderLikelihood:
         """
         print_status("Stage 2: Matrix-Level Likelihood Analysis", "SECTION")
 
-        # Find mu_ column indices
-        mu_indices = [i for i, p in enumerate(q) if p.startswith("mu_")]
-        mu_names = [q[i] for i in mu_indices]
-        print_status(f"Found {len(mu_indices)} host distance modulus parameters", "INFO")
-
-        # Build TEP column using L matrix for host identification
+        print_status(
+            f"Found {sum(p.startswith('mu_') for p in q)} host distance modulus parameters",
+            "INFO",
+        )
         n_rows = len(y)
-        x_tep = np.zeros(n_rows)
-
-        for i in range(n_rows):
-            for idx, mu_param in zip(mu_indices, mu_names):
-                if abs(L[i, idx]) > 0.01:
-                    host_name = mu_param.replace("mu_", "")
-                    if host_name in host_sigma:
-                        sigma = host_sigma[host_name]
-                        S = host_screening.get(host_name, 1.0)
-                        X = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
-                        x_tep[i] = X  # Positive X for high-sigma hosts
-                    break
-
-        n_nonzero = np.sum(x_tep != 0)
-        print_status(f"TEP column has {n_nonzero}/{n_rows} non-zero entries", "INFO")
-
-        if n_nonzero == 0:
-            print_status("TEP column is all zeros - no host sigma data matched", "ERROR")
-            return {"stage2": {"error": "no_tep_data", "n_nonzero": 0}}
 
         # --- Stage 2: Two-step constrained likelihood ---
         #
@@ -1813,8 +1813,8 @@ class FullLadderLikelihood:
         # because SN calibrator and anchor rows constrain mu_i independently of
         # the TEP-affected Cepheid rows. The free-kappa fit is valid.
         #
-        # However, the free-kappa fit finds kappa_Cep consistent with zero and
-        # with the opposite sign from canonical TEP. Stage 2 here tests the
+        # However, the free-kappa fit finds kappa_Cep consistent with zero.
+        # Stage 2 here tests the
         # fixed-kappa sensitivity: impose kappa from Stage 1 and observe the
         # H0 shift when host distances are constrained.
         #
@@ -1838,7 +1838,8 @@ class FullLadderLikelihood:
         # Build TEP columns using centralized helper
         x_tep, x_sn, row_classes, host_rows = self.build_tep_columns(
             L, q, host_sigma, host_screening, sigma_ref,
-            x_mode="centered", anchor_convention="anchor_screened_physical"
+            x_mode="centered", anchor_convention="anchor_screened_physical",
+            y_source=y_source,
         )
 
         X_SCALE = 1e6
@@ -1863,6 +1864,9 @@ class FullLadderLikelihood:
 
         # Diagnostics
         n_tep_nonzero = int(np.sum(x_tep != 0))
+        if n_tep_nonzero == 0:
+            print_status("TEP column is all zeros - no Cepheid hosts matched", "ERROR")
+            return {"stage2": {"error": "no_tep_data", "n_nonzero": 0}}
         print_status(f"TEP column: {n_tep_nonzero}/{n_rows} non-zero entries", "INFO")
         print_status(f"X range: [{x_tep[x_tep != 0].min():.3e}, {x_tep[x_tep != 0].max():.3e}]", "INFO")
         print_status(f"X_scaled range: [{x_tep_scaled[x_tep_scaled != 0].min():.3e}, {x_tep_scaled[x_tep_scaled != 0].max():.3e}]", "INFO")
@@ -2043,10 +2047,11 @@ class FullLadderLikelihood:
                 "delta_dof": int(delta_dof),
                 "delta_aic": float(delta_aic),
                 "delta_bic": float(delta_bic),
-                "n_cepheids": n_rows,
+                "n_observations": int(n_rows),
+                "n_cepheid_rows": int(sum(c == "Cepheid" for c in row_classes)),
                 "n_parameters": len(q),
             },
-            "n_tep_nonzero": int(n_nonzero),
+            "n_tep_nonzero": int(n_tep_nonzero),
         }
 
         return results
@@ -2193,7 +2198,11 @@ class FullLadderLikelihood:
             "notes": [
                 "Standard SH0ES",
                 "Discarded: model broken",
-                "kappa=-6.7e4+/-2.1e5 (0.3sigma; opposite sign)",
+                (
+                    f"kappa={var_a.get('kappa_Cep', np.nan):+.2e} +/- "
+                    f"{var_a.get('kappa_err', np.nan):.2e} "
+                    f"({var_a.get('kappa_significance', np.nan):.2f} sigma)"
+                ),
                 "Prior dominates",
                 "Sensitivity test only",
             ],
@@ -2244,7 +2253,8 @@ class FullLadderLikelihood:
             # Build TEP columns for diagnostics (re-use centralized helper)
             x_tep, x_sn, row_classes, host_rows = self.build_tep_columns(
                 L, q, host_sigma, host_screening, sigma_ref,
-                x_mode="centered", anchor_convention="anchor_screened_physical"
+                x_mode="centered", anchor_convention="anchor_screened_physical",
+                y_source=y_source,
             )
 
             # Diagnostic 1: Host-summary reconstruction audit (CRITICAL CHECK)
@@ -2259,7 +2269,10 @@ class FullLadderLikelihood:
             injection_all = self.injection_test_all_models(L, y, C, q, x_tep, x_sn, kappa_inj=KAPPA_GAL)
 
             # Diagnostic 4: Comprehensive model grid
-            model_grid = self.run_model_grid(L, y, C, q, host_sigma, host_screening, sigma_ref)
+            model_grid = self.run_model_grid(
+                L, y, C, q, host_sigma, host_screening, sigma_ref,
+                y_source=y_source,
+            )
 
             # Diagnostic 5: Leave-one-host-out
             loo_results = self.leave_one_host_out(L, y, C, q, x_tep, host_sigma)

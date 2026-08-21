@@ -73,8 +73,9 @@ def load_data():
     anchors = ["NGC 4258", "LMC", "SMC", "M 31", "MW"]
     full_nh = full[~full["normalized_name"].isin(anchors)].copy()
 
-    # Primary sample (z > 0.0035)
-    primary = full_nh[pd.to_numeric(full_nh["z_hd"], errors="coerce") > 0.0035].copy()
+    # Primary sample (Hubble-flow union cut)
+    from scripts.utils.sample_selection import hubble_flow_mask
+    primary = full_nh[hubble_flow_mask(full_nh)].copy()
 
     return {
         "hosts": hosts,
@@ -99,8 +100,8 @@ def build_master_table(data):
         z_cmb = pd.to_numeric(row.get("z_cmb"), errors="coerce")
         z_hel = pd.to_numeric(row.get("z_hel"), errors="coerce")
 
-        included = z_hd > 0.0035 if pd.notna(z_hd) else False
-        reason = "z_HD > 0.0035" if included else "z_HD <= 0.0035 (excluded)"
+        included = (z_cmb > 0.0035 if pd.notna(z_cmb) else False) or (z_hd > 0.0035 if pd.notna(z_hd) else False)
+        reason = "Hubble-flow union cut" if included else "z_cmb & z_hd <= 0.0035 (excluded)"
 
         table.append({
             "Host": row["normalized_name"],
@@ -130,22 +131,23 @@ def audit_sample_consistency(data):
 
     findings.append(f"Primary sample: N={n_primary}, z_HD range [{z_min:.5f}, {z_max:.5f}]")
 
-    # Check if every included host satisfies z > 0.0035
-    violations = primary[primary["z_hd"] <= 0.0035]
+    # Check if every included host satisfies the Hubble-flow union cut
+    from scripts.utils.sample_selection import hubble_flow_mask
+    violations = primary[~hubble_flow_mask(primary)]
     if len(violations) > 0:
-        findings.append(f"CRITICAL: {len(violations)} included hosts violate z > 0.0035")
+        findings.append(f"CRITICAL: {len(violations)} included hosts violate Hubble-flow cut")
         for _, row in violations.iterrows():
-            findings.append(f"  - {row['normalized_name']}: z_HD={row['z_hd']}")
+            findings.append(f"  - {row['normalized_name']}: z_HD={row['z_hd']}, z_CMB={row.get('z_cmb','?')}")
     else:
-        findings.append("OK: All included hosts satisfy z_HD > 0.0035")
+        findings.append("OK: All included hosts satisfy Hubble-flow union cut")
 
     # Full non-anchor sample
     full_nh = data["full_nh"]
     n_full = len(full_nh)
     findings.append(f"Full non-anchor sample: N={n_full}")
 
-    excluded = full_nh[pd.to_numeric(full_nh["z_hd"], errors="coerce") <= 0.0035]
-    findings.append(f"Excluded by z-cut: {len(excluded)} hosts")
+    excluded = full_nh[~hubble_flow_mask(full_nh)]
+    findings.append(f"Excluded by Hubble-flow cut: {len(excluded)} hosts")
     for _, row in excluded.iterrows():
         findings.append(f"  - {row['normalized_name']}: z_HD={row['z_hd']:.5f}")
 
@@ -187,10 +189,13 @@ def audit_h0_contradictions(data):
     # From redshift sensitivity
     if REDZ_SENS_PATH.exists():
         rz = pd.read_csv(REDZ_SENS_PATH)
-        row_29 = rz[rz["n"] == 29]
-        if len(row_29) > 0:
-            r = row_29.iloc[0]
-            findings.append(f"Redshift sensitivity (N=29, zcut=0.0035): h0_corr={r['h0_corr']:.2f}, kappa={r['kappa_1e6']:.4f}")
+        # Look for the primary sample size (N=33 with union cut, fallback to N=29)
+        for n_target in [33, 29]:
+            row_n = rz[rz["n"] == n_target]
+            if len(row_n) > 0:
+                r = row_n.iloc[0]
+                findings.append(f"Redshift sensitivity (N={n_target}): h0_corr={r['h0_corr']:.2f}, kappa={r['kappa_1e6']:.4f}")
+                break
 
     return findings
 
@@ -455,7 +460,7 @@ def audit_planck_circularity(data):
     sigma_vals = primary["sigma_inferred"].values
     h0_vals = primary["h0_derived"].values
     S = primary.get("shear_suppression", pd.Series(np.ones(len(primary)))).values
-    x = S * (sigma_vals**2 - np.median(sigma_vals)**2) / C2
+    x = (S * sigma_vals**2 - np.median(sigma_vals)**2) / C2
 
     # Linear fit H0 = a + b*x
     A = np.vstack([np.ones(len(x)), x]).T
@@ -493,10 +498,10 @@ def audit_bic_sign(data):
     k_null = 1
     bic_null = -2 * ll_null + k_null * np.log(n)
 
-    # TEP model: linear in X = S*(sigma^2 - sigma_ref^2)/c^2 (2 params: intercept + slope)
+    # TEP model: linear in X = (S*sigma^2 - sigma_ref^2)/c^2 (2 params: intercept + slope)
     S = primary.get("shear_suppression", pd.Series(np.ones(len(primary)))).values
     sigma_ref = np.median(sigma_vals)
-    x = S * (sigma_vals**2 - sigma_ref**2) / C2
+    x = (S * sigma_vals**2 - sigma_ref**2) / C2
 
     A = np.vstack([np.ones(len(x)), x]).T
     coeff, residual, rank, s_vals = np.linalg.lstsq(A, h0_vals, rcond=None)

@@ -50,7 +50,7 @@ class Step1DataIngestion:
     4.  **Ingest Pantheon+ Data**: We download the Pantheon+ Supernova catalog to obtain independent 
         host properties (Mass, Redshift).
     5.  **Cross-Match & Enrich**: We spatially cross-match SH0ES hosts with Pantheon+ objects and 
-        merge TEP-independent velocity dispersion measurements (from HyperLEDA/Literature).
+        merge operational kinematic velocity-dispersion estimates (from HyperLEDA/literature).
 
     Outputs:
         - data/interim/reconstructed_shoes_cepheids.csv
@@ -95,7 +95,7 @@ class Step1DataIngestion:
         
         # Specific SH0ES naming quirks (Check these FIRST)
         if name == 'M1337':
-            return 'NGC 1337'
+            return 'Mrk 1337'
         if name == 'N105A':
             return 'NGC 105'
         if name == 'N976A':
@@ -389,20 +389,26 @@ class Step1DataIngestion:
         pan_df['DEC'] = pd.to_numeric(pan_df['DEC'], errors='coerce')
         valid_pan = pan_df.dropna(subset=['RA', 'DEC']).copy()
         
-        # Match
-        c_hosts = SkyCoord(ra=valid_hosts['ra'].values*u.deg, dec=valid_hosts['dec'].values*u.deg)
-        c_pan = SkyCoord(ra=valid_pan['RA'].values*u.deg, dec=valid_pan['DEC'].values*u.deg)
-        
-        idx, d2d, _ = c_hosts.match_to_catalog_sky(c_pan)
-        
-        # Match constraints (increased to 15 arcmin for extended hosts like Antennae/NGC 4038)
-        max_sep = 15.0 * u.arcmin
-        constraint = d2d < max_sep
-        
-        matched_indices = idx[constraint]
-        hosts_indices = np.where(constraint)[0]
-        
-        print_status(f"Matched {len(hosts_indices)} SH0ES hosts to Pantheon+ SN catalog.", "INFO")
+        # Build the authoritative host-to-SN mapping from the R22 data-vector
+        # labels (for example M1337_2006D_57).  A nearest-neighbour match alone
+        # can attach an unrelated transient to an anchor or to a large nearby
+        # galaxy, so sky position is used only to choose among repeated
+        # Pantheon measurements of an already-identified SN.
+        y_labels = np.loadtxt(
+            self.external_dir / "y_R22.txt", skiprows=1, usecols=0, dtype=str
+        )
+        source_ids = set(valid_hosts["source_id"].astype(str))
+        expected_sn_ids = {source_id: [] for source_id in source_ids}
+        for label in y_labels:
+            parts = str(label).split("_")
+            if len(parts) >= 3 and parts[0] in source_ids:
+                if parts[1] not in expected_sn_ids[parts[0]]:
+                    expected_sn_ids[parts[0]].append(parts[1])
+
+        def normalize_cid(value):
+            return "".join(ch.lower() for ch in str(value) if ch.isalnum())
+
+        valid_pan["_cid_normalized"] = valid_pan["CID"].map(normalize_cid)
         
         # Extract Data
         valid_hosts['host_logmass'] = np.nan
@@ -419,15 +425,47 @@ class Step1DataIngestion:
         valid_hosts['pantheon_id'] = ""
         valid_hosts['separation_arcsec'] = np.nan
         
-        pan_matches = valid_pan.iloc[matched_indices]
-        
-        for i, host_idx in enumerate(hosts_indices):
-            pan_idx = matched_indices[i]
-            
-            # Map back to dataframe index
-            host_df_idx = valid_hosts.index[host_idx]
-            
-            row = valid_pan.iloc[pan_idx]
+        n_matched = 0
+        for host_df_idx, host_row in valid_hosts.iterrows():
+            expected = [
+                normalize_cid(cid)
+                for cid in expected_sn_ids.get(str(host_row["source_id"]), [])
+            ]
+            if not expected:
+                continue
+
+            # Use the first R22-listed SN that is present in Pantheon+.  This
+            # reproduces the host-redshift choice in the published tables when
+            # a galaxy has several SNe with slightly different catalog entries.
+            chosen_cid = next(
+                (cid for cid in expected if (valid_pan["_cid_normalized"] == cid).any()),
+                None,
+            )
+            candidates = valid_pan[valid_pan["_cid_normalized"] == chosen_cid]
+            if candidates.empty:
+                print_status(
+                    f"No Pantheon+ row for {host_row['source_id']} SN labels: {expected}",
+                    "WARNING",
+                )
+                continue
+
+            host_coord = SkyCoord(host_row["ra"] * u.deg, host_row["dec"] * u.deg)
+            candidate_coords = SkyCoord(
+                candidates["RA"].values * u.deg,
+                candidates["DEC"].values * u.deg,
+            )
+            separations = host_coord.separation(candidate_coords)
+            nearest_position = int(np.argmin(separations))
+            row = candidates.iloc[nearest_position]
+            separation_arcsec = float(separations[nearest_position].to(u.arcsec).value)
+            if separation_arcsec > 15.0 * 60.0:
+                print_status(
+                    f"Rejected {host_row['source_id']} / {row['CID']}: "
+                    f"separation {separation_arcsec:.1f} arcsec exceeds 15 arcmin.",
+                    "WARNING",
+                )
+                continue
+
             valid_hosts.at[host_df_idx, 'host_logmass'] = row['HOST_LOGMASS']
             valid_hosts.at[host_df_idx, 'z_hd'] = row['zHD']
             valid_hosts.at[host_df_idx, 'z_hd_err'] = row.get('zHDERR', np.nan)
@@ -440,7 +478,13 @@ class Step1DataIngestion:
             valid_hosts.at[host_df_idx, 'm_b_corr'] = row.get('m_b_corr', np.nan)
             valid_hosts.at[host_df_idx, 'm_b_corr_err'] = row.get('m_b_corr_err_DIAG', np.nan)
             valid_hosts.at[host_df_idx, 'pantheon_id'] = row['CID']
-            valid_hosts.at[host_df_idx, 'separation_arcsec'] = d2d[host_idx].to(u.arcsec).value
+            valid_hosts.at[host_df_idx, 'separation_arcsec'] = separation_arcsec
+            n_matched += 1
+
+        print_status(
+            f"Matched {n_matched} R22 SN hosts to Pantheon+ by explicit SN identifier.",
+            "INFO",
+        )
 
         # Clean invalid masses (-9 or similar in Pantheon)
         valid_hosts.loc[valid_hosts['host_logmass'] <= 0, 'host_logmass'] = np.nan
@@ -467,15 +511,18 @@ class Step1DataIngestion:
             how='left'
         )
         
-        # MEASURED Velocity Dispersions (TEP-Independent!)
-        # These come from spectroscopic measurements of stellar absorption line widths.
-        # Kinematics are TEP-independent: Doppler shift measures velocity, not time.
+        # CATALOG KINEMATIC POTENTIAL SCALES (TEP-independent input)
+        #
+        # HyperLEDA supplies one homogeneous, inclination-corrected maximum
+        # rotation speed for every ladder host.  The analysis coordinate is
+        # u_phi = V_rot / sqrt(2), the isothermal-equivalent one-dimensional
+        # potential scale.  It is a declared transformation of a catalogued
+        # rotation speed, not a measured central stellar dispersion.
         #
         # DATA SOURCE: data/raw/external/velocity_dispersions_literature.csv (master)
         # Full per-galaxy citations available in that file.
-        # Primary sources: HyperLEDA (Makarov+2014), Ho+2009, Kormendy & Ho 2013, SDSS DR7
-        # For late-type spirals without direct σ: HI linewidth proxy σ ≈ 0.7 × W50/2
-        # Aperture-corrected to Re/8 using Jorgensen+1995 prescription.
+        # Source: live HyperLEDA ledacat snapshot (Makarov et al. 2014),
+        # archived with PGC identifiers, V_rot errors, and access date.
         #
         # Load from external reference file for auditability
         # SINGLE SOURCE OF TRUTH: master literature CSV with full provenance
@@ -485,7 +532,7 @@ class Step1DataIngestion:
             sigma_df = pd.read_csv(sigma_csv_path, comment='#')
             for _, row in sigma_df.iterrows():
                 MEASURED_SIGMA[row['galaxy']] = row['sigma_kms']
-            print_status(f"Loaded {len(MEASURED_SIGMA)} velocity dispersions from literature CSV: {sigma_csv_path}", "INFO")
+            print_status(f"Loaded {len(MEASURED_SIGMA)} catalog kinematic scales: {sigma_csv_path}", "INFO")
         else:
             raise FileNotFoundError(
                 f"Literature velocity dispersion CSV not found at {sigma_csv_path}. "
@@ -493,7 +540,7 @@ class Step1DataIngestion:
             )
         
         def get_measured_sigma(name):
-            """Get measured velocity dispersion from literature."""
+            """Get the catalog-derived potential-equivalent scale."""
             # Normalize name for lookup
             name = str(name).strip()
             # Try direct lookup
@@ -507,19 +554,20 @@ class Step1DataIngestion:
                     return MEASURED_SIGMA[alt]
             return np.nan
         
-        # Use MEASURED sigma (TEP-independent) instead of mass-inferred
+        # Keep the historical column name for pipeline compatibility.  The
+        # source table defines this value as u_phi, not as stellar sigma.
         final_df['sigma_measured'] = final_df['normalized_name'].apply(get_measured_sigma)
         
         # Count how many have measured values
         n_measured = final_df['sigma_measured'].notna().sum()
-        print_status(f"Found measured σ for {n_measured}/{len(final_df)} hosts (TEP-independent).", "INFO")
+        print_status(f"Found catalog kinematic scales for {n_measured}/{len(final_df)} hosts.", "INFO")
         
         # Log missing hosts for transparency
         missing_sigma = final_df[final_df['sigma_measured'].isna()]['normalized_name'].tolist()
         if missing_sigma:
             print_status(f"Missing sigma for {len(missing_sigma)} hosts: {', '.join(missing_sigma)}", "INFO")
         
-        # Use measured sigma as primary; this is the scientifically correct approach
+        # Use the catalog potential-equivalent scale as the primary coordinate.
         final_df['sigma_inferred'] = final_df['sigma_measured']
         
         # Save

@@ -39,6 +39,9 @@ site/dist/
 # Temporary files
 *.tmp
 *.temp
+*_backup*
+*_v1_backup*
+results/outputs_backup*/
 
 tmp/
 

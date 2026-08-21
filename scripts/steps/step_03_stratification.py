@@ -146,14 +146,17 @@ class Step2Stratification:
 
         valid = valid[~valid["normalized_name"].isin(anchors)].copy()
         
-        # Enforce strict Hubble-flow redshift cut (z > 0.0035) to exclude
-        # local-flow and peculiar-velocity dominated hosts.
-        # This restores the physically motivated N=29 primary sample.
-        n_before = len(valid)
-        valid = valid[pd.to_numeric(valid['z_hd'], errors='coerce') > 0.0035].copy()
-        n_removed = n_before - len(valid)
-
-        print_status(f"Final Sample Size: {len(valid)} SN Ia Hosts ({n_removed} removed by z_HD > 0.0035 cut)", "SUCCESS")
+        # Retain the complete R22 SN-host set.  The endpoint likelihood carries
+        # an explicit peculiar-velocity variance, so deleting nearby galaxies
+        # by a post-hoc redshift threshold would discard information and make
+        # the sample definition depend on the chosen flow correction.  Plain
+        # z_HD cuts remain prespecified sensitivity analyses in Step 39.
+        valid = valid[valid["z_hd"].notna() & (valid["z_hd"] > 0)].copy()
+        print_status(
+            f"Final Sample Size: {len(valid)} R22 SN Ia host galaxies "
+            "(no redshift deletion; peculiar velocities enter the likelihood).",
+            "SUCCESS",
+        )
 
         # Display Sample
         headers = ["Host", "z_HD", "mu (mag)", "D (Mpc)", "H0 (km/s/Mpc)"]
@@ -492,8 +495,7 @@ class Step2Stratification:
                 with open(self.h0_cov_labels_path, "w") as f:
                     json.dump(sample_labels, f, indent=2)
 
-                ones = np.ones(len(df))
-                cov_all_mean_err = float(np.sqrt(ones @ h0_cov @ ones) / len(df))
+                cov_all_mean_err = float(np.sqrt(np.sum(h0_cov)) / len(df))
 
                 pos_low = low_sigma.index.to_numpy(dtype=int)
                 pos_high = high_sigma.index.to_numpy(dtype=int)
@@ -502,17 +504,13 @@ class Step2Stratification:
                 cov_high = h0_cov[np.ix_(pos_high, pos_high)]
                 ones_low = np.ones(len(pos_low))
                 ones_high = np.ones(len(pos_high))
-                cov_low_err = float(
-                    np.sqrt(ones_low @ cov_low @ ones_low) / len(pos_low)
-                )
-                cov_high_err = float(
-                    np.sqrt(ones_high @ cov_high @ ones_high) / len(pos_high)
-                )
+                cov_low_err = float(np.sqrt(np.sum(cov_low)) / len(pos_low))
+                cov_high_err = float(np.sqrt(np.sum(cov_high)) / len(pos_high))
 
                 w = np.zeros(len(df))
                 w[pos_high] = 1.0 / len(pos_high)
                 w[pos_low] = -1.0 / len(pos_low)
-                cov_diff_err = float(np.sqrt(w @ h0_cov @ w))
+                cov_diff_err = float(np.sqrt(np.einsum("i,ij,j->", w, h0_cov, w)))
                 cov_available = True
         except Exception as e:
             print_status(

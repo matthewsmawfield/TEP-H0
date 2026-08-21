@@ -5,7 +5,7 @@ Step 17: Primary TEP Regressor Audit
 
 Compares the same sample, same response variable (H0), same hosts against
 different regressors to test whether the TEP-consistent regressor
-X_TEP = S_total * (sigma^2 - sigma_ref^2) / c^2 is stronger than raw sigma
+X_TEP = (S_total * sigma^2 - sigma_ref^2) / c^2 is stronger than raw sigma
 or sigma^2.
 
 If TEP is real, the signal should strengthen as the regressor becomes more
@@ -71,13 +71,19 @@ class Step17RegressorAudit:
 
         sigma = strat["sigma_inferred"].values
         h0 = strat["h0_derived"].values
-        S_local = strat["shear_suppression"].values
+        # Step 03 already stores the complete local-times-group factor.
+        S_total = strat["shear_suppression"].values
 
         # S_group from tully_nmb
         from scripts.utils.tep_correction import group_screening_factor
         n_mb = strat["tully_nmb"].fillna(1.0).values
         S_group = np.array([group_screening_factor(x) for x in n_mb])
-        S_total = S_local * S_group
+        S_local = np.divide(
+            S_total,
+            S_group,
+            out=np.ones_like(S_total, dtype=float),
+            where=S_group > 0,
+        )
 
         # Build regressors
         regressors = {
@@ -85,7 +91,7 @@ class Step17RegressorAudit:
             "sigma_sq": sigma ** 2,
             "S_local_sigma_sq": S_local * sigma ** 2,
             "S_total_sigma_sq": S_total * sigma ** 2,
-            "TEP_full": S_total * (sigma ** 2 - sigma_ref ** 2) / c2,
+            "TEP_full": (S_total * sigma ** 2 - sigma_ref ** 2) / c2,
         }
 
         # Confound / null regressors

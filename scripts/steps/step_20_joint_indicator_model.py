@@ -14,7 +14,7 @@ where:
     - A_i = host-specific systematic (common to both indicators)
     - B_Cepheid = Cepheid-specific clock response coefficient
     - B_TRGB = TRGB response (should be << B_Cepheid if TEP is real)
-    - X_i = TEP regressor = S_total * (sigma^2 - sigma_ref^2) / c^2
+    - X_i = TEP regressor = (S_total * sigma^2 - sigma_ref^2) / c^2
 
 The key test: B_Cepheid > B_TRGB with shared host terms marginalized out.
 
@@ -84,14 +84,12 @@ class Step19JointIndicatorModel:
             print_status("Too few matched hosts; skipping", "INFO")
             return
 
-        # Compute TEP regressor: use SAME regressor as Step 12 cross-channel
-        # Step 12 uses: R_m = S_local * (sigma^2 - sigma_ref^2) / c^2
-        # NOT S_total = S_local * S_group (which adds noise for isolated hosts)
+        # Step 03 stores the complete local-times-group screening factor.
         # Use the same sigma as Step 3/Step 12 (from step_03_stratified_h0.csv),
         # not the TRGB-file sigma, to ensure regressor consistency.
         sigma = merged["sigma_inferred_host"].values
-        S_local = merged["shear_suppression"].values
-        R_m = S_local * (sigma ** 2 - sigma_ref ** 2) / c2
+        S_total = merged["shear_suppression"].values
+        R_m = (S_total * sigma ** 2 - sigma_ref ** 2) / c2
 
         # Robust approach: host-differenced model
         # Under TEP, high-sigma Cepheid distances are underestimated (too small),
@@ -100,12 +98,22 @@ class Step19JointIndicatorModel:
         delta_mu = merged["mu_trgb"].values - merged["value"].values
         delta_err = np.sqrt(merged["error"].values ** 2 + merged["mu_trgb_err"].values ** 2)
 
-        # Differential slope: delta_mu = mu_TRGB - mu_Ceph ~ kappa_diff * R_m
-        slope_diff, intercept_diff, _, _, se_diff = stats.linregress(R_m, delta_mu)
-        kappa_diff = float(slope_diff)
-        kappa_diff_err = float(se_diff)
+        # Primary differential fit: use the published indicator uncertainties as
+        # absolute Gaussian errors. Do not rescale them downward when chi2/dof < 1.
+        x_scale = 1.0e7
+        design = np.column_stack([np.ones(n_match), R_m * x_scale])
+        weights = 1.0 / np.maximum(delta_err, 1e-12) ** 2
+        fisher = design.T @ (weights[:, None] * design)
+        cov_wls = np.linalg.pinv(fisher, rcond=1e-12)
+        beta_wls = cov_wls @ design.T @ (weights * delta_mu)
+        kappa_diff = float(beta_wls[1] * x_scale)
+        kappa_diff_err = float(np.sqrt(cov_wls[1, 1]) * x_scale)
         t_diff = kappa_diff / kappa_diff_err if kappa_diff_err > 0 else 0
         p_diff = 2 * (1 - stats.t.cdf(abs(t_diff), max(n_match - 2, 1)))
+
+        # Unweighted slope is retained as an exploratory sensitivity diagnostic.
+        slope_uw, intercept_uw, _, p_uw, se_uw = stats.linregress(R_m, delta_mu)
+        t_uw = float(slope_uw / se_uw)
 
         # Also fit each indicator separately on R_m for comparison
         slope_c, _, _, _, se_c = stats.linregress(R_m, merged["value"].values)
@@ -123,13 +131,14 @@ class Step19JointIndicatorModel:
 
         print_status("Joint indicator model results:", "INFO")
         print_status(
-            "Using S_local-only regressor (same as Step 12 cross-channel)", "INFO"
+            "Using the Step 03 total-screening endpoint regressor", "INFO"
         )
         headers = ["Parameter", "Estimate", "SE", "t-stat", "p-value"]
         rows = [
             ["B_Cepheid", f"{B_ceph:.3e}", f"{se_ceph:.3e}", f"{t_ceph:.2f}", f"{p_ceph:.4f}"],
             ["B_TRGB", f"{B_trgb:.3e}", f"{se_trgb:.3e}", f"{t_trgb:.2f}", f"{p_trgb:.4f}"],
-            ["kappa_diff = B_TRGB - B_Ceph", f"{kappa_diff:.3e}", f"{kappa_diff_err:.3e}", f"{t_diff:.2f}", f"{p_diff:.4f}"],
+            ["kappa_diff (weighted)", f"{kappa_diff:.3e}", f"{kappa_diff_err:.3e}", f"{t_diff:.2f}", f"{p_diff:.4f}"],
+            ["kappa_diff (unweighted)", f"{slope_uw:.3e}", f"{se_uw:.3e}", f"{t_uw:.2f}", f"{p_uw:.4f}"],
         ]
         print_table(headers, rows)
 
@@ -157,7 +166,7 @@ class Step19JointIndicatorModel:
 
         results = {
             "N_hosts": n_match,
-            "regressor": "S_local * (sigma^2 - sigma_ref^2) / c^2 (same as Step 12)",
+            "regressor": "(S_total * sigma^2 - sigma_ref^2) / c^2",
             "B_ceph": B_ceph,
             "B_ceph_se": se_ceph,
             "B_ceph_t": t_ceph,
@@ -170,6 +179,14 @@ class Step19JointIndicatorModel:
             "kappa_diff_err": kappa_diff_err,
             "kappa_diff_t": t_diff,
             "kappa_diff_p": p_diff,
+            "unweighted_kappa_diff": float(slope_uw),
+            "unweighted_kappa_diff_err": float(se_uw),
+            "unweighted_kappa_diff_t": t_uw,
+            "unweighted_kappa_diff_p": float(p_uw),
+            "fit_note": (
+                "Primary differential fit is WLS with published Cepheid and TRGB "
+                "uncertainties treated as absolute; unweighted OLS is diagnostic."
+            ),
             "interpretation": (
                 "kappa_diff > 0 is directionally consistent with TEP "
                 "(Cepheids underestimated at high sigma), but magnitude "

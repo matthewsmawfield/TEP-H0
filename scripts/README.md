@@ -1,6 +1,6 @@
 # TEP-H0 Analysis Pipeline
 
-Entry point for reproducing all results and figures in Paper 11: *The Cepheid Bias: Resolving the Hubble Tension*.
+Entry point for reproducing the audited results in Paper 11: *Paper 11: The Cepheid Bias: Resolving the Hubble Tension*.
 
 ## Quick Start
 
@@ -18,9 +18,9 @@ This executes the full pipeline and populates `results/figures/` and `results/ou
 | 00 | `step_00_sigma_catalog.py` | Build and validate the velocity-dispersion compilation from literature and catalog sources. |
 | 01 | `step_01_data_ingestion.py` | Downloads SH0ES/Pantheon+ data, reconstructs catalogs, matches hosts. |
 | 02 | `step_02_aperture_correction.py` | Fetches RC3 metadata and applies aperture normalization to velocity dispersions. |
-| 03 | `step_03_stratification.py` | Calculates H₀, stratifies by σ, and detects environmental bias. |
-| 04 | `step_04_tep_correction.py` | Optimizes κ_Cep, applies the TEP correction, and unifies H₀. |
-| 05 | `step_05_prespecified_predictions.py` | Generates prespecified falsification-ready prediction table for prospective hosts. |
+| 03 | `step_03_stratification.py` | Calculates descriptive host-level H₀-equivalent values and stratification summaries. |
+| 04 | `step_04_tep_correction.py` | Historical in-sample residual-flattening diagnostic; not the primary inference. |
+| 05 | `step_05_prespecified_predictions.py` | Generates the conditional Cepheid-allocation prediction grid from Step 39. |
 | 06 | `step_06_shear_suppression_viz.py` | Generates shear-suppression visualization. |
 | 07 | `step_07_aperture_sensitivity.py` | Tests stability against aperture size and correction parameters. |
 | 08 | `step_08_robustness_checks.py` | Jackknife, Bootstrap, and Peculiar Velocity Monte Carlo tests. |
@@ -35,20 +35,26 @@ This executes the full pipeline and populates `results/figures/` and `results/ou
 | 17 | `step_17_host_mass_residual.py` | Host-mass residual test: isolates TEP-specific signal from shared systematics (Cepheid vs TRGB). |
 | 18 | `step_18_regressor_audit.py` | Primary TEP regressor audit: compares σ, σ², S_local·σ², S_total·σ², confounds, and null controls. |
 | 19 | `step_19_group_env_models.py` | Group environment model comparison: tests whether N_mb is a confound or a TEP screening mechanism. |
-| 20 | `step_20_joint_indicator_model.py` | Joint Cepheid+TRGB indicator model: separates common host systematics from indicator-specific clock bias. |
-| 21 | `step_21_stratified_validation.py` | Physically stratified validation: train on one physical regime, test on another. |
+| 20 | `step_20_joint_indicator_model.py` | Weighted 16-host Cepheid+TRGB differential endpoint diagnostic. |
+| 21 | `step_21_stratified_validation.py` | Small-sample physical-regime transfer diagnostics. |
 | 22 | `step_22_exact_sigma_ref.py` | Exact anchor-leverage σ_ref reconstruction from multiple weighting schemes. |
 | 23 | `step_23_sn_residual_test.py` | SN Ia downstream residual test: does TEP correction remove σ dependence in corrected H0? |
 | 24 | `step_24_synthetic_injection.py` | Synthetic signal injection and recovery test. |
 | 25 | `step_25_leave_one_out.py` | Leave-One-Out influence analysis. |
 | 26 | `step_26_m31_phat_analysis.py` | High-resolution HST analysis of M31 Cepheids (PHAT). |
 | 27 | `step_27_anchor_stratification.py` | Tests for TEP effects in geometric anchors (MW, LMC, NGC 4258). |
-| 28 | `step_28_local_gravity_closure.py` | Converts fitted Cepheid response into explicit local source-charge prediction. |
-| 29 | `step_29_cross_channel.py` | Cross-channel consistency test (Cepheid + TRGB + pulsar). |
-| 30 | `step_30_cosmology_inference.py` | Cosmological inference models and predictions. |
-| 31 | `step_31_final_synthesis.py` | Generates final manuscript figures and summary tables. |
-| 32 | `step_32_comprehensive_audit.py` | Comprehensive audit: sample consistency, headline recomputation, covariance, provenance, ODR, multiple-testing. |
-| 32b| `scripts/utils/pipeline_audit.py` | Lightweight pipeline self-check (legacy). |
+| 28 | `step_28_local_gravity_closure.py` | Exclusion record: no PPN closure is derived from the host coefficient. |
+| 29 | `step_29_cross_channel.py` | Exclusion record: no supported pulsar cross-channel prior exists here. |
+| 30 | `step_30_cosmology_inference.py` | Historical exploratory template; excluded from the authoritative pipeline. |
+| 31 | `step_31_final_synthesis.py` | Retired narrative generator; manuscript prose comes from site HTML components. |
+| 32 | `step_32_comprehensive_audit.py` | Compatibility wrapper around the current pipeline audit. |
+| 34 | `step_34_full_ladder_likelihood.py` | Raw SH0ES matrix fit and row-level injection tests. |
+| 39 | `step_39_environment_slope_decomposition.py` | Primary endpoint likelihood, profile/LRT, permutation, bootstrap, and LOHO. |
+| 40 | `step_40_flow_sky_controls.py` | Redshift, dipole, full quadrupole, and constrained-permutation controls. |
+| 45 | `step_45_full_ladder_h0_propagation.py` | Conditional full-ladder projection and exact reference-gauge audit. |
+| 47 | `step_47_anchor_double_counting_audit.py` | Cepheid-row ownership and anchor-prior audit. |
+| 49 | `step_49_independent_kappa_estimation.py` | Exclusion record: published H0 summaries are not an independent kappa estimate. |
+| 50 | `step_50_unified_joint_likelihood.py` | Diagnostic-only historical summary; excluded for gauge failure. |
 | 33 | `step_33_stellar_validation.py` | MESA/RSP/GYRE stellar-structure validation (optional, post-pipeline). |
 
 ## Options
@@ -65,7 +71,7 @@ python3 scripts/run_pipeline.py --run-stellar-validation  # Run Step 13
 
 ```
 scripts/
-  run_pipeline.py          # Master orchestrator — single entry point for all results
+  run_pipeline.py          # Master orchestrator for authoritative results
   steps/                   # Formal pipeline steps (numbered, ordered, reproducible)
     step_0_sigma_catalog.py
     step_1_data_ingestion.py
@@ -79,9 +85,9 @@ scripts/
     ...
 ```
 
-**Rule:** Every number quoted in the manuscript must trace to an output produced by
-`scripts/run_pipeline.py`. The `diagnostics/` folder contains standalone exploratory
-scripts; they are not guaranteed to be reproducible or maintained.
+**Rule:** Every number quoted in the manuscript must trace to a current output
+produced by the authoritative path in `scripts/run_pipeline.py`. Steps 28--31
+and 50 are excluded from that path. The `diagnostics/` folder is exploratory.
 
 ## Audit
 

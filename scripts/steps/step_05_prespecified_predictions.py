@@ -4,14 +4,14 @@ Step 14: Prespecified TEP Prediction Table
 =============================================
 
 Generates a falsification-ready prediction table for prospective Cepheid-SN hosts
-using the pipeline-prespecified parameters (no refitting).
+using the current frozen endpoint projection (no refitting within this step).
 
 The correction for a prospective host is:
-    Delta_mu = kappa_Cep * S(rho, N_mb) * (sigma^2 - sigma_ref^2) / c^2
+    Delta_mu = kappa_Cep * (S(rho, N_mb) * sigma^2 - U_ref) / c^2
 
-Parameters are prespecified at pipeline values:
-    kappa_Cep = step_04_tep_correction_results.json (optimal_kappa_cep)
-    sigma_ref = step_04_tep_correction_results.json (sigma_ref)
+Parameters are read from audited pipeline values:
+    kappa_Cep = Step 39 endpoint-equivalent projection (sigma_v=250)
+    U_ref = screened anchor endpoint (the complete matrix is gauge invariant)
     S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}
 
 This is a formal pipeline step. The output prediction table is a
@@ -34,11 +34,17 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.utils.logger import TEPLogger, set_step_logger, print_status
-from scripts.utils.tep_correction import C_SQUARED_KM_S, tep_correction
+from scripts.utils.tep_correction import (
+    C_SQUARED_KM_S,
+    GAMMA,
+    N_CRIT,
+    compute_anchor_sigma_ref,
+    tep_correction,
+)
 
 
 class Step14FrozenPredictions:
-    """Formal pipeline step: generate prespecified TEP prediction table."""
+    """Generate the conditional Cepheid-allocation prediction table."""
 
     def __init__(self):
         self.root = PROJECT_ROOT
@@ -55,18 +61,26 @@ class Step14FrozenPredictions:
     def run(self):
         print_status(">>> STEP 14: Prespecified TEP prediction table", "TITLE")
 
-        # Load prespecified parameters from pipeline output
-        with open(self.results_dir / "step_04_tep_correction_results.json") as f:
-            tep_json = json.load(f)
+        with open(self.results_dir / "step_39_environment_slope_decomposition.json") as f:
+            step39 = json.load(f)
+        matches = [
+            row for row in step39
+            if row.get("sample") == "all_r22_hosts"
+            and float(row.get("sigma_v", np.nan)) == 250.0
+            and float(row.get("z_cut", np.nan)) == 0.0
+        ]
+        if len(matches) != 1:
+            raise RuntimeError(f"Expected one all_r22_hosts Step 39 row, found {len(matches)}")
 
-        KAPPA_CEP = float(tep_json["optimal_kappa_cep"])
-        SIGMA_REF = float(tep_json["sigma_ref"])
+        KAPPA_CEP = float(matches[0]["kappa_equiv"])
+        KAPPA_CEP_ERR = float(matches[0]["kappa_equiv_err"])
+        SIGMA_REF = compute_anchor_sigma_ref(screened=True)
         C2 = C_SQUARED_KM_S
 
         print_status(f"Prespecified kappa_Cep: {KAPPA_CEP:.3e} mag", "INFO")
         print_status(f"Prespecified sigma_ref: {SIGMA_REF:.2f} km/s", "INFO")
 
-        # Verification: existing N=29 hosts
+        # Verification: existing N=33 hosts
         strat = pd.read_csv(self.results_dir / "step_03_stratified_h0.csv")
         print_status(f"Verifying predictions against {len(strat)} existing hosts", "PROCESS")
 
@@ -74,7 +88,7 @@ class Step14FrozenPredictions:
         for _, row in strat.iterrows():
             s = row["sigma_inferred"]
             S = row["shear_suppression"]
-            dmu_pred = KAPPA_CEP * S * (s ** 2 - SIGMA_REF ** 2) / C2
+            dmu_pred = tep_correction(s, SIGMA_REF, KAPPA_CEP, S)
             # Compare with actual correction from step_04_tep_corrected_h0.csv
             max_residual = max(max_residual, abs(dmu_pred))
 
@@ -87,7 +101,7 @@ class Step14FrozenPredictions:
         rows = []
         for s in sigma_grid:
             for S in S_grid:
-                dmu = KAPPA_CEP * S * (s ** 2 - SIGMA_REF ** 2) / C2
+                dmu = tep_correction(s, SIGMA_REF, KAPPA_CEP, S)
                 rows.append(
                     {
                         "sigma_kms": s,
@@ -99,6 +113,7 @@ class Step14FrozenPredictions:
 
         pred_df = pd.DataFrame(rows)
         pred_df.to_csv(self.results_dir / "step_05_prespecified_tep_predictions.csv", index=False)
+        pred_df.to_csv(self.results_dir / "step_05_prespecified_tep_predictions_native.csv", index=False)
         print_status(
             f"Saved prediction grid: {len(pred_df)} rows", "SUCCESS"
         )
@@ -106,85 +121,27 @@ class Step14FrozenPredictions:
         # Save manifest
         manifest = {
             "kappa_cep_frozen": KAPPA_CEP,
+            "kappa_cep_frozen_err": KAPPA_CEP_ERR,
             "sigma_ref_frozen": SIGMA_REF,
             "c_km_s": float(np.sqrt(C2)),
             "c_squared": float(C2),
             "screening_formula": "S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}",
-            "screening_n_crit": 10.0,
-            "screening_gamma": 1.2,
+            "screening_n_crit": N_CRIT,
+            "screening_gamma": GAMMA,
             "local_screening_formula": "S_local(rho) = [1 + (rho / rho_half)^n_steep]^{-1}",
             "prediction_criterion": (
-                "A new Cepheid-SN host validates the TEP correction if its observed "
-                "distance-modulus residual agrees with the predicted Delta_mu within "
-                "the quoted uncertainty (~0.1-0.2 mag). Systematic offsets falsify "
-                "the model."
+                "Under the restricted Cepheid-channel allocation, a new host should "
+                "follow this frozen endpoint response. Systematic disagreement "
+                "falsifies that allocation; agreement does not by itself identify "
+                "the microscopic TEP mechanism."
             ),
-        }
-
-        with open(self.results_dir / "step_05_prespecified_tep_prediction_manifest.json", "w") as f:
-            json.dump(manifest, f, indent=2)
-
-        print_status("Saved prediction manifest", "SUCCESS")
-        # ------------------------------------------------------------------
-        # TEP-native gauge variant: kappa_equiv from velocity-space likelihood
-        # ------------------------------------------------------------------
-        kappa_equiv = None
-        try:
-            with open(self.results_dir / "step_39_environment_slope_decomposition.json") as f:
-                s39 = json.load(f)
-            # Select primary sample, sigma_v=250, z_cut=0
-            for rec in s39:
-                if (rec.get("sample") == "primary"
-                        and rec.get("sigma_v") == 250
-                        and rec.get("z_cut", 0) == 0):
-                    kappa_equiv = float(rec["kappa_equiv"])
-                    break
-        except Exception:
-            pass
-
-        if kappa_equiv is not None and np.isfinite(kappa_equiv):
-            print_status(
-                f"TEP-native gauge kappa_equiv: {kappa_equiv:.3e} mag", "INFO"
-            )
-            rows_native = []
-            for s in sigma_grid:
-                for S in S_grid:
-                    dmu = kappa_equiv * S * (s ** 2 - SIGMA_REF ** 2) / C2
-                    rows_native.append(
-                        {
-                            "sigma_kms": s,
-                            "S": S,
-                            "Delta_mu_mag": dmu,
-                            "Delta_H0_approx_kms_mpc": -dmu * np.log(10) * 70 / 5,
-                        }
-                    )
-            pred_native = pd.DataFrame(rows_native)
-            pred_native.to_csv(
-                self.results_dir / "step_05_prespecified_tep_predictions_native.csv",
-                index=False,
-            )
-            print_status(
-                f"Saved TEP-native prediction grid: {len(pred_native)} rows",
-                "SUCCESS",
-            )
-
-            # Update manifest
-            manifest["kappa_equiv_native"] = kappa_equiv
-            manifest["kappa_equiv_source"] = (
+            "endpoint_formula": "Delta_mu = kappa * (S * sigma^2 - U_ref) / c^2",
+            "kappa_equiv_source": (
                 "step_39_environment_slope_decomposition.json "
-                "(primary, sigma_v=250, z_cut=0)"
-            )
-            manifest["gauge_note"] = (
-                "The empirical Step 04 table uses kappa_Cep from the host-residual "
-                "correction. The TEP-native table uses kappa_equiv = Gamma_X / "
-                "((ln 10 / 5) * H_app), the coefficient that would produce the "
-                "velocity-space environmental slope under the TEP-native gauge."
-            )
-        else:
-            print_status(
-                "TEP-native kappa_equiv not available; skipping native prediction table",
-                "INFO",
-            )
+                "(all_r22_hosts, sigma_v=250, z_cut=0)"
+            ),
+            "allocation_status": "conditional Cepheid-channel projection",
+        }
 
         with open(self.results_dir / "step_05_prespecified_tep_prediction_manifest.json", "w") as f:
             json.dump(manifest, f, indent=2)

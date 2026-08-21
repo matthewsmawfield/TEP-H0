@@ -42,6 +42,9 @@ HOSTS_PATH = DATA_DIR / "processed" / "hosts_processed.csv"
 OUT_DIR = BASE_DIR / "results" / "outputs"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+sys.path.insert(0, str(BASE_DIR))
+from scripts.utils.sample_selection import apply_hubble_flow_cut, hubble_flow_mask, Z_CUT
+
 C_KM_S = 299792.458
 
 
@@ -63,7 +66,7 @@ def build_host_x(sigma, sigma_ref, S=1.0):
     """Compute TEP regressor X for a host."""
     if sigma is None or sigma <= 0 or sigma_ref <= 0:
         return 0.0
-    return S * (sigma**2 - sigma_ref**2) / (C_KM_S ** 2)
+    return (S * sigma**2 - sigma_ref**2) / (C_KM_S ** 2)
 
 
 def center_scale(v):
@@ -312,11 +315,13 @@ def load_host_metadata():
     df = pd.read_csv(HOSTS_PATH)
     host_sigma = {}
     host_z = {}
+    host_z_cmb = {}
     host_S = {}
     for _, row in df.iterrows():
         name = row["normalized_name"]
         sigma = row["sigma_inferred"]
         z_hd = row["z_hd"]
+        z_cmb = row.get("z_cmb", np.nan)
         S = row.get("shear_suppression", 1.0)
         if pd.isna(S):
             S = 1.0
@@ -324,6 +329,8 @@ def load_host_metadata():
         host_S[name] = float(S)
         if pd.notna(z_hd) and z_hd > 0:
             host_z[name] = z_hd
+        if pd.notna(z_cmb) and z_cmb > 0:
+            host_z_cmb[name] = z_cmb
         # SH0ES-style compact names
         compact = name.replace(" ", "").replace("NGC", "N").replace("UGC", "U")
         if compact.startswith(("N", "U")):
@@ -334,29 +341,37 @@ def load_host_metadata():
                 host_S[padded] = float(S)
                 if pd.notna(z_hd) and z_hd > 0:
                     host_z[padded] = z_hd
+                if pd.notna(z_cmb) and z_cmb > 0:
+                    host_z_cmb[padded] = z_cmb
                 unpadded = compact[0] + parts.lstrip("0")
                 if unpadded != padded:
                     host_sigma[unpadded] = sigma
                     host_S[unpadded] = float(S)
                     if pd.notna(z_hd) and z_hd > 0:
                         host_z[unpadded] = z_hd
+                    if pd.notna(z_cmb) and z_cmb > 0:
+                        host_z_cmb[unpadded] = z_cmb
         if compact.startswith("N"):
             ngc_name = "NGC" + compact[1:]
             host_sigma[ngc_name] = sigma
             host_S[ngc_name] = float(S)
             if pd.notna(z_hd) and z_hd > 0:
                 host_z[ngc_name] = z_hd
-    explicit = {"M1337": "N1337", "N105A": "N105", "N976A": "N976"}
+            if pd.notna(z_cmb) and z_cmb > 0:
+                host_z_cmb[ngc_name] = z_cmb
+    explicit = {"M1337": "Mrk1337", "N105A": "N105", "N976A": "N976"}
     for sh0es_name, csv_name in explicit.items():
         if csv_name in host_sigma and sh0es_name not in host_sigma:
             host_sigma[sh0es_name] = host_sigma[csv_name]
             host_S[sh0es_name] = host_S[csv_name]
             if csv_name in host_z:
                 host_z[sh0es_name] = host_z[csv_name]
-    return host_sigma, host_z, host_S
+            if csv_name in host_z_cmb:
+                host_z_cmb[sh0es_name] = host_z_cmb[csv_name]
+    return host_sigma, host_z, host_z_cmb, host_S
 
 
-def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
+def compute_host_covariates(L, y, C, q, host_sigma, host_z, host_z_cmb, sigma_ref):
     """Compute per-host quantities from SH0ES matrix and metadata."""
     from scipy import linalg
 
@@ -380,6 +395,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
     mu_errs = []
     sigmas = []
     zs = []
+    zs_cmb = []
     is_anchors = []
     host_period_terms = []
     host_z_terms = []
@@ -424,6 +440,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
         mu_errs.append(mu_err)
         sigmas.append(host_sigma[host_name])
         zs.append(host_z.get(host_name, np.nan))
+        zs_cmb.append(host_z_cmb.get(host_name, np.nan))
         is_anchors.append(host_name in anchor_hosts)
         host_period_terms.append(period_terms)
         host_z_terms.append(z_terms)
@@ -435,6 +452,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
         "mu_err": mu_errs,
         "sigma": sigmas,
         "z_hd": zs,
+        "z_cmb": zs_cmb,
         "is_anchor": is_anchors,
         "mean_period_term": [np.mean(pts) if pts else 0.0 for pts in host_period_terms],
         "mean_Z_term": [np.mean(zts) if zts else 0.0 for zts in host_z_terms],
@@ -484,7 +502,7 @@ def run():
 
     # Load data
     L, y, C, q = load_sh0es_data()
-    host_sigma, host_z, host_S = load_host_metadata()
+    host_sigma, host_z, host_z_cmb, host_S = load_host_metadata()
     print_status(f"Design matrix: {L.shape}, loaded {len(host_sigma)} sigma mappings", "INFO")
 
     # Compute sigma_ref
@@ -493,15 +511,14 @@ def run():
     )
 
     # Compute host-level covariates from matrix fit
-    df_hosts = compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref)
+    df_hosts = compute_host_covariates(L, y, C, q, host_sigma, host_z, host_z_cmb, sigma_ref)
     print_status(f"Computed {len(df_hosts)} calibrator hosts with Cepheid rows", "INFO")
 
-    # Primary sample: non-anchor, valid redshift, z >= 0.0035 (N=29)
-    PRIMARY_Z_CUT = 0.0035
+    # Primary sample: non-anchor, Hubble-flow cut (z_cmb > Z_CUT) | (z_hd > Z_CUT)
+    # Hubble-flow criterion defined in scripts.utils.sample_selection
     df_primary = df_hosts[
         (~df_hosts["is_anchor"])
-        & df_hosts["z_hd"].notna()
-        & (df_hosts["z_hd"] >= PRIMARY_Z_CUT)
+        & hubble_flow_mask(df_hosts)
     ].copy()
 
     # Sensitivity: all non-anchor with valid redshift (N=35)
@@ -514,7 +531,7 @@ def run():
         print_status(f"Only {len(df_primary)} valid primary hosts — aborting", "ERROR")
         return []
 
-    print_status(f"Primary sample (z >= {PRIMARY_Z_CUT}): {len(df_primary)} hosts", "INFO")
+    print_status(f"Primary sample (Hubble-flow cut): {len(df_primary)} hosts", "INFO")
     print_status(f"Sensitivity sample (all non-anchor): {len(df_sensitivity)} hosts", "INFO")
 
     # Run models on both primary and sensitivity samples

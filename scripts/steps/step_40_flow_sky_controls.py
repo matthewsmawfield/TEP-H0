@@ -4,8 +4,9 @@ step_40_flow_sky_controls.py
 
 Flow / Sky-Position Controls for Apparent Hubble Environment
 
-Tests whether Gamma_X > 0 survives explicit controls for redshift trend,
-sky dipole/quadrupole, and group offsets.
+Tests whether Gamma_X > 0 survives explicit controls for redshift trend and
+sky dipole/quadrupole. Group fixed effects are skipped unless repeated groups
+are identifiable in the primary sample.
 
 Core model: cz_i = d_i (H_app + Gamma_X X_i) + controls + v_i
 
@@ -16,6 +17,7 @@ Also runs stricter permutation tests:
 """
 
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -23,6 +25,10 @@ import pandas as pd
 from scipy import optimize
 
 BASE_DIR = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(BASE_DIR))
+
+from scripts.utils.tep_correction import build_host_screening_map
+
 DATA_DIR = BASE_DIR / "data"
 SH0ES_DIR = DATA_DIR / "raw" / "external" / "Cepheid-Distance-Ladder-Data" / "SH0ES2022"
 HOSTS_PATH = DATA_DIR / "processed" / "hosts_processed.csv"
@@ -46,7 +52,7 @@ def print_status(msg, level="INFO"):
 def build_host_x(sigma, sigma_ref, S=1.0):
     if sigma is None or sigma <= 0 or sigma_ref <= 0:
         return 0.0
-    return S * (sigma**2 - sigma_ref**2) / (C_KM_S ** 2)
+    return (S * sigma**2 - sigma_ref**2) / (C_KM_S ** 2)
 
 
 def center_scale(v):
@@ -72,20 +78,32 @@ def load_sh0es_data():
 
 def load_host_metadata():
     df = pd.read_csv(HOSTS_PATH)
+    screening_map = build_host_screening_map(df, BASE_DIR)
+    stratified_path = OUT_DIR / "step_03_stratified_h0.csv"
+    group_by_name = {}
+    if stratified_path.exists():
+        stratified = pd.read_csv(stratified_path)
+        group_by_name = dict(zip(stratified["normalized_name"], stratified["tully_nest"]))
+
     host_sigma, host_z, host_S = {}, {}, {}
+    host_z_cmb = {}
     host_ra, host_dec, host_group = {}, {}, {}
     for _, row in df.iterrows():
         name = row["normalized_name"]
+        source_id = str(row.get("source_id", "")).strip()
         sigma = row["sigma_inferred"]
         z_hd = row["z_hd"]
-        S = row.get("shear_suppression", 1.0)
+        z_cmb = row.get("z_cmb", np.nan)
+        S = screening_map.get(name, row.get("shear_suppression", 1.0))
         if pd.isna(S):
             S = 1.0
         ra = row.get("ra", np.nan)
         dec = row.get("dec", np.nan)
-        group = row.get("pgc", np.nan)
+        group = group_by_name.get(name, np.nan)
 
-        for key in [name]:
+        for key in [name, source_id]:
+            if not key:
+                continue
             host_sigma[key] = sigma
             host_S[key] = float(S)
             host_ra[key] = float(ra) if pd.notna(ra) else np.nan
@@ -93,6 +111,8 @@ def load_host_metadata():
             host_group[key] = int(group) if pd.notna(group) else np.nan
             if pd.notna(z_hd) and z_hd > 0:
                 host_z[key] = z_hd
+            if pd.notna(z_cmb) and z_cmb > 0:
+                host_z_cmb[key] = z_cmb
 
         compact = name.replace(" ", "").replace("NGC", "N").replace("UGC", "U")
         if compact.startswith(("N", "U")):
@@ -107,6 +127,8 @@ def load_host_metadata():
                     host_group[alias] = int(group) if pd.notna(group) else np.nan
                     if pd.notna(z_hd) and z_hd > 0:
                         host_z[alias] = z_hd
+                    if pd.notna(z_cmb) and z_cmb > 0:
+                        host_z_cmb[alias] = z_cmb
         if compact.startswith("N"):
             ngc_name = "NGC" + compact[1:]
             host_sigma[ngc_name] = sigma
@@ -116,8 +138,10 @@ def load_host_metadata():
             host_group[ngc_name] = int(group) if pd.notna(group) else np.nan
             if pd.notna(z_hd) and z_hd > 0:
                 host_z[ngc_name] = z_hd
+            if pd.notna(z_cmb) and z_cmb > 0:
+                host_z_cmb[ngc_name] = z_cmb
 
-    explicit = {"M1337": "N1337", "N105A": "N105", "N976A": "N976"}
+    explicit = {"M101": "M 101", "M1337": "Mrk 1337", "N105A": "N105", "N976A": "N976"}
     for sh0es_name, csv_name in explicit.items():
         if csv_name in host_sigma and sh0es_name not in host_sigma:
             host_sigma[sh0es_name] = host_sigma[csv_name]
@@ -127,11 +151,13 @@ def load_host_metadata():
             host_group[sh0es_name] = host_group.get(csv_name, np.nan)
             if csv_name in host_z:
                 host_z[sh0es_name] = host_z[csv_name]
+            if csv_name in host_z_cmb:
+                host_z_cmb[sh0es_name] = host_z_cmb[csv_name]
 
-    return host_sigma, host_z, host_S, host_ra, host_dec, host_group
+    return host_sigma, host_z, host_z_cmb, host_S, host_ra, host_dec, host_group
 
 
-def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
+def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=None):
     from scipy import linalg
     try:
         Lc = np.linalg.cholesky(C)
@@ -143,7 +169,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
     theta, _, _, _ = np.linalg.lstsq(A_w, y_w, rcond=1e-12)
 
     mu_params = [(q[i].replace("mu_", ""), i) for i in range(len(q)) if q[i].startswith("mu_")]
-    hosts, mus, mu_errs, sigmas, zs, is_anchors = [], [], [], [], [], []
+    hosts, mus, mu_errs, sigmas, zs, zs_cmb, is_anchors = [], [], [], [], [], [], []
     anchor_hosts = {"N4258", "LMC", "M31", "MW", "SMC"}
 
     for host_name, mu_idx in mu_params:
@@ -170,11 +196,12 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
         mu_errs.append(mu_err)
         sigmas.append(host_sigma[host_name])
         zs.append(host_z.get(host_name, np.nan))
+        zs_cmb.append(host_z_cmb.get(host_name, np.nan) if host_z_cmb else np.nan)
         is_anchors.append(host_name in anchor_hosts)
 
     return pd.DataFrame({
         "host": hosts, "mu": mus, "mu_err": mu_errs,
-        "sigma": sigmas, "z_hd": zs, "is_anchor": is_anchors,
+        "sigma": sigmas, "z_hd": zs, "z_cmb": zs_cmb, "is_anchor": is_anchors,
     })
 
 
@@ -211,11 +238,13 @@ def _build_covariates(df_subset, host_S, host_ra, host_dec, host_group, sigma_re
 # ---------------------------------------------------------------------------
 def _neg_logL(params, cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
               n_x=None, n_y=None, n_z=None, z=None, groups=None, has_group=None):
-    sigma_int_v = max(params[-1], 0.01)
     idx = 0
     H_app = params[idx]; idx += 1
-    gamma_param = params[idx]; idx += 1
-    Gamma_X = 0.0 if model_type == "M0" else gamma_param * GAMMA_SCALE
+    if model_type == "M0":
+        Gamma_X = 0.0
+    else:
+        Gamma_X = params[idx] * GAMMA_SCALE
+        idx += 1
 
     cz_model = d_obs * (H_app + Gamma_X * X)
 
@@ -227,9 +256,15 @@ def _neg_logL(params, cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
         idx += 3
         cz_model += Dx * n_x + Dy * n_y + Dz * n_z
     if model_type in ("M4", "M6"):
-        Qxx, Qyy, Qxy = params[idx], params[idx+1], params[idx+2]
-        idx += 3
-        cz_model += Qxx * (n_x**2 - 1/3) + Qyy * (n_y**2 - 1/3) + Qxy * n_x * n_y
+        Qxx, Qyy, Qxy, Qxz, Qyz = params[idx:idx+5]
+        idx += 5
+        cz_model += (
+            Qxx * (n_x**2 - n_z**2)
+            + Qyy * (n_y**2 - n_z**2)
+            + 2.0 * Qxy * n_x * n_y
+            + 2.0 * Qxz * n_x * n_z
+            + 2.0 * Qyz * n_y * n_z
+        )
     if model_type in ("M5", "M6") and has_group is not None and np.any(has_group):
         unique_groups = np.unique(groups[has_group])
         goff = {}
@@ -239,6 +274,7 @@ def _neg_logL(params, cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
             if has_group[i] and groups[i] in goff:
                 cz_model[i] += goff[groups[i]]
 
+    sigma_int_v = max(params[idx], 0.01)
     resid = cz_obs - cz_model
     sigma_cz_dist = LN10_OVER_5 * np.abs(cz_model) * sigma_mu
     var = sigma_v**2 + sigma_cz_dist**2 + sigma_int_v**2
@@ -250,8 +286,12 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
               n_x=None, n_y=None, n_z=None, z=None, groups=None, has_group=None):
     n = len(cz_obs)
     H_app_init = np.median(cz_obs / d_obs)
-    x0 = [H_app_init, 2.0, 3.0]
-    bounds = [(30.0, 90.0), (-100.0, 100.0), (0.01, 50.0)]
+    x0 = [H_app_init]
+    bounds = [(30.0, 90.0)]
+
+    if model_type != "M0":
+        x0.append(2.0)
+        bounds.append((-100.0, 100.0))
 
     if model_type in ("M2", "M6"):
         x0.append(0.0); bounds.append((-1e4, 1e4))
@@ -259,12 +299,15 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
         x0.extend([0.0, 0.0, 0.0])
         bounds.extend([(-5000.0, 5000.0)] * 3)
     if model_type in ("M4", "M6"):
-        x0.extend([0.0, 0.0, 0.0])
-        bounds.extend([(-5000.0, 5000.0)] * 3)
+        x0.extend([0.0] * 5)
+        bounds.extend([(-5000.0, 5000.0)] * 5)
     if model_type in ("M5", "M6") and has_group is not None and np.any(has_group):
         unique_groups = np.unique(groups[has_group])
         x0.extend([0.0] * len(unique_groups))
         bounds.extend([(-5000.0, 5000.0)] * len(unique_groups))
+
+    x0.append(3.0)
+    bounds.append((0.01, 2000.0))
 
     x0 = np.array(x0)
 
@@ -273,24 +316,31 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
                          n_x, n_y, n_z, z, groups, has_group)
 
     res = optimize.minimize(obj, x0, method="L-BFGS-B", bounds=bounds)
+    az_inits = [0.0] if model_type not in ("M2", "M6") or z is None else [0.0, 500.0, 1000.0, 1500.0, -500.0]
     for H_init in [65.0, 70.0, 75.0, 80.0]:
         for g_init in [1.0, 2.0, 2.3, 2.5, 3.0, 0.0, -1.0]:
-            x0_try = x0.copy()
-            x0_try[0] = H_init
-            x0_try[1] = g_init
-            res_try = optimize.minimize(obj, x0_try, method="L-BFGS-B", bounds=bounds)
-            if res_try.fun < res.fun:
-                res = res_try
+            for az_init in az_inits:
+                x0_try = x0.copy()
+                x0_try[0] = H_init
+                if model_type != "M0":
+                    x0_try[1] = g_init
+                if model_type in ("M2", "M6") and z is not None:
+                    x0_try[2] = az_init
+                res_try = optimize.minimize(obj, x0_try, method="L-BFGS-B", bounds=bounds)
+                if res_try.fun < res.fun:
+                    res = res_try
 
     idx = 0
     H_app = res.x[idx]; idx += 1
-    gamma_param = res.x[idx]; idx += 1
-    Gamma_X = 0.0 if model_type == "M0" else gamma_param * GAMMA_SCALE
-    sigma_int_v = res.x[idx]; idx += 1
+    if model_type == "M0":
+        Gamma_X = 0.0
+    else:
+        Gamma_X = res.x[idx] * GAMMA_SCALE
+        idx += 1
 
     alpha_z = np.nan
     Dx = Dy = Dz = np.nan
-    Qxx = Qyy = Qxy = np.nan
+    Qxx = Qyy = Qxy = Qxz = Qyz = np.nan
     group_offsets = {}
 
     if model_type in ("M2", "M6"):
@@ -299,12 +349,14 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
         Dx, Dy, Dz = res.x[idx], res.x[idx+1], res.x[idx+2]
         idx += 3
     if model_type in ("M4", "M6"):
-        Qxx, Qyy, Qxy = res.x[idx], res.x[idx+1], res.x[idx+2]
-        idx += 3
+        Qxx, Qyy, Qxy, Qxz, Qyz = res.x[idx:idx+5]
+        idx += 5
     if model_type in ("M5", "M6") and has_group is not None and np.any(has_group):
         unique_groups = np.unique(groups[has_group])
         for g in unique_groups:
             group_offsets[int(g)] = float(res.x[idx]); idx += 1
+
+    sigma_int_v = res.x[idx]
 
     try:
         hess = optimize.approx_fprime(
@@ -324,7 +376,13 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
     if model_type in ("M3", "M4", "M6"):
         cz_model += Dx * n_x + Dy * n_y + Dz * n_z
     if model_type in ("M4", "M6"):
-        cz_model += Qxx * (n_x**2 - 1/3) + Qyy * (n_y**2 - 1/3) + Qxy * n_x * n_y
+        cz_model += (
+            Qxx * (n_x**2 - n_z**2)
+            + Qyy * (n_y**2 - n_z**2)
+            + 2.0 * Qxy * n_x * n_y
+            + 2.0 * Qxz * n_x * n_z
+            + 2.0 * Qyz * n_y * n_z
+        )
     if model_type in ("M5", "M6") and has_group is not None and np.any(has_group):
         for i in range(len(cz_obs)):
             if has_group[i] and groups[i] in group_offsets:
@@ -343,6 +401,7 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
         "Gamma_X": float(Gamma_X), "Gamma_X_err": float(gamma_se), "Gamma_X_sig": float(gamma_sig),
         "alpha_z": float(alpha_z), "dipole_x": float(Dx), "dipole_y": float(Dy), "dipole_z": float(Dz),
         "quadrupole_xx": float(Qxx), "quadrupole_yy": float(Qyy), "quadrupole_xy": float(Qxy),
+        "quadrupole_xz": float(Qxz), "quadrupole_yz": float(Qyz),
         "sigma_int_v": float(sigma_int_v), "chi2": chi2,
         "chi2_reduced": chi2 / dof if dof > 0 else np.inf,
         "logL": float(logL), "AIC": -2 * logL + 2 * len(res.x),
@@ -356,18 +415,12 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
 # Fast WLS for permutation tests (avoids slow optimizer)
 # ---------------------------------------------------------------------------
 def _wls_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v):
-    """Fast weighted least squares for Gamma_X only."""
-    n = len(cz_obs)
-    H_app_init = np.median(cz_obs / d_obs)
-    # Use fixed H_app, fit only Gamma_X
-    y = cz_obs - d_obs * H_app_init
-    x = d_obs * X
-    # Weights: 1 / sigma_v^2 (distance uncertainty subdominant for permutation)
+    """Fast WLS fit of H_app and Gamma_X for permutation diagnostics."""
     w = 1.0 / (sigma_v**2 + (LN10_OVER_5 * np.abs(cz_obs) * sigma_mu)**2)
     w = np.maximum(w, 1e-10)
-    Xmat = np.column_stack([np.ones(n), x])
+    Xmat = np.column_stack([d_obs, d_obs * X])
     W = np.diag(w)
-    beta = np.linalg.lstsq(Xmat.T @ W @ Xmat, Xmat.T @ W @ y, rcond=None)[0]
+    beta = np.linalg.lstsq(Xmat.T @ W @ Xmat, Xmat.T @ W @ cz_obs, rcond=None)[0]
     return beta[1]  # Gamma_X
 
 
@@ -392,7 +445,7 @@ def permutation_suite(cz_obs, d_obs, X, sigma_mu, sigma_v, z, n_x, n_y, n_z, n_p
     for _ in range(n_perm):
         Xp = rng.permutation(X)
         gp.append(abs(_wls_gamma(cz_obs, d_obs, Xp, sigma_mu, sigma_v)))
-    results["standard"] = float(np.mean(np.array(gp) >= gamma_true))
+    results["standard"] = float((np.sum(np.array(gp) >= gamma_true) + 1) / (n_perm + 1))
 
     # Redshift-bin
     z_bins = np.digitize(z, bins=np.percentile(z, [25, 50, 75]))
@@ -400,7 +453,7 @@ def permutation_suite(cz_obs, d_obs, X, sigma_mu, sigma_v, z, n_x, n_y, n_z, n_p
     for _ in range(n_perm):
         Xp = _permute_within_bins(X, z_bins, seed=rng.integers(0, 1e9))
         gp.append(abs(_wls_gamma(cz_obs, d_obs, Xp, sigma_mu, sigma_v)))
-    results["redshift_binned"] = float(np.mean(np.array(gp) >= gamma_true))
+    results["redshift_binned"] = float((np.sum(np.array(gp) >= gamma_true) + 1) / (n_perm + 1))
 
     # Sky-bin (RA octants)
     ra = np.rad2deg(np.arctan2(n_y, n_x))
@@ -409,7 +462,7 @@ def permutation_suite(cz_obs, d_obs, X, sigma_mu, sigma_v, z, n_x, n_y, n_z, n_p
     for _ in range(n_perm):
         Xp = _permute_within_bins(X, ra_bins, seed=rng.integers(0, 1e9))
         gp.append(abs(_wls_gamma(cz_obs, d_obs, Xp, sigma_mu, sigma_v)))
-    results["sky_binned"] = float(np.mean(np.array(gp) >= gamma_true))
+    results["sky_binned"] = float((np.sum(np.array(gp) >= gamma_true) + 1) / (n_perm + 1))
 
     # Redshift x sky cross-bin
     cross_bins = z_bins * 10 + ra_bins
@@ -417,7 +470,7 @@ def permutation_suite(cz_obs, d_obs, X, sigma_mu, sigma_v, z, n_x, n_y, n_z, n_p
     for _ in range(n_perm):
         Xp = _permute_within_bins(X, cross_bins, seed=rng.integers(0, 1e9))
         gp.append(abs(_wls_gamma(cz_obs, d_obs, Xp, sigma_mu, sigma_v)))
-    results["redshift_sky_binned"] = float(np.mean(np.array(gp) >= gamma_true))
+    results["redshift_sky_binned"] = float((np.sum(np.array(gp) >= gamma_true) + 1) / (n_perm + 1))
 
     results["gamma_true"] = float(gamma_true)
     return results
@@ -473,17 +526,21 @@ def run():
     print_status("Step 40: Flow / Sky Controls", "SECTION")
 
     L, y, C, q = load_sh0es_data()
-    host_sigma, host_z, host_S, host_ra, host_dec, host_group = load_host_metadata()
+    host_sigma, host_z, host_z_cmb, host_S, host_ra, host_dec, host_group = load_host_metadata()
     sigma_ref = np.sqrt((30.0**2 * 0.20 + 24.0**2 * 0.25 + 115.0**2 * 0.55) / (0.20 + 0.25 + 0.55))
 
-    df_hosts = compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref)
+    df_hosts = compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=host_z_cmb)
     print_status(f"Computed {len(df_hosts)} calibrator hosts", "INFO")
 
-    PRIMARY_Z_CUT = 0.0035
     df_primary = df_hosts[
-        (~df_hosts["is_anchor"]) & df_hosts["z_hd"].notna() & (df_hosts["z_hd"] >= PRIMARY_Z_CUT)
+        (~df_hosts["is_anchor"])
+        & df_hosts["z_hd"].notna()
+        & (df_hosts["z_hd"] > 0)
     ].copy()
-    print_status(f"Primary sample (z >= {PRIMARY_Z_CUT}): {len(df_primary)} hosts", "INFO")
+    print_status(
+        f"Primary sample (complete R22 positive-redshift set): {len(df_primary)} hosts",
+        "INFO",
+    )
 
     cz_pri, mu_err_pri, z_pri, d_pri, X_pri, n_x, n_y, n_z, groups, has_group = \
         _build_covariates(df_primary, host_S, host_ra, host_dec, host_group, sigma_ref)
@@ -504,7 +561,7 @@ def run():
     if n_meaningful_groups >= 2:
         model_types.append("M5")
     else:
-        print_status("Skipping M5/M6 group models: no meaningful groups found", "INFO")
+        print_status("Skipping group fixed effects: fewer than two repeated groups", "INFO")
     model_types.append("M6")
 
     results = []

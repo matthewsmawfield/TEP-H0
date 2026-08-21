@@ -27,9 +27,9 @@ h0 = strat["h0_derived"].values
 z = strat["z_hd"].values
 rho = strat["rho_local"].values
 n_mb = strat["tully_nmb"].fillna(1.0).values
-S_local = np.array([total_screening_factor(r,n) for r,n in zip(rho,n_mb)])
+S_total = np.array([total_screening_factor(r,n) for r,n in zip(rho,n_mb)])
 S_group = np.array([group_screening_factor(n) for n in n_mb])
-S_total = S_local * S_group
+S_local = np.divide(S_total, S_group, out=np.ones_like(S_total), where=S_group > 0)
 sref = float(tep["sigma_ref"]); sref_scr = float(tep.get("sigma_ref_screened",30.51))
 c2 = C_SQUARED_KM_S
 
@@ -38,9 +38,9 @@ regressors = {
     "S_local*sigma_sq": S_local*sigma**2,
     "S_group*sigma_sq": S_group*sigma**2,
     "S_total*sigma_sq": S_total*sigma**2,
-    "TEP_full_std": S_total*(sigma**2-sref**2)/c2,
-    "TEP_local_std": S_local*(sigma**2-sref**2)/c2,
-    "TEP_full_scr": S_total*(sigma**2-sref_scr**2)/c2,
+    "TEP_full_std": (S_total*sigma**2-sref**2)/c2,
+    "TEP_local_std": (S_local*sigma**2-sref**2)/c2,
+    "TEP_full_scr": (S_total*sigma**2-sref_scr**2)/c2,
 }
 
 sh("Correlation with H0")

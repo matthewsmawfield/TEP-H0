@@ -24,6 +24,8 @@ from scripts.steps.step_39_environment_slope_decomposition import LN10_OVER_5, f
 
 
 def _build_host_z_map(df: pd.DataFrame) -> dict[str, float]:
+    """Build host redshift map using the union Hubble-flow criterion."""
+    from scripts.utils.sample_selection import hubble_flow_mask
     host_z: dict[str, float] = {}
 
     def add_variants(name: str, z: float) -> None:
@@ -48,11 +50,18 @@ def _build_host_z_map(df: pd.DataFrame) -> dict[str, float]:
     for _, row in df.iterrows():
         name = str(row.get("normalized_name", ""))
         z_hd = row.get("z_hd", np.nan)
-        if pd.isna(z_hd) or z_hd <= 0:
+        z_cmb = row.get("z_cmb", np.nan)
+        # Use union criterion: include if z_cmb or z_hd exceeds threshold
+        from scripts.utils.sample_selection import Z_CUT
+        z_hd_ok = pd.notna(z_hd) and z_hd > Z_CUT
+        z_cmb_ok = pd.notna(z_cmb) and z_cmb > Z_CUT
+        if not (z_hd_ok or z_cmb_ok):
             continue
-        add_variants(name, float(z_hd))
+        # Use z_hd for H0 computation (best available correction)
+        z_use = float(z_hd) if pd.notna(z_hd) and z_hd > 0 else float(z_cmb)
+        add_variants(name, z_use)
 
-    explicit = {"M1337": "N1337", "N105A": "N105", "N976A": "N976"}
+    explicit = {"M1337": "Mrk1337", "N105A": "N105", "N976A": "N976"}
     for sh0es_name, csv_name in explicit.items():
         if csv_name in host_z and sh0es_name not in host_z:
             host_z[sh0es_name] = host_z[csv_name]
@@ -75,7 +84,8 @@ def run():
     seed = 43
     rng = np.random.default_rng(seed)
 
-    PRIMARY_Z_CUT = 0.0035
+    from scripts.utils.sample_selection import Z_CUT
+    PRIMARY_Z_CUT = Z_CUT  # Hubble-flow threshold (see sample_selection.py)
     anchor_hosts = {"MW", "LMC", "SMC", "M31", "N4258"}
 
     H_app_true = 73.04
@@ -83,9 +93,9 @@ def run():
     kappa_inj = float(Gamma_inj / (LN10_OVER_5 * H_app_true))
 
     # ------------------------------------------------------------------
-    # Method (1): SH0ES-style design matrix with free host moduli
-    # Inject an environment-dependent Cepheid bias that is algebraically
-    # equivalent to shifting the latent host moduli mu_i.
+    # Method (1): SH0ES-style design matrix with free host moduli.
+    # Inject a latent-modulus environmental shift. This is deliberately not an
+    # observation-level injection into the Cepheid rows tested by Step 34.
     # ------------------------------------------------------------------
     fll = FullLadderLikelihood()
     L, y, C, q, _ = fll.load_sh0es_data()
@@ -101,7 +111,7 @@ def run():
     mu_indices = [i for i, p in enumerate(q) if str(p).startswith("mu_")]
     mu_names = [str(q[i]) for i in mu_indices]
 
-    # Host redshift lookup (for selecting the primary N=29)
+    # Host redshift lookup (for selecting the primary N=33)
     df_hosts = pd.read_csv(fll.hosts_path)
     host_z = _build_host_z_map(df_hosts)
 
@@ -201,6 +211,7 @@ def run():
         "primary_z_cut": PRIMARY_Z_CUT,
         "N_primary": int(len(primary_hosts)),
         "injection": {
+            "target": "latent_host_moduli_not_cepheid_rows",
             "H_app_true": float(H_app_true),
             "kappa_Cep_injected": float(kappa_inj),
             "Gamma_X_injected": float(Gamma_inj),

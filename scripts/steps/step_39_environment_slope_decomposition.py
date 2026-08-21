@@ -38,6 +38,7 @@ from scipy import optimize, stats
 BASE_DIR = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(BASE_DIR))
 from core.constants import KAPPA_GAL, KAPPA_GAL_UNCERTAINTY
+from scripts.utils.tep_correction import build_host_screening_map
 DATA_DIR = BASE_DIR / "data"
 SH0ES_DIR = DATA_DIR / "raw" / "external" / "Cepheid-Distance-Ladder-Data" / "SH0ES2022"
 HOSTS_PATH = DATA_DIR / "processed" / "hosts_processed.csv"
@@ -68,7 +69,7 @@ def print_status(msg, level="INFO"):
 def build_host_x(sigma, sigma_ref, S=1.0):
     if sigma is None or sigma <= 0 or sigma_ref <= 0:
         return 0.0
-    return S * (sigma**2 - sigma_ref**2) / (C_KM_S ** 2)
+    return (S * sigma**2 - sigma_ref**2) / (C_KM_S ** 2)
 
 
 def center_scale(v):
@@ -94,20 +95,33 @@ def load_sh0es_data():
 
 def load_host_metadata():
     df = pd.read_csv(HOSTS_PATH)
+    screening_map = build_host_screening_map(df, BASE_DIR)
     host_sigma = {}
     host_z = {}
+    host_z_cmb = {}
     host_S = {}
     for _, row in df.iterrows():
         name = row["normalized_name"]
+        source_id = str(row.get("source_id", "")).strip()
         sigma = row["sigma_inferred"]
         z_hd = row["z_hd"]
-        S = row.get("shear_suppression", 1.0)
+        z_cmb = row.get("z_cmb", np.nan)
+        S = screening_map.get(name, row.get("shear_suppression", 1.0))
         if pd.isna(S):
             S = 1.0
         host_sigma[name] = sigma
         host_S[name] = float(S)
         if pd.notna(z_hd) and z_hd > 0:
             host_z[name] = z_hd
+        if pd.notna(z_cmb) and z_cmb > 0:
+            host_z_cmb[name] = z_cmb
+        if source_id:
+            host_sigma[source_id] = sigma
+            host_S[source_id] = float(S)
+            if pd.notna(z_hd) and z_hd > 0:
+                host_z[source_id] = z_hd
+            if pd.notna(z_cmb) and z_cmb > 0:
+                host_z_cmb[source_id] = z_cmb
         compact = name.replace(" ", "").replace("NGC", "N").replace("UGC", "U")
         if compact.startswith(("N", "U")):
             parts = compact[1:]
@@ -117,29 +131,37 @@ def load_host_metadata():
                 host_S[padded] = float(S)
                 if pd.notna(z_hd) and z_hd > 0:
                     host_z[padded] = z_hd
+                if pd.notna(z_cmb) and z_cmb > 0:
+                    host_z_cmb[padded] = z_cmb
                 unpadded = compact[0] + parts.lstrip("0")
                 if unpadded != padded:
                     host_sigma[unpadded] = sigma
                     host_S[unpadded] = float(S)
                     if pd.notna(z_hd) and z_hd > 0:
                         host_z[unpadded] = z_hd
+                    if pd.notna(z_cmb) and z_cmb > 0:
+                        host_z_cmb[unpadded] = z_cmb
         if compact.startswith("N"):
             ngc_name = "NGC" + compact[1:]
             host_sigma[ngc_name] = sigma
             host_S[ngc_name] = float(S)
             if pd.notna(z_hd) and z_hd > 0:
                 host_z[ngc_name] = z_hd
-    explicit = {"M1337": "N1337", "N105A": "N105", "N976A": "N976"}
+            if pd.notna(z_cmb) and z_cmb > 0:
+                host_z_cmb[ngc_name] = z_cmb
+    explicit = {"M101": "M 101", "M1337": "Mrk 1337", "N105A": "N105", "N976A": "N976"}
     for sh0es_name, csv_name in explicit.items():
         if csv_name in host_sigma and sh0es_name not in host_sigma:
             host_sigma[sh0es_name] = host_sigma[csv_name]
             host_S[sh0es_name] = host_S[csv_name]
             if csv_name in host_z:
                 host_z[sh0es_name] = host_z[csv_name]
-    return host_sigma, host_z, host_S
+            if csv_name in host_z_cmb:
+                host_z_cmb[sh0es_name] = host_z_cmb[csv_name]
+    return host_sigma, host_z, host_z_cmb, host_S
 
 
-def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
+def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=None):
     from scipy import linalg
     try:
         Lc = np.linalg.cholesky(C)
@@ -156,6 +178,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
     mu_errs = []
     sigmas = []
     zs = []
+    zs_cmb = []
     is_anchors = []
 
     anchor_hosts = {"N4258", "LMC", "M31", "MW", "SMC"}
@@ -183,6 +206,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
         mu_errs.append(mu_err)
         sigmas.append(host_sigma[host_name])
         zs.append(host_z.get(host_name, np.nan))
+        zs_cmb.append(host_z_cmb.get(host_name, np.nan) if host_z_cmb else np.nan)
         is_anchors.append(host_name in anchor_hosts)
 
     df = pd.DataFrame({
@@ -191,6 +215,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
         "mu_err": mu_errs,
         "sigma": sigmas,
         "z_hd": zs,
+        "z_cmb": zs_cmb,
         "is_anchor": is_anchors,
     })
     return df
@@ -219,7 +244,9 @@ def _build_covariates_for_subset(df_subset, host_S, sigma_ref):
 GAMMA_SCALE = 1e7
 
 
-def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0):
+def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0,
+              compute_profile=False, multi_start=False,
+              compute_uncertainty=True):
     """Fit cz = d_obs * (H_app + Gamma_X * X) + noise.
 
     Internally scales Gamma_X by GAMMA_SCALE so optimizer parameters are O(1).
@@ -236,38 +263,41 @@ def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0):
         var = np.maximum(var, 0.01)
         return 0.5 * np.sum(resid**2 / var + np.log(var))
 
-    H_app_init = np.median(cz_obs / d_obs)
-    x0 = np.array([H_app_init, 2.0, sigma_int_guess])
+    ratio = cz_obs / d_obs
+    linear_design = np.column_stack([np.ones(n), X * GAMMA_SCALE])
+    H_app_init, gamma_init = np.linalg.lstsq(linear_design, ratio, rcond=None)[0]
+    x0 = np.array([H_app_init, gamma_init, sigma_int_guess])
     bounds = [(30.0, 90.0), (-100.0, 100.0), (0.01, 50.0)]
 
     res = optimize.minimize(neg_logL, x0, method="L-BFGS-B", bounds=bounds)
-    # Always scan multiple initial guesses; L-BFGS-B can get stuck on flat likelihood ridges
-    for H_init in [65.0, 70.0, 75.0, 80.0]:
-        for g_init in [1.0, 2.0, 2.3, 2.5, 3.0, 0.0, -1.0]:
-            x0_try = np.array([H_init, g_init, sigma_int_guess])
-            res_try = optimize.minimize(neg_logL, x0_try, method="L-BFGS-B", bounds=bounds)
-            if res_try.fun < res.fun:
-                res = res_try
+    if multi_start:
+        for H_init in [65.0, 70.0, 75.0, 80.0]:
+            for g_init in [1.0, 2.0, 2.5, 3.0, 0.0, -1.0]:
+                x0_try = np.array([H_init, g_init, sigma_int_guess])
+                res_try = optimize.minimize(neg_logL, x0_try, method="L-BFGS-B", bounds=bounds)
+                if res_try.fun < res.fun:
+                    res = res_try
 
     H_app, gamma_param, sigma_int_v = res.x[0], res.x[1], res.x[2]
     Gamma_X = gamma_param * GAMMA_SCALE
 
     # Hessian for uncertainties (in scaled parameter space)
+    cov_physical = np.full((3, 3), np.nan)
     try:
+        if not compute_uncertainty:
+            raise RuntimeError("uncertainty calculation disabled")
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
             hess = optimize.approx_fprime(
                 res.x,
                 lambda x: optimize.approx_fprime(x, neg_logL, 1e-5),
                 1e-5,
             )
-            cov = np.linalg.pinv(hess, rcond=1e-12)
-            se_scaled = np.sqrt(np.maximum(np.diag(cov), 0))
+            cov_scaled = np.linalg.pinv(hess, rcond=1e-12)
+            jac = np.diag([1.0, GAMMA_SCALE, 1.0])
+            cov_physical = jac @ cov_scaled @ jac
+            se = np.sqrt(np.maximum(np.diag(cov_physical), 0))
     except Exception:
-        se_scaled = np.full(3, np.nan)
-
-    # Convert uncertainties back to physical units
-    se = se_scaled.copy()
-    se[1] *= GAMMA_SCALE
+        se = np.full(3, np.nan)
 
     cz_model = d_obs * (H_app + Gamma_X * X)
     sigma_cz_dist = LN10_OVER_5 * np.abs(cz_model) * sigma_mu
@@ -277,7 +307,69 @@ def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0):
     logL = -res.fun if hasattr(res, 'fun') else np.nan
     dof = n - 3
 
-    # Derived quantities
+    # One-parameter nested likelihood-ratio check against Gamma_X = 0.
+    def neg_logL_null(params):
+        return neg_logL([params[0], 0.0, params[1]])
+
+    if compute_uncertainty or compute_profile:
+        null_res = optimize.minimize(
+            neg_logL_null,
+            [H_app, sigma_int_v],
+            method="L-BFGS-B",
+            bounds=[bounds[0], bounds[2]],
+        )
+        delta_2logL = max(0.0, 2.0 * (null_res.fun - res.fun))
+        lrt_sig = np.sign(Gamma_X) * np.sqrt(delta_2logL)
+    else:
+        delta_2logL = np.nan
+        lrt_sig = np.nan
+
+    profile_low = np.nan
+    profile_high = np.nan
+    if compute_profile:
+        target = res.fun + 0.5
+
+        def profile_nll(gamma_param_fixed):
+            def objective_hs(hs):
+                return neg_logL([hs[0], gamma_param_fixed, hs[1]])
+
+            prof = optimize.minimize(
+                objective_hs,
+                [H_app, sigma_int_v],
+                method="L-BFGS-B",
+                bounds=[bounds[0], bounds[2]],
+            )
+            return prof.fun
+
+        def find_profile_limit(direction):
+            center = gamma_param
+            step = max(0.1, 0.1 * abs(center))
+            inner = center
+            outer = center + direction * step
+            while bounds[1][0] < outer < bounds[1][1] and profile_nll(outer) < target:
+                inner = outer
+                step *= 1.8
+                outer = center + direction * step
+            outer = min(max(outer, bounds[1][0]), bounds[1][1])
+            if profile_nll(outer) < target:
+                return np.nan
+            left, right = sorted([inner, outer])
+            return optimize.brentq(
+                lambda g: profile_nll(g) - target,
+                left,
+                right,
+            )
+
+        try:
+            profile_low = find_profile_limit(-1) * GAMMA_SCALE
+            profile_high = find_profile_limit(+1) * GAMMA_SCALE
+            profile_err = 0.5 * (profile_high - profile_low)
+            if np.isfinite(profile_err) and profile_err > 0:
+                se[1] = profile_err
+        except (ValueError, RuntimeError):
+            pass
+
+    # Derived Cepheid-only equivalent after selecting the profile uncertainty.
     kappa_equiv = Gamma_X / (LN10_OVER_5 * H_app) if H_app > 0 else np.nan
     kappa_equiv_err = np.nan
     try:
@@ -285,7 +377,7 @@ def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0):
         dkappa_dH = -Gamma_X / (LN10_OVER_5 * H_app**2)
         kappa_equiv_err = np.sqrt(
             (dkappa_dG * se[1])**2 + (dkappa_dH * se[0])**2
-            + 2 * dkappa_dG * dkappa_dH * cov[0, 1]
+            + 2 * dkappa_dG * dkappa_dH * cov_physical[0, 1]
         )
     except Exception:
         pass
@@ -302,6 +394,10 @@ def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0):
         "Gamma_X": float(Gamma_X),
         "Gamma_X_err": float(se[1]),
         "Gamma_X_sig": float(abs(Gamma_X) / se[1]) if se[1] > 0 else np.nan,
+        "Gamma_X_lrt_sig": float(lrt_sig),
+        "delta_2logL_vs_null": float(delta_2logL),
+        "Gamma_X_profile_low": float(profile_low),
+        "Gamma_X_profile_high": float(profile_high),
         "sigma_int_v": float(sigma_int_v),
         "sigma_int_v_err": float(se[2]),
         "kappa_equiv": float(kappa_equiv),
@@ -324,19 +420,28 @@ def permutation_test(cz_obs, d_obs, X, sigma_mu, sigma_v, n_perm=5000, seed=42):
     """Standard permutation test for Gamma_X significance."""
     rng = np.random.default_rng(seed)
     n = len(cz_obs)
-    res_true = fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v)
+    res_true = fit_gamma(
+        cz_obs, d_obs, X, sigma_mu, sigma_v,
+        multi_start=True, compute_uncertainty=False,
+    )
     gamma_true = abs(res_true["Gamma_X"])
 
     gamma_perm = []
     for _ in range(n_perm):
         X_perm = rng.permutation(X)
-        res_perm = fit_gamma(cz_obs, d_obs, X_perm, sigma_mu, sigma_v)
+        res_perm = fit_gamma(
+            cz_obs, d_obs, X_perm, sigma_mu, sigma_v,
+            compute_uncertainty=False,
+        )
         gamma_perm.append(abs(res_perm["Gamma_X"]))
 
     gamma_perm = np.array(gamma_perm)
-    p_value = float(np.mean(gamma_perm >= gamma_true))
+    exceedances = int(np.sum(gamma_perm >= gamma_true))
+    p_value = float((exceedances + 1) / (n_perm + 1))
     return {
         "permutation_p": p_value,
+        "permutation_exceedances": exceedances,
+        "n_permutations": int(n_perm),
         "gamma_true": float(gamma_true),
         "gamma_perm_mean": float(np.mean(gamma_perm)),
         "gamma_perm_std": float(np.std(gamma_perm)),
@@ -350,7 +455,10 @@ def bootstrap_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, n_boot=1000, seed=42):
     gammas = []
     for _ in range(n_boot):
         idx = rng.integers(0, n, size=n)
-        res = fit_gamma(cz_obs[idx], d_obs[idx], X[idx], sigma_mu[idx], sigma_v)
+        res = fit_gamma(
+            cz_obs[idx], d_obs[idx], X[idx], sigma_mu[idx], sigma_v,
+            compute_uncertainty=False,
+        )
         gammas.append(res["Gamma_X"])
 
     gammas = np.array(gammas)
@@ -371,7 +479,10 @@ def loho_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, host_names):
     for i in range(n):
         mask = np.ones(n, dtype=bool)
         mask[i] = False
-        res = fit_gamma(cz_obs[mask], d_obs[mask], X[mask], sigma_mu[mask], sigma_v)
+        res = fit_gamma(
+            cz_obs[mask], d_obs[mask], X[mask], sigma_mu[mask], sigma_v,
+            compute_uncertainty=False,
+        )
         gammas.append(res["Gamma_X"])
 
     gammas_arr = np.array(gammas)
@@ -394,22 +505,24 @@ def run():
     print_status("Step 39: Environment Slope Decomposition", "SECTION")
 
     L, y, C, q = load_sh0es_data()
-    host_sigma, host_z, host_S = load_host_metadata()
+    host_sigma, host_z, host_z_cmb, host_S = load_host_metadata()
     sigma_ref = np.sqrt(
         (30.0**2 * 0.20 + 24.0**2 * 0.25 + 115.0**2 * 0.55) / (0.20 + 0.25 + 0.55)
     )
 
-    df_hosts = compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref)
+    df_hosts = compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=host_z_cmb)
     print_status(f"Computed {len(df_hosts)} calibrator hosts", "INFO")
 
-    PRIMARY_Z_CUT = 0.0035
     df_primary = df_hosts[
         (~df_hosts["is_anchor"])
         & df_hosts["z_hd"].notna()
-        & (df_hosts["z_hd"] >= PRIMARY_Z_CUT)
+        & (df_hosts["z_hd"] > 0)
     ].copy()
 
-    print_status(f"Primary sample (z >= {PRIMARY_Z_CUT}): {len(df_primary)} hosts", "INFO")
+    print_status(
+        f"Primary sample (complete R22 positive-redshift set): {len(df_primary)} hosts",
+        "INFO",
+    )
 
     cz_pri, mu_err_pri, z_pri, d_pri, X_pri = _build_covariates_for_subset(
         df_primary, host_S, sigma_ref
@@ -421,9 +534,12 @@ def run():
     for sigma_v in sigma_v_values:
         print_status(f"sigma_v = {sigma_v} km/s", "SECTION")
 
-        res = fit_gamma(cz_pri, d_pri, X_pri, mu_err_pri, sigma_v)
+        res = fit_gamma(
+            cz_pri, d_pri, X_pri, mu_err_pri, sigma_v,
+            compute_profile=True, multi_start=True,
+        )
         res["sigma_v"] = sigma_v
-        res["sample"] = "primary"
+        res["sample"] = "all_r22_hosts"
         res["z_cut"] = 0.0
         results.append(res)
 
@@ -447,7 +563,7 @@ def run():
     # Redshift cut sensitivity
     # ========================================================================
     print_status("Redshift cut sensitivity", "SECTION")
-    z_cuts = [0.005, 0.0075]
+    z_cuts = [0.0035, 0.005, 0.0075]
     for z_cut in z_cuts:
         mask = z_pri >= z_cut
         n_cut = mask.sum()
@@ -463,7 +579,7 @@ def run():
         for sigma_v in [250]:
             res = fit_gamma(cz_cut, d_cut, X_cut, mu_err_cut, sigma_v)
             res["sigma_v"] = sigma_v
-            res["sample"] = "primary"
+            res["sample"] = "z_hd_cut"
             res["z_cut"] = z_cut
             results.append(res)
 

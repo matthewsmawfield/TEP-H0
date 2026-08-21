@@ -58,7 +58,8 @@ class Step23SyntheticInjection:
         print_status(">>> STEP 24: Synthetic injection recovery test", "TITLE")
 
         df = pd.read_csv(self.results_dir / "step_04_tep_corrected_h0.csv")
-        df = df[df["z_hd"] > 0.0035].copy()
+        from scripts.utils.sample_selection import apply_hubble_flow_cut
+        df = apply_hubble_flow_cut(df)
         N = len(df)
 
         # Load sigma_ref from pipeline JSON (not hardcoded)
@@ -100,7 +101,7 @@ class Step23SyntheticInjection:
         # TEP regressor
         sigma = df["sigma_inferred"].values
         S = df["shear_suppression"].values
-        X_tep = S * (sigma**2 - sigma_ref**2) / self.C2
+        X_tep = (S * sigma**2 - sigma_ref**2) / self.C2
 
         # ── Hubble-law null baseline ──────────────────────────────────────────
         # mu_null[i] depends only on z, not sigma.  At kappa_inj=0 the slope

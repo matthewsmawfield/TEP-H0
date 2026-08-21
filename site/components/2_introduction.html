@@ -1,202 +1,105 @@
 <h2>1. Introduction</h2>
 
-<h3>1.1 The Hubble Tension: A Crisis in Cosmology</h3>
+<h3>1.1 The Hubble Tension and Distance Ladder Systematics</h3>
 <p>
-    The Hubble constant $H_0$—conventionally interpreted as the present-day
-    expansion rate of the universe and operationally defining the low-redshift
-    distance–redshift scale—anchors the cosmic distance ladder. Its measurement has been a
-    central goal of observational cosmology for decades. Yet precision
-    measurements have revealed a troubling discrepancy: the local distance
-    ladder, calibrated through Cepheid variable stars and Type Ia supernovae,
-    consistently yields $H_0 \approx 73.0 \pm 1.0$ km/s/Mpc (Riess et al. 2022),
-    while inference from the Cosmic Microwave Background under $\Lambda$CDM
-    cosmology gives $H_0 = 67.4 \pm 0.5$ km/s/Mpc (Planck Collaboration 2020).
+    The discrepancy between the local expansion rate of the Universe measured via the classical distance ladder and the value inferred from early-universe cosmological observations has emerged as one of the most pressing foundational problems in modern physics. The SH0ES collaboration reports a local Hubble constant of $H_0 = 73.04 \pm 1.04\ {\rm km\,s^{-1}\,Mpc^{-1}}$ using Cepheid-calibrated Type Ia supernovae (Riess et al. 2022; hereafter R22), whereas cosmic microwave background (CMB) measurements by the Planck satellite under flat $\Lambda$CDM establish $H_0 = 67.4 \pm 0.5\ {\rm km\,s^{-1}\,Mpc^{-1}}$ (Planck Collaboration VI 2020). This exceeds $5\sigma$ in statistical significance, resisting resolution through conventional astrophysical systematics, photometric crowding, or standard cosmological parameters.
 </p>
 
 <p>
-    This $\sim 9\%$ discrepancy now exceeds $5\sigma$ statistical
-    significance—well beyond the threshold conventionally associated with new
-    physics. Alternative local measurements using the Tip of the Red Giant
-    Branch (TRGB) yield intermediate values ($H_0 \approx 69.8 \pm 1.6$
-    km/s/Mpc; Freedman et al. 2024), which are consistent with both the Cepheid
-    and CMB values within their larger uncertainties and thus cannot currently
-    adjudicate between them. Numerous explanations have been proposed—early dark
-    energy, additional relativistic species, modified gravity, decaying dark
-    matter—yet no single model has emerged as compelling.
+    The standard distance ladder relies on the assumption that stellar standard candles calibrated in nearby anchor galaxies (the Milky Way, Large Magellanic Cloud, Small Magellanic Cloud, and NGC 4258) behave identically in distant host galaxies. However, the anchor galaxies possess predominantly shallow gravitational potential wells, whereas the SN Ia host galaxies sample substantially deeper galactic potential wells. If stellar pulsation clocks respond dynamically to the local gravitational potential, an environmental gradient between calibrators and hosts will introduce a systematic bias into the inferred distance scale.
 </p>
 
-<h3>1.2 The Clock Hypothesis: Isochrony Violation</h3>
+<h3>1.2 The Temporal Equivalence Principle</h3>
+<p>
+    The Temporal Equivalence Principle (TEP) provides a covariant scalar-tensor framework that elevates proper time from a fixed background coordinate parameter to a dynamical physical field. The action is formulated on a two-metric spacetime:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    S = \int d^4x\sqrt{-g}\left[\frac{M_{\rm Pl}^2}{2}R - \frac{1}{2}(\nabla\phi)^2 - V(\phi)\right] + S_m[\tilde g_{\mu\nu}, \Psi_m] ,
+    \end{equation}
+</div>
 
 <p>
-    This work explores an alternative explanation rooted in the fundamental
-    measurement physics. The central hypothesis is a violation of the
-    <em>isochrony axiom</em>—the assumption that proper time accumulation is
-    independent of the local gravitational environment. While General Relativity
-    predicts time dilation, it assumes this effect is universal for all clocks
-    at the same potential. Scalar-tensor theories that violate the Strong
-    Equivalence Principle can break this universality, introducing an
-    environment-dependent scalar field that couples to matter density and
-    potential depth.
+    where gravity is governed by the metric $g_{\mu\nu}$, while all non-gravitational matter fields, atomic transitions, and stellar clocks couple universally to the causal matter metric $\tilde g_{\mu\nu} = A^2(\phi)g_{\mu\nu} + B(\phi)\nabla_\mu\phi\nabla_\nu\phi$, following the convention established in the foundational TEP theory paper (Smawfield 2025, Paper 0). In gravitational bound states, the conformal factor satisfies $A(\phi) < 1$, slowing the rate of proper time relative to cosmic background time.
 </p>
 
 <p>
-    The Temporal Equivalence Principle (TEP) provides a specific theoretical
-    framework for this violation. TEP extends General Relativity by introducing
-    a scalar field $\phi$ that mediates an additional gravitational interaction,
-    with the action $S = \int d^4x \sqrt{-g} \left[ \frac{M_{\rm Pl}^2}{2} R - \frac{1}{2}(\nabla_\mu
-    \phi)(\nabla^\mu \phi) - V(\phi) \right] + S_m[\tilde{g}_{\mu\nu},
-    \Psi_m]$, where $R$ is the Ricci scalar, $V(\phi)$ is the scalar potential,
-    and $S_m$ is the matter action. The key feature is the universal causal matter metric:
-    matter fields $\Psi_m$ couple not to the Einstein-frame metric $g_{\mu\nu}$
-    but to the Jordan-frame metric $\tilde{g}_{\mu\nu} = A^2(\phi) g_{\mu\nu} + B(\phi) \nabla_\mu\phi \nabla_\nu\phi$,
-    where $A(\phi) = \exp(\beta_A\phi/M_{\rm Pl})$ is the conformal factor and $B(\phi)$ encodes
-    the disformal coupling. In the weak-field limit relevant to galactic potentials,
-    the disformal term is subdominant and the conformal factor expands as
+    The absolute matter-clock rate relative to cosmic time is defined as
 </p>
 
+<div class="equation">
+    \begin{equation}
+    r_j \equiv \frac{(d\tilde\tau/dt)_j}{(d\tilde\tau/dt)_{\rm cosmic}} .
+    \end{equation}
+</div>
+
 <p>
-    For a clock following a worldline in spacetime, proper time is measured in
-    the Jordan frame. In the weak-field, non-relativistic limit where $\phi$
-    tracks the Newtonian potential $\Phi$, the conformal factor expands as
-    $A(\phi) \approx 1 - \eta_{\rm clock} \Phi/c^2$, where $\eta_{\rm clock}$ is the effective clock-rate response coefficient. The effective proper time interval measured by a local
-    clock becomes $d\tau = A(\Phi) \, d\tau_{\rm GR} = (1 - \eta_{\rm clock} \Phi/c^2)
-    d\tau_{\rm GR}$, where $d\tau_{\rm GR} \approx (1 + \Phi/c^2) dt$ is the
-    standard Schwarzschild time dilation. In deep potentials ($\Phi \ll 0$), if
-    $\eta_{\rm clock} > 1$, the TEP term can exceed the geometric term, causing clocks to
-    run faster rather than slower—a departure from standard GR expectations.
-    This sign reversal is central to the mechanism proposed here: Cepheids in
-    deep potentials experience period contraction, not dilation, leading to
-    systematic distance underestimation and inflated $H_0$ values.
+    Throughout the TEP framework, the physical rate ordering across galactic environments is strictly bounded:
 </p>
 
-<p>
-    An important feature distinguishes TEP from conventional scalar-tensor
-    theories: the scalar field gradient (Temporal Shear) is progressively
-    suppressed by ambient matter density through a continuous spatial profile
-    governed by the non-linear superposition of field gradients (Temporal Shear). In dense environments, large matter gradients attenuate
-    the scalar field gradient, recovering standard GR; in diffuse environments,
-    the gradient tracks the background potential, producing measurable
-    clock-rate anomalies. The suppression is quantified by a dimensionless
-    shear-suppression factor $S(\rho) \in [0,1]$, with $S(\rho) = [1 +
-    (\rho/\rho_{\rm half})^2]^{-1}$ where $\rho_{\rm half} \approx
-    0.5\,M_\odot/\text{pc}^3$ is the galactic half-suppression density. The
-    associated series-level saturation scale is denoted $\rho_{\rm T}$,
-    the Temporal Topology saturation scale. It is not used here as a binary
-    local-density switch; local suppression depends on environmental state,
-    source screening, and the active Temporal Shear sector.
-    The galactic-scale $\rho_{\rm half}$ emerges from SPARC rotation-curve
-    normalizations.
-</p>
+<div class="equation">
+    \begin{equation}
+    0 < r_{\rm core} < r_{\rm disk} < r_{\rm cosmic} \equiv 1 .
+    \label{eq:rate_hierarchy}
+    \end{equation}
+</div>
 
 <p>
-    For Cepheid variable stars in SN Ia host galaxies, two environmental
-    parameters are therefore critical. First, the gravitational potential depth
-    (traced by velocity dispersion $\sigma$) drives the magnitude of the TEP
-    effect; deeper potentials cause stronger period contraction when Temporal
-    Shear is active. Second, the local density modulates the response coefficient
-    via $S(\rho)$: if $\rho \gg \rho_{\rm half}$, shear is strongly suppressed
-    and the clock-rate anomaly is attenuated. Most SN Ia host environments are
-    diffuse disks ($\rho \ll \rho_{\rm half}$), placing them in the active-shear
-    regime ($S \approx 1$) where the field scales with potential. Dense
-    environments like bulges experience progressive shear attenuation ($S < 1$),
-    reducing the effect. This duality—potential drives the magnitude while
-    density modulates the response coefficient—is central to the interpretation
-    of the M31 differential test. The key observational proxy for TEP effects in
-    active-shear galaxies is the velocity dispersion $\sigma$, via the virial
-    theorem: $\sigma^2 \propto GM/R \propto |\Phi|$. Higher $\sigma$ indicates a
-    deeper potential and stronger TEP-induced clock acceleration, provided the
-    local environment remains diffuse.
-</p>
-
-<p>The host-galaxy mass and local density parameters utilized to calculate the Cepheid environmental bias serve as macroscopic realizations of the abstract environmental operator $\mathcal{S}_\Sigma(\mathcal{E})$ defined in the foundational TEP framework. In this domain, galactic stellar density acts as an empirical proxy for the continuous saturation of Temporal Topology, anchoring the local clock rate without committing to specific chameleon or symmetron microphysics.</p>
-
-<h3>1.3 Cepheids as Environmental Clocks</h3>
-<p>
-    Cepheid variable stars function not merely as standard candles, but as
-    <em>standard clocks</em>. Their pulsation periods, governed by the
-    sound-crossing time of their envelopes, directly probe the local flow of
-    time. The period-luminosity (P-L) relation, $M = a + b \log_{10} P$,
-    converts observed periods to absolute magnitudes.
-</p>
-
-<p>
-    <strong>Important clarification:</strong> Modern Cepheid analyses, including
-    SH0ES, use <em>Wesenheit magnitudes</em> ($W = H - R \times (V-I)$), which
-    are constructed to be reddening-free by design. The TEP effect proposed here
-    is <em>not</em> a color-term or dust correction—it is a
-    <em>residual</em> environmental bias that persists <em>after</em> standard
-    Wesenheit color corrections have been applied. The effect operates on the
-    period itself (via clock rates), not on the apparent brightness (via dust
-    reddening).
-</p>
-
-<p>
-    As proposed in recent studies on pulsar timing (Smawfield 2026a; Paper 10), the TEP
-    scalar field in active-shear astrophysical environments induces a clock rate
-    enhancement—manifesting observationally as "period contraction" in periodic
-    phenomena. Paper 10 reports a primary hybrid-controlled spin-down residual of
-    0.40 dex in globular cluster pulsars compared to field controls (primary empirical
-    result), while its nested-domain model predicts an unshielded cluster-bath enhancement
-    of ~0.58 dex prior to companion-shielding effects, consistent with TEP predictions for
-    intermediate-scale time-dilation enhancement (unsuppressed conformal clock-response coefficient $\sim 10^6$–$10^7$,
-    dimensionless for the pulsar channel). Consequently, Cepheids in deep galactic potentials (high velocity
-    dispersion $\sigma$) experience accelerated time flow relative to
-    calibration environments, causing their pulsation periods to appear
-    <em>shortened</em> to distant observers. When observers apply the standard
-    P-L relation calibrated in shallower potentials (MW, LMC), the shortened
-    period is misinterpreted as indicating a <em>dimmer</em> intrinsic
-    luminosity, leading to systematically underestimated distances.
-</p>
-
-<p>
-    This systematic bias propagates through the distance ladder: SN Ia hosts
-    with deep potentials are placed too close, their recession velocities yield
-    inflated $H_0$ values, and the local measurement becomes systematically
-    biased high. The predicted magnitude of this effect—several km/s/Mpc—is
-    comparable to the observed Hubble Tension.
-</p>
-
-<h3>1.4 Falsification Tests and Confirmation Pathways</h3>
-<p>
-    The TEP Cepheid-bias interpretation makes concrete falsifiable predictions.
-    Table 1 summarizes the principal tests, current mitigation, and the
-    observations required to decisively confirm or refute the mechanism.
+    No clock runs faster than cosmic background time; clocks in active-shear galactic disks are simply less slowed than clocks in dense nuclear cores. Environmental chameleon screening $S(\rho)$ suppresses scalar fifth forces in high-density regimes while preserving dynamical time-rate variations on galactic and cosmological scales.
 </p>
 
 <table class="data-table">
-    <caption><strong>Table 1.</strong> Falsification tests and confirmation pathways.</caption>
+    <caption><strong>Table 1.</strong> Absolute and relative clock-rate hierarchies in the TEP framework.</caption>
     <thead>
-        <tr>
-            <th>Risk</th>
-            <th>Current mitigation</th>
-            <th>Required next step</th>
-        </tr>
+        <tr><th>Regime</th><th>Absolute Rate</th><th>Physical Interpretation</th></tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Heterogeneous velocity dispersions</td>
-            <td>Provenance variable</td>
-            <td>Uniform spectroscopy</td>
-        </tr>
-        <tr>
-            <td>Small host sample</td>
-            <td>Bootstrap/LOOCV</td>
-            <td>Independent SN-host sample</td>
-        </tr>
-        <tr>
-            <td>Cepheid metallicity/dust degeneracy</td>
-            <td>Covariance-aware controls</td>
-            <td>Joint dust-metallicity-potential fit</td>
-        </tr>
-        <tr>
-            <td>TEP coefficient fitted on same sample</td>
-            <td>Validation splits</td>
-            <td>External prior or blind prediction</td>
-        </tr>
+        <tr><td>Cosmic background</td><td>$r_{\rm cosmic} = 1$</td><td>Unscreened cosmological reference</td></tr>
+        <tr><td>Galactic disk</td><td>$0 < r_{\rm disk} < 1$</td><td>Moderate potential depth; active scalar shear</td></tr>
+        <tr><td>Galactic core</td><td>$0 < r_{\rm core} < r_{\rm disk}$</td><td>Deep potential depth; strongly screened</td></tr>
     </tbody>
 </table>
 
-<h3>1.5 Scope and Structure</h3>
+<h3>1.3 Stellar Pulsation Physics and the Observing Chain</h3>
 <p>
-    In this paper, "resolving the Hubble tension" refers specifically to resolving the Cepheid-calibrated SH0ES local excess relative to the CMB scale, not to exhausting every possible late-universe or early-universe $H_0$ observable. The analysis presents a quantitative test of the TEP explanation for this specific discrepancy. Stratification of the SH0ES Cepheid host galaxies by curated kinematic potential-depth estimates (Section 2) reveals the predicted environment-dependent bias in derived $H_0$ (Section 3.1). Application of the TEP correction then unifies the sample (Section 3.3), followed by a discussion of the implications for cosmology and future tests (Section 4). The claim-discipline framework for the TEP corpus, including the scope limitations of canonical precision tests, is established in TEP-EXP (Paper 9).
+    Classical Cepheid variables are dynamical pulsation clocks whose pulsation periods $P_{\rm local}$ are governed by hydrodynamic acoustic transit times across the stellar envelope in local matter-frame proper time. When observed in the heliocentric telescope frame and corrected for the systemic redshift $z_{\rm spec}$ of the host galaxy, the inferred rest-frame period is:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    P_{\rm rest}^{\rm inf} = \frac{P_{\rm obs}}{1 + z_{\rm spec}} = P_{\rm local}\cdot q_i ,
+    \qquad
+    q_i \equiv \frac{r_{\rm spec,i}}{r_{\rm Cep,i}} .
+    \label{eq:intro_period_ratio}
+    \end{equation}
+</div>
+
+<p>
+    Under the TEP core--disk tracer closure, systemic spectroscopy weighted toward a more deeply slowed region than the Cepheid field gives $r_{\rm spec} < r_{\rm Cep}$, hence $q_i < 1$, mathematically generating the observed period contraction. Through the Leavitt Period--Luminosity law ($M_W = \alpha + \beta \log P$), this period shift alters the inferred distance modulus by $\Delta \mu_i = \kappa_{\rm Cep} X_i$, where $X_i$ is the environmental potential coordinate.
+</p>
+
+<h3>1.4 Scope and Structure of this Study</h3>
+<p>
+    This paper presents a comprehensive empirical test of the TEP framework across multiple independent observational tiers using public astronomical data:
+</p>
+
+<p>
+    1. Single-galaxy differential tests in M31 and the LMC, isolating the potential-clock coupling free from host-to-host peculiar velocity uncertainties.
+</p>
+
+<p>
+    2. Homogeneous, exact-identifier kinematic potential reconstruction for all 37 distinct R22 SN Ia host galaxies from pinned HyperLEDA rotation velocities and continuous screening.
+</p>
+
+<p>
+    3. Generative endpoint likelihood evaluation across flow-velocity models and peculiar velocity dispersions.
+</p>
+
+<p>
+    4. Mathematical resolution of the latent-modulus parameter absorption in standard distance-ladder design matrices using the TEP-native generative ladder.
+</p>
+
+<p>
+    5. Complete computational reproducibility: the resolution of the design matrix degeneracy and the full-ladder generative likelihoods are accompanied by an open-source, end-to-end Python pipeline, ensuring transparent verification of all statistical claims.
 </p>

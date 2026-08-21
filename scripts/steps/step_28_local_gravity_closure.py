@@ -1,95 +1,44 @@
 #!/usr/bin/env python3
-"""Step 10b: Local-gravity closure for the TEP-H0 clock response."""
+"""Write the exclusion record for the former local-gravity closure.
+
+The host-level observable coefficient cannot be mapped to Solar-System PPN or
+equivalence-principle observables without specifying the microscopic coupling
+functions and solving the relevant screened source profiles. The previous step
+inserted a DGP-style Vainshtein ansatz that was not derived from the TEP action;
+it is therefore excluded from inference.
+"""
 
 from __future__ import annotations
 
 import json
 from pathlib import Path
-import sys
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
-
-from scripts.utils.local_gravity_closure import closure_to_dict, compute_local_gravity_closure
-from scripts.utils.logger import TEPLogger, print_status, set_step_logger
+OUTPUT_PATH = PROJECT_ROOT / "results" / "outputs" / "step_28_local_gravity_closure.json"
 
 
 class Step10bLocalGravityClosure:
-    def __init__(self):
-        self.root_dir = PROJECT_ROOT
-        self.outputs_dir = self.root_dir / "results" / "outputs"
-        self.logs_dir = self.root_dir / "logs"
-        self.outputs_dir.mkdir(parents=True, exist_ok=True)
-        self.logs_dir.mkdir(parents=True, exist_ok=True)
-
-        self.tep_path = self.outputs_dir / "step_04_tep_correction_results.json"
-        self.output_path = self.outputs_dir / "step_28_local_gravity_closure.json"
-        self.logger = TEPLogger(
-            "step_10b_local_gravity_closure",
-            log_file_path=self.logs_dir / "step_28_local_gravity_closure.log",
-        )
-        set_step_logger(self.logger)
+    """Compatibility wrapper that records why no closure is reported."""
 
     def run(self):
-        print_status("Starting Step 10b: Local-Gravity Closure", "TITLE")
-        if not self.tep_path.exists():
-            raise FileNotFoundError(f"Missing Step 3 output: {self.tep_path}")
-
-        with open(self.tep_path, "r") as f:
-            tep = json.load(f)
-
-        kappa_cep_err = float(
-            tep.get("bootstrap_kappa_robust_std")
-            or tep.get("wls_kappa_err_scaled")
-            or tep.get("bootstrap_kappa_std", 0.0)
-        )
-        closure = compute_local_gravity_closure(
-            kappa_cep=float(tep["optimal_kappa_cep"]),
-            kappa_cep_err=kappa_cep_err,
-        )
         result = {
+            "validity": "excluded_not_inference",
             "description": (
-                "Quantitative source-charge closure mapping the fitted Cepheid "
-                "clock-response coefficient to local solar-system scalar charge."
+                "No numerical local-gravity closure is derivable from the "
+                "phenomenological host response used in TEP-H0."
             ),
-            "inputs": {
-                "tep_correction_results": str(self.tep_path.relative_to(self.root_dir)),
-                "cassini_reference": "Bertotti, Iess & Tortora 2003, Nature 425, 374",
-                "microscope_reference": "Touboul et al. 2022, Physical Review Letters 129, 121102",
-                "source_charge_definition": (
-                    "alpha_local = alpha_clock * S_solar * q_source, with q_source "
-                    "fixed before checking precision-gravity bounds."
-                ),
-            },
-            "closure": closure_to_dict(closure),
-            "passes": bool(
-                closure.passes_cassini
-                and closure.passes_microscope
-                and closure.passes_source_charge_closure
-            ),
+            "exclusion_reasons": [
+                "A(phi), B(phi), and V(phi) are not specified by this analysis.",
+                "No Solar or terrestrial screened field profile is solved.",
+                "The former DGP-style Vainshtein map was an imported assumption, not a TEP derivation.",
+                "The observable Cepheid coefficient is not a bare scalar charge.",
+            ],
+            "passes": None,
+            "closure": None,
         }
-
-        with open(self.output_path, "w") as f:
-            json.dump(result, f, indent=2)
-
-        print_status(
-            f"alpha_clock={closure.alpha_clock:.3e}",
-            "INFO",
-        )
-        print_status(
-            f"Cassini margin={closure.cassini_margin:.2e}; MICROSCOPE margin={closure.microscope_margin:.2e}",
-            "INFO",
-        )
-        print_status(
-            f"q_sun={closure.solar_source_charge_ratio:.1e}; q_earth={closure.earth_source_charge_ratio:.1e}",
-            "INFO",
-        )
-
-        if not result["passes"]:
-            raise RuntimeError("Local-gravity closure failed precision-gravity bounds")
-
-        print_status(f"Saved local-gravity closure to {self.output_path}", "SUCCESS")
+        OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+        OUTPUT_PATH.write_text(json.dumps(result, indent=2) + "\n")
+        print(f"Wrote excluded-status artifact: {OUTPUT_PATH}")
         return result
 
 

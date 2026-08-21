@@ -80,6 +80,7 @@ class Step4RobustnessChecks:
 
         self.flow_env_stats_path = self.outputs_dir / "step_08_flow_environment_robustness.txt"
         self.zcut_stats_path = self.outputs_dir / "step_08_redshift_cut_sensitivity.txt"
+        self.peculiar_velocity_mc_path = self.outputs_dir / "step_08_peculiar_velocity_mc.json"
 
         self.h0_cov_path = self.outputs_dir / "step_03_h0_covariance.npy"
         self.h0_cov_labels_path = self.outputs_dir / "step_03_h0_covariance_labels.json"
@@ -280,9 +281,9 @@ class Step4RobustnessChecks:
             sigma_ref = 87.17
             print_status("σ_ref missing from JSON; using standard fallback 87.17 km/s", "INFO")
 
-        # TEP regressor: S * (sigma^2 - sigma_ref^2) / c^2
+        # TEP endpoint regressor: (S * sigma^2 - sigma_ref^2) / c^2
         from scripts.utils.tep_correction import C_SQUARED_KM_S
-        x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
+        x = (S * sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
 
         # --- Diagonal H0 uncertainties from distance-modulus errors + peculiar velocity ---
         # sigma_H0^2 = (H0 * ln(10)/5 * sigma_mu)^2 + (vpecerr / d)^2
@@ -1464,7 +1465,7 @@ class Step4RobustnessChecks:
             print_status("σ_ref missing from JSON; using standard fallback 87.17 km/s", "INFO")
 
         from scripts.utils.tep_correction import C_SQUARED_KM_S
-        x = S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
+        x = (S * sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
 
         is_hi = (merged["method_class"] == "HI_linewidth").astype(float).values
         is_rot = (merged["method_class"] == "rotation_proxy").astype(float).values
@@ -1613,6 +1614,111 @@ class Step4RobustnessChecks:
 
         return result
 
+    def perform_peculiar_velocity_mc(self, n_mc=5000, seed=42):
+        """Monte Carlo propagation of residual peculiar-velocity uncertainty.
+
+        For each realisation, the host redshift is perturbed by a Gaussian
+        draw of the Pantheon+ peculiar-velocity uncertainty (fallback 250 km/s),
+        H0 is recomputed as cz/d, and the Pearson correlation with σ is
+        remeasured.  A joint stress test additionally perturbs the velocity
+        dispersions by their inferred uncertainties (sigma_delta).
+
+        Results are saved to ``step_08_peculiar_velocity_mc.json`` so that
+        downstream synthesis (Step 31) can cite computed values rather than
+        hardcoded strings.
+        """
+        print_status("Peculiar-Velocity Monte Carlo...", "SECTION")
+
+        if not self.stratified_path.exists():
+            print_status("Stratified data missing. Run Step 2 first.", "ERROR")
+            return None
+
+        df = pd.read_csv(self.stratified_path)
+        required = ["sigma_inferred", "h0_derived", "vpec", "vpecerr",
+                    "z_hd", "distance_mpc", "sigma_delta"]
+        missing = [c for c in required if c not in df.columns]
+        if missing:
+            print_status(f"Missing columns for PV MC: {missing}", "ERROR")
+            return None
+
+        c = 299792.458  # km/s
+        sigma_vals = pd.to_numeric(df["sigma_inferred"], errors="coerce").values
+        z_hd = pd.to_numeric(df["z_hd"], errors="coerce").values
+        d_mpc = pd.to_numeric(df["distance_mpc"], errors="coerce").values
+        vpecerr = pd.to_numeric(df["vpecerr"], errors="coerce").fillna(250.0).values
+        sigma_delta = pd.to_numeric(df["sigma_delta"], errors="coerce").fillna(0.0).values
+        # σ uncertainty: use |sigma_delta| as a proxy for the 1σ error; if
+        # all zero (no aperture correction), fall back to a conservative 5 km/s.
+        sigma_err = np.where(np.abs(sigma_delta) > 0, np.abs(sigma_delta), 5.0)
+
+        rng = np.random.default_rng(seed)
+
+        # --- Standalone peculiar-velocity MC ---
+        r_pv = np.empty(n_mc)
+        for i in range(n_mc):
+            dv = rng.normal(0.0, vpecerr)
+            z_pert = z_hd + dv / c
+            h0_pert = c * z_pert / d_mpc
+            r_pv[i], _ = stats.pearsonr(sigma_vals, h0_pert)
+
+        r_pv_mean = float(np.mean(r_pv))
+        r_pv_lo = float(np.percentile(r_pv, 2.5))
+        r_pv_hi = float(np.percentile(r_pv, 97.5))
+        p_pv_nonpos = float(np.mean(r_pv <= 0))
+
+        # --- Joint peculiar-velocity + σ-uncertainty MC ---
+        r_joint = np.empty(n_mc)
+        for i in range(n_mc):
+            dv = rng.normal(0.0, vpecerr)
+            z_pert = z_hd + dv / c
+            h0_pert = c * z_pert / d_mpc
+            dsigma = rng.normal(0.0, sigma_err)
+            sigma_pert = sigma_vals + dsigma
+            r_joint[i], _ = stats.pearsonr(sigma_pert, h0_pert)
+
+        r_joint_mean = float(np.mean(r_joint))
+        r_joint_lo = float(np.percentile(r_joint, 2.5))
+        r_joint_hi = float(np.percentile(r_joint, 97.5))
+        p_joint_nonpos = float(np.mean(r_joint <= 0))
+
+        result = {
+            "n_mc": n_mc,
+            "seed": seed,
+            "n_hosts": int(len(df)),
+            "peculiar_velocity_only": {
+                "r_mean": r_pv_mean,
+                "r_ci_lower": r_pv_lo,
+                "r_ci_upper": r_pv_hi,
+                "p_nonpositive": p_pv_nonpos,
+            },
+            "joint_pv_sigma": {
+                "r_mean": r_joint_mean,
+                "r_ci_lower": r_joint_lo,
+                "r_ci_upper": r_joint_hi,
+                "p_nonpositive": p_joint_nonpos,
+            },
+        }
+
+        with open(self.peculiar_velocity_mc_path, "w") as f:
+            json.dump(result, f, indent=2)
+        print_status(
+            f"Saved peculiar-velocity MC results to {self.peculiar_velocity_mc_path}",
+            "SUCCESS",
+        )
+
+        print_table(
+            ["Test", "⟨r⟩", "95% CI", "P(r≤0)"],
+            [
+                ["PV only", f"{r_pv_mean:.3f}",
+                 f"[{r_pv_lo:.3f}, {r_pv_hi:.3f}]", f"{p_pv_nonpos:.4f}"],
+                ["Joint PV+σ", f"{r_joint_mean:.3f}",
+                 f"[{r_joint_lo:.3f}, {r_joint_hi:.3f}]", f"{p_joint_nonpos:.4f}"],
+            ],
+            title="Peculiar-Velocity Monte Carlo",
+        )
+
+        return result
+
     def run(self):
         print_status("Starting Step 4: Robustness Checks", "TITLE")
         self.perform_jackknife_analysis()
@@ -1620,6 +1726,7 @@ class Step4RobustnessChecks:
         self.perform_bivariate_analysis()
         self.perform_redshift_cut_sensitivity()
         self.perform_flow_environment_robustness()
+        self.perform_peculiar_velocity_mc()
         if self.stratified_path.exists():
             df = pd.read_csv(self.stratified_path)
             self._provenance_eiv_model(df)

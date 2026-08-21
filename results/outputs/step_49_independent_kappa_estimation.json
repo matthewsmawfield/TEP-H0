@@ -1,0 +1,10 @@
+{
+  "validity": "excluded_not_inference",
+  "description": "Published TRGB/JAGB H0 summaries are not used as an independent confirmation of the in-sample Cepheid endpoint coefficient.",
+  "exclusion_reasons": [
+    "The former TEP H0 value came from a superseded residual-optimized coefficient.",
+    "The comparison assumed zero TRGB/JAGB response rather than estimating it.",
+    "Agreement among summary H0 values is not a raw joint likelihood."
+  ],
+  "replacement_artifact": "results/outputs/step_20_joint_indicator_model.json"
+}

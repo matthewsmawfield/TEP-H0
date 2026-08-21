@@ -104,18 +104,22 @@ def load_host_metadata():
 
     host_sigma = {}
     host_z = {}
+    host_z_cmb = {}
     host_screening = {}
 
     for _, row in df.iterrows():
         name = row["normalized_name"]
         sigma = row["sigma_inferred"]
         z_hd = row["z_hd"]
+        z_cmb = row.get("z_cmb", np.nan)
         S = row.get("shear_suppression", 1.0)
 
         host_sigma[name] = sigma
         host_screening[name] = S
         if pd.notna(z_hd) and z_hd > 0:
             host_z[name] = z_hd
+        if pd.notna(z_cmb) and z_cmb > 0:
+            host_z_cmb[name] = z_cmb
 
         # SH0ES-style compact names
         compact = name.replace(" ", "").replace("NGC", "N").replace("UGC", "U")
@@ -127,6 +131,8 @@ def load_host_metadata():
                 host_screening[padded] = S
                 if pd.notna(z_hd) and z_hd > 0:
                     host_z[padded] = z_hd
+                if pd.notna(z_cmb) and z_cmb > 0:
+                    host_z_cmb[padded] = z_cmb
 
                 unpadded = compact[0] + parts.lstrip("0")
                 if unpadded != padded:
@@ -134,6 +140,8 @@ def load_host_metadata():
                     host_screening[unpadded] = S
                     if pd.notna(z_hd) and z_hd > 0:
                         host_z[unpadded] = z_hd
+                    if pd.notna(z_cmb) and z_cmb > 0:
+                        host_z_cmb[unpadded] = z_cmb
 
         # NGC prefix variants
         if compact.startswith("N"):
@@ -142,18 +150,22 @@ def load_host_metadata():
             host_screening[ngc_name] = S
             if pd.notna(z_hd) and z_hd > 0:
                 host_z[ngc_name] = z_hd
+            if pd.notna(z_cmb) and z_cmb > 0:
+                host_z_cmb[ngc_name] = z_cmb
 
     # Explicit mappings
-    explicit = {"M1337": "N1337", "N105A": "N105", "N976A": "N976"}
+    explicit = {"M1337": "Mrk1337", "N105A": "N105", "N976A": "N976"}
     for sh0es_name, csv_name in explicit.items():
         if csv_name in host_sigma and sh0es_name not in host_sigma:
             host_sigma[sh0es_name] = host_sigma[csv_name]
             host_screening[sh0es_name] = host_screening[csv_name]
             if csv_name in host_z:
                 host_z[sh0es_name] = host_z[csv_name]
+            if csv_name in host_z_cmb:
+                host_z_cmb[sh0es_name] = host_z_cmb[csv_name]
 
     print_status(f"Loaded {len(host_sigma)} sigma mappings, {len(host_z)} redshift mappings", "INFO")
-    return host_sigma, host_z, host_screening
+    return host_sigma, host_z, host_screening, host_z_cmb
 
 
 def classify_row(i, L, q):
@@ -178,7 +190,7 @@ def build_host_x(host_name, host_sigma, host_screening, sigma_ref, mode="centere
         return 0.0
     S = host_screening.get(host_name, 1.0)
     if mode == "centered":
-        return S * (sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
+        return (S * sigma**2 - sigma_ref**2) / C_SQUARED_KM_S
     if mode == "raw_sigma2":
         return S * sigma**2 / C_SQUARED_KM_S
     if mode == "unscreened_centered":
@@ -246,7 +258,7 @@ def fit_gls(A, y, C):
 # ---------------------------------------------------------------------------
 # Redshift-distance prior construction
 # ---------------------------------------------------------------------------
-def build_redshift_priors(L, q, y, C, y_source, host_z, sigma_vpec=SIGMA_VPEC_KM_S):
+def build_redshift_priors(L, q, y, C, y_source, host_z, sigma_vpec=SIGMA_VPEC_KM_S, host_z_cmb=None):
     """
     For each non-anchor calibrator host with known redshift, add a prior row:
         mu_host + 5logH0 = 5*log10(c*z) + 25 + noise
@@ -255,6 +267,7 @@ def build_redshift_priors(L, q, y, C, y_source, host_z, sigma_vpec=SIGMA_VPEC_KM
       - Skip anchor hosts (they have geometric priors)
       - Skip z > 0.05  (these are Hubble-flow hosts, not calibrators)
       - Skip z < 0.0035 (too local; peculiar velocities completely dominate)
+        [Threshold centralized in scripts.utils.sample_selection]
       - Skip if sigma_mu_from_vpec > 0.5 mag (prior would be too weak/noisy)
 
     Returns augmented L, y, C, q, y_source.
@@ -288,6 +301,7 @@ def build_redshift_priors(L, q, y, C, y_source, host_z, sigma_vpec=SIGMA_VPEC_KM
             continue
 
         z = host_z[host_name]
+        z_cmb_val = host_z_cmb.get(host_name, np.nan) if host_z_cmb else np.nan
 
         # Hard validation
         if z <= 0 or z > 0.5:
@@ -295,9 +309,11 @@ def build_redshift_priors(L, q, y, C, y_source, host_z, sigma_vpec=SIGMA_VPEC_KM
         if z > 0.05:
             n_skipped_zrange += 1
             continue  # Hubble-flow host, not a local calibrator
-        if z < 0.0035:
+        # Union Hubble-flow cut: include if either z_cmb or z_hd exceeds threshold
+        from scripts.utils.sample_selection import Z_CUT
+        if z < Z_CUT and (pd.isna(z_cmb_val) or z_cmb_val < Z_CUT):
             n_skipped_zrange += 1
-            continue  # too local; peculiar velocities dominate
+            continue  # too local; peculiar velocities dominate (see sample_selection.py)
 
         # Peculiar velocity uncertainty in magnitude
         dm = (5.0 / np.log(10)) * (sigma_vpec / (C_KM_S * z))
@@ -554,7 +570,7 @@ def run():
 
     # Load data
     L, y, C, q, y_source = load_sh0es_data()
-    host_sigma, host_z, host_screening = load_host_metadata()
+    host_sigma, host_z, host_screening, host_z_cmb = load_host_metadata()
 
     # Calculate sigma_ref
     sigma_ref = np.sqrt(
@@ -593,7 +609,7 @@ def run():
             "SECTION",
         )
         L_p, y_p, C_p, q_p, y_src_p = build_redshift_priors(
-            L, q, y, C, y_source, host_z, sigma_vpec=sigma_v
+            L, q, y, C, y_source, host_z, sigma_vpec=sigma_v, host_z_cmb=host_z_cmb
         )
 
         n_prior = len(y_p) - len(y)

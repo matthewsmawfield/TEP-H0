@@ -1,0 +1,106 @@
+{
+  "description": "Hierarchical anchor model audit for double-counting and pseudo-replication",
+  "design_matrix": {
+    "n_rows": 3490,
+    "n_params": 46
+  },
+  "anchor_priors": [
+    {
+      "row": 3488,
+      "host": "N4258",
+      "param": "mu_N4258",
+      "value": 29.398,
+      "is_anchor": true
+    },
+    {
+      "row": 3489,
+      "host": "LMC",
+      "param": "mu_LMC",
+      "value": 18.477,
+      "is_anchor": true
+    }
+  ],
+  "anchor_prior_counts": {
+    "N4258": 1,
+    "LMC": 1
+  },
+  "tep_correction": {
+    "n_cepheid_corrected": 3132,
+    "n_anchor_cepheid_corrected": 982,
+    "n_nonanchor_cepheid_corrected": 2150,
+    "n_prior_modified": 0,
+    "corrected_rows_by_host": {
+      "M101": 259,
+      "M1337": 15,
+      "N0691": 28,
+      "N1015": 18,
+      "N105A": 8,
+      "N1309": 53,
+      "N1365": 46,
+      "N1448": 73,
+      "N1559": 110,
+      "N2442": 177,
+      "N2525": 73,
+      "N2608": 22,
+      "N3021": 16,
+      "N3147": 27,
+      "N3254": 48,
+      "N3370": 73,
+      "N3447": 101,
+      "N3583": 54,
+      "N3972": 52,
+      "N3982": 27,
+      "N4038": 29,
+      "N4424": 9,
+      "N4536": 40,
+      "N4639": 30,
+      "N4680": 11,
+      "N5468": 93,
+      "N5584": 165,
+      "N5643": 251,
+      "N5728": 20,
+      "N5861": 41,
+      "N5917": 14,
+      "N7250": 21,
+      "N7329": 31,
+      "N7541": 33,
+      "N7678": 16,
+      "N976A": 33,
+      "U9391": 33,
+      "N4258": 443,
+      "M31": 55,
+      "LMC": 339,
+      "SMC": 143,
+      "MW": 2
+    },
+    "kappa": 364773.8783220368,
+    "sigma_ref": 30.50738103825078
+  },
+  "mw_shift": {
+    "baseline": -5.893512385943417,
+    "corrected": -5.89370209794292,
+    "shift": -0.00018971199950268414,
+    "anchor_only": -0.0010492474832659582,
+    "nonanchor_only": 0.000859535483773044
+  },
+  "mb_shift": {
+    "baseline": -19.252899058391368,
+    "corrected": -19.29105580413153,
+    "shift": -0.0381567457401637
+  },
+  "h0_shift": {
+    "baseline": 73.04342157542929,
+    "corrected": 71.77108411786409,
+    "shift": -1.2723374575652002
+  },
+  "pseudo_replication": {
+    "unique_cepheid_rows": 3132,
+    "corrected_cepheid_rows": 3132,
+    "no_replication": true
+  },
+  "conclusion": {
+    "no_double_counting": true,
+    "no_prior_modification": true,
+    "no_pseudo_replication": true
+  }
+}

@@ -1,131 +1,45 @@
-<h2>Appendix D: Anchor-Screening Sensitivity Tests</h2>
+<h2>Appendix D: Reference-Gauge and Anchor Assumptions</h2>
 
-<h3>D.1 Categorical Environmental Screening Model</h3>
+<h3>D.1 Physical Anchor Potential Contrast vs Environmental Screening</h3>
+<p>
+    The environmental gradient between the calibration anchors and the SN Ia host galaxies is an intrinsic observational property of the galaxies rather than an artifact of group screening models. The primary distance ladder calibrators are dwarf or late-type galaxies with low circular rotation velocities: the LMC ($V_{\rm rot} \approx 65\text{--}72\ {\rm km\,s^{-1}} \implies u_\phi \approx 46\text{--}51\ {\rm km\,s^{-1}}$), the SMC ($V_{\rm rot} \approx 30\text{--}40\ {\rm km\,s^{-1}} \implies u_\phi \approx 21\text{--}28\ {\rm km\,s^{-1}}$), the Milky Way solar neighbourhood, and NGC 4258. Together, these anchors possess shallow potential depths ($\langle u_\phi^2 \rangle \sim 3.0 \times 10^3\ {\rm km^2\,s^{-2}}$).
+</p>
 
 <p>
-    As a sensitivity test, Appendix D represents the group-halo screening term $S_{\rm group}$ using a discrete
-    categorical mapping based on macroscopic environment structure.
-    This step-function approach correctly captures extreme sub-halo effects, such as
-    the LMC being deeply embedded within the extended Galactic halo potential,
-    conventionally reconstructed as a dark-matter halo,
-    where simple continuous richness scaling ($N_{\rm mb}$) fails.
+    In contrast, the 37 R22 SN Ia host galaxies sample massive luminous spirals with median circular rotation velocities $V_{\rm rot} \approx 160\text{--}250\ {\rm km\,s^{-1}}$ ($\langle u_\phi^2 \rangle \sim 2.5 \times 10^4\ {\rm km^2\,s^{-2}}$). Even in the completely unscreened coordinate ($S=1$), the potential contrast between anchors and hosts exceeds a factor of 8. Furthermore, the direct empirical detection of internal radial Period--Luminosity gradients within the LMC ($+0.0284 \pm 0.0086\ {\rm mag}$, $3.30\sigma$) and M31 ($+0.6304 \pm 0.1948\ {\rm mag}$, $3.24\sigma$) provides independent internal evidence that radial Period--Luminosity gradients are active within Local Group members with the sign predicted by TEP.
+</p>
+
+<h3>D.2 Adopted Anchor Endpoint Construction</h3>
+<p>
+    The analysis represents the Cepheid calibration ensemble with approximate weights 0.20, 0.25, and 0.55 for the Milky Way, LMC, and NGC 4258, using local stellar velocity dispersions at the Cepheid disk locations: Milky Way solar neighbourhood ($\sigma_z = 30.0\ {\rm km\,s^{-1}}$; Bovy et al. 2012), LMC stellar disk ($\sigma_{\rm disk} = 24.0\ {\rm km\,s^{-1}}$; van der Marel et al. 2002), and NGC 4258 intermediate annulus ($\sigma_{\rm local} = 115.0\ {\rm km\,s^{-1}}$; Kormendy & Ho 2013), yielding the composite reference scale $\sqrt{U_{\rm ref}} = 87.165\ {\rm km\,s^{-1}}$. These weights summarize the adopted endpoint construction; they are not recovered from a dedicated anchor-weight likelihood in this paper. Group screening is computed by the same continuous richness formula used for hosts ($S_{\rm group} = [1 + (N_{\rm mb}/10)^{1.2}]^{-1}$). No categorical anchor-screening model is selected or fitted as an alternative inference.
+</p>
+
+<h3>D.3 Exact Reference-Gauge Test</h3>
+<p>
+    The unscreened notation $\sqrt{U_{\rm ref}}=87.165\ {\rm km\,s^{-1}}$ and the screened notation $\sqrt{U_{\rm ref}}=30.507\ {\rm km\,s^{-1}}$ differ by a constant origin in the endpoint coordinate. A correct matrix refit absorbs that constant into the Cepheid zero point $M_H^W$. Step 45 verifies the resulting identity:
 </p>
 
 <table class="data-table">
-    <caption><strong>Table D.1.</strong> Categorical environmental screening factors.</caption>
     <thead>
         <tr>
-            <th>Object</th>
-            <th>Role</th>
-            <th>Environment</th>
-            <th>$S_{\rm group}$</th>
-            <th>Naive Shift</th>
-            <th>Screened Shift</th>
-            <th>Observed Shift</th>
+            <th>Fixed $\kappa$ (mag)</th>
+            <th>$H_0$ at 87.165 km/s</th>
+            <th>$H_0$ at 30.507 km/s</th>
+            <th>$\chi^2$</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>LMC</td>
-            <td>Anchor</td>
-            <td>Local Group (embedded satellite)</td>
-            <td>$0.10$</td>
-            <td>reference</td>
-            <td>reference</td>
-            <td>reference</td>
-        </tr>
-        <tr>
-            <td>MW</td>
-            <td>Host</td>
-            <td>Local Group (interior)</td>
-            <td>$0.10$</td>
-            <td>--</td>
-            <td>--</td>
-            <td>--</td>
-        </tr>
-        <tr>
-            <td>M31</td>
-            <td>Anchor/control</td>
-            <td>Local Group (core member)</td>
-            <td>$0.20$</td>
-            <td>$+0.233$ mag</td>
-            <td>$+0.047$ mag</td>
-            <td>$+0.002$ mag</td>
-        </tr>
-        <tr>
-            <td>NGC 4258</td>
-            <td>Anchor</td>
-            <td>Canes Venatici I (group core)</td>
-            <td>$0.50$</td>
-            <td>$+0.088$ mag</td>
-            <td>$+0.044$ mag</td>
-            <td>$+0.04$ mag</td>
-        </tr>
-        <tr>
-            <td>SN hosts</td>
-            <td>Hubble flow</td>
-            <td>Field/isolated</td>
-            <td>$1.00$</td>
-            <td>--</td>
-            <td>--</td>
-            <td>--</td>
-        </tr>
+        <tr><td>0</td><td>$73.0434$</td><td>$73.0434$</td><td>$3552.7063$</td></tr>
+        <tr><td>$0.365\times10^6$</td><td>$71.7711$</td><td>$71.7711$</td><td>$3558.7047$</td></tr>
+        <tr><td>$0.960\times10^6$</td><td>$69.7423$</td><td>$69.7423$</td><td>$3581.8608$</td></tr>
     </tbody>
 </table>
 
 <p>
-    Applying these categorical screening factors successfully reconciles the expected TEP shift
-    for both M31 and NGC 4258 with their observed zero-points.
+    This is an algebraic invariance check, not evidence that either numerical origin is a measured physical anchor dispersion. Host-mean shortcuts that change when the reference origin changes are excluded from inference because they do not refit the ladder zero point.
 </p>
 
-<h3>D.2 Akaike Information Criterion (AIC) Model Comparison</h3>
-
+<h3>D.4 Sensitivity and Future Hierarchical Extensions</h3>
 <p>
-    The predictive power of the continuous parameterization is formally compared
-    against the categorical step-function model using the Akaike Information Criterion (AIC),
-    which penalizes model complexity to prevent overfitting.
-</p>
-
-<table class="data-table">
-    <caption><strong>Table D.2.</strong> AIC comparison of screening models.</caption>
-    <thead>
-        <tr>
-            <th>Screening Model</th>
-            <th>Parameters ($k$)</th>
-            <th>$\chi^2$ (anchors)</th>
-            <th>AIC</th>
-            <th>$\Delta$AIC</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Categorical (Baseline)</td>
-            <td>0 (pre-fixed structure)</td>
-            <td>$2.51$</td>
-            <td>$2.51$</td>
-            <td>$0.0$ (Preferred)</td>
-        </tr>
-        <tr>
-            <td>Continuous ($N_{\rm mb}$)</td>
-            <td>2 ($N_{\rm crit}, \gamma$)</td>
-            <td>$4.31$</td>
-            <td>$8.31$</td>
-            <td>$+5.8$</td>
-        </tr>
-        <tr>
-            <td>No Screening ($S=1$)</td>
-            <td>0</td>
-            <td>$16.98$</td>
-            <td>$16.98$</td>
-            <td>$+14.47$</td>
-        </tr>
-    </tbody>
-</table>
-
-<p>
-    The categorical model gives a slightly better fit to the anchor residuals
-    ($\Delta\text{AIC} = -5.8$)
-    and is reported here as a sensitivity test. The main analysis, however, uses
-    the algorithmic $N_{\rm mb}$-based prescription because it is deterministic,
-    requires no free parameters, and applies equitably to both hosts and anchors.
+    Gauge invariance does not validate the adopted anchor weights, dispersions, or screening factors. Those inputs require a future hierarchical treatment using anchor-level Cepheid data and independently specified environmental measurements. The present result establishes that the implemented full-matrix projection is internally invariant to an additive reference shift, while the underlying physical contrast between anchors and hosts remains driven by galaxy kinematics.
 </p>

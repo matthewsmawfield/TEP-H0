@@ -37,6 +37,7 @@ TEP-HC (Paper 18) implemented the native TEP interpretation directly in the `hi_
 #### Parameter-Scale and Amplitude Convention
 
 **Turnover scales.**
+
 **Amplitudes.** $\epsilon_{\rm field}=0.0175$ denotes the primordial spectral-flow parameter constrained by $n_s$. $\epsilon_{\rm dyn}$ denotes the dynamical temporal-horizon response. $\epsilon_T^{\rm los}$ denotes the late-time line-of-sight transport amplitude fitted in TEP-C0. $\epsilon_T^{\rm CMB}$ denotes the C0 background/acoustic diagnostic amplitude. $\epsilon_T^{\rm HC}=0.00602\pm0.00493$ denotes the native `hi_class` homogeneous conformal amplitude reported in TEP-HC. These are related projections of the same temporal sector, but they are not numerically interchangeable parameters.
 
 In standard cosmology, epochs are conventionally defined by the chronological time elapsed since the physical singularity (e.g., "three minutes after the Big Bang" for nucleosynthesis). Because the temporal horizon in the TEP framework is an asymptotic boundary rather than a zero-volume origin, a global linear time coordinate $t$ cannot be extrapolated to a finite $t=0$. Consequently, the sequence of early-universe events is strictly mapped not by chronological time, but by the thermodynamic cooling of the plasma ($T$) and the evolution of the conformal clock-rate field. The history of the universe is preserved, but the chronological stopwatch is replaced by thermodynamic state variables.

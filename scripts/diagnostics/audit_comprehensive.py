@@ -58,8 +58,9 @@ for _, row in gold_prov.iterrows():
     print(f"  {row['normalized_name']:12s} z_HD={row.get('z_hd', 'N/A')}")
 
 print("\nNOTE: The manuscript's main table lists NGC 3982 and NGC 4536 as Ho+2009")
-print("      but they are excluded by z>0.0035. The manuscript now says N=7 Gold Standard")
-print("      (seven hosts satisfying z>0.0035). The pipeline (z>0.0035) sees N=7.")
+print("      but they are excluded by the Hubble-flow union cut (z_cmb or z_hd > 0.0035).")
+print("      The manuscript now says N=7 Gold Standard")
+print("      (seven hosts satisfying the union cut). The pipeline sees N=7.")
 print("      PASS: Manuscript and pipeline are consistent.")
 
 # Recompute N=7 stats
@@ -195,7 +196,7 @@ kappa_nm = res_nm.x[0]
 ln10 = np.log(10)
 h0_base = h0_vals.mean()
 delta_mu = (5.0 / ln10) * (h0_vals - h0_base) / h0_base
-x = S * (sigma_vals**2 - sigma_ref**2) / C2
+x = (S * sigma_vals**2 - sigma_ref**2) / C2
 y_err = strat['error'].values
 weights = 1.0 / y_err**2
 kappa_wls = float(np.sum(weights * x * delta_mu) / np.sum(weights * x**2))
@@ -307,7 +308,7 @@ from scipy.linalg import solve
 
 # We need the residual slope significance with full covariance
 # Simplified: compute effective error on slope with and without flow
-x = S * (sigma_vals**2 - sigma_ref**2) / C2
+x = (S * sigma_vals**2 - sigma_ref**2) / C2
 A = np.vstack([np.ones(len(x)), x]).T
 
 # Without flow
@@ -418,11 +419,12 @@ if strat['normalized_name'].duplicated().any():
 else:
     print("PASS: no duplicate hosts")
 
-# Test all included hosts pass sample cuts
-if (strat['z_hd'] <= 0.0035).any():
-    errors.append("hosts with z <= 0.0035 in primary sample")
+# Test all included hosts pass Hubble-flow union cut
+from scripts.utils.sample_selection import hubble_flow_mask
+if (~hubble_flow_mask(strat)).any():
+    errors.append("non-Hubble-flow hosts in primary sample")
 else:
-    print("PASS: all hosts satisfy z > 0.0035")
+    print("PASS: all hosts satisfy Hubble-flow union cut")
 
 # Test no missing sigma, z, mu
 for col in ['sigma_inferred', 'z_hd', 'value']:
@@ -446,7 +448,7 @@ print("AUDIT COMPLETE")
 print("=" * 70)
 print("Critical findings requiring action:")
 print("  1. Gold Standard: manuscript and pipeline both agree N=7 (PASS).")
-print("     NGC 3982 and NGC 4536 are below z>0.0035 and correctly excluded.")
+print("     NGC 3982 and NGC 4536 are below the Hubble-flow union cut and correctly excluded.")
 print("  2. Look-elsewhere: Bonferroni reduces significance; FDR is more lenient.")
 print("  3. Bin uncertainties: ±1.05 ignores peculiar-velocity systematics.")
 print("  4. Aperture sensitivity H0 range was [64.5,66.0]; corrected to [68.45,69.17].")

@@ -1,38 +1,38 @@
 {
-  "n": 29,
+  "n": 37,
   "sigma_ref": 87.16507328052906,
   "planck_h0": 67.4,
   "planck_err": 0.5,
   "baseline": {
-    "slope": 0.08511851500603197,
-    "pearson_r": 0.46591788894213326,
-    "pearson_p": 0.010855420330156207,
-    "spearman_rho": 0.5172413793103448,
-    "spearman_p": 0.004061456506390692
+    "slope": 0.04373632298114971,
+    "pearson_r": 0.24135531860278145,
+    "pearson_p": 0.15012430567445031,
+    "spearman_rho": 0.1876592973482066,
+    "spearman_p": 0.26604139990980974
   },
   "train_test": {
     "n_repeats": 200,
     "train_frac": 0.7,
-    "kappa_cep_mean": 1302956.7260742188,
-    "kappa_cep_std": 389842.123074811,
-    "test_slope_median": 0.01750023235469092,
-    "test_slope_q16": -0.05184268541107851,
-    "test_slope_q84": 0.11724770628643269,
-    "test_abs_pearson_r_median": 0.2969635030661818,
-    "test_h0_mean_median": 68.59250250026471,
-    "test_h0_mean_q16": 66.75930782128812,
-    "test_h0_mean_q84": 70.75078092517833
+    "kappa_cep_mean": 850718.9025878906,
+    "kappa_cep_std": 521867.409379258,
+    "test_slope_median": 0.002155601451061976,
+    "test_slope_q16": -0.08598658365628245,
+    "test_slope_q84": 0.07632667197880622,
+    "test_abs_pearson_r_median": 0.3205298065321798,
+    "test_h0_mean_median": 66.49734252574954,
+    "test_h0_mean_q16": 63.824065339139025,
+    "test_h0_mean_q84": 68.63273346817404
   },
   "loocv": {
-    "kappa_cep_mean": 1278370.6138873922,
-    "kappa_cep_std": 85232.36038968887,
-    "pred_h0_mean": 68.67141477184003,
-    "pred_h0_sem": 1.344575351242436,
-    "pred_slope": -0.011950026673827392,
-    "pearson_r": -0.07003120537122362,
-    "pearson_p": 0.718111123993446,
-    "spearman_rho": 0.08768472906403939,
-    "spearman_p": 0.6510536024486941,
-    "tension_sigma": 0.8862921982375062
+    "kappa_cep_mean": 852891.0868876689,
+    "kappa_cep_std": 105362.93427461853,
+    "pred_h0_mean": 66.47020881461567,
+    "pred_h0_sem": 1.6105637959318504,
+    "pred_slope": -0.00607678584278319,
+    "pearson_r": -0.032870072474129174,
+    "pearson_p": 0.8468568430728872,
+    "spearman_rho": -0.06543773350360711,
+    "spearman_p": 0.7003905852115646,
+    "tension_sigma": 0.5513495978695634
   }
 }

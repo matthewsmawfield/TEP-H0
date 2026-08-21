@@ -1,34 +1,28 @@
 {
-  "n_hosts_with_raw_and_corrected": 29,
+  "n_hosts_with_raw_and_corrected": 37,
   "assumed_aperture_radius_arcsec": 1.5,
   "default_beta": 0.04,
   "baseline": {
-    "r_raw": 0.48174588450114225,
-    "p_raw": 0.008142046000991755,
-    "r_corrected": 0.46591788894213326,
-    "p_corrected": 0.010855420330156207
+    "r_raw": 0.24135531860278145,
+    "p_raw": 0.15012430567445031,
+    "r_corrected": 0.24135531860278145,
+    "p_corrected": 0.15012430567445031
   },
   "source_stratified": {
     "sigma_source": [
       {
         "sigma_source": "",
-        "n": 29,
-        "r": 0.48174588450114225,
-        "p": 0.008142046000991755
+        "n": 37,
+        "r": 0.24135531860278145,
+        "p": 0.15012430567445031
       }
     ],
     "sigma_method": [
       {
-        "sigma_method": "HI linewidth proxy",
-        "n": 13,
-        "r": 0.5607010343104266,
-        "p": 0.04622203044930914
-      },
-      {
-        "sigma_method": "stellar absorption",
-        "n": 16,
-        "r": 0.5712469591323799,
-        "p": 0.02080951065772548
+        "sigma_method": "HyperLEDA rotation potential proxy",
+        "n": 37,
+        "r": 0.24135531860278145,
+        "p": 0.15012430567445031
       }
     ]
   },
@@ -37,15 +31,15 @@
     "beta_max": 0.08,
     "re_scale_min": 0.7,
     "re_scale_max": 1.3,
-    "r_min": 0.4477870930632749,
-    "r_max": 0.48174588450114225,
-    "slope_min": 0.08272920583483998,
-    "slope_max": 0.08852575487041876,
-    "delta_h0_min": 3.246018289203249,
-    "delta_h0_max": 7.860052734142712,
-    "kappa_cep_min": 1211151.123046875,
-    "kappa_cep_max": 1377795.41015625,
-    "unified_h0_min": 68.51681181827398,
-    "unified_h0_max": 69.28293753616902
+    "r_min": 0.24135531860278145,
+    "r_max": 0.2636973630446129,
+    "slope_min": 0.04373632298114971,
+    "slope_max": 0.054513674939688304,
+    "delta_h0_min": 0.11504195374570259,
+    "delta_h0_max": 1.498060482677559,
+    "kappa_cep_min": 849468.994140625,
+    "kappa_cep_max": 1116406.25,
+    "unified_h0_min": 66.6471548707494,
+    "unified_h0_max": 67.2846708507032
   }
 }

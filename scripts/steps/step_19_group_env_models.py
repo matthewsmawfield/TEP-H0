@@ -61,10 +61,16 @@ class Step18GroupEnvModels:
         sigma = strat["sigma_inferred"].values
         h0 = strat["h0_derived"].values
         mu = strat["value"].values
-        S_local = strat["shear_suppression"].values
+        # Step 03's shear_suppression is already S_local * S_group.
+        S_total = strat["shear_suppression"].values
         n_mb = strat["tully_nmb"].fillna(1.0).values
         S_group = np.array([group_screening_factor(x) for x in n_mb])
-        S_total = S_local * S_group
+        S_local = np.divide(
+            S_total,
+            S_group,
+            out=np.ones_like(S_total, dtype=float),
+            where=S_group > 0,
+        )
 
         # Response: delta_mu from mean
         mu_mean = np.mean(mu)

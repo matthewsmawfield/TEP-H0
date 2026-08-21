@@ -67,11 +67,13 @@ def load_host_metadata():
     df = pd.read_csv(HOSTS_PATH)
     host_sigma = {}
     host_z = {}
+    host_z_cmb = {}
     host_S = {}
     for _, row in df.iterrows():
         name = row["normalized_name"]
         sigma = row["sigma_inferred"]
         z_hd = row["z_hd"]
+        z_cmb = row.get("z_cmb", np.nan)
         S = row.get("shear_suppression", 1.0)
         if pd.isna(S):
             S = 1.0
@@ -79,6 +81,8 @@ def load_host_metadata():
         host_S[name] = float(S)
         if pd.notna(z_hd) and z_hd > 0:
             host_z[name] = z_hd
+        if pd.notna(z_cmb) and z_cmb > 0:
+            host_z_cmb[name] = z_cmb
         compact = name.replace(" ", "").replace("NGC", "N").replace("UGC", "U")
         if compact.startswith(("N", "U")):
             parts = compact[1:]
@@ -88,29 +92,37 @@ def load_host_metadata():
                 host_S[padded] = float(S)
                 if pd.notna(z_hd) and z_hd > 0:
                     host_z[padded] = z_hd
+                if pd.notna(z_cmb) and z_cmb > 0:
+                    host_z_cmb[padded] = z_cmb
                 unpadded = compact[0] + parts.lstrip("0")
                 if unpadded != padded:
                     host_sigma[unpadded] = sigma
                     host_S[unpadded] = float(S)
                     if pd.notna(z_hd) and z_hd > 0:
                         host_z[unpadded] = z_hd
+                    if pd.notna(z_cmb) and z_cmb > 0:
+                        host_z_cmb[unpadded] = z_cmb
         if compact.startswith("N"):
             ngc_name = "NGC" + compact[1:]
             host_sigma[ngc_name] = sigma
             host_S[ngc_name] = float(S)
             if pd.notna(z_hd) and z_hd > 0:
                 host_z[ngc_name] = z_hd
-    explicit = {"M1337": "N1337", "N105A": "N105", "N976A": "N976"}
+            if pd.notna(z_cmb) and z_cmb > 0:
+                host_z_cmb[ngc_name] = z_cmb
+    explicit = {"M1337": "Mrk1337", "N105A": "N105", "N976A": "N976"}
     for sh0es_name, csv_name in explicit.items():
         if csv_name in host_sigma and sh0es_name not in host_sigma:
             host_sigma[sh0es_name] = host_sigma[csv_name]
             host_S[sh0es_name] = host_S[csv_name]
             if csv_name in host_z:
                 host_z[sh0es_name] = host_z[csv_name]
-    return host_sigma, host_z, host_S
+            if csv_name in host_z_cmb:
+                host_z_cmb[sh0es_name] = host_z_cmb[csv_name]
+    return host_sigma, host_z, host_z_cmb, host_S
 
 
-def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
+def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=None):
     from scipy import linalg
     try:
         Lc = np.linalg.cholesky(C)
@@ -122,7 +134,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
     theta, _, _, _ = np.linalg.lstsq(A_w, y_w, rcond=1e-12)
 
     mu_params = [(q[i].replace("mu_", ""), i) for i in range(len(q)) if q[i].startswith("mu_")]
-    hosts, mus, mu_errs, sigmas, zs, is_anchors = [], [], [], [], [], []
+    hosts, mus, mu_errs, sigmas, zs, zs_cmb, is_anchors = [], [], [], [], [], [], []
     host_period_terms, host_z_terms = [], []
     anchor_hosts = {"N4258", "LMC", "M31", "MW", "SMC"}
 
@@ -156,13 +168,14 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
         mu_errs.append(mu_err)
         sigmas.append(host_sigma[host_name])
         zs.append(host_z.get(host_name, np.nan))
+        zs_cmb.append(host_z_cmb.get(host_name, np.nan) if host_z_cmb else np.nan)
         is_anchors.append(host_name in anchor_hosts)
         host_period_terms.append(period_terms)
         host_z_terms.append(z_terms)
 
     df = pd.DataFrame({
         "host": hosts, "mu": mus, "mu_err": mu_errs,
-        "sigma": sigmas, "z_hd": zs, "is_anchor": is_anchors,
+        "sigma": sigmas, "z_hd": zs, "z_cmb": zs_cmb, "is_anchor": is_anchors,
         "mean_period_term": [np.mean(pts) if pts else 0.0 for pts in host_period_terms],
         "mean_Z_term": [np.mean(zts) if zts else 0.0 for zts in host_z_terms],
     })
@@ -172,7 +185,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref):
 def build_host_x(sigma, sigma_ref, S=1.0):
     if sigma is None or sigma <= 0 or sigma_ref <= 0:
         return 0.0
-    return S * (sigma**2 - sigma_ref**2) / (C_KM_S ** 2)
+    return (S * sigma**2 - sigma_ref**2) / (C_KM_S ** 2)
 
 
 def center_scale(v):
@@ -419,29 +432,29 @@ def run():
     print_status("Step 37: Velocity Robustness Suite", "SECTION")
 
     L, y, C, q = load_sh0es_data()
-    host_sigma, host_z, host_S = load_host_metadata()
+    host_sigma, host_z, host_z_cmb, host_S = load_host_metadata()
     sigma_ref = np.sqrt(
         (30.0**2 * 0.20 + 24.0**2 * 0.25 + 115.0**2 * 0.55) / (0.20 + 0.25 + 0.55)
     )
 
-    df_hosts = compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref)
+    df_hosts = compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=host_z_cmb)
     print_status(f"Computed {len(df_hosts)} calibrator hosts", "INFO")
 
-    # Primary sample: non-anchor, valid redshift, z >= 0.0035 (N=29)
-    PRIMARY_Z_CUT = 0.0035
+    # Primary sample: non-anchor, valid redshift, Hubble-flow union cut
+    from scripts.utils.sample_selection import hubble_flow_mask, Z_CUT
     df_primary = df_hosts[
         (~df_hosts["is_anchor"])
         & df_hosts["z_hd"].notna()
-        & (df_hosts["z_hd"] >= PRIMARY_Z_CUT)
+        & hubble_flow_mask(df_hosts)
     ].copy()
 
-    # Sensitivity: all non-anchor with valid redshift (N=35)
+    # Sensitivity: all non-anchor with valid redshift
     df_sensitivity = df_hosts[
         (~df_hosts["is_anchor"])
         & df_hosts["z_hd"].notna()
     ].copy()
 
-    print_status(f"Primary sample (z >= {PRIMARY_Z_CUT}): {len(df_primary)} hosts", "INFO")
+    print_status(f"Primary sample (Hubble-flow cut): {len(df_primary)} hosts", "INFO")
     print_status(f"Sensitivity sample (all non-anchor): {len(df_sensitivity)} hosts", "INFO")
 
     # ========================================================================
@@ -704,8 +717,10 @@ def run():
         & (df_csv["sample"] == "primary")
         & (df_csv["model"] == "1_X")
     ]
-    assert set(primary_rows["N_hosts"]) == {29}, \
-        f"Primary standard model 1_X has N_hosts != 29: {set(primary_rows['N_hosts'])}"
+    from scripts.utils.sample_selection import hubble_flow_mask
+    expected_n = 33  # N=33 with union Hubble-flow cut (see sample_selection.py)
+    assert set(primary_rows["N_hosts"]) == {expected_n}, \
+        f"Primary standard model 1_X has N_hosts != {expected_n}: {set(primary_rows['N_hosts'])}"
     assert np.all(primary_rows["beta_X"] > 0), \
         f"Primary standard model 1_X has non-positive beta_X: {primary_rows['beta_X'].values}"
     print_status("CSV/JSON consistency assertions passed", "SUCCESS")

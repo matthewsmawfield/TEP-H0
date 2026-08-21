@@ -15,7 +15,7 @@ Appendix C of Paper 11.  The logic chain is:
        P_obs = P_MESA * exp(-DeltaTheta).
 4. Propagating through the Wesenheit P-L relation recovers the same
    DeltaMu law used in the headline analysis:
-       DeltaMu = kappa_Cep * S(rho) * (sigma^2 - sigma_ref^2) / c^2.
+       DeltaMu = kappa_Cep * (S(rho) * sigma^2 - sigma_ref^2) / c^2.
 
 The module is designed to run independently of MESA (it accepts a float
 P_MESA as input), but also provides helpers to extract P_MESA from MESA
@@ -132,7 +132,7 @@ def delta_theta(
     Returns
     -------
     float or array
-        DeltaTheta = alpha_clock * S(rho) * (sigma^2 - sigma_ref^2) / c^2.
+        DeltaTheta = alpha_clock * (S(rho) * sigma^2 - sigma_ref^2) / c^2.
     """
     S = S_rho(rho_over_rhohalf)
     sigma_sq = np.asarray(sigma_km_s) ** 2
@@ -216,7 +216,7 @@ def delta_mu_direct(
     Returns
     -------
     float or array
-        DeltaMu_direct = kappa_Cep * S(rho) * (sigma^2 - sigma_ref^2) / c^2.
+        DeltaMu_direct = kappa_Cep * (S(rho) * sigma^2 - sigma_ref^2) / c^2.
     """
     S = S_rho(rho_over_rhohalf)
     sigma_sq = np.asarray(sigma_km_s) ** 2

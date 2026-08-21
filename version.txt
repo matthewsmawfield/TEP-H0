@@ -1,1 +1,7 @@
-v0.8 (Kingston upon Hull) — 14 August 2026 — Canonical TEP architecture alignment: terminology and screening hierarchy updates
+v0.9 (Kingston upon Hull) - 21 August 2026
+
+- Refined the physical mechanism to model the period shift as an observing-chain differential between core and disk environments.
+- Upgraded the dataset to include all 37 SH0ES hosts using a standardized, rotation-based kinematic coordinate.
+- Restructured the statistical model into a generative distance ladder, with cosmologically constrained expansion likelihoods recovering H_app = 68.36–68.76 km/s/Mpc.
+- Updated the final corrected Hubble constant, bringing the local distance scale into statistical concordance with Planck.
+- Incorporated single-galaxy tests using M31 (3.24σ) and LMC (3.30σ) Cepheids to validate the clock gradient internally.

@@ -1,63 +1,55 @@
-# Velocity Dispersion Literature Compilation for SH0ES Host Galaxies
+# Homogeneous Kinematic Potential Catalog for SH0ES Host Galaxies
 #
-# MASTER FILE with full provenance documentation
-# Last updated: 2026-06-18
+# Compatibility note: the filename and sigma_kms column are retained because
+# historical pipeline steps consume them. sigma_kms is NOT a measured central
+# stellar velocity dispersion. It is the declared potential-equivalent scale
+# u_phi = V_rot / sqrt(2), computed from HyperLEDA's inclination-corrected
+# maximum rotation velocity. The source V_rot and catalog uncertainty are
+# preserved in adjacent columns.
 #
-# Every value traces to a peer-reviewed publication via ADS bibcode.
-# All entries include date accessed for audit trail.
-#
-# Columns:
-#   galaxy: Galaxy identifier (e.g., NGC 4258, M 31, LMC)
-#   sigma_kms: Central velocity dispersion in km/s
-#   error_kms: Uncertainty in km/s
-#   source_bibcode: ADS bibcode of source publication
-#   source_url: URL to ADS abstract page
-#   method: Measurement methodology
-#   notes: Provenance notes including corrections and caveats
-#   traceability_confidence: HIGH (direct stellar absorption) or MEDIUM (HI proxy or large uncertainty)
-#   date_accessed: Date data was retrieved from source
-#
-# DO NOT EDIT WITHOUT UPDATING AUDIT TRAIL AND REGENERATING ALL RESULTS.
-#
-galaxy,sigma_kms,error_kms,source_bibcode,source_url,method,notes,traceability_confidence,date_accessed
-NGC 0691,108.0,23.0,1999A&AS..136..509H,https://ui.adsabs.harvard.edu/abs/1999A%26AS..136..509H,stellar absorption,Héraudeau+1999 HyperLEDA compilation (LEDA ref HSMP99). Direct stellar absorption measurement. HyperLEDA: 108.0 ± 23.0 km/s.,HIGH,2026-06-18
-NGC 1015,106.5,6.6,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,stellar absorption,Campbell+2014 6dFGSv Fundamental Plane (LEDA ref 52286). Direct stellar absorption measurement. 6dFGSv: 106.5 ± 6.6 km/s.,HIGH,2026-06-18
-NGC 1309,89.0,29.0,1999A&AS..136..509H,https://ui.adsabs.harvard.edu/abs/1999A%26AS..136..509H,stellar absorption,Héraudeau+1999 HyperLEDA compilation (LEDA ref WM). HyperLEDA: 89.0 ± 29.0 km/s. Measurement has large uncertainty; value is consistent with HyperLEDA within errors.,MEDIUM,2026-06-18
-NGC 1365,151.0,15.0,2013ARA&A..51..511K,https://ui.adsabs.harvard.edu/abs/2013ARA&A..51..511K,stellar absorption,Kormendy&Ho2013 Table 1 compilation. Direct stellar absorption measurement. Literature value 151 km/s matches source.,HIGH,2026-06-18
-NGC 1448,95.0,12.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=270 km/s → σ≈95 via HyperLEDA calibrated proxy. Literature value matches.,MEDIUM,2026-06-18
-NGC 1559,73.0,4.0,2022ApJ...934L...7R,https://ui.adsabs.harvard.edu/abs/2022ApJ...934L...7R/abstract,stellar absorption,Riess+2022 SH0ES calibrator host compilation. Literature value 73 km/s matches source.,HIGH,2026-06-18
-NGC 2442,144.0,7.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=411 km/s → σ≈144 via HyperLEDA proxy. Literature value 144 matches.,MEDIUM,2026-06-18
-NGC 2525,82.0,11.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=234 km/s → σ≈82 via HyperLEDA proxy. Literature value 82 matches.,MEDIUM,2026-06-18
-NGC 2608,87.0,4.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=249 km/s → σ≈87 via HyperLEDA proxy. Literature value 87 matches.,MEDIUM,2026-06-18
-NGC 3021,55.7,24.5,2009ApJS..183....1H,https://ui.adsabs.harvard.edu/abs/2009ApJS..183....1H/abstract,stellar absorption,Ho+2009 ApJS 183 Table 1 via HyperLEDA (LEDA ref 51827). HyperLEDA reports 55.7 ± 24.5 km/s. Previous value of 88.0 km/s was from an undocumented source and has been replaced with the traceable HyperLEDA value. The large uncertainty reflects measurement uncertainty in this galaxy.,MEDIUM,2026-06-18
-NGC 3147,238.0,20.0,2013ARA&A..51..511K,https://ui.adsabs.harvard.edu/abs/2013ARA&A..51..511K,stellar absorption,Kormendy&Ho2013 Table 1. Direct measurement. Literature value 238 matches source.,HIGH,2026-06-18
-NGC 3254,117.8,12.0,2009ApJS..183....1H,https://ui.adsabs.harvard.edu/abs/2009ApJS..183....1H/abstract,stellar absorption,Ho+2009 ApJS 183 Table 1 via HyperLEDA (LEDA ref 51827). HyperLEDA: σfinal=117.8 ± 12.0 km/s. Corrected from previous undocumented value of 95.0 km/s.,HIGH,2026-06-18
-NGC 3370,85.0,11.0,1999A&AS..136..509H,https://ui.adsabs.harvard.edu/abs/1999A%26AS..136..509H,stellar absorption,Héraudeau+1999 HyperLEDA compilation (LEDA ref WM). HyperLEDA: 85.0 ± 11.0 km/s. Alternative HyperLEDA estimate is 92.4 ± 9.9 km/s; the adopted value is the primary compilation entry.,MEDIUM,2026-06-18
-NGC 3447,55.0,8.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=157 km/s → σ≈55. Literature value 55 matches.,MEDIUM,2026-06-18
-NGC 3583,108.0,13.0,2009ApJS..183....1H,https://ui.adsabs.harvard.edu/abs/2009ApJS..183....1H/abstract,stellar absorption,Ho+2009 ApJS 183 Table 1. LEDA ref 51827. Literature value 108 matches.,HIGH,2026-06-18
-NGC 3972,78.0,10.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=223 km/s → σ≈78. Literature value 78 matches.,MEDIUM,2026-06-18
-NGC 3982,87.3,9.0,2009ApJS..183....1H,https://ui.adsabs.harvard.edu/abs/2009ApJS..183....1H/abstract,stellar absorption,Ho+2009 ApJS 183 Table 1 via HyperLEDA (LEDA ref 51827). HyperLEDA: σfinal=87.3 ± 9.0 km/s. Corrected from previous undocumented value of 82.0 km/s.,HIGH,2026-06-18
-NGC 4424,65.0,9.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=186 km/s → σ≈65. Literature value 65 matches.,MEDIUM,2026-06-18
-NGC 4536,103.7,8.2,2009ApJS..183....1H,https://ui.adsabs.harvard.edu/abs/2009ApJS..183....1H/abstract,stellar absorption,Ho+2009 ApJS 183 Table 1 via HyperLEDA (LEDA ref 51827). HyperLEDA: σfinal=103.7 ± 8.2 km/s. Corrected from previous undocumented value of 95.0 km/s.,HIGH,2026-06-18
-NGC 4639,96.2,9.1,2009ApJS..183....1H,https://ui.adsabs.harvard.edu/abs/2009ApJS..183....1H/abstract,stellar absorption,Ho+2009 ApJS 183 Table 1 via HyperLEDA (LEDA ref 51827). HyperLEDA: σfinal=96.2 ± 9.1 km/s. Corrected from previous undocumented value of 88.0 km/s.,HIGH,2026-06-18
-NGC 4680,103.0,5.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=294 km/s → σ≈103. Literature value 103 matches.,MEDIUM,2026-06-18
-NGC 5468,68.0,3.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=194 km/s → σ≈68. Literature value 68 matches.,MEDIUM,2026-06-18
-NGC 5584,98.0,12.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=249 km/s → σ≈98. Literature value 98 matches.,MEDIUM,2026-06-18
-NGC 5643,107.0,13.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=306 km/s → σ≈107. Literature value 107 matches.,MEDIUM,2026-06-18
-NGC 5728,176.0,4.0,2022ApJS..261....6K,https://ui.adsabs.harvard.edu/abs/2022ApJS..261....6K/abstract,stellar absorption,BASS DR2 (Koss+2022). Table 2. HyperLEDA: 210.0 ± 15.0 (Whittle 1988). BASS DR2: 176.0 ± 4.0. Previous compilation value 175 matches BASS DR2.,HIGH,2026-06-18
-NGC 5861,112.0,6.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=320 km/s → σ≈112. Literature value 112 matches.,MEDIUM,2026-06-18
-NGC 5917,54.0,3.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. vrot=92.6 → σ≈54. Literature value 54 matches.,MEDIUM,2026-06-18
-NGC 7250,52.0,8.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=149 km/s → σ≈52. Literature value 52 matches.,MEDIUM,2026-06-18
-NGC 7329,124.0,6.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=354 km/s → σ≈124. Literature value 124 matches.,MEDIUM,2026-06-18
-NGC 7541,64.4,34.6,1999A&AS..136..509H,https://ui.adsabs.harvard.edu/abs/1999A%26AS..136..509H,stellar absorption,Héraudeau+1999 HyperLEDA compilation (LEDA ref WM). Direct stellar absorption measurement. Previous fabricated value of 125.0 km/s (no source) corrected to actual HyperLEDA entry 64.4 ± 34.6 km/s.,HIGH,2026-06-18
-NGC 7678,107.0,45.0,1999A&AS..136..509H,https://ui.adsabs.harvard.edu/abs/1999A%26AS..136..509H,stellar absorption,Héraudeau+1999 HyperLEDA compilation (LEDA ref HSMP99). HyperLEDA: 107.0 ± 45.0 km/s. Previous fabricated value of 138.0 km/s (no source) corrected to actual HyperLEDA entry.,HIGH,2026-06-18
-NGC 976,218.0,18.0,2019MNRAS.482.1427S,https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1427S/abstract,stellar absorption,Saulder+2019 MNRAS 482 1427 Table A1. Vdisp30Hd=217.6 ± 18.1. Also cataloged as NGC 0976. The duplicate entry NGC 0976 has been removed; NGC 976 is the preferred designation. Literature value 218 matches.,HIGH,2026-06-18
-NGC 105,85.0,12.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=243 km/s → σ≈85. Literature value 85 matches.,MEDIUM,2026-06-18
-NGC 1337,94.0,12.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=268 km/s → σ≈94. Literature value 94 matches.,MEDIUM,2026-06-18
-NGC 4038,107.0,13.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=306 km/s → σ≈107 (Antennae). Literature value 107 matches.,MEDIUM,2026-06-18
-UGC 9391,75.0,27.0,2009ApJS..182..543A,https://ui.adsabs.harvard.edu/abs/2009ApJS..182..543A/abstract,stellar absorption,SDSS DR7 fiber spectrum. HyperLEDA: 74.5 ± 27.4. Literature value 75 approximately matches.,MEDIUM,2026-06-18
-NGC 4258,115.0,10.0,2013ARA&A..51..511K,https://ui.adsabs.harvard.edu/abs/2013ARA&A..51..511K,stellar absorption,Kormendy&Ho2013 Table 1. Maser anchor galaxy. Literature value 115 matches.,HIGH,2026-06-18
-M 31,160.0,15.0,2013ARA&A..51..511K,https://ui.adsabs.harvard.edu/abs/2013ARA&A..51..511K,stellar absorption,Kormendy&Ho2013 Table 1. Andromeda bulge. Literature value 160 matches.,HIGH,2026-06-18
-M 101,28.0,5.0,2014MNRAS.443.1231C,https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.1231C/abstract,HI linewidth proxy,Campbell+2014 6dFGSv. W50=80 km/s → σ≈28 (face-on). Literature value 28 matches.,MEDIUM,2026-06-18
-LMC,24.0,4.0,2002AJ....124.2639V,https://ui.adsabs.harvard.edu/abs/2002AJ....124.2639V/abstract,stellar kinematics,van der Marel+2002 AJ 124 2639. Table 2. Disk velocity dispersion. Literature value 24 matches.,HIGH,2026-06-18
-SMC,22.0,4.0,2006AJ....131.2514H,https://ui.adsabs.harvard.edu/abs/2006AJ....131.2514H/abstract,stellar kinematics,Harris&Zaritsky2006 AJ 131 2514. Table 5. Disk velocity dispersion. Literature value 22 matches.,HIGH,2026-06-18
+# Query: http://atlas.obs-hp.fr/hyperleda/ledacat.cgi, fields vrot,e_vrot.
+# Archive date: 2026-08-21. Reference: Makarov et al. 2014, A&A 570, A13.
+# Rows 1-37 are the complete R22 SN-host set; final rows are ladder anchors.
+# M1337 is Mrk 1337 (PGC 43690, SN 2006D), not NGC 1337.
+galaxy,pgc,vrot_kms,vrot_error_kms,sigma_kms,error_kms,source_bibcode,source_url,method,notes,traceability_confidence,date_accessed
+M 101,50063,274.1,10.2,193.817969,7.212489,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 50063: vrot=274.1 +/- 10.2 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+Mrk 1337,43690,122.1,6.7,86.337738,4.737615,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 43690: vrot=122.1 +/- 6.7 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 0691,6793,200.6,4.3,141.845620,3.040559,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 6793: vrot=200.6 +/- 4.3 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 1015,9988,120.7,4.2,85.347788,2.969848,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 9988: vrot=120.7 +/- 4.2 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 105,1583,234.9,9.1,166.099383,6.434672,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 1583: vrot=234.9 +/- 9.1 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 1309,12626,162.1,4.9,114.622009,3.464823,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 12626: vrot=162.1 +/- 4.9 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 1365,13179,198.3,3.0,140.219275,2.121320,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 13179: vrot=198.3 +/- 3.0 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 1448,13727,185.1,2.0,130.885465,1.414214,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 13727: vrot=185.1 +/- 2.0 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 1559,14814,134.3,1.7,94.964441,1.202082,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 14814: vrot=134.3 +/- 1.7 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 2442,21373,226.7,10.4,160.301107,7.353911,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 21373: vrot=226.7 +/- 10.4 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 2525,22721,126.8,3.1,89.661140,2.192031,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 22721: vrot=126.8 +/- 3.1 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 2608,24111,104.3,2.8,73.751237,1.979899,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 24111: vrot=104.3 +/- 2.8 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 3021,28357,136.7,4.0,96.661497,2.828427,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 28357: vrot=136.7 +/- 4.0 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 3147,30019,334.6,13.2,236.597929,9.333810,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 30019: vrot=334.6 +/- 13.2 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 3254,30895,207.8,4.5,146.936789,3.181981,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 30895: vrot=207.8 +/- 4.5 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 3370,32207,149.4,3.0,105.641753,2.121320,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 32207: vrot=149.4 +/- 3.0 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 3447,32694,46.5,1.9,32.880465,1.343503,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 32694: vrot=46.5 +/- 1.9 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 3583,34232,181.4,5.7,128.269170,4.030509,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 34232: vrot=181.4 +/- 5.7 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 3972,37466,110.0,4.0,77.781746,2.828427,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 37466: vrot=110.0 +/- 4.0 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 3982,37520,195.6,6.6,138.310086,4.666905,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 37520: vrot=195.6 +/- 6.6 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 4038,37967,169.1,7.8,119.571757,5.515433,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 37967: vrot=169.1 +/- 7.8 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 4424,40809,28.6,1.1,20.223254,0.777817,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 40809: vrot=28.6 +/- 1.1 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 4536,41823,155.7,2.8,110.096526,1.979899,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 41823: vrot=155.7 +/- 2.8 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 4639,42741,165.9,3.1,117.309015,2.192031,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 42741: vrot=165.9 +/- 3.1 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 4680,43118,94.5,8.5,66.821591,6.010408,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 43118: vrot=94.5 +/- 8.5 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 5468,50323,150.9,4.4,106.702413,3.111270,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 50323: vrot=150.9 +/- 4.4 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 5584,51344,124.7,2.9,88.176216,2.050610,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 51344: vrot=124.7 +/- 2.9 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 5643,51969,171.2,4.3,121.056681,3.040559,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 51969: vrot=171.2 +/- 4.3 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 5728,52521,224.4,8.0,158.674762,5.656854,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 52521: vrot=224.4 +/- 8.0 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 5861,54097,158.5,2.2,112.076425,1.555635,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 54097: vrot=158.5 +/- 2.2 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 5917,54809,92.6,5.2,65.478088,3.676955,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 54809: vrot=92.6 +/- 5.2 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 7250,68535,71.1,3.7,50.275292,2.616295,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 68535: vrot=71.1 +/- 3.7 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 7329,69453,250.9,4.1,177.413091,2.899138,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 69453: vrot=250.9 +/- 4.1 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 7541,70795,207.8,4.3,146.936789,3.040559,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 70795: vrot=207.8 +/- 4.3 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 7678,71534,200.8,4.6,141.987042,3.252691,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 71534: vrot=200.8 +/- 4.6 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 976,9776,405.0,15.9,286.378246,11.242998,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 9776: vrot=405.0 +/- 15.9 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+UGC 9391,52091,75.7,2.8,53.527983,1.979899,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 52091: vrot=75.7 +/- 2.8 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+NGC 4258,39600,212.9,5.2,150.543034,3.676955,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 39600: vrot=212.9 +/- 5.2 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+M 31,2557,256.7,6.1,181.514311,4.313351,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 2557: vrot=256.7 +/- 6.1 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+LMC,17223,46.6,5.3,32.951176,3.747666,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 17223: vrot=46.6 +/- 5.3 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21
+SMC,3085,43.4,4.7,30.688434,3.323402,2014A&A...570A..13M,https://atlas.obs-hp.fr/hyperleda/,HyperLEDA rotation potential proxy,"HyperLEDA PGC 3085: vrot=43.4 +/- 4.7 km/s; u_phi=vrot/sqrt(2).",CATALOG_DERIVED,2026-08-21

@@ -1259,7 +1259,8 @@ This correlation survives multiple controls:
 #### 3.2.3 Seasonal Baseline Comparison
 
 To test whether the EW/NS anisotropy ratio could be explained by mundane seasonal factors, a baseline model was fit containing only annual (*ω*₁) and semi-annual (*ω*₂) sinusoids plus an offset:
-Rseasonal(t) = α₀ + α₁sin(ω₁t) + β₁cos(ω₁t) 
+
+Rseasonal(t) = α₀ + α₁sin(ω₁t) + β₁cos(ω₁t)
 + α₂sin(ω₂t) + β₂cos(ω₂t)
 
 #### Physical Interpretation of Results

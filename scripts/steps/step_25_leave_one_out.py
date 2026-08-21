@@ -22,7 +22,8 @@ class Step24LeaveOneOut:
 
     def run(self):
         df = pd.read_csv(self.results_dir / "step_04_tep_corrected_h0.csv")
-        df = df[df["z_hd"] > 0.0035].copy().reset_index(drop=True)
+        from scripts.utils.sample_selection import apply_hubble_flow_cut
+        df = apply_hubble_flow_cut(df).reset_index(drop=True)
         
         # Load baseline full sample values
         sigma_all = df["sigma_inferred"].values

@@ -41,6 +41,7 @@ BASE_DIR = Path(__file__).resolve().parents[2]
 import sys
 sys.path.insert(0, str(BASE_DIR))
 from core.constants import KAPPA_GAL
+from scripts.utils.tep_correction import build_host_screening_map
 DATA_DIR = BASE_DIR / "data"
 SH0ES_DIR = DATA_DIR / "raw" / "external" / "Cepheid-Distance-Ladder-Data" / "SH0ES2022"
 HOSTS_PATH = DATA_DIR / "processed" / "hosts_processed.csv"
@@ -67,7 +68,7 @@ def print_status(msg, level="INFO"):
 def build_host_x(sigma, sigma_ref, S=1.0):
     if sigma is None or sigma <= 0 or sigma_ref <= 0:
         return 0.0
-    return S * (sigma**2 - sigma_ref**2) / (C_KM_S ** 2)
+    return (S * sigma**2 - sigma_ref**2) / (C_KM_S ** 2)
 
 
 def center_scale(v):
@@ -93,13 +94,16 @@ def load_sh0es_data():
 
 def load_host_metadata():
     df = pd.read_csv(HOSTS_PATH)
+    screening_map = build_host_screening_map(df, BASE_DIR)
     host_sigma, host_S = {}, {}
     host_z = {}
+    host_z_cmb = {}
     for _, row in df.iterrows():
         name = row["normalized_name"]
         sigma = row["sigma_inferred"]
         z_hd = row["z_hd"]
-        S = row.get("shear_suppression", 1.0)
+        z_cmb = row.get("z_cmb", np.nan)
+        S = screening_map.get(name, row.get("shear_suppression", 1.0))
         if pd.isna(S):
             S = 1.0
         for key in [name]:
@@ -107,6 +111,8 @@ def load_host_metadata():
             host_S[key] = float(S)
             if pd.notna(z_hd) and z_hd > 0:
                 host_z[key] = z_hd
+            if pd.notna(z_cmb) and z_cmb > 0:
+                host_z_cmb[key] = z_cmb
 
         compact = name.replace(" ", "").replace("NGC", "N").replace("UGC", "U")
         if compact.startswith(("N", "U")):
@@ -118,22 +124,28 @@ def load_host_metadata():
                     host_S[alias] = float(S)
                     if alias not in host_z and pd.notna(z_hd) and z_hd > 0:
                         host_z[alias] = z_hd
+                    if alias not in host_z_cmb and pd.notna(z_cmb) and z_cmb > 0:
+                        host_z_cmb[alias] = z_cmb
         if compact.startswith("N"):
             ngc_name = "NGC" + compact[1:]
             host_sigma[ngc_name] = sigma
             host_S[ngc_name] = float(S)
             if pd.notna(z_hd) and z_hd > 0:
                 host_z[ngc_name] = z_hd
+            if pd.notna(z_cmb) and z_cmb > 0:
+                host_z_cmb[ngc_name] = z_cmb
 
-    explicit = {"M1337": "N1337", "N105A": "N105", "N976A": "N976"}
+    explicit = {"M1337": "Mrk1337", "N105A": "N105", "N976A": "N976"}
     for sh0es_name, csv_name in explicit.items():
         if csv_name in host_sigma and sh0es_name not in host_sigma:
             host_sigma[sh0es_name] = host_sigma[csv_name]
             host_S[sh0es_name] = host_S[csv_name]
             if csv_name in host_z:
                 host_z[sh0es_name] = host_z[csv_name]
+            if csv_name in host_z_cmb:
+                host_z_cmb[sh0es_name] = host_z_cmb[csv_name]
 
-    return host_sigma, host_z, host_S
+    return host_sigma, host_z, host_z_cmb, host_S
 
 
 def load_external_distances():
@@ -156,7 +168,7 @@ def load_external_distances():
     return pd.DataFrame(records)
 
 
-def compute_host_mu_cep(L, y, C, q, host_sigma, host_z, sigma_ref):
+def compute_host_mu_cep(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=None):
     """Extract SH0ES-derived Cepheid distance moduli per host."""
     from scipy import linalg
     try:
@@ -169,7 +181,7 @@ def compute_host_mu_cep(L, y, C, q, host_sigma, host_z, sigma_ref):
     theta, _, _, _ = np.linalg.lstsq(A_w, y_w, rcond=1e-12)
 
     mu_params = [(q[i].replace("mu_", ""), i) for i in range(len(q)) if q[i].startswith("mu_")]
-    hosts, mus, mu_errs, sigmas, zs, is_anchors = [], [], [], [], [], []
+    hosts, mus, mu_errs, sigmas, zs, zs_cmb, is_anchors = [], [], [], [], [], [], []
     anchor_hosts = {"N4258", "LMC", "M31", "MW", "SMC"}
 
     for host_name, mu_idx in mu_params:
@@ -196,11 +208,12 @@ def compute_host_mu_cep(L, y, C, q, host_sigma, host_z, sigma_ref):
         mu_errs.append(mu_err)
         sigmas.append(host_sigma[host_name])
         zs.append(host_z.get(host_name, np.nan))
+        zs_cmb.append(host_z_cmb.get(host_name, np.nan) if host_z_cmb else np.nan)
         is_anchors.append(host_name in anchor_hosts)
 
     return pd.DataFrame({
         "host": hosts, "mu_cep": mus, "mu_cep_err": mu_errs,
-        "sigma": sigmas, "z_hd": zs, "is_anchor": is_anchors,
+        "sigma": sigmas, "z_hd": zs, "z_cmb": zs_cmb, "is_anchor": is_anchors,
     })
 
 
@@ -227,7 +240,8 @@ def fit_tep_native_model(df_cep, df_merged, sigma_ref, host_S, sigma_v, model_ty
         TMixed:  both free (needs external distances for identifiability)
     """
     # Build arrays for all primary Cepheid hosts
-    df_pri = df_cep[(~df_cep["is_anchor"]) & df_cep["z_hd"].notna() & (df_cep["z_hd"] >= 0.0035)].copy()
+    from scripts.utils.sample_selection import hubble_flow_mask
+    df_pri = df_cep[(~df_cep["is_anchor"]) & df_cep["z_hd"].notna() & hubble_flow_mask(df_cep)].copy()
     hosts_all = df_pri["host"].values
     mu_cep_all = df_pri["mu_cep"].values
     mu_cep_err_all = df_pri["mu_cep_err"].values
@@ -242,7 +256,7 @@ def fit_tep_native_model(df_cep, df_merged, sigma_ref, host_S, sigma_v, model_ty
     mu_ext_dict = {}
     mu_ext_err_dict = {}
     if len(df_merged) > 0:
-        df_m_pri = df_merged[(~df_merged["is_anchor"]) & df_merged["z_hd"].notna() & (df_merged["z_hd"] >= 0.0035)].copy()
+        df_m_pri = df_merged[(~df_merged["is_anchor"]) & df_merged["z_hd"].notna() & hubble_flow_mask(df_merged)].copy()
         for _, row in df_m_pri.iterrows():
             h = row["host"]
             if h in has_ext:
@@ -391,10 +405,10 @@ def run():
     print_status("Step 42: TEP-Native Ladder (Generative Clock-Aware Model)", "SECTION")
 
     L, y, C, q = load_sh0es_data()
-    host_sigma, host_z, host_S = load_host_metadata()
+    host_sigma, host_z, host_z_cmb, host_S = load_host_metadata()
     sigma_ref = np.sqrt((30.0**2 * 0.20 + 24.0**2 * 0.25 + 115.0**2 * 0.55) / (0.20 + 0.25 + 0.55))
 
-    df_cep = compute_host_mu_cep(L, y, C, q, host_sigma, host_z, sigma_ref)
+    df_cep = compute_host_mu_cep(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=host_z_cmb)
     print_status(f"Cepheid hosts: {len(df_cep)}", "INFO")
 
     df_ext = load_external_distances()
@@ -424,7 +438,7 @@ def run():
     df_merged = pd.DataFrame(merged)
     print_status(f"Merged Cepheid+TRGB overlap: {len(df_merged)} hosts", "INFO")
 
-    sigma_v_values = [150, 250, 500]
+    sigma_v_values = [150, 182.1, 250, 500]
     results = []
 
     for sigma_v in sigma_v_values:

@@ -124,6 +124,8 @@ def build_metadata(cff_data):
     doi = cff_data.get('doi', '')
     url = cff_data.get('url', '')
     abstract = cff_data.get('abstract', '')
+    if abstract:
+        abstract = ' '.join(abstract.split())
     license_str = cff_data.get('license', 'CC-BY-4.0')
 
     keywords_list = cff_data.get('keywords', [])
@@ -150,7 +152,6 @@ def build_metadata(cff_data):
         metadata['CreationDate'] = f'{date_pdf} 00:00:00'
         metadata['ModifyDate'] = f'{date_pdf} 00:00:00'
 
-    metadata['XMP-dc:Creator'] = author_name
     metadata['XMP-dc:Title'] = title
     metadata['XMP-dc:Description'] = abstract[:500] if abstract else ''
     metadata['XMP-dc:Rights'] = license_str

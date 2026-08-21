@@ -1,0 +1,56 @@
+{
+  "description": "\u0394\u03c7\u00b2 decomposition for matrix propagation (\u03ba=1.81e6, \u03c3_ref=48.72 screened)",
+  "parameters": {
+    "kappa": 1805000.0,
+    "sigma_ref": 48.72,
+    "sigma_ref_label": "screened"
+  },
+  "total": {
+    "chi2_null": 3552.71,
+    "chi2_corr": 3579.73,
+    "delta_chi2": 27.02
+  },
+  "decomposition": [
+    {
+      "component": "cepheid_anchor",
+      "n_rows": 980,
+      "chi2_null": 1080.9,
+      "chi2_corr": 1081.67,
+      "delta_chi2": 0.77,
+      "pct": 2.8
+    },
+    {
+      "component": "cepheid_host",
+      "n_rows": 2152,
+      "chi2_null": 2177.32,
+      "chi2_corr": 2197.81,
+      "delta_chi2": 20.49,
+      "pct": 75.8
+    },
+    {
+      "component": "sn_calibrator",
+      "n_rows": 77,
+      "chi2_null": 54.42,
+      "chi2_corr": 60.11,
+      "delta_chi2": 5.69,
+      "pct": 21.0
+    },
+    {
+      "component": "hubble_flow",
+      "n_rows": 277,
+      "chi2_null": 239.22,
+      "chi2_corr": 239.38,
+      "delta_chi2": 0.16,
+      "pct": 0.6
+    },
+    {
+      "component": "other",
+      "n_rows": 4,
+      "chi2_null": 0.85,
+      "chi2_corr": 0.76,
+      "delta_chi2": -0.08,
+      "pct": -0.3
+    }
+  ],
+  "interpretation": "75.8% of \u0394\u03c7\u00b2 comes from non-anchor Cepheid photometry rows, where the TEP correction conflicts with the free host moduli \u03bc_i. 21.0% comes from calibrator SNe. Hubble-flow SNe contribute only 0.6%."
+}

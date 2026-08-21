@@ -2,23 +2,23 @@
 """
 TEP-H0 Analysis Pipeline Master Script
 ======================================
-Orchestrates the full analysis pipeline for Paper 11: "The Cepheid Bias: Resolving the Hubble Tension".
+Orchestrates the analysis pipeline for Paper 11: "Paper 11: The Cepheid Bias: Resolving the Hubble Tension".
 
 This script serves as the central controller for the TEP-H0 analysis.
 It executes the scientific workflow in a strictly ordered sequence, ensuring
 data integrity and dependency management between steps.
 
 Workflow Steps:
-1.  **Data Ingestion**: Downloads raw data (SH0ES, Pantheon+), reconstructs catalogs, 
+1.  **Data Ingestion**: Reads or prepares the SH0ES/Pantheon+ inputs, reconstructs catalogs,
     and cross-matches hosts with external databases (Simbad, HyperLEDA).
 2.  **Stratification**: Calculates H0 for each host, stratifies the sample by 
     gravitational potential (velocity dispersion), and detects the environmental bias.
-3.  **TEP Correction**: Optimizes the Observable Response Coefficient (kappa_cep), applies the 
-    conformal time correction, and unifies the Hubble Constant.
+3.  **Endpoint Models**: Fits the environmental redshift--distance slope and
+    evaluates restricted Cepheid-channel projections.
 4.  **Robustness Checks**: Performs rigorous statistical tests (Jackknife, Bivariate 
     Analysis, Sensitivity Analysis) to validate the results against systematics.
-5.  **M31 Analysis**: Executes a differential test on M31 Cepheids to verify the 
-    environmental P-L dependence in a controlled setting.
+5.  **Differential Diagnostics**: Runs M31 and TRGB analyses without treating
+    them as independent confirmation when their current power is insufficient.
 
 Usage:
     python scripts/run_pipeline.py
@@ -67,184 +67,157 @@ from scripts.steps.step_24_synthetic_injection import Step23SyntheticInjection
 from scripts.steps.step_25_leave_one_out import Step24LeaveOneOut
 from scripts.steps.step_26_m31_phat_analysis import Step8M31PHATAnalysis
 from scripts.steps.step_27_anchor_stratification import AnchorStratificationStep
-from scripts.steps.step_28_local_gravity_closure import Step10bLocalGravityClosure
-from scripts.steps.step_29_cross_channel import Step12CrossChannel
-from scripts.steps.step_30_cosmology_inference import main as step_12_cosmology_inference_main
-from scripts.steps.step_31_final_synthesis import Step9FinalSynthesis
-from scripts.steps.step_32_comprehensive_audit import Step11ComprehensiveAudit
-from scripts.steps.step_33_stellar_validation import Step13StellarValidation
 from scripts.steps.step_34_full_ladder_likelihood import FullLadderLikelihood
-from scripts.steps.step_35_bias_aware_tep_ladder import run as step_35_run
-from scripts.steps.step_36_apparent_hubble_environment_likelihood import run as step_36_run
 from scripts.steps.step_37_velocity_robustness import run as step_37_run
-from scripts.steps.step_38_hierarchical_timefield_ladder import run as step_38_run
 from scripts.steps.step_39_environment_slope_decomposition import run as step_39_run
 from scripts.steps.step_40_flow_sky_controls import run as step_40_run
-from scripts.steps.step_41_external_distance_breakers import run as step_41_run
-from scripts.steps.step_42_tep_native_ladder import run as step_42_run
 from scripts.steps.step_43_toy_recovery_experiment import run as step_43_run
+from scripts.steps.step_45_full_ladder_h0_propagation import run as step_45_run
+from scripts.steps.step_47_anchor_double_counting_audit import main as step_47_run
+from scripts.steps.step_48_pantheon_velocity_covariance import main as step_48_run
+from scripts.steps.step_51_recent_velocity_sensitivity import run as step_51_run
 from scripts.utils.pipeline_audit import audit
 
 def regression_gates(project_root):
-    """Hard regression gates for key known outputs. Raises RuntimeError on failure."""
+    """Fail when an authoritative artifact regresses to a superseded result."""
     import json
     from pathlib import Path
+
     import numpy as np
 
-    results_dir = Path(project_root) / "results" / "outputs"
-    gates_passed = 0
-    gates_total = 0
+    outputs = Path(project_root) / "results" / "outputs"
+    checks = []
 
-    def check(label, condition, msg=""):
-        nonlocal gates_passed, gates_total
-        gates_total += 1
-        if condition:
-            gates_passed += 1
-            print_status(f"  [PASS] {label}", "SUCCESS")
-        else:
-            print_status(f"  [FAIL] {label}: {msg}", "ERROR")
+    def load(name):
+        return json.loads((outputs / name).read_text())
+
+    def check(label, condition, detail=""):
+        checks.append((label, bool(condition), detail))
+        level = "SUCCESS" if condition else "ERROR"
+        state = "PASS" if condition else "FAIL"
+        print_status(f"  [{state}] {label}" + (f": {detail}" if detail else ""), level)
 
     print_status(">>> REGRESSION GATES", "TITLE")
 
-    # Step 34: Full ladder likelihood
-    try:
-        s34 = json.loads((results_dir / "step_34_full_ladder_likelihood_results.json").read_text())
-        H0 = s34.get("baseline", {}).get("H0", 0)
-        stage2 = s34.get("stage2", {})
-        variant_a = stage2.get("variant_a_free_kappa", {})
-        kappa = variant_a.get("kappa_Cep", 0)
-        kappa_err = variant_a.get("kappa_err", 1)
-        comparison = s34.get("comparison", {})
-        delta_chi2 = comparison.get("delta_chi2_vs_baseline", {})
-        fixed_chi2 = delta_chi2.get("4", 0) if isinstance(delta_chi2, dict) else 0
-        check("S34 H0 ≈ 73.04", abs(H0 - 73.04) < 1.0, f"H0={H0}")
-        check("S34 κ_Cep ≈ −0.067e6 ± 0.210e6", abs(kappa + 0.067e6) < 0.5e6 and abs(kappa_err - 0.210e6) < 0.5e6,
-              f"κ={kappa:.3e} ± {kappa_err:.3e}")
-        check("S34 fixed canonical χ² penalty ≈ +24.2", abs(fixed_chi2 - 24.2) < 10.0, f"penalty={fixed_chi2:.1f}")
-    except Exception as e:
-        check("S34 outputs exist", False, str(e))
+    s34 = load("step_34_full_ladder_likelihood_results.json")
+    baseline = s34["baseline"]
+    free = s34["stage2"]["variant_a_free_kappa"]
+    injection = s34["injection_test"]
+    check("S34 baseline H0", np.isclose(baseline["H0"], 73.0434, atol=0.01))
+    check(
+        "S34 real-data Cepheid coefficient remains weak",
+        abs(free["kappa_Cep"] / free["kappa_err"]) < 1.0,
+        f"kappa/error={free['kappa_significance']:.3f}",
+    )
+    check(
+        "S34 row-level injection is recovered",
+        abs(injection["recovery_fraction"] - 1.0) < 0.01
+        and injection["rank_aug"] == 47,
+    )
 
-    # Step 37: Velocity robustness
-    try:
-        s37 = json.loads((results_dir / "step_37_velocity_robustness.json").read_text())
-        primary = [r for r in s37 if r.get("test") == "standard" and r.get("sigma_v") == 250 and r.get("model") == "1_X"]
-        if primary:
-            r = primary[0]
-            beta = r.get("beta_X", 0)
-            N = r.get("N_hosts", 0)
-            check("S37 primary N=29", N == 29, f"N={N}")
-            check("S37 β_X > 0 at σ_v=250", beta > 0, f"β={beta:.3e}")
-        else:
-            check("S37 primary results found", False, "no standard/250/1_X result")
-    except Exception as e:
-        check("S37 outputs exist", False, str(e))
+    rows39 = load("step_39_environment_slope_decomposition.json")
+    primary39 = next(
+        row for row in rows39
+        if row["sigma_v"] == 250 and row["sample"] == "all_r22_hosts"
+        and row["z_cut"] == 0.0
+    )
+    tests39 = load("step_39_statistical_tests.json")
+    check("S39 complete R22 sample has 37 hosts", primary39["n_hosts"] == 37)
+    check(
+        "S39 endpoint likelihood is finite",
+        np.isfinite(primary39["Gamma_X"])
+        and primary39["Gamma_X_err"] > 0
+        and np.isfinite(primary39["delta_2logL_vs_null"]),
+        (
+            f"Gamma={primary39['Gamma_X']:.3e}, "
+            f"err={primary39['Gamma_X_err']:.3e}, "
+            f"LRT={primary39['Gamma_X_lrt_sig']:.3f}"
+        ),
+    )
+    perm39 = tests39["permutation"]
+    check(
+        "S39 finite-sample permutation uses plus-one correction",
+        perm39["n_permutations"] == 5000
+        and np.isclose(
+            perm39["permutation_p"],
+            (perm39["permutation_exceedances"] + 1) / 5001,
+        ),
+    )
+    check("S39 leave-one-host-out covers all hosts", tests39["loho"]["N_hosts"] == 37)
 
-    # Step 39: Environment slope decomposition
-    try:
-        s39 = json.loads((results_dir / "step_39_environment_slope_decomposition.json").read_text())
-        if isinstance(s39, list):
-            s39_rec = [r for r in s39 if r.get("sigma_v") == 250 and r.get("sample") == "primary" and r.get("z_cut", 0) == 0]
-            s39_rec = s39_rec[0] if s39_rec else {}
-        gamma = s39_rec.get("Gamma_X", 0)
-        kappa_eq = s39_rec.get("kappa_equiv", 0)
-        # LOHO is in separate statistical tests file
-        s39_tests = json.loads((results_dir / "step_39_statistical_tests.json").read_text())
-        loho_pos = s39_tests.get("loho", {}).get("n_positive", 0)
-        check("S39 Γ_X ≈ +2.3e7 at σ_v=250", abs(gamma - 2.3e7) < 0.5e7, f"Γ={gamma:.3e}")
-        check("S39 κ_equiv ≈ +7.2e5", abs(kappa_eq - 7.2e5) < 2.0e5, f"κ_eq={kappa_eq:.3e}")
-        check("S39 LOHO positive 29/29", loho_pos == 29, f"positive={loho_pos}/29")
-    except Exception as e:
-        check("S39 outputs exist", False, str(e))
+    rows40 = load("step_40_flow_sky_controls.json")
+    primary40 = {
+        row["model"]: row for row in rows40
+        if row["sample"] == "primary" and row["sigma_v"] == 250
+    }
+    check(
+        "S40 parameter counts include full traceless quadrupole",
+        primary40["M1"]["n_params"] == 3
+        and primary40["M4"]["n_params"] == 11
+        and primary40["M6"]["n_params"] == 12,
+    )
+    check(
+        "S40 M1 reproduces S39 endpoint",
+        np.isclose(primary40["M1"]["Gamma_X"], primary39["Gamma_X"], rtol=1e-5),
+    )
+    check(
+        "S40 null BIC is retained in model comparison",
+        primary40["M0"]["BIC"]
+        == min(primary40[name]["BIC"] for name in ("M0", "M1", "M2", "M3", "M4", "M6")),
+    )
 
-    # Step 40: Flow/sky controls
-    try:
-        s40 = json.loads((results_dir / "step_40_flow_sky_controls.json").read_text())
-        primary_250 = [r for r in s40 if r.get("sample") == "primary" and r.get("sigma_v") == 250 and r.get("model") != "M0"]
-        all_positive = all(r.get("Gamma_X", 0) > 0 for r in primary_250)
-        m1 = [r for r in primary_250 if r.get("model") == "M1"]
-        m1_aic = m1[0].get("AIC", 999) if m1 else 999
-        other_aic = [r.get("AIC", 0) for r in primary_250 if r.get("model") != "M1"]
-        m1_best = all(m1_aic < a for a in other_aic)
-        check("S40 Γ_X > 0 in all controlled models", all_positive, "")
-        check("S40 M1 has best AIC", m1_best, f"M1 AIC={m1_aic:.1f}")
-    except Exception as e:
-        check("S40 outputs exist", False, str(e))
+    s20 = load("step_20_joint_indicator_model.json")
+    check("S20 current matched indicator sample has 18 hosts", s20["N_hosts"] == 18)
+    check(
+        "S20 weighted Cepheid-TRGB differential is not detected",
+        abs(s20["kappa_diff_t"]) < 1.0 and s20["kappa_diff_p"] > 0.3,
+        f"t={s20['kappa_diff_t']:.3f}, p={s20['kappa_diff_p']:.3f}",
+    )
 
-    # Step 41: External distance breakers
-    try:
-        s41 = json.loads((results_dir / "step_41_external_distance_breakers.json").read_text())
-        N_merged = s41.get("N_merged_hosts", 0)
-        diff = s41.get("differential_kappa", {})
-        kappa_diff = diff.get("kappa_Cep", 0)
-        kappa_sig = diff.get("kappa_Cep_sig", 0)
-        vel = s41.get("velocity_beta", [])
-        # Check Γ_X stability across κ assumptions at sigma_v=250
-        gamma_250 = []
-        for r in vel:
-            if r.get("sigma_v") == 250:
-                kappa_label = r.get("kappa_label", "")
-                beta = r.get("beta_X", 0)
-                kappa_used = r.get("kappa_used", 0)
-                # Reconstruct Γ_X ≈ beta + (ln10/5)*70*kappa
-                gamma_est = beta + (np.log(10) / 5) * 70 * kappa_used
-                gamma_250.append(gamma_est)
-        gamma_stable = all(abs(g - 2.3e7) < 0.5e7 for g in gamma_250) if gamma_250 else False
-        check("S41 TRGB overlap N=13", N_merged == 13, f"N={N_merged}")
-        check("S41 differential κ consistent with zero", abs(kappa_diff) < 1.0e6, f"κ={kappa_diff:.3e} ({kappa_sig:.1f}σ)")
-        check("S41 Γ_X stable across κ assumptions", gamma_stable, f"Γ range={gamma_250}")
-    except Exception as e:
-        check("S41 outputs exist", False, str(e))
+    s45 = load("step_45_full_ladder_h0_propagation.json")
+    standard = {
+        row["kappa_name"]: row for row in s45["matrix_propagation"]
+        if row["sigma_ref_label"] == "standard"
+    }
+    screened = {
+        row["kappa_name"]: row for row in s45["matrix_propagation"]
+        if row["sigma_ref_label"] == "screened"
+    }
+    gauge_ok = standard.keys() == screened.keys() and all(
+        np.isclose(standard[name]["H0"], screened[name]["H0"], atol=1e-10)
+        and np.isclose(standard[name]["chi2"], screened[name]["chi2"], atol=1e-8)
+        for name in standard
+    )
+    check("S45 full-ladder result is reference-gauge invariant", gauge_ok)
+    endpoint45 = standard["kappa_endpoint_equiv"]
+    check(
+        "S45 endpoint projection is linked and reported with its penalty",
+        np.isclose(endpoint45["kappa"], primary39["kappa_equiv"], rtol=1e-12)
+        and endpoint45["delta_chi2"] > 0.0,
+        f"H0={endpoint45['H0']:.4f}, delta_chi2={endpoint45['delta_chi2']:.3f}",
+    )
 
-    # Step 42: TEP-native generative model
-    try:
-        s42 = json.loads((results_dir / "step_42_tep_native_ladder.json").read_text())
-        tgamma_250 = [r for r in s42 if r.get("sigma_v") == 250 and r.get("model") == "TGamma"]
-        if tgamma_250:
-            r = tgamma_250[0]
-            gamma = r.get("Gamma_X", 0)
-            gamma_sig = r.get("Gamma_X_sig", 0)
-            beta_A = r.get("beta_A", 0)
-            kappa_B = r.get("kappa_B", 0)
-            beta_C = r.get("beta_C", 0)
-            kappa_D = r.get("kappa_D", np.nan)
-            beta_D = r.get("beta_D", np.nan)
-            check("S42 Γ_X positive at σ_v=250", gamma > 0, f"Γ={gamma:.3e}")
-            check("S42 Γ_X in expected range", 2.0e7 < gamma < 2.7e7, f"Γ={gamma:.3e}")
-            check("S42 Γ_X > 1.5σ", gamma_sig > 1.5, f"sig={gamma_sig:.1f}σ")
-            check("S42 Gauge A β == Γ_X", abs(beta_A - gamma) < 1e3, f"β_A={beta_A:.3e}, Γ={gamma:.3e}")
-            check("S42 Gauge B κ_equiv ≈ 7.3e5", 6.0e5 < kappa_B < 9.0e5, f"κ_B={kappa_B:.3e}")
-            check("S42 Gauge C β < 0 (canonical κ)", beta_C < 0, f"β_C={beta_C:.3e}")
-            check("S42 Gauge D κ_ext ≈ 3.2e5", not np.isnan(kappa_D) and 0 < kappa_D < 8.0e5, f"κ_D={kappa_D:.3e}")
-            check("S42 Gauge D β > 0", not np.isnan(beta_D) and beta_D > 0, f"β_D={beta_D:.3e}")
-        else:
-            check("S42 TGamma results found", False, "no TGamma/250 result")
-    except Exception as e:
-        check("S42 outputs exist", False, str(e))
+    s47 = load("step_47_anchor_double_counting_audit.json")
+    check(
+        "S47 Cepheid rows are owned once and priors are untouched",
+        s47["pseudo_replication"]["no_replication"]
+        and s47["pseudo_replication"]["unique_cepheid_rows"] == 3132
+        and s47["tep_correction"]["n_prior_modified"] == 0,
+    )
 
-    # Step 43: Toy recovery experiment
-    try:
-        s43 = json.loads((results_dir / "step_43_toy_recovery_experiment.json").read_text())
-        N_primary = s43.get("N_primary", 0)
-        inj = s43.get("injection", {})
-        k_inj = float(inj.get("kappa_Cep_injected", np.nan))
-        g_inj = float(inj.get("Gamma_X_injected", np.nan))
-        dm = s43.get("design_matrix", {})
-        vs = s43.get("velocity_space", {})
-        k_hat = float(dm.get("kappa_Cep_recovered", np.nan))
-        g_hat = float(vs.get("Gamma_X_recovered", np.nan))
-        check("S43 primary N=29", N_primary == 29, f"N={N_primary}")
-        check("S43 injected κ_Cep positive", np.isfinite(k_inj) and k_inj > 0, f"κ_inj={k_inj:.3e}")
-        check("S43 injected Γ_X positive", np.isfinite(g_inj) and g_inj > 0, f"Γ_inj={g_inj:.3e}")
-        check("S43 Step-34 κ_Cep absorbed (≈0)", np.isfinite(k_hat) and abs(k_hat) < 0.2 * abs(k_inj), f"κ_hat={k_hat:.3e}")
-        check("S43 velocity-space recovers Γ_X", np.isfinite(g_hat) and abs(g_hat - g_inj) < 0.35 * abs(g_inj), f"Γ_hat={g_hat:.3e}")
-    except Exception as e:
-        check("S43 outputs exist", False, str(e))
+    s51 = load("step_51_recent_velocity_sensitivity.json")
+    check(
+        "S51 recent Manticore table is complete and labelled diagnostic",
+        s51["models"]["manticore_screened"]["n_hosts"] == 35
+        and s51["source"]["arxiv_version"] == "2509.09665v3"
+        and "not an independent" in s51["interpretation"],
+    )
 
-    print_status(f"Regression gates: {gates_passed}/{gates_total} passed", "INFO")
-    if gates_passed < gates_total:
-        raise RuntimeError(f"Regression gates failed: {gates_total - gates_passed} failures.")
+    failed = [label for label, ok, _ in checks if not ok]
+    print_status(f"Regression gates: {len(checks) - len(failed)}/{len(checks)} passed", "INFO")
+    if failed:
+        raise RuntimeError(f"Regression gates failed: {', '.join(failed)}")
     print_status("All regression gates passed.", "SUCCESS")
-
 
 def run_pipeline():
     ap = argparse.ArgumentParser(add_help=True)
@@ -252,8 +225,6 @@ def run_pipeline():
     ap.add_argument("--rebuild-sigma", action="store_true")
     ap.add_argument("--use-lit-overrides", action="store_true")
     ap.add_argument("--skip-audit", action="store_true")
-    ap.add_argument("--run-stellar-validation", action="store_true",
-                    help="Run Step 33: MESA/RSP stellar validation (optional, post-pipeline)")
     args = ap.parse_args()
 
     # Setup Global Logger
@@ -538,73 +509,6 @@ def run_pipeline():
         set_step_logger(pipeline_logger)
         print_status("Step 27 (Anchor Stratification) completed successfully.", "SUCCESS")
 
-        # --- Step 28: Local Gravity Closure ---
-        print_status(">>> STEP 28: Local Gravity Closure", "TITLE")
-        t0 = time.time()
-        Step10bLocalGravityClosure().run()
-        step_times['Step 28'] = time.time() - t0
-
-        set_step_logger(pipeline_logger)
-        print_status("Step 28 (Local Gravity Closure) completed successfully.", "SUCCESS")
-
-        # --- Step 29: Cross-Channel Consistency ---
-        print_status(">>> STEP 29: Cross-channel Consistency", "TITLE")
-        t0 = time.time()
-        Step12CrossChannel().run()
-        step_times['Step 29'] = time.time() - t0
-
-        set_step_logger(pipeline_logger)
-        print_status("Step 29 (Cross-Channel) completed successfully.", "SUCCESS")
-
-        # --- Step 30: Cosmology Inference ---
-        print_status(">>> STEP 30: Cosmology Inference", "TITLE")
-        t0 = time.time()
-        step_12_cosmology_inference_main()
-        step_times['Step 30'] = time.time() - t0
-
-        set_step_logger(pipeline_logger)
-        print_status("Step 30 (Cosmology Inference) completed successfully.", "SUCCESS")
-
-        # --- Step 31: Final Synthesis ---
-        print_status(">>> STEP 31: Final Synthesis", "TITLE")
-        t0 = time.time()
-        step9 = Step9FinalSynthesis()
-        step9.run()
-        step_times['Step 31'] = time.time() - t0
-
-        set_step_logger(pipeline_logger)
-        print_status("Step 31 (Final Synthesis) completed successfully.", "SUCCESS")
-
-        # --- Step 32: Comprehensive Audit & Integrity Verification ---
-        if not args.skip_audit:
-            print_status(">>> STEP 32: Comprehensive Audit & Integrity Verification", "TITLE")
-            t0 = time.time()
-            Step11ComprehensiveAudit().run()
-            step_times['Step 32'] = time.time() - t0
-            set_step_logger(pipeline_logger)
-            print_status("Step 32 (Comprehensive Audit) completed successfully.", "SUCCESS")
-            
-            # Lightweight pipeline self-check (legacy)
-            print_status(">>> STEP 32b: PIPELINE SELF-CHECK", "TITLE")
-            t0 = time.time()
-            report = audit(project_root=PROJECT_ROOT, write_report=True)
-            if not report.get('summary', {}).get('ok', False):
-                n_fail = report.get('summary', {}).get('n_failed', -1)
-                raise RuntimeError(f"Pipeline audit failed with {n_fail} errors. See results/outputs/step_32_pipeline_audit_report.json")
-            step_times['Step 32b'] = time.time() - t0
-            set_step_logger(pipeline_logger)
-            print_status("Step 32b (Self-Check) passed: all outputs consistent.", "SUCCESS")
-
-        # --- Step 33: Stellar Validation (Optional) ---
-        if args.run_stellar_validation:
-            print_status(">>> STEP 33: Stellar Validation of Scalar-boundary Transport", "TITLE")
-            t0 = time.time()
-            Step13StellarValidation().run()
-            step_times['Step 33'] = time.time() - t0
-
-            set_step_logger(pipeline_logger)
-            print_status("Step 33 (Stellar Validation) completed successfully.", "SUCCESS")
-
         # --- Step 34: Full Ladder Likelihood ---
         print_status(">>> STEP 34: Full Ladder Likelihood", "TITLE")
         t0 = time.time()
@@ -613,22 +517,6 @@ def run_pipeline():
         set_step_logger(pipeline_logger)
         print_status("Step 34 (Full Ladder Likelihood) completed successfully.", "SUCCESS")
 
-        # --- Step 35: Bias-Aware TEP Ladder ---
-        print_status(">>> STEP 35: Bias-aware TEP Ladder", "TITLE")
-        t0 = time.time()
-        step_35_run()
-        step_times['Step 35'] = time.time() - t0
-        set_step_logger(pipeline_logger)
-        print_status("Step 35 (Bias-Aware TEP Ladder) completed successfully.", "SUCCESS")
-
-        # --- Step 36: Apparent Hubble Environment Likelihood ---
-        print_status(">>> STEP 36: Apparent Hubble Environment Likelihood", "TITLE")
-        t0 = time.time()
-        step_36_run()
-        step_times['Step 36'] = time.time() - t0
-        set_step_logger(pipeline_logger)
-        print_status("Step 36 (Apparent Hubble Environment) completed successfully.", "SUCCESS")
-
         # --- Step 37: Velocity Robustness ---
         print_status(">>> STEP 37: Velocity Robustness", "TITLE")
         t0 = time.time()
@@ -636,14 +524,6 @@ def run_pipeline():
         step_times['Step 37'] = time.time() - t0
         set_step_logger(pipeline_logger)
         print_status("Step 37 (Velocity Robustness) completed successfully.", "SUCCESS")
-
-        # --- Step 38: Hierarchical Joint Model ---
-        print_status(">>> STEP 38: Hierarchical Joint Model", "TITLE")
-        t0 = time.time()
-        step_38_run()
-        step_times['Step 38'] = time.time() - t0
-        set_step_logger(pipeline_logger)
-        print_status("Step 38 (Hierarchical Joint Model) completed successfully.", "SUCCESS")
 
         # --- Step 39: Environment Slope Decomposition ---
         print_status(">>> STEP 39: Environment Slope Decomposition", "TITLE")
@@ -661,22 +541,6 @@ def run_pipeline():
         set_step_logger(pipeline_logger)
         print_status("Step 40 (Flow / Sky Controls) completed successfully.", "SUCCESS")
 
-        # --- Step 41: External Distance Breakers ---
-        print_status(">>> STEP 41: External Distance Breakers", "TITLE")
-        t0 = time.time()
-        step_41_run()
-        step_times['Step 41'] = time.time() - t0
-        set_step_logger(pipeline_logger)
-        print_status("Step 41 (External Distance Breakers) completed successfully.", "SUCCESS")
-
-        # --- Step 42: TEP-Native Generative Model ---
-        print_status(">>> STEP 42: Tep-native Generative Model", "TITLE")
-        t0 = time.time()
-        step_42_run()
-        step_times['Step 42'] = time.time() - t0
-        set_step_logger(pipeline_logger)
-        print_status("Step 42 (TEP-Native Generative Model) completed successfully.", "SUCCESS")
-
         # --- Step 43: Toy Recovery Experiment ---
         print_status(">>> STEP 43: Toy Recovery Experiment", "TITLE")
         t0 = time.time()
@@ -685,8 +549,57 @@ def run_pipeline():
         set_step_logger(pipeline_logger)
         print_status("Step 43 (Toy Recovery Experiment) completed successfully.", "SUCCESS")
 
+        # --- Step 45: Full-ladder H_0 propagation ---
+        print_status(">>> STEP 45: Full-Ladder H_0 Propagation Test", "TITLE")
+        t0 = time.time()
+        step_45_run()
+        step_times['Step 45'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 45 (Full-Ladder Propagation) completed successfully.", "SUCCESS")
+
+        # --- Step 47: Anchor double-counting audit ---
+        print_status(">>> STEP 47: Hierarchical Anchor Model Audit", "TITLE")
+        t0 = time.time()
+        step_47_run()
+        step_times['Step 47'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 47 (Anchor Audit) completed successfully.", "SUCCESS")
+
+        # --- Step 48: Pantheon+ peculiar-velocity covariance ---
+        print_status(">>> STEP 48: Pantheon+ Peculiar-Velocity Covariance Analysis", "TITLE")
+        t0 = time.time()
+        step_48_run()
+        step_times['Step 48'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 48 (Pantheon+ Velocity Covariance) completed successfully.", "SUCCESS")
+
+        # --- Step 51: recent Manticore posterior-summary sensitivity ---
+        print_status(">>> STEP 51: Recent Manticore Velocity Sensitivity", "TITLE")
+        t0 = time.time()
+        step_51_run()
+        step_times['Step 51'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 51 (Recent Velocity Sensitivity) completed successfully.", "SUCCESS")
+
         # --- Regression Gates ---
         regression_gates(PROJECT_ROOT)
+
+        # Run the manuscript/output audit only after all inferential steps have
+        # produced their current artifacts. Assumption-dependent and superseded
+        # legacy steps are deliberately excluded from this authoritative path.
+        if not args.skip_audit:
+            print_status(">>> FINAL PIPELINE SELF-CHECK", "TITLE")
+            t0 = time.time()
+            report = audit(project_root=PROJECT_ROOT, write_report=True)
+            if not report.get('summary', {}).get('ok', False):
+                n_fail = report.get('summary', {}).get('n_failed', -1)
+                raise RuntimeError(
+                    f"Pipeline audit failed with {n_fail} errors. "
+                    "See results/outputs/step_32_pipeline_audit_report.json"
+                )
+            step_times['Final audit'] = time.time() - t0
+            set_step_logger(pipeline_logger)
+            print_status("Final self-check passed: all audited outputs are consistent.", "SUCCESS")
 
     except Exception as e:
         print_status(f"Pipeline failed: {str(e)}", "CRITICAL")

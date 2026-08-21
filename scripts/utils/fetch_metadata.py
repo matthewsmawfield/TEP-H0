@@ -1,9 +1,6 @@
 
 import numpy as np
 import pandas as pd
-from astroquery.vizier import Vizier
-from astropy.coordinates import SkyCoord
-import astropy.units as u
 from pathlib import Path
 import sys
 
@@ -21,11 +18,17 @@ data_dir = root_dir / "data"
 processed_dir = data_dir / "processed"
 input_path = processed_dir / "hosts_processed.csv"
 output_path = processed_dir / "hosts_metadata_enriched.csv"
+rc3_path = data_dir / "raw" / "external" / "rc3_d25_hosts.csv"
+
+
+def read_commented_csv(path):
+    """Read a committed catalog snapshot while ignoring provenance comments."""
+    return pd.read_csv(path, comment="#")
 
 def fetch_galaxy_metadata():
     """
-    Fetches supplementary metadata for host galaxies from the Third Reference Catalog 
-    of Bright Galaxies (RC3) via Vizier.
+    Merges supplementary metadata from an exact-PGC subset of the Third
+    Reference Catalogue of Bright Galaxies (RC3).
     
     Target Data:
     - D25: Isophotal diameter at surface brightness 25 mag/arcsec^2.
@@ -46,47 +49,27 @@ def fetch_galaxy_metadata():
     # D25_arcmin = 10**LogD25 * 0.1
     # R25_arcsec = D25_arcmin * 60 / 2
     
-    print_status("Querying Vizier (Catalog VII/155)...", "PROCESS")
-    Vizier.ROW_LIMIT = 1
-    
-    df['log_d25'] = np.nan
-    df['r25_arcsec'] = np.nan
-    
-    found_count = 0
-    
-    for i, row in df.iterrows():
-        name = row['normalized_name']
-        ra = row.get('ra')
-        dec = row.get('dec')
+    if not rc3_path.exists():
+        raise FileNotFoundError(f"Pinned RC3 subset missing: {rc3_path}")
 
-        if pd.isna(ra) or pd.isna(dec):
-            continue
+    print_status("Merging pinned RC3 VII/155 values by exact PGC identifier...", "PROCESS")
+    rc3 = read_commented_csv(rc3_path)
+    if rc3["pgc"].duplicated().any():
+        raise ValueError("Pinned RC3 subset contains duplicate PGC identifiers")
 
-        try:
-            # Query by coordinates (name-based query_object is unreliable)
-            coord = SkyCoord(ra=ra, dec=dec, unit=(u.deg, u.deg))
-            cats = Vizier.query_region(coord, catalog='VII/155', radius=5*u.arcmin)
-            if cats and len(cats) > 0:
-                cat = cats[0]
-                if len(cat) > 0 and 'D25' in cat.columns:
-                    val = cat['D25'][0]
-                    if isinstance(val, (float, np.float32, np.float64)) and not np.isnan(val):
-                        df.at[i, 'log_d25'] = val
-                        # Convert to Radius in Arcsec
-                        # val is log10(diameter in 0.1 arcmin)
-                        # Diameter in 0.1 arcmin = 10^val
-                        # Diameter in arcmin = 10^val * 0.1
-                        # Radius in arcmin = 10^val * 0.05
-                        # Radius in arcsec = 10^val * 0.05 * 60 = 10^val * 3
-                        r25 = (10**val) * 3.0
-                        df.at[i, 'r25_arcsec'] = r25
-                        found_count += 1
-                        # Debug log for first few
-                        if i < 3:
-                            print_status(f"  {name}: logD25={val:.2f} -> R25={r25:.1f}''", "DEBUG")
-        except Exception as e:
-            # print_status(f"Error querying {name}: {e}", "DEBUG")
-            pass
+    df["pgc_int"] = pd.to_numeric(df["pgc"], errors="coerce").astype("Int64")
+    rc3["pgc"] = pd.to_numeric(rc3["pgc"], errors="raise").astype("Int64")
+    df = df.merge(
+        rc3[["pgc", "log_d25", "e_log_d25", "d25_uncertain"]],
+        left_on="pgc_int",
+        right_on="pgc",
+        how="left",
+        validate="many_to_one",
+        suffixes=("", "_rc3"),
+    )
+    df["log_d25"] = pd.to_numeric(df["log_d25"], errors="coerce")
+    df["r25_arcsec"] = np.power(10.0, df["log_d25"]) * 3.0
+    found_count = int(df["log_d25"].notna().sum())
             
     # Estimate Effective Radius (Re)
     # For disk galaxies, Re approx 0.5 * R25 is a common rough scaling 
@@ -110,18 +93,13 @@ def fetch_galaxy_metadata():
         ])
     print_table(headers, rows, title="Sample Galaxy Metadata (RC3)")
     
-    # Save only if we found data; otherwise preserve existing cache
-    if found_count > 0:
-        df.to_csv(output_path, index=False)
-        print_status(f"Saved enriched metadata to {output_path}", "SUCCESS")
-    elif output_path.exists():
-        print_status(
-            f"Vizier returned no RC3 data; preserving existing cache at {output_path}.",
-            "WARNING",
-        )
-    else:
-        df.to_csv(output_path, index=False)
-        print_status(f"Saved enriched metadata (empty) to {output_path}", "WARNING")
+    if found_count != df["pgc_int"].notna().sum():
+        missing = df.loc[df["pgc_int"].notna() & df["log_d25"].isna(), "normalized_name"].tolist()
+        raise ValueError(f"Pinned RC3 subset is incomplete for PGC-tagged rows: {missing}")
+
+    df = df.drop(columns=["pgc_int", "pgc_rc3"], errors="ignore")
+    df.to_csv(output_path, index=False)
+    print_status(f"Saved enriched metadata to {output_path}", "SUCCESS")
 
 if __name__ == "__main__":
     # Create a local logger if running directly

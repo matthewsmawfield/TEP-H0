@@ -274,7 +274,7 @@ class Step3TEPCorrection:
         def objective(params):
             kappa_cep = params[0]
 
-            # Physics-derived correction: mu_corr = mu_obs + kappa_cep * S * (sigma^2 - sigma_ref^2)/c^2
+            # TEP endpoint correction: mu_corr = mu_obs + kappa_cep * (S*sigma^2 - sigma_ref^2)/c^2
             correction = tep_correction(sigma_vals, sigma_ref, kappa_cep, S)
             mu_corr = df["value"].values + correction
 

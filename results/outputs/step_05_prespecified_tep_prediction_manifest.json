@@ -1,11 +1,15 @@
 {
-  "kappa_cep_frozen": 1272451.0192871094,
-  "sigma_ref_frozen": 87.16507328052906,
+  "kappa_cep_frozen": 364773.8783220368,
+  "kappa_cep_frozen_err": 304160.05347265705,
+  "sigma_ref_frozen": 30.50738103825078,
   "c_km_s": 299792.458,
   "c_squared": 89875517873.68175,
   "screening_formula": "S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}",
   "screening_n_crit": 10.0,
   "screening_gamma": 1.2,
   "local_screening_formula": "S_local(rho) = [1 + (rho / rho_half)^n_steep]^{-1}",
-  "prediction_criterion": "A new Cepheid-SN host validates the TEP correction if its observed distance-modulus residual agrees with the predicted Delta_mu within the quoted uncertainty (~0.1-0.2 mag). Systematic offsets falsify the model."
+  "prediction_criterion": "Under the restricted Cepheid-channel allocation, a new host should follow this frozen endpoint response. Systematic disagreement falsifies that allocation; agreement does not by itself identify the microscopic TEP mechanism.",
+  "endpoint_formula": "Delta_mu = kappa * (S * sigma^2 - U_ref) / c^2",
+  "kappa_equiv_source": "step_39_environment_slope_decomposition.json (all_r22_hosts, sigma_v=250, z_cut=0)",
+  "allocation_status": "conditional Cepheid-channel projection"
 }

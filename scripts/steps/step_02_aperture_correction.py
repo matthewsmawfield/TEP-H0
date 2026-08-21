@@ -18,8 +18,11 @@ class Step1bApertureCorrection:
     Step 1b: Aperture Correction
     ============================
     
-    This step homogenizes the velocity dispersion measurements by correcting for 
-    aperture size differences.
+    The authoritative catalog now uses inclination-corrected global rotation
+    speeds transformed to ``u_phi = V_rot / sqrt(2)``.  Global rotation speeds
+    have no spectroscopic aperture radius, so the Jorgensen correction is not
+    applicable.  This step preserves the historical output columns while
+    explicitly recording a unit correction factor.
     
     The Physics:
     Velocity dispersion ($\sigma$) measurements depend on the fraction of the galaxy 
@@ -64,6 +67,10 @@ class Step1bApertureCorrection:
         # Load Data
         hosts_df = pd.read_csv(self.hosts_path)
         meta_df = pd.read_csv(self.metadata_path)
+        # LMC has separate ground/HST rows in the ladder.  Metadata are
+        # galaxy-level, so deduplicate before merging to avoid a Cartesian
+        # expansion of those observations.
+        meta_df = meta_df.drop_duplicates(subset=["normalized_name"], keep="first")
         
         print_status(f"Loaded {len(hosts_df)} hosts from pipeline processing.", "INFO")
         
@@ -79,32 +86,11 @@ class Step1bApertureCorrection:
         BETA = 0.04
         ASSUMED_APERTURE_RADIUS = 1.5 # arcsec (Typical 3" slit/fiber)
         
-        print_status("Correction Parameters (Jorgensen et al. 1995):", "INFO")
-        print_status(f"  Beta (Slope):       {BETA}", "INFO")
-        print_status(f"  Aperture Radius:    {ASSUMED_APERTURE_RADIUS} arcsec", "INFO")
-        print_status(f"  Norm Radius:        R_eff / 8", "INFO")
-        
-        print_status("Calculating corrections...", "PROCESS")
-        
-        def correct_row(row):
-            return jorgensen_aperture_correction(
-                sigma_obs=row['sigma_measured'],
-                r_ap_arcsec=ASSUMED_APERTURE_RADIUS,
-                r_eff_arcsec=row['r_eff_arcsec'],
-                beta=BETA
-            )
-
-        hosts_df['sigma_corrected'] = hosts_df.apply(correct_row, axis=1)
-        
-        # When r_eff is unavailable, default to measured sigma (no correction possible)
-        missing_r_eff = hosts_df['r_eff_arcsec'].isna()
-        if missing_r_eff.any():
-            n_missing = missing_r_eff.sum()
-            print_status(
-                f"r_eff unavailable for {n_missing}/{len(hosts_df)} hosts; using measured sigma (no aperture correction).",
-                "WARNING",
-            )
-            hosts_df.loc[missing_r_eff, 'sigma_corrected'] = hosts_df.loc[missing_r_eff, 'sigma_measured']
+        print_status(
+            "HyperLEDA V_rot is a global kinematic measure; aperture correction disabled.",
+            "INFO",
+        )
+        hosts_df['sigma_corrected'] = hosts_df['sigma_measured']
         
         # Calculate deltas for reporting
         hosts_df['sigma_delta'] = hosts_df['sigma_corrected'] - hosts_df['sigma_measured']
@@ -130,11 +116,11 @@ class Step1bApertureCorrection:
         print_table(headers, rows, title="Aperture Correction Samples")
         
         # Log changes
-        n_corrected = hosts_df['r_eff_arcsec'].notna().sum()
+        n_corrected = 0
         mean_change = hosts_df['sigma_delta'].mean()
         
         print_status(f"Applied corrections to {n_corrected}/{len(hosts_df)} hosts.", "SUCCESS")
-        print_status(f"Mean Velocity Dispersion Change: {mean_change:+.2f} km/s", "INFO")
+        print_status(f"Mean Kinematic Scale Change: {mean_change:+.2f} km/s", "INFO")
         
         # Save
         hosts_df.to_csv(self.hosts_path, index=False)

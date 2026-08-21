@@ -150,7 +150,7 @@ class CrossChannelKappaConsistency:
 
         For small corrections:
             H0 ~ H0_base * (1 - (ln 10 / 5) * kappa * x)
-        where x = S*(sigma^2 - sigma_ref^2)/c^2.
+        where x = (S*sigma^2 - sigma_ref^2)/c^2.
         So the slope b of H0 vs x is:
             b = -(ln 10 / 5) * H0_base * kappa
         and:
@@ -158,7 +158,7 @@ class CrossChannelKappaConsistency:
         """
         sigma = df["sigma"].values
         S = df["S"].values
-        x = S * (sigma ** 2 - sigma_ref ** 2) / C_SQUARED_KM_S
+        x = (S * sigma ** 2 - sigma_ref ** 2) / C_SQUARED_KM_S
         h0 = df["h0_trgb"].values
         h0_err = df["h0_trgb_err"].values
 
@@ -195,7 +195,7 @@ class CrossChannelKappaConsistency:
     def fit_kappa_diff(self, df: pd.DataFrame, sigma_ref: float) -> dict:
         sigma = df["sigma"].values
         S = df["S"].values
-        x = S * (sigma ** 2 - sigma_ref ** 2) / C_SQUARED_KM_S
+        x = (S * sigma ** 2 - sigma_ref ** 2) / C_SQUARED_KM_S
         delta_mu = (df["mu_trgb"] - df["mu_ceph"]).values
         delta_err = np.sqrt(df["mu_trgb_err"]**2 + df["mu_ceph_err"]**2).values
 
@@ -280,7 +280,7 @@ class CrossChannelKappaConsistency:
         ax = axes[0]
         sigma = df["sigma"].values
         S = df["S"].values
-        x = S * (sigma ** 2 - sigma_ref ** 2) / C_SQUARED_KM_S
+        x = (S * sigma ** 2 - sigma_ref ** 2) / C_SQUARED_KM_S
         delta_mu = (df["mu_trgb"] - df["mu_ceph"]).values
         delta_err = np.sqrt(df["mu_trgb_err"]**2 + df["mu_ceph_err"]**2).values
         ax.errorbar(

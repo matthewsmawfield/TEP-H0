@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "source": {
+    "citation": "Stiskalek et al. 2025, MNRAS, staf2260",
+    "doi": "10.1093/mnras/staf2260",
+    "arxiv_version": "2509.09665v3",
+    "version_date": "2026-06-10",
+    "table": "Table B1",
+    "data_kind": "joint posterior summaries"
+  },
+  "interpretation": "Reproducible posterior-summary sensitivity only; it is not an independent reanalysis of the unreleased Manticore field samples.",
+  "models": {
+    "manticore_screened": {
+      "n_hosts": 35,
+      "H_app": 71.02124261411332,
+      "H_app_err": 1.215804169533692,
+      "Gamma_X": -2822887.3029056946,
+      "Gamma_X_err": 14220581.244630974,
+      "Gamma_X_sig": 0.1985071674880719,
+      "delta_2logL_vs_null": 0.03931546705848632,
+      "Gamma_X_lrt_sig": -0.19828128267309125,
+      "residual_velocity_kms": 172.5,
+      "status": "converged"
+    },
+    "manticore_unscreened": {
+      "n_hosts": 35,
+      "H_app": 70.8736000703965,
+      "H_app_err": 1.2095430970774086,
+      "Gamma_X": 6052464.410884143,
+      "Gamma_X_err": 8542269.214123407,
+      "Gamma_X_sig": 0.7085312180137413,
+      "delta_2logL_vs_null": 0.5064150578991189,
+      "Gamma_X_lrt_sig": 0.7116284549532284,
+      "residual_velocity_kms": 172.5,
+      "status": "converged"
+    },
+    "carrick_r22_same_35": {
+      "n_hosts": 35,
+      "H_app": 68.96907881606484,
+      "H_app_err": 1.3368001424183469,
+      "Gamma_X": 14801069.738453867,
+      "Gamma_X_err": 15803851.83130291,
+      "Gamma_X_sig": 0.9365482476327184,
+      "delta_2logL_vs_null": 0.8843451206773807,
+      "Gamma_X_lrt_sig": 0.94039625726466,
+      "residual_velocity_kms": 216.6,
+      "status": "converged"
+    }
+  }
+}
