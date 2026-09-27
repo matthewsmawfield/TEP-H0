@@ -150,6 +150,30 @@ def load_host_metadata():
             if pd.notna(z_cmb) and z_cmb > 0:
                 host_z_cmb[ngc_name] = z_cmb
     explicit = {"M101": "M 101", "M1337": "Mrk 1337", "N105A": "N105", "N976A": "N976"}
+    host_mass = {}
+    for _, row in df.iterrows():
+        name = row["normalized_name"]
+        source_id = str(row.get("source_id", "")).strip()
+        m = row.get("host_logmass", np.nan)
+        if pd.notna(m):
+            host_mass[name] = float(m)
+            if source_id:
+                host_mass[source_id] = float(m)
+            compact = name.replace(" ", "").replace("NGC", "N").replace("UGC", "U")
+            if compact.startswith(("N", "U")):
+                parts = compact[1:]
+                if parts.isdigit():
+                    padded = compact[0] + parts.zfill(4)
+                    host_mass[padded] = float(m)
+                    unpadded = compact[0] + parts.lstrip("0")
+                    if unpadded != padded:
+                        host_mass[unpadded] = float(m)
+            if compact.startswith("N"):
+                ngc_name = "NGC" + compact[1:]
+                host_mass[ngc_name] = float(m)
+    for sh0es_name, csv_name in explicit.items():
+        if csv_name in host_mass and sh0es_name not in host_mass:
+            host_mass[sh0es_name] = host_mass[csv_name]
     for sh0es_name, csv_name in explicit.items():
         if csv_name in host_sigma and sh0es_name not in host_sigma:
             host_sigma[sh0es_name] = host_sigma[csv_name]
@@ -158,10 +182,10 @@ def load_host_metadata():
                 host_z[sh0es_name] = host_z[csv_name]
             if csv_name in host_z_cmb:
                 host_z_cmb[sh0es_name] = host_z_cmb[csv_name]
-    return host_sigma, host_z, host_z_cmb, host_S
+    return host_sigma, host_z, host_z_cmb, host_S, host_mass
 
 
-def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=None):
+def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=None, host_mass=None):
     from scipy import linalg
     try:
         Lc = np.linalg.cholesky(C)
@@ -179,6 +203,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cm
     sigmas = []
     zs = []
     zs_cmb = []
+    masses = []
     is_anchors = []
 
     anchor_hosts = {"N4258", "LMC", "M31", "MW", "SMC"}
@@ -207,6 +232,10 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cm
         sigmas.append(host_sigma[host_name])
         zs.append(host_z.get(host_name, np.nan))
         zs_cmb.append(host_z_cmb.get(host_name, np.nan) if host_z_cmb else np.nan)
+        if host_mass is not None:
+            masses.append(host_mass.get(host_name, np.nan))
+        else:
+            masses.append(np.nan)
         is_anchors.append(host_name in anchor_hosts)
 
     df = pd.DataFrame({
@@ -216,6 +245,7 @@ def compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cm
         "sigma": sigmas,
         "z_hd": zs,
         "z_cmb": zs_cmb,
+        "host_logmass": masses,
         "is_anchor": is_anchors,
     })
     return df
@@ -244,18 +274,53 @@ def _build_covariates_for_subset(df_subset, host_S, sigma_ref):
 GAMMA_SCALE = 1e7
 
 
+def velocity_likelihood_hessian(params, cz_obs, d_obs, x_scaled, sigma_mu, sigma_v):
+    """Exact curvature of the Gaussian likelihood, including model-dependent variance.
+
+    Differencing log-likelihoods twice at 1e-5 loses precision and can create
+    negative variances. Work in the same normalized coordinates as the fit.
+    """
+    H, gamma, scatter = params
+    design = np.column_stack([d_obs, d_obs * x_scaled])
+    model = design @ np.asarray([H, gamma])
+    residual = cz_obs - model
+    a2 = (LN10_OVER_5 * sigma_mu)**2
+    variance = sigma_v**2 + a2 * model**2 + scatter**2
+    vm = 2 * a2 * model
+    vs = 2 * scatter
+    first_v = 1 / variance - residual**2 / variance**2
+    second_v = -1 / variance**2 + 2 * residual**2 / variance**3
+    fmm = (1 / variance + 2 * residual * vm / variance**2
+           + a2 * first_v + .5 * vm**2 * second_v)
+    fms = residual * vs / variance**2 + .5 * vm * vs * second_v
+    fss = first_v + .5 * vs**2 * second_v
+    hessian = np.empty((3, 3))
+    hessian[:2, :2] = design.T @ (fmm[:, None] * design)
+    hessian[:2, 2] = design.T @ fms
+    hessian[2, :2] = hessian[:2, 2]
+    hessian[2, 2] = np.sum(fss)
+    return hessian
+
+
 def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0,
               compute_profile=False, multi_start=False,
               compute_uncertainty=True):
     """Fit cz = d_obs * (H_app + Gamma_X * X) + noise.
 
-    Internally scales Gamma_X by GAMMA_SCALE so optimizer parameters are O(1).
+    Normalize the actual regressor for numerical conditioning. The canonical
+    potential contrast is O(1e-7), whereas callers also supply O(1) response
+    functions. A fixed 1e7 multiplier makes those fits ill-conditioned.
+    Returned coefficients and their covariance remain in the caller's units;
+    the existing physical Gamma_X bounds are preserved.
     """
     n = len(cz_obs)
+    X = np.asarray(X, dtype=float)
+    x_norm = float(np.max(np.abs(X)))
+    gamma_scale = 1.0 / x_norm if x_norm > 0 else GAMMA_SCALE
 
     def neg_logL(params):
         H_app, gamma_param, sigma_int_v = params[0], params[1], max(params[2], 0.01)
-        Gamma_X = gamma_param * GAMMA_SCALE
+        Gamma_X = gamma_param * gamma_scale
         cz_model = d_obs * (H_app + Gamma_X * X)
         resid = cz_obs - cz_model
         sigma_cz_dist = LN10_OVER_5 * np.abs(cz_model) * sigma_mu
@@ -264,10 +329,11 @@ def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0,
         return 0.5 * np.sum(resid**2 / var + np.log(var))
 
     ratio = cz_obs / d_obs
-    linear_design = np.column_stack([np.ones(n), X * GAMMA_SCALE])
+    linear_design = np.column_stack([np.ones(n), X * gamma_scale])
     H_app_init, gamma_init = np.linalg.lstsq(linear_design, ratio, rcond=None)[0]
     x0 = np.array([H_app_init, gamma_init, sigma_int_guess])
-    bounds = [(30.0, 90.0), (-100.0, 100.0), (0.01, 50.0)]
+    gamma_bound = 100.0 * GAMMA_SCALE / gamma_scale
+    bounds = [(30.0, 90.0), (-gamma_bound, gamma_bound), (0.01, 50.0)]
 
     res = optimize.minimize(neg_logL, x0, method="L-BFGS-B", bounds=bounds)
     if multi_start:
@@ -279,25 +345,34 @@ def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0,
                     res = res_try
 
     H_app, gamma_param, sigma_int_v = res.x[0], res.x[1], res.x[2]
-    Gamma_X = gamma_param * GAMMA_SCALE
+    Gamma_X = gamma_param * gamma_scale
 
     # Hessian for uncertainties (in scaled parameter space)
     cov_physical = np.full((3, 3), np.nan)
+    uncertainty_method = "not_computed"
     try:
         if not compute_uncertainty:
             raise RuntimeError("uncertainty calculation disabled")
-        with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
-            hess = optimize.approx_fprime(
-                res.x,
-                lambda x: optimize.approx_fprime(x, neg_logL, 1e-5),
-                1e-5,
-            )
-            cov_scaled = np.linalg.pinv(hess, rcond=1e-12)
-            jac = np.diag([1.0, GAMMA_SCALE, 1.0])
-            cov_physical = jac @ cov_scaled @ jac
-            se = np.sqrt(np.maximum(np.diag(cov_physical), 0))
+        hess = velocity_likelihood_hessian(
+            res.x, cz_obs, d_obs, X * gamma_scale, sigma_mu, sigma_v)
+        # At a constrained optimum, invert curvature only for free parameters.
+        # A bound parameter has no symmetric Wald error; leave its SE missing.
+        free = np.array([not (np.isclose(value, low, rtol=0, atol=1e-5)
+                              or np.isclose(value, high, rtol=0, atol=1e-5))
+                         for value, (low, high) in zip(res.x, bounds)])
+        active_hess = hess[np.ix_(free, free)]
+        np.linalg.cholesky(active_hess)  # never turn negative variance into zero
+        cov_scaled = np.full((3, 3), np.nan)
+        cov_scaled[np.ix_(free, free)] = np.linalg.inv(active_hess)
+        units = np.array([1., gamma_scale, 1.])
+        cov_physical = cov_scaled * units[:, None] * units[None, :]
+        se = np.sqrt(np.diag(cov_physical))
+        uncertainty_method = ("analytic_hessian" if np.all(free)
+                              else "analytic_hessian_conditional_on_active_bounds")
     except Exception:
         se = np.full(3, np.nan)
+        if compute_uncertainty:
+            uncertainty_method = "unavailable_nonpositive_or_singular_curvature"
 
     cz_model = d_obs * (H_app + Gamma_X * X)
     sigma_cz_dist = LN10_OVER_5 * np.abs(cz_model) * sigma_mu
@@ -361,11 +436,12 @@ def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0,
             )
 
         try:
-            profile_low = find_profile_limit(-1) * GAMMA_SCALE
-            profile_high = find_profile_limit(+1) * GAMMA_SCALE
+            profile_low = find_profile_limit(-1) * gamma_scale
+            profile_high = find_profile_limit(+1) * gamma_scale
             profile_err = 0.5 * (profile_high - profile_low)
             if np.isfinite(profile_err) and profile_err > 0:
                 se[1] = profile_err
+                uncertainty_method += "; Gamma_X_profile_likelihood"
         except (ValueError, RuntimeError):
             pass
 
@@ -410,6 +486,9 @@ def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0,
         "AIC": -2 * logL + 6 if np.isfinite(logL) else np.nan,
         "BIC": -2 * logL + 3 * np.log(n) if np.isfinite(logL) else np.nan,
         "status": "converged" if res.success else "fallback",
+        "optimizer_gamma_scale": float(gamma_scale),
+        "optimizer_message": str(res.message),
+        "uncertainty_method": uncertainty_method,
     }
 
 
@@ -448,27 +527,58 @@ def permutation_test(cz_obs, d_obs, X, sigma_mu, sigma_v, n_perm=5000, seed=42):
     }
 
 
-def bootstrap_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, n_boot=1000, seed=42):
-    """Bootstrap for Gamma_X confidence interval and sign stability."""
+def bootstrap_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, n_boot=1000, seed=42,
+                    strata=None):
+    """Bootstrap Gamma_X, optionally conditional on fixed observed strata.
+
+    A binary threshold can lose its entire rare group in a pairs bootstrap.
+    Then intercept and slope are not separately identifiable: arbitrary
+    optimizer slopes must not enter the interval. Report such draws explicitly.
+    With strata, preserve each group's observed count; the resulting interval
+    is conditional on those counts and the selected response/threshold.
+    """
     rng = np.random.default_rng(seed)
     n = len(cz_obs)
     gammas = []
+    unidentified = 0
+    failed = 0
+    groups = None
+    if strata is not None:
+        strata = np.asarray(strata)
+        if strata.shape != (n,):
+            raise ValueError("strata must have one label per host")
+        groups = [np.flatnonzero(strata == label) for label in np.unique(strata)]
     for _ in range(n_boot):
-        idx = rng.integers(0, n, size=n)
+        idx = (rng.integers(0, n, size=n) if groups is None else
+               np.concatenate([rng.choice(group, len(group), replace=True)
+                               for group in groups]))
+        if np.ptp(X[idx]) == 0:
+            unidentified += 1
+            continue
         res = fit_gamma(
             cz_obs[idx], d_obs[idx], X[idx], sigma_mu[idx], sigma_v,
             compute_uncertainty=False,
         )
+        if res["status"] != "converged":
+            failed += 1
         gammas.append(res["Gamma_X"])
 
     gammas = np.array(gammas)
-    ci_low, ci_high = np.percentile(gammas, [2.5, 97.5])
+    ci_low, ci_high = np.percentile(gammas, [2.5, 97.5]) if len(gammas) else (np.nan, np.nan)
     return {
-        "Gamma_X_boot_mean": float(np.mean(gammas)),
-        "Gamma_X_boot_std": float(np.std(gammas)),
+        "Gamma_X_boot_mean": float(np.mean(gammas)) if len(gammas) else np.nan,
+        "Gamma_X_boot_std": float(np.std(gammas)) if len(gammas) else np.nan,
         "Gamma_X_ci_low": float(ci_low),
         "Gamma_X_ci_high": float(ci_high),
-        "frac_positive": float(np.mean(gammas > 0)),
+        "frac_positive": float(np.mean(gammas > 0)) if len(gammas) else np.nan,
+        "n_attempted": int(n_boot),
+        "n_identifiable": int(len(gammas)),
+        "n_unidentifiable": int(unidentified),
+        "n_optimizer_fallback": int(failed),
+        "resampling": "stratified_pairs" if groups is not None else "pairs",
+        "group_sizes": [int(len(g)) for g in groups] if groups is not None else None,
+        "interval_scope": ("Conditional on observed stratum counts and the selected model/shape" if groups is not None else
+                           "Identifiable pairs-bootstrap draws only; inspect n_unidentifiable before interpreting coverage"),
     }
 
 
@@ -498,6 +608,215 @@ def loho_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, host_names):
     }
 
 
+def fit_multivariate_gamma(cz_obs, d_obs, regressor_dict, sigma_mu, sigma_v, sigma_int_guess=5.0):
+    """Fit cz = d_obs * (H_app + sum_k c_k * regressor_k) + noise.
+
+    regressor_dict: dict of {name: (array, scale_factor)}
+    """
+    reg_names = list(regressor_dict.keys())
+    reg_arrays = [regressor_dict[k][0] for k in reg_names]
+    reg_scales = [regressor_dict[k][1] for k in reg_names]
+    k_dim = len(reg_names)
+
+    def neg_logL(params):
+        H_app = params[0]
+        c_params = params[1:1+k_dim]
+        sigma_int_v = max(params[1+k_dim], 0.01)
+        cz_model = d_obs * H_app
+        for arr, scale, c in zip(reg_arrays, reg_scales, c_params):
+            cz_model = cz_model + d_obs * (c * scale * arr)
+        resid = cz_obs - cz_model
+        sigma_cz_dist = LN10_OVER_5 * np.abs(cz_model) * sigma_mu
+        var = sigma_v**2 + sigma_cz_dist**2 + sigma_int_v**2
+        var = np.maximum(var, 0.01)
+        return 0.5 * np.sum(resid**2 / var + np.log(var))
+
+    if k_dim > 0:
+        design = [np.ones(len(cz_obs))] + [arr * scale for arr, scale in zip(reg_arrays, reg_scales)]
+        A = np.column_stack(design)
+        coeffs = np.linalg.lstsq(A, cz_obs / d_obs, rcond=None)[0]
+    else:
+        coeffs = [np.mean(cz_obs / d_obs)]
+    x0 = np.concatenate([coeffs, [sigma_int_guess]])
+    bounds = [(30.0, 90.0)] + [(-100.0, 100.0)] * k_dim + [(0.01, 50.0)]
+
+    res = optimize.minimize(neg_logL, x0, method="L-BFGS-B", bounds=bounds)
+
+    cov_physical = np.full((len(x0), len(x0)), np.nan)
+    try:
+        hess = optimize.approx_fprime(res.x, lambda x: optimize.approx_fprime(x, neg_logL, 1e-5), 1e-5)
+        cov_scaled = np.linalg.pinv(hess, rcond=1e-12)
+        jac_diag = [1.0] + reg_scales + [1.0]
+        jac = np.diag(jac_diag)
+        cov_physical = jac @ cov_scaled @ jac
+        se = np.sqrt(np.maximum(np.diag(cov_physical), 0))
+    except Exception:
+        se = np.full(len(x0), np.nan)
+
+    out = {
+        "H_app": float(res.x[0]),
+        "H_app_err": float(se[0]),
+        "logL": float(-res.fun),
+        "AIC": float(2 * len(x0) + 2 * res.fun),
+        "BIC": float(len(x0) * np.log(len(cz_obs)) + 2 * res.fun),
+        "sigma_int_v": float(res.x[-1]),
+    }
+    for i, name in enumerate(reg_names):
+        val = float(res.x[1+i] * reg_scales[i])
+        err = float(se[1+i])
+        sig = float(val / err) if (err > 0 and np.isfinite(err)) else np.nan
+        out[name] = val
+        out[f"{name}_err"] = err
+        out[f"{name}_sig"] = sig
+
+    return out, res, neg_logL
+
+
+def run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_ref):
+    """Evaluate host-mass decorrelation and joint likelihood marginalization against SN Ia mass step."""
+    print_status("Host-Mass Decoupling & Mass-Step Marginalization", "SECTION")
+
+    M = df_primary["host_logmass"].values
+    valid_m = np.isfinite(M)
+    if valid_m.sum() < 10:
+        print_status("Insufficient host mass data for marginalization analysis", "WARNING")
+        return {}
+
+    M_c = M - np.mean(M)
+    step_10 = (M >= 10.0).astype(float)
+    step_10_c = step_10 - np.mean(step_10)
+
+    # 1. Correlations
+    r_XM, p_XM = stats.pearsonr(X_pri, M)
+    rho_XM, prho_XM = stats.spearmanr(X_pri, M)
+    r_Xs, p_Xs = stats.pearsonr(X_pri, step_10)
+    rho_Xs, prho_Xs = stats.spearmanr(X_pri, step_10)
+
+    sig_raw = df_primary["sigma"].values
+    r_sig_M, p_sig_M = stats.pearsonr(sig_raw, M)
+    r_sig2_M, p_sig2_M = stats.pearsonr(sig_raw**2, M)
+
+    print_status(f"Decorrelation check: r(sigma, M*) = {r_sig_M:.3f} (p = {p_sig_M:.2e}), r(sigma^2, M*) = {r_sig2_M:.3f} (p = {p_sig2_M:.2e})", "INFO")
+    print_status(f"TEP screened potential: r(X_TEP, M*) = {r_XM:.3f} (p = {p_XM:.4f}), rho(X_TEP, M*) = {rho_XM:.3f} (p = {prho_XM:.4f})", "INFO")
+    print_status(f"TEP vs SN Ia Mass Step: r(X_TEP, Step_10) = {r_Xs:.3f} (p = {p_Xs:.4f}), rho(X_TEP, Step_10) = {rho_Xs:.3f} (p = {prho_Xs:.4f})", "INFO")
+
+    # 2. Orthogonalized coordinates
+    slope_xm, int_xm, _, _, _ = stats.linregress(M, X_pri)
+    X_resid_M = X_pri - (slope_xm * M + int_xm)
+
+    slope_xs, int_xs, _, _, _ = stats.linregress(step_10, X_pri)
+    X_resid_step = X_pri - (slope_xs * step_10 + int_xs)
+
+    # 3. Model fittings across velocity dispersions
+    sigma_v_values = [150.0, 182.1, 250.0]
+    marginalization_results = []
+
+    U_ref = sigma_ref**2
+    X_cosmic = -U_ref / (C_KM_S**2)
+    mean_X_raw = np.mean([
+        build_host_x(s, sigma_ref, S=1.0) for s in sig_raw
+    ])
+    dX_to_cosmic = X_cosmic - mean_X_raw
+
+    for sv in sigma_v_values:
+        out_null, res_null, _ = fit_multivariate_gamma(cz_pri, d_pri, {}, mu_err_pri, sv)
+        out_tep, res_tep, _ = fit_multivariate_gamma(cz_pri, d_pri, {"Gamma_X": (X_pri, 1e7)}, mu_err_pri, sv)
+        out_step, res_step, _ = fit_multivariate_gamma(cz_pri, d_pri, {"gamma_step": (step_10_c, 1.0)}, mu_err_pri, sv)
+        out_m, res_m, _ = fit_multivariate_gamma(cz_pri, d_pri, {"gamma_M": (M_c, 1.0)}, mu_err_pri, sv)
+        out_j_step, res_j_step, _ = fit_multivariate_gamma(cz_pri, d_pri, {"Gamma_X": (X_pri, 1e7), "gamma_step": (step_10_c, 1.0)}, mu_err_pri, sv)
+        out_j_m, res_j_m, _ = fit_multivariate_gamma(cz_pri, d_pri, {"Gamma_X": (X_pri, 1e7), "gamma_M": (M_c, 1.0)}, mu_err_pri, sv)
+        out_res_step, res_res_step, _ = fit_multivariate_gamma(cz_pri, d_pri, {"Gamma_X_resid_step": (X_resid_step, 1e7)}, mu_err_pri, sv)
+        out_res_m, res_res_m, _ = fit_multivariate_gamma(cz_pri, d_pri, {"Gamma_X_resid_M": (X_resid_M, 1e7)}, mu_err_pri, sv)
+
+        # Likelihood ratio statistics
+        lrt_tep_standalone = np.sqrt(max(0.0, 2.0 * (out_tep["logL"] - out_null["logL"])))
+        lrt_tep_given_step = np.sqrt(max(0.0, 2.0 * (out_j_step["logL"] - out_step["logL"])))
+        lrt_step_given_tep = np.sqrt(max(0.0, 2.0 * (out_j_step["logL"] - out_tep["logL"])))
+        lrt_tep_given_m = np.sqrt(max(0.0, 2.0 * (out_j_m["logL"] - out_m["logL"])))
+        lrt_m_given_tep = np.sqrt(max(0.0, 2.0 * (out_j_m["logL"] - out_tep["logL"])))
+        lrt_res_step = np.sqrt(max(0.0, 2.0 * (out_res_step["logL"] - out_null["logL"])))
+        lrt_res_m = np.sqrt(max(0.0, 2.0 * (out_res_m["logL"] - out_null["logL"])))
+
+        # Cosmic H0 projections
+        H0_cosmic_tep = out_tep["H_app"] + out_tep["Gamma_X"] * dX_to_cosmic
+        H0_cosmic_j_step = out_j_step["H_app"] + out_j_step["Gamma_X"] * dX_to_cosmic
+        H0_cosmic_j_m = out_j_m["H_app"] + out_j_m["Gamma_X"] * dX_to_cosmic
+
+        row_entry = {
+            "sigma_v": sv,
+            "Gamma_X_standalone": out_tep["Gamma_X"],
+            "Gamma_X_standalone_err": out_tep["Gamma_X_err"],
+            "Gamma_X_standalone_lrt": lrt_tep_standalone,
+            "H_app_standalone": out_tep["H_app"],
+            "H0_cosmic_standalone": H0_cosmic_tep,
+            "Gamma_X_joint_step": out_j_step["Gamma_X"],
+            "Gamma_X_joint_step_err": out_j_step["Gamma_X_err"],
+            "Gamma_X_joint_step_lrt": lrt_tep_given_step,
+            "gamma_step_joint": out_j_step["gamma_step"],
+            "gamma_step_joint_err": out_j_step["gamma_step_err"],
+            "gamma_step_joint_lrt": lrt_step_given_tep,
+            "H_app_joint_step": out_j_step["H_app"],
+            "H0_cosmic_joint_step": H0_cosmic_j_step,
+            "retention_vs_step": out_j_step["Gamma_X"] / out_tep["Gamma_X"],
+            "Gamma_X_joint_m": out_j_m["Gamma_X"],
+            "Gamma_X_joint_m_err": out_j_m["Gamma_X_err"],
+            "Gamma_X_joint_m_lrt": lrt_tep_given_m,
+            "gamma_m_joint": out_j_m["gamma_M"],
+            "gamma_m_joint_err": out_j_m["gamma_M_err"],
+            "gamma_m_joint_lrt": lrt_m_given_tep,
+            "H_app_joint_m": out_j_m["H_app"],
+            "H0_cosmic_joint_m": H0_cosmic_j_m,
+            "retention_vs_m": out_j_m["Gamma_X"] / out_tep["Gamma_X"],
+            "Gamma_X_resid_step": out_res_step["Gamma_X_resid_step"],
+            "Gamma_X_resid_step_err": out_res_step["Gamma_X_resid_step_err"],
+            "Gamma_X_resid_step_lrt": lrt_res_step,
+            "Gamma_X_resid_m": out_res_m["Gamma_X_resid_M"],
+            "Gamma_X_resid_m_err": out_res_m["Gamma_X_resid_M_err"],
+            "Gamma_X_resid_m_lrt": lrt_res_m,
+            "aic_null": out_null["AIC"],
+            "aic_tep": out_tep["AIC"],
+            "aic_step": out_step["AIC"],
+            "aic_m": out_m["AIC"],
+            "aic_joint_step": out_j_step["AIC"],
+            "aic_joint_m": out_j_m["AIC"],
+        }
+        marginalization_results.append(row_entry)
+
+        print_status(f"  sigma_v = {sv:5.1f} km/s: Standalone Gamma_X = {out_tep['Gamma_X']:+.3e} ({lrt_tep_standalone:.2f}σ)", "INFO")
+        print_status(f"    Joint w/ Mass Step: Gamma_X = {out_j_step['Gamma_X']:+.3e} ({lrt_tep_given_step:.2f}σ, retention {out_j_step['Gamma_X']/out_tep['Gamma_X']*100:.1f}%), Step = {out_j_step['gamma_step']:+.2f} ({lrt_step_given_tep:.2f}σ)", "INFO")
+        print_status(f"    Joint w/ log M*:    Gamma_X = {out_j_m['Gamma_X']:+.3e} ({lrt_tep_given_m:.2f}σ, retention {out_j_m['Gamma_X']/out_tep['Gamma_X']*100:.1f}%), Mass = {out_j_m['gamma_M']:+.2f} ({lrt_m_given_tep:.2f}σ)", "INFO")
+        print_status(f"    Mass-Step Resid:    Gamma_X = {out_res_step['Gamma_X_resid_step']:+.3e} ({lrt_res_step:.2f}σ)", "INFO")
+        print_status(f"    Continuous Resid:   Gamma_X = {out_res_m['Gamma_X_resid_M']:+.3e} ({lrt_res_m:.2f}σ)", "INFO")
+
+    out_csv = OUT_DIR / "step_39_host_mass_marginalization.csv"
+    pd.DataFrame(marginalization_results).to_csv(out_csv, index=False)
+    print_status(f"Saved mass marginalization CSV to {out_csv}", "SUCCESS")
+
+    out_json = OUT_DIR / "step_39_host_mass_marginalization.json"
+    meta_summary = {
+        "decorrelation_metrics": {
+            "r_X_logM": float(r_XM),
+            "p_X_logM": float(p_XM),
+            "rho_X_logM": float(rho_XM),
+            "p_rho_X_logM": float(prho_XM),
+            "r_X_step10": float(r_Xs),
+            "p_X_step10": float(p_Xs),
+            "rho_X_step10": float(rho_Xs),
+            "p_rho_X_step10": float(prho_Xs),
+            "r_sigma_logM": float(r_sig_M),
+            "p_sigma_logM": float(p_sig_M),
+            "r_sigma2_logM": float(r_sig2_M),
+            "p_sigma2_logM": float(p_sig2_M),
+        },
+        "marginalization_models": marginalization_results,
+    }
+    with open(out_json, "w") as f:
+        json.dump(meta_summary, f, indent=2, default=lambda x: float(x) if isinstance(x, np.floating) else str(x))
+    print_status(f"Saved mass marginalization JSON to {out_json}", "SUCCESS")
+
+    return meta_summary
+
+
 # ---------------------------------------------------------------------------
 # Main run
 # ---------------------------------------------------------------------------
@@ -505,12 +824,12 @@ def run():
     print_status("Step 39: Environment Slope Decomposition", "SECTION")
 
     L, y, C, q = load_sh0es_data()
-    host_sigma, host_z, host_z_cmb, host_S = load_host_metadata()
+    host_sigma, host_z, host_z_cmb, host_S, host_mass = load_host_metadata()
     sigma_ref = np.sqrt(
         (30.0**2 * 0.20 + 24.0**2 * 0.25 + 115.0**2 * 0.55) / (0.20 + 0.25 + 0.55)
     )
 
-    df_hosts = compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=host_z_cmb)
+    df_hosts = compute_host_covariates(L, y, C, q, host_sigma, host_z, sigma_ref, host_z_cmb=host_z_cmb, host_mass=host_mass)
     print_status(f"Computed {len(df_hosts)} calibrator hosts", "INFO")
 
     df_primary = df_hosts[
@@ -618,6 +937,11 @@ def run():
     )
 
     # ========================================================================
+    # Host-mass decoupling and marginalization analysis
+    # ========================================================================
+    mass_results = run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_ref)
+
+    # ========================================================================
     # Summary table
     # ========================================================================
     print_status("Summary: identifiable environmental slope", "SECTION")
@@ -651,6 +975,7 @@ def run():
         "permutation": perm,
         "bootstrap": boot,
         "loho": loho,
+        "mass_marginalization": mass_results,
     }
     test_json = OUT_DIR / "step_39_statistical_tests.json"
     with open(test_json, "w") as f:

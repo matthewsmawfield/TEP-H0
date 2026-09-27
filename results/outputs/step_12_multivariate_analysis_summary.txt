@@ -4,8 +4,8 @@ Model 1: H0 ~ Sigma
 Dep. Variable:             h0_derived   R-squared:                       0.058
 Model:                            OLS   Adj. R-squared:                  0.031
 Method:                 Least Squares   F-statistic:                     2.165
-Date:                Fri, 21 Aug 2026   Prob (F-statistic):              0.150
-Time:                        18:30:44   Log-Likelihood:                -50.884
+Date:                Mon, 14 Sep 2026   Prob (F-statistic):              0.150
+Time:                        01:23:23   Log-Likelihood:                -50.884
 No. Observations:                  37   AIC:                             105.8
 Df Residuals:                      35   BIC:                             109.0
 Df Model:                           1                                         
@@ -13,7 +13,7 @@ Covariance Type:            nonrobust
 ==================================================================================
                      coef    std err          t      P>|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-const           -2.29e-16      0.162  -1.42e-15      1.000      -0.328       0.328
+const          -1.367e-15      0.162  -8.45e-15      1.000      -0.328       0.328
 sigma_inferred     0.2414      0.164      1.471      0.150      -0.092       0.574
 ==============================================================================
 Omnibus:                        2.912   Durbin-Watson:                   2.035
@@ -31,8 +31,8 @@ Model 2: H0 ~ Sigma + MeanLogP (Age Proxy)
 Dep. Variable:             h0_derived   R-squared:                       0.302
 Model:                            OLS   Adj. R-squared:                  0.261
 Method:                 Least Squares   F-statistic:                     7.341
-Date:                Fri, 21 Aug 2026   Prob (F-statistic):            0.00224
-Time:                        18:30:44   Log-Likelihood:                -45.353
+Date:                Mon, 14 Sep 2026   Prob (F-statistic):            0.00224
+Time:                        01:23:23   Log-Likelihood:                -45.353
 No. Observations:                  37   AIC:                             96.71
 Df Residuals:                      34   BIC:                             101.5
 Df Model:                           2                                         
@@ -40,7 +40,7 @@ Covariance Type:            nonrobust
 ==================================================================================
                      coef    std err          t      P>|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-const           -2.29e-16      0.141  -1.62e-15      1.000      -0.287       0.287
+const          -1.367e-15      0.141  -9.67e-15      1.000      -0.287       0.287
 sigma_inferred     0.2317      0.143      1.616      0.115      -0.060       0.523
 mean_logP          0.4934      0.143      3.442      0.002       0.202       0.785
 ==============================================================================
@@ -59,8 +59,8 @@ Model 3: H0 ~ Sigma + Color + Stretch
 Dep. Variable:             h0_derived   R-squared:                       0.090
 Model:                            OLS   Adj. R-squared:                  0.008
 Method:                 Least Squares   F-statistic:                     1.093
-Date:                Fri, 21 Aug 2026   Prob (F-statistic):              0.366
-Time:                        18:30:44   Log-Likelihood:                -50.241
+Date:                Mon, 14 Sep 2026   Prob (F-statistic):              0.366
+Time:                        01:23:23   Log-Likelihood:                -50.241
 No. Observations:                  37   AIC:                             108.5
 Df Residuals:                      33   BIC:                             114.9
 Df Model:                           3                                         
@@ -68,7 +68,7 @@ Covariance Type:            nonrobust
 ==================================================================================
                      coef    std err          t      P>|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-const           -2.29e-16      0.164   -1.4e-15      1.000      -0.333       0.333
+const          -1.367e-15      0.164  -8.35e-15      1.000      -0.333       0.333
 sigma_inferred     0.2347      0.167      1.406      0.169      -0.105       0.574
 c                  0.1767      0.169      1.047      0.303      -0.166       0.520
 x1                 0.0137      0.169      0.081      0.936      -0.330       0.358
@@ -88,8 +88,8 @@ Model 4: H0 ~ Sigma + Age + Dust + Mass
 Dep. Variable:             h0_derived   R-squared:                       0.334
 Model:                            OLS   Adj. R-squared:                  0.251
 Method:                 Least Squares   F-statistic:                     4.020
-Date:                Fri, 21 Aug 2026   Prob (F-statistic):            0.00942
-Time:                        18:30:44   Log-Likelihood:                -44.463
+Date:                Mon, 14 Sep 2026   Prob (F-statistic):            0.00942
+Time:                        01:23:23   Log-Likelihood:                -44.463
 No. Observations:                  37   AIC:                             98.93
 Df Residuals:                      32   BIC:                             107.0
 Df Model:                           4                                         
@@ -97,7 +97,7 @@ Covariance Type:            nonrobust
 ==================================================================================
                      coef    std err          t      P>|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-const           -2.29e-16      0.142  -1.61e-15      1.000      -0.290       0.290
+const          -1.367e-15      0.142  -9.61e-15      1.000      -0.290       0.290
 sigma_inferred     0.0698      0.204      0.342      0.735      -0.346       0.486
 mean_logP          0.4824      0.147      3.284      0.002       0.183       0.782
 c                  0.0460      0.152      0.302      0.765      -0.264       0.356
@@ -118,8 +118,8 @@ Model 5: H0 ~ Sigma + Age + Dust + Mass + zHD + Group Richness
 Dep. Variable:             h0_derived   R-squared:                       0.412
 Model:                            OLS   Adj. R-squared:                  0.294
 Method:                 Least Squares   F-statistic:                     3.498
-Date:                Fri, 21 Aug 2026   Prob (F-statistic):            0.00964
-Time:                        18:30:44   Log-Likelihood:                -42.181
+Date:                Mon, 14 Sep 2026   Prob (F-statistic):            0.00964
+Time:                        01:23:23   Log-Likelihood:                -42.181
 No. Observations:                  37   AIC:                             98.36
 Df Residuals:                      30   BIC:                             109.6
 Df Model:                           6                                         
@@ -127,7 +127,7 @@ Covariance Type:            nonrobust
 ==================================================================================
                      coef    std err          t      P>|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-const           -2.29e-16      0.138  -1.66e-15      1.000      -0.282       0.282
+const          -1.367e-15      0.138   -9.9e-15      1.000      -0.282       0.282
 sigma_inferred    -0.1397      0.256     -0.546      0.589      -0.662       0.383
 mean_logP          0.2835      0.212      1.336      0.191      -0.150       0.717
 c                  0.0759      0.162      0.469      0.642      -0.254       0.406

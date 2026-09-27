@@ -1,17 +1,35 @@
 {
   "cepheid": {
-    "raw_r": 0.24135531860278145,
-    "raw_p": 0.15012430567445031,
-    "mass_residual_r": 0.03352049895145092,
-    "mass_residual_p": 0.8438634085536009,
-    "both_residual_r": 0.046847793172643565,
-    "both_residual_p": 0.783059296460234
+    "raw_r": 0.24135531860280865,
+    "raw_p": 0.15012430567440319,
+    "mass_residual_r": 0.03352049895144912,
+    "mass_residual_p": 0.8438634085536091,
+    "both_residual_r": 0.04684779317264106,
+    "both_residual_p": 0.7830592964602474,
+    "x_tep_raw_r": 0.15067226281612256,
+    "x_tep_raw_p": 0.37338868820358406,
+    "x_tep_mass_residual_r": 0.08573057410579912,
+    "x_tep_mass_residual_p": 0.613902491031274,
+    "x_tep_step_residual_r": 0.07739698473072103,
+    "x_tep_step_residual_p": 0.6488841327087773
   },
   "trgb": {
     "raw_r": 0.3660783406173258,
     "raw_p": 0.135157088894232,
     "mass_residual_r": 0.18553083268830564,
-    "mass_residual_p": 0.4610815205667987
+    "mass_residual_p": 0.4610815205667987,
+    "x_tep_raw_r": 0.12957121495281107,
+    "x_tep_raw_p": 0.6083516915773206,
+    "x_tep_mass_residual_r": 0.11308223707320247,
+    "x_tep_mass_residual_p": 0.6550468758827666
+  },
+  "decorrelation_metrics": {
+    "r_sigma_logM": 0.6985929922187081,
+    "p_sigma_logM": 1.523158274809539e-06,
+    "r_x_tep_logM": 0.2298307139983601,
+    "p_x_tep_logM": 0.17117996848983638,
+    "r_x_tep_step10": 0.35110177603280357,
+    "p_x_tep_step10": 0.03311192626964186
   },
   "tep_prediction": "If TEP is real: Cepheid mass-residual r should remain significant; TRGB mass-residual r should collapse toward zero."
 }

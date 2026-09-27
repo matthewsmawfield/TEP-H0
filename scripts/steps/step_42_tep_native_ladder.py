@@ -282,23 +282,43 @@ def fit_tep_native_model(df_cep, df_merged, sigma_ref, host_S, sigma_v, model_ty
     w = d_obs**2 / (sigma_v**2 + (LN10_OVER_5 * cz_obs * mu_cep_err_all)**2)
     w = np.maximum(w, 1e-10)
 
-    Xmat = np.column_stack([np.ones(n_all), X_scale])
-    W = np.diag(w)
-    beta_wls = np.linalg.lstsq(Xmat.T @ W @ Xmat, Xmat.T @ W @ y, rcond=None)[0]
-    H_app_wls = beta_wls[0]
-    gamma_param_wls = beta_wls[1]
-    Gamma_X_wls = gamma_param_wls * GAMMA_SCALE
+    # T0 (null): intercept only, no environmental coordinate
+    if model_type == "T0":
+        Xmat = np.column_stack([np.ones(n_all)])
+        W = np.diag(w)
+        beta_wls = np.linalg.lstsq(Xmat.T @ W @ Xmat, Xmat.T @ W @ y, rcond=None)[0]
+        H_app_wls = beta_wls[0]
+        gamma_param_wls = 0.0
+        Gamma_X_wls = 0.0
 
-    cov_wls = np.linalg.pinv(Xmat.T @ W @ Xmat, rcond=1e-12)
-    H_err_wls = np.sqrt(cov_wls[0, 0])
-    gamma_param_err_wls = np.sqrt(cov_wls[1, 1])
-    gamma_err_wls = gamma_param_err_wls * GAMMA_SCALE
-    gamma_sig_wls = abs(Gamma_X_wls) / gamma_err_wls if gamma_err_wls > 0 else np.nan
+        cov_wls = np.linalg.pinv(Xmat.T @ W @ Xmat, rcond=1e-12)
+        H_err_wls = np.sqrt(cov_wls[0, 0])
+        gamma_param_err_wls = 0.0
+        gamma_err_wls = 0.0
+        gamma_sig_wls = 0.0
+    else:
+        # TGamma, TK, TBeta, TMixed: full two-parameter fit
+        Xmat = np.column_stack([np.ones(n_all), X_scale])
+        W = np.diag(w)
+        beta_wls = np.linalg.lstsq(Xmat.T @ W @ Xmat, Xmat.T @ W @ y, rcond=None)[0]
+        H_app_wls = beta_wls[0]
+        gamma_param_wls = beta_wls[1]
+        Gamma_X_wls = gamma_param_wls * GAMMA_SCALE
+
+        cov_wls = np.linalg.pinv(Xmat.T @ W @ Xmat, rcond=1e-12)
+        H_err_wls = np.sqrt(cov_wls[0, 0])
+        gamma_param_err_wls = np.sqrt(cov_wls[1, 1])
+        gamma_err_wls = gamma_param_err_wls * GAMMA_SCALE
+        gamma_sig_wls = abs(Gamma_X_wls) / gamma_err_wls if gamma_err_wls > 0 else np.nan
 
     # χ²
-    resid_wls = y - (H_app_wls + gamma_param_wls * X_scale)
+    if model_type == "T0":
+        resid_wls = y - H_app_wls
+        dof_wls = n_all - 1
+    else:
+        resid_wls = y - (H_app_wls + gamma_param_wls * X_scale)
+        dof_wls = n_all - 2
     chi2_wls = np.sum(w * resid_wls**2)
-    dof_wls = n_all - 2
 
     # -----------------------------------------------------------------------
     # Gauge interpretations of Γ_X

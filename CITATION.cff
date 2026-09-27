@@ -13,9 +13,9 @@ abstract: >-
 
   Across all 37 hosts, the generative endpoint likelihood yields Gamma_X = (1.156 +/- 0.958) x 10^7 km/s/Mpc under the canonical 250 km/s velocity variance, strengthening to 1.64 sigma under data-driven Pantheon+ velocity scatter (182.1 km/s) and 1.97 sigma at 150 km/s, with 100% positive leave-one-host-out stability (37 of 37 refits positive). In the cosmologically constrained host-level expansion-rate likelihood across the 33 Hubble-flow hosts (Step 42), the combined endpoint response is recovered at Gamma_X = (1.165 +/- 0.979) x 10^7 km/s/Mpc (1.19 sigma; 2.07 sigma at 150 km/s; and 1.99 sigma under full 33x33 SH0ES covariance GLS), yielding a conventional Hubble-flow intercept of H_app = 68.36 +/- 0.98 km/s/Mpc to 68.62 +/- 1.51 km/s/Mpc. When evaluated in a joint multi-block framework with independent TRGB distances and geometric anchors (Step 44), the multi-block likelihood consistently favours an environmental response under either single-parameter allocation (kappa_Cep = (0.400 +/- 0.270) x 10^6 mag or beta_X = (1.631 +/- 1.250) x 10^7 km/s/Mpc), resolving the local Hubble constant to H_app = 68.76 +/- 1.02 km/s/Mpc. Under the restricted TEP Cepheid-channel closure (beta_X = 0), the full response is allocated to the Cepheid channel (kappa_Cep_equiv = (0.369 +/- 0.310) x 10^6 mag); this allocation is physically specified but remains conditional on host-specific aperture validation.
 
-  Propagating the TEP potential correction through the distance ladder yields a unified local Hubble constant of H0 = 66.65 +/- 1.58 km/s/Mpc, consistent with Planck CMB observations at 0.45 sigma (0.31 sigma bootstrap). Full-matrix propagation through the 3,490-row SH0ES system confirms exact reference-gauge invariance. These multi-scale empirical findings indicate that the Hubble tension can be resolved by dynamical proper time in the local distance scale, pending host-specific aperture validation of the Cepheid-channel allocation.
+  Propagating the TEP potential correction through the distance ladder yields a unified local Hubble constant of H0 = 66.65 +/- 1.58 km/s/Mpc, consistent with Planck CMB observations at 0.45 sigma (0.31 sigma bootstrap); the TEP-CMB inference (H0 = 66.70 +/- 0.58 km/s/Mpc) agrees with the TEP-corrected local value at 0.03 sigma. Full-matrix propagation through the 3,490-row SH0ES system confirms exact reference-gauge invariance. These multi-scale empirical findings indicate that the Hubble tension can be resolved by dynamical proper time in the local distance scale, pending host-specific aperture validation of the Cepheid-channel allocation.
 license: CC-BY-4.0
-version: v0.9 (Kingston upon Hull)
+version: v0.10 (Kingston upon Hull)
 date-released: 2026-01-11
 date-published: 2026-08-21
 keywords:
@@ -41,7 +41,7 @@ url: https://mlsmawfield.com/tep/h0/
 doi: 10.5281/zenodo.18209702
 preferred-citation:
   type: article
-  title: 'The Cepheid Bias: Resolving the Hubble Tension (Kingston upon Hull v0.9)'
+  title: 'The Cepheid Bias: Resolving the Hubble Tension (Kingston upon Hull v0.10)'
   authors:
   - family-names: Smawfield
     given-names: Matthew Lukin
@@ -54,4 +54,4 @@ preferred-citation:
     value: 10.5281/zenodo.18209702
     description: Pre-print DOI
   url: https://doi.org/10.5281/zenodo.18209702
-  notes: Preprint v0.9 (Kingston upon Hull)
+  notes: Preprint v0.10 (Kingston upon Hull)

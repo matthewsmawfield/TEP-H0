@@ -8,9 +8,9 @@
     "group_richness_mean": 13.0,
     "n_high_sigma": 18,
     "n_low_sigma": 19,
-    "raw_slope": 0.04373632298114946,
-    "corrected_mean_full_kappa": 66.6471548707494,
-    "corrected_mean_refit_kappa": 66.6471548707494,
+    "raw_slope": 0.043736322981152355,
+    "corrected_mean_full_kappa": 66.64715487074687,
+    "corrected_mean_refit_kappa": 66.64715487074687,
     "refit_kappa": 849468.994140625
   }
 ]

@@ -174,7 +174,7 @@
   },
   "ols_inner_effect": {
     "n": 504,
-    "beta_inner": 0.15874706604471045,
+    "beta_inner": 0.15874706604470962,
     "se_inner": 0.1155903299307407,
     "x_used": [
       "ri_color",

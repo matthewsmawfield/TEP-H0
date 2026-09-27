@@ -55,6 +55,12 @@ This executes the full pipeline and populates `results/figures/` and `results/ou
 | 47 | `step_47_anchor_double_counting_audit.py` | Cepheid-row ownership and anchor-prior audit. |
 | 49 | `step_49_independent_kappa_estimation.py` | Exclusion record: published H0 summaries are not an independent kappa estimate. |
 | 50 | `step_50_unified_joint_likelihood.py` | Diagnostic-only historical summary; excluded for gauge failure. |
+| 51 | `step_51_recent_velocity_sensitivity.py` | Sensitivity of the endpoint inference to recent-velocity choices. |
+| 52 | `step_52_bounded_response_comparison.py` | Bounded-response model comparison (LOO-CV), κP×κZ disentanglement, injection validation. |
+| 53 | `step_53_within_host_structure_battery.py` | Within-host period-structure discriminating battery: PL-shape controls, modulator discrimination, per-host slopes, host-assignment permutation. |
+| 54 | `step_54_ned_tracer_provenance.py` | Scaffold for NED redshift-tracer provenance compilation (optional). WARNING: tracer classes are currently simulated placeholders (`np.random.choice`), not real NED classifications — outputs must not be cited as provenance (issue 11-4). |
+| 55 | `step_55_within_host_plz_decomposition.py` | Within-host demeaned PLZ decomposition: separates the conventional per-Cepheid period–metallicity interaction from the environment-coupled metallicity term; per-host Z-slope ordering on X_i. |
+| 61 | `step_61_nested_kappa.py` | Nested clock-ratio bound on the raw conformal channel: q = r_spec/r_Cep under three reference-clock conventions, showing the clock channel contributes |κ| ≲ 1 mag — the measured κ_Cep is a response-sector coefficient, not a clock-ratio artifact. |
 | 33 | `step_33_stellar_validation.py` | MESA/RSP/GYRE stellar-structure validation (optional, post-pipeline). |
 
 ## Options

@@ -904,6 +904,15 @@ class Step4RobustnessChecks:
         out.to_csv(self.zcut_stats_path, index=False)
         print_status(f"Saved redshift cut sensitivity results to {self.zcut_stats_path}", "SUCCESS")
 
+        # Forward-model diagnostic: inject the fitted bias and reobserve under
+        # realistic peculiar-velocity noise, to test whether the observed
+        # z-cut dependence of kappa is consistent with a real distance-scale
+        # bias plus velocity scatter rather than velocity contamination.
+        try:
+            self._injection_mc(df_full, step3, sigma_ref, out)
+        except Exception as e:
+            print_status(f"Injection MC failed: {e}", "WARNING")
+
         print_table(
             ["z_cut", "N", "Pearson r", "Spearman ρ", "Corr H0", "LOOCV H0", "κ_Cep (10^6)", "ΔBIC"],
             [[
@@ -920,6 +929,111 @@ class Step4RobustnessChecks:
         )
 
         return out
+
+    def _injection_mc(self, df_full, step3, sigma_ref, observed_df,
+                      n_mc=200, seed=123):
+        """Inject the observed kappa_Cep*X bias into host distances, reobserve
+        with realistic peculiar-velocity realizations, and refit the slope at
+        each redshift cut.  If the observed kappa(z_cut) profile falls inside
+        the injection band, the cut-dependence is consistent with a genuine
+        bias degraded by velocity noise and small subsamples, rather than a
+        velocity systematic masquerading as an environmental gradient.
+
+        Two velocity families are generated:
+          (a) iid:        v_i ~ N(0, 250 km/s)
+          (b) bulk+iid:   CMB-frame dipole of 370 km/s toward (l,b) =
+                          (264.0, 48.3) deg projected on each host line of
+                          sight, plus iid N(0, 150 km/s) residual
+        """
+        import scripts.steps.step_04_tep_correction as _s4
+        from scripts.utils.tep_correction import C_SQUARED_KM_S
+
+        print_status("Injection MC: forward-model z-cut stability", "SECTION")
+        rng = np.random.default_rng(seed)
+
+        df = df_full.copy()
+        df = df[pd.to_numeric(df["z_hd"], errors="coerce") > 0].copy()
+        X = (df["sigma_inferred"].values ** 2 - sigma_ref ** 2) / C_SQUARED_KM_S
+        d_obs = df["distance_mpc"].values
+
+        base_row = observed_df[observed_df["zcut"] == 0.0]
+        kappa_inj = float(base_row["kappa_1e6"].iloc[0]) * 1e6 if len(base_row) else 4.6e5
+        H0_true = 70.0
+
+        d_true = d_obs * 10 ** (kappa_inj * X / 5.0)
+        cz_true = d_true * H0_true
+
+        ra = np.deg2rad(pd.to_numeric(df["ra"], errors="coerce").values)
+        dec = np.deg2rad(pd.to_numeric(df["dec"], errors="coerce").values)
+        l_cmb, b_cmb = np.deg2rad(264.0), np.deg2rad(48.3)
+        los = (np.sin(dec) * np.sin(b_cmb)
+               + np.cos(dec) * np.cos(b_cmb) * np.cos(ra - l_cmb))
+        los = np.where(np.isfinite(los), los, 0.0)
+
+        cuts = [float(c) for c in observed_df["zcut"].values]
+        obs_map = {float(r["zcut"]): float(r["kappa_1e6"]) * 1e6 for _, r in observed_df.iterrows()}
+
+        _orig_ps = _s4.print_status
+        _s4.print_status = lambda *a, **k: None
+        families = {
+            "iid_250": lambda: rng.normal(0.0, 250.0, len(df)),
+            "bulk370_iid150": lambda: 370.0 * los + rng.normal(0.0, 150.0, len(df)),
+        }
+        try:
+            results = {}
+            for fam, draw in families.items():
+                kappas = {c: [] for c in cuts}
+                for _ in range(n_mc):
+                    cz_obs = cz_true + draw()
+                    z_obs = cz_obs / 299792.458
+                    mc = df.copy()
+                    mc["velocity"] = cz_obs
+                    mc["h0_derived"] = cz_obs / mc["distance_mpc"]
+                    mc["z_hd"] = z_obs
+                    mc = mc[mc["velocity"] > 0]
+                    for c in cuts:
+                        sub = mc[mc["z_hd"] >= c]
+                        if len(sub) < 10:
+                            continue
+                        try:
+                            kappas[c].append(step3.optimize_correction(sub, sigma_ref))
+                        except Exception:
+                            pass
+                results[fam] = {
+                    str(c): {
+                        "n_mc": len(v),
+                        "kappa_median": float(np.median(v)) if v else None,
+                        "kappa_p16": float(np.percentile(v, 16)) if v else None,
+                        "kappa_p84": float(np.percentile(v, 84)) if v else None,
+                        "kappa_mean": float(np.mean(v)) if v else None,
+                        "kappa_std": float(np.std(v)) if v else None,
+                        "observed_kappa": obs_map.get(c),
+                        "observed_percentile": (
+                            float(np.mean(np.array(v) <= obs_map[c])) if (v and c in obs_map) else None
+                        ),
+                    }
+                    for c, v in kappas.items() if v
+                }
+        finally:
+            _s4.print_status = _orig_ps
+
+        payload = {
+            "description": (
+                "Forward-model injection: the fitted kappa_Cep bias is injected "
+                "into host distances and reobserved under peculiar-velocity "
+                "realizations; the observed kappa(z_cut) profile is compared "
+                "with the injection band."
+            ),
+            "kappa_injected": kappa_inj,
+            "H0_true": H0_true,
+            "n_mc": n_mc,
+            "n_hosts": int(len(df)),
+            "families": results,
+        }
+        out_path = self.outputs_dir / "step_08_injection_mc.json"
+        with open(out_path, "w") as f:
+            json.dump(payload, f, indent=2)
+        print_status(f"Saved injection MC results to {out_path}", "SUCCESS")
 
     def perform_flow_environment_robustness(self, n_perm=5000, n_mc=5000):
         print_status("Flow/Environment Confound Robustness...", "SECTION")

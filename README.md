@@ -6,8 +6,8 @@
 ![TEP-H0: Cepheid Bias](site/public/image.webp)
 
 **Author:** Matthew Lukin Smawfield  
-**Version:** v0.9 (Kingston upon Hull)  
-**Date:** First published: 11 January 2026 · Last updated: 21 August 2026
+**Version:** v0.10 (Kingston upon Hull)  
+**First published:** 11 January 2026 · **Last updated:** 16 September 2026
 **Status:** Preprint (Open for Collaboration)  
 **DOI:** [10.5281/zenodo.18209702](https://doi.org/10.5281/zenodo.18209702)  
 **Website:** [https://mlsmawfield.com/tep/h0/](https://mlsmawfield.com/tep/h0/)  
@@ -23,7 +23,7 @@ In standard distance-ladder linear regression, unconstrained latent host distanc
 
 This generative framework is tested using the complete public Riess et al. (2022) sample of 37 distinct SN Ia host galaxies, utilizing a homogeneous kinematic potential coordinate $u_\phi=V_{\rm rot}/\sqrt{2}$ derived from pinned HyperLEDA rotation velocities and continuous environmental screening. Across all 37 hosts, the generative endpoint likelihood yields $\Gamma_X=(1.156\pm0.958)\times10^7\ {\rm km\,s^{-1}\,Mpc^{-1}}$ under canonical $250\ {\rm km/s}$ velocity variance, strengthening to $1.64\sigma$ under data-driven Pantheon+ velocity scatter ($182.1\ {\rm km/s}$) and $1.97\sigma$ at $150\ {\rm km/s}$, with 100% leave-one-host-out sign stability (37 of 37 refits positive). In the cosmologically constrained host-level expansion-rate likelihood across the 33 Hubble-flow hosts (Step 42), the combined endpoint response is recovered at $\Gamma_X=(1.165\pm0.979)\times10^7\ {\rm km\,s^{-1}\,Mpc^{-1}}$ ($1.19\sigma$; $2.07\sigma$ at $150\ {\rm km/s}$; and $1.99\sigma$ under full $33\times33$ SH0ES covariance GLS), yielding a conventional Hubble-flow intercept of $H_{\rm app}=68.36\pm0.98\ {\rm km\,s^{-1}\,Mpc^{-1}}$ to $68.62\pm1.51\ {\rm km\,s^{-1}\,Mpc^{-1}}$. When evaluated in a joint multi-block framework with independent TRGB distances and geometric anchors (Step 44), the multi-block likelihood consistently favours an environmental response under either single-parameter allocation ($\kappa_{\rm Cep} = (0.400 \pm 0.270)\times 10^6\ {\rm mag}$ or $\beta_X = (1.631 \pm 1.250)\times 10^7\ {\rm km\,s^{-1}\,Mpc^{-1}}$), resolving the local Hubble constant to $H_{\rm app} = 68.76\pm 1.02\ {\rm km\,s^{-1}\,Mpc^{-1}}$. Under the restricted TEP Cepheid-channel closure ($\beta_X=0$), the full response is allocated to the Cepheid channel ($\kappa_{\rm Cep}^{\rm equiv} = (0.369 \pm 0.310)\times 10^6\ {\rm mag}$); this allocation is physically specified but remains conditional on host-specific aperture validation.
 
-Propagating the TEP potential correction through the distance ladder yields a unified local Hubble constant of $H_0=66.65\pm1.58\ {\rm km\,s^{-1}\,Mpc^{-1}}$, consistent with Planck CMB observations at $0.45\sigma$ ($0.31\sigma$ bootstrap). Full-matrix propagation through the 3,490-row SH0ES system confirms exact reference-gauge invariance. Finally, single-galaxy differential tests provide internal signatures with the sign predicted by TEP free from host-to-host peculiar velocity systematics: M31 inner versus outer Cepheids exhibit an empirical Period--Luminosity offset of $+0.356 \pm 0.136\ {\rm mag}$ ($2.6\sigma$), increasing to $+0.630 \pm 0.195\ {\rm mag}$ ($3.24\sigma$) under spatial PHAT matching, while OGLE-IV Cepheids in the LMC independently exhibit radial potential stratification at $+0.0284 \pm 0.0086\ {\rm mag}$ ($3.3\sigma$).
+Propagating the TEP potential correction through the distance ladder yields a unified local Hubble constant of $H_0=66.65\pm1.58\ {\rm km\,s^{-1}\,Mpc^{-1}}$, consistent with Planck CMB observations at $0.45\sigma$ ($0.31\sigma$ bootstrap); the TEP-CMB inference ($H_0 = 66.70 \pm 0.58\ {\rm km\,s^{-1}\,Mpc^{-1}}$) agrees with the TEP-corrected local value at $0.03\sigma$. Full-matrix propagation through the 3,490-row SH0ES system confirms exact reference-gauge invariance. Finally, single-galaxy differential tests provide internal signatures with the sign predicted by TEP free from host-to-host peculiar velocity systematics: M31 inner versus outer Cepheids exhibit an empirical Period--Luminosity offset of $+0.356 \pm 0.136\ {\rm mag}$ ($2.6\sigma$), increasing to $+0.630 \pm 0.195\ {\rm mag}$ ($3.24\sigma$) under spatial PHAT matching; however, M31 fails matched controls (colour-matched $-0.017 \pm 0.128$ mag, $0.1\sigma$; eW-matched $-0.103 \pm 0.129$ mag, $0.8\sigma$), so the M31 signal is treated as a debug signal, not evidence. The LMC gradient ($+0.0284 \pm 0.0086$ mag, $3.3\sigma$) is robust to period and colour matching and remains the strongest single-galaxy result.
 
 ## Key Findings
 
@@ -34,7 +34,7 @@ Propagating the TEP potential correction through the distance ladder yields a un
 - **Flow-velocity sensitivity:** $1.97\sigma$ at 150 km/s; $1.64\sigma$ at data-driven Pantheon+ residual scatter $182.1$ km/s; $0.54\sigma$ at 500 km/s.
 - **Cosmologically constrained expansion likelihood (Step 42, 33 Hubble-flow hosts):** $\Gamma_X = (1.165 \pm 0.979) \times 10^7\ {\rm km\,s^{-1}\,Mpc^{-1}}$ ($1.19\sigma$ at $\sigma_v=250$; $2.07\sigma$ at $\sigma_v=150$; $1.99\sigma$ under full $33\times33$ SH0ES covariance GLS), $H_{\rm app} = 68.36 \pm 0.98$ to $68.62 \pm 1.51\ {\rm km\,s^{-1}\,Mpc^{-1}}$.
 - **Joint multi-block likelihood (Step 44):** Consistently favours environmental response; $\kappa_{\rm Cep} = (0.400 \pm 0.270) \times 10^6\ {\rm mag}$ or $\beta_X = (1.631 \pm 1.250) \times 10^7\ {\rm km\,s^{-1}\,Mpc^{-1}}$; $H_{\rm app} = 68.76 \pm 1.02\ {\rm km\,s^{-1}\,Mpc^{-1}}$.
-- **Unified host-level reconstruction (Step 04):** $H_0 = 66.65 \pm 1.58\ {\rm km\,s^{-1}\,Mpc^{-1}}$, $0.45\sigma$ from Planck ($0.31\sigma$ bootstrap).
+- **Unified host-level reconstruction (Step 04):** $H_0 = 66.65 \pm 1.58\ {\rm km\,s^{-1}\,Mpc^{-1}}$, $0.45\sigma$ from Planck ($0.31\sigma$ bootstrap); $0.03\sigma$ from TEP-CMB ($H_0 = 66.70 \pm 0.58$).
 - **Full-matrix SH0ES propagation:** exact reference-gauge invariance through the 3,490-row system.
 
 ---
@@ -58,7 +58,7 @@ Propagating the TEP potential correction through the distance ladder yields a un
 | **Paper 11** | **TEP-H0** (This repo) | The Cepheid Bias: Resolving the Hubble Tension | [10.5281/zenodo.18209702](https://doi.org/10.5281/zenodo.18209702) |
 | **Paper 12** | [TEP-JWST](https://github.com/matthewsmawfield/TEP-JWST) | The Temporal Equivalence Principle: A Unified Resolution to the JWST High-Redshift Anomalies | [10.5281/zenodo.19000827](https://doi.org/10.5281/zenodo.19000827) |
 | **Paper 13** | [TEP-WB](https://github.com/matthewsmawfield/TEP-WB) | The Temporal Equivalence Principle: Temporal Shear Recovery in Gaia DR3 Wide Binaries | [10.5281/zenodo.19102061](https://doi.org/10.5281/zenodo.19102061) |
-| **Paper 15** | [TEP-EFA](https://github.com/matthewsmawfield/TEP-EFA) | Temporal Equivalence Principle: Temporal Shear in the Earth Flyby Anomaly | [10.5281/zenodo.19454863](https://doi.org/10.5281/zenodo.19454863) |
+| **Paper 15** | [TEP-EFA](https://github.com/matthewsmawfield/TEP-EFA) | Temporal Equivalence Principle: Temporal Shear in the Earth Flyby Anomaly | [10.5281/zenodo.19454862](https://doi.org/10.5281/zenodo.19454862) |
 | **Paper 16** | [TEP-J0437](https://github.com/matthewsmawfield/TEP-J0437) | Synchronization Holonomy in Pulsar Scintillation | [10.5281/zenodo.19454620](https://doi.org/10.5281/zenodo.19454620) |
 | **Paper 17** | [TEP-LLR](https://github.com/matthewsmawfield/TEP-LLR) | Lunar Laser Ranging and the Nordtvedt Effect | [10.5281/zenodo.19446029](https://doi.org/10.5281/zenodo.19446029) |
 
@@ -80,7 +80,7 @@ TEP-H0/
 ├── site/
 │   ├── components/                # Manuscript HTML sections
 │   └── public/                    # Static assets
-├── 11-TEP-H0-v0.9-KingstonUponHull.md  # Full manuscript (Markdown)
+├── 11-TEP-H0-v0.10-KingstonUponHull.md  # Full manuscript (Markdown)
 └── requirements.txt               # Python dependencies
 ```
 
@@ -161,7 +161,7 @@ Local-gravity closure, pulsar coefficient matching, and the gauge-failing Step
   journal={Zenodo},
   year={2026},
   doi={10.5281/zenodo.18209702},
-  note={Preprint v0.9 (Kingston upon Hull)}
+  note={Preprint v0.10 (Kingston upon Hull)}
 }
 ```
 

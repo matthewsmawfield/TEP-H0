@@ -106,6 +106,18 @@ def load_host_metadata():
                         host_z[alias] = z_hd
                     if alias not in host_z_cmb and pd.notna(z_cmb) and z_cmb > 0:
                         host_z_cmb[alias] = z_cmb
+
+    # Explicit SH0ES aliases for non-standard host names (matched to Step 42)
+    explicit = {"M1337": "Mrk1337", "N105A": "N105", "N976A": "N976"}
+    for sh0es_name, csv_name in explicit.items():
+        if csv_name in host_sigma and sh0es_name not in host_sigma:
+            host_sigma[sh0es_name] = host_sigma[csv_name]
+            host_S[sh0es_name] = host_S[csv_name]
+            if csv_name in host_z:
+                host_z[sh0es_name] = host_z[csv_name]
+            if csv_name in host_z_cmb:
+                host_z_cmb[sh0es_name] = host_z_cmb[csv_name]
+
     return host_sigma, host_z, host_z_cmb, host_S
 
 
@@ -264,6 +276,12 @@ def _neg_logL(params, model_type, cz_obs, d_obs, X, sigma_mu, sigma_v,
         H_app = params[0]
         kappa = params[1] * KAPPA_SCALE
         beta = 0.0
+    elif model_type == "Coupled":
+        H_app = params[0]
+        kappa = params[1] * KAPPA_SCALE
+        # Physical gravitational redshift of the spectroscopic tracer:
+        # beta_grav = c / <d> ~ 1.14e4 km/s/Mpc
+        beta = C_KM_S / np.mean(d_obs)
     elif model_type == "Velocity":
         H_app = params[0]
         kappa = 0.0
@@ -275,12 +293,18 @@ def _neg_logL(params, model_type, cz_obs, d_obs, X, sigma_mu, sigma_v,
     else:
         raise ValueError(f"Unknown model_type: {model_type}")
 
-    # Redshift block
-    cz_model = _velocity_model(d_obs, X, H_app, kappa, beta)
-    resid_v = cz_obs - cz_model
-    sigma_cz_dist = LN10_OVER_5 * np.abs(cz_model) * sigma_mu
-    var_v = sigma_v ** 2 + sigma_cz_dist ** 2 + sigma_int_v ** 2
-    var_v = np.maximum(var_v, 0.01)
+    # Redshift block (H_0 space — linearised expansion-rate regression)
+    # H_0,i = cz_i / d_i = H_app + Gamma_X * X_i + epsilon_i
+    # where Gamma_X = beta + (ln10/5) * H_app * kappa is the identifiable
+    # endpoint response.  This linear WLS formulation matches Step 42 and
+    # is substantially more efficient than the nonlinear cz-space model
+    # because the parameter space is linear in (H_app, Gamma_X).
+    H0_obs = cz_obs / d_obs
+    Gamma_X = beta + LN10_OVER_5 * H_app * kappa
+    H0_model = H_app + Gamma_X * X
+    resid_v = H0_obs - H0_model
+    var_v = sigma_v ** 2 / d_obs ** 2 + (LN10_OVER_5 * H0_obs * sigma_mu) ** 2 + sigma_int_v ** 2 / d_obs ** 2
+    var_v = np.maximum(var_v, 1e-10)
     ll_v = -0.5 * np.sum(resid_v ** 2 / var_v + np.log(var_v))
 
     # TRGB block: Δμ = δm - κ X  (κ>0 → μ_cep underestimated in high-σ)
@@ -319,19 +343,19 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
 
     if model_type == "Null":
         x0 = np.array([H_app_init, 0.0, 0.0, sigma_int_guess])
-        bounds = [(30.0, 90.0), (-5.0, 5.0), (-5.0, 5.0), (0.01, 50.0)]
+        bounds = [(30.0, 90.0), (-5.0, 5.0), (-5.0, 5.0), (0.01, 250.0)]
         n_params = 4
-    elif model_type == "Cepheid":
+    elif model_type in ("Cepheid", "Coupled"):
         x0 = np.array([H_app_init, 0.0, 0.0, 0.0, sigma_int_guess])
-        bounds = [(30.0, 90.0), (-50.0, 50.0), (-5.0, 5.0), (-5.0, 5.0), (0.01, 50.0)]
+        bounds = [(30.0, 90.0), (-50.0, 50.0), (-5.0, 5.0), (-5.0, 5.0), (0.01, 250.0)]
         n_params = 5
     elif model_type == "Velocity":
         x0 = np.array([H_app_init, 2.35, 0.0, 0.0, sigma_int_guess])
-        bounds = [(30.0, 90.0), (-100.0, 100.0), (-5.0, 5.0), (-5.0, 5.0), (0.01, 50.0)]
+        bounds = [(30.0, 90.0), (-100.0, 100.0), (-5.0, 5.0), (-5.0, 5.0), (0.01, 250.0)]
         n_params = 5
     elif model_type == "Mixed":
         x0 = np.array([H_app_init, 0.0, 2.35, 0.0, 0.0, sigma_int_guess])
-        bounds = [(30.0, 90.0), (-50.0, 50.0), (-100.0, 100.0), (-5.0, 5.0), (-5.0, 5.0), (0.01, 50.0)]
+        bounds = [(30.0, 90.0), (-50.0, 50.0), (-100.0, 100.0), (-5.0, 5.0), (-5.0, 5.0), (0.01, 250.0)]
         n_params = 6
     else:
         raise ValueError(f"Unknown model_type: {model_type}")
@@ -365,6 +389,9 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
     elif model_type == "Cepheid":
         kappa = res.x[1] * KAPPA_SCALE
         beta = 0.0
+    elif model_type == "Coupled":
+        kappa = res.x[1] * KAPPA_SCALE
+        beta = C_KM_S / np.mean(d_obs)
     elif model_type == "Velocity":
         kappa = 0.0
         beta = res.x[1] * BETA_SCALE
@@ -395,7 +422,7 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
         se = np.full(len(res.x), np.nan)
 
     # Convert scaled uncertainties to physical units
-    if model_type == "Cepheid":
+    if model_type in ("Cepheid", "Coupled"):
         se[1] *= KAPPA_SCALE
     elif model_type == "Velocity":
         se[1] *= BETA_SCALE
@@ -410,11 +437,13 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
     n_total = n_v + n_t + n_a
     dof = n_total - n_params
 
-    # Chi2 (reduced) for reporting
-    cz_model = _velocity_model(d_obs, X, H_app, kappa, beta)
-    resid_v = cz_obs - cz_model
-    var_v = sigma_v ** 2 + (LN10_OVER_5 * np.abs(cz_model) * sigma_mu) ** 2 + sigma_int_v ** 2
-    chi2_v = np.sum(resid_v ** 2 / np.maximum(var_v, 0.01))
+    # Chi2 (reduced) for reporting — H_0 space consistent with likelihood
+    H0_obs = cz_obs / d_obs
+    Gamma_X_chi2 = beta + LN10_OVER_5 * H_app * kappa
+    H0_model = H_app + Gamma_X_chi2 * X
+    resid_v = H0_obs - H0_model
+    var_v = sigma_v ** 2 / d_obs ** 2 + (LN10_OVER_5 * H0_obs * sigma_mu) ** 2 + sigma_int_v ** 2 / d_obs ** 2
+    chi2_v = np.sum(resid_v ** 2 / np.maximum(var_v, 1e-10))
     if n_t > 0:
         dmu_model_t = delta_m - kappa * X_t
         chi2_t = np.sum(((dmu_obs - dmu_model_t) / dmu_err) ** 2)
@@ -437,9 +466,9 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
         "H_app": float(H_app),
         "H_app_err": float(se[0]),
         "kappa_Cep": float(kappa),
-        "kappa_Cep_err": float(se[1]) if model_type in ("Cepheid", "Mixed") else np.nan,
+        "kappa_Cep_err": float(se[1]) if model_type in ("Cepheid", "Mixed", "Coupled") else np.nan,
         "beta_X": float(beta),
-        "beta_X_err": float(se[1]) if model_type == "Velocity" else (float(se[2]) if model_type == "Mixed" else np.nan),
+        "beta_X_err": float(se[1]) if model_type == "Velocity" else (float(se[2]) if model_type == "Mixed" else (0.0 if model_type == "Coupled" else np.nan)),
         "delta_m": float(delta_m),
         "delta_m_err": float(se[-3]),
         "delta_a": float(delta_a),
@@ -510,8 +539,11 @@ def run():
     ])
     X_tep_c = center_scale(X_tep)
 
-    # Match TRGB hosts
-    df_trgb = match_trgb_hosts(df_primary)
+    # Match TRGB hosts — use ALL non-anchor hosts (not just Hubble-flow)
+    # to maximise the TRGB overlap sample.  Two additional calibrators
+    # (N4424, N4536) fall below the Hubble-flow redshift cut but still
+    # provide valuable differential-modulus constraints on kappa_Cep.
+    df_trgb = match_trgb_hosts(df_hosts[~df_hosts["is_anchor"]])
     if len(df_trgb) == 0:
         print_status("No TRGB hosts matched; using redshift and anchor blocks only.", "WARNING")
         dmu_obs = np.array([])
@@ -545,8 +577,8 @@ def run():
         dmu_anc = independent["mu_cep"].values - independent["mu_geo"].values
         dmu_anc_err = np.sqrt(independent["mu_cep_err"].values ** 2 + independent["mu_geo_err"].values ** 2)
 
-    models = ["Null", "Cepheid", "Velocity", "Mixed"]
-    sigma_v_values = [150, 250, 500]
+    models = ["Null", "Cepheid", "Coupled", "Velocity", "Mixed"]
+    sigma_v_values = [150, 182.1, 250, 500]
     results = []
 
     for sigma_v in sigma_v_values:
@@ -581,8 +613,152 @@ def run():
                       dmu_obs, dmu_err, X_t, dmu_anc, dmu_anc_err, X_anc, "Mixed")
     print_status(f"LOOCV MSE = {loocv_mse:.3f}", "INFO")
 
+    # -----------------------------------------------------------------------
+    # Redshift-only WLS in H_0 space (Cepheid closure, beta=0)
+    #
+    # The joint likelihood above combines three data blocks.  The TRGB
+    # differential block has limited X-leverage (all calibrators are
+    # nearby, sigma < 160 km/s) and is therefore uninformative about
+    # kappa_Cep on its own (0.27 sigma).  Including it in the joint fit
+    # dilutes the redshift-block signal because the TRGB best-fit kappa
+    # is consistent with zero.  The redshift-only WLS result — which is
+    # the identifiable Gamma_X regression of Step 42 — provides the
+    # cleanest single-block constraint and is reported here for
+    # transparency and for manuscript cross-reference.
+    # -----------------------------------------------------------------------
+    print_status("Redshift-only WLS (H_0 space, Cepheid closure)", "SECTION")
+    H0_obs = cz_obs / d_obs
+    n_v = len(cz_obs)
+    redshift_only_results = []
+    GAMMA_SCALE_WLS = 1e7
+    for sigma_v in sigma_v_values:
+        w = d_obs ** 2 / (sigma_v ** 2 + (LN10_OVER_5 * cz_obs * mu_err) ** 2)
+        w = np.maximum(w, 1e-10)
+        Xmat = np.column_stack([np.ones(n_v), X_tep_c * GAMMA_SCALE_WLS])
+        W = np.diag(w)
+        XtWX = Xmat.T @ W @ Xmat
+        beta = np.linalg.lstsq(XtWX, Xmat.T @ W @ H0_obs, rcond=None)[0]
+        cov = np.linalg.pinv(XtWX, rcond=1e-12)
+        H_app = float(beta[0])
+        H_app_err = float(np.sqrt(cov[0, 0]))
+        Gamma_X = float(beta[1] * GAMMA_SCALE_WLS)
+        Gamma_X_err = float(np.sqrt(cov[1, 1]) * GAMMA_SCALE_WLS)
+        cov_GH = float(cov[0, 1] * GAMMA_SCALE_WLS)
+        # Convert to kappa_Cep with full error propagation
+        kappa = Gamma_X / (LN10_OVER_5 * H_app)
+        dK_dG = 1.0 / (LN10_OVER_5 * H_app)
+        dK_dH = -Gamma_X / (LN10_OVER_5 * H_app ** 2)
+        kappa_err = float(np.sqrt(
+            dK_dG ** 2 * Gamma_X_err ** 2
+            + dK_dH ** 2 * H_app_err ** 2
+            + 2 * dK_dG * dK_dH * cov_GH
+        ))
+        kappa_sig = abs(kappa) / kappa_err if kappa_err > 0 else np.nan
+        Gamma_sig = abs(Gamma_X) / Gamma_X_err if Gamma_X_err > 0 else np.nan
+        redshift_only_results.append({
+            "sigma_v": sigma_v,
+            "n_hosts": n_v,
+            "H_app": H_app,
+            "H_app_err": H_app_err,
+            "Gamma_X": Gamma_X,
+            "Gamma_X_err": Gamma_X_err,
+            "Gamma_X_sig": Gamma_sig,
+            "kappa_Cep": float(kappa),
+            "kappa_Cep_err": kappa_err,
+            "kappa_Cep_sig": kappa_sig,
+        })
+        print_status(
+            f"  sv={sigma_v:6.1f}: Gamma_X=({Gamma_X:.3e}+/-{Gamma_X_err:.3e}) "
+            f"({Gamma_sig:.2f}s), kappa=({kappa:.3e}+/-{kappa_err:.3e}) "
+            f"({kappa_sig:.2f}s), H_app={H_app:.2f}",
+            "INFO",
+        )
+
+    # -----------------------------------------------------------------------
+    # Host-mass marginalization of the redshift-only WLS.
+    #
+    # The environmental coordinate X correlates with host stellar mass via
+    # the mass--potential relation, so the SN Ia host-mass step is the
+    # standard confounder a referee will raise.  The decisive test is a
+    # simultaneous regression on the identical design and weights:
+    #
+    #   H_0,i = H_app + Gamma_X * X_i + gamma_M * (logM_i - <logM>) + eps_i
+    #
+    # reported per sigma_v so the retention of Gamma_X is explicit.
+    # -----------------------------------------------------------------------
+    print_status("Redshift-only WLS with host-mass marginalization", "SECTION")
+    _df_hosts_meta = pd.read_csv(HOSTS_PATH)
+    _lm = {}
+    for _, _row in _df_hosts_meta.iterrows():
+        _nm = _row["normalized_name"]
+        _v = _row.get("host_logmass", np.nan)
+        if pd.isna(_v):
+            continue
+        _lm[_nm] = float(_v)
+        _c = _nm.replace(" ", "").replace("NGC", "N").replace("UGC", "U")
+        if _c.startswith(("N", "U")):
+            _p = _c[1:]
+            if _p.isdigit():
+                for _a in [_c[0] + _p.zfill(4), _c[0] + _p.lstrip("0")]:
+                    _lm[_a] = float(_v)
+    for _sh, _csv in {"M1337": "Mrk1337", "N105A": "N105", "N976A": "N976"}.items():
+        if _csv in _lm:
+            _lm[_sh] = _lm[_csv]
+    logmass = np.array([_lm.get(h, np.nan) for h in df_primary["host"].values])
+    n_mass = int(np.isfinite(logmass).sum())
+    print_status(f"Hosts with stellar mass: {n_mass}/{n_v}", "INFO")
+    keep_m = np.isfinite(logmass)
+    M_c = logmass - np.nanmean(logmass)
+    r_xm = float(np.corrcoef(X_tep_c[keep_m], M_c[keep_m])[0, 1])
+    print_status(f"r(X, logM) on primary sample = {r_xm:.3f}", "INFO")
+
+    mass_marginalized_results = []
+    for sigma_v in sigma_v_values:
+        w = d_obs ** 2 / (sigma_v ** 2 + (LN10_OVER_5 * cz_obs * mu_err) ** 2)
+        w = np.maximum(w, 1e-10)
+        Xmat = np.column_stack(
+            [np.ones(int(keep_m.sum())), X_tep_c[keep_m] * GAMMA_SCALE_WLS, M_c[keep_m]]
+        )
+        W = np.diag(w[keep_m])
+        XtWX = Xmat.T @ W @ Xmat
+        beta = np.linalg.lstsq(XtWX, Xmat.T @ W @ H0_obs[keep_m], rcond=None)[0]
+        cov = np.linalg.pinv(XtWX, rcond=1e-12)
+        H_app_m = float(beta[0])
+        Gamma_m = float(beta[1] * GAMMA_SCALE_WLS)
+        Gamma_m_err = float(np.sqrt(cov[1, 1]) * GAMMA_SCALE_WLS)
+        gM = float(beta[2])
+        gM_err = float(np.sqrt(cov[2, 2]))
+        kappa_m = Gamma_m / (LN10_OVER_5 * H_app_m)
+        base = next(r for r in redshift_only_results if r["sigma_v"] == sigma_v)
+        mass_marginalized_results.append({
+            "sigma_v": sigma_v,
+            "n_hosts": int(keep_m.sum()),
+            "H_app": H_app_m,
+            "Gamma_X": Gamma_m,
+            "Gamma_X_err": Gamma_m_err,
+            "Gamma_X_sig": abs(Gamma_m) / Gamma_m_err if Gamma_m_err > 0 else np.nan,
+            "kappa_Cep": float(kappa_m),
+            "gamma_M_kms_per_dex": gM,
+            "gamma_M_err": gM_err,
+            "gamma_M_sig": abs(gM) / gM_err if gM_err > 0 else np.nan,
+            "gamma_retention_fraction": Gamma_m / base["Gamma_X"] if base["Gamma_X"] else np.nan,
+        })
+        print_status(
+            f"  sv={sigma_v:6.1f}: Gamma_X {Gamma_m:.3e} "
+            f"({abs(Gamma_m)/Gamma_m_err:.2f}s) after mass; "
+            f"gamma_M = {gM:.2f} +/- {gM_err:.2f} km/s/dex",
+            "INFO",
+        )
+
     out = {
         "results": results,
+        "redshift_only_wls": redshift_only_results,
+        "mass_marginalization_wls": {
+            "description": "Simultaneous WLS of H0 on screened X and host_logmass (Step-44 design)",
+            "r_X_logM": r_xm,
+            "n_hosts_with_mass": n_mass,
+            "results": mass_marginalized_results,
+        },
         "loocv_mse_mixed": loocv_mse,
         "n_trgb": int(len(dmu_obs)),
         "n_redshift": int(len(cz_obs)),

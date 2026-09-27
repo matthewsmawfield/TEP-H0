@@ -1,0 +1,113 @@
+{
+  "description": "Forward-model injection: the fitted kappa_Cep bias is injected into host distances and reobserved under peculiar-velocity realizations; the observed kappa(z_cut) profile is compared with the injection band.",
+  "kappa_injected": 461204.5288085937,
+  "H0_true": 70.0,
+  "n_mc": 200,
+  "n_hosts": 37,
+  "families": {
+    "iid_250": {
+      "0.0": {
+        "n_mc": 200,
+        "kappa_median": 474213.7908935547,
+        "kappa_p16": 46900.848388671875,
+        "kappa_p84": 835213.1042480469,
+        "kappa_mean": 406567.7604675293,
+        "kappa_std": 482276.3734423793,
+        "observed_kappa": 461204.5288085937,
+        "observed_percentile": 0.49
+      },
+      "0.0035": {
+        "n_mc": 200,
+        "kappa_median": 376746.7498779297,
+        "kappa_p16": 177533.05053710938,
+        "kappa_p84": 605964.1418457031,
+        "kappa_mean": 395841.43447875977,
+        "kappa_std": 246322.13462124576,
+        "observed_kappa": 412650.29907226557,
+        "observed_percentile": 0.57
+      },
+      "0.004": {
+        "n_mc": 200,
+        "kappa_median": 402656.9366455078,
+        "kappa_p16": 159334.07592773438,
+        "kappa_p84": 606387.6037597656,
+        "kappa_mean": 397128.17764282227,
+        "kappa_std": 241880.92889251074,
+        "observed_kappa": 405183.4106445312,
+        "observed_percentile": 0.515
+      },
+      "0.005": {
+        "n_mc": 200,
+        "kappa_median": 353053.6651611328,
+        "kappa_p16": 159836.57836914062,
+        "kappa_p84": 544629.9743652344,
+        "kappa_mean": 355584.3849182129,
+        "kappa_std": 222337.1181590927,
+        "observed_kappa": 130365.7531738281,
+        "observed_percentile": 0.145
+      },
+      "0.007": {
+        "n_mc": 200,
+        "kappa_median": 282941.05529785156,
+        "kappa_p16": 80013.916015625,
+        "kappa_p84": 490396.2707519531,
+        "kappa_mean": 284748.1002807617,
+        "kappa_std": 204130.6638262032,
+        "observed_kappa": 175485.9924316406,
+        "observed_percentile": 0.27
+      }
+    },
+    "bulk370_iid150": {
+      "0.0": {
+        "n_mc": 200,
+        "kappa_median": 422322.08251953125,
+        "kappa_p16": 251449.55444335938,
+        "kappa_p84": 579437.8356933594,
+        "kappa_mean": 421799.7245788574,
+        "kappa_std": 169928.9037565876,
+        "observed_kappa": 461204.5288085937,
+        "observed_percentile": 0.59
+      },
+      "0.0035": {
+        "n_mc": 200,
+        "kappa_median": 238264.8468017578,
+        "kappa_p16": 96230.40771484375,
+        "kappa_p84": 399431.8542480469,
+        "kappa_mean": 249470.32165527344,
+        "kappa_std": 168862.04947217673,
+        "observed_kappa": 412650.29907226557,
+        "observed_percentile": 0.855
+      },
+      "0.004": {
+        "n_mc": 200,
+        "kappa_median": 286163.330078125,
+        "kappa_p16": 136022.8271484375,
+        "kappa_p84": 424979.4921875,
+        "kappa_mean": 280293.0679321289,
+        "kappa_std": 149620.97112032864,
+        "observed_kappa": 405183.4106445312,
+        "observed_percentile": 0.795
+      },
+      "0.005": {
+        "n_mc": 200,
+        "kappa_median": 286391.0675048828,
+        "kappa_p16": 156976.83715820312,
+        "kappa_p84": 403886.65771484375,
+        "kappa_mean": 288688.5070800781,
+        "kappa_std": 125010.14861210038,
+        "observed_kappa": 130365.7531738281,
+        "observed_percentile": 0.115
+      },
+      "0.007": {
+        "n_mc": 200,
+        "kappa_median": 297395.7061767578,
+        "kappa_p16": 173251.03759765625,
+        "kappa_p84": 428816.3146972656,
+        "kappa_mean": 294780.34591674805,
+        "kappa_std": 118119.67310858045,
+        "observed_kappa": 175485.9924316406,
+        "observed_percentile": 0.17
+      }
+    }
+  }
+}

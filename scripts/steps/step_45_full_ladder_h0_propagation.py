@@ -670,8 +670,12 @@ def run():
     print_status("sigma_ref conventions...", "SECTION")
     sigma_ref_std = compute_sigma_ref(screened=False)
     sigma_ref_scr = compute_sigma_ref(screened=True)
+    sigma_ref_eq = float(np.sqrt(np.mean([30.0 ** 2, 24.0 ** 2, 115.0 ** 2])))
+    sigma_ref_rot = float(np.sqrt(0.20 * (220.0 / np.sqrt(2)) ** 2 + 0.25 * (66.0 / np.sqrt(2)) ** 2 + 0.55 * (208.0 / np.sqrt(2)) ** 2))
     print_status(f"  Standard  sigma_ref = {sigma_ref_std:.2f} km/s", "INFO")
     print_status(f"  Screened  sigma_ref = {sigma_ref_scr:.2f} km/s", "INFO")
+    print_status(f"  Equal-wt  sigma_ref = {sigma_ref_eq:.2f} km/s", "INFO")
+    print_status(f"  Rotation  sigma_ref = {sigma_ref_rot:.2f} km/s", "INFO")
     print_status(f"    MW  S = {ANCHOR_SCREENING['MW']:.3f}  (N_mb = {ANCHOR_NMB['MW']})", "INFO")
     print_status(f"    LMC S = {ANCHOR_SCREENING['LMC']:.3f}  (N_mb = {ANCHOR_NMB['LMC']})", "INFO")
     print_status(f"    N4258 S = {ANCHOR_SCREENING['NGC 4258']:.3f}  (N_mb = {ANCHOR_NMB['NGC 4258']})", "INFO")
@@ -686,12 +690,19 @@ def run():
         "kappa_endpoint_equiv": kappa_endpoint,
     }
 
+    sigma_ref_list = [
+        (sigma_ref_std, "standard"),
+        (sigma_ref_scr, "screened"),
+        (sigma_ref_eq, "equal_weights"),
+        (sigma_ref_rot, "homogeneous_rotation"),
+    ]
+
     # ------------------------------------------------------------------
     # Full-ladder propagation (simple M_B method)
     # ------------------------------------------------------------------
     print_status("Full-ladder propagation (M_B -> Hubble flow)...", "SECTION")
     results_simple = []
-    for sigma_ref, sr_label in [(sigma_ref_std, "standard"), (sigma_ref_scr, "screened")]:
+    for sigma_ref, sr_label in sigma_ref_list:
         for kappa_name, kappa in kappa_values.items():
             res = compute_full_ladder_h0(df_cep, hf, kappa, sigma_ref,
                                          label=f"{kappa_name}_{sr_label}")
@@ -699,7 +710,7 @@ def run():
             res["kappa_name"] = kappa_name
             results_simple.append(res)
             print_status(
-                f"  {sr_label:8s} {kappa_name:25s} kappa={kappa:.3e}  "
+                f"  {sr_label:20s} {kappa_name:22s} kappa={kappa:.3e}  "
                 f"H_0={res['H0']:.2f} +/- {res['H0_err']:.2f}  "
                 f"tension={res['tension_planck']:.2f}sigma  "
                 f"delta_H0={res['delta_H0_vs_sh0es']:+.2f}",
@@ -711,7 +722,7 @@ def run():
     # ------------------------------------------------------------------
     print_status("Full-ladder propagation (SH0ES design matrix)...", "SECTION")
     results_matrix = []
-    for sigma_ref, sr_label in [(sigma_ref_std, "standard"), (sigma_ref_scr, "screened")]:
+    for sigma_ref, sr_label in sigma_ref_list:
         for kappa_name, kappa in kappa_values.items():
             if kappa == 0:
                 # Use baseline
@@ -816,6 +827,8 @@ def run():
             "sigma_ref": {
                 "standard": float(sigma_ref_std),
                 "screened": float(sigma_ref_scr),
+                "equal_weights": float(sigma_ref_eq),
+                "homogeneous_rotation": float(sigma_ref_rot),
             },
             "endpoint_projection": {
                 "source": "step_39_environment_slope_decomposition.json",

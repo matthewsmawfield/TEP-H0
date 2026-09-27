@@ -15,7 +15,7 @@ abstract: >-
 
   Propagating the TEP potential correction through the distance ladder yields a unified local Hubble constant of H0 = 66.65 +/- 1.58 km/s/Mpc, consistent with Planck CMB observations at 0.45 sigma (0.31 sigma bootstrap). Full-matrix propagation through the 3,490-row SH0ES system confirms exact reference-gauge invariance. These multi-scale empirical findings indicate that the Hubble tension can be resolved by dynamical proper time in the local distance scale, pending host-specific aperture validation of the Cepheid-channel allocation.
 license: CC-BY-4.0
-version: v0.9 (Kingston upon Hull)
+version: v0.10 (Kingston upon Hull)
 date-released: 2026-01-11
 date-published: 2026-08-21
 keywords:
@@ -41,7 +41,7 @@ url: https://mlsmawfield.com/tep/h0/
 doi: 10.5281/zenodo.18209702
 preferred-citation:
   type: article
-  title: 'The Cepheid Bias: Resolving the Hubble Tension (Kingston upon Hull v0.9)'
+  title: 'The Cepheid Bias: Resolving the Hubble Tension (Kingston upon Hull v0.10)'
   authors:
   - family-names: Smawfield
     given-names: Matthew Lukin
@@ -54,4 +54,4 @@ preferred-citation:
     value: 10.5281/zenodo.18209702
     description: Pre-print DOI
   url: https://doi.org/10.5281/zenodo.18209702
-  notes: Preprint v0.9 (Kingston upon Hull)
+  notes: Preprint v0.10 (Kingston upon Hull)

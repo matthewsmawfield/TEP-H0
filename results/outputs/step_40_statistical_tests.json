@@ -4,22 +4,22 @@
     "redshift_binned": 0.28535732133933034,
     "sky_binned": 0.23338330834582707,
     "redshift_sky_binned": 0.20689655172413793,
-    "gamma_true": 11558694.60370752
+    "gamma_true": 11558694.603707239
   },
   "loho": {
-    "Gamma_X_mean": 11423356.449663116,
-    "Gamma_X_std": 1823573.1065540381,
-    "Gamma_X_min": 2609312.7574355546,
-    "Gamma_X_max": 15175633.119835723,
+    "Gamma_X_mean": 11423360.238884993,
+    "Gamma_X_std": 1823577.2295062433,
+    "Gamma_X_min": 2609289.999974708,
+    "Gamma_X_max": 15175646.696946759,
     "n_positive": 37,
     "N_hosts": 37,
     "most_influential_host": "N976A"
   },
   "bootstrap": {
-    "Gamma_X_boot_mean": 10994240.851841377,
-    "Gamma_X_boot_std": 11834516.749933047,
-    "Gamma_X_ci_low": -15803875.800878031,
-    "Gamma_X_ci_high": 35213030.07634066,
+    "Gamma_X_boot_mean": 10995054.171259142,
+    "Gamma_X_boot_std": 11834163.486896388,
+    "Gamma_X_ci_low": -15803860.388691273,
+    "Gamma_X_ci_high": 35212788.7244778,
     "frac_positive": 0.864
   }
 }

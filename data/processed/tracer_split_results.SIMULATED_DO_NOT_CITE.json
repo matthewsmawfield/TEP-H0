@@ -1,0 +1,17 @@
+{
+    "HI": {
+        "count": 28,
+        "mean_sigma_corrected": 117.95803792857141,
+        "r_spec_lt_r_cep_valid": false
+    },
+    "nuclear": {
+        "count": 10,
+        "mean_sigma_corrected": 120.39907170000001,
+        "r_spec_lt_r_cep_valid": true
+    },
+    "integrated-optical": {
+        "count": 4,
+        "mean_sigma_corrected": 76.3675325,
+        "r_spec_lt_r_cep_valid": false
+    }
+}

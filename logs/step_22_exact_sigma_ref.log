@@ -1,12 +1,15 @@
-[18:31:12] [INFO] 
-[18:31:12] [INFO] ================================================================================
-[18:31:12] [INFO]    >>> STEP 21: Exact anchor-leverage sigma_ref
-[18:31:12] [INFO] ================================================================================
-[18:31:12] [INFO] 
-[18:31:12] [INFO] Step-3 weights, unscreened:        87.17 km/s
-[18:31:12] [INFO] Step-3 weights, screened:          30.51 km/s
-[18:31:12] [INFO] Equal weights, unscreened:         70.00 km/s
-[18:31:12] [INFO] Equal weights, screened:           27.77 km/s
-[18:31:12] [INFO] Pipeline sigma_ref (standard):     87.17 km/s
-[18:31:12] [INFO] Pipeline sigma_ref (screened):     30.51 km/s
-[18:31:12] [SUCCESS] Step 21 complete
+[15:09:17] [INFO] 
+[15:09:17] [INFO] ================================================================================
+[15:09:17] [INFO]    >>> STEP 21: Exact anchor-leverage sigma_ref
+[15:09:17] [INFO] ================================================================================
+[15:09:17] [INFO] 
+[15:09:17] [INFO] Step-3 weights, unscreened:        87.17 km/s
+[15:09:17] [INFO] Step-3 weights, screened:          30.51 km/s
+[15:09:17] [INFO] Equal weights, unscreened:         70.00 km/s
+[15:09:17] [INFO] Equal weights, screened:           27.77 km/s
+[15:09:17] [INFO] Homogeneous rotation (SH0ES wts):  131.46 km/s
+[15:09:17] [INFO] Homogeneous rotation (equal wts):  126.50 km/s
+[15:09:17] [SUCCESS] Algebraic invariance of H_cosmic to U_ref verified: True
+[15:09:17] [INFO] Pipeline sigma_ref (standard):     87.17 km/s
+[15:09:17] [INFO] Pipeline sigma_ref (screened):     30.51 km/s
+[15:09:17] [SUCCESS] Step 21 complete

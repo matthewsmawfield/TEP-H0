@@ -7,6 +7,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy import stats as scipy_stats
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
@@ -99,6 +100,13 @@ class Step2Stratification:
             self.data_dir / "raw" / "external" / "tully2015_2mrs_groups_table5.csv"
         )
 
+        # Stiskalek et al. 2026 (Manticore) Bayesian peculiar-velocity catalog.
+        # Provides posterior-mean vpec from a coherent-flow model that handles
+        # group environments better than Pantheon+'s simple flow correction.
+        self.manticore_path = (
+            self.data_dir / "raw" / "external" / "stiskalek2026_manticore_hosts.csv"
+        )
+
         # Outputs
         self.stratified_output_path = self.outputs_dir / "step_03_stratified_h0.csv"
         self.json_output_path = self.outputs_dir / "step_03_stratification_results.json"
@@ -173,7 +181,67 @@ class Step2Stratification:
             )
         print_table(headers, rows, title="Sample H0 Calculations")
 
+        # Compute vpec-corrected H0 using Stiskalek et al. 2026 (Manticore)
+        # Bayesian peculiar velocities where available, falling back to the
+        # Pantheon+ flow model otherwise.  The Manticore model handles group
+        # environments coherently and resolves large discrepancies for nearby
+        # group-host galaxies (e.g. NGC 4639).
+        self._add_manticore_vpec_h0(valid)
+
         return valid
+
+    def _add_manticore_vpec_h0(self, valid):
+        """Add a vpec-corrected H0 column using Stiskalek et al. 2026."""
+        c_kms = 299792.458
+
+        valid["h0_vpec_corrected"] = valid["h0_derived"].copy()
+        valid["vpec_source"] = "pantheon_plus"
+
+        if not self.manticore_path.exists():
+            print_status(
+                "Manticore vpec catalog not found; using Pantheon+ vpec for all hosts.",
+                "INFO",
+            )
+            return
+
+        manticore = pd.read_csv(self.manticore_path, comment="#")
+
+        # Map Stiskalek host labels to our normalized_name conventions.
+        name_map = {}
+        for _, r in manticore.iterrows():
+            h = str(r["host"]).strip()
+            if h == "M101":
+                name_map[h] = "M 101"
+            elif h.startswith("M1337"):
+                name_map[h] = "Mrk 1337"
+            elif h.startswith("M") and len(h) > 1 and h[1:].isdigit():
+                name_map[h] = "M " + h[1:]
+            elif h.startswith("N"):
+                name_map[h] = f"NGC {h[1:]}"
+            elif h.startswith("U"):
+                name_map[h] = f"UGC {h[1:]}"
+        manticore["our_name"] = manticore["host"].map(name_map)
+        mant_lookup = dict(
+            zip(manticore["our_name"], manticore["vpec_manticore_kms"])
+        )
+
+        n_corrected = 0
+        for idx, row in valid.iterrows():
+            name = row["normalized_name"]
+            if name in mant_lookup and pd.notna(mant_lookup[name]):
+                vpec_mant = float(mant_lookup[name])
+                z_cmb = float(row.get("z_cmb", np.nan))
+                if pd.notna(z_cmb) and z_cmb > 0:
+                    h0_corr = (c_kms * z_cmb - vpec_mant) / row["distance_mpc"]
+                    valid.at[idx, "h0_vpec_corrected"] = h0_corr
+                    valid.at[idx, "vpec_source"] = "manticore"
+                    n_corrected += 1
+
+        print_status(
+            f"Applied Manticore vpec correction to {n_corrected}/{len(valid)} hosts; "
+            f"{len(valid) - n_corrected} retain Pantheon+ vpec.",
+            "INFO",
+        )
 
     def _load_tully_2015_table5(self):
         if Vizier is None:
@@ -474,12 +542,28 @@ class Step2Stratification:
         # Calculate Correlation
         corr = df["sigma_inferred"].corr(df["h0_derived"])
 
+        # Pearson p-value (two-tailed)
+        n_sample = len(df)
+        if n_sample > 2 and abs(corr) < 1.0:
+            t_pearson = corr * np.sqrt((n_sample - 2) / (1.0 - corr**2))
+            p_pearson = float(2.0 * scipy_stats.t.sf(np.abs(t_pearson), df=n_sample - 2))
+        else:
+            p_pearson = float("nan")
+
+        # Spearman rank correlation (robust to outliers)
+        spearman_r, spearman_p = scipy_stats.spearmanr(
+            df["sigma_inferred"], df["h0_derived"]
+        )
+
         # Covariance-aware uncertainties (if available)
         cov_low_err = None
         cov_high_err = None
         cov_all_mean_err = None
         cov_diff_err = None
         cov_available = False
+        weighted_r = None
+        weighted_p = None
+        weighted_n_eff = None
         try:
             mu_cov, mu_labels = self._load_mu_covariance()
             if mu_cov is not None and mu_labels is not None:
@@ -512,10 +596,93 @@ class Step2Stratification:
                 w[pos_low] = -1.0 / len(pos_low)
                 cov_diff_err = float(np.sqrt(np.einsum("i,ij,j->", w, h0_cov, w)))
                 cov_available = True
+
+                # Heteroscedasticity-weighted Pearson correlation.
+                # Weights = 1/diag(h0_cov), so that nearby galaxies with large
+                # peculiar-velocity noise are down-weighted relative to
+                # Hubble-flow hosts.  This is the appropriate descriptive
+                # statistic for the full sample.
+                h0_var_diag = np.diag(h0_cov)
+                h0_var_diag = np.maximum(h0_var_diag, np.finfo(float).tiny)
+                weights = 1.0 / h0_var_diag
+
+                x = df["sigma_inferred"].values
+                y = df["h0_derived"].values
+
+                x_mean_w = np.average(x, weights=weights)
+                y_mean_w = np.average(y, weights=weights)
+
+                cov_xy_w = np.sum(weights * (x - x_mean_w) * (y - y_mean_w)) / np.sum(weights)
+                var_x_w = np.sum(weights * (x - x_mean_w) ** 2) / np.sum(weights)
+                var_y_w = np.sum(weights * (y - y_mean_w) ** 2) / np.sum(weights)
+
+                if var_x_w > 0 and var_y_w > 0:
+                    weighted_r = float(cov_xy_w / np.sqrt(var_x_w * var_y_w))
+                    weighted_n_eff = float(np.sum(weights) ** 2 / np.sum(weights ** 2))
+                    if weighted_n_eff > 2 and abs(weighted_r) < 1.0:
+                        t_w = weighted_r * np.sqrt(
+                            (weighted_n_eff - 2) / (1.0 - weighted_r ** 2)
+                        )
+                        weighted_p = float(
+                            2.0 * scipy_stats.t.sf(np.abs(t_w), df=weighted_n_eff - 2)
+                        )
         except Exception as e:
             print_status(
                 f"Could not compute covariance-aware uncertainties: {e}", "WARNING"
             )
+
+        # Vpec-corrected correlation using Stiskalek et al. 2026 (Manticore)
+        # Bayesian peculiar velocities.  The Manticore coherent-flow model
+        # resolves large group-environment discrepancies that bias the raw
+        # Pantheon+ vpec for nearby hosts (e.g. NGC 4639).
+        vpec_corr_r = None
+        vpec_corr_p = None
+        vpec_corr_weighted_r = None
+        vpec_corr_weighted_p = None
+        vpec_corr_n_eff = None
+        if "h0_vpec_corrected" in df.columns:
+            h0_corr = df["h0_vpec_corrected"].values
+            sigma_vals = df["sigma_inferred"].values
+            valid_mask = np.isfinite(h0_corr) & np.isfinite(sigma_vals)
+            if valid_mask.sum() > 3:
+                vpec_corr_r, vpec_corr_p = scipy_stats.pearsonr(
+                    sigma_vals[valid_mask], h0_corr[valid_mask]
+                )
+                vpec_corr_r = float(vpec_corr_r)
+                vpec_corr_p = float(vpec_corr_p)
+
+                # Weighted version using the same H0 covariance diagonal
+                if cov_available and h0_cov is not None:
+                    h0_var_diag_v = np.diag(h0_cov)
+                    h0_var_diag_v = np.maximum(
+                        h0_var_diag_v, np.finfo(float).tiny
+                    )
+                    w_v = 1.0 / h0_var_diag_v
+                    xv = sigma_vals[valid_mask]
+                    yv = h0_corr[valid_mask]
+                    wv = w_v[valid_mask]
+                    x_mean_v = np.average(xv, weights=wv)
+                    y_mean_v = np.average(yv, weights=wv)
+                    cov_xy_v = np.sum(wv * (xv - x_mean_v) * (yv - y_mean_v)) / np.sum(wv)
+                    var_x_v = np.sum(wv * (xv - x_mean_v) ** 2) / np.sum(wv)
+                    var_y_v = np.sum(wv * (yv - y_mean_v) ** 2) / np.sum(wv)
+                    if var_x_v > 0 and var_y_v > 0:
+                        vpec_corr_weighted_r = float(
+                            cov_xy_v / np.sqrt(var_x_v * var_y_v)
+                        )
+                        vpec_corr_n_eff = float(
+                            np.sum(wv) ** 2 / np.sum(wv ** 2)
+                        )
+                        if vpec_corr_n_eff > 2 and abs(vpec_corr_weighted_r) < 1:
+                            t_v = vpec_corr_weighted_r * np.sqrt(
+                                (vpec_corr_n_eff - 2)
+                                / (1.0 - vpec_corr_weighted_r ** 2)
+                            )
+                            vpec_corr_weighted_p = float(
+                                2.0 * scipy_stats.t.sf(
+                                    np.abs(t_v), df=vpec_corr_n_eff - 2
+                                )
+                            )
 
         # Results Table
         headers = ["Bin", "Sigma Range", "N", "Mean H0", "Std Err"]
@@ -543,7 +710,30 @@ class Step2Stratification:
         print_table(headers, rows, title="Stratified H0 Results")
 
         print_status(f"Median Velocity Dispersion: {median_sigma:.2f} km/s", "INFO")
-        print_status(f"Correlation (Sigma vs H0): r = {corr:.3f}", "TEST")
+        print_status(
+            f"Correlation (u_phi vs H0): r = {corr:.3f} (p = {p_pearson:.3f})", "TEST"
+        )
+        print_status(
+            f"Spearman rank correlation: rho = {spearman_r:.3f} (p = {spearman_p:.3f})",
+            "TEST",
+        )
+        if weighted_r is not None:
+            print_status(
+                f"Weighted Pearson r = {weighted_r:.3f} (p = {weighted_p:.3f}, "
+                f"n_eff = {weighted_n_eff:.1f})",
+                "TEST",
+            )
+        if vpec_corr_r is not None:
+            print_status(
+                f"Vpec-corrected Pearson r = {vpec_corr_r:.3f} (p = {vpec_corr_p:.3f})",
+                "TEST",
+            )
+            if vpec_corr_weighted_r is not None:
+                print_status(
+                    f"Vpec-corrected weighted r = {vpec_corr_weighted_r:.3f} "
+                    f"(p = {vpec_corr_weighted_p:.3f}, n_eff = {vpec_corr_n_eff:.1f})",
+                    "TEST",
+                )
 
         if diff > 3.0:
             print_status(
@@ -567,6 +757,12 @@ class Step2Stratification:
             },
             "difference": float(diff),
             "correlation_r": float(corr),
+            "correlation_p": float(p_pearson),
+            "spearman_r": float(spearman_r),
+            "spearman_p": float(spearman_p),
+            "weighted_correlation_r": float(weighted_r) if weighted_r is not None else None,
+            "weighted_correlation_p": float(weighted_p) if weighted_p is not None else None,
+            "weighted_n_eff": float(weighted_n_eff) if weighted_n_eff is not None else None,
             "h0_mean_cov_err": float(cov_all_mean_err)
             if cov_all_mean_err is not None
             else None,
@@ -574,6 +770,11 @@ class Step2Stratification:
             if cov_diff_err is not None
             else None,
             "h0_covariance_saved": bool(cov_available),
+            "vpec_corrected_correlation_r": float(vpec_corr_r) if vpec_corr_r is not None else None,
+            "vpec_corrected_correlation_p": float(vpec_corr_p) if vpec_corr_p is not None else None,
+            "vpec_corrected_weighted_r": float(vpec_corr_weighted_r) if vpec_corr_weighted_r is not None else None,
+            "vpec_corrected_weighted_p": float(vpec_corr_weighted_p) if vpec_corr_weighted_p is not None else None,
+            "vpec_corrected_n_eff": float(vpec_corr_n_eff) if vpec_corr_n_eff is not None else None,
         }
 
         return df, metrics

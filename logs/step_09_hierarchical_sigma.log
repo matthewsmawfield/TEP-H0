@@ -1,11 +1,11 @@
-[18:29:47] [INFO] 
-[18:29:47] [INFO] ================================================================================
-[18:29:47] [INFO]    >>> STEP 09: Velocity-dispersion errors-in-variables audit
-[18:29:47] [INFO] ================================================================================
-[18:29:47] [INFO] 
-[18:29:47] [INFO] Method-specific bias and scatter:
-[18:29:47] [INFO]   HyperLEDA rotation potential proxy: N=37, bias=+0.00 km/s, scatter=3.04 km/s
-[18:29:47] [INFO] OLS slope: 0.0437
-[18:29:47] [INFO] Linear-sigma ODR: 0.0423 ± 0.0238 (1.78 sigma; fixed observational errors)
-[18:29:47] [INFO] TEP-endpoint ODR: Gamma=1.162e+07 ± 9.669e+06 (1.20 sigma; fixed observational errors)
-[18:29:47] [SUCCESS] Step 09 complete
+[01:22:47] [INFO] 
+[01:22:47] [INFO] ================================================================================
+[01:22:47] [INFO]    >>> STEP 09: Velocity-dispersion errors-in-variables audit
+[01:22:47] [INFO] ================================================================================
+[01:22:47] [INFO] 
+[01:22:47] [INFO] Method-specific bias and scatter:
+[01:22:47] [INFO]   HyperLEDA rotation potential proxy: N=37, bias=+0.00 km/s, scatter=3.04 km/s
+[01:22:47] [INFO] OLS slope: 0.0437
+[01:22:47] [INFO] Linear-sigma ODR: 0.0423 ± 0.0238 (1.78 sigma; fixed observational errors)
+[01:22:47] [INFO] TEP-endpoint ODR: Gamma=1.162e+07 ± 9.669e+06 (1.20 sigma; fixed observational errors)
+[01:22:47] [SUCCESS] Step 09 complete

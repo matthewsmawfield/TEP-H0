@@ -1,16 +1,16 @@
-[18:31:12] [INFO] Step 7: TRGB re-analysis (differential test)
-[18:31:12] [INFO] Matched 18 hosts for differential analysis
-[18:31:12] [INFO] 
+[01:23:47] [INFO] Step 7: TRGB re-analysis (differential test)
+[01:23:47] [INFO] Matched 18 hosts for differential analysis
+[01:23:47] [INFO] 
 Differential Modulus (TRGB - Cepheid) vs Sigma:
-[18:31:12] [INFO] +-----------------+----------------+--------------+
-[18:31:12] [INFO] | Metric          | Value          | Significance |
-[18:31:12] [INFO] +-----------------+----------------+--------------+
-[18:31:12] [INFO] | Pearson r       | -0.148         | p=0.7217     |
-[18:31:12] [INFO] | Spearman ρ      | 0.259          | p=0.1497     |
-[18:31:12] [INFO] | Slope (mag/dex) | -0.126 ± 0.087 | p=0.9169     |
-[18:31:12] [INFO] +-----------------+----------------+--------------+
-[18:31:12] [INFO] 
+[01:23:47] [INFO] +-----------------+----------------+--------------+
+[01:23:47] [INFO] | Metric          | Value          | Significance |
+[01:23:47] [INFO] +-----------------+----------------+--------------+
+[01:23:47] [INFO] | Pearson r       | -0.148         | p=0.7217     |
+[01:23:47] [INFO] | Spearman ρ      | 0.259          | p=0.1497     |
+[01:23:47] [INFO] | Slope (mag/dex) | -0.126 ± 0.087 | p=0.9169     |
+[01:23:47] [INFO] +-----------------+----------------+--------------+
+[01:23:47] [INFO] 
 Interpretation Check:
-[18:31:12] [INFO]   No significant positive correlation.
-[18:31:12] [INFO]   → Inconclusive / tension.
-[18:31:12] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_16_trgb_differential_results.json
+[01:23:47] [INFO]   No significant positive correlation.
+[01:23:47] [INFO]   → Inconclusive / tension.
+[01:23:47] [INFO] Results saved to /Users/matthewsmawfield/Library/CloudStorage/Dropbox/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_16_trgb_differential_results.json

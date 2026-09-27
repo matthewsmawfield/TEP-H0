@@ -1,10 +1,10 @@
 {
-  "mode": "master_literature",
+  "mode": "pinned_hyperleda_vrot",
   "source_file": "velocity_dispersions_literature.csv",
-  "note": "Using manually curated master file with full ADS bibcode traceability.",
+  "note": "Potential scale is u_phi=Vrot/sqrt(2), not central stellar dispersion.",
   "counts": {
-    "n_hosts": 43,
-    "n_with_sigma": 43,
+    "n_hosts": 41,
+    "n_with_sigma": 41,
     "n_missing_sigma": 0
   }
 }

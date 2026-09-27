@@ -342,7 +342,7 @@ class Step3TEPCorrection:
                     f"{row['sigma_inferred']:.1f}",
                     f"{row['shear_suppression']:.3f}",
                     f"{row['h0_derived']:.2f}",
-                    f"{row['effective_coupling'] * (row['sigma_inferred']**2 - sigma_ref**2) / C_SQUARED_KM_S:+.4f}",
+                    f"{kappa_cep * (row['shear_suppression'] * row['sigma_inferred']**2 - sigma_ref**2) / C_SQUARED_KM_S:+.4f}",
                     f"{row['h0_corrected']:.2f}",
                 ]
             )
@@ -451,28 +451,49 @@ class Step3TEPCorrection:
         h0_q50 = float(np.percentile(h0s, 50))
         h0_q84 = float(np.percentile(h0s, 84))
 
-        # Also compute a host-only WLS through-the-origin uncertainty.
-        # The slope-minimisation bootstrap is positively skewed and can
-        # over-estimate scatter; the WLS formal error scaled by sqrt(chi2/dof)
-        # provides a complementary uncertainty estimate.
+        # Host-only WLS uncertainty diagnostic. The estimator is the
+        # coefficient that flattens the modulus-residual trend against the
+        # correction regressor x = (S*sigma^2 - sigma_ref^2)/c^2: fit
+        # delta_mu = a + b*x by WLS (the intercept absorbs the mean offset,
+        # i.e. the H0 tension itself), then kappa_flat = -b since the TEP
+        # term enters as mu_corr = mu_obs + kappa*x. This uses the same
+        # delta_mu convention as the optimizer (mu_obs - mu_fiducial at
+        # H0 = 70), not the H0 residual, whose sign is opposite.
+        # The error model adds the canonical peculiar-velocity dispersion
+        # sigma_v = 250 km/s (R22 baseline) propagated into modulus units,
+        # sqrt(err_mu^2 + ((5/ln10) sigma_v / v)^2); omitting it leaves the
+        # chi2/dof >> 1 (velocity noise dominates the low-z hosts).
         c2 = C_SQUARED_KM_S
         S_all = df["shear_suppression"].values
         sigma_all = df["sigma_inferred"].values
         mu_all = df["value"].values
         v_all = df["velocity"].values
-        h0_raw_all = v_all / (10 ** ((mu_all - 25) / 5))
-        h0_base_all = float(np.mean(h0_raw_all))  # approximate baseline
         ln10 = np.log(10)
-        delta_mu_all = (5.0 / ln10) * (h0_raw_all - h0_base_all) / h0_base_all
-        x_all = S_all * (sigma_all**2 - sigma_ref**2) / c2
-        y_err_all = df["error"].values
+        mu_fiducial_all = 5.0 * np.log10(v_all) + 25.0 - 5.0 * np.log10(70.0)
+        delta_mu_all = mu_all - mu_fiducial_all
+        x_all = (S_all * sigma_all**2 - sigma_ref**2) / c2
+        SIGMA_V_CANONICAL = 250.0
+        y_err_all = np.sqrt(
+            df["error"].values ** 2
+            + ((5.0 / ln10) * SIGMA_V_CANONICAL / v_all) ** 2
+        )
         weights_all = 1.0 / y_err_all**2
-        kappa_wls = float(np.sum(weights_all * x_all * delta_mu_all) / np.sum(weights_all * x_all**2))
-        kappa_err_wls = float(np.sqrt(1.0 / np.sum(weights_all * x_all**2)))
-        residuals_wls = delta_mu_all - kappa_wls * x_all
-        chi2_wls = float(np.sum((residuals_wls / y_err_all)**2))
-        dof_wls = len(x_all) - 1
-        kappa_err_wls_scaled = float(kappa_err_wls * np.sqrt(chi2_wls / dof_wls)) if dof_wls > 0 and chi2_wls > dof_wls else kappa_err_wls
+        X_wls = np.column_stack([np.ones_like(x_all), x_all])
+        sw = np.sqrt(weights_all)
+        beta_wls, _, _, _ = np.linalg.lstsq(
+            X_wls * sw[:, None], delta_mu_all * sw, rcond=None
+        )
+        kappa_wls = float(-beta_wls[1])
+        residuals_wls = delta_mu_all - X_wls @ beta_wls
+        chi2_wls = float(np.sum((residuals_wls / y_err_all) ** 2))
+        dof_wls = len(x_all) - 2
+        cov_wls = np.linalg.pinv((X_wls * sw[:, None]).T @ (X_wls * sw[:, None]))
+        kappa_err_wls = float(np.sqrt(cov_wls[1, 1]))
+        kappa_err_wls_scaled = (
+            float(kappa_err_wls * np.sqrt(chi2_wls / dof_wls))
+            if dof_wls > 0 and chi2_wls > dof_wls
+            else kappa_err_wls
+        )
 
         metrics = {
             "bootstrap_h0_mean": float(np.mean(h0s)),

@@ -1,21 +1,21 @@
-[18:29:07] [INFO] 
-[18:29:07] [INFO] ================================================================================
-[18:29:07] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis
-[18:29:07] [INFO] ================================================================================
-[18:29:07] [INFO] 
-[18:29:07] [INFO] Using master sigma catalog for provenance: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv
-[18:29:07] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_07_sigma_provenance_table.csv
-[18:29:07] [INFO] Analyzing 37 hosts with both Raw and Corrected data.
-[18:29:07] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_07_aperture_sensitivity_grid.csv
-[18:29:07] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_07_aperture_sensitivity_summary.json
-[18:29:07] [INFO] Sensitivity Results
-[18:29:07] [INFO] +-----------------+-------------------------+-----------------------+
-[18:29:07] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |
-[18:29:07] [INFO] +-----------------+-------------------------+-----------------------+
-[18:29:07] [INFO] | Correlation (r) | 0.2414                  | 0.2414                |
-[18:29:07] [INFO] | P-value         | 1.5012e-01              | 1.5012e-01            |
-[18:29:07] [INFO] | Significance    | Weak                    | Significant (>99%)    |
-[18:29:07] [INFO] +-----------------+-------------------------+-----------------------+
-[18:29:07] [INFO] Conclusion: aperture corrections significantly alter the signal.
-[18:29:07] [PROCESS] Generating sensitivity plot...
-[18:29:07] [SUCCESS] Step 4b Complete.
+[01:22:23] [INFO] 
+[01:22:23] [INFO] ================================================================================
+[01:22:23] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis
+[01:22:23] [INFO] ================================================================================
+[01:22:23] [INFO] 
+[01:22:23] [INFO] Using master sigma catalog for provenance: /Users/matthewsmawfield/Library/CloudStorage/Dropbox/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv
+[01:22:24] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/Library/CloudStorage/Dropbox/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_07_sigma_provenance_table.csv
+[01:22:24] [INFO] Analyzing 37 hosts with both Raw and Corrected data.
+[01:22:24] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/Library/CloudStorage/Dropbox/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_07_aperture_sensitivity_grid.csv
+[01:22:24] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/Library/CloudStorage/Dropbox/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_07_aperture_sensitivity_summary.json
+[01:22:24] [INFO] Sensitivity Results
+[01:22:24] [INFO] +-----------------+-------------------------+-----------------------+
+[01:22:24] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |
+[01:22:24] [INFO] +-----------------+-------------------------+-----------------------+
+[01:22:24] [INFO] | Correlation (r) | 0.2414                  | 0.2414                |
+[01:22:24] [INFO] | P-value         | 1.5012e-01              | 1.5012e-01            |
+[01:22:24] [INFO] | Significance    | Weak                    | Significant (>99%)    |
+[01:22:24] [INFO] +-----------------+-------------------------+-----------------------+
+[01:22:24] [INFO] Conclusion: aperture corrections significantly alter the signal.
+[01:22:24] [PROCESS] Generating sensitivity plot...
+[01:22:24] [SUCCESS] Step 4b Complete.

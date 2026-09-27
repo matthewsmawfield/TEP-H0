@@ -1,4 +1,4 @@
-v0.9 (Kingston upon Hull) - 21 August 2026
+v0.10 (Kingston upon Hull) — 16 September 2026
 
 - Refined the physical mechanism to model the period shift as an observing-chain differential between core and disk environments.
 - Upgraded the dataset to include all 37 SH0ES hosts using a standardized, rotation-based kinematic coordinate.

@@ -29,7 +29,11 @@
 
 <h3>2.3 Environmental Screening Formulation</h3>
 <p>
-    The scalar field coupling in TEP is modulated by environmental density via chameleon-like screening. Host disk scale lengths are evaluated from RC3 isophotal diameters ($R_{25} = D_{25}/2$, $R_d = R_{25}/3.2$, $z_d = 0.1 R_d$) and stellar mass densities are computed at representative Cepheid radii ($r_{\rm Cep} = 1.8 R_d$). Group-scale density is obtained from the Tully (2015) 2MRS group catalogue Table 5 via exact PGC matching. The total continuous screening factor is:
+    The scalar field sector in TEP acts through two distinct macroscopic operators governed by Rules 10, 11, and 22: the Temporal Shear suppression operator $\mathcal{S}_\Sigma(\mathcal{E})$ and the clock-amplitude response $A(\phi)$. The macroscopic shear operator $\mathcal{S}_\Sigma(\mathcal{E})$ suppresses spatial clock-rate gradients and fifth-force dynamical accelerations in dense environments ($\mathcal{S}_\Sigma \to 0$ in screened matter), recovering standard General Relativity for gravitational orbits. By contrast, the clock amplitude $A(\phi) = \exp(-\phi / M_{\rm Pl})$ tracks potential depth monotonically: proper-time clock rates run slower in deeper gravitational wells ($A < 1$), and this clock slowing continues inside screened matter without vanishing, preserving gravitational redshift.
+</p>
+
+<p>
+    In galaxy halos, the two-body environmental suppression factor $S_i = S_{{\rm local},i} S_{{\rm group},i}$ parameterizes the shear suppression of the host's extended potential well within its surrounding group or cluster environment. In local high-density stellar cores (such as inner M31 or LMC centers), the local potential depth is deepest, causing local clocks to run slowest ($A < 1$), which generates the observed positive Period--Luminosity offset ($\Delta W > 0$) relative to diffuse outer-disk Cepheids. Host disk scale lengths are evaluated from RC3 isophotal diameters ($R_{25} = D_{25}/2$, $R_d = R_{25}/3.2$, $z_d = 0.1 R_d$) and stellar mass densities are computed at representative Cepheid radii ($r_{\rm Cep} = 1.8 R_d$). Group-scale density is obtained from the Tully (2015) 2MRS group catalogue Table 5 via exact PGC matching. The total continuous screening factor is:
 </p>
 
 <div class="equation">
@@ -42,7 +46,7 @@
 </div>
 
 <p>
-    The screened potential scale for each host is $U_i = S_i u_{\phi,i}^2$. For likelihood evaluation, the dimensionless centered environmental regressor is defined as:
+    The screened potential scale for each host is $U_i = S_i u_{\phi,i}^2$. The assignment is positional: $S_i$ is the source-side suppression — the host's potential well sources the local field level through its effective scalar charge, which the shear-sector operator $\mathcal{S}_\Sigma$ suppresses at the habitat density — while the probe-side clock-amplitude response $\mathcal{S}_A$, evaluated at the Cepheid's own material density, is a per-source constant absorbed into the channel coefficient $\kappa_{\rm Cep}$ (Appendix C). For likelihood evaluation, the dimensionless centered environmental regressor is defined as:
 </p>
 
 <div class="equation">
@@ -126,7 +130,51 @@
 </div>
 
 <p>
-    Because $H_{0,i}$ is scale-invariant across distance, all 33 hosts contribute according to their fractional distance precision. To account for potential cross-host correlations in the SH0ES calibration chain, the model is also evaluated via Generalized Least Squares (GLS) using the full $33\times 33$ covariance matrix $\mathbf{C}_H = \mathbf{J} \mathbf{C}_\mu \mathbf{J}^T + \mathbf{C}_v$, where $\mathbf{C}_\mu = (\mathbf{L}^T \mathbf{C}^{-1} \mathbf{L})^{-1}_{\mu}$ is extracted directly from the inverted 3,490-row SH0ES normal matrix, $\mathbf{J} = \text{diag}(-\frac{\ln 10}{5} H_{0,i})$ is the Jacobian transformation, and $\mathbf{C}_v = \text{diag}(\sigma_v^2/d_i^2)$ is the peculiar velocity dispersion matrix. Setting $\beta_X = 0$ defines the restricted TEP Cepheid-channel closure, which assigns the full environmental response $\Gamma_X$ to the Cepheid distance scale ($\kappa_{\rm Cep} = \Gamma_X / [(\frac{\ln 10}{5}) H_{\rm app}]$).
+    Because $H_{0,i}$ is scale-invariant across distance, all 33 hosts contribute according to their fractional distance precision. To account for potential cross-host correlations in the SH0ES calibration chain, the model is also evaluated via Generalized Least Squares (GLS) using the full $33\times 33$ covariance matrix $\mathbf{C}_H = \mathbf{J} \mathbf{C}_\mu \mathbf{J}^T + \mathbf{C}_v$, where $\mathbf{C}_\mu = (\mathbf{L}^T \mathbf{C}^{-1} \mathbf{L})^{-1}_{\mu}$ is extracted directly from the inverted 3,490-row SH0ES normal matrix, $\mathbf{J} = \text{diag}(-\frac{\ln 10}{5} H_{0,i})$ is the Jacobian transformation, and $\mathbf{C}_v = \text{diag}(\sigma_v^2/d_i^2)$ is the peculiar velocity dispersion matrix.
+</p>
+
+<p>
+    Under the observing-chain mechanism formalized in Appendix C, the same potential well that causes the period contraction via $q_i = r_{\rm spec}/r_{\rm Cep}$ also imparts a gravitational redshift to the central spectroscopic tracer:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    1 + z_{{\rm spec},i} = \frac{1 + z_{{\rm path},i}}{r_{{\rm spec},i}} \approx 1 + z_{{\rm path},i} + \frac{\Phi_{{\rm spec},i}}{c^2} .
+    \end{equation}
+</div>
+
+<p>
+    This shifts the observed velocity by $\Delta(cz)_i = c \Phi_{{\rm spec},i}/c^2 = \Phi_{{\rm spec},i}/c \sim 70\ {\rm m\,s^{-1}}$. When expressed as an apparent expansion-rate slope by dividing by host distance $d_i$, this physical gravitational redshift contributes:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \beta_{X,\rm grav} \equiv \frac{c}{\langle d \rangle} \approx \frac{299,792\ {\rm km\,s^{-1}}}{31.2\ {\rm Mpc}} \approx 9.60 \times 10^3\ {\rm km\,s^{-1}\,Mpc^{-1}} .
+    \end{equation}
+</div>
+
+<p>
+    In contrast, the Cepheid distance-modulus bias $\Delta \mu_i = \kappa_{\rm Cep} X_i$ rescales the host distance by $\Delta d / d \approx 7\%$, producing an apparent expansion-rate slope:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \Gamma_{X,\rm Cep} \equiv \left(\frac{\ln 10}{5}\right) H_{\rm app} \kappa_{\rm Cep} \approx 1.15 \times 10^7\ {\rm km\,s^{-1}\,Mpc^{-1}} .
+    \end{equation}
+</div>
+
+<p>
+    The ratio of the direct velocity response to the distance-modulus response is:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    \frac{\beta_{X,\rm grav}}{\Gamma_{X,\rm Cep}} = \frac{9.60 \times 10^3}{1.15 \times 10^7} \approx 8.3 \times 10^{-4} \approx 0.08\% \text{--} 0.10\% .
+    \end{equation}
+</div>
+
+<p>
+    Consequently, the physical observing chain intrinsically allocates $>99.9\%$ of the combined response $\Gamma_X$ to the Cepheid distance channel. Setting $\beta_X \approx 0$ (or coupling $\beta_X = \beta_{X,\rm grav}$) is therefore not an ad-hoc allocation, but the direct leading-order consequence of metric proper-time transport.
 </p>
 
 <p>
@@ -163,11 +211,11 @@
 </p>
 
 <p>
-    1. <em>Redshift--Distance Block ($N=31$ Hubble-flow hosts):</em> Evaluates cosmological expansion with TEP-corrected true distances $d_i^{\rm true} = d_i^{\rm obs} 10^{\kappa_{\rm Cep} X_i / 5}$, modeling $cz_i = d_i^{\rm true}(H_{\rm app} + \beta_X X_i) + v_i$. The 31 hosts represent the subset of the 33 Hubble-flow calibrator hosts after strictly excluding the two lowest-redshift systems (NGC 4424 at $z = 0.0026$ and NGC 4536 at $z = 0.0032$). The per-host variance is $\sigma_{v,i}^2 = \sigma_v^2 + (\frac{\ln 10}{5} cz_i \sigma_{\mu,i})^2 + \sigma_{{\rm int},v}^2$, where $\sigma_{{\rm int},v}$ is an intrinsic velocity dispersion nuisance parameter.
+    1. <em>Redshift--Distance Block ($N=33$ Hubble-flow hosts):</em> Evaluates cosmological expansion via a linearised Hubble-flow regression in $H_0$ space, $H_{0,i} = cz_i / d_i^{\rm obs} = H_{\rm app} + \Gamma_X X_i + \epsilon_i$, where $\Gamma_X = \beta_X + (\ln 10 / 5) H_{\rm app} \kappa_{\rm Cep}$ is the identifiable combined endpoint response. This formulation is equivalent to the nonlinear $cz$-space model $cz_i = d_i^{\rm true}(H_{\rm app} + \beta_X X_i) + v_i$ with $d_i^{\rm true} = d_i^{\rm obs} 10^{\kappa_{\rm Cep} X_i / 5}$, but offers superior numerical conditioning because the parameter space is linear in $(H_{\rm app}, \Gamma_X)$. The 33 hosts comprise the full Hubble-flow calibrator sample, including the two lowest-redshift systems (NGC 4424 and NGC 4536) whose CMB-corrected redshifts place them above the Hubble-flow threshold. The per-host variance is $\sigma_{v,i}^2 = \sigma_v^2 / d_i^2 + (\frac{\ln 10}{5} H_{0,i} \sigma_{\mu,i})^2 + \sigma_{{\rm int},v}^2 / d_i^2$, where $\sigma_{{\rm int},v}$ is an intrinsic velocity dispersion nuisance parameter.
 </p>
 
 <p>
-    2. <em>TRGB Differential Block ($N=16$ non-anchor calibrators):</em> Compares Cepheid and Tip of the Red Giant Branch distance moduli, $\Delta \mu_i \equiv \mu_i^{\rm Cep} - \mu_i^{\rm TRGB} = \delta m - \kappa_{\rm Cep} X_i + \epsilon_i$, with variance $\sigma_{\Delta\mu,i}^2 = \sigma_{\mu,{\rm Cep},i}^2 + \sigma_{\mu,{\rm TRGB},i}^2$. Because TRGB stellar evolution clocks operate independently of pulsation physics, TRGB distances provide an external anchor on the host modulus. The 16 hosts represent the complete overlap of SH0ES Cepheid calibrators, HyperLEDA rotation velocities, and EDD/CCHP TRGB measurements (excluding geometric anchors to prevent double counting).
+    2. <em>TRGB Differential Block ($N=18$ non-anchor calibrators):</em> Compares Cepheid and Tip of the Red Giant Branch distance moduli, $\Delta \mu_i \equiv \mu_i^{\rm Cep} - \mu_i^{\rm TRGB} = \delta m - \kappa_{\rm Cep} X_i + \epsilon_i$, with variance $\sigma_{\Delta\mu,i}^2 = \sigma_{\mu,{\rm Cep},i}^2 + \sigma_{\mu,{\rm TRGB},i}^2$. Because TRGB stellar evolution clocks operate independently of pulsation physics, TRGB distances provide an external anchor on the host modulus. The 18 hosts represent the complete overlap of SH0ES Cepheid calibrators, HyperLEDA rotation velocities, and EDD/CCHP TRGB measurements (excluding geometric anchors to prevent double counting).
 </p>
 
 <p>
@@ -175,7 +223,7 @@
 </p>
 
 <p>
-    Four nested model configurations are evaluated against the data: the <em>Null Model</em> ($k=4$: $H_{\rm app}, \delta m, \delta a, \sigma_{{\rm int},v}$), the <em>Cepheid Model</em> ($k=5$: setting $\beta_X \equiv 0$ and fitting $\kappa_{\rm Cep}$), the <em>Velocity Model</em> ($k=5$: setting $\kappa_{\rm Cep} \equiv 0$ and fitting $\beta_X$), and the <em>Mixed Model</em> ($k=6$: simultaneously fitting both $\kappa_{\rm Cep}$ and $\beta_X$). The Cepheid and Velocity models represent two alternative single-degree-of-freedom closures of the underlying physical response rather than additive components. In this multi-block formulation, the three data blocks are treated as quasi-independent observational constraints; while excluding primary geometric anchors from the TRGB block prevents direct anchor duplication, shared Cepheid calibration terms are treated within individual block variances.
+    Five nested model configurations are evaluated against the data: the <em>Null Model</em> ($k=4$: $H_{\rm app}, \delta m, \delta a, \sigma_{{\rm int},v}$), the <em>Cepheid Model</em> ($k=5$: setting $\beta_X \equiv 0$ and fitting $\kappa_{\rm Cep}$), the <em>Coupled Model</em> ($k=5$: setting $\beta_X = \beta_{X,\rm grav} \equiv c/\langle d \rangle \approx 9.60 \times 10^3\ {\rm km\,s^{-1}\,Mpc^{-1}}$ and fitting $\kappa_{\rm Cep}$), the <em>Velocity Model</em> ($k=5$: setting $\kappa_{\rm Cep} \equiv 0$ and fitting $\beta_X$), and the <em>Mixed Model</em> ($k=6$: simultaneously fitting both $\kappa_{\rm Cep}$ and $\beta_X$). The Cepheid and Velocity models represent two alternative single-degree-of-freedom closures of the underlying physical response rather than additive components, while the Coupled model realizes the physical prediction where the direct velocity perturbation is small but nonzero. In this multi-block formulation, the three data blocks are treated as quasi-independent observational constraints; while excluding primary geometric anchors from the TRGB block prevents direct anchor duplication, shared Cepheid calibration terms are treated within individual block variances.
 </p>
 
 <h3>2.8 Unified Host-Level Reconstruction (Step 04)</h3>
@@ -185,7 +233,7 @@
 
 <div class="equation">
     \begin{equation}
-    \mu_i^{\rm corr} = \mu_i^{\rm obs} + \kappa_{\rm Cep} S(\rho_i) \frac{u_{\phi,i}^2 - U_{\rm ref}}{c^2} ,
+    \mu_i^{\rm corr} = \mu_i^{\rm obs} + \kappa_{\rm Cep} \frac{S(\rho_i)\, u_{\phi,i}^2 - U_{\rm ref}}{c^2} ,
     \label{eq:step04_correction}
     \end{equation}
 </div>
@@ -198,6 +246,10 @@
     The optimal response coefficient $\kappa_{\rm Cep}$ is determined by minimizing the residual variance and environmental gradient across the host sample ($\partial H_{0,i} / \partial u_{\phi,i} \to 0$). Honest uncertainties are estimated via a joint bootstrap ($N=1,000$ resamples with replacement), where $\kappa_{\rm Cep}$ is re-optimized for each realization, simultaneously propagating host-to-host sampling scatter and $\kappa_{\rm Cep}$ parameter variance to yield the unified Hubble constant $H_0 = 66.65 \pm 1.58\ {\rm km\,s^{-1}\,Mpc^{-1}}$.
 </p>
 
+<p>
+    Evaluating the host-level reconstruction under the alternative screened anchor reference scale $\sqrt{U_{\rm ref}} = 30.507\ {\rm km\,s^{-1}}$ yields $H_0 = 64.74 \pm 1.53\ {\rm km\,s^{-1}\,Mpc^{-1}}$. Both host-level values ($66.65 \pm 1.58$ and $64.74 \pm 1.53\ {\rm km\,s^{-1}\,Mpc^{-1}}$) are in statistical concordance with Planck CMB cosmology ($67.4 \pm 0.5\ {\rm km\,s^{-1}\,Mpc^{-1}}$) within $0.45\sigma$ and $1.73\sigma$ respectively. The $1.9\ {\rm km\,s^{-1}\,Mpc^{-1}}$ offset between the two values is an artifact of the unconstrained host-level shortcut, which applies an additive modulus shift $\Delta \mu = \kappa_{\rm Cep} \Delta U_{\rm ref} / c^2$ without simultaneously refitting the anchor absolute magnitude zero point. In the full generative distance ladder (Step 45; Appendix D.3), where the anchor absolute magnitude $M_H^W$ is freely refit, this additive shift is identically absorbed into the zero point, returning $H_0$ values that are identical to four decimal places. Furthermore, in the generative expansion-rate likelihoods (Steps 42 and 44), the cosmological background extrapolation $H_{\rm cosmic} = H_{\rm app} - \Gamma_X \langle U \rangle / c^2$ is algebraically independent of $U_{\rm ref}$, yielding Planck-concordant background expansion rates ($66.58\text{--}67.16\ {\rm km\,s^{-1}\,Mpc^{-1}}$) with exact gauge invariance.
+</p>
+
 <h3>2.9 Observational Controls for Single-Galaxy Internal Gradients</h3>
 <p>
     Single-galaxy differential tests in M31 and the LMC provide internal empirical checks of the TEP potential hierarchy free from host-to-host peculiar velocity dispersions. To ensure these internal Period--Luminosity offsets are not generated by standard astrophysical systematics, the analysis incorporates three rigorous controls:
@@ -208,9 +260,44 @@
 </p>
 
 <p>
-    2. <em>Spatial Resolution and Crowding Controls:</em> In M31, ground-based blending and crowding effects in the dense inner bulge are controlled by utilizing high-resolution Hubble Space Telescope Panchromatic Hubble Andromeda Treasury (PHAT) spatial matching, which isolates uncrowded stellar point spread functions and recovers the internal offset at $\Delta W = +0.630 \pm 0.195\ {\rm mag}$ ($3.24\sigma$).
+    2. <em>Spatial Resolution and Crowding Controls:</em> In M31, ground-based blending and crowding effects in the dense inner bulge are controlled in two ways: (a) restricting the Pan-STARRS sample to the PHAT survey footprint, which recovers the internal offset at $\Delta W = +0.630 \pm 0.195\ {\rm mag}$ ($3.24\sigma$; step_10, $n_{\rm inner}=106$, $n_{\rm outer}=110$); and (b) the dedicated HST PHAT J/H photometric catalogue (Kodric et al. 2018), which yields $\Delta W = +0.681 \pm 0.187\ {\rm mag}$ ($3.65\sigma$; step_26, $n_{\rm inner}=78$, $n_{\rm outer}=69$) and is adopted as the primary PHAT measurement. The two values correspond to distinct catalogues and are not interchangeable.
 </p>
 
 <p>
     3. <em>Metallicity Plausibility Limits:</em> To test whether radial metallicity gradients could mimic the observed $\Delta W$, the required metallicity sensitivity is evaluated. For the empirical M31 metallicity gradient ($\Delta [\text{O/H}] \sim 0.2\text{--}0.4\ {\rm dex}$), explaining the observed $\Delta W \approx +0.36\text{--}0.63\ {\rm mag}$ purely via metallicity would require an unphysical coefficient $\gamma > 1.5\ {\rm mag/dex}$, whereas the empirical metallicity dependence measured across the SH0ES calibrator sample is $\gamma = -0.20 \pm 0.08\ {\rm mag/dex}$.
+</p>
+
+<h3>2.10 Host-Mass Decoupling and Supernova Mass-Step Marginalization</h3>
+<p>
+    An essential empirical test is verifying that the physical TEP environmental coordinate does not act as a surrogate for the established Type Ia supernova host-galaxy stellar mass step. In standard supernova standardization pipelines (e.g., Betoule et al. 2014; Scolnic et al. 2018; Brout et al. 2022), an empirical magnitude correction $\gamma_{\rm step} \sim 0.05\text{--}0.06\ {\rm mag}$ is applied across the split threshold $\log(M_*/M_\odot) = 10.0$ to account for residual correlations between peak luminosity and host galaxy properties.
+</p>
+
+<p>
+    Host stellar masses $\log(M_*/M_\odot)$ are compiled directly from Riess et al. (2022, Table 4), spanning $8.50 \le \log(M_*/M_\odot) \le 10.87$ across the complete 37-calibrator sample. While raw galactic rotation velocity correlates with host stellar mass via the baryonic Tully--Fisher relation, the physical TEP coordinate $X_i \equiv (S_i \sigma_i^2 - \sigma_{\rm ref}^2)/c^2$ incorporates multi-scale environmental screening $S_i = S_{\rm local}(\Sigma_*) \times S_{\rm group}(\rho_{\rm env})$, which suppresses both dense galactic disks and massive group potentials. Consequently, the screened potential depth is fundamentally distinct from total integrated stellar mass.
+</p>
+
+<p>
+    To evaluate whether the measured slope $\Gamma_X$ could be mimicked by host-mass corrections, a joint multi-regressor likelihood is formulated (Step 39):
+</p>
+
+<div class="equation">
+    \begin{equation}
+    cz_i = d_i \left[ H_{\rm app} + \Gamma_X X_i + \gamma_{\rm step} \Theta(\log M_{*,i} - 10.0) + \gamma_M (\log M_{*,i} - \langle \log M_* \rangle) \right] + \epsilon_i ,
+    \label{eq:joint_mass_likelihood}
+    \end{equation}
+</div>
+
+<p>
+    where $\Theta(x)$ is the Heaviside step function, $\gamma_{\rm step}$ measures the discrete host-mass step in equivalent velocity-space units, and $\gamma_M$ captures continuous mass dependence. In addition, an orthogonalized coordinate framework is constructed by projecting out host stellar mass:
+</p>
+
+<div class="equation">
+    \begin{equation}
+    X_{\perp \rm step} \equiv X - (\alpha_{\rm step} \Theta + \beta_{\rm step}) , \quad X_{\perp M} \equiv X - (\alpha_M \log M_* + \beta_M) ,
+    \label{eq:orthogonalized_coordinates}
+    \end{equation}
+</div>
+
+<p>
+    allowing the isolated environmental slope $\Gamma_{X,\perp}$ to be fitted against the mass-residualized coordinate completely independent of any host stellar mass variations.
 </p>

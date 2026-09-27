@@ -6,7 +6,7 @@
     "recovered_kappa": 240500.26531825884,
     "recovered_beta": 0.0,
     "kappa_bias": 40500.26531825884,
-    "beta_bias": NaN
+    "beta_bias": null
   },
   {
     "check": "injection_beta_only",
@@ -14,7 +14,7 @@
     "injected_beta": 20000000.0,
     "recovered_kappa": 0.0,
     "recovered_beta": 21539598.43938194,
-    "kappa_bias": NaN,
+    "kappa_bias": null,
     "beta_bias": 1539598.4393819384
   },
   {

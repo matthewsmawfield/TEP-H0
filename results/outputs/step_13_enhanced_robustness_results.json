@@ -4,8 +4,8 @@
     "n_hi": 37,
     "n_total": 37,
     "full_sample": {
-      "pearson_r": 0.24135531860278145,
-      "pearson_p": 0.15012430567445031,
+      "pearson_r": 0.24135531860280865,
+      "pearson_p": 0.15012430567440319,
       "spearman_rho": 0.1876592973482066,
       "spearman_p": 0.26604139990980974
     },
@@ -76,21 +76,21 @@
   "density_control": {
     "available": true,
     "n_valid": 37,
-    "baseline_r": 0.24135531860278145,
-    "baseline_p": 0.15012430567445031,
-    "partial_r_h0_sigma_given_rho": 0.17346694379507074,
-    "partial_p": 0.30453692222384615,
-    "r_h0_rho": 0.2577959078786884,
-    "p_h0_rho": 0.12344844868855781,
-    "r_sigma_rho": 0.3203479170723774,
-    "p_sigma_rho": 0.053235684567696555
+    "baseline_r": 0.24135531860280865,
+    "baseline_p": 0.15012430567440319,
+    "partial_r_h0_sigma_given_rho": 0.17346694379509714,
+    "partial_p": 0.30453692222377143,
+    "r_h0_rho": 0.2577959078786942,
+    "p_h0_rho": 0.12344844868854916,
+    "r_sigma_rho": 0.32034791707238486,
+    "p_sigma_rho": 0.05323568456769073
   },
   "subsample_tep": {
     "full_sample": {
       "n": 37,
       "kappa_cep": 849468.994140625,
-      "unified_h0": 66.6471548707494,
-      "h0_error": 1.555317974655575
+      "unified_h0": 66.64715487074687,
+      "h0_error": 1.5553179746554964
     },
     "stellar_only": {
       "n": 0,
@@ -110,19 +110,19 @@
       {
         "tier": "Full sample",
         "n": 37,
-        "h0_raw": 67.717485403136,
-        "h0_raw_sem": 1.5786652787398265,
-        "h0_corrected": 66.6471548707494,
-        "h0_corrected_sem": 1.5767716498223747,
-        "correction_kms": 1.070330532386592,
-        "dH_dkappa": -1.25999952884614e-06,
-        "kappa_for_planck": 251972.6363919605,
-        "kappa_bound_1sigma": 1504882.0562752376,
-        "delta_planck": -0.752845129250602,
-        "tension_sigma_planck": 0.4774598334105074
+        "h0_raw": 67.71748540313348,
+        "h0_raw_sem": 1.5786652787397528,
+        "h0_corrected": 66.64715487074687,
+        "h0_corrected_sem": 1.5767716498222946,
+        "correction_kms": 1.0703305323866061,
+        "dH_dkappa": -1.2599995288461567e-06,
+        "kappa_for_planck": 251972.63638996086,
+        "kappa_bound_1sigma": 1504882.056273165,
+        "delta_planck": -0.7528451292531315,
+        "tension_sigma_planck": 0.47745983341213594
       }
     ],
-    "tightest_bound": 1504882.0562752376,
+    "tightest_bound": 1504882.056273165,
     "tightest_bound_tier": "Full sample",
     "uniform_kappa": 849468.994140625
   },
@@ -136,9 +136,9 @@
       "group_richness_mean": 13.0,
       "n_high_sigma": 18,
       "n_low_sigma": 19,
-      "raw_slope": 0.04373632298114946,
-      "corrected_mean_full_kappa": 66.6471548707494,
-      "corrected_mean_refit_kappa": 66.6471548707494,
+      "raw_slope": 0.043736322981152355,
+      "corrected_mean_full_kappa": 66.64715487074687,
+      "corrected_mean_refit_kappa": 66.64715487074687,
       "refit_kappa": 849468.994140625
     }
   ]

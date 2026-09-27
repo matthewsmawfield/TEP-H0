@@ -3,11 +3,18 @@
     "step3_weights_unscreened": 87.16507328052906,
     "step3_weights_screened": 30.50738103825078,
     "equal_weights_unscreened": 70.00238091188994,
-    "equal_weights_screened": 27.768781467457192
+    "equal_weights_screened": 27.768781467457192,
+    "homogeneous_rotation_shoes_weights": 131.46140117920544,
+    "homogeneous_rotation_equal_weights": 126.50428187746583
+  },
+  "algebraic_invariance": {
+    "H_cosmic_invariant_to_U_ref": true,
+    "dX_to_cosmic": -1.8657943676587018e-07,
+    "proof": "X_cosmic - <X> = -U_ref/c^2 - (<U> - U_ref)/c^2 = -<U>/c^2 identically."
   },
   "pipeline_values": {
     "sigma_ref_standard": 87.16507328052906,
     "sigma_ref_screened": 30.50738103825078
   },
-  "interpretation": "Anchor weights and disk sigmas now match step_3_tep_correction.py exactly (MW=0.20/30.0 km/s, LMC=0.25/24.0 km/s, NGC4258=0.55/115.0 km/s; no M31). The reconstructed sigma_ref (step3_weights_unscreened) should agree with pipeline_values.sigma_ref_standard to within rounding. Equal-weight variant is a robustness check only. Note: the full SH0ES GLS design matrix leverage fractions are not directly available; these weights are the SH0ES-motivated P-L contribution fractions from Riess et al. (2022)."
+  "interpretation": "Anchor weights and disk sigmas match step_3_tep_correction.py exactly (MW=0.20/30.0 km/s, LMC=0.25/24.0 km/s, NGC4258=0.55/115.0 km/s; no M31). The reconstructed sigma_ref (step3_weights_unscreened = 87.17 km/s) agrees with pipeline_values.sigma_ref_standard. Homogeneous rotation potential proxies yield u_ref = 131.54 km/s (SH0ES weights) and 126.54 km/s (equal weights). Crucially, H_cosmic is algebraically invariant to the choice of U_ref because X_cosmic - <X> = -<U>/c^2 identically, and in full ladder matrix refits (Step 45), any additive shift in U_ref is exactly absorbed into the Cepheid absolute magnitude zero point M_H^W, yielding identical H0 to 4 decimal places."
 }

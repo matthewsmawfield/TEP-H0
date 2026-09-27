@@ -71,11 +71,17 @@ from scripts.steps.step_34_full_ladder_likelihood import FullLadderLikelihood
 from scripts.steps.step_37_velocity_robustness import run as step_37_run
 from scripts.steps.step_39_environment_slope_decomposition import run as step_39_run
 from scripts.steps.step_40_flow_sky_controls import run as step_40_run
+from scripts.steps.step_42_tep_native_ladder import run as step_42_run
 from scripts.steps.step_43_toy_recovery_experiment import run as step_43_run
+from scripts.steps.step_44_joint_distance_redshift_likelihood import run as step_44_run
 from scripts.steps.step_45_full_ladder_h0_propagation import run as step_45_run
 from scripts.steps.step_47_anchor_double_counting_audit import main as step_47_run
 from scripts.steps.step_48_pantheon_velocity_covariance import main as step_48_run
 from scripts.steps.step_51_recent_velocity_sensitivity import run as step_51_run
+from scripts.steps.step_52_bounded_response_comparison import run as step_52_run
+from scripts.steps.step_53_within_host_structure_battery import run as step_53_run
+from scripts.steps.step_55_within_host_plz_decomposition import run as step_55_run
+from scripts.steps.step_61_nested_kappa import main as step_61_run
 from scripts.utils.pipeline_audit import audit
 
 def regression_gates(project_root):
@@ -541,6 +547,14 @@ def run_pipeline():
         set_step_logger(pipeline_logger)
         print_status("Step 40 (Flow / Sky Controls) completed successfully.", "SUCCESS")
 
+        # --- Step 42: TEP Native Ladder ---
+        print_status(">>> STEP 42: TEP Native Ladder", "TITLE")
+        t0 = time.time()
+        step_42_run()
+        step_times['Step 42'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 42 (TEP Native Ladder) completed successfully.", "SUCCESS")
+
         # --- Step 43: Toy Recovery Experiment ---
         print_status(">>> STEP 43: Toy Recovery Experiment", "TITLE")
         t0 = time.time()
@@ -548,6 +562,14 @@ def run_pipeline():
         step_times['Step 43'] = time.time() - t0
         set_step_logger(pipeline_logger)
         print_status("Step 43 (Toy Recovery Experiment) completed successfully.", "SUCCESS")
+
+        # --- Step 44: Joint Distance-Redshift Likelihood ---
+        print_status(">>> STEP 44: Joint Distance-Redshift Likelihood", "TITLE")
+        t0 = time.time()
+        step_44_run()
+        step_times['Step 44'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 44 (Joint Distance-Redshift Likelihood) completed successfully.", "SUCCESS")
 
         # --- Step 45: Full-ladder H_0 propagation ---
         print_status(">>> STEP 45: Full-Ladder H_0 Propagation Test", "TITLE")
@@ -580,6 +602,38 @@ def run_pipeline():
         step_times['Step 51'] = time.time() - t0
         set_step_logger(pipeline_logger)
         print_status("Step 51 (Recent Velocity Sensitivity) completed successfully.", "SUCCESS")
+
+        # --- Step 52: bounded-response model comparison and kappaP disentanglement ---
+        print_status(">>> STEP 52: Bounded-Response Model Comparison", "TITLE")
+        t0 = time.time()
+        step_52_run()
+        step_times['Step 52'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 52 (Bounded-Response Model Comparison) completed successfully.", "SUCCESS")
+
+        # --- Step 53: within-host period-structure discriminating battery ---
+        print_status(">>> STEP 53: Within-Host Period-Structure Battery", "TITLE")
+        t0 = time.time()
+        step_53_run()
+        step_times['Step 53'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 53 (Within-Host Structure Battery) completed successfully.", "SUCCESS")
+
+        # --- Step 55: within-host PLZ decomposition (metallicity channel) ---
+        print_status(">>> STEP 55: Within-Host PLZ Decomposition", "TITLE")
+        t0 = time.time()
+        step_55_run()
+        step_times['Step 55'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 55 (Within-Host PLZ Decomposition) completed successfully.", "SUCCESS")
+
+        # --- Step 61: nested clock-ratio bound on the raw conformal channel ---
+        print_status(">>> STEP 61: Nested Clock-Ratio Bound", "TITLE")
+        t0 = time.time()
+        step_61_run()
+        step_times['Step 61'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 61 (Nested Clock-Ratio Bound) completed successfully.", "SUCCESS")
 
         # --- Regression Gates ---
         regression_gates(PROJECT_ROOT)

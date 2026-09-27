@@ -1,49 +1,49 @@
-[18:31:12] [INFO] Step 7: TRGB-Cepheid comparative analysis
-[18:31:12] [INFO] Comparing H0-σ correlations across distance indicators
-[18:31:12] [INFO] Loading TRGB distances from Freedman et al. (2024) from CSV
-[18:31:12] [INFO] Loaded 20 TRGB distances from traceable CCHP CSV catalog
-[18:31:12] [INFO] 
+[01:23:47] [INFO] Step 7: TRGB-Cepheid comparative analysis
+[01:23:47] [INFO] Comparing H0-σ correlations across distance indicators
+[01:23:47] [INFO] Loading TRGB distances from Freedman et al. (2024) from CSV
+[01:23:47] [INFO] Loaded 20 TRGB distances from traceable CCHP CSV catalog
+[01:23:47] [INFO] 
 --- Cross-matching TRGB hosts with σ data ---
-[18:31:12] [INFO] Unmatched TRGB hosts: NGC 4039, NGC 4526
-[18:31:12] [INFO] Matched 18/20 TRGB hosts with σ data
-[18:31:12] [INFO] 
+[01:23:47] [INFO] Unmatched TRGB hosts: NGC 4039, NGC 4526
+[01:23:47] [INFO] Matched 18/20 TRGB hosts with σ data
+[01:23:47] [INFO] 
 --- Computing H0 from TRGB distances ---
-[18:31:12] [INFO] TRGB H0 range: 47.0 - 81.6 km/s/Mpc
-[18:31:12] [INFO] TRGB H0 mean: 66.75 ± 11.18 km/s/Mpc
-[18:31:12] [INFO] TRGB host data saved to: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_15_trgb_hosts_data.csv
-[18:31:12] [INFO] 
+[01:23:47] [INFO] TRGB H0 range: 47.0 - 81.6 km/s/Mpc
+[01:23:47] [INFO] TRGB H0 mean: 66.75 ± 11.18 km/s/Mpc
+[01:23:47] [INFO] TRGB host data saved to: /Users/matthewsmawfield/Library/CloudStorage/Dropbox/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_15_trgb_hosts_data.csv
+[01:23:47] [INFO] 
 --- TRGB H0-σ correlation analysis ---
-[18:31:12] [INFO] TRGB H0-σ Correlation Results
-[18:31:12] [INFO] +------------------+---------------+-----------------+
-[18:31:12] [INFO] | Metric           | Value         | Interpretation  |
-[18:31:12] [INFO] +------------------+---------------+-----------------+
-[18:31:12] [INFO] | N hosts          | 18            |                 |
-[18:31:12] [INFO] | Pearson r        | 0.366         | Moderate        |
-[18:31:12] [INFO] | Pearson p        | 0.1352        | Not significant |
-[18:31:12] [INFO] | Spearman ρ       | 0.327         | Moderate        |
-[18:31:12] [INFO] | Spearman p       | 0.1851        | Not significant |
-[18:31:12] [INFO] | ΔH0 (high-low σ) | 3.22 km/s/Mpc | Moderate        |
-[18:31:12] [INFO] +------------------+---------------+-----------------+
-[18:31:12] [INFO] 
+[01:23:47] [INFO] TRGB H0-σ Correlation Results
+[01:23:47] [INFO] +------------------+---------------+-----------------+
+[01:23:47] [INFO] | Metric           | Value         | Interpretation  |
+[01:23:47] [INFO] +------------------+---------------+-----------------+
+[01:23:47] [INFO] | N hosts          | 18            |                 |
+[01:23:47] [INFO] | Pearson r        | 0.366         | Moderate        |
+[01:23:47] [INFO] | Pearson p        | 0.1352        | Not significant |
+[01:23:47] [INFO] | Spearman ρ       | 0.327         | Moderate        |
+[01:23:47] [INFO] | Spearman p       | 0.1851        | Not significant |
+[01:23:47] [INFO] | ΔH0 (high-low σ) | 3.22 km/s/Mpc | Moderate        |
+[01:23:47] [INFO] +------------------+---------------+-----------------+
+[01:23:47] [INFO] 
 --- Comparison: TRGB vs Cepheids ---
-[18:31:12] [INFO] +-----------------+------------+---------+----------------+--------------+
-[18:31:12] [INFO] | Indicator       | Spearman ρ | p-value | ΔH0 (km/s/Mpc) | Significant? |
-[18:31:12] [INFO] +-----------------+------------+---------+----------------+--------------+
-[18:31:12] [INFO] | Cepheids (N=37) | 0.188      | 0.2660  | 1.50           | NO           |
-[18:31:12] [INFO] | TRGB (N=18)     | 0.327      | 0.1851  | 3.22           | NO           |
-[18:31:12] [INFO] +-----------------+------------+---------+----------------+--------------+
-[18:31:12] [INFO] 
+[01:23:47] [INFO] +-----------------+------------+---------+----------------+--------------+
+[01:23:47] [INFO] | Indicator       | Spearman ρ | p-value | ΔH0 (km/s/Mpc) | Significant? |
+[01:23:47] [INFO] +-----------------+------------+---------+----------------+--------------+
+[01:23:47] [INFO] | Cepheids (N=37) | 0.188      | 0.2660  | 1.50           | NO           |
+[01:23:47] [INFO] | TRGB (N=18)     | 0.327      | 0.1851  | 3.22           | NO           |
+[01:23:47] [INFO] +-----------------+------------+---------+----------------+--------------+
+[01:23:47] [INFO] 
 ============================================================
-[18:31:12] [INFO] Comparative analysis conclusion
-[18:31:12] [INFO] ============================================================
-[18:31:12] [INFO] • Cepheids do not show significant H0-σ correlation
-[18:31:12] [INFO] • TRGB does not show significant H0-σ correlation
-[18:31:12] [INFO] 
-[18:31:12] [INFO]   Interpretation:
-[18:31:12] [INFO]   ───────────────
-[18:31:12] [INFO]   Interpretation is inconclusive based on H0-σ alone.
-[18:31:12] [INFO]   See step_7_trgb_reanalysis.py for the differential Δμ test.
-[18:31:12] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_15_trgb_comparison_results.json
-[18:31:12] [INFO] ============================================================
-[18:31:12] [INFO] TRGB-Cepheid comparison complete
-[18:31:12] [INFO] ============================================================
+[01:23:47] [INFO] Comparative analysis conclusion
+[01:23:47] [INFO] ============================================================
+[01:23:47] [INFO] • Cepheids do not show significant H0-σ correlation
+[01:23:47] [INFO] • TRGB does not show significant H0-σ correlation
+[01:23:47] [INFO] 
+[01:23:47] [INFO]   Interpretation:
+[01:23:47] [INFO]   ───────────────
+[01:23:47] [INFO]   Interpretation is inconclusive based on H0-σ alone.
+[01:23:47] [INFO]   See step_7_trgb_reanalysis.py for the differential Δμ test.
+[01:23:47] [INFO] Results saved to /Users/matthewsmawfield/Library/CloudStorage/Dropbox/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_15_trgb_comparison_results.json
+[01:23:47] [INFO] ============================================================
+[01:23:47] [INFO] TRGB-Cepheid comparison complete
+[01:23:47] [INFO] ============================================================
