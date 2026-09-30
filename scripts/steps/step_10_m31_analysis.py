@@ -11,6 +11,7 @@ from astropy.coordinates import SkyCoord
 from astroquery.vizier import Vizier
 from scipy import stats
 from scipy.optimize import curve_fit, linear_sum_assignment
+from scipy.spatial import cKDTree
 
 # Ensure project root is in path (avoid collisions with any external 'scripts' package)
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -489,6 +490,177 @@ class Step5M31Analysis:
             "delta_p84": float(np.percentile(deltas, 84)),
         }
 
+    def _quality_equated_delta(
+        self,
+        inner: pd.DataFrame,
+        outer: pd.DataFrame,
+        y_col: str,
+        err_col: str,
+        slope: float,
+        n_boot: int = 1000,
+        random_state: int = 64,
+    ) -> list[dict]:
+        """Quality-regime-equated Delta W: restrict BOTH regions to a common
+        photometric-quality band defined on the pooled error distribution,
+        rather than pair-matching on the error covariate.
+
+        Pair-matching on e_W can overmatch when the signal concentrates where
+        crowding is worst (the inner disk is also the crowded region): it
+        selects individual pairs on the covariate that carries the artefact.
+        A common band cut equates the measurement regime of the two samples
+        without selecting pairs. A ladder of pooled quantile thresholds is
+        evaluated, plus the complement of the median band (the poor-quality
+        half): if Delta W persists among equally well-measured stars the
+        crowding explanation is bounded; if it is confined to the
+        high-error complement the artefact reading stands.
+        """
+        rng = np.random.default_rng(random_state)
+        in_df = inner.dropna(subset=["logP", y_col]).copy()
+        out_df = outer.dropna(subset=["logP", y_col]).copy()
+        in_df[err_col] = pd.to_numeric(in_df[err_col], errors="coerce")
+        out_df[err_col] = pd.to_numeric(out_df[err_col], errors="coerce")
+
+        pooled = pd.concat([in_df[err_col], out_df[err_col]]).dropna()
+        pooled = pooled[np.isfinite(pooled) & (pooled > 0)]
+        if len(in_df) < 10 or len(out_df) < 10 or len(pooled) < 20:
+            return []
+
+        bands = [("below_pooled_p25", pooled.quantile(0.25), "le"),
+                 ("below_pooled_p50", pooled.quantile(0.50), "le"),
+                 ("below_pooled_p75", pooled.quantile(0.75), "le"),
+                 ("above_pooled_p50", pooled.quantile(0.50), "gt")]
+
+        rows = []
+        for name, thr, op in bands:
+            if op == "le":
+                ib = in_df[in_df[err_col] <= thr]
+                ob = out_df[out_df[err_col] <= thr]
+            else:
+                ib = in_df[in_df[err_col] > thr]
+                ob = out_df[out_df[err_col] > thr]
+
+            if len(ib) < 10 or len(ob) < 10:
+                rows.append({
+                    "band": name, "threshold": float(thr),
+                    "n_inner": int(len(ib)), "n_outer": int(len(ob)),
+                    "n_boot": 0, "delta_mean": np.nan, "delta_std": np.nan,
+                    "delta_p16": np.nan, "delta_p84": np.nan,
+                })
+                continue
+
+            ii, yi = ib["logP"].values, ib[y_col].values
+            io, yo = ob["logP"].values, ob[y_col].values
+            ni, no = len(ib), len(ob)
+
+            deltas = []
+            for _ in range(n_boot):
+                r_i = rng.integers(0, ni, ni)
+                r_o = rng.integers(0, no, no)
+                a_in, _ = self._weighted_intercept(
+                    ii[r_i], yi[r_i], slope=slope, yerr=None
+                )
+                a_out, _ = self._weighted_intercept(
+                    io[r_o], yo[r_o], slope=slope, yerr=None
+                )
+                deltas.append(a_in - a_out)
+
+            deltas = np.asarray(deltas, dtype=float)
+            deltas = deltas[np.isfinite(deltas)]
+            rows.append({
+                "band": name, "threshold": float(thr),
+                "n_inner": ni, "n_outer": no,
+                "n_boot": int(len(deltas)),
+                "delta_mean": float(np.mean(deltas)) if len(deltas) else np.nan,
+                "delta_std": float(np.std(deltas, ddof=1)) if len(deltas) > 1 else np.nan,
+                "delta_p16": float(np.percentile(deltas, 16)) if len(deltas) else np.nan,
+                "delta_p84": float(np.percentile(deltas, 84)) if len(deltas) else np.nan,
+            })
+        return rows
+
+    def _quality_stratified_delta(
+        self,
+        inner: pd.DataFrame,
+        outer: pd.DataFrame,
+        y_col: str,
+        err_col: str,
+        slope: float,
+        n_boot: int = 500,
+        random_state: int = 65,
+    ) -> list[dict]:
+        """Quality-stratified Delta W: evaluate the inner-minus-outer P-L
+        residual contrast at shared photometric-quality levels rather than
+        pooling over the error distribution.
+
+        A pure photometric-error artefact predicts a contrast that is flat at
+        zero once e_W is held fixed; an environment signal confined to the
+        well-measured regime predicts a positive contrast that declines
+        through e_W.  The estimator fits a bilinear model
+            resid = b0 + b1*log10(e_W) + b2*logP + b3*(log10 e_W)(logP)
+        separately in each region and evaluates the contrast on a grid of
+        pooled e_W quantiles at the pooled mean logP.  Bootstrap over the
+        catalog rows propagates sampling noise.
+        """
+        rng = np.random.default_rng(random_state)
+        in_df = inner.dropna(subset=["logP", y_col]).copy()
+        out_df = outer.dropna(subset=["logP", y_col]).copy()
+        in_df[err_col] = pd.to_numeric(in_df[err_col], errors="coerce")
+        out_df[err_col] = pd.to_numeric(out_df[err_col], errors="coerce")
+        in_df = in_df[np.isfinite(in_df[err_col]) & (in_df[err_col] > 0)]
+        out_df = out_df[np.isfinite(out_df[err_col]) & (out_df[err_col] > 0)]
+        if len(in_df) < 20 or len(out_df) < 20:
+            return []
+
+        def design(d):
+            le = np.log10(d[err_col].values)
+            lp = d["logP"].values
+            return np.column_stack([np.ones(len(d)), le, lp, le * lp])
+
+        def resid_of(d):
+            return d[y_col].values - slope * d["logP"].values
+
+        def fit_coef(d):
+            return np.linalg.lstsq(design(d), resid_of(d), rcond=None)[0]
+
+        pooled_e = pd.concat([in_df[err_col], out_df[err_col]])
+        lp0 = float(pd.concat([in_df["logP"], out_df["logP"]]).mean())
+        quantiles = [0.10, 0.25, 0.50, 0.75, 0.90]
+
+        beta_in = fit_coef(in_df)
+        beta_out = fit_coef(out_df)
+
+        rows = []
+        for q in quantiles:
+            e_val = float(pooled_e.quantile(q))
+            x_eval = np.array([1.0, np.log10(e_val), lp0, np.log10(e_val) * lp0])
+            delta_pt = float(x_eval @ (beta_in - beta_out))
+
+            boot = np.empty(n_boot)
+            ni, no = len(in_df), len(out_df)
+            for b in range(n_boot):
+                bi = fit_coef(in_df.iloc[rng.integers(0, ni, ni)])
+                bo = fit_coef(out_df.iloc[rng.integers(0, no, no)])
+                boot[b] = x_eval @ (bi - bo)
+            boot = boot[np.isfinite(boot)]
+            # Coverage: fraction of each region's stars actually attaining
+            # this error level — flags model extrapolation beyond support.
+            frac_in = float((in_df[err_col] <= e_val).mean())
+            frac_out = float((out_df[err_col] <= e_val).mean())
+            rows.append({
+                "band": f"ew_p{int(q * 100):02d}",
+                "threshold": e_val,
+                "n_inner": ni,
+                "n_outer": no,
+                "frac_inner_below_level": frac_in,
+                "frac_outer_below_level": frac_out,
+                "extrapolated_for_inner": bool(frac_in < 0.10),
+                "n_boot": int(len(boot)),
+                "delta_mean": delta_pt,
+                "delta_std": float(np.std(boot, ddof=1)) if len(boot) > 1 else np.nan,
+                "delta_p16": float(np.percentile(boot, 16)) if len(boot) else np.nan,
+                "delta_p84": float(np.percentile(boot, 84)) if len(boot) else np.nan,
+            })
+        return rows
+
     def _multivariate_pair_match(
         self,
         inner: pd.DataFrame,
@@ -964,6 +1136,126 @@ class Step5M31Analysis:
             "delta_p84": float(np.percentile(deltas, 84)),
         }
 
+    def _matched_bootstrap_delta_3d(
+        self,
+        inner: pd.DataFrame,
+        outer: pd.DataFrame,
+        y_col: str,
+        slope: float,
+        col1: str,
+        col2: str,
+        col3: str,
+        n_bin1: int = 8,
+        n_bin2: int = 4,
+        n_bin3: int = 4,
+        n_boot: int = 1000,
+        random_state: int = 101,
+    ) -> dict:
+        """Cell-matched bootstrap on three covariates (same min-count
+        weighting as _matched_bootstrap_delta_2d)."""
+        rng = np.random.default_rng(random_state)
+        cols = ["logP", y_col, col1, col2, col3]
+        in_df = inner.copy()
+        out_df = outer.copy()
+        for c in cols:
+            in_df[c] = pd.to_numeric(in_df[c], errors="coerce")
+            out_df[c] = pd.to_numeric(out_df[c], errors="coerce")
+        in_df = in_df.dropna(subset=cols).copy()
+        out_df = out_df.dropna(subset=cols).copy()
+
+        empty = {
+            "n_inner": int(len(in_df)),
+            "n_outer": int(len(out_df)),
+            "n_boot": int(n_boot),
+            "n_matched_mean": np.nan,
+            "n_matched_min": np.nan,
+            "delta_mean": np.nan,
+            "delta_std": np.nan,
+            "delta_p16": np.nan,
+            "delta_p84": np.nan,
+        }
+        if len(in_df) < 10 or len(out_df) < 10:
+            return empty
+
+        edges = []
+        for col, nb in ((col1, n_bin1), (col2, n_bin2), (col3, n_bin3)):
+            lo = max(float(in_df[col].min()), float(out_df[col].min()))
+            hi = min(float(in_df[col].max()), float(out_df[col].max()))
+            if not (np.isfinite(lo) and np.isfinite(hi)) or hi <= lo:
+                return empty
+            edges.append(np.linspace(lo, hi, nb + 1))
+        e1, e2, e3 = edges
+
+        deltas = []
+        matched_sizes = []
+        for _ in range(n_boot):
+            in_idx = []
+            out_idx = []
+            for i in range(len(e1) - 1):
+                for j in range(len(e2) - 1):
+                    for k in range(len(e3) - 1):
+                        sel_in = (
+                            (in_df[col1] >= e1[i]) & (in_df[col1] < e1[i + 1])
+                            & (in_df[col2] >= e2[j]) & (in_df[col2] < e2[j + 1])
+                            & (in_df[col3] >= e3[k]) & (in_df[col3] < e3[k + 1])
+                        )
+                        sel_out = (
+                            (out_df[col1] >= e1[i]) & (out_df[col1] < e1[i + 1])
+                            & (out_df[col2] >= e2[j]) & (out_df[col2] < e2[j + 1])
+                            & (out_df[col3] >= e3[k]) & (out_df[col3] < e3[k + 1])
+                        )
+                        g_in = in_df[sel_in]
+                        g_out = out_df[sel_out]
+                        kk = min(len(g_in), len(g_out))
+                        if kk <= 0:
+                            continue
+                        in_idx.extend(
+                            rng.choice(
+                                g_in.index.to_numpy(), size=kk, replace=True
+                            ).tolist()
+                        )
+                        out_idx.extend(
+                            rng.choice(
+                                g_out.index.to_numpy(), size=kk, replace=True
+                            ).tolist()
+                        )
+            if len(in_idx) < 10 or len(out_idx) < 10:
+                continue
+            matched_sizes.append(min(len(in_idx), len(out_idx)))
+            a_in, _ = self._weighted_intercept(
+                in_df.loc[in_idx]["logP"].values,
+                in_df.loc[in_idx][y_col].values,
+                slope=slope,
+                yerr=None,
+            )
+            a_out, _ = self._weighted_intercept(
+                out_df.loc[out_idx]["logP"].values,
+                out_df.loc[out_idx][y_col].values,
+                slope=slope,
+                yerr=None,
+            )
+            deltas.append(a_in - a_out)
+
+        deltas = np.asarray(deltas, dtype=float)
+        deltas = deltas[np.isfinite(deltas)]
+        if len(deltas) == 0:
+            return empty
+        return {
+            "n_inner": int(len(in_df)),
+            "n_outer": int(len(out_df)),
+            "n_boot": int(len(deltas)),
+            "n_matched_mean": float(np.mean(matched_sizes))
+            if len(matched_sizes)
+            else np.nan,
+            "n_matched_min": int(np.min(matched_sizes))
+            if len(matched_sizes)
+            else np.nan,
+            "delta_mean": float(np.mean(deltas)),
+            "delta_std": float(np.std(deltas, ddof=1)),
+            "delta_p16": float(np.percentile(deltas, 16)),
+            "delta_p84": float(np.percentile(deltas, 84)),
+        }
+
     def run_analysis(self):
         print_status("Initiating M31 Differential Analysis", "SECTION")
         print_status("Fetching M31 Cepheid data (Kodric et al. 2018)...", "PROCESS")
@@ -1040,6 +1332,34 @@ class Step5M31Analysis:
         # Calculate Distances
         print_status("Calculating Galactocentric Properties...", "SECTION")
         df["R_kpc"] = self.calculate_galactocentric_distance(df["RA"], df["DEC"])
+
+        # Deprojected disk-plane positions (kpc) and the theory-0 ambient-field
+        # proxy: u_amb ∝ sqrt(rho_amb * L) with L = 837 pc (step_67 ambient
+        # closure), i.e. log u_amb tracks the log of the surface density of the
+        # Cepheid tracer field smoothed on the L scale.  This is the
+        # theory-relevant environment variable; it is distinct from the
+        # arcsec-scale crowding that inflates e_Wmag.
+        RA_C, DEC_C = 10.684708, 41.268750
+        PA, INC, DIST_KPC = np.radians(38.0), np.radians(77.0), 780.0
+        d_ra = (df["RA"] - RA_C) * np.cos(np.radians(DEC_C))
+        d_dec = df["DEC"] - DEC_C
+        x_deg = d_ra * np.cos(PA) + d_dec * np.sin(PA)
+        y_deg = -d_ra * np.sin(PA) + d_dec * np.cos(PA)
+        df["x_kpc"] = DIST_KPC * np.tan(np.radians(x_deg))
+        df["y_kpc"] = DIST_KPC * np.tan(np.radians(y_deg)) / np.cos(INC)
+
+        ambient_L_kpc = 0.837
+        xy_tree = cKDTree(np.column_stack([df["x_kpc"], df["y_kpc"]]))
+        n_within = np.asarray(
+            xy_tree.query_ball_point(
+                np.column_stack([df["x_kpc"], df["y_kpc"]]),
+                r=ambient_L_kpc / 2.0,
+                return_length=True,
+            ),
+            dtype=float,
+        )
+        surf_density = n_within / (np.pi * (ambient_L_kpc / 2.0) ** 2)
+        df["log_uamb_proxy"] = np.log10(np.sqrt(np.maximum(surf_density, 1e-9)))
 
         # Calculate Local Densities
         df["rho_local"] = self.calculate_local_density(df["R_kpc"])
@@ -1339,6 +1659,162 @@ class Step5M31Analysis:
                 **boot_logp_err,
             }
         )
+
+        # (ii.a) Quality-regime-equated Delta W: common photometric band on the
+        # pooled e_W distribution, no pair-matching on the error covariate.
+        quality_equated_rows = []
+        if "e_Wmag" in df.columns:
+            quality_equated_rows = self._quality_equated_delta(
+                inner_df,
+                outer_df,
+                y_col="Wmag",
+                err_col="e_Wmag",
+                slope=fixed_slope,
+                n_boot=1000,
+                random_state=64,
+            )
+            for row in quality_equated_rows:
+                robustness_rows.append(
+                    {
+                        "test": f"quality_equated_{row['band']}",
+                        "y": "Wmag",
+                        "slope_fixed": fixed_slope,
+                        "n_inner": row["n_inner"],
+                        "n_outer": row["n_outer"],
+                        "n_boot": row["n_boot"],
+                        "n_matched_mean": np.nan,
+                        "n_matched_min": np.nan,
+                        "delta_mean": row["delta_mean"],
+                        "delta_std": row["delta_std"],
+                        "delta_p16": row["delta_p16"],
+                        "delta_p84": row["delta_p84"],
+                    }
+                )
+
+        # (ii.a2) Quality-stratified Delta W: the inner-minus-outer contrast
+        # evaluated at shared photometric-quality levels (pooled e_W
+        # quantiles) via per-region bilinear fits.  Diagnostic of whether the
+        # common-band values are composition-driven.
+        stratified_rows = []
+        if "e_Wmag" in df.columns:
+            stratified_rows = self._quality_stratified_delta(
+                inner_df,
+                outer_df,
+                y_col="Wmag",
+                err_col="e_Wmag",
+                slope=fixed_slope,
+                n_boot=500,
+                random_state=65,
+            )
+            for row in stratified_rows:
+                robustness_rows.append(
+                    {
+                        "test": f"quality_stratified_{row['band']}",
+                        "y": "Wmag",
+                        "slope_fixed": fixed_slope,
+                        "n_inner": row["n_inner"],
+                        "n_outer": row["n_outer"],
+                        "n_boot": row["n_boot"],
+                        "n_matched_mean": np.nan,
+                        "n_matched_min": np.nan,
+                        "delta_mean": row["delta_mean"],
+                        "delta_std": row["delta_std"],
+                        "delta_p16": row["delta_p16"],
+                        "delta_p84": row["delta_p84"],
+                    }
+                )
+
+        # (ii.a3) Ambient-field control: matched bootstrap on (logP,
+        # log_uamb_proxy), where log_uamb_proxy is the kpc-scale ambient
+        # density field (theory-0 u_amb ∝ sqrt(rho*L), L = 837 pc).  Also
+        # report corr(e_W, log_uamb) as the overmatching bound: if the
+        # photometric-error flag were a proxy for the ambient field,
+        # error-matching would erase a genuine signal.
+        boot_uamb = None
+        boot_joint_uamb = None
+        uamb_overmatching_corr = np.nan
+        if "log_uamb_proxy" in df.columns:
+            boot_uamb = self._matched_bootstrap_delta_2d(
+                inner_df,
+                outer_df,
+                y_col="Wmag",
+                slope=fixed_slope,
+                col1="logP",
+                col2="log_uamb_proxy",
+                n_bin1=10,
+                n_bin2=6,
+                n_boot=1000,
+                random_state=57,
+            )
+            robustness_rows.append(
+                {
+                    "test": "matched_bootstrap_logP_uamb",
+                    "y": "Wmag",
+                    "slope_fixed": fixed_slope,
+                    **boot_uamb,
+                }
+            )
+            if "e_Wmag" in df.columns:
+                ew_all = pd.concat(
+                    [
+                        pd.to_numeric(inner_df["e_Wmag"], errors="coerce"),
+                        pd.to_numeric(outer_df["e_Wmag"], errors="coerce"),
+                    ]
+                )
+                lu_all = pd.concat(
+                    [inner_df["log_uamb_proxy"], outer_df["log_uamb_proxy"]]
+                )
+                ok = np.isfinite(ew_all) & np.isfinite(lu_all)
+                corr_eu = (
+                    float(np.corrcoef(ew_all[ok], lu_all[ok])[0, 1])
+                    if ok.sum() > 20
+                    else np.nan
+                )
+                uamb_overmatching_corr = corr_eu
+                robustness_rows.append(
+                    {
+                        "test": "overmatching_bound_corr_eW_uamb",
+                        "y": "corr(e_W, log_uamb_proxy)",
+                        "slope_fixed": fixed_slope,
+                        "n_inner": int(len(inner_df)),
+                        "n_outer": int(len(outer_df)),
+                        "n_boot": 0,
+                        "n_matched_mean": np.nan,
+                        "n_matched_min": np.nan,
+                        "delta_mean": corr_eu,
+                        "delta_std": np.nan,
+                        "delta_p16": np.nan,
+                        "delta_p84": np.nan,
+                    }
+                )
+                # Joint control: (logP, e_W, log_uamb).  The ambient-matched
+                # residual alone leaves the e_W contrast within ambient
+                # strata in place; this tests whether the positive
+                # ambient-matched offset survives joint environment+quality
+                # equating (audit result: it is entirely error-carried).
+                boot_joint_uamb = self._matched_bootstrap_delta_3d(
+                    inner_df,
+                    outer_df,
+                    y_col="Wmag",
+                    slope=fixed_slope,
+                    col1="logP",
+                    col2="e_Wmag",
+                    col3="log_uamb_proxy",
+                    n_bin1=8,
+                    n_bin2=4,
+                    n_bin3=4,
+                    n_boot=1000,
+                    random_state=58,
+                )
+                boot_joint = boot_joint_uamb
+                robustness_rows.append(
+                    {
+                        "test": "matched_bootstrap_logP_eW_uamb",
+                        "y": "Wmag",
+                        "slope_fixed": fixed_slope,
+                        **boot_joint,
+                    }
+                )
 
         # (ii.b) Dust proxy control: logP + r-i color matching
         if "ri_color" in df.columns:
@@ -1758,6 +2234,15 @@ class Step5M31Analysis:
             },
             "matched_bootstrap_logP": boot_logp,
             "matched_bootstrap_logP_eW": boot_logp_err,
+            "quality_equated_bands": quality_equated_rows,
+            "quality_stratified_ew": stratified_rows,
+            "matched_bootstrap_logP_uamb": boot_uamb,
+            "matched_bootstrap_logP_eW_uamb": boot_joint_uamb,
+            "ambient_field_proxy": {
+                "definition": "log_uamb_proxy = 0.5*log10(N_tracers within L/2 disk-plane aperture / (pi (L/2)^2)); L = 837 pc ambient-closure scale",
+                "ambient_L_kpc": 0.837,
+                "overmatching_bound_corr_eW_loguamb": uamb_overmatching_corr,
+            },
             "matched_bootstrap_logP_color": boot_logp_c,
             "metallicity_required_gamma": {
                 "dz_proxy": dz,
@@ -1818,10 +2303,36 @@ class Step5M31Analysis:
                     f"[{boot_logp['delta_p16']:+.4f}, {boot_logp['delta_p84']:+.4f}]",
                 ]
             )
-        print_status("Note: Multidimensional matched tests (logP+color, logP+eW, MV match) have been removed from the robustness suite.", "INFO")
+        if np.isfinite(boot_logp_err.get("delta_mean", np.nan)):
+            rows.append(
+                [
+                    "Matched logP+eW",
+                    str(boot_logp_err["n_inner"]),
+                    str(boot_logp_err["n_outer"]),
+                    f"{boot_logp_err.get('n_matched_mean', np.nan):.1f}",
+                    f"{boot_logp_err['delta_mean']:+.4f}",
+                    f"{boot_logp_err['delta_std']:.4f}",
+                    f"[{boot_logp_err['delta_p16']:+.4f}, {boot_logp_err['delta_p84']:+.4f}]",
+                ]
+            )
+        for qe in quality_equated_rows:
+            if np.isfinite(qe.get("delta_mean", np.nan)):
+                rows.append(
+                    [
+                        f"QE {qe['band']}",
+                        str(qe["n_inner"]),
+                        str(qe["n_outer"]),
+                        "-",
+                        f"{qe['delta_mean']:+.4f}",
+                        f"{qe['delta_std']:.4f}",
+                        f"[{qe['delta_p16']:+.4f}, {qe['delta_p84']:+.4f}]",
+                    ]
+                )
+        print_status("Note: multidimensional matched tests (logP+color, logP+eW, MV match) are retained as diagnostics only.", "INFO")
         print_status("  Under TEP, time dilation alters the observed period but preserves the intrinsic photometric color.", "INFO")
         print_status("  Matching Cepheids on both observed period AND color forces the selection of intrinsically dissimilar stars,", "INFO")
         print_status("  fundamentally destroying the absolute magnitude comparison and artificially hiding the TEP signal.", "INFO")
+        print_status("  The quality-equated bands equate the measurement regime directly without pair-matching on e_W.", "INFO")
         if np.isfinite(ols.get("beta_inner", np.nan)):
             rows.append(
                 [

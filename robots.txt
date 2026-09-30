@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://matthewsmawfield.github.io/TEP-H0/sitemap.xml
+Sitemap: https://mlsmawfield.com/tep/h0/sitemap.xml

@@ -6,7 +6,7 @@
 </p>
 
 <p>
-    The R22 calibrator sample contains 42 SNe Ia situated in 37 distinct host galaxies. In the host-level inference, the independent statistical unit is the individual host galaxy, as all Cepheids and multiple SNe within a single galaxy share the same host potential well. Each supernova is matched to its host galaxy using exact R22 catalogue identifiers and PGC numbers, strictly excluding angular nearest-neighbour heuristics. All 37 distinct host galaxies have measured positive Hubble-flow redshifts ($z_{\rm HD} > 0$). Of these, 34 satisfy the Hubble-flow union cut ($z_{\rm CMB} > 0.0035$ or $z_{\rm HD} > 0.0035$); 33 of those have matching Cepheid design-matrix entries and enter the primary generative likelihood (Step 42).
+    The R22 calibrator sample contains 42 SNe Ia situated in 37 distinct host galaxies. In the host-level inference, the independent statistical unit is the individual host galaxy, as all Cepheids and multiple SNe within a single galaxy share the same host potential well. Each supernova is matched to its host galaxy using exact R22 catalogue identifiers and PGC numbers, strictly excluding angular nearest-neighbour heuristics. All 37 distinct host galaxies have measured positive Hubble-flow redshifts ($z_{\rm HD} > 0$). Of these, 34 satisfy the Hubble-flow union cut ($z_{\rm CMB} > 0.0035$ or $z_{\rm HD} > 0.0035$); 33 of those have matching Cepheid design-matrix entries and enter the primary generative likelihood.
 </p>
 
 <h3>2.2 Homogeneous Kinematic Potential Coordinate</h3>
@@ -29,11 +29,11 @@
 
 <h3>2.3 Environmental Screening Formulation</h3>
 <p>
-    The scalar field sector in TEP acts through two distinct macroscopic operators governed by Rules 10, 11, and 22: the Temporal Shear suppression operator $\mathcal{S}_\Sigma(\mathcal{E})$ and the clock-amplitude response $A(\phi)$. The macroscopic shear operator $\mathcal{S}_\Sigma(\mathcal{E})$ suppresses spatial clock-rate gradients and fifth-force dynamical accelerations in dense environments ($\mathcal{S}_\Sigma \to 0$ in screened matter), recovering standard General Relativity for gravitational orbits. By contrast, the clock amplitude $A(\phi) = \exp(-\phi / M_{\rm Pl})$ tracks potential depth monotonically: proper-time clock rates run slower in deeper gravitational wells ($A < 1$), and this clock slowing continues inside screened matter without vanishing, preserving gravitational redshift.
+    The scalar field sector in TEP acts through two distinct macroscopic operators governed by Rules 10, 11, and 22: the Temporal Shear suppression operator $\mathcal{S}_\Sigma(\mathcal{E})$ and the clock-amplitude response $A(\phi)$. The macroscopic shear operator $\mathcal{S}_\Sigma(\mathcal{E})$ suppresses spatial clock-rate gradients and the corresponding Einstein-frame anomalous accelerations in dense environments ($\mathcal{S}_\Sigma \to 0$ in screened matter), recovering standard General Relativity for gravitational orbits. By contrast, the clock amplitude $A(\phi) = \exp(-\phi / M_{\rm Pl})$ tracks potential depth monotonically: proper-time clock rates run slower in deeper gravitational wells ($A < 1$), and this clock slowing continues inside screened matter without vanishing, preserving gravitational redshift.
 </p>
 
 <p>
-    In galaxy halos, the two-body environmental suppression factor $S_i = S_{{\rm local},i} S_{{\rm group},i}$ parameterizes the shear suppression of the host's extended potential well within its surrounding group or cluster environment. In local high-density stellar cores (such as inner M31 or LMC centers), the local potential depth is deepest, causing local clocks to run slowest ($A < 1$), which generates the observed positive Period--Luminosity offset ($\Delta W > 0$) relative to diffuse outer-disk Cepheids. Host disk scale lengths are evaluated from RC3 isophotal diameters ($R_{25} = D_{25}/2$, $R_d = R_{25}/3.2$, $z_d = 0.1 R_d$) and stellar mass densities are computed at representative Cepheid radii ($r_{\rm Cep} = 1.8 R_d$). Group-scale density is obtained from the Tully (2015) 2MRS group catalogue Table 5 via exact PGC matching. The total continuous screening factor is:
+    In galaxy halos, the two-body environmental suppression factor $S_i = S_{{\rm local},i} S_{{\rm group},i}$ parameterizes the shear suppression of the host's extended potential well within its surrounding group or cluster environment. In local high-density stellar cores (such as inner M31 or LMC centers), the local potential depth is deepest, causing local clocks to run slowest ($A < 1$), which generates the observed positive Period--Luminosity offset ($\Delta W > 0$) relative to diffuse outer-disk Cepheids. Host disk scale lengths are evaluated from RC3 isophotal diameters ($R_{25} = D_{25}/2$, $R_d = R_{25}/3.2$, $z_d = 0.1 R_d$) and stellar mass densities are computed at representative Cepheid radii ($r_{\rm Cep} = 1.8 R_d$). Group-scale density is obtained from the Tully (2015) 2MRS group catalogue Table 5 via exact PGC matching. Evaluated at $r_{\rm Cep}$, the local density projection is equivalent to the enclosed-acceleration diagnostic $M({<}r_{\rm Cep})/r_{\rm Cep}^2 \propto \bar\rho({<}r_{\rm Cep})\,r_{\rm Cep}$ up to the disk's vertical-thickness correction — the density stand-in licensed for dense macroscopic matter by the $\mathcal{S}_\Sigma(\mathcal{E})$ construction (Paper 0 \S8). The total continuous screening factor is:
 </p>
 
 <div class="equation">
@@ -88,12 +88,12 @@
 </div>
 
 <p>
-    The likelihood is evaluated across a spectrum of peculiar-velocity dispersions: the standard R22 baseline ($\sigma_v = 250\ {\rm km\,s^{-1}}$), alternative velocity scales ($150\ {\rm km\,s^{-1}}$ and $500\ {\rm km\,s^{-1}}$), and the data-driven residual velocity scatter after bulk-flow removal from Pantheon+ ($\sigma_v = 182.1\ {\rm km\,s^{-1}}$).
+    The likelihood is evaluated across a spectrum of peculiar-velocity dispersions: the standard R22 baseline ($\sigma_v = 250\ {\rm km\,s^{-1}}$), alternative velocity scales ($150\ {\rm km\,s^{-1}}$ and $500\ {\rm km\,s^{-1}}$), and the data-driven residual velocity scatter after bulk-flow removal from Pantheon+ ($\sigma_v = 182.1\ {\rm km\,s^{-1}}$). Because the intrinsic-scatter parameter $\sigma_{{\rm int},v}$ enters the variance only through the sum $\sigma_v^2 + \sigma_{{\rm int},v}^2$, the likelihood identifies a single quantity --- the total velocity-space scatter --- rather than $\sigma_v$ and $\sigma_{{\rm int},v}$ separately. With $\sigma_{{\rm int},v}$ free, any adopted $\sigma_v$ below the data-implied total is compensated by the fitted $\sigma_{{\rm int},v}$, so the $\sigma_v = 150$ and $182.1\ {\rm km\,s^{-1}}$ variants are reparameterizations of a single optimum rather than distinct fits; the likelihood-implied total is reported with the results ($\sigma_{\rm tot} \approx 210\text{--}226\ {\rm km\,s^{-1}}$ across the cz-space and $H_0$-space likelihoods), and the canonical $\sigma_v = 250\ {\rm km\,s^{-1}}$ convention sits mildly above it, pinning $\sigma_{{\rm int},v}$ at its lower bound.
 </p>
 
 <h3>2.6 The TEP-Native Generative Distance Ladder</h3>
 <p>
-    In standard distance-ladder linear regression, host distance moduli $\mu_i$ are treated as unconstrained latent parameters. The linear design matrix does not generically erase observation-level Cepheid perturbations (as confirmed by the 99.7% recovery of raw row-level injections in Step 34). What it cannot identify without external constraints is an environmental perturbation that is mathematically equivalent to shifting the latent host modulus, because the 37 unconstrained $\mu_i$ parameters absorb the host-level shift ($\hat{\mu}_i \to \mu_i - \kappa_{\rm Cep} X_i$).
+    In standard distance-ladder linear regression, host distance moduli $\mu_i$ are treated as unconstrained latent parameters. The linear design matrix does not generically erase observation-level Cepheid perturbations (as confirmed by the unbiased ensemble recovery of raw row-level injections in Step 34: pull mean $+0.12$ with unit scatter over 200 covariance-level realizations). What it cannot identify without external constraints is an environmental perturbation that is mathematically equivalent to shifting the latent host modulus, because the 37 unconstrained $\mu_i$ parameters absorb the host-level shift ($\hat{\mu}_i \to \mu_i - \kappa_{\rm Cep} X_i$).
 </p>
 
 <p>
@@ -108,13 +108,13 @@
 </div>
 
 <p>
-    In Step 42, the generative ladder is formulated directly in expansion-rate space across the $N=33$ Hubble-flow SN Ia hosts with Cepheid calibrations ($z_{\rm HD} > 0.0035$ or $z_{\rm CMB} > 0.0035$, excluding local anchors):
+    In the generative ladder formulation, the relation is evaluated directly in expansion-rate space across the $N=33$ Hubble-flow SN Ia hosts with Cepheid calibrations ($z_{\rm HD} > 0.0035$ or $z_{\rm CMB} > 0.0035$, excluding local anchors):
 </p>
 
 <div class="equation">
     \begin{equation}
     H_{0,i} \equiv \frac{cz_i}{d_i^{\rm SH0ES}} = H_{\rm app} + \Gamma_X \widetilde X_i + \epsilon_i ,
-    \label{eq:step42_wls}
+    \label{eq:generative_wls}
     \end{equation}
 </div>
 
@@ -125,7 +125,7 @@
 <div class="equation">
     \begin{equation}
     w_i = \frac{1}{\sigma_{H_0,i}^2} = \frac{d_i^2}{\sigma_v^2 + \left(\frac{\ln 10}{5} cz_i \sigma_{\mu,i}\right)^2} .
-    \label{eq:step42_weights}
+    \label{eq:generative_weights}
     \end{equation}
 </div>
 
@@ -196,7 +196,7 @@
 
 <h3>2.7 Joint Multi-Block Distance--Redshift Likelihood</h3>
 <p>
-    While the standalone host-level regression (Step 42) measures the identifiable combined slope $\Gamma_X$, breaking the internal parameter degeneracy of the distance ladder without fixing $\beta_X=0$ requires external observational constraints. In Step 44, a joint multi-block likelihood is formulated by combining three observational data blocks:
+    While the standalone host-level regression measures the identifiable combined slope $\Gamma_X$, breaking the internal parameter degeneracy of the distance ladder without fixing $\beta_X=0$ requires external observational constraints. A joint multi-block likelihood is formulated by combining three observational data blocks:
 </p>
 
 <div class="equation">
@@ -226,7 +226,7 @@
     Five nested model configurations are evaluated against the data: the <em>Null Model</em> ($k=4$: $H_{\rm app}, \delta m, \delta a, \sigma_{{\rm int},v}$), the <em>Cepheid Model</em> ($k=5$: setting $\beta_X \equiv 0$ and fitting $\kappa_{\rm Cep}$), the <em>Coupled Model</em> ($k=5$: setting $\beta_X = \beta_{X,\rm grav} \equiv c/\langle d \rangle \approx 9.60 \times 10^3\ {\rm km\,s^{-1}\,Mpc^{-1}}$ and fitting $\kappa_{\rm Cep}$), the <em>Velocity Model</em> ($k=5$: setting $\kappa_{\rm Cep} \equiv 0$ and fitting $\beta_X$), and the <em>Mixed Model</em> ($k=6$: simultaneously fitting both $\kappa_{\rm Cep}$ and $\beta_X$). The Cepheid and Velocity models represent two alternative single-degree-of-freedom closures of the underlying physical response rather than additive components, while the Coupled model realizes the physical prediction where the direct velocity perturbation is small but nonzero. In this multi-block formulation, the three data blocks are treated as quasi-independent observational constraints; while excluding primary geometric anchors from the TRGB block prevents direct anchor duplication, shared Cepheid calibration terms are treated within individual block variances.
 </p>
 
-<h3>2.8 Unified Host-Level Reconstruction (Step 04)</h3>
+<h3>2.8 Unified Host-Level Reconstruction</h3>
 <p>
     Complementing the expansion-rate likelihood, a unified host-level reconstruction is performed directly on the complete 37-host sample. Each host's distance modulus is corrected according to its screened kinematic potential:
 </p>
@@ -234,7 +234,7 @@
 <div class="equation">
     \begin{equation}
     \mu_i^{\rm corr} = \mu_i^{\rm obs} + \kappa_{\rm Cep} \frac{S(\rho_i)\, u_{\phi,i}^2 - U_{\rm ref}}{c^2} ,
-    \label{eq:step04_correction}
+    \label{eq:endpoint_correction}
     \end{equation}
 </div>
 
@@ -247,7 +247,7 @@
 </p>
 
 <p>
-    Evaluating the host-level reconstruction under the alternative screened anchor reference scale $\sqrt{U_{\rm ref}} = 30.507\ {\rm km\,s^{-1}}$ yields $H_0 = 64.74 \pm 1.53\ {\rm km\,s^{-1}\,Mpc^{-1}}$. Both host-level values ($66.65 \pm 1.58$ and $64.74 \pm 1.53\ {\rm km\,s^{-1}\,Mpc^{-1}}$) are in statistical concordance with Planck CMB cosmology ($67.4 \pm 0.5\ {\rm km\,s^{-1}\,Mpc^{-1}}$) within $0.45\sigma$ and $1.73\sigma$ respectively. The $1.9\ {\rm km\,s^{-1}\,Mpc^{-1}}$ offset between the two values is an artifact of the unconstrained host-level shortcut, which applies an additive modulus shift $\Delta \mu = \kappa_{\rm Cep} \Delta U_{\rm ref} / c^2$ without simultaneously refitting the anchor absolute magnitude zero point. In the full generative distance ladder (Step 45; Appendix D.3), where the anchor absolute magnitude $M_H^W$ is freely refit, this additive shift is identically absorbed into the zero point, returning $H_0$ values that are identical to four decimal places. Furthermore, in the generative expansion-rate likelihoods (Steps 42 and 44), the cosmological background extrapolation $H_{\rm cosmic} = H_{\rm app} - \Gamma_X \langle U \rangle / c^2$ is algebraically independent of $U_{\rm ref}$, yielding Planck-concordant background expansion rates ($66.58\text{--}67.16\ {\rm km\,s^{-1}\,Mpc^{-1}}$) with exact gauge invariance.
+    Evaluating the host-level reconstruction under the alternative screened anchor reference scale $\sqrt{U_{\rm ref}} = 30.507\ {\rm km\,s^{-1}}$ yields $H_0 = 64.74 \pm 1.53\ {\rm km\,s^{-1}\,Mpc^{-1}}$. Both host-level values ($66.65 \pm 1.58$ and $64.74 \pm 1.53\ {\rm km\,s^{-1}\,Mpc^{-1}}$) are in statistical concordance with Planck CMB cosmology ($67.4 \pm 0.5\ {\rm km\,s^{-1}\,Mpc^{-1}}$) within $0.45\sigma$ and $1.73\sigma$ respectively. The $1.9\ {\rm km\,s^{-1}\,Mpc^{-1}}$ offset between the two values is an artifact of the unconstrained host-level shortcut, which applies an additive modulus shift $\Delta \mu = \kappa_{\rm Cep} \Delta U_{\rm ref} / c^2$ without simultaneously refitting the anchor absolute magnitude zero point. In the full generative distance ladder (Appendix D.3), where the anchor absolute magnitude $M_H^W$ is freely refit, this additive shift is identically absorbed into the zero point, returning $H_0$ values that are identical to four decimal places. Furthermore, in the generative expansion-rate likelihoods, the cosmological background extrapolation $H_{\rm cosmic} = H_{\rm app} - \Gamma_X \langle U \rangle / c^2$ is algebraically independent of $U_{\rm ref}$, yielding Planck-concordant background expansion rates ($67.30\text{--}67.82\ {\rm km\,s^{-1}\,Mpc^{-1}}$) with exact gauge invariance.
 </p>
 
 <h3>2.9 Observational Controls for Single-Galaxy Internal Gradients</h3>
@@ -260,7 +260,7 @@
 </p>
 
 <p>
-    2. <em>Spatial Resolution and Crowding Controls:</em> In M31, ground-based blending and crowding effects in the dense inner bulge are controlled in two ways: (a) restricting the Pan-STARRS sample to the PHAT survey footprint, which recovers the internal offset at $\Delta W = +0.630 \pm 0.195\ {\rm mag}$ ($3.24\sigma$; step_10, $n_{\rm inner}=106$, $n_{\rm outer}=110$); and (b) the dedicated HST PHAT J/H photometric catalogue (Kodric et al. 2018), which yields $\Delta W = +0.681 \pm 0.187\ {\rm mag}$ ($3.65\sigma$; step_26, $n_{\rm inner}=78$, $n_{\rm outer}=69$) and is adopted as the primary PHAT measurement. The two values correspond to distinct catalogues and are not interchangeable.
+    2. <em>Spatial Resolution and Crowding Controls:</em> In M31, ground-based blending and crowding effects in the dense inner bulge are controlled in three ways: (a) restricting the Pan-STARRS sample to the PHAT survey footprint, which recovers the internal offset at $\Delta W = +0.630 \pm 0.195\ {\rm mag}$ ($3.24\sigma$; $n_{\rm inner}=106$, $n_{\rm outer}=110$); (b) the dedicated HST PHAT J/H photometric catalogue (Kodric et al. 2018), which yields $\Delta W = +0.681 \pm 0.187\ {\rm mag}$ ($3.65\sigma$; $n_{\rm inner}=78$, $n_{\rm outer}=69$) and is adopted as the primary PHAT measurement — the two values correspond to distinct catalogues and are not interchangeable; and (c) two theory-informed diagnostics of the error control: an ambient-field proxy constructed at the theory closure scale ($L = 837$ pc; $\log u_{\rm amb} \propto \tfrac12\log$ of the tracer density within an $L/2$ disk-plane aperture), which both bounds the overmatching hypothesis — ${\rm corr}(e_W, \log u_{\rm amb}) = -0.18$ means the error covariate removes only a few per cent of the ambient-field variance — and supplies a matched estimate under the theory-relevant environmental control ($\Delta W = +0.206 \pm 0.163$ mag, falling to $-0.069 \pm 0.126$ mag under joint $(\log P, e_W, \log u_{\rm amb})$ cell-matching — the residual is error-carried within ambient strata); and an error-stratified contrast table, under which the conditional offset declines monotonically from $+0.270 \pm 0.304$ mag at the 10th-percentile error level to $-0.117 \pm 0.202$ mag in the poorest, so quality-band persistence reflects within-band composition rather than a uniform offset among equally-well-measured stars.
 </p>
 
 <p>
@@ -273,11 +273,11 @@
 </p>
 
 <p>
-    Host stellar masses $\log(M_*/M_\odot)$ are compiled directly from Riess et al. (2022, Table 4), spanning $8.50 \le \log(M_*/M_\odot) \le 10.87$ across the complete 37-calibrator sample. While raw galactic rotation velocity correlates with host stellar mass via the baryonic Tully--Fisher relation, the physical TEP coordinate $X_i \equiv (S_i \sigma_i^2 - \sigma_{\rm ref}^2)/c^2$ incorporates multi-scale environmental screening $S_i = S_{\rm local}(\Sigma_*) \times S_{\rm group}(\rho_{\rm env})$, which suppresses both dense galactic disks and massive group potentials. Consequently, the screened potential depth is fundamentally distinct from total integrated stellar mass.
+    Host stellar masses $\log(M_*/M_\odot)$ are compiled directly from Riess et al. (2022, Table 4), spanning $8.50 \le \log(M_*/M_\odot) \le 10.87$ across the complete 37-calibrator sample. While raw galactic rotation velocity correlates with host stellar mass via the baryonic Tully--Fisher relation, the physical TEP coordinate $X_i \equiv (S_i \sigma_i^2 - \sigma_{\rm ref}^2)/c^2$ incorporates multi-scale environmental screening $S_i = S_{\rm local}(\Sigma_*) \times S_{\rm group}(\rho_{\rm env})$ — the factorized evaluation of the canonical shear-sector projection $\mathcal{S}_\Sigma(\mathcal{E})$ on the two-component host environment $\mathcal{E} = \{\Sigma_*, \rho_{\rm env}\}$ (Paper 0 §7) — which suppresses both dense galactic disks and massive group potentials. Consequently, the screened potential depth is fundamentally distinct from total integrated stellar mass.
 </p>
 
 <p>
-    To evaluate whether the measured slope $\Gamma_X$ could be mimicked by host-mass corrections, a joint multi-regressor likelihood is formulated (Step 39):
+    To evaluate whether the measured slope $\Gamma_X$ could be mimicked by host-mass corrections, a joint multi-regressor likelihood is formulated:
 </p>
 
 <div class="equation">

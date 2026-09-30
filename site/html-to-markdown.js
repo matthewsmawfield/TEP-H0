@@ -53,6 +53,17 @@ class HTMLToMarkdownConverter {
             return `\n\n${[headerRow, sepRow, ...bodyRows].join('\n')}\n\n`;
         };
 
+        // Preformatted/code blocks (index-only markers; restored after cleanup)
+        const codeBlocks = [];
+        html = html.replace(/<pre[^>]*>([\s\S]*?)<\/pre>/gi, (match, content) => {
+            const inner = String(content).replace(/<[^>]+>/g, '')
+                .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
+                .replace(/\n+$/g, '');
+            codeBlocks.push(inner);
+            return `\n\n@@CODE_BLOCK_${codeBlocks.length - 1}@@\n\n`;
+        });
+
         html = html.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
         html = html.replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '');
         html = html.replace(/<!--[\s\S]*?-->/g, '');
@@ -73,12 +84,14 @@ class HTMLToMarkdownConverter {
 
         html = html.replace(/<div[^>]*id=["']code-availability["'][^>]*>/gi, '\n> ');
         html = html.replace(/<div[^>]*class=["']key-finding[^"']*["'][^>]*>/gi, '\n> ');
-        html = html.replace(/<h1[^>]*>(.*?)<\/h1>/gi, '\n# $1\n\n');
-        html = html.replace(/<h2[^>]*>(.*?)<\/h2>/gi, '\n## $1\n\n');
-        html = html.replace(/<h3[^>]*>(.*?)<\/h3>/gi, '\n### $1\n\n');
-        html = html.replace(/<h4[^>]*>(.*?)<\/h4>/gi, '\n#### $1\n\n');
+        html = html.replace(/<h1[^>]*>([\s\S]*?)<\/h1>/gi, '\n# $1\n\n');
+        html = html.replace(/<h2[^>]*>([\s\S]*?)<\/h2>/gi, '\n## $1\n\n');
+        html = html.replace(/<h3[^>]*>([\s\S]*?)<\/h3>/gi, '\n### $1\n\n');
+        html = html.replace(/<h4[^>]*>([\s\S]*?)<\/h4>/gi, '\n#### $1\n\n');
+        html = html.replace(/<h5[^>]*>([\s\S]*?)<\/h5>/gi, '\n##### $1\n\n');
+        html = html.replace(/<h6[^>]*>([\s\S]*?)<\/h6>/gi, '\n###### $1\n\n');
         // Paragraphs - trim content to remove indentation from HTML formatting
-        html = html.replace(/<p[^>]*>([\s\S]*?)<\/p>/gi, (match, content) => {
+        html = html.replace(/<p\b[^>]*>([\s\S]*?)<\/p>/gi, (match, content) => {
             const trimmed = content.replace(/^\s+/gm, '').replace(/\s+$/gm, '').trim();
             return trimmed ? trimmed + '\n\n' : '';
         });
@@ -94,6 +107,7 @@ class HTMLToMarkdownConverter {
         html = html.replace(/<\/?(?!sub|sup)[A-Za-z][^>]*>/g, '');
         // Clean up: remove indentation from lines, collapse multiple blank lines
         html = html.replace(/^[ \t]+/gm, '');
+        html = html.replace(/@@CODE_BLOCK_(\d+)@@/g, (match, idx) => `\n\n\`\`\`\n${codeBlocks[idx]}\n\`\`\`\n\n`);
         return html.replace(/\n{3,}/g, '\n\n').trim();
     }
 
@@ -108,7 +122,7 @@ class HTMLToMarkdownConverter {
             
             const manifestPath = path.join(__dirname, 'manifest.json');
             const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-            const formattedDate = manifest.last_updated || new Date().toISOString().split('T')[0];
+            const formattedDate = manifest.last_updated || manifest.date || '30 September 2026';
             const firstPublished = manifest.first_published || '11 January 2026';
             const header = `# The Cepheid Bias: Resolving the Hubble Tension
 **Matthew Lukin Smawfield**  

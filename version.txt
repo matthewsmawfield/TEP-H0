@@ -2,6 +2,7 @@ v0.10 (Kingston upon Hull) — 16 September 2026
 
 - Refined the physical mechanism to model the period shift as an observing-chain differential between core and disk environments.
 - Upgraded the dataset to include all 37 SH0ES hosts using a standardized, rotation-based kinematic coordinate.
-- Restructured the statistical model into a generative distance ladder, with cosmologically constrained expansion likelihoods recovering H_app = 68.36–68.76 km/s/Mpc.
-- Updated the final corrected Hubble constant, bringing the local distance scale into statistical concordance with Planck.
+- Restructured the statistical model into a generative distance ladder, with cosmologically constrained expansion likelihoods recovering H_app = 68.36–68.78 km/s/Mpc.
+- Reported the prespecified primary full-ladder projection (H0 = 71.77 ± 0.99) separately from the conditional host-level reconstruction (H0 = 66.65 ± 1.58, consistent with Planck).
 - Incorporated single-galaxy tests using M31 (3.24σ) and LMC (3.30σ) Cepheids to validate the clock gradient internally.
+- Reframed as a conditional environmental-response test; added canonical-action qualifier and aperture-transfer caveats

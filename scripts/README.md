@@ -61,6 +61,9 @@ This executes the full pipeline and populates `results/figures/` and `results/ou
 | 54 | `step_54_ned_tracer_provenance.py` | Scaffold for NED redshift-tracer provenance compilation (optional). WARNING: tracer classes are currently simulated placeholders (`np.random.choice`), not real NED classifications — outputs must not be cited as provenance (issue 11-4). |
 | 55 | `step_55_within_host_plz_decomposition.py` | Within-host demeaned PLZ decomposition: separates the conventional per-Cepheid period–metallicity interaction from the environment-coupled metallicity term; per-host Z-slope ordering on X_i. |
 | 61 | `step_61_nested_kappa.py` | Nested clock-ratio bound on the raw conformal channel: q = r_spec/r_Cep under three reference-clock conventions, showing the clock channel contributes |κ| ≲ 1 mag — the measured κ_Cep is a response-sector coefficient, not a clock-ratio artifact. |
+| 64 | `step_64_inclination_proxy_audit.py` | Inclination-aware audit of the V_rot proxy: HyperLEDA inclination error propagation, EIV κ estimate with injection-based bias calibration, low-inclination robustness cuts (NGC 976 lever-arm test), and a K-band Tully–Fisher hybrid proxy for hosts below i = 45°. |
+| 65 | `step_65_hfsn_environment_contrast.py` | Hubble-flow SN environment contrast: common-mode clock response propagation to H0 through the calibrator–HF host environment difference, with bootstrap map propagation and alternative (robust/quadratic/rank) transfer-map checks. |
+| 66 | `step_66_combined_evidence.py` | Cross-channel combined-evidence Stouffer combination over the four independent-noise primary channels (Γ_X, κ_P, κ_Z, Cepheid–TRGB differential) with explicit fitted-correlation handling and shared-correlation sensitivity analysis. |
 | 33 | `step_33_stellar_validation.py` | MESA/RSP/GYRE stellar-structure validation (optional, post-pipeline). |
 
 ## Options

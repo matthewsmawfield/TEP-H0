@@ -314,9 +314,18 @@ class FullLadderLikelihood:
         q_aug = list(q) + names
         return L_aug, q_aug
 
-    def injection_test(self, L, y, C, q, x_cepheid, kappa_inj=KAPPA_GAL):
-        """Test that the pipeline can recover a known injected TEP signal."""
-        print_status(f"Injection test: kappa_inj = {kappa_inj:.3e} mag", "SECTION")
+    def injection_test(self, L, y, C, q, x_cepheid, kappa_inj=KAPPA_GAL,
+                       n_draws=200, seed=20240901):
+        """Test that the pipeline can recover a known injected TEP signal.
+
+        Noise is drawn at the full diagonal-covariance level (not a
+        down-scaled fraction), and the recovery statistics are evaluated over
+        an ensemble of n_draws seeded realizations: a single draw cannot
+        distinguish an unbiased estimator from a lucky fluctuation.
+        """
+        print_status(
+            f"Injection test: kappa_inj = {kappa_inj:.3e} mag "
+            f"(N={n_draws} draws, full covariance-level noise)", "SECTION")
 
         X_SCALE = 1e6
         x_c = x_cepheid * X_SCALE
@@ -326,36 +335,59 @@ class FullLadderLikelihood:
 
         # Inject known signal: y_mock = L theta_base - kappa6_inj * x_c
         kappa6_inj = kappa_inj / X_SCALE
-        y_mock = L @ theta_base - kappa6_inj * x_c
+        y_true = L @ theta_base - kappa6_inj * x_c
 
-        # Add noise proportional to diagonal covariance
         noise_std = np.sqrt(np.diag(C))
-        y_mock += np.random.normal(0, noise_std * 0.01)  # small noise
-
-        # Recover with augmented model
         L_aug = np.column_stack([L, -x_c])
-        theta_aug, cov_aug, chi2_aug, rank_aug, _ = self.fit_gls(L_aug, y_mock, C)
 
-        kappa6_hat = theta_aug[-1]
-        kappa_hat = kappa6_hat * X_SCALE
-        kappa_err = np.sqrt(cov_aug[-1, -1]) * X_SCALE
+        # C and L_aug are fixed across draws: whiten once and reuse the
+        # pseudo-inverse, so each draw is a pair of matvecs.
+        Lc = np.linalg.cholesky(C)
+        A_w = linalg.solve_triangular(Lc, L_aug, lower=True, check_finite=False)
+        pinv_Aw = np.linalg.pinv(A_w, rcond=1e-12)
+        cov_aug_fixed = pinv_Aw @ pinv_Aw.T
+        kappa_err_fixed = float(np.sqrt(max(cov_aug_fixed[-1, -1], 0)) * X_SCALE)
+
+        rec, errs = [], []
+        for i in range(n_draws):
+            rng = np.random.default_rng(seed + i)
+            y_mock = y_true + rng.normal(0.0, noise_std)
+            y_w = linalg.solve_triangular(Lc, y_mock, lower=True, check_finite=False)
+            theta_aug = pinv_Aw @ y_w
+            rec.append(theta_aug[-1] * X_SCALE)
+            errs.append(kappa_err_fixed)
+        rec = np.asarray(rec)
+        errs = np.asarray(errs)
+        chi2_aug = np.nan
+
+        kappa_hat = float(np.mean(rec))
+        kappa_err = float(np.mean(errs))
+        pull = (rec - kappa_inj) / errs
+        cover68 = float(np.mean(np.abs(rec - kappa_inj) <= errs))
 
         result = {
             "kappa_injected": float(kappa_inj),
-            "kappa_recovered": float(kappa_hat),
-            "kappa_err": float(kappa_err),
+            "kappa_recovered": kappa_hat,
+            "kappa_err": kappa_err,
+            "kappa_scatter": float(np.std(rec)),
+            "kappa_pull_mean": float(np.mean(pull)),
+            "kappa_pull_std": float(np.std(pull)),
+            "coverage_68": cover68,
+            "n_draws": int(n_draws),
             "recovery_fraction": float(kappa_hat / kappa_inj) if kappa_inj != 0 else 0,
-            "rank_aug": int(rank_aug),
             "chi2_aug": float(chi2_aug),
         }
 
         print_status(f"Injected:  {kappa_inj:.3e}", "INFO")
-        print_status(f"Recovered: {kappa_hat:.3e} +/- {kappa_err:.3e}", "INFO")
+        print_status(
+            f"Recovered: {kappa_hat:.3e} +/- {kappa_err:.3e} "
+            f"(ensemble scatter {np.std(rec):.3e}, pull mean {np.mean(pull):+.3f}, "
+            f"68% coverage {cover68:.3f})", "INFO")
         print_status(f"Recovery fraction: {result['recovery_fraction']:.3f}", "INFO")
 
-        # Also test negative injection
-        y_mock_neg = L @ theta_base + kappa6_inj * x_c
-        y_mock_neg += np.random.normal(0, noise_std * 0.01)
+        # Also test negative injection (single confirmation draw)
+        rng_neg = np.random.default_rng(seed + n_draws)
+        y_mock_neg = L @ theta_base + kappa6_inj * x_c + rng_neg.normal(0.0, noise_std)
         theta_neg, cov_neg, chi2_neg, rank_neg, _ = self.fit_gls(L_aug, y_mock_neg, C)
         kappa_neg = theta_neg[-1] * X_SCALE
         print_status(f"Negative injection: injected {-kappa_inj:.3e}, recovered {kappa_neg:.3e}", "INFO")
@@ -1293,8 +1325,17 @@ class FullLadderLikelihood:
 
         return df
 
-    def injection_test_all_models(self, L, y, C, q, x_cepheid, x_sn, kappa_inj=KAPPA_GAL):
-        """Run injection-recovery tests for all model classes."""
+    def injection_test_all_models(self, L, y, C, q, x_cepheid, x_sn, kappa_inj=KAPPA_GAL,
+                                  n_draws=200, seed=20240902):
+        """Run injection-recovery tests for all model classes.
+
+        Each configuration is fitted over n_draws seeded noise realizations at
+        the full diagonal-covariance level. The recovered mean, ensemble
+        scatter, pull distribution and 68% coverage are reported per parameter.
+        For cepheid_plus_sn the individual kappas are degenerate (a common-mode
+        host shift is absorbed by the free mu_i), so the identifiable
+        difference kappaCep - kappaSN is reported as well.
+        """
         print_status("Injection Tests for All Model Classes", "SECTION")
 
         X_SCALE = 1e6
@@ -1308,6 +1349,7 @@ class FullLadderLikelihood:
 
         results = []
         kappa6_inj = kappa_inj / X_SCALE
+        rng = np.random.default_rng(seed)
 
         test_configs = [
             ("cepheid_offset", [(-x_c, "kappa0_6")]),
@@ -1318,33 +1360,79 @@ class FullLadderLikelihood:
         for model_name, cols in test_configs:
             # Inject signal: y_mock = y_base + kappa6_inj * col
             # where col = -x_c = -x_cepheid*X_SCALE, so kappa6_inj*col = -kappa_inj*x_cepheid
-            y_mock = y_base.copy()
+            y_true = y_base.copy()
             for col, _ in cols:
-                y_mock += kappa6_inj * col
+                y_true += kappa6_inj * col
 
-            # Add small noise
-            y_mock += np.random.normal(0, noise_std * 0.01)
-
-            # Build augmented matrix
+            # Build augmented matrix; C and L_aug are fixed across draws, so
+            # whiten once and reuse the pseudo-inverse per realization.
             L_aug = np.column_stack([L] + [c for c, _ in cols])
-            theta, cov, chi2, rank, _ = self.fit_gls(L_aug, y_mock, C)
+            n_par = len(cols)
+            Lc = np.linalg.cholesky(C)
+            A_w = linalg.solve_triangular(Lc, L_aug, lower=True, check_finite=False)
+            pinv_Aw = np.linalg.pinv(A_w, rcond=1e-12)
+            cov_fixed = pinv_Aw @ pinv_Aw.T
+            err_fixed = np.sqrt(np.maximum(np.diag(cov_fixed), 0)) * X_SCALE
 
-            for j, (_, name) in enumerate(cols, start=len(q)):
-                kappa_hat = theta[j] * X_SCALE
-                kappa_err = np.sqrt(cov[j, j]) * X_SCALE
+            rec = np.full((n_draws, n_par), np.nan)
+            errs = np.full((n_draws, n_par), np.nan)
+            for i in range(n_draws):
+                y_mock = y_true + rng.normal(0.0, noise_std)
+                y_w = linalg.solve_triangular(Lc, y_mock, lower=True, check_finite=False)
+                theta = pinv_Aw @ y_w
+                for j in range(n_par):
+                    rec[i, j] = theta[len(q) + j] * X_SCALE
+                    errs[i, j] = err_fixed[len(q) + j]
+
+            for j, (_, name) in enumerate(cols):
+                kappa_hat = float(np.mean(rec[:, j]))
+                kappa_err = float(np.mean(errs[:, j]))
+                pull = (rec[:, j] - kappa_inj) / errs[:, j]
                 results.append({
                     "model": model_name,
                     "parameter": name,
                     "kappa_injected": float(kappa_inj),
                     "kappa_recovered": float(kappa_hat),
                     "kappa_err": float(kappa_err),
+                    "kappa_scatter": float(np.std(rec[:, j])),
+                    "pull_mean": float(np.mean(pull)),
+                    "pull_std": float(np.std(pull)),
+                    "coverage_68": float(np.mean(np.abs(rec[:, j] - kappa_inj) <= errs[:, j])),
+                    "n_draws": int(n_draws),
                     "recovery_fraction": float(kappa_hat / kappa_inj) if kappa_inj != 0 else 0,
                     "significance": float(abs(kappa_hat) / kappa_err) if kappa_err > 0 else 0,
                 })
 
                 print_status(
-                    f"  {model_name:25s} {name:12s} injected={kappa_inj:.3e} recovered={kappa_hat:.3e} "
-                    f"frac={kappa_hat/kappa_inj:.3f}",
+                    f"  {model_name:25s} {name:12s} injected={kappa_inj:.3e} "
+                    f"recovered={kappa_hat:.3e}+/-{kappa_err:.3e} "
+                    f"frac={kappa_hat/kappa_inj:.3f} pull={np.mean(pull):+.2f} "
+                    f"cov68={np.mean(np.abs(rec[:, j] - kappa_inj) <= errs[:, j]):.2f}",
+                    "INFO"
+                )
+
+            if len(cols) == 2:
+                # Identifiable combination: kappaCep - kappaSN (a common-mode
+                # host shift is absorbed by the free mu_i parameters).
+                drec = rec[:, 0] - rec[:, 1]
+                # use ensemble scatter for the honest uncertainty of the difference
+                results.append({
+                    "model": model_name,
+                    "parameter": "kappaCep_minus_kappaSN",
+                    "kappa_injected": 0.0,
+                    "kappa_recovered": float(np.mean(drec)),
+                    "kappa_err": float(np.std(drec)),
+                    "kappa_scatter": float(np.std(drec)),
+                    "pull_mean": np.nan,
+                    "pull_std": np.nan,
+                    "coverage_68": np.nan,
+                    "n_draws": int(n_draws),
+                    "recovery_fraction": np.nan,
+                    "significance": float(abs(np.mean(drec)) / np.std(drec)) if np.std(drec) > 0 else 0,
+                })
+                print_status(
+                    f"  {model_name:25s} kappaCep-kappaSN injected=0.0 "
+                    f"recovered={np.mean(drec):.3e}+/-{np.std(drec):.3e}",
                     "INFO"
                 )
 

@@ -10,12 +10,24 @@ Combines independent data blocks:
   - Anchor block (LMC and NGC 4258 independent geometric distances)
 
 Fits four nested models:
-  Null     : H_app only (kappa=0, beta=0)
-  Cepheid  : H_app + kappa (beta=0)
-  Velocity : H_app + beta  (kappa=0)
-  Mixed    : H_app + kappa + beta
+  Null       : H_app only (kappa=0, beta=0)
+  Cepheid    : H_app + kappa (beta=0)
+  Velocity   : H_app + beta  (kappa=0)
+  Mixed      : H_app + kappa + beta
+  Cepheid_SN : H_app + kappa_Cep + kappa_SN (beta=0), channel-split
 
 The shared kappa parameter is constrained by all three data blocks.
+
+Channel identification: in the redshift block the per-host-varying
+environmental bias on the inferred distance d_i is the SN-magnitude
+channel, kappa_SN * X_i. A Cepheid-channel bias acts on the calibrator
+hosts and propagates into Hubble-flow distances only through the
+calibrator-mean M_B, i.e. as a common mode absorbed by H_app. The TRGB
+differential and anchor blocks, by contrast, measure mu_Cep against
+environment-insensitive references and therefore identify kappa_Cep
+per host. The shared-kappa models conflate the two carriers; the
+Cepheid_SN model separates them on the same data without redshift
+priors (Step-35 model C in a no-expansion likelihood).
 """
 
 import json
@@ -290,8 +302,18 @@ def _neg_logL(params, model_type, cz_obs, d_obs, X, sigma_mu, sigma_v,
         H_app = params[0]
         kappa = params[1] * KAPPA_SCALE
         beta = params[2] * BETA_SCALE
+    elif model_type == "Cepheid_SN":
+        H_app = params[0]
+        kappa_cep = params[1] * KAPPA_SCALE
+        kappa_sn = params[2] * KAPPA_SCALE
+        kappa = 0.0
+        beta = 0.0
     else:
         raise ValueError(f"Unknown model_type: {model_type}")
+
+    if model_type != "Cepheid_SN":
+        kappa_cep = kappa
+        kappa_sn = kappa
 
     # Redshift block (H_0 space — linearised expansion-rate regression)
     # H_0,i = cz_i / d_i = H_app + Gamma_X * X_i + epsilon_i
@@ -300,25 +322,25 @@ def _neg_logL(params, model_type, cz_obs, d_obs, X, sigma_mu, sigma_v,
     # is substantially more efficient than the nonlinear cz-space model
     # because the parameter space is linear in (H_app, Gamma_X).
     H0_obs = cz_obs / d_obs
-    Gamma_X = beta + LN10_OVER_5 * H_app * kappa
+    Gamma_X = beta + LN10_OVER_5 * H_app * kappa_sn
     H0_model = H_app + Gamma_X * X
     resid_v = H0_obs - H0_model
     var_v = sigma_v ** 2 / d_obs ** 2 + (LN10_OVER_5 * H0_obs * sigma_mu) ** 2 + sigma_int_v ** 2 / d_obs ** 2
     var_v = np.maximum(var_v, 1e-10)
     ll_v = -0.5 * np.sum(resid_v ** 2 / var_v + np.log(var_v))
 
-    # TRGB block: Δμ = δm - κ X  (κ>0 → μ_cep underestimated in high-σ)
+    # TRGB block: Δμ = δm - κ_Cep X  (κ>0 → μ_cep underestimated in high-σ)
     if len(dmu_obs) > 0:
-        dmu_model = delta_m - kappa * X_t
+        dmu_model = delta_m - kappa_cep * X_t
         resid_t = dmu_obs - dmu_model
         var_t = dmu_err ** 2
         ll_t = -0.5 * np.sum(resid_t ** 2 / var_t + np.log(var_t))
     else:
         ll_t = 0.0
 
-    # Anchor block: Δμ_anc = μ_cep - μ_geo = δa - κ X_anc + ε
+    # Anchor block: Δμ_anc = μ_cep - μ_geo = δa - κ_Cep X_anc + ε
     if len(dmu_anc) > 0:
-        dmu_anc_model = delta_a - kappa * X_anc
+        dmu_anc_model = delta_a - kappa_cep * X_anc
         resid_a = dmu_anc - dmu_anc_model
         var_a = dmu_anc_err ** 2
         ll_a = -0.5 * np.sum(resid_a ** 2 / var_a + np.log(var_a))
@@ -357,6 +379,10 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
         x0 = np.array([H_app_init, 0.0, 2.35, 0.0, 0.0, sigma_int_guess])
         bounds = [(30.0, 90.0), (-50.0, 50.0), (-100.0, 100.0), (-5.0, 5.0), (-5.0, 5.0), (0.01, 250.0)]
         n_params = 6
+    elif model_type == "Cepheid_SN":
+        x0 = np.array([H_app_init, 0.0, 0.0, 0.0, 0.0, sigma_int_guess])
+        bounds = [(30.0, 90.0), (-50.0, 50.0), (-50.0, 50.0), (-5.0, 5.0), (-5.0, 5.0), (0.01, 250.0)]
+        n_params = 6
     else:
         raise ValueError(f"Unknown model_type: {model_type}")
 
@@ -368,6 +394,24 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
         method="L-BFGS-B",
         bounds=bounds,
     )
+
+    # Multi-start over the intrinsic-scatter coordinate: the likelihood is
+    # nearly flat in sigma_int_v near the start point, and single-start
+    # L-BFGS-B can stall at the initial guess (observed: sigma_int_v ~ 5.0
+    # returned while the true optimum sits near ~120-170 km/s), corrupting
+    # logL, BIC and Hessian errors.  Always re-minimize from a small ladder
+    # of sigma_int starts and keep the best objective.
+    for si_guess in [50.0, 120.0, 200.0]:
+        x0_try = x0.copy()
+        x0_try[-1] = si_guess
+        res_try = optimize.minimize(
+            _neg_logL, x0_try,
+            args=(model_type, cz_obs, d_obs, X, sigma_mu, sigma_v,
+                  dmu_obs, dmu_err, X_t, dmu_anc, dmu_anc_err, X_anc, sigma_int_guess),
+            method="L-BFGS-B", bounds=bounds,
+        )
+        if res_try.fun < res.fun - 1e-9:
+            res = res_try
 
     if not res.success:
         for H_init in [65.0, 70.0, 75.0]:
@@ -395,9 +439,16 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
     elif model_type == "Velocity":
         kappa = 0.0
         beta = res.x[1] * BETA_SCALE
+    elif model_type == "Cepheid_SN":
+        kappa = 0.0
+        kappa_sn = res.x[2] * KAPPA_SCALE
+        beta = 0.0
     else:
         kappa = res.x[1] * KAPPA_SCALE
         beta = res.x[2] * BETA_SCALE
+    if model_type != "Cepheid_SN":
+        kappa_sn = np.nan
+    kappa_cep = res.x[1] * KAPPA_SCALE if model_type == "Cepheid_SN" else kappa
 
     delta_m = res.x[-3]
     delta_a = res.x[-2]
@@ -429,6 +480,9 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
     elif model_type == "Mixed":
         se[1] *= KAPPA_SCALE
         se[2] *= BETA_SCALE
+    elif model_type == "Cepheid_SN":
+        se[1] *= KAPPA_SCALE
+        se[2] *= KAPPA_SCALE
 
     # Likelihood and chi2 at MLE
     final_nll = _neg_logL(res.x, model_type, cz_obs, d_obs, X, sigma_mu, sigma_v,
@@ -439,18 +493,20 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
 
     # Chi2 (reduced) for reporting — H_0 space consistent with likelihood
     H0_obs = cz_obs / d_obs
-    Gamma_X_chi2 = beta + LN10_OVER_5 * H_app * kappa
+    kappa_red = kappa_sn if model_type == "Cepheid_SN" else kappa
+    kappa_ref = kappa_cep if model_type == "Cepheid_SN" else kappa
+    Gamma_X_chi2 = beta + LN10_OVER_5 * H_app * kappa_red
     H0_model = H_app + Gamma_X_chi2 * X
     resid_v = H0_obs - H0_model
     var_v = sigma_v ** 2 / d_obs ** 2 + (LN10_OVER_5 * H0_obs * sigma_mu) ** 2 + sigma_int_v ** 2 / d_obs ** 2
     chi2_v = np.sum(resid_v ** 2 / np.maximum(var_v, 1e-10))
     if n_t > 0:
-        dmu_model_t = delta_m - kappa * X_t
+        dmu_model_t = delta_m - kappa_ref * X_t
         chi2_t = np.sum(((dmu_obs - dmu_model_t) / dmu_err) ** 2)
     else:
         chi2_t = 0.0
     if n_a > 0:
-        dmu_model_a = delta_a - kappa * X_anc
+        dmu_model_a = delta_a - kappa_ref * X_anc
         chi2_a = np.sum(((dmu_anc - dmu_model_a) / dmu_anc_err) ** 2)
     else:
         chi2_a = 0.0
@@ -465,8 +521,10 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v,
         "dof": int(dof),
         "H_app": float(H_app),
         "H_app_err": float(se[0]),
-        "kappa_Cep": float(kappa),
-        "kappa_Cep_err": float(se[1]) if model_type in ("Cepheid", "Mixed", "Coupled") else np.nan,
+        "kappa_Cep": float(kappa_cep),
+        "kappa_Cep_err": float(se[1]) if model_type in ("Cepheid", "Mixed", "Coupled", "Cepheid_SN") else np.nan,
+        "kappa_SN": float(kappa_sn),
+        "kappa_SN_err": float(se[2]) if model_type == "Cepheid_SN" else np.nan,
         "beta_X": float(beta),
         "beta_X_err": float(se[1]) if model_type == "Velocity" else (float(se[2]) if model_type == "Mixed" else (0.0 if model_type == "Coupled" else np.nan)),
         "delta_m": float(delta_m),
@@ -577,7 +635,7 @@ def run():
         dmu_anc = independent["mu_cep"].values - independent["mu_geo"].values
         dmu_anc_err = np.sqrt(independent["mu_cep_err"].values ** 2 + independent["mu_geo_err"].values ** 2)
 
-    models = ["Null", "Cepheid", "Coupled", "Velocity", "Mixed"]
+    models = ["Null", "Cepheid", "Coupled", "Velocity", "Mixed", "Cepheid_SN"]
     sigma_v_values = [150, 182.1, 250, 500]
     results = []
 
@@ -595,13 +653,17 @@ def run():
 
             kappa = res.get("kappa_Cep", np.nan)
             kappa_err = res.get("kappa_Cep_err", np.nan)
+            kappa_sn = res.get("kappa_SN", np.nan)
+            kappa_sn_err = res.get("kappa_SN_err", np.nan)
             beta = res.get("beta_X", np.nan)
             beta_err = res.get("beta_X_err", np.nan)
             k_sig = abs(kappa) / kappa_err if kappa_err and kappa_err > 0 else np.nan
+            ksn_sig = abs(kappa_sn) / kappa_sn_err if kappa_sn_err and kappa_sn_err > 0 else np.nan
             b_sig = abs(beta) / beta_err if beta_err and beta_err > 0 else np.nan
             print_status(
                 f"    {model_type}: H_app={res['H_app']:.2f}, "
                 f"kappa={kappa:.3e} ({k_sig:.1f}σ), "
+                f"kappa_SN={kappa_sn:.3e} ({ksn_sig:.1f}σ), "
                 f"beta={beta:.3e} ({b_sig:.1f}σ), "
                 f"BIC={res['BIC']:.1f}, logL={res['logL']:.1f}",
                 "INFO",

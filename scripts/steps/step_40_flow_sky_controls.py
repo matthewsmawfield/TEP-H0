@@ -330,6 +330,15 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
                 if res_try.fun < res.fun:
                     res = res_try
 
+    # sigma_int_v (last coordinate) is nearly degenerate with sigma_v in the
+    # variance and can stall at its start; re-minimize from a scatter ladder.
+    for si_init in [50.0, 120.0, 200.0]:
+        x0_try = res.x.copy()
+        x0_try[-1] = si_init
+        res_try = optimize.minimize(obj, x0_try, method="L-BFGS-B", bounds=bounds)
+        if res_try.fun < res.fun - 1e-9:
+            res = res_try
+
     idx = 0
     H_app = res.x[idx]; idx += 1
     if model_type == "M0":

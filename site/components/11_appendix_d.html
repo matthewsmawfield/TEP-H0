@@ -6,7 +6,7 @@
 </p>
 
 <p>
-    In contrast, the 37 R22 SN Ia host galaxies sample massive luminous spirals with median circular rotation velocities $V_{\rm rot} \approx 160\text{--}250\ {\rm km\,s^{-1}}$ ($\langle u_\phi^2 \rangle \sim 2.5 \times 10^4\ {\rm km^2\,s^{-2}}$). Even in the completely unscreened coordinate ($S=1$), the potential contrast between anchors and hosts exceeds a factor of 8. Furthermore, the direct empirical detection of internal radial Period--Luminosity gradients within the LMC ($+0.0284 \pm 0.0086\ {\rm mag}$, $3.30\sigma$) and M31 ($+0.681 \pm 0.187\ {\rm mag}$, $3.65\sigma$ in the HST PHAT catalogue; $+0.630 \pm 0.195\ {\rm mag}$, $3.24\sigma$ for the Pan-STARRS sample restricted to the PHAT footprint) provides internal evidence that radial Period--Luminosity gradients are measured within Local Group members with the sign predicted by TEP — noting that the M31 signal does not survive colour- and error-matched controls and is therefore treated as a debug signal rather than confirmed evidence (Section 3.2).
+    In contrast, the 37 R22 SN Ia host galaxies sample massive luminous spirals with median circular rotation velocities $V_{\rm rot} \approx 160\text{--}250\ {\rm km\,s^{-1}}$ ($\langle u_\phi^2 \rangle \sim 2.5 \times 10^4\ {\rm km^2\,s^{-2}}$). Even in the completely unscreened coordinate ($S=1$), the potential contrast between anchors and hosts exceeds a factor of 8. Furthermore, the direct empirical detection of internal radial Period--Luminosity gradients within the LMC ($+0.0284 \pm 0.0086\ {\rm mag}$, $3.30\sigma$) and M31 ($+0.681 \pm 0.187\ {\rm mag}$, $3.65\sigma$ in the HST PHAT catalogue; $+0.630 \pm 0.195\ {\rm mag}$, $3.24\sigma$ for the Pan-STARRS sample restricted to the PHAT footprint) provides internal evidence that radial Period--Luminosity gradients are measured within Local Group members with the sign predicted by TEP — noting that the M31 signal fails pair-matched controls but persists under quality-regime equating ($2.3$–$3.2\sigma$ across the pooled-error band ladder), so it is carried as conditional evidence bounded by the contested colour-matched control (Section 3.2).
 </p>
 
 <h3>D.2 Adopted Anchor Endpoint Construction</h3>
@@ -36,7 +36,7 @@
 </p>
 
 <p>
-    <em>Full Distance Ladder Matrix Invariance:</em> In the simultaneous 3,490-row SH0ES design matrix fit (Step 45), the Cepheid photometric model includes the anchor absolute magnitude zero point $M_H^W$, which enters with a uniform column of $+1$ across all Cepheid observations. Shifting the reference potential by $\Delta U_{\rm ref}$ introduces an additive offset $\Delta m = -\kappa \Delta U_{\rm ref}/c^2$ across every Cepheid row. In a linear least-squares regression, this uniform offset is absorbed exactly by the refitted Cepheid absolute magnitude zero point:
+    <em>Full Distance Ladder Matrix Invariance:</em> In the simultaneous 3,490-row SH0ES design matrix fit, the Cepheid photometric model includes the anchor absolute magnitude zero point $M_H^W$, which enters with a uniform column of $+1$ across all Cepheid observations. Shifting the reference potential by $\Delta U_{\rm ref}$ introduces an additive offset $\Delta m = -\kappa \Delta U_{\rm ref}/c^2$ across every Cepheid row. In a linear least-squares regression, this uniform offset is absorbed exactly by the refitted Cepheid absolute magnitude zero point:
 </p>
 
 <div class="equation">
@@ -67,12 +67,12 @@
 </table>
 
 <p>
-    Across all four conventions, the matrix-recovered $H_0$ and $\chi^2$ match to four decimal places ($H_0 = 71.7711\ {\rm km\,s^{-1}\,Mpc^{-1}}$ for the endpoint projection and $69.7423\ {\rm km\,s^{-1}\,Mpc^{-1}}$ for the canonical coupling). In contrast, unconstrained host-mean shortcuts that evaluate $\Delta\mu_i = \kappa (U_i - U_{\rm ref})/c^2$ without refitting the anchor zero point $M_H^W$ produce artificial numerical offsets (such as $64.74$ vs $66.65\ {\rm km\,s^{-1}\,Mpc^{-1}}$ in Step 04, or $69.42$ vs $71.73\ {\rm km\,s^{-1}\,Mpc^{-1}}$ in simplified propagation). These offsets are methodological artifacts of omitting the ladder zero-point refit. Both values in Step 04 remain statistically concordant with the Planck baseline ($67.4 \pm 0.5\ {\rm km\,s^{-1}\,Mpc^{-1}}$) within $1.73\sigma$ and $0.45\sigma$ respectively.
+    Across all four conventions, the matrix-recovered $H_0$ and $\chi^2$ match to four decimal places ($H_0 = 71.7711\ {\rm km\,s^{-1}\,Mpc^{-1}}$ for the endpoint projection and $69.7423\ {\rm km\,s^{-1}\,Mpc^{-1}}$ for the canonical coupling). In contrast, unconstrained host-mean shortcuts that evaluate $\Delta\mu_i = \kappa (U_i - U_{\rm ref})/c^2$ without refitting the anchor zero point $M_H^W$ produce artificial numerical offsets (such as $64.74$ vs $66.65\ {\rm km\,s^{-1}\,Mpc^{-1}}$ in host-level evaluations, or $69.42$ vs $71.73\ {\rm km\,s^{-1}\,Mpc^{-1}}$ in simplified propagation). These offsets are methodological artifacts of omitting the ladder zero-point refit. Both host-level values remain statistically concordant with the Planck baseline ($67.4 \pm 0.5\ {\rm km\,s^{-1}\,Mpc^{-1}}$) within $1.73\sigma$ and $0.45\sigma$ respectively.
 </p>
 
 <h3>D.4 Sensitivity Continuum and Hierarchical Modeling</h3>
 <p>
-    To verify that empirical concordance does not hinge upon any specific reference choice, Step 07 computes the sensitivity continuum of inferred $H_0$ across the continuous parameter sweep $\sqrt{U_{\rm ref}} \in [30.0, 131.5]\ {\rm km\,s^{-1}}$. Across this entire domain, the recovered $H_0$ remains strictly confined within $64.73\text{--}69.45\ {\rm km\,s^{-1}\,Mpc^{-1}}$, maintaining statistical concordance with Planck ($\le 1.7\sigma$) without tuning.
+    To verify that empirical concordance does not hinge upon any specific reference choice, the sensitivity analysis evaluates the continuum of inferred $H_0$ across the continuous parameter sweep $\sqrt{U_{\rm ref}} \in [30.0, 131.5]\ {\rm km\,s^{-1}}$. Across this entire domain, the recovered $H_0$ remains strictly confined within $64.73\text{--}69.45\ {\rm km\,s^{-1}\,Mpc^{-1}}$, maintaining statistical concordance with Planck ($\le 1.7\sigma$) without tuning.
 </p>
 
 <p>

@@ -85,7 +85,7 @@ async function buildStaticSite() {
         const staticContent = indexContent
             .replace(
                 /<div id="loading".*?<\/div>\s*<div id="manuscript-content".*?<\/div>/s,
-                `<div id="manuscript-content">${componentsHtml}</div>`
+                () => `<div id="manuscript-content">${componentsHtml}</div>`
             )
             .replace(/<div id="loading"[^>]*>[\s\S]*?<\/div>/g, '')
             .replace(/<div id="manuscript-content"[^>]*style="display:\s*none;"[^>]*>[\s\S]*?<\/div>/g, '')
@@ -222,7 +222,7 @@ function copyRecursiveSync(src, dest) {
         });
     } else {
         // Filter out raw data files
-        if (src.endsWith('.csv') || src.endsWith('.dat') || src.endsWith('.nc')) {
+        if (src.endsWith('.csv') || src.endsWith('.dat') || src.endsWith('.nc') || src.endsWith('.DS_Store')) {
             return;
         }
         fs.copyFileSync(src, dest);

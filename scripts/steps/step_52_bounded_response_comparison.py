@@ -37,6 +37,21 @@ identical to step_39, against:
   tanh_sigma      tanh((sigma - sigma_t)/w)        [sigma_t, w profiled;
                                                     phenomenological proxy
                                                     for S_Sigma saturation]
+  sA_sigma        min(1, (sigma/sigma_T)^(2/3))    [sigma_T profiled; the
+                                                    v6.0 amplitude-sector
+                                                    form S_A =
+                                                    min(1,(rho/rho_T)^{1/3})
+                                                    with sigma^2 as the
+                                                    depth proxy]
+  nested_lin      (S sigma^2 + sigma_amb^2 - U_ref,nested)/c^2
+                                                    [Rule-22 nested check:
+                                                    ambient group-halo depth
+                                                    sigma_amb^2 =
+                                                    c^2 PHI_REF0 Mvir^{2/3}
+                                                    added to the host term]
+  sA_nested       min(1, (sqrt(sigma^2+sigma_amb^2)/sigma_T)^{2/3})
+                                                    [sigma_T profiled;
+                                                    nested-depth S_A]
 
 Models are compared on equal footing by AIC/BIC (scanned shape parameters
 carry an explicit penalty) and, decisively, by leave-one-host-out
@@ -79,7 +94,7 @@ from scipy import optimize, stats
 BASE_DIR = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(BASE_DIR))
 
-from core.constants import KAPPA_GAL, KAPPA_GAL_UNCERTAINTY
+from core.constants import KAPPA_GAL, KAPPA_GAL_UNCERTAINTY, PHI_REF_0
 from scripts.utils.sample_selection import hubble_flow_mask, Z_CUT
 from scripts.utils.tep_correction import build_host_screening_map
 from scripts.steps.step_39_environment_slope_decomposition import (
@@ -107,6 +122,38 @@ KAPPA_CANONICAL = KAPPA_GAL
 STEP_GRID = np.arange(45.0, 145.0, 5.0)
 TANH_CENTER_GRID = np.arange(40.0, 150.0, 10.0)
 TANH_WIDTH_GRID = np.array([10.0, 20.0, 40.0, 80.0])
+SA_GRID = np.arange(30.0, 160.0, 5.0)
+SA_NESTED_GRID = np.arange(30.0, 1200.0, 25.0)
+
+# Group ambient depth is scaled as sigma_amb^2 = c^2 * PHI_REF_0 *
+# Mvir^{2/3} with Tully-2015 Mvir in units of 1e12 Msun.
+
+
+def load_ambient_sigmas(hosts):
+    """Ambient group-halo velocity scale per host from Tully 2015 Mvir.
+
+    Rule-22 nesting: a host's clock sits inside its group's ambient well.
+    sigma_amb^2 = c^2 * PHI_REF0 * Mvir^{2/3} (Mvir in units of 1e12 Msun;
+    Tully 2015 table 5).  Hosts with no Tully match or missing Mvir are
+    treated as field galaxies (sigma_amb = 0).
+    """
+    tully_path = DATA_DIR / "raw" / "external" / "tully2015_2mrs_groups_table5.csv"
+    hosts_csv = pd.read_csv(DATA_DIR / "processed" / "hosts_processed.csv")
+    pgc_map = dict(zip(hosts_csv["source_id"], hosts_csv["pgc"]))
+    if not tully_path.exists():
+        return {h: 0.0 for h in hosts}
+    tully = pd.read_csv(tully_path).set_index("PGC")
+    out = {}
+    for h in hosts:
+        pgc = pgc_map.get(h)
+        mvir = np.nan
+        if pgc is not None and pd.notna(pgc) and int(pgc) in tully.index:
+            row = tully.loc[int(pgc)]
+            mvir = row["Mvir"] if not isinstance(row, pd.DataFrame) \
+                else row["Mvir"].iloc[0]
+        mvir = float(mvir) if pd.notna(mvir) else 0.0
+        out[h] = float(np.sqrt(C_KM_S ** 2 * PHI_REF_0 * max(mvir, 0.0) ** (2.0 / 3.0)))
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -138,6 +185,71 @@ def build_step(sigma, sigma_c):
 
 def build_tanh(sigma, sigma_t, w):
     return np.tanh((np.asarray(sigma) - sigma_t) / w)
+
+
+def build_sA(sigma, sigma_T):
+    """v6.0 amplitude-sector response: S_A = min(1, (rho_bar/rho_T)^{1/3}).
+
+    With host dispersion sigma^2 as the depth proxy, S_A maps to
+    min(1, (sigma/sigma_T)^{2/3}) -- a saturating profile, not linear.
+    """
+    return np.minimum(1.0, (np.asarray(sigma) / sigma_T) ** (2.0 / 3.0))
+
+
+# Anchor ambient depths (Tully-2015 group Mvir, units 1e12 Msun).
+# MW/LMC share the Local Group (~4e12); NGC 4258 is a 65-member group.
+ANCHOR_MVIR = {"MW": 4.31, "LMC": 0.0, "NGC 4258": 55.10}
+ANCHOR_SIGMA_LOCAL = {"MW": 30.0, "LMC": 24.0, "NGC 4258": 115.0}
+ANCHOR_W = {"MW": 0.20, "LMC": 0.25, "NGC 4258": 0.55}
+
+
+def nested_sigma_ref():
+    """Reference endpoint including the anchors' ambient baselines.
+
+    U_ref,nested = sum_a w_a (sigma_a^2 + sigma_amb,a^2) / sum_a w_a,
+    returned as sqrt -- same weighted-anchor convention as sigma_ref.
+    """
+    num = den = 0.0
+    for a, w in ANCHOR_W.items():
+        sa2 = C_KM_S ** 2 * PHI_REF_0 * ANCHOR_MVIR[a] ** (2.0 / 3.0)
+        num += w * (ANCHOR_SIGMA_LOCAL[a] ** 2 + sa2)
+        den += w
+    return float(np.sqrt(num / den))
+
+
+def build_nested_lin(sigma, S, sig_amb, sigma_ref_n):
+    """Nested linear coordinate: screened host depth + ambient baseline.
+
+    Rule-22 nesting in additive-depth form: u_total = u_ambient + u_local.
+    The ambient baseline is common-mode between the systemic redshift and
+    the Cepheid clocks; whether its residual (group-scale infall, baseline
+    differences) belongs in the distance-bias coordinate is exactly what
+    this regressor tests.
+    """
+    sigma = np.asarray(sigma, dtype=float)
+    return (np.asarray(S) * sigma ** 2 + np.asarray(sig_amb) ** 2
+            - sigma_ref_n ** 2) / C_KM_S ** 2
+
+
+def build_sA_nested(sig_tot, sigma_T):
+    """Amplitude-sector S_A evaluated on the total nested depth."""
+    return np.minimum(1.0, (np.asarray(sig_tot) / sigma_T) ** (2.0 / 3.0))
+
+
+def scan_sA_nested(cz, d, sig_tot, sigma_mu, sigma_v):
+    """Profile the nested-depth S_A response over sigma_T."""
+    best = None
+    table = []
+    for sT in SA_NESTED_GRID:
+        g = center_scale(build_sA_nested(sig_tot, sT))
+        if np.all(g == g[0]):
+            continue
+        r = fit_amplitude_only(cz, d, g, sigma_mu, sigma_v)
+        table.append({"sigma_T": float(sT), "neg2logL": -2.0 * r["logL"],
+                      "amplitude": r["Gamma_X"]})
+        if best is None or r["logL"] > best["logL"]:
+            best = dict(r, sigma_T=float(sT))
+    return best, table
 
 
 # ---------------------------------------------------------------------------
@@ -195,7 +307,24 @@ def scan_tanh(cz, d, sigma, sigma_mu, sigma_v):
     return best, table
 
 
-def loo_cv(cz, d, sigma, S, sigma_ref, sigma_mu, sigma_v, host):
+def scan_sA(cz, d, sigma, sigma_mu, sigma_v):
+    """Profile the derived S_A saturating response over sigma_T."""
+    best = None
+    table = []
+    for sT in SA_GRID:
+        g = center_scale(build_sA(sigma, sT))
+        if np.all(g == g[0]):
+            continue
+        r = fit_amplitude_only(cz, d, g, sigma_mu, sigma_v)
+        table.append({"sigma_T": float(sT), "neg2logL": -2.0 * r["logL"],
+                      "amplitude": r["Gamma_X"]})
+        if best is None or r["logL"] > best["logL"]:
+            best = dict(r, sigma_T=float(sT))
+    return best, table
+
+
+def loo_cv(cz, d, sigma, S, sigma_ref, sigma_mu, sigma_v, host,
+           sig_amb=None, sigma_ref_n=None):
     """Leave-one-host-out predictive MSE for every model.
 
     For profiled-shape models the shape parameter is re-selected on the
@@ -204,7 +333,14 @@ def loo_cv(cz, d, sigma, S, sigma_ref, sigma_mu, sigma_v, host):
     """
     n = len(cz)
     regs = build_regressors(sigma, S, sigma_ref)
-    models = list(regs.keys()) + ["step_sigma", "tanh_sigma"]
+    nested = sig_amb is not None and sigma_ref_n is not None
+    if nested:
+        regs["nested_lin"] = build_nested_lin(sigma, S, sig_amb,
+                                              sigma_ref_n)
+        sig_tot = np.sqrt(sigma ** 2 + np.asarray(sig_amb) ** 2)
+    models = list(regs.keys()) + ["step_sigma", "tanh_sigma", "sA_sigma"]
+    if nested:
+        models.append("sA_nested")
     sse = {m: [] for m in models}
 
     for i in range(n):
@@ -228,6 +364,21 @@ def loo_cv(cz, d, sigma, S, sigma_ref, sigma_mu, sigma_v, host):
             build_tanh(sigma[tr], b["sigma_t"], b["w"]))
         pred = d[i] * (b["H_app"] + b["Gamma_X"] * g_te)
         sse["tanh_sigma"].append((cz[i] - pred) ** 2)
+        # derived S_A saturating form (re-scan sigma_T on the training fold)
+        b, _ = scan_sA(cz[tr], d[tr], sigma[tr], sigma_mu[tr], sigma_v)
+        g_te = float(build_sA(sigma[i:i+1], b["sigma_T"])[0]) - np.mean(
+            build_sA(sigma[tr], b["sigma_T"]))
+        pred = d[i] * (b["H_app"] + b["Gamma_X"] * g_te)
+        sse["sA_sigma"].append((cz[i] - pred) ** 2)
+        # nested-depth S_A (re-scan sigma_T on the training fold)
+        if nested:
+            b, _ = scan_sA_nested(cz[tr], d[tr], sig_tot[tr],
+                                  sigma_mu[tr], sigma_v)
+            g_te = float(build_sA_nested(sig_tot[i:i+1],
+                                         b["sigma_T"])[0]) - np.mean(
+                build_sA_nested(sig_tot[tr], b["sigma_T"]))
+            pred = d[i] * (b["H_app"] + b["Gamma_X"] * g_te)
+            sse["sA_nested"].append((cz[i] - pred) ** 2)
 
     return {m: float(np.mean(v)) for m, v in sse.items()}
 
@@ -336,22 +487,38 @@ def ladder_disentanglement():
             results.append(row)
 
         # --- Observable-level injection-recovery for kappa_P (only on the
-        # primary anchor convention to keep the table compact) -------------
+        # primary anchor convention to keep the table compact). Ensemble of
+        # seeded draws at the full covariance level; the whitening is fixed
+        # across draws so each realization is a single matvec. -------------
         if anchor_conv == "anchor_screened_physical":
+            from scipy import linalg as _la
+            n_inj_draws = 200
             rng = np.random.default_rng(7)
             noise = np.sqrt(np.diag(C))
+            L_aug = np.column_stack([L, colP])
+            Lc = np.linalg.cholesky(C)
+            A_w = _la.solve_triangular(Lc, L_aug, lower=True, check_finite=False)
+            pinv_Aw = np.linalg.pinv(A_w, rcond=1e-12)
+            err_fixed = float(np.sqrt(max((pinv_Aw @ pinv_Aw.T)[-1, -1], 0)) * X_SCALE)
             for k_true in (KAPPA_CANONICAL, -KAPPA_CANONICAL, 3.0e5):
-                y_mock = L @ theta_base + (k_true / X_SCALE) * colP
-                y_mock = y_mock + rng.normal(0, 0.01 * noise)
-                L_aug = np.column_stack([L, colP])
-                th, cv, _, _, _ = fl.fit_gls(L_aug, y_mock, C)
-                rec = th[-1] * X_SCALE
-                err = np.sqrt(cv[-1, -1]) * X_SCALE
+                y_true = L @ theta_base + (k_true / X_SCALE) * colP
+                recs = np.empty(n_inj_draws)
+                for d in range(n_inj_draws):
+                    y_w = _la.solve_triangular(
+                        Lc, y_true + rng.normal(0, noise),
+                        lower=True, check_finite=False)
+                    recs[d] = (pinv_Aw @ y_w)[-1] * X_SCALE
+                pull = (recs - k_true) / err_fixed
                 inj[f"kappaP_inj_{k_true:+.2e}"] = {
                     "injected": float(k_true),
-                    "recovered": float(rec),
-                    "err": float(err),
-                    "recovery_fraction": float(rec / k_true) if k_true else np.nan,
+                    "recovered": float(recs.mean()),
+                    "err": float(err_fixed),
+                    "scatter": float(recs.std()),
+                    "pull_mean": float(pull.mean()),
+                    "pull_std": float(pull.std()),
+                    "coverage_68": float(np.mean(np.abs(recs - k_true) <= err_fixed)),
+                    "n_draws": n_inj_draws,
+                    "recovery_fraction": float(recs.mean() / k_true) if k_true else np.nan,
                 }
 
             # Degeneracy check: a host-uniform modulus shift must NOT
@@ -378,14 +545,19 @@ def ladder_disentanglement():
                         uniform_col[i] = x_host.get(host, 0.0)
                         break
             k_host = KAPPA_CANONICAL
-            y_mock = L @ theta_base - (k_host / X_SCALE) * (uniform_col * X_SCALE)
-            y_mock = y_mock + rng.normal(0, 0.01 * noise)
-            L_aug = np.column_stack([L, colP])
-            th, cv, _, _, _ = fl.fit_gls(L_aug, y_mock, C)
+            y_true = L @ theta_base - (k_host / X_SCALE) * (uniform_col * X_SCALE)
+            recs = np.empty(n_inj_draws)
+            for d in range(n_inj_draws):
+                y_w = _la.solve_triangular(
+                    Lc, y_true + rng.normal(0, noise),
+                    lower=True, check_finite=False)
+                recs[d] = (pinv_Aw @ y_w)[-1] * X_SCALE
             inj["uniform_modulus_injection"] = {
                 "injected_uniform_kappa": float(k_host),
-                "kappaP_recovered": float(th[-1] * X_SCALE),
-                "kappaP_err": float(np.sqrt(cv[-1, -1]) * X_SCALE),
+                "kappaP_recovered": float(recs.mean()),
+                "kappaP_err": float(err_fixed),
+                "kappaP_scatter": float(recs.std()),
+                "n_draws": n_inj_draws,
                 "note": "A host-uniform modulus shift should yield kappa_P ~ 0 "
                         "(free mu_i absorb it); nonzero recovery would "
                         "indicate cross-channel leakage.",
@@ -456,6 +628,9 @@ def run(reuse_ladder_from=None, output_dir=None):
 
     sig_all = df_all["sigma"].values
     S_all = np.array([host_S.get(h, 1.0) for h in df_all["host"]])
+    amb_map = load_ambient_sigmas(df_all["host"].tolist())
+    amb_all = np.array([amb_map.get(h, 0.0) for h in df_all["host"]])
+    sigma_ref_nested = nested_sigma_ref()
     d_all = 10 ** ((df_all["mu"].values - 25.0) / 5.0)
     muerr_all = df_all["mu_err"].fillna(0.05).values
     cz_hd = C_KM_S * df_all["z_hd"].values
@@ -485,9 +660,12 @@ def run(reuse_ladder_from=None, output_dir=None):
         s_d = sig_all[mask]
         S_d = S_all[mask]
         m_d = muerr_all[mask]
+        a_d = amb_all[mask]
         print_status(f"{label}: N={mask.sum()}, sigma_v={sv:.0f}", "SECTION")
 
         regs = build_regressors(s_d, S_d, sigma_ref)
+        regs["nested_lin"] = build_nested_lin(s_d, S_d, a_d,
+                                              sigma_ref_nested)
 
         # Fixed-shape models
         fitted = {}
@@ -513,12 +691,17 @@ def run(reuse_ladder_from=None, output_dir=None):
         # Scanned models (in-sample profile)
         b_step, step_tab = scan_step(cz_d, d_d, s_d, m_d, sv)
         b_tanh, tanh_tab = scan_tanh(cz_d, d_d, s_d, m_d, sv)
+        b_sA, sA_tab = scan_sA(cz_d, d_d, s_d, m_d, sv)
+        sig_tot_d = np.sqrt(s_d ** 2 + a_d ** 2)
+        b_sAn, sAn_tab = scan_sA_nested(cz_d, d_d, sig_tot_d, m_d, sv)
         for name, best, k_shape in (("step_sigma", b_step, 1),
-                                    ("tanh_sigma", b_tanh, 2)):
+                                    ("tanh_sigma", b_tanh, 2),
+                                    ("sA_sigma", b_sA, 1),
+                                    ("sA_nested", b_sAn, 1)):
             rows.append({
                 "dataset": label, "model": name, "shape_params": k_shape,
                 "shape_best": {k: v for k, v in best.items()
-                               if k in ("sigma_c", "sigma_t", "w")},
+                               if k in ("sigma_c", "sigma_t", "w", "sigma_T")},
                 "amplitude": best["Gamma_X"], "amplitude_err": best["Gamma_X_err"],
                 "amplitude_sig": best["Gamma_X_sig"],
                 "lrt_sig": best["Gamma_X_lrt_sig"],
@@ -537,7 +720,8 @@ def run(reuse_ladder_from=None, output_dir=None):
         # LOO-CV (all configs)
         print_status(f"  LOO-CV ({label})...", "INFO")
         cv = loo_cv(cz_d, d_d, s_d, S_d, sigma_ref, m_d, sv,
-                    df_all["host"].values[mask])
+                    df_all["host"].values[mask],
+                    sig_amb=a_d, sigma_ref_n=sigma_ref_nested)
         cv_results[label] = cv
         for m, v in cv.items():
             for r in rows:

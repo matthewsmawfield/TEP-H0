@@ -1,29 +1,13 @@
-[22:42:25] [INFO] Loading SH0ES Data...
-[22:42:25] [INFO] Design matrix shape: (3490, 46)
-[22:42:25] [INFO] Data vector length: 3490
-[22:42:26] [INFO] Covariance matrix shape: (3490, 3490)
-[22:42:26] [INFO] Number of parameters: 46
-[22:42:26] [INFO] Loading Host Metadata...
-[22:42:26] [INFO] Loaded 42 hosts
-[22:42:26] [INFO] Mapped M1337 -> Mrk1337
-[22:42:26] [INFO] Mapped N105A -> N105
-[22:42:26] [INFO] Mapped N976A -> N976
-[22:42:26] [INFO] Created 122 name mappings
-[22:42:26] [INFO] Calculating Effective Calibrator Sigma...
-[22:42:26] [SUCCESS] Anchor active-response scale: 30.51 km/s
-[22:42:26] [INFO] Part A: decomposed PLZ battery
-[22:42:26] [INFO]   baseline                         dChi2=    0.00
-[22:42:26] [INFO]   kappaP                           dChi2=    8.60  kappaP=-6.544e-01 (2.93s)
-[22:42:26] [INFO]   plz_within                       dChi2=    0.06  c_plz_w=-1.174e-01 (0.24s)
-[22:42:26] [INFO]   plz_cross                        dChi2=    7.03  c_plz_c=+2.473e-01 (2.65s)
-[22:42:26] [INFO]   kappaP+plz_within                dChi2=    8.68  kappaP=-6.554e-01 (2.94s)  c_plz_w=-1.405e-01 (0.29s)
-[22:42:26] [INFO]   kappaP+kappaZ                    dChi2=   13.44  kappaP=-5.833e-01 (2.59s)  kappaZ=-2.001e+00 (2.20s)
-[22:42:26] [INFO]   kappaP+kappaZ+plz_decomp         dChi2=   15.53  kappaP=-4.643e-01 (1.91s)  kappaZ=-1.882e+00 (2.03s)  c_plz_w=-2.898e-01 (0.59s)  c_plz_c=+1.357e-01 (1.33s)
-[22:42:26] [INFO]   kappaZ+plz_decomp                dChi2=   11.87  kappaZ=-2.014e+00 (2.18s)  c_plz_w=-2.946e-01 (0.60s)  c_plz_c=+2.080e-01 (2.19s)
-[22:42:26] [INFO]   plz_decomp_only                  dChi2=    7.14  c_plz_w=-1.579e-01 (0.32s)  c_plz_c=+2.483e-01 (2.66s)
-[22:42:26] [INFO] Part B: per-host metallicity-slope ordering
-[22:42:26] [INFO]   per-host Z-slope on X: slope=+3.213e+00 (2.71s, n=39)
-[22:42:26] [INFO] Part C: entanglement diagnostics
-[22:42:26] [INFO]   design overlap kappaP vs plz_within: +0.031
-[22:42:26] [INFO]   cov(t~,z~) vs X slope: -4.908e-04 (2.43e-03)
-[22:42:26] [SUCCESS] Step 55 done: kappaP under full PLZ decomposition = -4.643e-01 (1.91s); kappaZ = -1.882e+00 (2.03s)
+[16:08:35] [INFO] Loading SH0ES Data...
+[16:08:35] [INFO] Design matrix shape: (3490, 46)
+[16:08:35] [INFO] Data vector length: 3490
+[16:08:36] [INFO] Covariance matrix shape: (3490, 3490)
+[16:08:36] [INFO] Number of parameters: 46
+[16:08:36] [INFO] Loading Host Metadata...
+[16:08:36] [INFO] Loaded 42 hosts
+[16:08:36] [INFO] Mapped M1337 -> Mrk1337
+[16:08:36] [INFO] Mapped N105A -> N105
+[16:08:36] [INFO] Mapped N976A -> N976
+[16:08:36] [INFO] Created 122 name mappings
+[16:08:36] [INFO] Calculating Effective Calibrator Sigma...
+[16:08:36] [SUCCESS] Anchor active-response scale: 30.51 km/s

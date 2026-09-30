@@ -101,7 +101,7 @@ def copy_pdf_to_docs(source_pdf: Path, docs_dir: Path):
     # Load metadata from CITATION.cff
     metadata = load_citation_metadata()
     # Format: 11-TEP-H0-v0.5-KingstonUponHull.pdf
-    codename_clean = metadata['codename'].replace(' ', '')
+    codename_clean = ''.join(word.capitalize() for word in metadata['codename'].split())
     target_name = f"11-TEP-H0-v{metadata['version']}-{codename_clean}.pdf"
     target_path = docs_dir / target_name
     
@@ -120,7 +120,7 @@ def copy_pdf_to_root(source_pdf: Path, base_dir: Path):
     # Load metadata from CITATION.cff
     metadata = load_citation_metadata()
     # Format: 11-TEP-H0-v0.5-KingstonUponHull.pdf
-    codename_clean = metadata['codename'].replace(' ', '')
+    codename_clean = ''.join(word.capitalize() for word in metadata['codename'].split())
     target_name = f"11-TEP-H0-v{metadata['version']}-{codename_clean}.pdf"
     target_path = base_dir / target_name
     

@@ -226,7 +226,84 @@ class Step8M31PHATAnalysis:
             match_str = "Inner brighter" if delta_matched < 0 else "Inner fainter"
             print_status(f"Found {len(matched_inner)} tight 2D matches.", "INFO")
             print_status(f"Matched: ΔW = {delta_matched:+.3f} ± {err_matched:.3f} mag ({sig_matched:.1f}σ) [{match_str}]", "RESULT")
-        
+
+        # 5b. Photometric-error control (e_WH): the analogue of the Pan-STARRS
+        # e_W matching.  Inner-disk Cepheids carry systematically larger
+        # photometric errors; since resid correlates strongly with e_WH in
+        # both regions, matching on it tests whether the offset is confined
+        # to the error-stratified component.
+        e_J = pd.to_numeric(df.get('e_Jmag', np.nan), errors='coerce')
+        e_H = pd.to_numeric(df.get('e_Hmag', np.nan), errors='coerce')
+        df['e_WH'] = np.sqrt(e_H**2 + R_ir**2 * (e_J**2 + e_H**2))
+
+        # Arcsec-scale neighbor density (crowding proxy, flux-independent)
+        xy_arcsec = np.column_stack([
+            (df['RAJ2000'] - self.RA_CENTER) * np.cos(np.radians(self.DEC_CENTER)) * 3600.0,
+            (df['DEJ2000'] - self.DEC_CENTER) * 3600.0,
+        ])
+        pos_tree = cKDTree(xy_arcsec)
+        d5 = pos_tree.query(xy_arcsec, k=6)[0][:, 5]
+        df['log_dens'] = np.log10(5.0 / (np.pi * np.maximum(d5, 1e-3) ** 2))
+
+        inner = df[df['R_kpc'] < inner_cut]
+        outer = df[df['R_kpc'] > outer_cut]
+
+        def _nn_matched_delta(col2, col3=None):
+            """1-NN match on (logP, col2[, col3]); returns dict of stats."""
+            feats = ['logP', col2] + ([col3] if col3 else [])
+            i_sub = inner.dropna(subset=feats)
+            o_sub = outer.dropna(subset=feats)
+            if len(i_sub) < 5 or len(o_sub) < 5:
+                return {'n_matched': 0, 'delta_mag': None, 'delta_err': None,
+                        'significance_sigma': None}
+            sds = df[feats].std(ddof=0).replace(0, 1.0)
+            Xi = (i_sub[feats] / sds).values
+            Xo = (o_sub[feats] / sds).values
+            tr = cKDTree(Xo)
+            dist, idx = tr.query(Xi, k=1)
+            dm = (i_sub['W_H'].values - o_sub.iloc[idx]['W_H'].values)
+            dlogp = (i_sub['logP'].values - o_sub.iloc[idx]['logP'].values)
+            dm_c = dm - fixed_slope * dlogp
+            # bootstrap SE over the pair differences
+            rng = np.random.default_rng(0)
+            bs = np.array([
+                dm_c[rng.integers(0, len(dm_c), len(dm_c))].mean()
+                for _ in range(2000)
+            ])
+            return {
+                'n_matched': int(len(dm_c)),
+                'mean_match_dist': float(np.mean(dist)),
+                'delta_mag': float(np.mean(dm_c)),
+                'delta_err': float(np.std(bs, ddof=1)),
+                'significance_sigma': float(abs(np.mean(dm_c)) / np.std(bs, ddof=1)),
+            }
+
+        em_res = _nn_matched_delta('e_WH')
+        dens_res = _nn_matched_delta('log_dens')
+        ec_res = _nn_matched_delta('e_WH', 'JH_color')
+
+        print_status(
+            f"Error-matched (logP+e_WH): ΔW = {em_res['delta_mag']:+.3f} "
+            f"± {em_res['delta_err']:.3f} mag (n={em_res['n_matched']})"
+            if em_res['delta_mag'] is not None else
+            "Error-matched control failed (insufficient coverage).", "RESULT")
+        print_status(
+            f"Density-matched (logP+neighbors): ΔW = {dens_res['delta_mag']:+.3f} "
+            f"± {dens_res['delta_err']:.3f} mag (n={dens_res['n_matched']})"
+            if dens_res['delta_mag'] is not None else
+            "Density-matched control failed (insufficient coverage).", "RESULT")
+        print_status(
+            f"Error+color matched: ΔW = {ec_res['delta_mag']:+.3f} "
+            f"± {ec_res['delta_err']:.3f} mag "
+            f"(n={ec_res['n_matched']})"
+            if ec_res['delta_mag'] is not None else
+            "Error+color matched control failed.", "RESULT")
+
+        # Overlap diagnostic: fraction of inner stars beyond the outer error range
+        e_in = pd.to_numeric(inner['e_WH'], errors='coerce').dropna()
+        e_out = pd.to_numeric(outer['e_WH'], errors='coerce').dropna()
+        frac_beyond = float((e_in > e_out.max()).mean()) if len(e_out) else np.nan
+
         # 6. Summary
         print_status("=" * 60, "INFO")
         print_status("Summary", "TITLE")
@@ -272,6 +349,14 @@ class Step8M31PHATAnalysis:
                 'delta_mag': float(delta_matched) if not np.isnan(delta_matched) else None,
                 'delta_err': float(err_matched) if not np.isnan(err_matched) else None,
                 'significance_sigma': float(sig_matched) if not np.isnan(sig_matched) else None
+            },
+            'error_matched': em_res,
+            'density_matched': dens_res,
+            'error_color_matched': ec_res,
+            'error_overlap': {
+                'e_WH_inner_mean': float(e_in.mean()) if len(e_in) else None,
+                'e_WH_outer_mean': float(e_out.mean()) if len(e_out) else None,
+                'frac_inner_beyond_outer_error_range': frac_beyond,
             },
             'interpretation': sign_str,
             'conclusion': interpretation

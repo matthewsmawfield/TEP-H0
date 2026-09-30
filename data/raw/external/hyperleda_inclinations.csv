@@ -1,0 +1,50 @@
+# HyperLEDA inclination and rotation provenance for SH0ES Cepheid hosts
+# Source: http://atlas.obs-hp.fr/hyperleda (per-object ledacat pages, queried by PGC)
+# Fetched: 2026-09-28 (kt_mag added 2026-09-28). Fields:
+#   incl_deg        - disc inclination from the Hubble axis-ratio formula
+#   logr25          - log axis ratio at the B 25 mag/arcsec^2 isophote
+#   vmaxg_kms       - apparent (projected) maximum gas rotation velocity
+#   vrot_kms        - maximum rotation velocity corrected for inclination
+#   morph_t         - HyperLEDA morphological type code
+#   kt_mag          - total K-band magnitude (inclination-independent proxy input)
+# Note: HyperLEDA does not tabulate an inclination error; the e_logr25 column
+# is blank where not reported, and the audit step adopts the literature-typical
+# 0.05 dex axis-ratio uncertainty when propagating inclination into sigma.
+normalized_name,pgc,incl_deg,logr25,e_logr25_dex,vmaxg_kms,vrot_kms,e_vrot_kms,morph_t,kt_mag
+M 101,50063,16.0,0.02,,75.8,274.1,,5.9,5.63
+Mrk 1337,43690,56.6,0.22,,101.9,122.1,,2.1,10.52
+NGC 0691,6793,48.0,0.16,,149.0,200.6,,4.0,8.81
+NGC 1015,9988,35.5,0.08,,70.0,120.7,,1.0,9.24
+NGC 105,1583,38.8,0.1,,147.1,234.9,,1.7,10.39
+NGC 1309,12626,21.2,0.03,,58.7,162.1,,3.9,9.12
+NGC 1365,13179,62.6,0.29,,176.1,198.3,,3.2,6.41
+NGC 1448,13727,86.4,0.72,,184.7,185.1,,6.0,7.68
+NGC 1559,14814,59.9,0.28,,116.2,134.3,,5.9,8.02
+NGC 2442,21373,50.3,0.18,,174.4,226.7,,3.7,6.9
+NGC 2525,22721,46.3,0.15,,91.7,126.8,,5.1,8.85
+NGC 2608,24111,64.3,0.31,,94.0,104.3,,3.4,9.34
+NGC 3021,28357,55.7,0.23,,113.0,136.7,,4.0,9.19
+NGC 3147,30019,31.2,0.06,,173.5,334.6,,3.9,7.44
+NGC 3254,30895,64.4,0.32,,187.4,207.8,,4.0,8.91
+NGC 3370,32207,56.2,0.24,,124.2,149.4,,5.1,9.44
+NGC 3447,32694,64.1,0.24,,41.9,46.5,,8.8,12.56
+NGC 3583,34232,58.7,0.25,,155.0,181.4,,3.1,8.4
+NGC 3972,37466,81.1,0.56,,108.7,110.0,,4.0,9.62
+NGC 3982,37520,29.3,0.05,,95.6,195.6,,3.2,8.86
+NGC 4038,37967,51.9,0.16,,133.1,169.1,,8.9,7.7
+NGC 4424,40809,64.5,0.29,,25.8,28.6,,1.3,9.11
+NGC 4536,41823,73.1,0.44,,148.9,155.7,,4.3,7.55
+NGC 4639,42741,51.0,0.18,,128.9,165.9,,3.6,8.81
+NGC 4680,43118,62.8,0.25,,84.1,94.5,,0.3,9.78
+NGC 5468,50323,21.1,0.03,,54.5,150.9,,6.0,10.35
+NGC 5584,51344,42.4,0.13,,84.1,124.7,,5.9,12.0
+NGC 5643,51969,29.6,0.06,,84.6,171.2,,5.0,7.19
+NGC 5728,52521,53.1,0.19,,179.5,224.4,,1.2,8.19
+NGC 5861,54097,69.5,0.4,,148.4,158.5,,5.0,8.67
+NGC 5917,54809,53.9,0.2,,74.8,92.6,,3.1,10.74
+NGC 7250,68535,80.2,0.35,,70.1,71.1,,7.2,10.29
+NGC 7329,69453,42.7,0.12,,170.1,250.9,,3.6,8.9
+NGC 7541,70795,74.8,0.48,,200.5,207.8,,4.7,8.35
+NGC 7678,71534,43.0,0.13,,137.0,200.8,,4.9,9.14
+NGC 976,9776,21.2,0.03,,146.3,405.0,,4.1,9.14
+UGC 9391,52091,41.2,0.1,,49.9,75.7,,8.1,

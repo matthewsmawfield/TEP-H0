@@ -350,19 +350,19 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, sigma_int_guess=5
     H_app_init = np.median(cz_obs / d_obs)
     if model_type == "H0":
         x0 = np.array([H_app_init, sigma_int_guess])
-        bounds = [(30.0, 90.0), (0.01, 50.0)]
+        bounds = [(30.0, 90.0), (0.01, 250.0)]
     elif model_type == "Hβ":
         x0 = np.array([H_app_init, 2.35, sigma_int_guess])
-        bounds = [(30.0, 90.0), (-100.0, 100.0), (0.01, 50.0)]
+        bounds = [(30.0, 90.0), (-100.0, 100.0), (0.01, 250.0)]
     elif model_type == "K0":
         x0 = np.array([H_app_init, 0.0, sigma_int_guess])
-        bounds = [(30.0, 90.0), (-50.0, 50.0), (0.01, 50.0)]
+        bounds = [(30.0, 90.0), (-50.0, 50.0), (0.01, 250.0)]
     elif model_type == "Kfixβ":
         x0 = np.array([H_app_init, 2.35, sigma_int_guess])
-        bounds = [(30.0, 90.0), (-100.0, 100.0), (0.01, 50.0)]
+        bounds = [(30.0, 90.0), (-100.0, 100.0), (0.01, 250.0)]
     elif model_type in ("Kpriorβ", "Kβ"):
         x0 = np.array([H_app_init, KAPPA_PRIOR_MEAN / KAPPA_SCALE, 2.35, sigma_int_guess])
-        bounds = [(30.0, 90.0), (-50.0, 50.0), (-100.0, 100.0), (0.01, 50.0)]
+        bounds = [(30.0, 90.0), (-50.0, 50.0), (-100.0, 100.0), (0.01, 250.0)]
     else:
         raise ValueError(f"Unknown model_type: {model_type}")
 
@@ -373,6 +373,22 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, sigma_int_guess=5
         method="L-BFGS-B",
         bounds=bounds,
     )
+
+    # Multi-start over sigma_int_v (last coordinate): the likelihood is
+    # nearly flat in sigma_v**2 + sigma_int_v**2, so single-start L-BFGS-B
+    # can stall at the initial guess while reporting success.
+    for si_init in [50.0, 120.0, 200.0]:
+        x0_try = res.x.copy()
+        x0_try[-1] = si_init
+        res_try = optimize.minimize(
+            _neg_logL_velocity,
+            x0_try,
+            args=(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, sigma_int_guess),
+            method="L-BFGS-B",
+            bounds=bounds,
+        )
+        if res_try.fun < res.fun - 1e-9:
+            res = res_try
 
     if not res.success:
         # Fallback: try with different initializations
@@ -406,6 +422,7 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, sigma_int_guess=5
         H_app, kappa, beta, sigma_int_v = res.x[0], res.x[1] * KAPPA_SCALE, res.x[2] * BETA_SCALE, res.x[3]
 
     # Compute Hessian for uncertainties (in scaled parameter space)
+    cov = None
     try:
         with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
             hess = optimize.approx_fprime(
@@ -451,6 +468,23 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, sigma_int_guess=5
         n_params = 4
     dof = n - n_params
 
+    # Identifiable combination gamma_X = beta + (ln10/5) H_app kappa.
+    # For the jointly degenerate (kappa, beta) models the individual
+    # parameters slide along a ridge; gamma and its propagated error are the
+    # honest summary of what the data constrain.
+    gamma_X = np.nan
+    gamma_X_err = np.nan
+    kappa_beta_corr = np.nan
+    if model_type in ("Kpriorβ", "Kβ") and cov is not None:
+        scale = np.array([1.0, KAPPA_SCALE, BETA_SCALE, 1.0])
+        cov_phys = cov * np.outer(scale, scale)
+        g = np.array([LN10_OVER_5 * kappa, LN10_OVER_5 * H_app, 1.0, 0.0])
+        gamma_X = beta + LN10_OVER_5 * H_app * kappa
+        gamma_X_err = float(np.sqrt(max(g @ cov_phys @ g, 0.0)))
+        if cov_phys[1, 1] > 0 and cov_phys[2, 2] > 0:
+            kappa_beta_corr = float(
+                cov_phys[1, 2] / np.sqrt(cov_phys[1, 1] * cov_phys[2, 2]))
+
     return {
         "model": model_type,
         "n_hosts": n,
@@ -462,6 +496,9 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, sigma_int_guess=5
         "kappa_Cep_err": float(se[1]) if model_type in ("K0", "Kpriorβ", "Kβ") else np.nan,
         "beta_X": float(beta),
         "beta_X_err": float(se[-2]) if model_type in ("Hβ", "Kfixβ", "Kpriorβ", "Kβ") else np.nan,
+        "gamma_X": float(gamma_X),
+        "gamma_X_err": float(gamma_X_err),
+        "kappa_beta_corr": float(kappa_beta_corr),
         "sigma_int_v": float(sigma_int_v),
         "sigma_int_v_err": float(se[-1]),
         "chi2": chi2,
@@ -477,29 +514,79 @@ def fit_model(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, sigma_int_guess=5
 # ---------------------------------------------------------------------------
 # Mandatory debug checks
 # ---------------------------------------------------------------------------
-def injection_recovery(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type, true_kappa, true_beta, seed=42):
-    """Inject known (kappa, beta), fit, and recover."""
-    rng = np.random.default_rng(seed)
+def injection_recovery(cz_obs, d_obs, X, sigma_mu, sigma_v, model_type,
+                       true_kappa, true_beta, seed=42, n_draws=200):
+    """Inject known (kappa, beta) and recover over an ensemble of noise draws.
+
+    A single noise realization cannot demonstrate bias or coverage, so
+    n_draws synthetic datasets are fitted. For the K_beta model kappa and beta
+    are jointly degenerate (they enter the cz model through the single
+    combination gamma = beta + (ln10/5) * H_app * kappa), so the ensemble also
+    reports the recovered gamma, which is the identifiable quantity.
+    """
     n = len(cz_obs)
 
-    # Generate synthetic cz with injected signal
-    cz_model_true = _velocity_model(cz_obs, d_obs, X, 73.0, true_kappa, true_beta)
-    sigma_cz_dist = LN10_OVER_5 * np.abs(cz_model_true) * sigma_mu
-    var = sigma_v**2 + sigma_cz_dist**2 + 2.0**2
-    noise = rng.normal(0, np.sqrt(var))
-    cz_synth = cz_model_true + noise
+    rec_kappa, rec_beta, rec_gamma, rec_kappa_se = [], [], [], []
+    rec_gamma_se = []
+    for i in range(n_draws):
+        rng = np.random.default_rng(seed + i)
+        cz_model_true = _velocity_model(cz_obs, d_obs, X, 73.0, true_kappa, true_beta)
+        sigma_cz_dist = LN10_OVER_5 * np.abs(cz_model_true) * sigma_mu
+        var = sigma_v**2 + sigma_cz_dist**2 + 2.0**2
+        noise = rng.normal(0, np.sqrt(var))
+        cz_synth = cz_model_true + noise
 
-    result = fit_model(cz_synth, d_obs, X, sigma_mu, sigma_v, model_type)
-    recovered_kappa = result.get("kappa_Cep", 0.0)
-    recovered_beta = result.get("beta_X", 0.0)
+        result = fit_model(cz_synth, d_obs, X, sigma_mu, sigma_v, model_type)
+        rk = result.get("kappa_Cep", 0.0)
+        rb = result.get("beta_X", 0.0)
+        rec_kappa.append(rk)
+        rec_beta.append(rb)
+        rec_kappa_se.append(result.get("kappa_Cep_err", np.nan))
+        rec_gamma.append(rb + LN10_OVER_5 * result["H_app"] * rk)
+        rec_gamma_se.append(result.get("gamma_X_err", np.nan))
+
+    rec_kappa = np.asarray(rec_kappa)
+    rec_beta = np.asarray(rec_beta)
+    rec_gamma = np.asarray(rec_gamma)
+    rec_kappa_se = np.asarray(rec_kappa_se)
+
+    true_gamma = true_beta + LN10_OVER_5 * 73.0 * true_kappa
 
     return {
         "injected_kappa": true_kappa,
         "injected_beta": true_beta,
-        "recovered_kappa": recovered_kappa,
-        "recovered_beta": recovered_beta,
-        "kappa_bias": recovered_kappa - true_kappa if true_kappa != 0 else np.nan,
-        "beta_bias": recovered_beta - true_beta if true_beta != 0 else np.nan,
+        "n_draws": n_draws,
+        "recovered_kappa": float(np.nanmean(rec_kappa)),
+        "recovered_kappa_median": float(np.nanmedian(rec_kappa)),
+        "recovered_kappa_scatter": float(np.nanstd(rec_kappa)),
+        "recovered_kappa_mean_se": (
+            float(np.nanmean(rec_kappa_se)) if np.isfinite(rec_kappa_se).any() else np.nan
+        ),
+        "recovered_beta": float(np.nanmean(rec_beta)),
+        "recovered_beta_scatter": float(np.nanstd(rec_beta)),
+        "kappa_bias": float(np.nanmean(rec_kappa) - true_kappa),
+        "beta_bias": float(np.nanmean(rec_beta) - true_beta),
+        "gamma_true": float(true_gamma),
+        "gamma_recovered_mean": float(np.nanmean(rec_gamma)),
+        "gamma_recovered_scatter": float(np.nanstd(rec_gamma)),
+        "gamma_bias": float(np.nanmean(rec_gamma) - true_gamma),
+        "gamma_coverage_1sigma": (
+            float(np.nanmean(
+                np.abs(np.asarray(rec_gamma)[_gse_ok] - true_gamma)
+                < np.asarray(rec_gamma_se)[_gse_ok]))
+            if (_gse_ok := np.isfinite(np.asarray(rec_gamma_se))
+                & (np.asarray(rec_gamma_se) > 0)).any() else np.nan
+        ),
+        "gamma_pull_std": (
+            float(np.nanstd(
+                (np.asarray(rec_gamma)[_gse_ok] - true_gamma)
+                / np.asarray(rec_gamma_se)[_gse_ok]))
+            if _gse_ok.any() else np.nan
+        ),
+        "corr_kappa_beta_ensemble": (
+            float(np.corrcoef(rec_kappa, rec_beta)[0, 1])
+            if np.nanstd(rec_kappa) > 0 and np.nanstd(rec_beta) > 0 else np.nan
+        ),
     }
 
 
@@ -517,9 +604,13 @@ def likelihood_contour(cz_obs, d_obs, X, sigma_mu, sigma_v, n_grid=40):
     beta_grid = np.linspace(beta_mle - 3 * db, beta_mle + 3 * db, n_grid)
     logL_grid = np.full((n_grid, n_grid), -np.inf)
 
+    prev_x = np.array([70.0, 3.0])
     for i, k in enumerate(kappa_grid):
         for j, b in enumerate(beta_grid):
-            # Profile out H_app and sigma_int_v
+            # Profile out H_app and sigma_int_v. Warm-start from the previous
+            # grid point's optimum and take the best of a small set of starts;
+            # single-start L-BFGS-B occasionally stalls in sigma_int_v and
+            # produces spurious dips in the contour.
             def _profile(params):
                 H_app, sigma_int_v = params[0], max(params[1], 0.01)
                 cz_model = _velocity_model(cz_obs, d_obs, X, H_app, k, b)
@@ -529,11 +620,16 @@ def likelihood_contour(cz_obs, d_obs, X, sigma_mu, sigma_v, n_grid=40):
                 var = np.maximum(var, 0.01)
                 return 0.5 * np.sum(resid**2 / var + np.log(var))
 
-            res_prof = optimize.minimize(
-                _profile, [70.0, 3.0], method="L-BFGS-B",
-                bounds=[(30.0, 90.0), (0.01, 50.0)]
-            )
-            logL_grid[j, i] = -res_prof.fun
+            best = None
+            for x0 in (prev_x, np.array([70.0, 3.0]), np.array([68.0, 50.0])):
+                res_prof = optimize.minimize(
+                    _profile, x0, method="L-BFGS-B",
+                    bounds=[(30.0, 90.0), (0.01, 250.0)]
+                )
+                if best is None or res_prof.fun < best.fun:
+                    best = res_prof
+            prev_x = best.x
+            logL_grid[j, i] = -best.fun
 
     return {
         "kappa_mle": kappa_mle,
@@ -725,24 +821,34 @@ def run():
     print_status("Debug checks (primary, sigma_v=250, Kβ)", "SECTION")
     sigma_v_dbg = 250
 
-    # 1. Injection recovery: kappa only
-    print_status("  Injection recovery: kappa=2e5, beta=0", "INFO")
+    # 1. Injection recovery ensemble: kappa only
+    print_status("  Injection recovery (200 draws): kappa=2e5, beta=0", "INFO")
     inj_k = injection_recovery(cz_pri, d_pri, X_pri, mu_err_pri, sigma_v_dbg, "K0", true_kappa=2e5, true_beta=0.0)
     debug_results.append({"check": "injection_kappa_only", **inj_k})
-    print_status(f"    recovered kappa={inj_k['recovered_kappa']:.3e}", "INFO")
+    print_status(
+        f"    recovered kappa={inj_k['recovered_kappa']:.3e} "
+        f"(scatter {inj_k['recovered_kappa_scatter']:.2e}, mean SE {inj_k['recovered_kappa_mean_se']:.2e})",
+        "INFO",
+    )
 
-    # 2. Injection recovery: beta only
-    print_status("  Injection recovery: kappa=0, beta=2e7", "INFO")
+    # 2. Injection recovery ensemble: beta only
+    print_status("  Injection recovery (200 draws): kappa=0, beta=2e7", "INFO")
     inj_b = injection_recovery(cz_pri, d_pri, X_pri, mu_err_pri, sigma_v_dbg, "Hβ", true_kappa=0.0, true_beta=2e7)
     debug_results.append({"check": "injection_beta_only", **inj_b})
-    print_status(f"    recovered beta={inj_b['recovered_beta']:.3e}", "INFO")
+    print_status(
+        f"    recovered beta={inj_b['recovered_beta']:.3e} "
+        f"(scatter {inj_b['recovered_beta_scatter']:.2e})",
+        "INFO",
+    )
 
-    # 3. Injection recovery: both
-    print_status("  Injection recovery: kappa=2e5, beta=2e7", "INFO")
+    # 3. Injection recovery ensemble: both — gamma is the identifiable combination
+    print_status("  Injection recovery (200 draws): kappa=2e5, beta=2e7", "INFO")
     inj_kb = injection_recovery(cz_pri, d_pri, X_pri, mu_err_pri, sigma_v_dbg, "Kβ", true_kappa=2e5, true_beta=2e7)
     debug_results.append({"check": "injection_kappa_beta", **inj_kb})
     print_status(
-        f"    recovered kappa={inj_kb['recovered_kappa']:.3e}, beta={inj_kb['recovered_beta']:.3e}",
+        f"    recovered kappa={inj_kb['recovered_kappa']:.3e} (corr(k,b)={inj_kb['corr_kappa_beta_ensemble']:.3f}), "
+        f"gamma={inj_kb['gamma_recovered_mean']:.3e} vs true {inj_kb['gamma_true']:.3e} "
+        f"(scatter {inj_kb['gamma_recovered_scatter']:.2e})",
         "INFO",
     )
 

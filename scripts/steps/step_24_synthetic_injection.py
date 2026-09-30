@@ -12,6 +12,15 @@ where H0_mean is the mean of individual H0 values derived from the SH0ES
 distances. This null has zero sigma-correlation by construction, so OLS/GLS
 at kappa_inj=0 should recover a slope consistent with zero.
 
+The regression target is the distance-modulus residual relative to the
+observed host velocity,
+    delta_mu[i] = mu[i] - 5*log10(v_i) - 25 + 5*log10(70),
+which is the quantity the Step 04 residual-flattening estimator actually
+regresses on the TEP regressor. Regressing mu itself instead would fold the
+Hubble-law log z trend into the slope through the z--sigma correlation
+(r ~ 0.6) and produce a spurious non-zero slope at kappa_inj = 0; that earlier
+form was a test artifact, not an estimator bias.
+
 For each injected kappa level, the recovered slope is compared to the injected
 value using OLS (no measurement errors), GLS (full covariance), and ODR
 (errors-in-variables). ODR is pre-scaled to avoid numerical conditioning issues
@@ -109,21 +118,29 @@ class Step23SyntheticInjection:
         C_KMS = 299792.458
         z_hd = df["z_hd"].values
         mu_obs = df["value"].values
+        v_obs = df["velocity"].values
         d_mpc = 10**((mu_obs - 25) / 5)
         H0_individual = C_KMS * z_hd / d_mpc
         H0_null = float(np.mean(H0_individual))
         mu_null = 5 * np.log10(C_KMS * z_hd / H0_null) + 25
         print_status(f"Null H0 = {H0_null:.2f} km/s/Mpc (mean over N={N} hosts)", "INFO")
 
+        # Regression target matching the Step 04 estimator: the modulus
+        # residual relative to the observed host velocity (Hubble-law trend
+        # removed). See module docstring for why mu itself is not regressed.
+        fiducial = 5.0 * np.log10(v_obs) + 25.0 - 5.0 * np.log10(70.0)
+
         # ── Pre-scale X_tep for ODR conditioning ─────────────────────────────
         # X_tep ~ 1e-8 while dmu_err ~ 0.1; pre-scaling X by 1e7 puts both on O(1).
         SCALE = 1e7
 
-        # Diagnostic: check z-sigma correlation (explains non-zero null at kappa_inj=0)
+        # Diagnostic: check z-sigma correlation. In delta_mu space the null is
+        # exact even though corr(z, X_tep) is non-zero, because the velocity
+        # fiducial removes the Hubble-law trend.
         r_z_xtep, p_z_xtep = stats.pearsonr(z_hd, X_tep)
         print_status(
             f"Correlation(z, X_tep) = {r_z_xtep:.3f} (p={p_z_xtep:.3f}) — "
-            "non-zero OLS baseline at kappa_inj=0 expected; differential recovery is exact.",
+            "delta_mu target removes the Hubble-law trend; null slope is exactly zero.",
             "INFO",
         )
 
@@ -142,19 +159,20 @@ class Step23SyntheticInjection:
 
         for kappa_inj in injections:
             mu_inj = mu_null + kappa_inj * X_tep
+            dmu_inj = mu_inj - fiducial
 
             # OLS
-            slope_ols, _, r_val, p_val, _ = stats.linregress(X_tep, mu_inj)
+            slope_ols, _, r_val, p_val, _ = stats.linregress(X_tep, dmu_inj)
 
             # ODR — disabled when sx/X_tep > 0.5 (measurement errors dominate signal)
             if odr_reliable:
                 X_scaled = X_tep * SCALE
                 sx_scaled = sx * SCALE
                 try:
-                    data = RealData(X_scaled, mu_inj, sx=sx_scaled, sy=dmu_errs)
+                    data = RealData(X_scaled, dmu_inj, sx=sx_scaled, sy=dmu_errs)
                     odr_model = Model(lambda B, x: B[0] * x + B[1])
                     odr_obj = ODR(data, odr_model,
-                                  beta0=[slope_ols / SCALE, np.mean(mu_inj)],
+                                  beta0=[slope_ols / SCALE, np.mean(dmu_inj)],
                                   maxit=300)
                     out = odr_obj.run()
                     slope_odr = float(out.beta[0]) * SCALE
@@ -169,7 +187,7 @@ class Step23SyntheticInjection:
             try:
                 inv_cov = np.linalg.inv(cov)
                 beta_gls = (np.linalg.inv(X_mat.T @ inv_cov @ X_mat)
-                            @ (X_mat.T @ inv_cov @ mu_inj))
+                            @ (X_mat.T @ inv_cov @ dmu_inj))
                 slope_gls = float(beta_gls[1])
             except Exception:
                 slope_gls = float("nan")
@@ -181,8 +199,8 @@ class Step23SyntheticInjection:
                 "GLS_recovered_1e6": round(slope_gls / 1e6, 3) if np.isfinite(slope_gls) else None,
                 "null_pvalue": round(float(p_val), 4) if kappa_inj == 0 else None,
                 "null_baseline_note": (
-                    f"OLS baseline at kappa=0 reflects z-sigma correlation (r={r_z_xtep:.3f}); "
-                    "differential recovery is exact"
+                    "delta_mu target removes the Hubble-law trend; null slope is "
+                    "exactly zero at kappa_inj=0"
                 ) if kappa_inj == 0 else None,
             })
             print_status(

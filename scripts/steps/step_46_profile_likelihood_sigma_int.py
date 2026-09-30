@@ -308,10 +308,12 @@ def profile_likelihood_sigma_int(cz_obs, d_obs, X, sigma_mu, sigma_v,
     the best-fit sigma_int_v, and the best-fit parameters.
     """
     if sigma_int_grid is None:
-        # Grid from 0 to 100 km/s (beyond the old 50 bound)
+        # Grid from 0 to 250 km/s: the likelihood-implied total scatter is
+        # ~210 km/s (sigma_v**2 + sigma_int**2), so a 100 km/s ceiling left
+        # the optimum on the grid boundary for the low-sigma_v variants.
         sigma_int_grid = np.concatenate([
             np.array([0.0, 0.1, 0.5, 1.0, 2.0, 5.0]),
-            np.arange(10.0, 105.0, 5.0),
+            np.arange(10.0, 255.0, 5.0),
         ])
 
     results = []
@@ -348,7 +350,7 @@ def profile_likelihood_sigma_int(cz_obs, d_obs, X, sigma_mu, sigma_v,
         "ci_1sigma_sigma_int": ci_1sigma,
         "ci_2sigma_sigma_int": ci_2sigma,
         "profile": results,
-        "at_boundary": best["sigma_int_v"] <= 0.1 or best["sigma_int_v"] >= 99.0,
+        "at_boundary": best["sigma_int_v"] <= 0.1 or best["sigma_int_v"] >= 249.0,
     }
 
 
@@ -368,7 +370,7 @@ def profile_likelihood_kappa(cz_obs, d_obs, X, sigma_mu, sigma_v,
         best_logL = -np.inf
         best_siv = 0.0
         best_H = 0.0
-        for siv in np.concatenate([np.array([0.0, 1.0, 5.0]), np.arange(10.0, 105.0, 10.0)]):
+        for siv in np.concatenate([np.array([0.0, 1.0, 5.0]), np.arange(10.0, 255.0, 10.0)]):
             # Fix kappa and sigma_int_v, optimize H_app only
             d_true = d_obs * np.power(10.0, kappa_val * X / 5.0)
             H_init = np.median(cz_obs / d_true)

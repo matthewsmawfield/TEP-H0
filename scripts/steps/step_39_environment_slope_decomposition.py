@@ -333,7 +333,11 @@ def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0,
     H_app_init, gamma_init = np.linalg.lstsq(linear_design, ratio, rcond=None)[0]
     x0 = np.array([H_app_init, gamma_init, sigma_int_guess])
     gamma_bound = 100.0 * GAMMA_SCALE / gamma_scale
-    bounds = [(30.0, 90.0), (-gamma_bound, gamma_bound), (0.01, 50.0)]
+    # sigma_int_v enters the variance only through sigma_v**2 + sigma_int_v**2,
+    # so it must be allowed to reach the likelihood-implied total scatter
+    # (measured ~210 km/s on this sample); a 50 km/s cap made every
+    # sigma_v < ~210 variant under-dispersed and inflated its significance.
+    bounds = [(30.0, 90.0), (-gamma_bound, gamma_bound), (0.01, 250.0)]
 
     res = optimize.minimize(neg_logL, x0, method="L-BFGS-B", bounds=bounds)
     if multi_start:
@@ -343,6 +347,16 @@ def fit_gamma(cz_obs, d_obs, X, sigma_mu, sigma_v, sigma_int_guess=5.0,
                 res_try = optimize.minimize(neg_logL, x0_try, method="L-BFGS-B", bounds=bounds)
                 if res_try.fun < res.fun:
                     res = res_try
+
+    # Multi-start over sigma_int_v: the likelihood is nearly flat in this
+    # coordinate (exactly degenerate with sigma_v in the variance), and
+    # single-start L-BFGS-B can stall at the initial guess while reporting
+    # success.  Keep the best objective across a small scatter ladder.
+    for si_init in [50.0, 120.0, 200.0]:
+        x0_try = np.array([res.x[0], res.x[1], si_init])
+        res_try = optimize.minimize(neg_logL, x0_try, method="L-BFGS-B", bounds=bounds)
+        if res_try.fun < res.fun - 1e-9:
+            res = res_try
 
     H_app, gamma_param, sigma_int_v = res.x[0], res.x[1], res.x[2]
     Gamma_X = gamma_param * gamma_scale
@@ -638,14 +652,32 @@ def fit_multivariate_gamma(cz_obs, d_obs, regressor_dict, sigma_mu, sigma_v, sig
     else:
         coeffs = [np.mean(cz_obs / d_obs)]
     x0 = np.concatenate([coeffs, [sigma_int_guess]])
-    bounds = [(30.0, 90.0)] + [(-100.0, 100.0)] * k_dim + [(0.01, 50.0)]
+    # See fit_gamma: sigma_int_v must reach the likelihood-implied total
+    # scatter (~210 km/s); a 50 km/s cap under-disperses low-sigma_v fits.
+    bounds = [(30.0, 90.0)] + [(-100.0, 100.0)] * k_dim + [(0.01, 250.0)]
 
     res = optimize.minimize(neg_logL, x0, method="L-BFGS-B", bounds=bounds)
+    for si_init in [50.0, 120.0, 200.0]:
+        x0_try = res.x.copy()
+        x0_try[-1] = si_init
+        res_try = optimize.minimize(neg_logL, x0_try, method="L-BFGS-B", bounds=bounds)
+        if res_try.fun < res.fun - 1e-9:
+            res = res_try
 
     cov_physical = np.full((len(x0), len(x0)), np.nan)
     try:
         hess = optimize.approx_fprime(res.x, lambda x: optimize.approx_fprime(x, neg_logL, 1e-5), 1e-5)
-        cov_scaled = np.linalg.pinv(hess, rcond=1e-12)
+        hess = 0.5 * (hess + hess.T)
+        # When the intrinsic scatter sits on a bound, the variance direction is
+        # singular; report covariance conditional on the boundary value.
+        active = np.ones(len(x0), dtype=bool)
+        lo, hi = bounds[-1]
+        if res.x[-1] <= lo + 1e-3 or res.x[-1] >= hi - 1e-3:
+            active[-1] = False
+        cov_scaled = np.zeros((len(x0), len(x0)))
+        cov_scaled[np.ix_(active, active)] = np.linalg.pinv(
+            hess[np.ix_(active, active)], rcond=1e-12
+        )
         jac_diag = [1.0] + reg_scales + [1.0]
         jac = np.diag(jac_diag)
         cov_physical = jac @ cov_scaled @ jac
@@ -668,11 +700,12 @@ def fit_multivariate_gamma(cz_obs, d_obs, regressor_dict, sigma_mu, sigma_v, sig
         out[name] = val
         out[f"{name}_err"] = err
         out[f"{name}_sig"] = sig
+        out[f"{name}_covH"] = float(cov_physical[0, 1 + i])
 
     return out, res, neg_logL
 
 
-def run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_ref):
+def run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_ref, host_S=None):
     """Evaluate host-mass decorrelation and joint likelihood marginalization against SN Ia mass step."""
     print_status("Host-Mass Decoupling & Mass-Step Marginalization", "SECTION")
 
@@ -713,8 +746,16 @@ def run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_r
 
     U_ref = sigma_ref**2
     X_cosmic = -U_ref / (C_KM_S**2)
+    # The intercept sits at <X> on the *screened* coordinate that the fit
+    # actually uses, X_i = (S_i sigma_i^2 - sigma_ref^2)/c^2. Evaluating the
+    # mean with S=1 mixes coordinate axes and overstates the extrapolation
+    # distance to the cosmic point.
+    host_names = df_primary["host"].values
+    if host_S is None:
+        host_S = {}
     mean_X_raw = np.mean([
-        build_host_x(s, sigma_ref, S=1.0) for s in sig_raw
+        build_host_x(s, sigma_ref, S=host_S.get(h, 1.0))
+        for s, h in zip(sig_raw, host_names)
     ])
     dX_to_cosmic = X_cosmic - mean_X_raw
 
@@ -737,7 +778,13 @@ def run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_r
         lrt_res_step = np.sqrt(max(0.0, 2.0 * (out_res_step["logL"] - out_null["logL"])))
         lrt_res_m = np.sqrt(max(0.0, 2.0 * (out_res_m["logL"] - out_null["logL"])))
 
-        # Cosmic H0 projections
+        # Cosmic H0 projections (with full (H_app, Gamma_X) covariance propagation)
+        def hcos_err(out):
+            var = (out["H_app_err"] ** 2
+                   + dX_to_cosmic ** 2 * out["Gamma_X_err"] ** 2
+                   + 2 * dX_to_cosmic * out.get("Gamma_X_covH", 0.0))
+            return float(np.sqrt(var)) if np.isfinite(var) and var > 0 else np.nan
+
         H0_cosmic_tep = out_tep["H_app"] + out_tep["Gamma_X"] * dX_to_cosmic
         H0_cosmic_j_step = out_j_step["H_app"] + out_j_step["Gamma_X"] * dX_to_cosmic
         H0_cosmic_j_m = out_j_m["H_app"] + out_j_m["Gamma_X"] * dX_to_cosmic
@@ -749,6 +796,7 @@ def run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_r
             "Gamma_X_standalone_lrt": lrt_tep_standalone,
             "H_app_standalone": out_tep["H_app"],
             "H0_cosmic_standalone": H0_cosmic_tep,
+            "H0_cosmic_standalone_err": hcos_err(out_tep),
             "Gamma_X_joint_step": out_j_step["Gamma_X"],
             "Gamma_X_joint_step_err": out_j_step["Gamma_X_err"],
             "Gamma_X_joint_step_lrt": lrt_tep_given_step,
@@ -757,6 +805,7 @@ def run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_r
             "gamma_step_joint_lrt": lrt_step_given_tep,
             "H_app_joint_step": out_j_step["H_app"],
             "H0_cosmic_joint_step": H0_cosmic_j_step,
+            "H0_cosmic_joint_step_err": hcos_err(out_j_step),
             "retention_vs_step": out_j_step["Gamma_X"] / out_tep["Gamma_X"],
             "Gamma_X_joint_m": out_j_m["Gamma_X"],
             "Gamma_X_joint_m_err": out_j_m["Gamma_X_err"],
@@ -766,6 +815,7 @@ def run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_r
             "gamma_m_joint_lrt": lrt_m_given_tep,
             "H_app_joint_m": out_j_m["H_app"],
             "H0_cosmic_joint_m": H0_cosmic_j_m,
+            "H0_cosmic_joint_m_err": hcos_err(out_j_m),
             "retention_vs_m": out_j_m["Gamma_X"] / out_tep["Gamma_X"],
             "Gamma_X_resid_step": out_res_step["Gamma_X_resid_step"],
             "Gamma_X_resid_step_err": out_res_step["Gamma_X_resid_step_err"],
@@ -847,7 +897,7 @@ def run():
         df_primary, host_S, sigma_ref
     )
 
-    sigma_v_values = [150, 250, 500]
+    sigma_v_values = [150, 182.1, 250, 500]
     results = []
 
     for sigma_v in sigma_v_values:
@@ -939,7 +989,7 @@ def run():
     # ========================================================================
     # Host-mass decoupling and marginalization analysis
     # ========================================================================
-    mass_results = run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_ref)
+    mass_results = run_host_mass_analysis(cz_pri, d_pri, X_pri, mu_err_pri, df_primary, sigma_ref, host_S)
 
     # ========================================================================
     # Summary table

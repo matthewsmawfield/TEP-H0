@@ -82,6 +82,9 @@ from scripts.steps.step_52_bounded_response_comparison import run as step_52_run
 from scripts.steps.step_53_within_host_structure_battery import run as step_53_run
 from scripts.steps.step_55_within_host_plz_decomposition import run as step_55_run
 from scripts.steps.step_61_nested_kappa import main as step_61_run
+from scripts.steps.step_64_inclination_proxy_audit import run as step_64_run
+from scripts.steps.step_65_hfsn_environment_contrast import run as step_65_run
+from scripts.steps.step_66_combined_evidence import run as step_66_run
 from scripts.utils.pipeline_audit import audit
 
 def regression_gates(project_root):
@@ -634,6 +637,30 @@ def run_pipeline():
         step_times['Step 61'] = time.time() - t0
         set_step_logger(pipeline_logger)
         print_status("Step 61 (Nested Clock-Ratio Bound) completed successfully.", "SUCCESS")
+
+        # --- Step 64: inclination-aware proxy audit ---
+        print_status(">>> STEP 64: Inclination-Aware Proxy Audit", "TITLE")
+        t0 = time.time()
+        step_64_run()
+        step_times['Step 64'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 64 (Inclination-Aware Proxy Audit) completed successfully.", "SUCCESS")
+
+        # --- Step 65: Hubble-flow SN environment contrast ---
+        print_status(">>> STEP 65: Hubble-Flow SN Environment Contrast", "TITLE")
+        t0 = time.time()
+        step_65_run()
+        step_times['Step 65'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 65 (HF-SN Environment Contrast) completed successfully.", "SUCCESS")
+
+        # --- Step 66: Combined cross-channel evidence ---
+        print_status(">>> STEP 66: Combined Cross-Channel Evidence", "TITLE")
+        t0 = time.time()
+        step_66_run()
+        step_times['Step 66'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 66 (Combined Evidence) completed successfully.", "SUCCESS")
 
         # --- Regression Gates ---
         regression_gates(PROJECT_ROOT)

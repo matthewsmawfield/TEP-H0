@@ -398,8 +398,10 @@ def fit_joint_model(df_merged, sigma_ref, host_S, sigma_v, model_type):
     bounds = []
     for _ in range(n):
         bounds.append((20.0, 40.0))
+    # sigma_int_v (index n+3) must reach the likelihood-implied total scatter
+    # (~210 km/s); a 50 km/s cap under-disperses low-sigma_v fits.
     bounds.extend([
-        (30.0, 90.0), (-100.0, 100.0), (-100.0, 100.0), (0.01, 50.0), (-5.0, 5.0),
+        (30.0, 90.0), (-100.0, 100.0), (-100.0, 100.0), (0.01, 250.0), (-5.0, 5.0),
     ])
 
     if model_type == "E0":
@@ -425,6 +427,15 @@ def fit_joint_model(df_merged, sigma_ref, host_S, sigma_v, model_type):
                 res_try = optimize.minimize(obj, x0_try, method="L-BFGS-B", bounds=bounds)
                 if res_try.fun < res.fun:
                     res = res_try
+
+    # sigma_int_v can stall at its start (flat sigma_v**2 + sigma_int**2
+    # direction); re-minimize from a scatter ladder.
+    for si_init in [50.0, 120.0, 200.0]:
+        x0_try = res.x.copy()
+        x0_try[n + 3] = si_init
+        res_try = optimize.minimize(obj, x0_try, method="L-BFGS-B", bounds=bounds)
+        if res_try.fun < res.fun - 1e-9:
+            res = res_try
 
     idx = 0
     mu_true = res.x[idx:idx + n]
@@ -597,7 +608,7 @@ def run():
                 for _ in range(len(df_merged_primary)):
                     bounds.append((20.0, 40.0))
                 bounds.extend([
-                    (30.0, 90.0), (-100.0, 100.0), (-100.0, 100.0), (0.01, 50.0), (-5.0, 5.0),
+                    (30.0, 90.0), (-100.0, 100.0), (-100.0, 100.0), (0.01, 250.0), (-5.0, 5.0),
                 ])
                 res = optimize.minimize(obj_prior, x0, method="L-BFGS-B", bounds=bounds)
                 for H_init in [65.0, 70.0, 75.0, 80.0]:
@@ -608,6 +619,12 @@ def run():
                             res_try = optimize.minimize(obj_prior, x0_try, method="L-BFGS-B", bounds=bounds)
                             if res_try.fun < res.fun:
                                 res = res_try
+                for si_init in [50.0, 120.0, 200.0]:
+                    x0_try = res.x.copy()
+                    x0_try[len(df_merged_primary) + 3] = si_init
+                    res_try = optimize.minimize(obj_prior, x0_try, method="L-BFGS-B", bounds=bounds)
+                    if res_try.fun < res.fun - 1e-9:
+                        res = res_try
 
                 n = len(df_merged_primary)
                 idx = n

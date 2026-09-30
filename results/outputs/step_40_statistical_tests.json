@@ -16,8 +16,8 @@
     "most_influential_host": "N976A"
   },
   "bootstrap": {
-    "Gamma_X_boot_mean": 10995054.171259142,
-    "Gamma_X_boot_std": 11834163.486896388,
+    "Gamma_X_boot_mean": 10993801.249687163,
+    "Gamma_X_boot_std": 11834336.38742667,
     "Gamma_X_ci_low": -15803860.388691273,
     "Gamma_X_ci_high": 35212788.7244778,
     "frac_positive": 0.864
