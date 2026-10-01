@@ -3,48 +3,72 @@
     {
       "channel": "velocity_endpoint_GammaX",
       "source": "step_39",
-      "estimate": 11563392.765403697,
-      "error": 9581430.265956152,
-      "z": 1.2068545555760783,
+      "estimate": 38455272.51961872,
+      "error": 16527158.446145171,
+      "z": 2.326792754176572,
       "independent_noise": "peculiar velocity + redshift residuals",
       "primary": true
     },
     {
       "channel": "within_host_period_kappaP",
       "source": "step_52",
-      "estimate": -579370.9909261984,
-      "error": 225589.93486862208,
-      "z": 2.5682484072864757,
+      "estimate": -419686.39146346285,
+      "error": 338389.53202764643,
+      "z": 1.2402463780385928,
       "independent_noise": "Cepheid photometric residuals (design matrix)",
       "fit_corr_with": {
-        "within_host_metallicity_kappaZ": -0.14546918155210753
+        "within_host_metallicity_kappaZ": -0.1719957818021084
       },
       "primary": true
     },
     {
       "channel": "within_host_metallicity_kappaZ",
       "source": "step_52",
-      "estimate": -2103003.706364869,
-      "error": 920228.0134483221,
-      "z": 2.28530720172753,
+      "estimate": -1534911.5359707077,
+      "error": 1364801.761317142,
+      "z": 1.1246406470705286,
       "independent_noise": "same fit as kappa_P (corr carried explicitly)",
       "primary": true
     },
     {
+      "channel": "within_host_period_kappaP2",
+      "source": "step_62",
+      "estimate": -1110140.17411097,
+      "error": 487231.42363459343,
+      "z": 2.2784658793754984,
+      "independent_noise": "Cepheid photometric residuals (design matrix)",
+      "fit_corr_with": {
+        "within_host_metallicity_kappaZ_P2fit": -0.17722766811123028
+      },
+      "primary": false,
+      "variant_of": "within_host_period_kappaP",
+      "note": "derived inverse-density carrier; supersedes the ad hoc linear-in-logP placeholder per the Part B carrier discrimination"
+    },
+    {
+      "channel": "within_host_metallicity_kappaZ_P2fit",
+      "source": "step_62",
+      "estimate": -1274410.827434644,
+      "error": 1366088.3996099653,
+      "z": 0.9328904540866491,
+      "independent_noise": "same fit as kappa_P2 (corr carried explicitly)",
+      "primary": false,
+      "variant_of": "within_host_metallicity_kappaZ"
+    },
+    {
       "channel": "cepheid_trgb_differential",
       "source": "step_41",
-      "estimate": 241093.70413962106,
-      "error": 332816.197933223,
-      "z": 0.7244049587634394,
+      "estimate": 250043.69942961272,
+      "error": 313111.85679359926,
+      "z": 0.7985762723589208,
       "independent_noise": "TRGB photometry; shared anchors/hosts",
       "primary": true
     },
     {
       "channel": "hfsn_environment_contrast",
       "source": "step_65",
-      "estimate": -2.6719917001027226e-08,
-      "error": 2.5566958592699694e-08,
-      "z": 1.0450956418671067,
+      "estimate": -8.794477515145732e-09,
+      "error": 1.2816727004192254e-08,
+      "z": 0.686171868392697,
       "independent_noise": "HF host mass distribution + map bootstrap",
       "primary": false,
       "note": "derived propagation under common-mode response; one-sided consistency check, not independent evidence"
@@ -53,7 +77,8 @@
   "n_primary_in_predicted_direction": 4,
   "sign_concordance_p": 0.125,
   "fitted_correlations": {
-    "within_host_period_kappaP--within_host_metallicity_kappaZ": -0.14546918155210753
+    "within_host_period_kappaP--within_host_metallicity_kappaZ": -0.1719957818021084,
+    "within_host_period_kappaP2--within_host_metallicity_kappaZ_P2fit": -0.17722766811123028
   },
   "sensitivity": {
     "primary_rho0": {
@@ -64,9 +89,9 @@
         "cepheid_trgb_differential"
       ],
       "shared_rho": 0.0,
-      "stouffer_Z": 3.5229460542120803,
-      "p_two_sided": 0.0004267782182933999,
-      "p_one_sided": 0.00021338910914669995
+      "stouffer_Z": 2.871368982723428,
+      "p_two_sided": 0.004086981613493634,
+      "p_one_sided": 0.002043490806746817
     },
     "primary_rho_shared_0.1": {
       "channels": [
@@ -76,9 +101,9 @@
         "cepheid_trgb_differential"
       ],
       "shared_rho": 0.1,
-      "stouffer_Z": 3.126589253064387,
-      "p_two_sided": 0.0017684681514718026,
-      "p_one_sided": 0.0008842340757359013
+      "stouffer_Z": 2.5444019517363925,
+      "p_two_sided": 0.010946503864777135,
+      "p_one_sided": 0.0054732519323885676
     },
     "primary_rho_shared_0.3": {
       "channels": [
@@ -88,9 +113,45 @@
         "cepheid_trgb_differential"
       ],
       "shared_rho": 0.3,
-      "stouffer_Z": 2.6194319916810334,
-      "p_two_sided": 0.008807633268328674,
-      "p_one_sided": 0.004403816634164337
+      "stouffer_Z": 2.1280688144519524,
+      "p_two_sided": 0.03333137849887291,
+      "p_one_sided": 0.016665689249436455
+    },
+    "derived_carrier_rho0": {
+      "channels": [
+        "velocity_endpoint_GammaX",
+        "within_host_period_kappaP2",
+        "within_host_metallicity_kappaZ_P2fit",
+        "cepheid_trgb_differential"
+      ],
+      "shared_rho": 0.0,
+      "stouffer_Z": 3.314067045248975,
+      "p_two_sided": 0.0009194945668413723,
+      "p_one_sided": 0.00045974728342068616
+    },
+    "derived_carrier_rho_shared_0.1": {
+      "channels": [
+        "velocity_endpoint_GammaX",
+        "within_host_period_kappaP2",
+        "within_host_metallicity_kappaZ_P2fit",
+        "cepheid_trgb_differential"
+      ],
+      "shared_rho": 0.1,
+      "stouffer_Z": 2.9366893314139273,
+      "p_two_sided": 0.0033173625064810697,
+      "p_one_sided": 0.0016586812532405348
+    },
+    "derived_carrier_rho_shared_0.3": {
+      "channels": [
+        "velocity_endpoint_GammaX",
+        "within_host_period_kappaP2",
+        "within_host_metallicity_kappaZ_P2fit",
+        "cepheid_trgb_differential"
+      ],
+      "shared_rho": 0.3,
+      "stouffer_Z": 2.4561673440200207,
+      "p_two_sided": 0.01404277476425575,
+      "p_one_sided": 0.007021387382127875
     },
     "velocity_plus_period_only": {
       "channels": [
@@ -98,9 +159,19 @@
         "within_host_period_kappaP"
       ],
       "shared_rho": 0.0,
-      "stouffer_Z": 2.669400904717539,
-      "p_two_sided": 0.007598669176139827,
-      "p_one_sided": 0.0037993345880699136
+      "stouffer_Z": 2.522277559147121,
+      "p_two_sided": 0.011659766708912,
+      "p_one_sided": 0.005829883354456
+    },
+    "derived_velocity_plus_period": {
+      "channels": [
+        "velocity_endpoint_GammaX",
+        "within_host_period_kappaP2"
+      ],
+      "shared_rho": 0.0,
+      "stouffer_Z": 3.2564096089025627,
+      "p_two_sided": 0.0011283084982638414,
+      "p_one_sided": 0.0005641542491319207
     },
     "drop_metallicity": {
       "channels": [
@@ -109,9 +180,9 @@
         "cepheid_trgb_differential"
       ],
       "shared_rho": 0.0,
-      "stouffer_Z": 2.7337297410670187,
-      "p_two_sided": 0.006262142014039629,
-      "p_one_sided": 0.0031310710070198144
+      "stouffer_Z": 2.6787411433265573,
+      "p_two_sided": 0.0073899499022516135,
+      "p_one_sided": 0.0036949749511258068
     },
     "with_hfsn_consistency": {
       "channels": [
@@ -122,14 +193,28 @@
         "hfsn_environment_contrast"
       ],
       "shared_rho": 0.0,
-      "stouffer_Z": 3.608191882300224,
-      "p_two_sided": 0.00030833841659716477,
-      "p_one_sided": 0.00015416920829858238
+      "stouffer_Z": 2.9780002735115083,
+      "p_two_sided": 0.002901357257764303,
+      "p_one_sided": 0.0014506786288821516
+    }
+  },
+  "rho_crit": {
+    "primary": {
+      "rho_crit_2sigma": 0.39,
+      "Z_at_rho1": 1.4856985897457295,
+      "note": "shared inter-channel correlation at which the Stouffer combination first falls below 2 sigma; None means the combination remains >= 2 sigma for every admissible shared correlation rho <= 1"
+    },
+    "derived_carrier": {
+      "rho_crit_2sigma": 0.64,
+      "Z_at_rho1": 1.7147586273566198,
+      "note": "shared inter-channel correlation at which the Stouffer combination first falls below 2 sigma; None means the combination remains >= 2 sigma for every admissible shared correlation rho <= 1"
     }
   },
   "headline": {
     "combination": "primary_rho0",
-    "Z": 3.5229460542120803,
-    "note": "Stouffer combination of the four independent-noise primary channels; two-sided z per channel in the predicted direction; fitted kappa_P-kappa_Z correlation (-0.15) carried explicitly. The HF-SN contrast is a derived consistency channel and is excluded from the headline."
+    "Z": 2.871368982723428,
+    "Z_derived_carrier": 3.314067045248975,
+    "p_derived_carrier": 0.0009194945668413723,
+    "note": "Stouffer combination of the four independent-noise primary channels; two-sided z per channel in the predicted direction; fitted kappa_P-kappa_Z correlation (-0.17) carried explicitly. The derived-carrier variant substitutes the theory-predicted X*(P/10d)^2 term (step_62, fitted jointly with kappa_Z) for the ad hoc linear-in-logP placeholder. The HF-SN contrast is a derived consistency channel and is excluded from the headline."
   }
 }

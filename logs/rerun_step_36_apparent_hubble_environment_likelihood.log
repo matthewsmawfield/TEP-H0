@@ -1,0 +1,53 @@
+
+============================================================
+Step 36: Apparent Hubble Environment Likelihood
+============================================================
+[INFO] Design matrix: (3490, 46), loaded 117 sigma mappings
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: divide by zero encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: overflow encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: invalid value encountered in matmul
+  return _core_matmul(x1, x2)
+[INFO] Computed 37 calibrator hosts with Cepheid rows
+[INFO] Primary sample (Hubble-flow cut): 33 hosts
+[INFO] Sensitivity sample (all non-anchor): 35 hosts
+[INFO] Sample 'primary': H_app range 47.25 to 80.67, mean 68.55
+[INFO] Sample 'sensitivity': H_app range 47.25 to 80.67, mean 67.98
+
+============================================================
+Summary Table
+============================================================
+[INFO]     sample sigma_v        Model   N   H_app s_int     beta_X  sig_X  p_perm   VIF    LOOCV
+[INFO]   primary      150 0_intercept_only  33   68.66   5.6        n/a    n/a     n/a   1.0    90.78
+[INFO]   primary      150 1_X           33   68.48   3.2 +2.568e+07    3.3   0.018   1.0    76.53
+[INFO]   primary      150 2_X_Z         33   68.50   2.8 +2.086e+07    2.4   0.048   1.3    77.30
+[INFO]   primary      150 3_X_Z_P       33   67.82   2.1 +2.017e+07    2.5   0.052   1.3    75.54
+[INFO]   primary      150 4_X_Z_P_z     33   67.76   2.2 +1.930e+07    2.2   0.064   1.8    82.45
+[INFO]   primary      250 0_intercept_only  33   69.15   0.0        n/a    n/a     n/a   1.0    90.16
+[INFO]   primary      250 1_X           33   68.62   0.0 +2.406e+07    2.6   0.022   1.0    75.72
+[INFO]   primary      250 2_X_Z         33   68.65   0.0 +1.918e+07    1.8   0.046   1.3    76.20
+[INFO]   primary      250 3_X_Z_P       33   67.86   0.0 +1.922e+07    1.8   0.050   1.3    74.37
+[INFO]   primary      250 4_X_Z_P_z     33   67.94   0.0 +1.975e+07    1.8   0.052   1.8    81.19
+[INFO]   primary      500 0_intercept_only  33   69.19   0.0        n/a    n/a     n/a   1.0    90.10
+[INFO]   primary      500 1_X           33   68.61   0.0 +2.395e+07    1.4   0.026   1.0    75.51
+[INFO]   primary      500 2_X_Z         33   68.66   0.0 +1.864e+07    0.9   0.052   1.3    75.88
+[INFO]   primary      500 3_X_Z_P       33   67.82   0.0 +1.881e+07    1.0   0.058   1.3    74.03
+[INFO]   primary      500 4_X_Z_P_z     33   68.09   0.0 +2.004e+07    1.0   0.052   1.8    81.13
+[INFO]   sensitivity   150 0_intercept_only  35   68.39   5.6        n/a    n/a     n/a   1.0    93.29
+[INFO]   sensitivity   150 1_X           35   68.21   3.2 +2.639e+07    3.4   0.008   1.0    77.66
+[INFO]   sensitivity   150 2_X_Z         35   68.25   2.8 +2.223e+07    2.6   0.032   1.2    79.51
+[INFO]   sensitivity   150 3_X_Z_P       35   67.43   2.1 +2.105e+07    2.6   0.026   1.3    74.23
+[INFO]   sensitivity   150 4_X_Z_P_z     35   67.35   2.1 +1.999e+07    2.3   0.060   1.9    80.64
+[INFO]   sensitivity   250 0_intercept_only  35   69.00   0.0        n/a    n/a     n/a   1.0    93.23
+[INFO]   sensitivity   250 1_X           35   68.42   0.0 +2.453e+07    2.7   0.014   1.0    77.13
+[INFO]   sensitivity   250 2_X_Z         35   68.44   0.0 +2.013e+07    1.9   0.038   1.2    78.72
+[INFO]   sensitivity   250 3_X_Z_P       35   67.49   0.0 +1.993e+07    1.9   0.026   1.3    73.37
+[INFO]   sensitivity   250 4_X_Z_P_z     35   67.55   0.0 +2.030e+07    1.8   0.048   1.9    79.92
+[INFO]   sensitivity   500 0_intercept_only  35   69.06   0.0        n/a    n/a     n/a   1.0    93.24
+[INFO]   sensitivity   500 1_X           35   68.42   0.0 +2.436e+07    1.5   0.024   1.0    76.94
+[INFO]   sensitivity   500 2_X_Z         35   68.47   0.0 +1.950e+07    1.0   0.050   1.2    78.53
+[INFO]   sensitivity   500 3_X_Z_P       35   67.46   0.0 +1.945e+07    1.0   0.036   1.3    73.13
+[INFO]   sensitivity   500 4_X_Z_P_z     35   67.71   0.0 +2.057e+07    1.0   0.044   1.9    80.11
+[SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_36_apparent_hubble_environment.csv
+[SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_36_apparent_hubble_environment.json

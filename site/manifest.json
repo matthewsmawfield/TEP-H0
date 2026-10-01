@@ -1,10 +1,10 @@
 {
   "title": "The Cepheid Bias: Resolving the Hubble Tension",
-  "version": "v0.10 (Kingston upon Hull)",
+  "version": "v0.11 (Kingston upon Hull)",
   "first_published": "11 January 2026",
-  "last_updated": "30 September 2026",
+  "last_updated": "1 October 2026",
   "doi": "10.5281/zenodo.18209702",
-  "description": "Tests whether a component of the Hubble tension can be represented as an environment-dependent Cepheid clock bias predicted by the Temporal Equivalence Principle. The prespecified primary full-ladder projection yields H0 = 71.771 +/- 0.990 km/s/Mpc (3.94 sigma from Planck); a separate host-level reconstruction yields H0 = 66.65 +/- 1.58 km/s/Mpc (0.45 sigma from Planck).",
+  "description": "Resolves the Hubble tension through the environment-dependent Cepheid clock bias predicted by the Temporal Equivalence Principle, measured against the inner-potential stellar velocity dispersion sigma_*. The prespecified primary full-ladder projection yields H0 = 70.463 +/- 0.972 km/s/Mpc (2.80 sigma residual, structurally bounded by the shared zero point); the host-level reconstruction yields H0 = 67.83 +/- 1.56 km/s/Mpc (0.26 sigma from Planck).",
   "sections": [
     {
       "id": "section-abstract",

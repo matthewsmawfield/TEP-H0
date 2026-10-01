@@ -1,19 +1,19 @@
 {
   "raw": {
-    "pearson_r": 0.24135531860280865,
-    "pearson_p": 0.15012430567440319,
-    "spearman_rho": 0.1876592973482066,
-    "spearman_p": 0.26604139990980974,
+    "pearson_r": 0.5009249031075955,
+    "pearson_p": 0.0015892479578589374,
+    "spearman_rho": 0.5527096282385601,
+    "spearman_p": 0.00038913101913812395,
     "scatter": 9.471991672438516
   },
   "corrected": {
-    "pearson_r": 0.001913763362706383,
-    "pearson_p": 0.9910308375558525,
-    "spearman_rho": -0.03983166387176084,
-    "spearman_p": 0.8149357306842047,
-    "scatter": 9.46062989893377,
-    "residual_r": 0.0019137633627063482,
-    "residual_p": 0.9910308375558525
+    "pearson_r": 0.03720334142881544,
+    "pearson_p": 0.8269558272357006,
+    "spearman_rho": 0.08348156581848235,
+    "spearman_p": 0.6232647805605402,
+    "scatter": 9.372006954062577,
+    "residual_r": 0.03720334142881544,
+    "residual_p": 0.8269558272357006
   },
   "interpretation": "If TEP is real, the corrected H0 should show no residual correlation with sigma (|r| < 0.2). The scatter should also decrease. If |r_corr| > |r_raw|, the correction overfit."
 }

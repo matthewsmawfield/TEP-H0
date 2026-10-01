@@ -18,11 +18,15 @@ class Step1bApertureCorrection:
     Step 1b: Aperture Correction
     ============================
     
-    The authoritative catalog now uses inclination-corrected global rotation
-    speeds transformed to ``u_phi = V_rot / sqrt(2)``.  Global rotation speeds
-    have no spectroscopic aperture radius, so the Jorgensen correction is not
-    applicable.  This step preserves the historical output columns while
-    explicitly recording a unit correction factor.
+    The authoritative catalog uses the local inner-potential scale sigma_*:
+    central stellar dispersions (or documented HI-linewidth dispersion
+    proxies) compiled on the inner-galaxy scale relevant to the Cepheid
+    fields.  The literature compilation mixes spectroscopic apertures, so a
+    strict Jorgensen normalization is not applied here; this step preserves
+    the historical output columns while explicitly recording a unit
+    correction factor.  (Prior to v0.11 this file instead held deprojected
+    V_rot/sqrt(2) values, for which the Jorgensen correction was also not
+    applicable.)
     
     The Physics:
     Velocity dispersion ($\sigma$) measurements depend on the fraction of the galaxy 

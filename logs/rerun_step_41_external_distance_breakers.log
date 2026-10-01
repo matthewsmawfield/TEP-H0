@@ -1,0 +1,66 @@
+
+============================================================
+Step 41: External Distance Breakers
+============================================================
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: divide by zero encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: overflow encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: invalid value encountered in matmul
+  return _core_matmul(x1, x2)
+[INFO] Cepheid hosts: 37
+[INFO] External distances: 18 hosts (TRGB)
+[INFO] Merged Cepheid+TRGB overlap: 18 hosts
+[INFO] Primary Cepheid sample: 33 hosts
+[INFO] Primary merged sample: 13 hosts
+
+============================================================
+Part 1: Differential κ test (μ_Cep - μ_ext vs X)
+============================================================
+[INFO]   N=13, κ_Cep = +2.500e+05 (0.8σ), Δμ_offset = 0.014 +/- 0.022 mag, χ²/dof = 2.1/11
+
+============================================================
+Part 2: Velocity β with external-informed μ_true
+============================================================
+[INFO]   σ_v=150, κ=0: H_app=68.45, β_X=+2.467e+07 (3.9σ)
+[INFO]   σ_v=150, κ=canonical: H_app=66.89, β_X=-6.585e+06 (1.2σ)
+[INFO]   σ_v=150, κ=fit: H_app=68.02, β_X=+1.597e+07 (2.6σ)
+[INFO]   σ_v=250, κ=0: H_app=68.59, β_X=+2.388e+07 (2.6σ)
+[INFO]   σ_v=250, κ=canonical: H_app=67.03, β_X=-7.453e+06 (1.0σ)
+[INFO]   σ_v=250, κ=fit: H_app=68.16, β_X=+1.513e+07 (1.7σ)
+[INFO]   σ_v=500, κ=0: H_app=68.57, β_X=+2.382e+07 (1.4σ)
+[INFO]   σ_v=500, κ=canonical: H_app=67.00, β_X=-7.561e+06 (0.5σ)
+[INFO]   σ_v=500, κ=fit: H_app=68.13, β_X=+1.505e+07 (0.9σ)
+
+============================================================
+Part 3: Joint model (latent μ_true)
+============================================================
+[INFO]   E0 (σ_v=150): κ=+0.000e+00 (0.0σ), β=+0.000e+00 (0.0σ), AIC=39.2
+[INFO]   Eβ (σ_v=150): κ=+0.000e+00 (0.0σ), β=+4.888e+07 (1.4σ), AIC=37.3
+[INFO]   Eκ (σ_v=150): κ=+2.863e+05 (0.9σ), β=+0.000e+00 (0.0σ), AIC=38.4
+[INFO]   Eκβ (σ_v=150): κ=+2.477e+05 (0.8σ), β=+4.576e+07 (1.3σ), AIC=36.7
+[INFO]   Eκpriorβ (σ_v=150): κ=+5.182e+05 (2.1σ), β=+4.239e+07 (1.2σ), AIC=37.4
+[INFO]   E0 (σ_v=250): κ=+0.000e+00 (0.0σ), β=+0.000e+00 (0.0σ), AIC=40.7
+[INFO]   Eβ (σ_v=250): κ=+0.000e+00 (0.0σ), β=+4.867e+07 (1.0σ), AIC=39.7
+[INFO]   Eκ (σ_v=250): κ=+2.711e+05 (0.9σ), β=+0.000e+00 (0.0σ), AIC=40.0
+[INFO]   Eκβ (σ_v=250): κ=+2.489e+05 (0.8σ), β=+4.555e+07 (1.0σ), AIC=39.1
+[INFO]   Eκpriorβ (σ_v=250): κ=+5.190e+05 (2.1σ), β=+4.220e+07 (0.9σ), AIC=39.8
+[INFO]   E0 (σ_v=500): κ=+0.000e+00 (0.0σ), β=+0.000e+00 (0.0σ), AIC=52.7
+[INFO]   Eβ (σ_v=500): κ=+0.000e+00 (0.0σ), β=+4.777e+07 (0.5σ), AIC=52.4
+[INFO]   Eκ (σ_v=500): κ=+2.554e+05 (0.8σ), β=+0.000e+00 (0.0σ), AIC=52.0
+[INFO]   Eκβ (σ_v=500): κ=+2.497e+05 (0.8σ), β=+4.540e+07 (0.5σ), AIC=51.8
+[INFO]   Eκpriorβ (σ_v=500): κ=+5.196e+05 (2.4σ), β=+4.205e+07 (0.9σ), AIC=52.5
+
+============================================================
+Joint model comparison (σ_v=250)
+============================================================
+   Model N_param          κ_Cep            β_X        AIC        BIC
+--------------------------------------------------------------------------------
+      E0      18     +0.000e+00     +0.000e+00       40.7       50.9
+      Eβ      18     +0.000e+00     +4.867e+07       39.7       49.9
+      Eκ      18     +2.711e+05     +0.000e+00       40.0       50.1
+     Eκβ      18     +2.489e+05     +4.555e+07       39.1       49.2
+Eκpriorβ      18     +5.190e+05     +4.220e+07       39.8       50.0
+[SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_41_external_distance_breakers.json
+[SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_41_velocity_beta.csv
+[SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_41_joint_model.csv

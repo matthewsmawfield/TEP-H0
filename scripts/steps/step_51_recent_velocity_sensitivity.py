@@ -113,7 +113,7 @@ def run():
     if len(table) != 35 or table["host"].duplicated().any():
         raise ValueError("The pinned Stiskalek v3 table must contain 35 unique hosts")
 
-    host_sigma, host_z, host_z_cmb, host_s = load_host_metadata()
+    host_sigma, host_z, host_z_cmb, host_s, _host_mass = load_host_metadata()
     sigma_ref = np.sqrt(30.0**2 * 0.20 + 24.0**2 * 0.25 + 115.0**2 * 0.55)
 
     table["distance_mpc"] = 10 ** ((table["mu_mag"] - 25.0) / 5.0)

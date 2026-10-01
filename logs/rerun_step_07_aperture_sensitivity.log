@@ -1,0 +1,21 @@
+[0;37m[01:45:39] [INFO] [0m
+[0;37m[01:45:39] [INFO] ================================================================================[0m
+[0;37m[01:45:39] [INFO]    Starting Step 4b: Aperture Sensitivity Analysis[0m
+[0;37m[01:45:39] [INFO] ================================================================================[0m
+[0;37m[01:45:39] [INFO] [0m
+[0;37m[01:45:39] [INFO] Using master sigma catalog for provenance: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/raw/external/velocity_dispersions_literature.csv[0m
+[1;32m[01:45:39] [SUCCESS] Saved sigma provenance table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_07_sigma_provenance_table.csv[0m
+[0;37m[01:45:39] [INFO] Analyzing 37 hosts with both Raw and Corrected data.[0m
+[1;32m[01:45:39] [SUCCESS] Saved aperture sensitivity grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_07_aperture_sensitivity_grid.csv[0m
+[1;32m[01:45:39] [SUCCESS] Saved aperture sensitivity summary to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_07_aperture_sensitivity_summary.json[0m
+[0;37m[01:45:39] [INFO] Sensitivity Results[0m
+[0;37m[01:45:39] [INFO] +-----------------+-------------------------+-----------------------+[0m
+[0;37m[01:45:39] [INFO] | Metric          | Raw Sigma (Uncorrected) | Corrected Sigma (Ref) |[0m
+[0;37m[01:45:39] [INFO] +-----------------+-------------------------+-----------------------+[0m
+[0;37m[01:45:39] [INFO] | Correlation (r) | 0.5009                  | 0.5009                |[0m
+[0;37m[01:45:39] [INFO] | P-value         | 1.5892e-03              | 1.5892e-03            |[0m
+[0;37m[01:45:39] [INFO] | Significance    | Significant (>99%)      | Significant (>99%)    |[0m
+[0;37m[01:45:39] [INFO] +-----------------+-------------------------+-----------------------+[0m
+[1;32m[01:45:39] [SUCCESS] Conclusion: the signal is robust. It exists independently of aperture corrections.[0m
+[0;34m[01:45:39] [PROCESS] Generating sensitivity plot...[0m
+[1;32m[01:45:39] [SUCCESS] Step 4b Complete.[0m

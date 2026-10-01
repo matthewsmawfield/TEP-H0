@@ -1,0 +1,48 @@
+[0;37m[01:48:09] [INFO] ======================================================================[0m
+[01:48:09] [SECTION] Step 27: Anchor stratification test[0m
+[0;37m[01:48:09] [INFO] Testing for internal P-L tension in geometric anchors[0m
+[0;37m[01:48:09] [INFO] ======================================================================[0m
+[01:48:09] [SECTION] Anchor Screening from Continuous Nmb Formula:[0m
+[0;37m[01:48:09] [INFO]   S_group(N_mb) = [1 + (N_mb / N_crit)^gamma]^{-1}[0m
+[0;37m[01:48:09] [INFO]   N_crit = 10.0, gamma = 1.2 (fixed before any fit)[0m
+[0;37m[01:48:09] [INFO]   S_{MW} = 0.605  (N_mb = 7)[0m
+[0;37m[01:48:09] [INFO]   S_{LMC} = 0.873  (N_mb = 2)[0m
+[0;37m[01:48:09] [INFO]   S_{M31} = 0.471  (N_mb = 11)[0m
+[0;37m[01:48:09] [INFO]   S_{SMC} = 0.873  (N_mb = 2)[0m
+[0;37m[01:48:09] [INFO]   S_{NGC 4258} = 0.096  (N_mb = 65)[0m
+[0;37m[01:48:09] [INFO] Loaded 3130 Cepheid measurements[0m
+[01:48:09] [SECTION] Anchor Sample Sizes:[0m
++----------+-----+----------+--------+
+| Anchor   | N   | σ (km/s) | μ_geo  |
++----------+-----+----------+--------+
+| NGC 4258 | 443 | 115      | 29.398 |
+| LMC      | 339 | 24       | 18.477 |
+| M31      | 55  | 160      | 24.380 |
++----------+-----+----------+--------+
+[01:48:09] [SECTION] Independent P-L Fit Results:[0m
++----------+-----+-----+-----------+-------+--------+-------+
+| Anchor   | N   | σ   | M_W (abs) | ± err | b_W    | ± err |
++----------+-----+-----+-----------+-------+--------+-------+
+| NGC 4258 | 443 | 115 | -5.838    | 0.022 | -3.288 | 0.078 |
+| LMC      | 339 | 24  | -5.878    | 0.005 | -3.291 | 0.019 |
+| M31      | 55  | 160 | -5.849    | 0.024 | -3.313 | 0.077 |
++----------+-----+-----+-----------+-------+--------+-------+
+[01:48:09] [SECTION] Multi-Anchor Regression (sigma^2/c^2 form):[0m
+[0;37m[01:48:09] [INFO]   κ_anchor = 2.321e+05 ± 1.937e+05 mag[0m
+[0;37m[01:48:09] [INFO]   Significance: 1.2σ[0m
+[0;37m[01:48:09] [INFO]   Pearson r = 0.306 (p = 0.8019)[0m
+[0;37m[01:48:09] [INFO]   κ comparison (3-anchor fit, error dominated by κ_host): 1.6σ[0m
+[01:48:09] [SECTION] Prediction Test A (NAIVE, S=1 for anchors — standard-GR-style):[0m
+[0;37m[01:48:09] [INFO]   NGC 4258 σ=   115  Δμ_pred=+0.475  M_W obs=-5.838  pred=-5.403  resid=-0.435 (-1.5σ)[0m
+[0;37m[01:48:09] [INFO]   M31      σ=   160  Δμ_pred=+0.940  M_W obs=-5.849  pred=-4.938  resid=-0.911 (-1.6σ)[0m
+[0;37m[01:48:09] [INFO]   Mean |residual| = 1.6σ; chi2 = 4.96 / 2 dof[0m
+[01:48:09] [SECTION] Prediction Test B (TEP-AWARE, S_anchor from cosmological environment, ref=LMC with S=0.87):[0m
+[0;37m[01:48:09] [INFO]   NGC 4258 S=0.10  Δμ_TEP=+0.029  M_W obs=-5.838  pred=-5.849  resid=+0.011 (+0.4σ)[0m
+[0;37m[01:48:09] [INFO]   M31      S=0.47  Δμ_TEP=+0.434  M_W obs=-5.849  pred=-5.444  resid=-0.406 (-1.6σ)[0m
+[0;37m[01:48:09] [INFO]   Mean |residual| = 1.0σ; chi2 = 2.57 / 2 dof[0m
+[1;32m[01:48:09] [SUCCESS] Results saved: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_27_anchor_stratification_test.json[0m
+[0;37m[01:48:09] [INFO] ======================================================================[0m
+[01:48:09] [SECTION] ANCHOR STRATIFICATION SUMMARY[0m
+[0;37m[01:48:09] [INFO] ======================================================================[0m
+[0;37m[01:48:09] [INFO] TEP framing: anchors lie in DEEP cosmological potential wells (LG/Local Volume); hosts are in Hubble flow (less screened). Density-regime screening is expected.[0m
+[0;37m[01:48:09] [INFO] Limited anchor/host κ comparison (1.6σ) — anchor sample (N=3) is insufficient to discriminate screening regimes.[0m

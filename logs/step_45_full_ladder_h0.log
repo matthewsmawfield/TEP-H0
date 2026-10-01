@@ -1,78 +1,78 @@
-[07:11:47] [INFO] Step 45: Full-Ladder H_0 Propagation Test
-[07:11:47] [INFO] Decisive audit: does frozen kappa move the complete SH0ES ladder
+[01:51:21] [INFO] Step 45: Full-Ladder H_0 Propagation Test
+[01:51:21] [INFO] Decisive audit: does frozen kappa move the complete SH0ES ladder
 from 73.04 to approximately 69?
-[07:11:47] [INFO] Loading data...
-[07:11:48] [INFO] SH0ES design matrix: (3490, 46), 3490 observations, 46 parameters
-[07:11:48] [INFO] Hubble-flow sample: 274 SNe (z > 0.023)
-[07:11:48] [INFO] Baseline SH0ES fit...
-[07:11:48] [SUCCESS]   H_0 = 73.04 +/- 1.01 km/s/Mpc
-[07:11:48] [INFO]   M_B = -19.2529 +/- 0.0289
-[07:11:48] [INFO]   chi^2/dof = 3552.7/3444 = 1.0316
-[07:11:48] [INFO]   (SH0ES reports H_0 = 73.04 +/- 1.01)
-[07:11:48] [INFO] Extracting Cepheid host distance moduli...
-[07:11:48] [INFO]   N_Cepheid hosts = 37
-[07:11:48] [INFO]   sigma range: 20.2 - 286.4 km/s
-[07:11:48] [INFO]   S range: 0.027 - 0.940
-[07:11:48] [INFO] sigma_ref conventions...
-[07:11:48] [INFO]   Standard  sigma_ref = 87.17 km/s
-[07:11:48] [INFO]   Screened  sigma_ref = 30.51 km/s
-[07:11:48] [INFO]   Equal-wt  sigma_ref = 70.00 km/s
-[07:11:48] [INFO]   Rotation  sigma_ref = 131.46 km/s
-[07:11:48] [INFO]     MW  S = 0.605  (N_mb = 7)
-[07:11:48] [INFO]     LMC S = 0.873  (N_mb = 2)
-[07:11:48] [INFO]     N4258 S = 0.096  (N_mb = 65)
-[07:11:48] [INFO] Full-ladder propagation (M_B -> Hubble flow)...
-[07:11:48] [INFO]   standard             kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00
-[07:11:48] [INFO]   standard             kappa_gal_canonical    kappa=9.600e+05  H_0=71.73 +/- 1.01  tension=3.84sigma  delta_H0=-1.31
-[07:11:48] [INFO]   standard             kappa_endpoint_equiv   kappa=3.648e+05  H_0=72.54 +/- 1.01  tension=4.56sigma  delta_H0=-0.50
-[07:11:48] [INFO]   screened             kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00
-[07:11:48] [INFO]   screened             kappa_gal_canonical    kappa=9.600e+05  H_0=69.42 +/- 1.01  tension=1.79sigma  delta_H0=-3.62
-[07:11:48] [INFO]   screened             kappa_endpoint_equiv   kappa=3.648e+05  H_0=71.64 +/- 1.01  tension=3.76sigma  delta_H0=-1.40
-[07:11:48] [INFO]   equal_weights        kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00
-[07:11:48] [INFO]   equal_weights        kappa_gal_canonical    kappa=9.600e+05  H_0=70.78 +/- 1.01  tension=3.00sigma  delta_H0=-2.26
-[07:11:48] [INFO]   equal_weights        kappa_endpoint_equiv   kappa=3.648e+05  H_0=72.17 +/- 1.01  tension=4.24sigma  delta_H0=-0.87
-[07:11:48] [INFO]   homogeneous_rotation kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00
-[07:11:48] [INFO]   homogeneous_rotation kappa_gal_canonical    kappa=9.600e+05  H_0=75.23 +/- 1.01  tension=6.95sigma  delta_H0=+2.19
-[07:11:48] [INFO]   homogeneous_rotation kappa_endpoint_equiv   kappa=3.648e+05  H_0=73.86 +/- 1.01  tension=5.74sigma  delta_H0=+0.82
-[07:11:48] [INFO] Full-ladder propagation (SH0ES design matrix)...
-[07:11:48] [INFO]   standard kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma
-[07:11:48] [INFO]   standard kappa_gal_canonical       kappa=9.600e+05  H_0=69.74  delta_chi2=+29.2  tension=2.16sigma
-[07:11:48] [INFO]   standard kappa_endpoint_equiv      kappa=3.648e+05  H_0=71.77  delta_chi2=+6.0  tension=3.94sigma
-[07:11:48] [INFO]   screened kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma
-[07:11:48] [INFO]   screened kappa_gal_canonical       kappa=9.600e+05  H_0=69.74  delta_chi2=+29.2  tension=2.16sigma
-[07:11:48] [INFO]   screened kappa_endpoint_equiv      kappa=3.648e+05  H_0=71.77  delta_chi2=+6.0  tension=3.94sigma
-[07:11:48] [INFO]   equal_weights kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma
-[07:11:49] [INFO]   equal_weights kappa_gal_canonical       kappa=9.600e+05  H_0=69.74  delta_chi2=+29.2  tension=2.16sigma
-[07:11:49] [INFO]   equal_weights kappa_endpoint_equiv      kappa=3.648e+05  H_0=71.77  delta_chi2=+6.0  tension=3.94sigma
-[07:11:49] [INFO]   homogeneous_rotation kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma
-[07:11:49] [INFO]   homogeneous_rotation kappa_gal_canonical       kappa=9.600e+05  H_0=69.74  delta_chi2=+29.2  tension=2.16sigma
-[07:11:49] [INFO]   homogeneous_rotation kappa_endpoint_equiv      kappa=3.648e+05  H_0=71.77  delta_chi2=+6.0  tension=3.94sigma
-[07:11:49] [INFO] Summary: Full-Ladder H_0 Propagation
-[07:11:49] [INFO] Full-Ladder H_0 Propagation Results
-[07:11:49] [INFO] +----------------------+-----------+-----------+-----------+-------+-----------+
-[07:11:49] [INFO] | sigma_ref            | kappa     | H0_simple | H0_matrix | dChi2 | tension   |
-[07:11:49] [INFO] +----------------------+-----------+-----------+-----------+-------+-----------+
-[07:11:49] [INFO] | standard             | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |
-[07:11:49] [INFO] | standard             | 9.600e+05 | 71.73     | 69.74     | +29.2 | 3.84sigma |
-[07:11:49] [INFO] | standard             | 3.648e+05 | 72.54     | 71.77     | +6.0  | 4.56sigma |
-[07:11:49] [INFO] | screened             | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |
-[07:11:49] [INFO] | screened             | 9.600e+05 | 69.42     | 69.74     | +29.2 | 1.79sigma |
-[07:11:49] [INFO] | screened             | 3.648e+05 | 71.64     | 71.77     | +6.0  | 3.76sigma |
-[07:11:49] [INFO] | equal_weights        | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |
-[07:11:49] [INFO] | equal_weights        | 9.600e+05 | 70.78     | 69.74     | +29.2 | 3.00sigma |
-[07:11:49] [INFO] | equal_weights        | 3.648e+05 | 72.17     | 71.77     | +6.0  | 4.24sigma |
-[07:11:49] [INFO] | homogeneous_rotation | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |
-[07:11:49] [INFO] | homogeneous_rotation | 9.600e+05 | 75.23     | 69.74     | +29.2 | 6.95sigma |
-[07:11:49] [INFO] | homogeneous_rotation | 3.648e+05 | 73.86     | 71.77     | +6.0  | 5.74sigma |
-[07:11:49] [INFO] +----------------------+-----------+-----------+-----------+-------+-----------+
-[07:11:49] [INFO] Delta-chi2 row-type decomposition (endpoint-equivalent projection)...
-[07:11:49] [INFO]   cepheid_nonanchor     : Δχ² = +3.1  (51.4%)  N_rows = 2150
-[07:11:49] [INFO]   sn_calibrator         : Δχ² = +3.3  (55.2%)  N_rows = 77
-[07:11:49] [INFO]   cepheid_anchor        : Δχ² = +0.0  (0.1%)  N_rows = 982
-[07:11:49] [INFO]   sn_hubble_flow        : Δχ² = -0.4  (-6.4%)  N_rows = 277
-[07:11:49] [INFO]   other                 : Δχ² = -0.0  (-0.3%)  N_rows = 4
-[07:11:49] [INFO]   total                 : Δχ² = +6.0
-[07:11:49] [INFO] Key Conclusion
-[07:11:49] [SUCCESS]   Endpoint-equivalent kappa (3.648e+05): H_0 = 71.77 +/- 0.99, Delta-chi2 = +6.00
-[07:11:49] [SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_45_full_ladder_h0_propagation.json
-[07:11:49] [SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_45_full_ladder_h0_propagation.csv
+[01:51:21] [INFO] Loading data...
+[01:51:22] [INFO] SH0ES design matrix: (3490, 46), 3490 observations, 46 parameters
+[01:51:22] [INFO] Hubble-flow sample: 274 SNe (z > 0.023)
+[01:51:22] [INFO] Baseline SH0ES fit...
+[01:51:22] [SUCCESS]   H_0 = 73.04 +/- 1.01 km/s/Mpc
+[01:51:22] [INFO]   M_B = -19.2529 +/- 0.0289
+[01:51:22] [INFO]   chi^2/dof = 3552.7/3444 = 1.0316
+[01:51:22] [INFO]   (SH0ES reports H_0 = 73.04 +/- 1.01)
+[01:51:22] [INFO] Extracting Cepheid host distance moduli...
+[01:51:22] [INFO]   N_Cepheid hosts = 37
+[01:51:22] [INFO]   sigma range: 28.0 - 238.0 km/s
+[01:51:22] [INFO]   S range: 0.027 - 0.940
+[01:51:22] [INFO] sigma_ref conventions...
+[01:51:22] [INFO]   Standard  sigma_ref = 87.17 km/s
+[01:51:22] [INFO]   Screened  sigma_ref = 30.51 km/s
+[01:51:22] [INFO]   Equal-wt  sigma_ref = 70.00 km/s
+[01:51:22] [INFO]   Rotation  sigma_ref = 131.46 km/s
+[01:51:22] [INFO]     MW  S = 0.605  (N_mb = 7)
+[01:51:22] [INFO]     LMC S = 0.873  (N_mb = 2)
+[01:51:22] [INFO]     N4258 S = 0.096  (N_mb = 65)
+[01:51:22] [INFO] Full-ladder propagation (M_B -> Hubble flow)...
+[01:51:22] [INFO]   standard             kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00
+[01:51:22] [INFO]   standard             kappa_gal_canonical    kappa=9.600e+05  H_0=73.09 +/- 1.01  tension=5.05sigma  delta_H0=+0.05
+[01:51:22] [INFO]   standard             kappa_endpoint_equiv   kappa=1.220e+06  H_0=73.10 +/- 1.01  tension=5.06sigma  delta_H0=+0.06
+[01:51:22] [INFO]   screened             kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00
+[01:51:22] [INFO]   screened             kappa_gal_canonical    kappa=9.600e+05  H_0=70.73 +/- 1.01  tension=2.96sigma  delta_H0=-2.31
+[01:51:22] [INFO]   screened             kappa_endpoint_equiv   kappa=1.220e+06  H_0=70.12 +/- 1.01  tension=2.41sigma  delta_H0=-2.92
+[01:51:22] [INFO]   equal_weights        kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00
+[01:51:22] [INFO]   equal_weights        kappa_gal_canonical    kappa=9.600e+05  H_0=72.13 +/- 1.01  tension=4.19sigma  delta_H0=-0.91
+[01:51:22] [INFO]   equal_weights        kappa_endpoint_equiv   kappa=1.220e+06  H_0=71.88 +/- 1.01  tension=3.98sigma  delta_H0=-1.16
+[01:51:22] [INFO]   homogeneous_rotation kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00
+[01:51:22] [INFO]   homogeneous_rotation kappa_gal_canonical    kappa=9.600e+05  H_0=76.66 +/- 1.01  tension=8.21sigma  delta_H0=+3.62
+[01:51:22] [INFO]   homogeneous_rotation kappa_endpoint_equiv   kappa=1.220e+06  H_0=77.67 +/- 1.01  tension=9.11sigma  delta_H0=+4.63
+[01:51:22] [INFO] Full-ladder propagation (SH0ES design matrix)...
+[01:51:22] [INFO]   standard kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma
+[01:51:22] [INFO]   standard kappa_gal_canonical       kappa=9.600e+05  H_0=71.01  delta_chi2=+5.9  tension=3.28sigma
+[01:51:22] [INFO]   standard kappa_endpoint_equiv      kappa=1.220e+06  H_0=70.46  delta_chi2=+9.9  tension=2.80sigma
+[01:51:22] [INFO]   screened kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma
+[01:51:22] [INFO]   screened kappa_gal_canonical       kappa=9.600e+05  H_0=71.01  delta_chi2=+5.9  tension=3.28sigma
+[01:51:22] [INFO]   screened kappa_endpoint_equiv      kappa=1.220e+06  H_0=70.46  delta_chi2=+9.9  tension=2.80sigma
+[01:51:22] [INFO]   equal_weights kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma
+[01:51:22] [INFO]   equal_weights kappa_gal_canonical       kappa=9.600e+05  H_0=71.01  delta_chi2=+5.9  tension=3.28sigma
+[01:51:22] [INFO]   equal_weights kappa_endpoint_equiv      kappa=1.220e+06  H_0=70.46  delta_chi2=+9.9  tension=2.80sigma
+[01:51:22] [INFO]   homogeneous_rotation kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma
+[01:51:23] [INFO]   homogeneous_rotation kappa_gal_canonical       kappa=9.600e+05  H_0=71.01  delta_chi2=+5.9  tension=3.28sigma
+[01:51:23] [INFO]   homogeneous_rotation kappa_endpoint_equiv      kappa=1.220e+06  H_0=70.46  delta_chi2=+9.9  tension=2.80sigma
+[01:51:23] [INFO] Summary: Full-Ladder H_0 Propagation
+[01:51:23] [INFO] Full-Ladder H_0 Propagation Results
+[01:51:23] [INFO] +----------------------+-----------+-----------+-----------+-------+-----------+
+[01:51:23] [INFO] | sigma_ref            | kappa     | H0_simple | H0_matrix | dChi2 | tension   |
+[01:51:23] [INFO] +----------------------+-----------+-----------+-----------+-------+-----------+
+[01:51:23] [INFO] | standard             | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |
+[01:51:23] [INFO] | standard             | 9.600e+05 | 73.09     | 71.01     | +5.9  | 5.05sigma |
+[01:51:23] [INFO] | standard             | 1.220e+06 | 73.10     | 70.46     | +9.9  | 5.06sigma |
+[01:51:23] [INFO] | screened             | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |
+[01:51:23] [INFO] | screened             | 9.600e+05 | 70.73     | 71.01     | +5.9  | 2.96sigma |
+[01:51:23] [INFO] | screened             | 1.220e+06 | 70.12     | 70.46     | +9.9  | 2.41sigma |
+[01:51:23] [INFO] | equal_weights        | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |
+[01:51:23] [INFO] | equal_weights        | 9.600e+05 | 72.13     | 71.01     | +5.9  | 4.19sigma |
+[01:51:23] [INFO] | equal_weights        | 1.220e+06 | 71.88     | 70.46     | +9.9  | 3.98sigma |
+[01:51:23] [INFO] | homogeneous_rotation | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |
+[01:51:23] [INFO] | homogeneous_rotation | 9.600e+05 | 76.66     | 71.01     | +5.9  | 8.21sigma |
+[01:51:23] [INFO] | homogeneous_rotation | 1.220e+06 | 77.67     | 70.46     | +9.9  | 9.11sigma |
+[01:51:23] [INFO] +----------------------+-----------+-----------+-----------+-------+-----------+
+[01:51:23] [INFO] Delta-chi2 row-type decomposition (endpoint-equivalent projection)...
+[01:51:23] [INFO]   cepheid_nonanchor     : Δχ² = +9.1  (92.4%)  N_rows = 2150
+[01:51:23] [INFO]   sn_calibrator         : Δχ² = +0.7  (7.0%)  N_rows = 77
+[01:51:23] [INFO]   cepheid_anchor        : Δχ² = +0.2  (1.8%)  N_rows = 982
+[01:51:23] [INFO]   sn_hubble_flow        : Δχ² = -0.0  (-0.0%)  N_rows = 277
+[01:51:23] [INFO]   other                 : Δχ² = -0.1  (-1.2%)  N_rows = 4
+[01:51:23] [INFO]   total                 : Δχ² = +9.9
+[01:51:23] [INFO] Key Conclusion
+[01:51:23] [SUCCESS]   Endpoint-equivalent kappa (1.220e+06): H_0 = 70.46 +/- 0.97, Delta-chi2 = +9.87
+[01:51:23] [SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_45_full_ladder_h0_propagation.json
+[01:51:23] [SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_45_full_ladder_h0_propagation.csv

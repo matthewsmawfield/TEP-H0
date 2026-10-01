@@ -5,17 +5,17 @@ TEP prediction: Model 'tep_full' should be preferred.
 Confound prediction: Model 'confound_nmb' should be preferred.
 
 Confound: sigma^2 + N_mb
-  BIC=277.8, scatter=8.92, p=0.3375
-
-TEP-full + N_mb residual
-  BIC=278.7, scatter=9.04, p=0.8119
+  BIC=270.6, scatter=8.09, p=0.0063
 
 Baseline: sigma^2 only
-  BIC=278.9, scatter=9.51, p=0.2010
+  BIC=272.5, scatter=8.72, p=0.0058
 
 TEP-full: S_local * S_group * sigma^2
-  BIC=279.8, scatter=9.63, p=0.3734
+  BIC=272.7, scatter=8.75, p=0.0065
+
+TEP-full + N_mb residual
+  BIC=273.6, scatter=8.43, p=0.0294
 
 TEP-local: S_local * sigma^2
-  BIC=280.4, scatter=9.70, p=0.6038
+  BIC=274.3, scatter=8.94, p=0.0151
 

@@ -1,13 +1,13 @@
 Flow / Environment Robustness
 ==============================
 
-Baseline Pearson r(H0, Sigma): 0.241355 (perm p=0.151200) N=37
-Partial r(H0, Sigma | zHD): 0.059044 (p=0.732306) N=37
-Partial r(H0, Sigma | zHD, Tully Nmb): 0.013951 (p=0.936601) N=37
-Partial r(H0, Sigma | zHD, Tully logpK): 0.017508 (p=0.924230) N=34
+Baseline Pearson r(H0, Sigma): 0.500925 (perm p=0.001200) N=37
+Partial r(H0, Sigma | zHD): 0.374640 (p=0.024372) N=37
+Partial r(H0, Sigma | zHD, Tully Nmb): 0.404858 (p=0.015844) N=37
+Partial r(H0, Sigma | zHD, Tully logpK): 0.512559 (p=0.002705) N=34
 
 Alternative velocity definitions (H0 = cz/d):
-  z_hd: Pearson r=0.241355 (perm p=0.151200) N=37
-  z_cmb: Pearson r=0.214561 (perm p=0.198200) N=37
-  z_hel: Pearson r=0.357478 (perm p=0.029400) N=37
+  z_hd: Pearson r=0.500925 (perm p=0.001200) N=37
+  z_cmb: Pearson r=0.424541 (perm p=0.010800) N=37
+  z_hel: Pearson r=0.491369 (perm p=0.001800) N=37
 

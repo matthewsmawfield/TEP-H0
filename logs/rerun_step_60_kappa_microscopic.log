@@ -1,0 +1,9 @@
+{
+  "step": "step_60_kappa_microscopic",
+  "b_leavitt": -3.3,
+  "lambda_Cep": 1.0,
+  "kappa_Cep_mag": 1.4331717902807308,
+  "example_X_200kms": 4.4506002242144735e-07,
+  "example_delta_mu_mag": 6.378474691161279e-07,
+  "not_this_derivation": "The fitted ladder coefficient ~10^6 mag is not produced by an envelope density. It is not \u03ba_micro."
+}

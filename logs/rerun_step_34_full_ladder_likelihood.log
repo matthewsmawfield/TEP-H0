@@ -1,0 +1,255 @@
+[0;37m[01:48:10] [INFO] [0m
+[0;37m[01:48:10] [INFO] ================================================================================[0m
+[0;37m[01:48:10] [INFO]    Full-Ladder Likelihood Analysis[0m
+[0;37m[01:48:10] [INFO] ================================================================================[0m
+[0;37m[01:48:10] [INFO] [0m
+[0;37m[01:48:10] [INFO] Loading SH0ES Data...[0m
+[0;37m[01:48:10] [INFO] Design matrix shape: (3490, 46)[0m
+[0;37m[01:48:10] [INFO] Data vector length: 3490[0m
+[0;37m[01:48:11] [INFO] Covariance matrix shape: (3490, 3490)[0m
+[0;37m[01:48:11] [INFO] Number of parameters: 46[0m
+[0;37m[01:48:11] [INFO] Loading Host Metadata...[0m
+[0;37m[01:48:11] [INFO] Loaded 42 hosts[0m
+[0;37m[01:48:11] [INFO] Mapped M1337 -> Mrk1337[0m
+[0;37m[01:48:11] [INFO] Mapped N105A -> N105[0m
+[0;37m[01:48:11] [INFO] Mapped N976A -> N976[0m
+[0;37m[01:48:11] [INFO] Created 122 name mappings[0m
+[0;37m[01:48:11] [INFO] Calculating Effective Calibrator Sigma...[0m
+[1;32m[01:48:11] [SUCCESS] Anchor active-response scale: 30.51 km/s[0m
+[0;37m[01:48:11] [INFO] Running Baseline SH0ES Fit...[0m
+[0;37m[01:48:11] [INFO] Using Cholesky-whitened GLS (numerically stable)[0m
+[1;32m[01:48:11] [SUCCESS] Baseline H0: 73.04 +/- 1.01 km/s/Mpc[0m
+[0;37m[01:48:11] [INFO] Baseline Chi2/dof: 1.03[0m
+[0;37m[01:48:11] [INFO] Stage 1: Summary-Likelihood Analysis[0m
+[0;37m[01:48:11] [INFO] Fitting 38 hosts with TEP regressor[0m
+[0;37m[01:48:11] [INFO] X range: [-9.085e-09, 3.421e-07][0m
+[0;37m[01:48:11] [INFO] mu range: [29.16, 34.49][0m
+[0;37m[01:48:11] [INFO] Condition number of ATWA: 3.26e+14[0m
+[0;37m[01:48:11] [INFO] Baseline mu_true: 30.771 mag[0m
+[1;32m[01:48:11] [SUCCESS] TEP coefficient kappa_Cep: 1.273e+07 +/- 1.606e+05 mag[0m
+[0;37m[01:48:11] [INFO] Chi2/dof: 424.32[0m
+[0;37m[01:48:11] [INFO] Very high chi2/dof is expected for the summary-likelihood approximation[0m
+[0;37m[01:48:11] [INFO] The simple linear model mu = mu_true + kappa*X is intentionally approximate[0m
+[0;37m[01:48:11] [INFO] Mean mu shift: -0.9014 mag[0m
+[0;37m[01:48:11] [INFO] Stage 2: Matrix-Level Likelihood Analysis[0m
+[0;37m[01:48:11] [INFO] Found 40 host distance modulus parameters[0m
+[0;37m[01:48:11] [INFO] Baseline H0: 73.04 +/- 1.01 km/s/Mpc[0m
+[0;37m[01:48:11] [INFO] Variant A: Free kappa with full latent host distances[0m
+[0;37m[01:48:11] [INFO] Row class counts:[0m
+[0;37m[01:48:11] [INFO]   Anchor_prior        :    2 rows (no TEP)[0m
+[0;37m[01:48:11] [INFO]   Cepheid             : 3132 rows (TEP applied)[0m
+[0;37m[01:48:11] [INFO]   Other               :    2 rows (no TEP)[0m
+[0;37m[01:48:11] [INFO]   SN_Hubble           :  277 rows (no TEP)[0m
+[0;37m[01:48:11] [INFO]   SN_calibrator       :   77 rows (no TEP)[0m
+[0;37m[01:48:11] [INFO] Host-level TEP application:[0m
+[0;37m[01:48:11] [INFO] Host       Cepheid rows          X_i  TEP?[0m
+[0;37m[01:48:11] [INFO] ---------------------------------------------[0m
+[0;37m[01:48:11] [INFO] LMC                 339   -4.758e-09   yes[0m
+[0;37m[01:48:11] [INFO] M101                259   -3.299e-09   yes[0m
+[0;37m[01:48:11] [INFO] M1337                15    8.128e-08   yes[0m
+[0;37m[01:48:11] [INFO] M31                  55    1.239e-07   yes[0m
+[0;37m[01:48:11] [INFO] MW                    2   -4.293e-09   yes[0m
+[0;37m[01:48:11] [INFO] N0691                28    6.756e-08   yes[0m
+[0;37m[01:48:11] [INFO] N1015                18    1.082e-07   yes[0m
+[0;37m[01:48:11] [INFO] N105A                 8    6.505e-08   yes[0m
+[0;37m[01:48:11] [INFO] N1309                53    7.220e-08   yes[0m
+[0;37m[01:48:11] [INFO] N1365                46    2.244e-08   yes[0m
+[0;37m[01:48:11] [INFO] N1448                73    6.764e-08   yes[0m
+[0;37m[01:48:11] [INFO] N1559               110    4.302e-08   yes[0m
+[0;37m[01:48:11] [INFO] N2442               177    8.580e-11   yes[0m
+[0;37m[01:48:11] [INFO] N2525                73    5.454e-08   yes[0m
+[0;37m[01:48:11] [INFO] N2608                22    6.654e-08   yes[0m
+[0;37m[01:48:11] [INFO] N3021                16    1.355e-08   yes[0m
+[0;37m[01:48:11] [INFO] N3147                27    5.156e-08   yes[0m
+[0;37m[01:48:11] [INFO] N3254                48    1.053e-07   yes[0m
+[0;37m[01:48:11] [INFO] N3370                73    6.487e-08   yes[0m
+[0;37m[01:48:11] [INFO] N3447               101    2.130e-08   yes[0m
+[0;37m[01:48:11] [INFO] N3583                54    9.700e-08   yes[0m
+[0;37m[01:48:11] [INFO] N3972                52   -3.967e-09   yes[0m
+[0;37m[01:48:11] [INFO] N3982                27   -3.162e-09   yes[0m
+[0;37m[01:48:11] [INFO] N4038                29    1.083e-07   yes[0m
+[0;37m[01:48:11] [INFO] N4258               443    3.724e-09   yes[0m
+[0;37m[01:48:11] [INFO] N4424                 9   -9.085e-09   yes[0m
+[0;37m[01:48:11] [INFO] N4536                40    7.940e-08   yes[0m
+[0;37m[01:48:11] [INFO] N4639                30    7.911e-08   yes[0m
+[0;37m[01:48:11] [INFO] N4680                11    9.809e-08   yes[0m
+[0;37m[01:48:11] [INFO] N5468                93    3.117e-08   yes[0m
+[0;37m[01:48:11] [INFO] N5584               165    8.880e-08   yes[0m
+[0;37m[01:48:11] [INFO] N5643               251    8.608e-08   yes[0m
+[0;37m[01:48:11] [INFO] N5728                20    3.121e-07   yes[0m
+[0;37m[01:48:11] [INFO] N5861                41    1.074e-07   yes[0m
+[0;37m[01:48:11] [INFO] N5917                14    1.791e-08   yes[0m
+[0;37m[01:48:11] [INFO] N7250                21    1.777e-08   yes[0m
+[0;37m[01:48:11] [INFO] N7329                31    1.505e-07   yes[0m
+[0;37m[01:48:11] [INFO] N7541                33    2.889e-08   yes[0m
+[0;37m[01:48:11] [INFO] N7678                16    1.087e-07   yes[0m
+[0;37m[01:48:11] [INFO] N976A                33    3.421e-07   yes[0m
+[0;37m[01:48:11] [INFO] SMC                 143   -5.652e-09   yes[0m
+[0;37m[01:48:11] [INFO] U9391                33    4.847e-08   yes[0m
+[0;37m[01:48:11] [INFO] TEP column: 3132/3490 non-zero entries[0m
+[0;37m[01:48:11] [INFO] X range: [-9.085e-09, 3.421e-07][0m
+[0;37m[01:48:11] [INFO] X_scaled range: [-9.085e-03, 3.421e-01][0m
+[0;37m[01:48:11] [INFO] L_aug rank: 47 (full: 47)[0m
+[0;37m[01:48:11] [INFO] Parameter correlations with kappa:[0m
+[0;37m[01:48:11] [INFO]   corr(kappa, MHW1    ) =  -0.046[0m
+[0;37m[01:48:11] [INFO]   corr(kappa, MB      ) =  -0.632[0m
+[0;37m[01:48:11] [INFO]   corr(kappa, bW      ) =   0.026[0m
+[0;37m[01:48:11] [INFO]   corr(kappa, ZW      ) =   0.053[0m
+[0;37m[01:48:11] [INFO]   corr(kappa, 5logH0  ) =  -0.621[0m
+[0;37m[01:48:11] [INFO] Free kappa: 5.569e+04 +/- 3.703e+05 mag[0m
+[0;37m[01:48:11] [INFO] Significance: 0.15 sigma[0m
+[0;37m[01:48:11] [INFO] H0 (free kappa): 72.92 km/s/Mpc[0m
+[0;37m[01:48:11] [INFO] Chi2/dof: 1.03[0m
+[0;37m[01:48:11] [INFO] Variant B: Prior-constrained kappa[0m
+[0;37m[01:48:11] [INFO] Prior kappa: 4.730e+05 +/- 2.717e+05 mag[0m
+[0;37m[01:48:11] [INFO] H0 (prior): 72.03 +/- 1.15 km/s/Mpc[0m
+[0;37m[01:48:11] [INFO] Chi2/dof: 1.03[0m
+[0;37m[01:48:11] [INFO] Variant C: Fixed-kappa sensitivity test[0m
+[0;37m[01:48:11] [INFO] Fixed kappa = 9.600e+05 mag[0m
+[0;37m[01:48:11] [INFO] Baseline H0: 73.04 +/- 1.01 km/s/Mpc[0m
+[1;32m[01:48:11] [SUCCESS] Fixed-kappa H0: 71.01 +/- 0.98 km/s/Mpc[0m
+[0;37m[01:48:11] [INFO] Baseline Chi2/dof: 1.03[0m
+[0;37m[01:48:11] [INFO] Fixed-kappa Chi2/dof: 1.03[0m
+[0;37m[01:48:11] [INFO] Chi2 penalty (fixed vs baseline): 5.9408 (dof=0)[0m
+[0;37m[01:48:11] [INFO] Delta AIC: 5.9408[0m
+[0;37m[01:48:11] [INFO] Delta BIC: 5.9408 (not valid for model selection)[0m
+[0;37m[01:48:11] [INFO] Host-Summary Reconstruction Audit[0m
+[0;37m[01:48:11] [INFO] Total hosts with both published and matrix mu: 40[0m
+[0;37m[01:48:11] [INFO] After anchor exclusion and Hubble-flow cut: 34[0m
+[0;37m[01:48:11] [INFO] --- Paper Discovery Statistic Reproduction ---[0m
+[0;37m[01:48:11] [INFO] Published H0 vs sigma:  r=+0.445 (p=0.0083), rho=+0.523[0m
+[0;37m[01:48:11] [INFO] Matrix H0 vs sigma:     r=+0.445 (p=0.0083), rho=+0.523[0m
+[0;37m[01:48:11] [INFO] Published mu vs sigma:  r=+0.224 (p=0.2025)[0m
+[0;37m[01:48:11] [INFO] Matrix mu vs sigma:    r=+0.224 (p=0.2025)[0m
+[0;37m[01:48:11] [INFO] Delta mu vs sigma:     r=+0.190 (p=0.2815)[0m
+[0;37m[01:48:11] [INFO] Delta H0 vs sigma:     r=-0.174 (p=0.3263)[0m
+[0;37m[01:48:11] [INFO] Manuscript claims: r=0.466, rho=0.517[0m
+[1;32m[01:48:11] [SUCCESS] ✓ Published H0-sigma reproduces manuscript r within 0.1[0m
+[1;32m[01:48:11] [SUCCESS] ✓ Published H0-sigma reproduces manuscript rho within 0.1[0m
+[1;32m[01:48:11] [SUCCESS] ✓ Matrix-derived H0 reproduces published H0 trend[0m
+[0;37m[01:48:11] [INFO] Hosts with largest H0 discrepancy (published vs matrix):[0m
+[0;37m[01:48:11] [INFO]   N2525        sigma=  82.0 H0_pub=  71.47 H0_fit=  71.47 dH0=  +0.00[0m
+[0;37m[01:48:11] [INFO]   N5728        sigma= 176.0 H0_pub=  77.96 H0_fit=  77.96 dH0=  +0.00[0m
+[0;37m[01:48:11] [INFO]   N1365        sigma= 151.0 H0_pub=  78.65 H0_fit=  78.65 dH0=  +0.00[0m
+[0;37m[01:48:11] [INFO]   N1448        sigma=  95.0 H0_pub=  54.98 H0_fit=  54.98 dH0=  +0.00[0m
+[0;37m[01:48:11] [INFO]   U9391        sigma=  75.0 H0_pub=  61.23 H0_fit=  61.23 dH0=  +0.00[0m
+[1;32m[01:48:11] [SUCCESS] Saved audit to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_host_summary_audit.csv[0m
+[1;32m[01:48:11] [SUCCESS] Saved comparison to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_matrix_vs_paper_host_residuals.csv[0m
+[0;37m[01:48:11] [INFO] Injection test: kappa_inj = 9.600e+05 mag (N=200 draws, full covariance-level noise)[0m
+[0;37m[01:48:12] [INFO] Injected:  9.600e+05[0m
+[0;37m[01:48:12] [INFO] Recovered: 1.003e+06 +/- 3.703e+05 (ensemble scatter 3.522e+05, pull mean +0.117, 68% coverage 0.715)[0m
+[0;37m[01:48:12] [INFO] Recovery fraction: 1.045[0m
+[0;37m[01:48:12] [INFO] Negative injection: injected -9.600e+05, recovered -1.363e+06[0m
+[0;37m[01:48:12] [INFO] Injection Tests for All Model Classes[0m
+[0;37m[01:48:13] [INFO]   cepheid_offset            kappa0_6     injected=9.600e+05 recovered=1.008e+06+/-3.703e+05 frac=1.050 pull=+0.13 cov68=0.72[0m
+[0;37m[01:48:14] [INFO]   sn_offset                 kappaSN_6    injected=9.600e+05 recovered=9.346e+05+/-3.710e+05 frac=0.974 pull=-0.07 cov68=0.74[0m
+[0;37m[01:48:14] [INFO]   cepheid_plus_sn           kappaCep_6   injected=9.600e+05 recovered=1.195e+06+/-5.258e+06 frac=1.245 pull=+0.04 cov68=0.70[0m
+[0;37m[01:48:14] [INFO]   cepheid_plus_sn           kappaSN_6    injected=9.600e+05 recovered=1.181e+06+/-5.268e+06 frac=1.231 pull=+0.04 cov68=0.69[0m
+[0;37m[01:48:14] [INFO]   cepheid_plus_sn           kappaCep-kappaSN injected=0.0 recovered=1.369e+04+/-3.199e+05[0m
+[1;32m[01:48:14] [SUCCESS] Saved injection tests to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_injection_tests_all_models.csv[0m
+[0;37m[01:48:14] [INFO] Running TEP Model Grid[0m
+[1;32m[01:48:19] [SUCCESS] Saved model grid to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_model_grid.csv[0m
+[0;37m[01:48:19] [INFO] Model Grid Summary (key results):[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset                      centered           H0=72.92 dchi2=0.02 kappa0_6=5.57e+04[0m
+[0;37m[01:48:19] [INFO]   cepheid_period                      centered           H0=73.67 dchi2=2.12 kappaP_6=-4.85e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_period          centered           H0=72.81 dchi2=3.76 kappa0_6=5.93e+05 kappaP_6=-8.05e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_metallicity     centered           H0=72.49 dchi2=1.89 kappa0_6=7.93e+04 kappaZ_6=-1.84e+06[0m
+[0;37m[01:48:19] [INFO]   sn_offset                           centered           H0=72.96 dchi2=0.01 kappaSN_6=-4.04e+04[0m
+[0;37m[01:48:19] [INFO]   cepheid_plus_sn                     centered           H0=72.66 dchi2=0.36 kappaSN_6=3.08e+06 kappaCep_6=3.12e+06[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset                      centered           H0=72.96 dchi2=0.01 kappa0_6=4.04e+04[0m
+[0;37m[01:48:19] [INFO]   cepheid_period                      centered           H0=73.77 dchi2=1.38 kappaP_6=-5.29e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_period          centered           H0=72.94 dchi2=4.88 kappa0_6=1.22e+06 kappaP_6=-1.74e+06[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_metallicity     centered           H0=71.93 dchi2=8.42 kappa0_6=1.11e+05 kappaZ_6=-4.77e+06[0m
+[0;37m[01:48:19] [INFO]   sn_offset                           centered           H0=72.96 dchi2=0.01 kappaSN_6=-4.04e+04[0m
+[0;37m[01:48:19] [INFO]   cepheid_plus_sn                     centered           H0=72.96 dchi2=0.01 kappaSN_6=-3.67e+07 kappaCep_6=-3.66e+07[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset                      raw_sigma2         H0=72.92 dchi2=0.02 kappa0_6=5.57e+04[0m
+[0;37m[01:48:19] [INFO]   cepheid_period                      raw_sigma2         H0=73.67 dchi2=2.12 kappaP_6=-4.85e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_period          raw_sigma2         H0=72.81 dchi2=3.76 kappa0_6=5.93e+05 kappaP_6=-8.05e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_metallicity     raw_sigma2         H0=72.50 dchi2=1.84 kappa0_6=7.98e+04 kappaZ_6=-1.79e+06[0m
+[0;37m[01:48:19] [INFO]   sn_offset                           raw_sigma2         H0=72.95 dchi2=0.01 kappaSN_6=-4.04e+04[0m
+[0;37m[01:48:19] [INFO]   cepheid_plus_sn                     raw_sigma2         H0=73.73 dchi2=0.36 kappaSN_6=3.08e+06 kappaCep_6=3.12e+06[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset                      raw_sigma2         H0=72.95 dchi2=0.01 kappa0_6=4.04e+04[0m
+[0;37m[01:48:19] [INFO]   cepheid_period                      raw_sigma2         H0=73.97 dchi2=1.80 kappaP_6=-5.77e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_period          raw_sigma2         H0=72.87 dchi2=5.42 kappa0_6=1.15e+06 kappaP_6=-1.63e+06[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_metallicity     raw_sigma2         H0=71.81 dchi2=7.97 kappa0_6=1.17e+05 kappaZ_6=-4.24e+06[0m
+[0;37m[01:48:19] [INFO]   sn_offset                           raw_sigma2         H0=72.95 dchi2=0.01 kappaSN_6=-4.04e+04[0m
+[0;37m[01:48:19] [INFO]   cepheid_plus_sn                     raw_sigma2         H0=72.95 dchi2=0.01 kappaSN_6=-4.08e+07 kappaCep_6=-4.08e+07[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset                      unscreened_centered H0=73.18 dchi2=0.09 kappa0_6=-5.24e+04[0m
+[0;37m[01:48:19] [INFO]   cepheid_period                      unscreened_centered H0=73.44 dchi2=2.56 kappaP_6=-2.63e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_period          unscreened_centered H0=73.22 dchi2=2.87 kappa0_6=1.15e+05 kappaP_6=-3.14e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_metallicity     unscreened_centered H0=73.28 dchi2=0.64 kappa0_6=-4.16e+04 kappaZ_6=4.79e+05[0m
+[0;37m[01:48:19] [INFO]   sn_offset                           unscreened_centered H0=73.59 dchi2=0.53 kappaSN_6=1.57e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_plus_sn                     unscreened_centered H0=73.74 dchi2=0.82 kappaSN_6=3.28e+05 kappaCep_6=1.71e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset                      unscreened_centered H0=73.59 dchi2=0.53 kappa0_6=-1.57e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_period                      unscreened_centered H0=73.96 dchi2=2.36 kappaP_6=-4.06e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_period          unscreened_centered H0=73.51 dchi2=3.31 kappa0_6=3.74e+05 kappaP_6=-7.84e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_offset_plus_metallicity     unscreened_centered H0=73.62 dchi2=0.53 kappa0_6=-1.60e+05 kappaZ_6=6.18e+04[0m
+[0;37m[01:48:19] [INFO]   sn_offset                           unscreened_centered H0=73.59 dchi2=0.53 kappaSN_6=1.57e+05[0m
+[0;37m[01:48:19] [INFO]   cepheid_plus_sn                     unscreened_centered H0=73.59 dchi2=0.53 kappaSN_6=-4.62e+07 kappaCep_6=-4.64e+07[0m
+[0;37m[01:48:19] [INFO] Leave-One-Host-Out Diagnostic[0m
+[1;32m[01:48:25] [SUCCESS] Saved leave-one-host-out to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_leave_one_host_out.csv[0m
+[0;37m[01:48:25] [INFO] Hosts with largest kappa influence:[0m
+[0;37m[01:48:25] [INFO]   N976A      sigma= 218.0 kappa=   5.255e+05 +/-    4.591e+05[0m
+[0;37m[01:48:25] [INFO]   N5728      sigma= 176.0 kappa=   2.350e+05 +/-    4.022e+05[0m
+[0;37m[01:48:25] [INFO]   N3982      sigma=  87.3 kappa=  -1.223e+05 +/-    3.801e+05[0m
+[0;37m[01:48:25] [INFO]   N5584      sigma=  98.0 kappa=  -9.770e+04 +/-    3.725e+05[0m
+[0;37m[01:48:25] [INFO]   M101       sigma=  28.0 kappa=  -6.764e+04 +/-    3.835e+05[0m
+[0;37m[01:48:25] [INFO] Residual-After-Fit Audit[0m
+[0;37m[01:48:25] [INFO] Baseline residual-sigma: r=0.422, rho=0.064[0m
+[0;37m[01:48:25] [INFO] TEP residual-sigma:      r=0.431, rho=0.068[0m
+[0;37m[01:48:25] [INFO] ✗ TEP fit does not reduce residual-sigma correlation[0m
+[1;32m[01:48:25] [SUCCESS] Saved residual audit to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_residual_after_fit.csv[0m
+[0;37m[01:48:25] [INFO] Host Covariate Table (B)[0m
+[0;37m[01:48:25] [INFO] Host-level correlations:[0m
+[0;37m[01:48:25] [INFO]   r(sigma, mean period term         ) = +0.198 (p=0.2612)[0m
+[0;37m[01:48:25] [INFO]   r(sigma, mean period contrib      ) = -0.198 (p=0.2612)[0m
+[0;37m[01:48:25] [INFO]   r(sigma, mean Z term              ) = +0.501 (p=0.0025)[0m
+[0;37m[01:48:25] [INFO]   r(sigma, mean Z contrib           ) = -0.501 (p=0.0025)[0m
+[0;37m[01:48:25] [INFO]   r(sigma, fraction logP > 1.5      ) = n/a[0m
+[0;37m[01:48:25] [INFO] ---[0m
+[0;37m[01:48:25] [INFO]   r(H0, mean period term         ) = +0.420 (p=0.0134)[0m
+[0;37m[01:48:25] [INFO]   r(H0, mean period contrib      ) = -0.420 (p=0.0134)[0m
+[0;37m[01:48:25] [INFO]   r(H0, mean Z term              ) = +0.299 (p=0.0857)[0m
+[0;37m[01:48:25] [INFO]   r(H0, mean Z contrib           ) = -0.299 (p=0.0857)[0m
+[0;37m[01:48:25] [INFO]   r(H0, fraction logP > 1.5      ) = n/a[0m
+[1;32m[01:48:25] [SUCCESS] Saved host covariate table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_host_covariate_table.csv[0m
+[0;37m[01:48:25] [INFO] Nested Absorption Test (P6) — Decomposition[0m
+[0;37m[01:48:25] [INFO]   full_baseline       : r=+0.445 rho=+0.523 dH0= +8.90  (Full baseline (mu_i + all corrections))[0m
+[0;37m[01:48:25] [INFO]   no_period           : r=+0.383 rho=+0.384 dH0=+11.51  (Remove period correction)[0m
+[0;37m[01:48:25] [INFO]   no_Z                : r=+0.479 rho=+0.555 dH0= +9.67  (Remove metallicity correction)[0m
+[0;37m[01:48:25] [INFO]   no_PZ               : r=+0.407 rho=+0.427 dH0=+12.34  (Remove period + metallicity)[0m
+[0;37m[01:48:25] [INFO]   → Removing period correction weakens the H0-sigma trend[0m
+[0;37m[01:48:25] [INFO]   → Period distribution contributes to the apparent trend[0m
+[0;37m[01:48:25] [INFO]   → Removing metallicity correction strengthens the H0-sigma trend[0m
+[0;37m[01:48:25] [INFO]   → Z_W was suppressing an environmental signal[0m
+[1;32m[01:48:25] [SUCCESS] Saved nested absorption test to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_nested_absorption_test.csv[0m
+[0;37m[01:48:25] [INFO] SN-Channel Scope Validation (C)[0m
+[0;37m[01:48:25] [INFO] SN calibrator rows total:           77[0m
+[0;37m[01:48:25] [INFO] SN calibrator rows with X_SN != 0:  77[0m
+[0;37m[01:48:25] [INFO] SN Hubble rows total:               0[0m
+[0;37m[01:48:25] [INFO] SN Hubble rows with X_SN != 0:      0[0m
+[0;37m[01:48:25] [INFO] TEP–Metallicity Disentanglement (A)[0m
+[0;37m[01:48:26] [INFO]   Orthogonalization: X = +7.917e-02 + +1.772e-01 * Z_mean[0m
+[0;37m[01:48:26] [INFO]   r(host_X, host_Z_mean) = +0.327[0m
+[0;37m[01:48:26] [INFO] Disentanglement Results:[0m
+[0;37m[01:48:26] [INFO] Model                     n_par     H0       chi2    dchi2       kappa0   sig0       kappaZ   sigZ[0m
+[0;37m[01:48:26] [INFO]   1_baseline                 46  73.04    3552.71    +0.00          n/a    n/a          n/a    n/a[0m
+[0;37m[01:48:26] [INFO]   2_noZ_plus_TEP             46  72.85    3575.49   -22.78    +1.49e+05    0.4          n/a    n/a[0m
+[0;37m[01:48:26] [INFO]   3_baseline_plus_TEP        47  72.92    3552.68    +0.02    +5.57e+04    0.2          n/a    n/a[0m
+[0;37m[01:48:26] [INFO]   4_baseline_TEP_Zint        48  72.49    3550.82    +1.89    +7.93e+04    0.2    -1.84e+06    1.4[0m
+[0;37m[01:48:26] [INFO]   6_orthogonalized_TEP       47  73.03    3552.66    +0.04    +7.09e+04    0.2          n/a    n/a[0m
+[1;32m[01:48:26] [SUCCESS] Saved disentanglement results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_tep_metallicity_disentanglement.csv[0m
+[0;37m[01:48:26] [INFO] Generating Comparison Table...[0m
+[1;32m[01:48:26] [SUCCESS] Saved comparison table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_ladder_likelihood_comparison.csv[0m
+[0;37m[01:48:26] [INFO] Full-Ladder Likelihood Comparison[0m
+[0;37m[01:48:26] [INFO] +----------------------------------+--------------------+--------------------+--------------------+-------------------+--------------------+--------------------+------+--------------------+------------------------+-------------------------------------------+[0m
+[0;37m[01:48:26] [INFO] | model                            | kappa_Cep          | kappa_err          | kappa_significance | H0                | H0_err             | chi2               | dof  | chi2_reduced       | delta_chi2_vs_baseline | notes                                     |[0m
+[0;37m[01:48:26] [INFO] +----------------------------------+--------------------+--------------------+--------------------+-------------------+--------------------+--------------------+------+--------------------+------------------------+-------------------------------------------+[0m
+[0;37m[01:48:26] [INFO] | Baseline SH0ES                   | 0.0                | 0.0                | 0                  | 73.04342157542906 | 1.0071562538178485 | 3552.706270469551  | 3444 | 1.031563957743772  | 0                      | Standard SH0ES                            |[0m
+[0;37m[01:48:26] [INFO] | TEP Summary Likelihood (Stage 1) | 12727288.541751307 | 160616.10813467373 | 79.24042419879645  | —                 | —                  | 15275.358574329184 | 36   | 424.31551595358843 | —                      | Discarded: model broken                   |[0m
+[0;37m[01:48:26] [INFO] | Variant A: Free kappa            | 55687.21274394751  | 370315.75749637134 | 0.1503776483086685 | 72.92363393224504 | —                  | 3552.683657032441  | 3443 | 1.0318570017520885 | —                      | kappa=+5.57e+04 +/- 3.70e+05 (0.15 sigma) |[0m
+[0;37m[01:48:26] [INFO] | Variant B: Prior kappa           | 473047.43749350414 | 271741.63502265373 | —                  | 72.03209001797235 | 1.1486093337215126 | 3553.953873475757  | 3443 | 1.0322259289793079 | —                      | Prior dominates                           |[0m
+[0;37m[01:48:26] [INFO] | Variant C: Fixed kappa           | 960000.0           | 0.0                | —                  | 71.00565456616712 | 0.9790585861164187 | 3558.647043551591  | 3444 | 1.0332889208918674 | 5.940773082040323      | Sensitivity test only                     |[0m
+[0;37m[01:48:26] [INFO] +----------------------------------+--------------------+--------------------+--------------------+-------------------+--------------------+--------------------+------+--------------------+------------------------+-------------------------------------------+[0m
+[1;32m[01:48:26] [SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_34_full_ladder_likelihood_results.json[0m
+[1;32m[01:48:26] [SUCCESS] Full-Ladder Likelihood Analysis Complete[0m

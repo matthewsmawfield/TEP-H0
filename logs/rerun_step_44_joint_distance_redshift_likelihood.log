@@ -1,0 +1,110 @@
+
+============================================================
+Step 44: Joint distance + redshift likelihood
+============================================================
+[INFO] Primary redshift sample: 33 hosts
+[INFO] TRGB overlap sample: 18 hosts
+[INFO] Independent anchor sample: 2 anchors
+    host     mu_cep  mu_geo                                          method
+0    LMC  18.487090  18.477  Detached Eclipsing Binaries (Pietrzynski+2019)
+1  N4258  29.385304  29.398                         Water Maser (Reid+2019)
+
+============================================================
+sigma_v = 150 km/s
+============================================================
+[INFO]   Fitting Null...
+[INFO]     Null: H_app=69.11, kappa=0.000e+00 (nanσ), kappa_SN=nan (nanσ), beta=0.000e+00 (nanσ), BIC=96.7, logL=-40.4
+[INFO]   Fitting Cepheid...
+[INFO]     Cepheid: H_app=68.72, kappa=7.460e+05 (2.2σ), kappa_SN=nan (nanσ), beta=0.000e+00 (nanσ), BIC=96.1, logL=-38.1
+[INFO]   Fitting Coupled...
+[INFO]     Coupled: H_app=68.72, kappa=7.458e+05 (2.2σ), kappa_SN=nan (nanσ), beta=9.597e+03 (nanσ), BIC=96.1, logL=-38.1
+[INFO]   Fitting Velocity...
+[INFO]     Velocity: H_app=68.44, kappa=0.000e+00 (nanσ), kappa_SN=nan (nanσ), beta=3.860e+07 (2.7σ), BIC=93.8, logL=-37.0
+[INFO]   Fitting Mixed...
+[INFO]     Mixed: H_app=68.44, kappa=1.626e+05 (0.3σ), kappa_SN=nan (nanσ), beta=3.347e+07 (1.6σ), BIC=97.7, logL=-36.9
+[INFO]   Fitting Cepheid_SN...
+[INFO]     Cepheid_SN: H_app=68.44, kappa=1.626e+05 (0.3σ), kappa_SN=1.224e+06 (2.7σ), beta=0.000e+00 (nanσ), BIC=97.7, logL=-36.9
+
+============================================================
+sigma_v = 182.1 km/s
+============================================================
+[INFO]   Fitting Null...
+[INFO]     Null: H_app=69.11, kappa=0.000e+00 (nanσ), kappa_SN=nan (nanσ), beta=0.000e+00 (nanσ), BIC=96.7, logL=-40.4
+[INFO]   Fitting Cepheid...
+[INFO]     Cepheid: H_app=68.72, kappa=7.460e+05 (6.8σ), kappa_SN=nan (nanσ), beta=0.000e+00 (nanσ), BIC=96.1, logL=-38.1
+[INFO]   Fitting Coupled...
+[INFO]     Coupled: H_app=68.72, kappa=7.458e+05 (2.2σ), kappa_SN=nan (nanσ), beta=9.597e+03 (nanσ), BIC=96.1, logL=-38.1
+[INFO]   Fitting Velocity...
+[INFO]     Velocity: H_app=68.44, kappa=0.000e+00 (nanσ), kappa_SN=nan (nanσ), beta=3.860e+07 (2.7σ), BIC=93.8, logL=-37.0
+[INFO]   Fitting Mixed...
+[INFO]     Mixed: H_app=68.44, kappa=1.626e+05 (0.3σ), kappa_SN=nan (nanσ), beta=3.347e+07 (1.6σ), BIC=97.7, logL=-36.9
+[INFO]   Fitting Cepheid_SN...
+[INFO]     Cepheid_SN: H_app=68.44, kappa=1.626e+05 (0.3σ), kappa_SN=1.224e+06 (2.7σ), beta=0.000e+00 (nanσ), BIC=97.7, logL=-36.9
+
+============================================================
+sigma_v = 250 km/s
+============================================================
+[INFO]   Fitting Null...
+[INFO]     Null: H_app=69.15, kappa=0.000e+00 (nanσ), kappa_SN=nan (nanσ), beta=0.000e+00 (nanσ), BIC=97.2, logL=-40.7
+[INFO]   Fitting Cepheid...
+[INFO]     Cepheid: H_app=68.82, kappa=6.650e+05 (1.8σ), kappa_SN=nan (nanσ), beta=0.000e+00 (nanσ), BIC=97.8, logL=-39.0
+[INFO]   Fitting Coupled...
+[INFO]     Coupled: H_app=68.82, kappa=6.649e+05 (1.8σ), kappa_SN=nan (nanσ), beta=9.597e+03 (nanσ), BIC=97.8, logL=-39.0
+[INFO]   Fitting Velocity...
+[INFO]     Velocity: H_app=68.48, kappa=0.000e+00 (nanσ), kappa_SN=nan (nanσ), beta=3.805e+07 (2.3σ), BIC=95.8, logL=-38.0
+[INFO]   Fitting Mixed...
+[INFO]     Mixed: H_app=68.48, kappa=1.626e+05 (0.3σ), kappa_SN=nan (nanσ), beta=3.292e+07 (1.4σ), BIC=99.7, logL=-37.9
+[INFO]   Fitting Cepheid_SN...
+[INFO]     Cepheid_SN: H_app=68.48, kappa=1.627e+05 (0.3σ), kappa_SN=1.206e+06 (2.3σ), beta=0.000e+00 (nanσ), BIC=99.7, logL=-37.9
+
+============================================================
+sigma_v = 500 km/s
+============================================================
+[INFO]   Fitting Null...
+[INFO]     Null: H_app=69.19, kappa=0.000e+00 (nanσ), kappa_SN=nan (nanσ), beta=0.000e+00 (nanσ), BIC=120.1, logL=-52.1
+[INFO]   Fitting Cepheid...
+[INFO]     Cepheid: H_app=68.98, kappa=3.877e+05 (0.9σ), kappa_SN=nan (nanσ), beta=0.000e+00 (nanσ), BIC=123.3, logL=-51.7
+[INFO]   Fitting Coupled...
+[INFO]     Coupled: H_app=68.98, kappa=3.877e+05 (0.9σ), kappa_SN=nan (nanσ), beta=9.597e+03 (nanσ), BIC=123.3, logL=-51.7
+[INFO]   Fitting Velocity...
+[INFO]     Velocity: H_app=68.44, kappa=0.000e+00 (nanσ), kappa_SN=nan (nanσ), beta=3.759e+07 (87984441.3σ), BIC=122.5, logL=-51.3
+[INFO]   Fitting Mixed...
+[INFO]     Mixed: H_app=68.44, kappa=1.626e+05 (0.4σ), kappa_SN=nan (nanσ), beta=3.246e+07 (1.0σ), BIC=126.3, logL=-51.3
+[INFO]   Fitting Cepheid_SN...
+[INFO]     Cepheid_SN: H_app=68.44, kappa=1.626e+05 (0.3σ), kappa_SN=1.193e+06 (1.2σ), beta=0.000e+00 (nanσ), BIC=126.3, logL=-51.3
+
+============================================================
+Leave-one-out cross-validation (Mixed, sigma_v=250)
+============================================================
+[INFO] LOOCV MSE = 0.749
+
+============================================================
+Redshift-only WLS (H_0 space, Cepheid closure)
+============================================================
+[INFO]   sv= 150.0: Gamma_X=(4.009e+07+/-1.155e+07) (3.47s), kappa=(1.275e+06+/-3.701e+05) (3.44s), H_app=68.31
+[INFO]   sv= 182.1: Gamma_X=(3.904e+07+/-1.306e+07) (2.99s), kappa=(1.239e+06+/-4.185e+05) (2.96s), H_app=68.41
+[INFO]   sv= 250.0: Gamma_X=(3.805e+07+/-1.647e+07) (2.31s), kappa=(1.206e+06+/-5.279e+05) (2.29s), H_app=68.48
+[INFO]   sv= 500.0: Gamma_X=(3.759e+07+/-3.009e+07) (1.25s), kappa=(1.193e+06+/-9.662e+05) (1.23s), H_app=68.44
+
+============================================================
+Redshift-only WLS with host-mass marginalization
+============================================================
+[INFO] Hosts with stellar mass: 33/33
+[INFO] r(X, logM) on primary sample = 0.116
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_44_joint_distance_redshift_likelihood.py:785: RuntimeWarning: divide by zero encountered in matmul
+  XtWX = Xmat.T @ W @ Xmat
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_44_joint_distance_redshift_likelihood.py:785: RuntimeWarning: overflow encountered in matmul
+  XtWX = Xmat.T @ W @ Xmat
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_44_joint_distance_redshift_likelihood.py:785: RuntimeWarning: invalid value encountered in matmul
+  XtWX = Xmat.T @ W @ Xmat
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_44_joint_distance_redshift_likelihood.py:786: RuntimeWarning: divide by zero encountered in matmul
+  beta = np.linalg.lstsq(XtWX, Xmat.T @ W @ H0_obs[keep_m], rcond=None)[0]
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_44_joint_distance_redshift_likelihood.py:786: RuntimeWarning: overflow encountered in matmul
+  beta = np.linalg.lstsq(XtWX, Xmat.T @ W @ H0_obs[keep_m], rcond=None)[0]
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_44_joint_distance_redshift_likelihood.py:786: RuntimeWarning: invalid value encountered in matmul
+  beta = np.linalg.lstsq(XtWX, Xmat.T @ W @ H0_obs[keep_m], rcond=None)[0]
+[INFO]   sv= 150.0: Gamma_X 3.476e+07 (2.97s) after mass; gamma_M = 3.82 +/- 1.40 km/s/dex
+[INFO]   sv= 182.1: Gamma_X 3.384e+07 (2.55s) after mass; gamma_M = 3.81 +/- 1.62 km/s/dex
+[INFO]   sv= 250.0: Gamma_X 3.298e+07 (1.97s) after mass; gamma_M = 3.81 +/- 2.11 km/s/dex
+[INFO]   sv= 500.0: Gamma_X 3.249e+07 (1.06s) after mass; gamma_M = 3.83 +/- 3.97 km/s/dex
+[SUCCESS] Saved: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_44_joint_distance_redshift_likelihood.json

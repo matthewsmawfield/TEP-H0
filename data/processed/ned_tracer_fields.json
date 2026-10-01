@@ -1,0 +1,1426 @@
+{
+ "M 101": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 42,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "Optical",
+    3
+   ],
+   "Spectral Range": [
+    "Optical",
+    3
+   ],
+   "Measurement Mode Technique": [
+    "Features measured in single-screw engine",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is for nucleus only",
+    1
+   ]
+  }
+ },
+ "Mrk 1337": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 16,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": null,
+   "Spectral Range": null,
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 0691": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 23,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel"
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [
+    "Heterodyne receiver(e.g., 21-cm)"
+   ],
+   "Measurement Mode Features": [
+    "1 Emission lines"
+   ],
+   "Comments": [
+    "'Quality' Good.  Arecibo data."
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm HI line",
+    2
+   ],
+   "Spectral Range": [
+    "Radio",
+    3
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    2
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    3
+   ]
+  }
+ },
+ "NGC 1015": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 16,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    2
+   ]
+  }
+ },
+ "NGC 105": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 8,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "Optical"
+   ],
+   "Spectral Range": [
+    "Optical"
+   ],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [
+    "From 1975ApJ...197..265S"
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "Optical",
+    1
+   ],
+   "Spectral Range": [
+    "Optical",
+    1
+   ],
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 1309": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 24,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm HI line",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    1
+   ]
+  }
+ },
+ "NGC 1365": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 51,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    3
+   ],
+   "Spectral Range": [
+    "Radio",
+    3
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    2
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    3
+   ]
+  }
+ },
+ "NGC 1448": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 27,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    3
+   ],
+   "Spectral Range": [
+    "Radio",
+    4
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    2
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    5
+   ]
+  }
+ },
+ "NGC 1559": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 15,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    1
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    1
+   ]
+  }
+ },
+ "NGC 2442": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 17,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    1
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    1
+   ]
+  }
+ },
+ "NGC 2525": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 12,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel"
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [
+    "Heterodyne receiver(e.g., 21-cm)"
+   ],
+   "Measurement Mode Features": [
+    "1 Emission lines"
+   ],
+   "Comments": [
+    "'Quality' Good.  Green Bank 91-m data."
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    3
+   ],
+   "Spectral Range": [
+    "Radio",
+    4
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    2
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    3
+   ]
+  }
+ },
+ "NGC 2608": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 12,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel"
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [
+    "Heterodyne receiver(e.g., 21-cm)"
+   ],
+   "Measurement Mode Features": [
+    "1 Emission lines"
+   ],
+   "Comments": [
+    "'Quality' Good.  Arecibo data."
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    2
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    2
+   ]
+  }
+ },
+ "NGC 3021": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 24,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel"
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [
+    "Heterodyne receiver(e.g., 21-cm)"
+   ],
+   "Measurement Mode Features": [
+    "1 Emission lines"
+   ],
+   "Comments": [
+    "'Quality' Good.  Arecibo data."
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    1
+   ]
+  }
+ },
+ "NGC 3147": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 21,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": null,
+   "Spectral Range": null,
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 3254": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 20,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    1
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    1
+   ]
+  }
+ },
+ "NGC 3370": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 34,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel"
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [
+    "Heterodyne receiver(e.g., 21-cm)"
+   ],
+   "Measurement Mode Features": [
+    "1 Emission lines"
+   ],
+   "Comments": [
+    "'Quality' Good.  Arecibo data."
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    2
+   ],
+   "Spectral Range": [
+    "Radio",
+    3
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    2
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    2
+   ]
+  }
+ },
+ "NGC 3447": {
+  "n_pref_refcode_rows": 3,
+  "n_z_match_rows": 8,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "Optical"
+   ],
+   "Spectral Range": [
+    "Optical"
+   ],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [
+    "From 1962AJ.....67..363M",
+    "From 1971AJ.....76...22F"
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "Optical",
+    1
+   ],
+   "Spectral Range": [
+    "Optical",
+    1
+   ],
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 3583": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 7,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": null,
+   "Spectral Range": null,
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 3972": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 13,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm HI line",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": null,
+   "Spatial Mode": [
+    "Redshift is systemic",
+    1
+   ]
+  }
+ },
+ "NGC 3982": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 5,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "Optical features",
+    1
+   ],
+   "Spectral Range": [
+    "Optical",
+    1
+   ],
+   "Measurement Mode Technique": [
+    "Individual line fitting",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is for nucleus only",
+    1
+   ]
+  }
+ },
+ "NGC 4038": {
+  "n_pref_refcode_rows": 3,
+  "n_z_match_rows": 3,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm HI line",
+    "Optical lines"
+   ],
+   "Spectral Range": [
+    "Optical",
+    "Radio"
+   ],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Homogenized from new and previously published data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm HI line",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    1
+   ],
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 4424": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 39,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "Optical",
+    3
+   ],
+   "Spectral Range": [
+    "Optical",
+    3
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    2
+   ]
+  }
+ },
+ "NGC 4536": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 39,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm HI line",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    2
+   ]
+  }
+ },
+ "NGC 4639": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 5,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": null,
+   "Spectral Range": null,
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 4680": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 10,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm HI line"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Homogenized from new and previously published data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm HI line",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    1
+   ],
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 5468": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 20,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    1
+   ]
+  }
+ },
+ "NGC 5584": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 37,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel"
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [
+    "Heterodyne receiver(e.g., 21-cm)"
+   ],
+   "Measurement Mode Features": [
+    "1 Emission lines"
+   ],
+   "Comments": [
+    "'Quality' Good.  Green Bank 91-m data."
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    2
+   ],
+   "Spectral Range": [
+    "Radio",
+    3
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    2
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    3
+   ]
+  }
+ },
+ "NGC 5643": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 58,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm HI line",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    1
+   ]
+  }
+ },
+ "NGC 5728": {
+  "n_pref_refcode_rows": 4,
+  "n_z_match_rows": 3,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": null,
+   "Spectral Range": null,
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 5861": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 13,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    2
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    2
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    2
+   ]
+  }
+ },
+ "NGC 5917": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 2,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": null,
+   "Spectral Range": null,
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 7250": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 26,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm HI line"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel"
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [
+    "Heterodyne receiver(e.g., 21-cm)"
+   ],
+   "Measurement Mode Features": [
+    "1 Emission lines"
+   ],
+   "Comments": [],
+   "Qualifiers": [
+    "From new, raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "Optical",
+    3
+   ],
+   "Spectral Range": [
+    "Optical",
+    4
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    2
+   ]
+  }
+ },
+ "NGC 7329": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 13,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    2
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    2
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    2
+   ]
+  }
+ },
+ "NGC 7541": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 14,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel"
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [
+    "Heterodyne receiver(e.g., 21-cm)"
+   ],
+   "Measurement Mode Features": [
+    "1 Emission lines"
+   ],
+   "Comments": [
+    "'Quality' Good.  Arecibo data."
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    3
+   ],
+   "Spectral Range": [
+    "Radio",
+    3
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    2
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    3
+   ]
+  }
+ },
+ "NGC 7678": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 17,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel"
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [
+    "Heterodyne receiver(e.g., 21-cm)"
+   ],
+   "Measurement Mode Features": [
+    "1 Emission lines"
+   ],
+   "Comments": [
+    "'Quality' Good.  Arecibo data."
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm",
+    1
+   ],
+   "Spectral Range": [
+    "Radio",
+    2
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    2
+   ]
+  }
+ },
+ "NGC 976": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 13,
+  "refcode_fields": {
+   "Frequency Targeted": [
+    "21-cm"
+   ],
+   "Spectral Range": [
+    "Radio"
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel"
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [
+    "Heterodyne receiver(e.g., 21-cm)"
+   ],
+   "Measurement Mode Features": [
+    "1 Emission lines"
+   ],
+   "Comments": [
+    "'Quality' Good.  Arecibo data."
+   ],
+   "Qualifiers": [
+    "From reprocessed raw data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "21-cm HI line",
+    2
+   ],
+   "Spectral Range": [
+    "Radio",
+    3
+   ],
+   "Measurement Mode Technique": [
+    "Mid-point of line profile at 50% lvel",
+    2
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    3
+   ]
+  }
+ },
+ "UGC 9391": {
+  "n_pref_refcode_rows": 4,
+  "n_z_match_rows": 8,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": null,
+   "Spectral Range": null,
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "NGC 4258": {
+  "n_pref_refcode_rows": 3,
+  "n_z_match_rows": 12,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "Optical",
+    1
+   ],
+   "Spectral Range": [
+    "Optical",
+    1
+   ],
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "M 31": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 27,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [
+    "Optical"
+   ],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [
+    "Redshift is systemic"
+   ],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Homogenized from previously published data"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "Optical",
+    8
+   ],
+   "Spectral Range": [
+    "Optical",
+    10
+   ],
+   "Measurement Mode Technique": [
+    "Cross-correlation fit to template spectrum",
+    1
+   ],
+   "Spatial Mode": [
+    "Redshift is systemic",
+    2
+   ]
+  }
+ },
+ "LMC": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 11,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": [
+    "Optical lines",
+    1
+   ],
+   "Spectral Range": [
+    "Optical",
+    2
+   ],
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ },
+ "SMC": {
+  "n_pref_refcode_rows": 2,
+  "n_z_match_rows": 3,
+  "refcode_fields": {
+   "Frequency Targeted": [],
+   "Spectral Range": [],
+   "Measurement Mode Technique": [],
+   "Spatial Mode": [],
+   "Spectrograph": [],
+   "Measurement Mode Features": [],
+   "Comments": [],
+   "Qualifiers": [
+    "Uncertain origin"
+   ]
+  },
+  "zmatch_modal": {
+   "Frequency Targeted": null,
+   "Spectral Range": null,
+   "Measurement Mode Technique": null,
+   "Spatial Mode": null
+  }
+ }
+}

@@ -85,6 +85,7 @@ from scripts.steps.step_61_nested_kappa import main as step_61_run
 from scripts.steps.step_64_inclination_proxy_audit import run as step_64_run
 from scripts.steps.step_65_hfsn_environment_contrast import run as step_65_run
 from scripts.steps.step_66_combined_evidence import run as step_66_run
+from scripts.steps.step_67_validation_battery import run as step_67_run
 from scripts.utils.pipeline_audit import audit
 
 def regression_gates(project_root):
@@ -661,6 +662,14 @@ def run_pipeline():
         step_times['Step 66'] = time.time() - t0
         set_step_logger(pipeline_logger)
         print_status("Step 66 (Combined Evidence) completed successfully.", "SUCCESS")
+
+        # --- Step 67: Validation battery ---
+        print_status(">>> STEP 67: Validation Battery", "TITLE")
+        t0 = time.time()
+        step_67_run()
+        step_times['Step 67'] = time.time() - t0
+        set_step_logger(pipeline_logger)
+        print_status("Step 67 (Validation Battery) completed successfully.", "SUCCESS")
 
         # --- Regression Gates ---
         regression_gates(PROJECT_ROOT)

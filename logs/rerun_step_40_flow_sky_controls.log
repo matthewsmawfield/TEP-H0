@@ -1,0 +1,93 @@
+
+============================================================
+Step 40: Flow / Sky Controls
+============================================================
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: divide by zero encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: overflow encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: invalid value encountered in matmul
+  return _core_matmul(x1, x2)
+[INFO] Computed 40 calibrator hosts
+[INFO] Primary sample (complete R22 positive-redshift set): 37 hosts
+[INFO] Sky coordinates: 37/37
+[INFO] Group IDs: 34/37, meaningful groups (>=2 hosts): 1
+[INFO] Skipping group fixed effects: fewer than two repeated groups
+
+============================================================
+sigma_v = 150 km/s
+============================================================
+[INFO]   Fitting M0...
+[INFO]     M0: H0=69.26, Gamma_X=+0.000e+00 (n/a), chi2/dof=37.3/35, dipole=n/a
+[INFO]   Fitting M1...
+[INFO]     M1: H0=68.44, Gamma_X=+3.906e+07 (2.8σ), chi2/dof=36.6/34, dipole=n/a
+[INFO]   Fitting M2...
+[INFO]     M2: H0=64.74, Gamma_X=+3.163e+07 (2.4σ), chi2/dof=38.2/33, dipole=n/a
+[INFO]   Fitting M3...
+[INFO]     M3: H0=69.10, Gamma_X=+3.483e+07 (2.6σ), chi2/dof=37.5/31, dipole=111.4
+[INFO]   Fitting M4...
+[INFO]     M4: H0=70.71, Gamma_X=+1.895e+07 (1.9σ), chi2/dof=37.3/26, dipole=73.9
+[INFO]   Fitting M6...
+[INFO]     M6: H0=68.11, Gamma_X=+1.569e+07 (1.2σ), chi2/dof=37.6/25, dipole=88.7
+
+============================================================
+sigma_v = 250 km/s
+============================================================
+[INFO]   Fitting M0...
+[INFO]     M0: H0=69.28, Gamma_X=+0.000e+00 (n/a), chi2/dof=29.2/35, dipole=n/a
+[INFO]   Fitting M1...
+[INFO]     M1: H0=68.42, Gamma_X=+3.846e+07 (2.3σ), chi2/dof=23.6/34, dipole=n/a
+[INFO]   Fitting M2...
+[INFO]     M2: H0=66.26, Gamma_X=+3.441e+07 (2.1σ), chi2/dof=23.2/33, dipole=n/a
+[INFO]   Fitting M3...
+[INFO]     M3: H0=68.98, Gamma_X=+3.477e+07 (2.1σ), chi2/dof=22.0/31, dipole=103.5
+[INFO]   Fitting M4...
+[INFO]     M4: H0=70.49, Gamma_X=+1.874e+07 (1.1σ), chi2/dof=16.1/26, dipole=88.6
+[INFO]   Fitting M6...
+[INFO]     M6: H0=71.11, Gamma_X=+1.936e+07 (1.2σ), chi2/dof=16.1/25, dipole=83.6
+
+============================================================
+sigma_v = 500 km/s
+============================================================
+[INFO]   Fitting M0...
+[INFO]     M0: H0=69.17, Gamma_X=+0.000e+00 (n/a), chi2/dof=8.1/35, dipole=n/a
+[INFO]   Fitting M1...
+[INFO]     M1: H0=68.27, Gamma_X=+3.820e+07 (1.7σ), chi2/dof=6.4/34, dipole=n/a
+[INFO]   Fitting M2...
+[INFO]     M2: H0=68.25, Gamma_X=+3.818e+07 (1.3σ), chi2/dof=6.4/33, dipole=n/a
+[INFO]   Fitting M3...
+[INFO]     M3: H0=68.67, Gamma_X=+3.562e+07 (1.2σ), chi2/dof=6.1/31, dipole=95.4
+[INFO]   Fitting M4...
+[INFO]     M4: H0=70.12, Gamma_X=+1.988e+07 (0.7σ), chi2/dof=4.5/26, dipole=106.4
+[INFO]   Fitting M6...
+[INFO]     M6: H0=72.89, Gamma_X=+2.167e+07 (0.7σ), chi2/dof=4.4/25, dipole=82.2
+
+============================================================
+Permutation suite (sigma_v=250)
+============================================================
+[INFO]   standard: p = 0.0315
+[INFO]   redshift_binned: p = 0.0440
+[INFO]   sky_binned: p = 0.0200
+[INFO]   redshift_sky_binned: p = 0.0890
+[INFO]   gamma_true = 3.924e+07
+
+============================================================
+LOHO and bootstrap (M1, sigma_v=250)
+============================================================
+[INFO]   LOHO: Gamma_X = 3.860e+07 +/- 1.992e+06, positive in 37/37
+[INFO]   Bootstrap: Gamma_X = 4.440e+07 +/- 1.883e+07, 95% CI [2.375e+07, 1.060e+08], frac_positive=0.998
+
+============================================================
+Model comparison (primary, sigma_v=250)
+============================================================
+ Model N_param        Gamma_X   sig   chi2/dof        AIC        BIC
+--------------------------------------------------------------------------------
+    M0       2     +0.000e+00   n/a 29.2/35      445.8      449.0
+    M1       3     +3.846e+07   2.3 23.6/34      442.1      446.9
+    M2       4     +3.441e+07   2.1 23.2/33      443.8      450.3
+    M3       6     +3.477e+07   2.1 22.0/31      446.6      456.2
+    M4      11     +1.874e+07   1.1 16.1/26      450.7      468.5
+    M6      12     +1.936e+07   1.2 16.1/25      452.7      472.1
+[SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_40_flow_sky_controls.csv
+[SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_40_flow_sky_controls.json
+[SUCCESS] Saved test results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_40_statistical_tests.json

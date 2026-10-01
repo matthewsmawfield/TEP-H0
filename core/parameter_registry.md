@@ -26,7 +26,7 @@ Generated from parameter_registry.yaml. Classification records provenance; a ben
 | $\beta_{\text{spin}}$ | Phenomenological screening coefficient in tanh ansatz | 0.01 | dimensionless | calibrated | Paper 24 | 24 |
 | $\beta_{\text{Cassini}}$ | Upper bound on the unscreened DEF-normalized coupling \|α_DEF\| from the Cassini PPN test; the binding constraint on the screened Solar source charge is S_Σ(1 AU) ≲ 5.75×10⁻⁶ | 0.0034 | dimensionless | observable_response | Paper 0 | 0, 6, 18, 22, 24 |
 | $B(\phi)$ | Disformal coupling function | Not specified | mass^{-4} for a dimension-one canonical scalar; dimensionless only in explicitly nondimensionalized benchmark coordinates | fundamental | Paper 0 | 0, 4, 9, 22, 28 |
-| $H_0$ | Hubble constant (TEP-corrected local value) | 66.65 ± 1.58 | km s^{-1} Mpc^{-1} | calibrated | Paper 11 | 11, 26 |
+| $H_0$ | Hubble constant (TEP-corrected local value) | 67.83 ± 1.56 | km s^{-1} Mpc^{-1} | calibrated | Paper 11 | 11, 26 |
 | $S_8$ | Structure growth amplitude | Not specified | dimensionless | exploratory | Paper 26 | 26 |
 | $V(\phi)$ | Canonical scalar potential branch | V(u) = V_matter(u) e^{-(u/u_s)^4} + V_0 e^{-(u_s/u)^4} | M_Pl^4 (dimensionless-u form) | fundamental | Paper 0 | 0 |
 | $\Lambda_X$ | Kinetic-completion scale (gradient/shear screening threshold) | 1.9068 | meV | derived | Paper 0 | 0, 4, 6, 7, 12, 13, 17, 26, 28 |
@@ -140,7 +140,7 @@ Disformal coupling function B(phi). GW170817 constrains the path-integral combin
 
 #### H0
 
-TEP-corrected local Hubble constant from per-host cz/d after removing ~1 km/s/Mpc host-potential clock distortion. Consistent with the TEP CMB (66.70 ± 0.58, Paper 26) at 0.03σ. The SH0ES ladder value 73.04 is the Hubble-flow temporal shear (cosmic-web path integral), not a correction to be closed.
+TEP-corrected local Hubble constant from per-host cz/d after removing the environment-dependent host-potential clock distortion. Consistent with the TEP CMB (66.70 ± 0.58, Paper 26) at 0.68σ. The SH0ES ladder value 73.04 is the Hubble-flow temporal shear (cosmic-web path integral), not a correction to be closed.
 
 #### S8
 

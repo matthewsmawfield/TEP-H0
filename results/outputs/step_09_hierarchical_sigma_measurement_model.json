@@ -1,23 +1,30 @@
 {
   "method_parameters": {
-    "HyperLEDA rotation potential proxy": {
-      "n_hosts": 37,
+    "HI linewidth proxy": {
+      "n_hosts": 19,
       "median_bias_kms": 0.0,
-      "median_scatter_kms": 3.040559,
-      "mean_measured_kms": 118.47669670270268,
-      "mean_inferred_kms": 118.47669670270268
+      "median_scatter_kms": 8.0,
+      "mean_measured_kms": 86.21052631578948,
+      "mean_inferred_kms": 86.21052631578948
+    },
+    "stellar absorption": {
+      "n_hosts": 18,
+      "median_bias_kms": 0.0,
+      "median_scatter_kms": 14.0,
+      "mean_measured_kms": 114.42222222222222,
+      "mean_inferred_kms": 114.42222222222222
     }
   },
-  "ols_slope": 0.04373632298115242,
-  "odr_slope": 0.042287552058511875,
-  "odr_slope_error": 0.023792008156828793,
-  "odr_slope_error_residual_scaled": 0.020513183143267714,
-  "odr_significance": 1.7773847327122105,
-  "odr_ols_ratio": 0.9668748805594638,
-  "tep_endpoint_gamma_odr": 11620157.081596522,
-  "tep_endpoint_gamma_error": 9668959.010550113,
-  "tep_endpoint_gamma_error_residual_scaled": 8606567.640999138,
-  "tep_endpoint_significance": 1.2018002216078683,
+  "ols_slope": 0.11328306612482175,
+  "odr_slope": 0.08719040400556119,
+  "odr_slope_error": 0.030563921575381944,
+  "odr_slope_error_residual_scaled": 0.023638502792720704,
+  "odr_significance": 2.85272306403867,
+  "odr_ols_ratio": 0.7696684684495547,
+  "tep_endpoint_gamma_odr": 41320868.94264694,
+  "tep_endpoint_gamma_error": 17374759.12063292,
+  "tep_endpoint_gamma_error_residual_scaled": 14153323.50485012,
+  "tep_endpoint_significance": 2.378212477983506,
   "sigma_ref_active_response_kms": 30.50738103825078,
   "peculiar_velocity_kms": 250.0,
   "description": "Errors-in-variables audit for velocity dispersion. H0 errors include distance-modulus uncertainty and an adopted 250 km/s peculiar-velocity term. Primary ODR errors use the supplied observational covariance; the residual-rescaled SciPy errors are retained as a diagnostic only."

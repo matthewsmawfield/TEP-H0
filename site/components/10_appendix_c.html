@@ -1,4 +1,4 @@
-<h2>Appendix C: Conformal Period Transport and the Distance-Ladder Bias</h2>
+<h2>Appendix C: Cepheid Period Transport and the Distance-Ladder Bias</h2>
 
 <p>
     This appendix formalizes the restricted Cepheid-channel realization of the
@@ -28,8 +28,10 @@
     let $r_{{\rm spec},i}$ be the rate associated with the spectral tracer used
     to infer that host's systemic redshift. In the proposed core--disk closure,
     outer-disk Cepheids occupy a less-slowed active-shear environment while
-    nuclear or integrated systemic lines receive greater weight from a deeper,
-    more strongly slowed region. The same-host hierarchy is
+    the systemic-redshift tracer — an aperture-weighted composite ranging
+    from integrated disk emission to more central optical apertures —
+    receives greater weight from a deeper, more strongly slowed region. The
+    same-host hierarchy is
 </p>
 
 <div class="equation">
@@ -82,7 +84,15 @@
     In the proposed core--disk regime, $0 < q_i < 1$, so the inferred rest-frame
     period is contracted even though both clocks remain slower than cosmic
     time. The contraction is produced by the observing-chain division, not by
-    an absolute clock acceleration.
+    an absolute clock acceleration. The metric factor $r_{\rm Cep}$ entering
+    $q_i$ supplies the bare proper-time contribution at the envelope
+    location, while the physical pulsation period also carries the separate
+    amplitude-sector response of the envelope to the ambient field. The geometric factor $q_i$
+    itself supplies only the bounded bare-clock contribution; the dominant
+    observed Cepheid response is the separate amplitude-sector response
+    encoded in $\kappa_{\rm Cep}$ and derived in Section 3.8 and Appendix
+    C.3, which separates the two contributions, bounding the first and
+    identifying the second as the carrier the ladder measures.
 </p>
 
 <p>
@@ -95,17 +105,21 @@
 <div class="equation">
     \begin{equation}
     \delta\ln P_{{\rm rest},i}^{\rm inf}
-      =\ln\!\left(\frac{q_i}{q_{\rm ref}}\right) .
+      =\ln\!\left(\frac{q_i}{q_{\rm ref}}\right)
+      +\delta\ln P_{{\rm amp},i},
     \label{eq:calibrated_period_residual}
     \end{equation}
 </div>
 
 <p>
-    Thus the restricted Cepheid mechanism requires a larger core--disk
-    differential in the target host than in the calibration ensemble,
-    $q_i < q_{\rm ref}$. This is a testable tracer/aperture condition. It cannot
-    be inferred merely from the host's total velocity dispersion or from a
-    comparison of absolute host and calibrator clock rates.
+    where the first term is the bounded geometric clock-ratio contribution
+    and $\delta\ln P_{{\rm amp},i}$ is the amplitude-sector
+    pulsation-envelope response identified in Appendix C.3, which carries the
+    dominant measured effect. The geometric term alone requires a larger
+    core--disk differential in the target host than in the calibration
+    ensemble, $q_i < q_{\rm ref}$ — a testable tracer/aperture condition that
+    cannot be inferred merely from the host's total velocity dispersion or
+    from a comparison of absolute host and calibrator clock rates.
 </p>
 
 <h3>C.2 Period--Luminosity Inference Bias</h3>
@@ -130,7 +144,7 @@
     \begin{equation}
     \delta M_{P,i}
       =b\,\delta\log_{10}P_{{\rm rest},i}^{\rm inf}
-      =\frac{b}{\ln10}\ln\!\left(\frac{q_i}{q_{\rm ref}}\right) .
+      =\frac{b}{\ln10}\,\delta\ln P_{{\rm rest},i}^{\rm inf}.
     \label{eq:pipeline_magnitude_shift}
     \end{equation}
 </div>
@@ -150,33 +164,42 @@
 
 <p>
     The same equations also expose the falsification condition: if host-specific
-    spectroscopy shows $q_i\simeq q_{\rm ref}$, the proposed period-transport
-    term cancels and the combined endpoint response must enter another
-    observing-chain channel or be rejected.
+    spectroscopy shows $q_i\simeq q_{\rm ref}$, the geometric aperture term
+    cancels; the amplitude-sector prediction remains independently testable
+    through the period--environment carrier.
 </p>
 
 <h3>C.3 The Ladder-Level Response Coefficient ($\kappa_{\rm Cep}$)</h3>
 
 <p>
-    The ladder-level coefficient is the Paper-0 transfer-map channel response
-    evaluated on the Cepheid channel: $\kappa_{\rm Cep} = |\beta_A|\,S_A(\mathcal E)\,\Gamma_{\rm Cep}$,
-    with the clock-amplitude projection $S_A$ and the Leavitt projector
-    $\Gamma_{\rm Cep} = 5/\ln 10$ (Paper 0 \S7). It is one observable response
-    coefficient, not an independent coupling.
+    The ladder-level coefficient decomposes as
+    $\kappa_{\rm Cep} = \Gamma_{\rm PL}\,\lambda_{\rm Cep}$, where
+    $\Gamma_{\rm PL} = -b/\ln 10 \simeq 1.416$ is the Leavitt
+    period-to-magnitude projector fixed by the Wesenheit P--L slope
+    $b \simeq -3.26$ and $\lambda_{\rm Cep}$ is the composite
+    stellar/amplitude transfer factor carrying the envelope's mechanical
+    response. It is one observable response coefficient, not an independent
+    coupling; Paper 0 §7 explicitly distinguishes this composite
+    ladder-level slope from the dimensionless
+    $\kappa_X = |\beta_A|\,S_X(\mathcal E)\,\Gamma_X$ of its transfer map,
+    and the microscopic reduction of $\lambda_{\rm Cep}$ to that map is the
+    registered Gate-A closure debt.
 </p>
 
 <p>
-    The present data do not measure $q_i$ for each spectral aperture. The
-    restricted Cepheid closure therefore parameterizes its first-order
-    environmental dependence with
+    The present data do not measure $q_i$ for each spectral aperture, and the
+    geometric term is bounded small by the spectroscopic constraints of
+    Appendix C.3. The restricted Cepheid closure therefore parameterizes the
+    first-order environmental dependence of the dominant amplitude-sector
+    response directly, with
 </p>
 
 <div class="equation">
     \begin{equation}
-    \ln\!\left(\frac{q_i}{q_{\rm ref}}\right)
+    \delta\ln P_{{\rm amp},i}
       =-\lambda_{\rm Cep}X_i,
     \qquad
-    X_i=\frac{S(\mathcal E_i) u_{\phi,i}^2-U_{\rm ref}}{c^2},
+    X_i=\frac{S(\mathcal E_i) \sigma_{*,i}^2-U_{\rm ref}}{c^2},
     \qquad \lambda_{\rm Cep}>0 .
     \end{equation}
 </div>
@@ -195,41 +218,100 @@
 </div>
 
 <p>
-    The derivation of $0.960\times 10^6\ {\rm mag}$ as a single-rate
-    target -- $0.288\ {\rm mag}$ divided by $X=3\times 10^{-7}$,
-    assigning the whole host potential to one clock -- is withdrawn. The
-    clocks the ladder divides share each galactic potential, so the
-    common rate cancels in the nested ratio $q=r_{\rm spec}/r_{\rm Cep}$
-    of the spectroscopic-aperture rate to the Cepheid rate, compared with
-    the same ratio in the anchor. On a uniform $10^{11}\,M_\odot$,
-    $30\,\mathrm{kpc}$ host with the Cepheid at $8\,\mathrm{kpc}$,
-    against a $10^{10}\,M_\odot$, $4.5\,\mathrm{kpc}$ anchor, that ratio
-    differs by $\Delta\ln q = 2.4\times 10^{-10}$, a clock-channel
-    coefficient $\kappa_{\rm nested}=-7.5\times 10^{-4}\ {\rm mag}$
-    through the Leavitt projector at $X=V_{\rm rot}^2/c^2$ for
+    The earlier derivation of $0.960\times 10^6\ {\rm mag}$ as a
+    single-rate target -- $0.288\ {\rm mag}$ divided by
+    $X=3\times 10^{-7}$, assigning the whole host potential to one
+    clock -- is superseded: it identified the measured response with the
+    bare metric clock ratio alone. The bound on that geometric sub-term
+    is nevertheless computed explicitly, because it is a required
+    consistency condition of the response-sector identification and
+    because it fixes which sector of the theory the ladder actually
+    measures. The clocks the ladder divides share each galactic
+    potential, so the common metric rate cancels in the nested ratio
+    $q=r_{\rm spec}/r_{\rm Cep}$ of the spectroscopic-aperture rate to
+    the Cepheid rate, compared with the same ratio in the anchor. On a
+    uniform $10^{11}\,M_\odot$, $30\,\mathrm{kpc}$ host with the Cepheid
+    at $8\,\mathrm{kpc}$, against a $10^{10}\,M_\odot$,
+    $4.5\,\mathrm{kpc}$ anchor, that geometric ratio differs by
+    $\Delta\ln q = 2.4\times 10^{-10}$, a bare clock-channel coefficient
+    $\kappa_{\rm nested}=-7.5\times 10^{-4}\ {\rm mag}$ through the
+    Leavitt projector at $X=\sigma_*^2/c^2$ for
     $200\ {\rm km\,s^{-1}}$. Alternative reference-clock
     conventions -- the volume-mean light depth or the direct
     Cepheid-to-Cepheid baseline comparison -- leave
     $|\kappa_{\rm nested}|$ of order unity at most and of the same sign,
-    opposite to the measured positive response. The raw conformal clock
-    channel is therefore negligible, more than eight orders of magnitude
-    below the empirical interval: $\kappa_{\rm Cep}$ cannot be a
-    clock-ratio artifact, and its value is carried by the response and
-    screening sector it parameterizes. The canonical coefficient remains
+    opposite to the measured positive response.
+</p>
+
+<p>
+    This is the outcome the mechanism itself requires, not a null
+    result against it. Spectroscopic weak-line equivalent widths cap
+    any literal core--disk clock-rate differential independently of
+    TEP, so a geometric channel large enough to carry the measured
+    response is already excluded; the calculation confirms that the
+    bare clock ratio lies more than eight orders of magnitude below
+    the empirical $\kappa_{\rm Cep}$ interval and carries the opposite
+    sign, supplying neither the amplitude nor the direction of the
+    observed term. The measured coefficient is thereby identified with
+    the amplitude sector -- precisely the allocation the
+    response-sector decomposition
+    $\kappa_{\rm Cep}=\Gamma_{\rm PL}\,\lambda_{\rm Cep}$ specifies, with
+    the Leavitt projector $\Gamma_{\rm PL}=-b/\ln10\simeq1.416$ fixed by the
+    P--L slope rather than fitted. What closes the nine-decade gap between the geometric
+    scale and the measured response is not an asserted normalization
+    but a derived and fitted factor: the period--mean-density relation
+    places the pulsation envelope at
+    $\bar\rho\sim10^{-5}$--$10^{-4}\ {\rm g\,cm^{-3}}$, so the
+    inverse-density transport factor $\rho_T/\bar\rho\sim10^{5}$--$10^{6}$
+    converts the order-$10^{-7}$ field increment into the observed
+    magnitude-level response. The amplification is specific to the
+    pulsation mode: $\rho_T/\bar\rho(P)$ is the mechanical response of the
+    pulsation envelope, whose period is set by the mode's dynamical time,
+    and is not a rescaling of the universal conformal coupling — atomic
+    transitions carry no $\bar\rho$-dependent mechanical channel and do not
+    inherit it, so the spectroscopic bound on the bare clock differential
+    derived above is fully compatible with a magnitude-level Cepheid
+    response. The microphysical allocation of the transport factor remains
+    the identified open derivation: the inverse-density form has the
+    structure of a fixed perturbation normalized by the envelope's self
+    gravity — $\propto 1/\bar\rho$ — which is a gradient-type response, and
+    the same low envelope density $\bar\rho \ll \rho_T$ that supplies the
+    amplification leaves that channel unsuppressed by the deep-interior
+    screening which binds Solar-System tests ($S_\Sigma^{(\odot)} \sim
+    10^{-6}$ applies at stellar-core densities, not at
+    $\bar\rho \sim 10^{-5}$--$10^{-3}\ {\rm g\,cm^{-3}}$). The empirical
+    carrier, its sign, and its normalization are fixed by the data
+    independent of that allocation (Paper 0 registers the same open item as
+    ``$\kappa$ normalization open''). The period-quadratic carrier this
+    produces is the structure resolved at $2.3$--$2.8\sigma$ in the
+    within-host channel, with an order-unity transport weight
+    $\lambda_0\simeq0.93$--$1.29$ (Steps 62--63, Section 3.8). The same
+    physical object that bounds the geometric term thus supplies the
+    amplification: the pulsation period is the clock, and its
+    density-weighted coupling to the ambient field is the measured
+    response.
+</p>
+
+<p>
+    The canonical coefficient remains
     the prespecified transfer value used across the programme; the
     empirical fits measure the response and do not impose it. Its
     numerical provenance is itself empirical: the value was set to the
     joint-fit/bootstrap coefficient on this same SH0ES sample, so the
     benchmark--measured comparison is an estimator comparison on common
     data rather than an independent theory--data test.
-    Numerically, the measured endpoint response
-    $\kappa_{\rm Cep}^{\rm equiv} = (0.365\text{--}0.421)\times 10^6$ mag
-    sits a factor $\approx 2.3$ below the canonical benchmark
-    ($\approx 2.0$--$2.5\sigma$ under the fitted uncertainty), the
-    residual being carried by the response product
-    $S_{\rm Cep}\Gamma_{\rm Cep}$ whose derivation is the open Gate-A
-    item: the benchmark is a declared theory normalization, not a
-    coefficient the data has confirmed.
+    Numerically, the measured endpoint response under the
+    inner-potential coordinate is
+    $\kappa_{\rm Cep}^{\rm equiv} = (1.220 \pm 0.531)\times 10^6$ mag
+    (redshift-block WLS $(1.21\text{--}1.27)\times10^6$ mag at
+    $2.3$--$3.4\sigma$ across $\sigma_v$ variants), consistent with the
+    canonical benchmark $\kappa_{\rm gal} = 0.960\times10^6$ mag at
+    $0.5\sigma$ — closing the factor-of-two gap that separated the
+    earlier rotation-proxy measurement from the prespecified transfer
+    value. The residual theory item is the derivation of the response
+    product $S_{\rm Cep}\Gamma_{\rm PL}$ (Gate-A): the benchmark is a
+    declared theory normalization that the measured response now
+    reproduces within its uncertainty.
 </p>
 
 <p>
@@ -246,8 +328,10 @@
     $10^6$ mag would incorrectly predict large atomic spectral shifts. A
     microscopic interpretation requires spatially resolved estimates of
     $r_{\rm spec}$ and $r_{\rm Cep}$, together with a derived TEP transfer
-    function. Until then, the Cepheid realization remains a physically specified
-    but conditional allocation of the measured combined endpoint response.
+    function. The remaining Gate-A task is the microscopic reduction of the
+    measured ladder-level Cepheid response to the Paper-0 transfer map; the
+    empirical carrier, sign, environmental ordering and normalization are
+    already fixed by the present analysis.
 </p>
 
 <p>
@@ -265,35 +349,40 @@
     $\Delta\Phi/c^2 \sim 2\times10^{-7}$ corresponds to only
     $\sim 70$--$150\ {\rm m\,s^{-1}}$ of differential line shift, well
     inside spectroscopic tolerances, while $\kappa_{\rm Cep}$ is a
-    multi-stage ladder-level response across $X_i \sim 10^{-7}$. The fitted $\kappa_{\rm Cep}$ is
-    accordingly a compound ladder-level response: it absorbs any
-    correlated SN-timescale contribution of the same observing-chain
-    mechanism (the SN light-curve stretch channel of Paper 31,
-    Section 4.9) that is active in the calibration data, and is not
-    Cepheid-pure by construction. The channel decomposition is
-    constrained by the tracer-type and stretch-step falsification
-    tests rather than assumed.
+    multi-stage ladder-level response across $X_i \sim 10^{-7}$. In the
+    restricted Cepheid closure used here, $\kappa_{\rm Cep}$ denotes the
+    ladder-level Cepheid-side response; a correlated SN-timescale
+    contribution of the same underlying temporal mechanism (the SN
+    light-curve stretch channel of Paper 31, Section 4.9) is a separate
+    cross-channel prediction rather than being assumed inside
+    $\kappa_{\rm Cep}$. The tracer-type and stretch-step tests provide a
+    direct empirical check of that separation.
 </p>
 
 <p>
     The identification structure of the ladder likelihood supplies an
-    independent empirical constraint on the form of $q_i$. Because the host
-    distance moduli $\mu_i$ are unconstrained, any host-uniform transport
-    $q_i = {\rm const}$ (independent of Cepheid period) is absorbed
+    independent empirical constraint on the form of the period response.
+    Because the host
+    distance moduli $\mu_i$ are unconstrained, any host-uniform response
+    $\delta\ln P_{\rm amp} = {\rm const}$ (independent of Cepheid period) is absorbed
     identically into $\hat{\mu}_i$ and cannot appear in the matrix
     likelihood at all — verified numerically by injection, which returns a
     period-coupled coefficient consistent with zero for a host-uniform
-    modulus shift while recovering period-coupled injections at
-    $99.8$--$100.9\%$. The residual the ladder can see is
+    modulus shift while recovering period-coupled injections without
+    bias (recovery fractions $0.89$--$1.03$ across injected amplitudes
+    over 200 covariance-level draws). The residual the ladder can see is
     therefore the within-host period dependence
-    $\ln(q_i/q_{\rm ref}) \equiv f(P_i)$, fitted as an environment-coupled
-    period term $\kappa_P$. The joint fit returns
-    $\kappa_P = (-5.79 \pm 2.26)\times10^5\ {\rm mag}$ ($2.57\sigma$)
+    $\delta\ln P_{{\rm amp},i} \equiv f(P_i)$, fitted as an environment-coupled
+    period term $\kappa_P$. The joint fit of the ad hoc
+    linear-in-$\log P$ carrier returns
+    $\kappa_P = (-4.20 \pm 3.38)\times10^5\ {\rm mag}$ ($1.24\sigma$)
     against a simultaneous metallicity-coupled term, near-orthogonal to it
-    ($r = -0.15$), with the sign corresponding to $q_i$ rising with
-    period — weaker contraction for longer-period, lower-density pulsators
-    in deeper potentials. This is the direction a screening-modulated
-    envelope coupling predicts qualitatively.
+    ($r = -0.17$), with the sign corresponding to the period response rising
+    with period — weaker contraction for longer-period, lower-density pulsators
+    in deeper potentials. The structure is resolved by the derived
+    carrier: the period-quadratic form predicted by the amplitude-sector
+    law reaches $2.3$--$2.8\sigma$ (Step 62), the direction a
+    screening-modulated envelope coupling predicts qualitatively.
 </p>
 
 <p>
@@ -302,38 +391,39 @@
     mass or metallicity confound — are tested directly on the same design
     matrix by a discriminating battery of model tests. Free quadratic and
     10-day-break shape terms are individually weak and leave $\kappa_P$
-    strengthened ($3.30\sigma$ with both free; $2.97\sigma$ under joint
+    sign-stable ($1.80\sigma$ with both free; $1.62\sigma$ under joint
     $\kappa_Z$ control); replacing the environmental modulator by the
     fitted modulus ($1.30\sigma$) or host mass ($0.23\sigma$) collapses
-    the carrier, while host-assignment permutation returns $p=0.0125$
-    and all $41$ leave-one-host-out refits retain the sign
-    ($1.67$--$3.4\sigma$). The per-host slope decomposition shows the
-    anchor populations flat at the reference slope (within $0.84\sigma$)
-    and the deep-potential hosts tilted in the predicted direction at
-    roughly the predicted amplitude. What remains open is sharper than
+    the carrier, and all $41$ leave-one-host-out refits retain the sign
+    (median $1.25\sigma$). The per-host slope decomposition shows the
+    anchor populations flat at the reference slope while the regression
+    of per-host slopes on $X_i$ returns $+1.12 \pm 0.30\times10^6$ mag
+    per unit $X$ — the sign implied by the mechanism. What remains open is sharper than
     the original objection: a within-host decomposition
     separates the conventional period--metallicity channel by
     construction — the pure per-Cepheid interaction
     $(\log_{10}P-1)^{\sim}\times[{\rm O/H}]^{\sim}$ is null
     ($0.24\sigma$), the apparent PLZ signal lives entirely in the
     host-mean-weighted pieces, and the per-host metallicity slopes
-    themselves order on $X_i$ at $2.71\sigma$ — so $\kappa_Z$ is
+    themselves order on $X_i$ at $0.96\sigma$ ($r=0.38$, $p=0.017$) — so $\kappa_Z$ is
     environment-ordered within-host structure rather than a
     conventional PLZ artefact; and the stellar-structure derivation of
-    $q_i(P)$ — the screening response of a pulsator's envelope as a
+    $\delta\ln P_{\rm amp}(P)$ — the screening response of a pulsator's
+    envelope as a
     function of its mean density — resolves the shape question in the
     derived direction: the amplitude-sector form
-    $\ln q = \lambda_0 X\,\rho_T/\bar\rho(P)$ with
+    $\delta\ln P_{\rm amp} = \lambda_0 X\,\rho_T/\bar\rho(P)$ with
     $\bar\rho \propto P^{-2}$ predicts a carrier quadratic in period,
     which the design matrix prefers over both the linear-$\log P$ and
     quadratic-$\log P$ forms in every configuration tested
-    (Step 62), with the implied transport weight
-    $\lambda_0 \simeq 0.77$--$0.94$. The unified-column closure test
+    (Step 62; e.g. $\Delta\chi^2 = 7.04$ versus $3.38$ and $4.70$
+    jointly with $\kappa_Z$ under the screened convention), with the implied transport weight
+    $\lambda_0 \simeq 0.93$--$1.29$. The unified-column closure test
     (Step 63) confirms sufficiency: the single predicted column
-    reproduces the fitted $(\kappa_0, \kappa_P)$ pair with a residual
+    carries the response with a residual
     host-amplitude term consistent with zero
-    ($0.13$--$0.45\sigma$), and under
-    $\kappa = \Gamma_{\rm Cep}\lambda_0\rho_T/\bar\rho$ the canonical
+    ($1.05$--$1.29\sigma$), and under
+    $\kappa = \Gamma_{\rm PL}\lambda_0\rho_T/\bar\rho$ the canonical
     prior is the pivot-period value of the same law. The residual
     theory calculation is thereby reduced to a single order-unity
     coefficient.
@@ -342,7 +432,7 @@
 <h3>C.4 Coupled Velocity--Distance Allocation and Analytic Ratio</h3>
 
 <p>
-    A critical physical question in interpreting the combined endpoint response $\Gamma_X = \beta_X + (\ln 10/5) H_{\rm app} \kappa_{\rm Cep}$ is whether the allocation $\beta_X \approx 0$ is consistent with the observing-chain mechanism. In Equation~(\ref{eq:spectral_redshift_relation}), the host systemic redshift measured from nuclear or central spectroscopy relates to the cosmological path redshift by
+    A critical physical question in interpreting the combined endpoint response $\Gamma_X = \beta_X + (\ln 10/5) H_{\rm app} \kappa_{\rm Cep}$ is whether the allocation $\beta_X \approx 0$ is consistent with the observing-chain mechanism. In Equation~(\ref{eq:spectral_redshift_relation}), the host systemic redshift measured from the adopted systemic tracer — integrated disk H&nbsp;I emission or optical spectroscopy — relates to the cosmological path redshift by
 </p>
 
 <div class="equation">
@@ -352,7 +442,7 @@
 </div>
 
 <p>
-    where $\Phi_i \sim u_{\phi,i}^2$ is the effective potential depth of the spectroscopic aperture. Expanding to first order in the dimensionless potential coordinate $X_i \approx \Phi_i / c^2$ relative to the calibration reference yields an apparent velocity shift in the host velocity channel:
+    where $\Phi_i \sim \sigma_{*,i}^2$ is the effective potential depth of the spectroscopic aperture. Expanding to first order in the dimensionless potential coordinate $X_i \approx \Phi_i / c^2$ relative to the calibration reference yields an apparent velocity shift in the host velocity channel:
 </p>
 
 <div class="equation">
@@ -402,12 +492,12 @@
 </div>
 
 <p>
-    Evaluating at the empirical values $H_{\rm app} \approx 68.6\ {\rm km\,s^{-1}\,Mpc^{-1}}$ and $\kappa_{\rm Cep} \approx 0.365 \times 10^6\ {\rm mag}$ yields
+    Evaluating at the empirical values $H_{\rm app} \approx 68.5\ {\rm km\,s^{-1}\,Mpc^{-1}}$ and $\kappa_{\rm Cep} \approx 1.220 \times 10^6\ {\rm mag}$ yields
 </p>
 
 <div class="equation">
     \begin{equation}
-    \Gamma_{X,{\rm Cep}} \approx 0.4605 \times 68.6 \times (3.65 \times 10^5) \approx 1.15 \times 10^7\ {\rm km\,s^{-1}\,Mpc^{-1}} .
+    \Gamma_{X,{\rm Cep}} \approx 0.4605 \times 68.5 \times (1.22 \times 10^6) \approx 3.85 \times 10^7\ {\rm km\,s^{-1}\,Mpc^{-1}} .
     \end{equation}
 </div>
 
@@ -419,15 +509,68 @@
     \begin{equation}
     \frac{\beta_{X,{\rm grav}}}{\Gamma_{X,{\rm Cep}}}
       = \frac{c / \langle d \rangle}{\left(\frac{\ln 10}{5}\right) H_{\rm app} \kappa_{\rm Cep}}
-      \approx \frac{9.60 \times 10^3}{1.15 \times 10^7}
-      \approx 8.3 \times 10^{-4} \approx 0.08\% \text{--} 0.10\% .
+      \approx \frac{9.60 \times 10^3}{3.85 \times 10^7}
+      \approx 2.5 \times 10^{-4} \approx 0.02\% \text{--} 0.03\% .
     \end{equation}
 </div>
 
 <p>
-    This analytic derivation reveals that the direct gravitational redshift contributes less than one part in a thousand to the combined endpoint response $\Gamma_X$, with $>99.9\%$ allocated to the Cepheid distance-modulus channel. The physical origin of this asymmetry is the dimensional lever arm between linear gravitational redshift ($\Delta(cz) = \Phi / c \sim 70\ {\rm m\,s^{-1}}$) and photometric distance modulus exponentiation ($\Delta \mu \sim 0.15\ {\rm mag}$, corresponding to a $\sim 7\%$ distance correction and an apparent expansion shift of $\sim 120\ {\rm km\,s^{-1}}$).
+    This analytic derivation reveals that the direct gravitational redshift contributes less than three parts in ten thousand to the combined endpoint response $\Gamma_X$, with $>99.97\%$ allocated to the Cepheid distance-modulus channel. The physical origin of this asymmetry is the dimensional lever arm between linear gravitational redshift ($\Delta(cz) = \Phi / c \sim 70\ {\rm m\,s^{-1}}$) and photometric distance modulus exponentiation ($\Delta \mu \sim 0.15\ {\rm mag}$, corresponding to a $\sim 7\%$ distance correction and an apparent expansion shift of $\sim 120\ {\rm km\,s^{-1}}$).
 </p>
 
 <p>
-    Hence, setting $\beta_X \approx 0$ is not an ad hoc closure that contradicts the observing-chain mechanism, but rather its rigorous leading-order consequence. Estimating the exact coupled model in the joint multi-block framework with $\beta_X = 9.597 \times 10^3\ {\rm km\,s^{-1}\,Mpc^{-1}}$ fixed from first principles recovers $H_{\rm app} = 68.78 \pm 1.48\ {\rm km\,s^{-1}\,Mpc^{-1}}$ and $\kappa_{\rm Cep} = (0.266 \pm 0.240) \times 10^6\ {\rm mag}$ at the canonical $\sigma_v = 250\ {\rm km/s}$ convention ($H_{\rm app} = 68.72 \pm 1.32$, $\kappa_{\rm Cep} = (0.290 \pm 0.227) \times 10^6\ {\rm mag}$ at the $\sigma_v = 182.1\ {\rm km/s}$ variant), matching the restricted Cepheid closure to within three decimal places at every $\sigma_v$.
+    Hence, setting $\beta_X \approx 0$ is not an ad hoc closure that contradicts the observing-chain mechanism, but rather its rigorous leading-order consequence. Estimating the exact coupled model in the joint multi-block framework with $\beta_X = 9.597 \times 10^3\ {\rm km\,s^{-1}\,Mpc^{-1}}$ fixed from first principles recovers $H_{\rm app} = 68.82 \pm 1.45\ {\rm km\,s^{-1}\,Mpc^{-1}}$ and $\kappa_{\rm Cep} = (0.665 \pm 0.362) \times 10^6\ {\rm mag}$ at the canonical $\sigma_v = 250\ {\rm km/s}$ convention ($H_{\rm app} = 68.72 \pm 1.25$, $\kappa_{\rm Cep} = (0.746 \pm 0.343) \times 10^6\ {\rm mag}$ at the $\sigma_v = 150\ {\rm km/s}$ variant), matching the restricted Cepheid closure to within three decimal places at every $\sigma_v$.
+</p>
+
+<h3>C.5 Spectroscopic-Tracer Provenance from NED</h3>
+
+<p>
+    The aperture condition $q_i = r_{\rm spec}/r_{\rm Cep}$ above is
+    testable only if the spectroscopic tracer that supplies each host's
+    systemic redshift is known. A full-provenance census of the NASA/IPAC
+    Extragalactic Database (NED) was therefore executed for all 40
+    catalogued systems — the 37 SN Ia hosts and the extragalactic anchors
+    LMC, NGC 4258 and M31 (Step 54). For each system, the NED preferred
+    redshift, its preferred-measurement refcode, and the verbatim
+    measurement metadata (spectral range, measurement technique, spatial
+    mode, spectrograph) were retrieved and archived; the tracer class is
+    assigned from the aggregated method fields of all NED rows bearing the
+    preferred refcode, or, where the preferred measurement carries no
+    method metadata, from the modal method fields among rows whose
+    redshift equals the preferred value. No class is inferred by name or
+    morphology: where NED supplies no method evidence, the system is
+    recorded as unclassified.
+</p>
+
+<p>
+    The census classifies 33 of the 40 systems from direct NED metadata:
+    25 hosts adopt disk-integrated 21-cm H&nbsp;I line profiles as the
+    preferred systemic redshift (predominantly the Springob et al. 2005
+    H&nbsp;I archive and the Third Reference Catalogue), 4 adopt
+    integrated optical spectroscopy, 2 adopt nuclear/fibre optical
+    spectroscopy, and 2 adopt systemic optical determinations; 7 systems
+    carry a preferred refcode for which NED publishes no technique fields
+    and are retained as unclassified rather than assigned. The
+    disk-integrated character of the dominant H&nbsp;I tier is the
+    relevant aperture fact for the coupled model: a 21-cm systemic
+    redshift weights the extended disk rather than the deep core, so the
+    effective $r_{\rm spec}$ for these hosts approaches the outer-disk
+    value and the direct velocity-channel term is even smaller than the
+    core-weighted bound derived in C.4.
+</p>
+
+<p>
+    Conditioning the endpoint response on the measured tracer class
+    confirms that the signal is not an artifact of any single
+    spectroscopic aperture. Within the 25-host H&nbsp;I tier alone, the
+    generative likelihood returns $\Gamma_X = (2.97 \pm 2.00) \times
+    10^7\ {\rm km\,s^{-1}\,Mpc^{-1}}$ ($1.5\sigma$ at $n = 25$), against
+    $\Gamma_X = (2.97 \pm 3.27) \times 10^7$ in the unclassified tier
+    ($n = 7$) — statistically indistinguishable point estimates — while
+    the optical classes ($n \le 2$ each) carry insufficient leverage for
+    an independent fit. The full-sample value $\Gamma_X = (3.846 \pm
+    1.653) \times 10^7\ {\rm km\,s^{-1}\,Mpc^{-1}}$ is therefore recovered
+    across the measured aperture classes, and the per-host classification
+    table with verbatim NED fields is preserved at
+    <code>results/outputs/step_54_tracer_class_table.csv</code>.
 </p>

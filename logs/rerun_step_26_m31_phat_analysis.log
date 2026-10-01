@@ -1,0 +1,35 @@
+[0;37m[01:48:08] [INFO] [0m
+[0;37m[01:48:08] [INFO] ================================================================================[0m
+[0;37m[01:48:08] [INFO]    Starting Step 8: M31 HST Differential Analysis[0m
+[0;37m[01:48:08] [INFO] ================================================================================[0m
+[0;37m[01:48:08] [INFO] [0m
+[0;34m[01:48:08] [PROCESS] Fetching Kodric 2018 HST J/H catalog (J/ApJ/864/59)...[0m
+[1;32m[01:48:08] [SUCCESS] Downloaded 1113 Cepheids with HST J/H photometry[0m
+[0;37m[01:48:08] [INFO] After quality cuts: 391 classical Cepheids (P=10-60d)[0m
+[0;37m[01:48:08] [INFO] M31 HST Sample[0m
+[0;37m[01:48:08] [INFO] +--------+--------------+----+----------+----------+[0m
+[0;37m[01:48:08] [INFO] | Region | Cut          | N  | Mean W_H | Mean J-H |[0m
+[0;37m[01:48:08] [INFO] +--------+--------------+----+----------+----------+[0m
+[0;37m[01:48:08] [INFO] | Inner  | R < 5.0 kpc  | 78 | 18.31    | 0.680    |[0m
+[0;37m[01:48:08] [INFO] | Outer  | R > 15.0 kpc | 69 | 18.00    | 0.544    |[0m
+[0;37m[01:48:08] [INFO] +--------+--------------+----+----------+----------+[0m
+[0;37m[01:48:08] [INFO] === Baseline analysis (no color matching) ===[0m
+[0;37m[01:48:08] [INFO] Baseline: ΔW = +0.681 ± 0.187 mag (3.6σ) [Inner fainter][0m
+[0;37m[01:48:08] [INFO] === 2D multidimensional matching (logP + color) ===[0m
+[0;37m[01:48:08] [INFO] Found 26 tight 2D matches.[0m
+[0;37m[01:48:08] [INFO] Matched: ΔW = +0.604 ± 0.277 mag (2.2σ) [Inner fainter][0m
+[0;37m[01:48:08] [INFO] Error-matched (logP+e_WH): ΔW = -0.565 ± 0.079 mag (n=78)[0m
+[0;37m[01:48:08] [INFO] Density-matched (logP+neighbors): ΔW = +0.906 ± 0.147 mag (n=78)[0m
+[0;37m[01:48:08] [INFO] Error+color matched: ΔW = -0.335 ± 0.083 mag (n=78)[0m
+[0;37m[01:48:08] [INFO] ============================================================[0m
+[0;37m[01:48:08] [INFO] [0m
+[0;37m[01:48:08] [INFO] ================================================================================[0m
+[0;37m[01:48:08] [INFO]    Summary[0m
+[0;37m[01:48:08] [INFO] ================================================================================[0m
+[0;37m[01:48:08] [INFO] [0m
+[0;37m[01:48:08] [INFO] Baseline (Confounded): ΔW = +0.681 ± 0.187 mag [Inner fainter][0m
+[0;37m[01:48:08] [INFO] Matched (Controlled):  ΔW = +0.604 ± 0.277 mag [Inner fainter][0m
+[0;37m[01:48:08] [INFO] [0m
+[1;32m[01:48:08] [SUCCESS] M31 HST shows robust inner fainter — consistent with screened TEP.[0m
+[1;32m[01:48:08] [SUCCESS] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_26_m31_phat_robustness_summary.json[0m
+[1;32m[01:48:08] [SUCCESS] Step 8 complete.[0m

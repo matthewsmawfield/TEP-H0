@@ -1,0 +1,11 @@
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: divide by zero encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: overflow encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: invalid value encountered in matmul
+  return _core_matmul(x1, x2)
+manticore_screened: N=35, Gamma_X=+1.203e+07 +/- 1.857e+07 (0.65 sigma; LRT=+0.65)
+manticore_unscreened: N=35, Gamma_X=+1.040e+07 +/- 8.839e+06 (1.18 sigma; LRT=+1.19)
+carrick_r22_same_35: N=35, Gamma_X=+4.733e+07 +/- 2.203e+07 (2.15 sigma; LRT=+2.20)
+Saved /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_51_recent_velocity_sensitivity.json
+Saved /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_51_recent_velocity_sensitivity.csv

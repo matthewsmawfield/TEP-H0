@@ -1,0 +1,16 @@
+[0;37m[01:48:02] [INFO] Step 7: TRGB re-analysis (differential test)[0m
+[0;37m[01:48:02] [INFO] Matched 18 hosts for differential analysis[0m
+[0;37m[01:48:02] [INFO] 
+Differential Modulus (TRGB - Cepheid) vs Sigma:[0m
+[0;37m[01:48:02] [INFO] +-----------------+----------------+--------------+[0m
+[0;37m[01:48:02] [INFO] | Metric          | Value          | Significance |[0m
+[0;37m[01:48:02] [INFO] +-----------------+----------------+--------------+[0m
+[0;37m[01:48:02] [INFO] | Pearson r       | -0.148         | p=0.7217     |[0m
+[0;37m[01:48:02] [INFO] | Spearman ρ      | 0.259          | p=0.1497     |[0m
+[0;37m[01:48:02] [INFO] | Slope (mag/dex) | -0.126 ± 0.087 | p=0.9169     |[0m
+[0;37m[01:48:02] [INFO] +-----------------+----------------+--------------+[0m
+[0;37m[01:48:02] [INFO] 
+Interpretation Check:[0m
+[0;37m[01:48:02] [INFO]   No significant positive correlation.[0m
+[0;37m[01:48:02] [INFO]   → Inconclusive / tension.[0m
+[0;37m[01:48:02] [INFO] Results saved to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_16_trgb_differential_results.json[0m

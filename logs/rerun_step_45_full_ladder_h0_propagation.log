@@ -1,0 +1,108 @@
+[0;37m[01:51:21] [INFO] Step 45: Full-Ladder H_0 Propagation Test[0m
+[0;37m[01:51:21] [INFO] Decisive audit: does frozen kappa move the complete SH0ES ladder
+from 73.04 to approximately 69?[0m
+[0;37m[01:51:21] [INFO] Loading data...[0m
+[0;37m[01:51:22] [INFO] SH0ES design matrix: (3490, 46), 3490 observations, 46 parameters[0m
+[0;37m[01:51:22] [INFO] Hubble-flow sample: 274 SNe (z > 0.023)[0m
+[0;37m[01:51:22] [INFO] Baseline SH0ES fit...[0m
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:243: RuntimeWarning: divide by zero encountered in matmul
+  resid = y_w - A_w @ theta
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:243: RuntimeWarning: overflow encountered in matmul
+  resid = y_w - A_w @ theta
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:243: RuntimeWarning: invalid value encountered in matmul
+  resid = y_w - A_w @ theta
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:247: RuntimeWarning: divide by zero encountered in matmul
+  cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:247: RuntimeWarning: overflow encountered in matmul
+  cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:247: RuntimeWarning: invalid value encountered in matmul
+  cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: divide by zero encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: overflow encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: invalid value encountered in matmul
+  return _core_matmul(x1, x2)
+[1;32m[01:51:22] [SUCCESS]   H_0 = 73.04 +/- 1.01 km/s/Mpc[0m
+[0;37m[01:51:22] [INFO]   M_B = -19.2529 +/- 0.0289[0m
+[0;37m[01:51:22] [INFO]   chi^2/dof = 3552.7/3444 = 1.0316[0m
+[0;37m[01:51:22] [INFO]   (SH0ES reports H_0 = 73.04 +/- 1.01)[0m
+[0;37m[01:51:22] [INFO] Extracting Cepheid host distance moduli...[0m
+[0;37m[01:51:22] [INFO]   N_Cepheid hosts = 37[0m
+[0;37m[01:51:22] [INFO]   sigma range: 28.0 - 238.0 km/s[0m
+[0;37m[01:51:22] [INFO]   S range: 0.027 - 0.940[0m
+[0;37m[01:51:22] [INFO] sigma_ref conventions...[0m
+[0;37m[01:51:22] [INFO]   Standard  sigma_ref = 87.17 km/s[0m
+[0;37m[01:51:22] [INFO]   Screened  sigma_ref = 30.51 km/s[0m
+[0;37m[01:51:22] [INFO]   Equal-wt  sigma_ref = 70.00 km/s[0m
+[0;37m[01:51:22] [INFO]   Rotation  sigma_ref = 131.46 km/s[0m
+[0;37m[01:51:22] [INFO]     MW  S = 0.605  (N_mb = 7)[0m
+[0;37m[01:51:22] [INFO]     LMC S = 0.873  (N_mb = 2)[0m
+[0;37m[01:51:22] [INFO]     N4258 S = 0.096  (N_mb = 65)[0m
+[0;37m[01:51:22] [INFO] Full-ladder propagation (M_B -> Hubble flow)...[0m
+[0;37m[01:51:22] [INFO]   standard             kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00[0m
+[0;37m[01:51:22] [INFO]   standard             kappa_gal_canonical    kappa=9.600e+05  H_0=73.09 +/- 1.01  tension=5.05sigma  delta_H0=+0.05[0m
+[0;37m[01:51:22] [INFO]   standard             kappa_endpoint_equiv   kappa=1.220e+06  H_0=73.10 +/- 1.01  tension=5.06sigma  delta_H0=+0.06[0m
+[0;37m[01:51:22] [INFO]   screened             kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00[0m
+[0;37m[01:51:22] [INFO]   screened             kappa_gal_canonical    kappa=9.600e+05  H_0=70.73 +/- 1.01  tension=2.96sigma  delta_H0=-2.31[0m
+[0;37m[01:51:22] [INFO]   screened             kappa_endpoint_equiv   kappa=1.220e+06  H_0=70.12 +/- 1.01  tension=2.41sigma  delta_H0=-2.92[0m
+[0;37m[01:51:22] [INFO]   equal_weights        kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00[0m
+[0;37m[01:51:22] [INFO]   equal_weights        kappa_gal_canonical    kappa=9.600e+05  H_0=72.13 +/- 1.01  tension=4.19sigma  delta_H0=-0.91[0m
+[0;37m[01:51:22] [INFO]   equal_weights        kappa_endpoint_equiv   kappa=1.220e+06  H_0=71.88 +/- 1.01  tension=3.98sigma  delta_H0=-1.16[0m
+[0;37m[01:51:22] [INFO]   homogeneous_rotation kappa_0_null           kappa=0.000e+00  H_0=73.04 +/- 1.01  tension=5.00sigma  delta_H0=+0.00[0m
+[0;37m[01:51:22] [INFO]   homogeneous_rotation kappa_gal_canonical    kappa=9.600e+05  H_0=76.66 +/- 1.01  tension=8.21sigma  delta_H0=+3.62[0m
+[0;37m[01:51:22] [INFO]   homogeneous_rotation kappa_endpoint_equiv   kappa=1.220e+06  H_0=77.67 +/- 1.01  tension=9.11sigma  delta_H0=+4.63[0m
+[0;37m[01:51:22] [INFO] Full-ladder propagation (SH0ES design matrix)...[0m
+[0;37m[01:51:22] [INFO]   standard kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma[0m
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:470: RuntimeWarning: divide by zero encountered in matmul
+  resid = y_w - A_w @ theta
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:470: RuntimeWarning: overflow encountered in matmul
+  resid = y_w - A_w @ theta
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:470: RuntimeWarning: invalid value encountered in matmul
+  resid = y_w - A_w @ theta
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:474: RuntimeWarning: divide by zero encountered in matmul
+  cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:474: RuntimeWarning: overflow encountered in matmul
+  cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_45_full_ladder_h0_propagation.py:474: RuntimeWarning: invalid value encountered in matmul
+  cov = np.linalg.pinv(A_w.T @ A_w, rcond=1e-12)
+[0;37m[01:51:22] [INFO]   standard kappa_gal_canonical       kappa=9.600e+05  H_0=71.01  delta_chi2=+5.9  tension=3.28sigma[0m
+[0;37m[01:51:22] [INFO]   standard kappa_endpoint_equiv      kappa=1.220e+06  H_0=70.46  delta_chi2=+9.9  tension=2.80sigma[0m
+[0;37m[01:51:22] [INFO]   screened kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma[0m
+[0;37m[01:51:22] [INFO]   screened kappa_gal_canonical       kappa=9.600e+05  H_0=71.01  delta_chi2=+5.9  tension=3.28sigma[0m
+[0;37m[01:51:22] [INFO]   screened kappa_endpoint_equiv      kappa=1.220e+06  H_0=70.46  delta_chi2=+9.9  tension=2.80sigma[0m
+[0;37m[01:51:22] [INFO]   equal_weights kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma[0m
+[0;37m[01:51:22] [INFO]   equal_weights kappa_gal_canonical       kappa=9.600e+05  H_0=71.01  delta_chi2=+5.9  tension=3.28sigma[0m
+[0;37m[01:51:22] [INFO]   equal_weights kappa_endpoint_equiv      kappa=1.220e+06  H_0=70.46  delta_chi2=+9.9  tension=2.80sigma[0m
+[0;37m[01:51:22] [INFO]   homogeneous_rotation kappa_0_null              kappa=0.000e+00  H_0=73.04  delta_chi2=+0.0  tension=5.02sigma[0m
+[0;37m[01:51:23] [INFO]   homogeneous_rotation kappa_gal_canonical       kappa=9.600e+05  H_0=71.01  delta_chi2=+5.9  tension=3.28sigma[0m
+[0;37m[01:51:23] [INFO]   homogeneous_rotation kappa_endpoint_equiv      kappa=1.220e+06  H_0=70.46  delta_chi2=+9.9  tension=2.80sigma[0m
+[0;37m[01:51:23] [INFO] Summary: Full-Ladder H_0 Propagation[0m
+[0;37m[01:51:23] [INFO] Full-Ladder H_0 Propagation Results[0m
+[0;37m[01:51:23] [INFO] +----------------------+-----------+-----------+-----------+-------+-----------+[0m
+[0;37m[01:51:23] [INFO] | sigma_ref            | kappa     | H0_simple | H0_matrix | dChi2 | tension   |[0m
+[0;37m[01:51:23] [INFO] +----------------------+-----------+-----------+-----------+-------+-----------+[0m
+[0;37m[01:51:23] [INFO] | standard             | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |[0m
+[0;37m[01:51:23] [INFO] | standard             | 9.600e+05 | 73.09     | 71.01     | +5.9  | 5.05sigma |[0m
+[0;37m[01:51:23] [INFO] | standard             | 1.220e+06 | 73.10     | 70.46     | +9.9  | 5.06sigma |[0m
+[0;37m[01:51:23] [INFO] | screened             | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |[0m
+[0;37m[01:51:23] [INFO] | screened             | 9.600e+05 | 70.73     | 71.01     | +5.9  | 2.96sigma |[0m
+[0;37m[01:51:23] [INFO] | screened             | 1.220e+06 | 70.12     | 70.46     | +9.9  | 2.41sigma |[0m
+[0;37m[01:51:23] [INFO] | equal_weights        | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |[0m
+[0;37m[01:51:23] [INFO] | equal_weights        | 9.600e+05 | 72.13     | 71.01     | +5.9  | 4.19sigma |[0m
+[0;37m[01:51:23] [INFO] | equal_weights        | 1.220e+06 | 71.88     | 70.46     | +9.9  | 3.98sigma |[0m
+[0;37m[01:51:23] [INFO] | homogeneous_rotation | 0.000e+00 | 73.04     | 73.04     | +0.0  | 5.00sigma |[0m
+[0;37m[01:51:23] [INFO] | homogeneous_rotation | 9.600e+05 | 76.66     | 71.01     | +5.9  | 8.21sigma |[0m
+[0;37m[01:51:23] [INFO] | homogeneous_rotation | 1.220e+06 | 77.67     | 70.46     | +9.9  | 9.11sigma |[0m
+[0;37m[01:51:23] [INFO] +----------------------+-----------+-----------+-----------+-------+-----------+[0m
+[0;37m[01:51:23] [INFO] Delta-chi2 row-type decomposition (endpoint-equivalent projection)...[0m
+[0;37m[01:51:23] [INFO]   cepheid_nonanchor     : Δχ² = +9.1  (92.4%)  N_rows = 2150[0m
+[0;37m[01:51:23] [INFO]   sn_calibrator         : Δχ² = +0.7  (7.0%)  N_rows = 77[0m
+[0;37m[01:51:23] [INFO]   cepheid_anchor        : Δχ² = +0.2  (1.8%)  N_rows = 982[0m
+[0;37m[01:51:23] [INFO]   sn_hubble_flow        : Δχ² = -0.0  (-0.0%)  N_rows = 277[0m
+[0;37m[01:51:23] [INFO]   other                 : Δχ² = -0.1  (-1.2%)  N_rows = 4[0m
+[0;37m[01:51:23] [INFO]   total                 : Δχ² = +9.9[0m
+[0;37m[01:51:23] [INFO] Key Conclusion[0m
+[1;32m[01:51:23] [SUCCESS]   Endpoint-equivalent kappa (1.220e+06): H_0 = 70.46 +/- 0.97, Delta-chi2 = +9.87[0m
+[1;32m[01:51:23] [SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_45_full_ladder_h0_propagation.json[0m
+[1;32m[01:51:23] [SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_45_full_ladder_h0_propagation.csv[0m

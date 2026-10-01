@@ -21,6 +21,15 @@ Primary channel set (independent noise sources):
      differential. Noise: TRGB photometry, shares host set and anchors
      with (1).
 
+Derived-carrier variant (theory-predicted period structure):
+  2b. within_host_period_kappaP2 (step_62): the derived inverse-density
+     carrier X*(P/10d)^2, which the stellar-structure argument selects
+     over the ad hoc X*logP form at equal parameter count; fitted jointly
+     with kappa_Z in the same design-matrix configuration (fitted
+     kappa_P2-kappa_Z correlation carried explicitly).
+  3b. within_host_metallicity_kappaZ_P2fit (step_62): the metallicity
+     term refit in the derived-carrier configuration.
+
 Consistency channel (not independent evidence; derived propagation):
   5. hfsn_contrast (step_65): the calibrator-vs-HF environment contrast,
      reported one-sided in the predicted direction.
@@ -92,6 +101,32 @@ def load_channels():
         "independent_noise": "same fit as kappa_P (corr carried explicitly)",
         "primary": True})
 
+    # 2b-3b. derived-carrier period term and its joint metallicity term,
+    # anchor_screened_physical convention (theory-predicted channel)
+    r62 = json.load(open(OUT_DIR / "step_62_q_structure_derivation.json"))
+    prow = [r for r in r62["part_B_carrier_discrimination"]
+            if r["model"] == "P2_plus_kappaZ"
+            and r["anchor_convention"] == "anchor_screened_physical"][0]
+    ch.append({
+        "channel": "within_host_period_kappaP2",
+        "source": "step_62", "estimate": prow["kappa_P2_6"],
+        "error": prow["kappa_P2_6_err"], "z": prow["kappa_P2_6_sig"],
+        "independent_noise": "Cepheid photometric residuals (design matrix)",
+        "fit_corr_with": {"within_host_metallicity_kappaZ_P2fit":
+                          prow["corr_kappa_P2_6_kappaZ_6"]},
+        "primary": False,
+        "variant_of": "within_host_period_kappaP",
+        "note": "derived inverse-density carrier; supersedes the ad hoc "
+                "linear-in-logP placeholder per the Part B carrier "
+                "discrimination"})
+    ch.append({
+        "channel": "within_host_metallicity_kappaZ_P2fit",
+        "source": "step_62", "estimate": prow["kappaZ_6"],
+        "error": prow["kappaZ_6_err"], "z": prow["kappaZ_6_sig"],
+        "independent_noise": "same fit as kappa_P2 (corr carried explicitly)",
+        "primary": False,
+        "variant_of": "within_host_metallicity_kappaZ"})
+
     # 4. Cepheid-TRGB differential
     r41 = json.load(open(OUT_DIR / "step_41_external_distance_breakers.json"))
     dk = r41["differential_kappa"]
@@ -150,6 +185,8 @@ def run():
     pred_sign = {"velocity_endpoint_GammaX": 1,
                  "within_host_period_kappaP": -1,
                  "within_host_metallicity_kappaZ": -1,
+                 "within_host_period_kappaP2": -1,
+                 "within_host_metallicity_kappaZ_P2fit": -1,
                  "cepheid_trgb_differential": 1,
                  "hfsn_environment_contrast": -1}
     zs_dir = np.array([c["z"] * np.sign(c["estimate"]) * pred_sign[c["channel"]]
@@ -165,15 +202,30 @@ def run():
     kp, kz = name_idx["within_host_period_kappaP"], name_idx["within_host_metallicity_kappaZ"]
     cp = ch[kp].get("fit_corr_with", {})
     corr_pairs[(kp, kz)] = float(cp.get("within_host_metallicity_kappaZ", 0.0))
+    kp2, kz2 = (name_idx["within_host_period_kappaP2"],
+                name_idx["within_host_metallicity_kappaZ_P2fit"])
+    cp2 = ch[kp2].get("fit_corr_with", {})
+    corr_pairs[(kp2, kz2)] = float(
+        cp2.get("within_host_metallicity_kappaZ_P2fit", 0.0))
+
+    # derived-carrier primary set: swaps the ad hoc placeholder pair for
+    # the theory-predicted P2 carrier and its joint metallicity term
+    prim_derived = [name_idx["velocity_endpoint_GammaX"], kp2, kz2,
+                    name_idx["cepheid_trgb_differential"]]
 
     sensitivity = {}
     for tag, idxs, rho in [
         ("primary_rho0", prim, 0.0),
         ("primary_rho_shared_0.1", prim, 0.1),
         ("primary_rho_shared_0.3", prim, 0.3),
+        ("derived_carrier_rho0", prim_derived, 0.0),
+        ("derived_carrier_rho_shared_0.1", prim_derived, 0.1),
+        ("derived_carrier_rho_shared_0.3", prim_derived, 0.3),
         ("velocity_plus_period_only",
          [name_idx["velocity_endpoint_GammaX"],
           name_idx["within_host_period_kappaP"]], 0.0),
+        ("derived_velocity_plus_period",
+         [name_idx["velocity_endpoint_GammaX"], kp2], 0.0),
         ("drop_metallicity",
          [i for i in prim if i != kz], 0.0),
         ("with_hfsn_consistency", prim + [name_idx["hfsn_environment_contrast"]], 0.0),
@@ -189,6 +241,27 @@ def run():
         print_status(f"{tag:28s} Z={Z:+.2f}  p1={p1:.4f}  p2={p2:.4f}",
                      "SUCCESS")
 
+    # rho_crit scan: the shared-correlation level at which the combined
+    # significance falls below 2 sigma, for both carrier conventions.
+    # Converts the adopted rho=0.3 conservatism into a bounded statement.
+    rho_grid = np.linspace(0.0, 1.0, 201)
+    rho_crit = {}
+    for tag, idxs in [("primary", prim), ("derived_carrier", prim_derived)]:
+        z_curve = [stouffer(zs_dir[idxs], corr_pairs=corr_pairs,
+                            shared_rho=float(r)) for r in rho_grid]
+        z_curve = np.asarray(z_curve)
+        below = np.where(z_curve < 2.0)[0]
+        rho_crit[tag] = {
+            "rho_crit_2sigma": float(rho_grid[below[0]])
+            if len(below) else None,
+            "Z_at_rho1": float(z_curve[-1]),
+            "note": ("shared inter-channel correlation at which the "
+                     "Stouffer combination first falls below 2 sigma; "
+                     "None means the combination remains >= 2 sigma for "
+                     "every admissible shared correlation rho <= 1")}
+        print_status(f"rho_crit {tag:16s} "
+                     f"= {rho_crit[tag]['rho_crit_2sigma']}", "SUCCESS")
+
     # Sign concordance: fraction of channels in the predicted direction
     n_pred = int(np.sum(zs_dir[prim] > 0))
     result = {
@@ -199,15 +272,22 @@ def run():
         "fitted_correlations": {f"{ch[i]['channel']}--{ch[j]['channel']}": v
                                 for (i, j), v in corr_pairs.items()},
         "sensitivity": sensitivity,
+        "rho_crit": rho_crit,
         "headline": {
             "combination": "primary_rho0",
             "Z": sensitivity["primary_rho0"]["stouffer_Z"],
+            "Z_derived_carrier": sensitivity["derived_carrier_rho0"]["stouffer_Z"],
+            "p_derived_carrier": sensitivity["derived_carrier_rho0"]["p_two_sided"],
             "note": "Stouffer combination of the four independent-noise "
                     "primary channels; two-sided z per channel in the "
                     "predicted direction; fitted kappa_P-kappa_Z "
-                    "correlation (-0.15) carried explicitly. The HF-SN "
-                    "contrast is a derived consistency channel and is "
-                    "excluded from the headline."},
+                    "correlation (-0.17) carried explicitly. The "
+                    "derived-carrier variant substitutes the "
+                    "theory-predicted X*(P/10d)^2 term (step_62, fitted "
+                    "jointly with kappa_Z) for the ad hoc linear-in-logP "
+                    "placeholder. The HF-SN contrast is a derived "
+                    "consistency channel and is excluded from the "
+                    "headline."},
     }
     with open(OUT_DIR / "step_66_combined_evidence.json", "w") as f:
         json.dump(result, f, indent=2, default=float)

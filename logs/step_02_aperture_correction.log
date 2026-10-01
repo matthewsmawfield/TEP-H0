@@ -1,23 +1,23 @@
-[01:22:22] [INFO] 
-[01:22:22] [INFO] ================================================================================
-[01:22:22] [INFO]    Starting Step 1b: Aperture Correction
-[01:22:22] [INFO] ================================================================================
-[01:22:22] [INFO] 
-[01:22:22] [INFO] Initializing Aperture Correction Protocol
-[01:22:22] [INFO] Loaded 42 hosts from pipeline processing.
-[01:22:22] [PROCESS] Merging enriched metadata (R_eff, R25)...
-[01:22:22] [INFO] HyperLEDA V_rot is a global kinematic measure; aperture correction disabled.
-[01:22:22] [INFO] Aperture Correction Samples
-[01:22:22] [INFO] +----------+-----------+-----------+------------+-------+
-[01:22:22] [INFO] | Host     | R_eff (") | Raw Sigma | Corr Sigma | Delta |
-[01:22:22] [INFO] +----------+-----------+-----------+------------+-------+
-[01:22:22] [INFO] | LMC      | 9684.8    | 33.0      | 33.0       | +0.00 |
-[01:22:22] [INFO] | LMC      | 9684.8    | 33.0      | 33.0       | +0.00 |
-[01:22:22] [INFO] | M 101    | 432.6     | 193.8     | 193.8      | +0.00 |
-[01:22:22] [INFO] | Mrk 1337 | 18.5      | 86.3      | 86.3       | +0.00 |
-[01:22:22] [INFO] | M 31     | 2858.2    | 181.5     | 181.5      | +0.00 |
-[01:22:22] [INFO] +----------+-----------+-----------+------------+-------+
-[01:22:22] [SUCCESS] Applied corrections to 0/42 hosts.
-[01:22:22] [INFO] Mean Kinematic Scale Change: +0.00 km/s
-[01:22:22] [SUCCESS] Updated /Users/matthewsmawfield/Library/CloudStorage/Dropbox/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_processed.csv with homogenized velocity dispersions.
-[01:22:22] [SUCCESS] Step 1b Complete.
+[01:41:30] [INFO] 
+[01:41:30] [INFO] ================================================================================
+[01:41:30] [INFO]    Starting Step 1b: Aperture Correction
+[01:41:30] [INFO] ================================================================================
+[01:41:30] [INFO] 
+[01:41:30] [INFO] Initializing Aperture Correction Protocol
+[01:41:30] [INFO] Loaded 42 hosts from pipeline processing.
+[01:41:30] [PROCESS] Merging enriched metadata (R_eff, R25)...
+[01:41:30] [INFO] HyperLEDA V_rot is a global kinematic measure; aperture correction disabled.
+[01:41:30] [INFO] Aperture Correction Samples
+[01:41:30] [INFO] +----------+-----------+-----------+------------+-------+
+[01:41:30] [INFO] | Host     | R_eff (") | Raw Sigma | Corr Sigma | Delta |
+[01:41:30] [INFO] +----------+-----------+-----------+------------+-------+
+[01:41:30] [INFO] | LMC      | 9684.8    | 24.0      | 24.0       | +0.00 |
+[01:41:30] [INFO] | LMC      | 9684.8    | 24.0      | 24.0       | +0.00 |
+[01:41:30] [INFO] | M 101    | 432.6     | 28.0      | 28.0       | +0.00 |
+[01:41:30] [INFO] | Mrk 1337 | 18.5      | 94.0      | 94.0       | +0.00 |
+[01:41:30] [INFO] | M 31     | 2858.2    | 160.0     | 160.0      | +0.00 |
+[01:41:30] [INFO] +----------+-----------+-----------+------------+-------+
+[01:41:30] [SUCCESS] Applied corrections to 0/42 hosts.
+[01:41:30] [INFO] Mean Kinematic Scale Change: +0.00 km/s
+[01:41:30] [SUCCESS] Updated /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/data/processed/hosts_processed.csv with homogenized velocity dispersions.
+[01:41:30] [SUCCESS] Step 1b Complete.

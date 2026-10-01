@@ -1,0 +1,12 @@
+[0;37m[01:45:37] [INFO] [0m
+[0;37m[01:45:37] [INFO] ================================================================================[0m
+[0;37m[01:45:37] [INFO]    >>> STEP 14: Prespecified TEP prediction table[0m
+[0;37m[01:45:37] [INFO] ================================================================================[0m
+[0;37m[01:45:37] [INFO] [0m
+[0;37m[01:45:37] [INFO] Prespecified kappa_Cep: 1.220e+06 mag[0m
+[0;37m[01:45:37] [INFO] Prespecified sigma_ref: 30.51 km/s[0m
+[0;34m[01:45:37] [PROCESS] Verifying predictions against 37 existing hosts[0m
+[0;37m[01:45:37] [INFO] Max prediction residual: 0.417536 mag[0m
+[1;32m[01:45:37] [SUCCESS] Saved prediction grid: 54 rows[0m
+[1;32m[01:45:37] [SUCCESS] Saved prediction manifest[0m
+[1;32m[01:45:37] [SUCCESS] Step 14 complete[0m

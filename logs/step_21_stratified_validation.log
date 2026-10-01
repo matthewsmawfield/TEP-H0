@@ -1,19 +1,19 @@
-[01:23:47] [INFO] 
-[01:23:47] [INFO] ================================================================================
-[01:23:47] [INFO]    >>> STEP 21: Physically stratified validation
-[01:23:47] [INFO] ================================================================================
-[01:23:47] [INFO] 
-[01:23:47] [INFO] stellar_to_hi: insufficient data (train=0, test=0), skipping
-[01:23:47] [INFO] hi_to_stellar: insufficient data (train=0, test=0), skipping
-[01:23:47] [INFO] Physically stratified validation results:
-[01:23:47] [INFO] Stratified Validation (Train -> Test)
-[01:23:47] [INFO] +-------------------+---------+--------+----------+--------+--------+----------------+
-[01:23:47] [INFO] | Split             | N_train | N_test | κ_train  | Test r | Test p | Criterion met? |
-[01:23:47] [INFO] +-------------------+---------+--------+----------+--------+--------+----------------+
-[01:23:47] [INFO] | lowz_to_highz     | 13      | 24     | 1.51e+06 | 0.514  | 0.0101 | NO             |
-[01:23:47] [INFO] | highz_to_lowz     | 24      | 13     | 2.48e+05 | -0.186 | 0.5431 | YES            |
-[01:23:47] [INFO] | isolated_to_group | 16      | 21     | 6.34e+05 | -0.182 | 0.4298 | YES            |
-[01:23:47] [INFO] | group_to_isolated | 21      | 16     | 1.34e+06 | 0.269  | 0.3136 | YES            |
-[01:23:47] [INFO] +-------------------+---------+--------+----------+--------+--------+----------------+
-[01:23:47] [INFO] Passed 3/4 stratified validation splits
-[01:23:47] [SUCCESS] Step 21 complete
+[01:48:05] [INFO] 
+[01:48:05] [INFO] ================================================================================
+[01:48:05] [INFO]    >>> STEP 21: Physically stratified validation
+[01:48:05] [INFO] ================================================================================
+[01:48:05] [INFO] 
+[01:48:05] [INFO] Physically stratified validation results:
+[01:48:05] [INFO] Stratified Validation (Train -> Test)
+[01:48:05] [INFO] +-------------------+---------+--------+----------+--------+--------+----------------+
+[01:48:05] [INFO] | Split             | N_train | N_test | κ_train  | Test r | Test p | Criterion met? |
+[01:48:05] [INFO] +-------------------+---------+--------+----------+--------+--------+----------------+
+[01:48:05] [INFO] | lowz_to_highz     | 13      | 24     | 2.35e+07 | 0.668  | 0.0004 | NO             |
+[01:48:05] [INFO] | highz_to_lowz     | 24      | 13     | 1.35e+06 | -0.574 | 0.0401 | NO             |
+[01:48:05] [INFO] | stellar_to_hi     | 18      | 19     | 2.87e+06 | -0.412 | 0.0795 | NO             |
+[01:48:05] [INFO] | hi_to_stellar     | 19      | 18     | 7.12e+06 | 0.389  | 0.1106 | NO             |
+[01:48:05] [INFO] | isolated_to_group | 16      | 21     | 2.37e+06 | -0.210 | 0.3605 | YES            |
+[01:48:05] [INFO] | group_to_isolated | 21      | 16     | 4.08e+06 | 0.468  | 0.0676 | NO             |
+[01:48:05] [INFO] +-------------------+---------+--------+----------+--------+--------+----------------+
+[01:48:05] [INFO] Passed 1/6 stratified validation splits
+[01:48:05] [SUCCESS] Step 21 complete

@@ -1,7 +1,7 @@
 {
   "name": "tep-h0-site",
-  "version": "0.10.0",
-  "description": "The Cepheid Bias: Resolving the Hubble Tension (v0.9 Kingston upon Hull)",
+  "version": "0.11.0",
+  "description": "The Cepheid Bias: Resolving the Hubble Tension (v0.11 Kingston upon Hull)",
   "main": "index.html",
   "scripts": {
     "dev": "node dev-server.js",

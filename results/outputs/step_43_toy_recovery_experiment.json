@@ -10,14 +10,14 @@
     "sigma_v_true": 250.0
   },
   "design_matrix": {
-    "kappa_Cep_recovered": 1.4142214349734603e-07,
-    "kappa_Cep_err": 206849.96050984014,
-    "kappa_Cep_sig": 6.836943219557365e-13
+    "kappa_Cep_recovered": -9.329163785133858e-08,
+    "kappa_Cep_err": 370559.1906336764,
+    "kappa_Cep_sig": 2.5175907172024205e-13
   },
   "velocity_space": {
-    "Gamma_X_recovered": 25547095.488780517,
-    "Gamma_X_err": 11186579.223855563,
-    "Gamma_X_sig": 2.2837272214816946
+    "Gamma_X_recovered": 24754856.261503797,
+    "Gamma_X_err": 18092896.16752059,
+    "Gamma_X_sig": 1.3682086069748416
   },
   "outputs": {
     "json": "results/outputs/step_43_toy_recovery_experiment.json",

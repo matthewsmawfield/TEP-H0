@@ -1,5 +1,5 @@
 kappa_injected_1e6,OLS_recovered_1e6,ODR_recovered_1e6,GLS_recovered_1e6,null_pvalue,null_baseline_note
-0.0,-0.0,-0.0,-0.0,0.841,delta_mu target removes the Hubble-law trend; null slope is exactly zero at kappa_inj=0
-0.5,0.5,0.5,0.5,,
-1.0,1.0,1.0,1.0,,
-1.5,1.5,1.5,1.5,,
+0.0,0.0,,0.0,0.2616,delta_mu target removes the Hubble-law trend; null slope is exactly zero at kappa_inj=0
+0.5,0.5,,0.5,,
+1.0,1.0,,1.0,,
+1.5,1.5,,1.5,,

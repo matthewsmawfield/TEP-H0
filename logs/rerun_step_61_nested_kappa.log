@@ -1,0 +1,35 @@
+{
+  "step": "step_61_nested_kappa",
+  "ln_q_host": -5.671775470001143e-09,
+  "ln_q_ref": -5.908099447917843e-09,
+  "ln_q_ratio": 2.3632397791669994e-10,
+  "X_host": 4.4506002242144735e-07,
+  "b": -3.26,
+  "projector_b_over_ln10": -1.4158000110046007,
+  "kappa_nested_mag": -0.000751780599647476,
+  "delta_mu_mag": -3.345874905351148e-10,
+  "reference_variants": {
+    "nuclear_aperture": {
+      "ln_q_host": -5.671775470001143e-09,
+      "ln_q_ref": -5.908099447917843e-09,
+      "dln": 2.3632397791669994e-10,
+      "kappa_mag": -0.000751780599647476
+    },
+    "volume_mean_light": {
+      "ln_q_host": 4.218383005813327e-08,
+      "ln_q_ref": 2.5995637570838423e-08,
+      "dln": 1.6188192487294846e-08,
+      "kappa_mag": -0.05149697107585497
+    },
+    "cepheid_to_cepheid_baseline": {
+      "ln_q_host": 2.3360625217067075e-07,
+      "ln_q_ref": 1.5361058564586346e-07,
+      "dln": 7.99956665248073e-08,
+      "kappa_mag": -0.2544777329806845
+    }
+  },
+  "kappa_bound_mag": 0.2544777329806845,
+  "withdrawn_single_rate_benchmark_mag": 960000.0,
+  "ratio_old_over_nested": -1276968307.5755906,
+  "note": "The single-rate benchmark divided 0.288 mag by X=3e-7. Under every reference-clock convention the raw conformal clock channel yields |kappa| <~ 1 mag, so the measured kappa_Cep ~ 4e5 mag is a response-sector coefficient, not a clock-ratio artifact."
+}

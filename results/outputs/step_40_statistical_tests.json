@@ -1,25 +1,25 @@
 {
   "permutation": {
-    "standard": 0.2908545727136432,
-    "redshift_binned": 0.28535732133933034,
-    "sky_binned": 0.23338330834582707,
-    "redshift_sky_binned": 0.20689655172413793,
-    "gamma_true": 11558694.603707239
+    "standard": 0.031484257871064465,
+    "redshift_binned": 0.04397801099450275,
+    "sky_binned": 0.01999000499750125,
+    "redshift_sky_binned": 0.08895552223888056,
+    "gamma_true": 39237475.965112165
   },
   "loho": {
-    "Gamma_X_mean": 11423360.238884993,
-    "Gamma_X_std": 1823577.2295062433,
-    "Gamma_X_min": 2609289.999974708,
-    "Gamma_X_max": 15175646.696946759,
+    "Gamma_X_mean": 38601418.91193993,
+    "Gamma_X_std": 1991705.7125430515,
+    "Gamma_X_min": 34859564.09413083,
+    "Gamma_X_max": 47992121.649217896,
     "n_positive": 37,
     "N_hosts": 37,
     "most_influential_host": "N976A"
   },
   "bootstrap": {
-    "Gamma_X_boot_mean": 10993801.249687163,
-    "Gamma_X_boot_std": 11834336.38742667,
-    "Gamma_X_ci_low": -15803860.388691273,
-    "Gamma_X_ci_high": 35212788.7244778,
-    "frac_positive": 0.864
+    "Gamma_X_boot_mean": 44397803.45242353,
+    "Gamma_X_boot_std": 18829673.966271587,
+    "Gamma_X_ci_low": 23746629.141130567,
+    "Gamma_X_ci_high": 105996979.86702149,
+    "frac_positive": 0.998
   }
 }

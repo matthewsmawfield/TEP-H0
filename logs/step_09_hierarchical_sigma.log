@@ -1,11 +1,13 @@
-[01:22:47] [INFO] 
-[01:22:47] [INFO] ================================================================================
-[01:22:47] [INFO]    >>> STEP 09: Velocity-dispersion errors-in-variables audit
-[01:22:47] [INFO] ================================================================================
-[01:22:47] [INFO] 
-[01:22:47] [INFO] Method-specific bias and scatter:
-[01:22:47] [INFO]   HyperLEDA rotation potential proxy: N=37, bias=+0.00 km/s, scatter=3.04 km/s
-[01:22:47] [INFO] OLS slope: 0.0437
-[01:22:47] [INFO] Linear-sigma ODR: 0.0423 ± 0.0238 (1.78 sigma; fixed observational errors)
-[01:22:47] [INFO] TEP-endpoint ODR: Gamma=1.162e+07 ± 9.669e+06 (1.20 sigma; fixed observational errors)
-[01:22:47] [SUCCESS] Step 09 complete
+[01:46:07] [INFO] 
+[01:46:07] [INFO] ================================================================================
+[01:46:07] [INFO]    >>> STEP 09: Velocity-dispersion errors-in-variables audit
+[01:46:07] [INFO] ================================================================================
+[01:46:07] [INFO] 
+[01:46:07] [INFO] Method-specific bias and scatter:
+[01:46:07] [INFO]   HI linewidth proxy: N=19, bias=+0.00 km/s, scatter=8.00 km/s
+[01:46:07] [INFO]   stellar absorption: N=18, bias=+0.00 km/s, scatter=14.00 km/s
+[01:46:07] [INFO] OLS slope: 0.1133
+[01:46:07] [INFO] Linear-sigma ODR: 0.0872 ± 0.0306 (2.85 sigma; fixed observational errors)
+[01:46:07] [INFO] TEP-endpoint ODR: Gamma=4.132e+07 ± 1.737e+07 (2.38 sigma; fixed observational errors)
+[01:46:07] [INFO] Stellar-only: N=18, r=0.556, p=0.017
+[01:46:07] [SUCCESS] Step 09 complete

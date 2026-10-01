@@ -1,0 +1,50 @@
+[01:52:09] [SECTION] Step 53: within-host period-structure battery[0m
+[0;37m[01:52:09] [INFO] Loading SH0ES Data...[0m
+[0;37m[01:52:09] [INFO] Design matrix shape: (3490, 46)[0m
+[0;37m[01:52:09] [INFO] Data vector length: 3490[0m
+[0;37m[01:52:09] [INFO] Covariance matrix shape: (3490, 3490)[0m
+[0;37m[01:52:09] [INFO] Number of parameters: 46[0m
+[0;37m[01:52:09] [INFO] Loading Host Metadata...[0m
+[0;37m[01:52:09] [INFO] Loaded 42 hosts[0m
+[0;37m[01:52:09] [INFO] Mapped M1337 -> Mrk1337[0m
+[0;37m[01:52:09] [INFO] Mapped N105A -> N105[0m
+[0;37m[01:52:09] [INFO] Mapped N976A -> N976[0m
+[0;37m[01:52:09] [INFO] Created 122 name mappings[0m
+[0;37m[01:52:09] [INFO] Calculating Effective Calibrator Sigma...[0m
+[1;32m[01:52:09] [SUCCESS] Anchor active-response scale: 30.51 km/s[0m
+[0;37m[01:52:09] [INFO] Part A: PL-shape controls[0m
+[0;37m[01:52:09] [INFO]   baseline                         dchi2=    0.00 [0m
+[0;37m[01:52:09] [INFO]   kappaP                           dchi2=    2.12 kP=-4.85e+05 (1.46sig)[0m
+[0;37m[01:52:09] [INFO]   quad_PL                          dchi2=    0.60  cq=-0.028 (0.77sig)[0m
+[0;37m[01:52:09] [INFO]   break_PL                         dchi2=    2.65  cb=-0.097 (1.63sig)[0m
+[0;37m[01:52:09] [INFO]   plz_PL                           dchi2=    7.11 [0m
+[0;37m[01:52:09] [INFO]   kappaP+quad                      dchi2=    4.17 kP=-6.81e+05 (1.89sig) cq=-0.056 (1.43sig)[0m
+[0;37m[01:52:09] [INFO]   kappaP+break                     dchi2=    6.67 kP=-6.97e+05 (2.00sig) cb=-0.133 (2.13sig)[0m
+[0;37m[01:52:09] [INFO]   kappaP+quad+break                dchi2=    6.90 kP=-6.51e+05 (1.80sig) cq=0.032 (0.48sig) cb=-0.173 (1.65sig)[0m
+[0;37m[01:52:09] [INFO]   kappaP+kappaZ                    dchi2=    3.37 kP=-4.24e+05 (1.25sig) kZ=-1.51e+06 (1.12sig)[0m
+[0;37m[01:52:09] [INFO]   kappaP+kappaZ+quad+break         dchi2=    8.29 kP=-5.91e+05 (1.62sig) kZ=-1.59e+06 (1.18sig) cq=0.030 (0.46sig) cb=-0.174 (1.66sig)[0m
+[0;37m[01:52:09] [INFO]   kappaP+kappaZ+plz                dchi2=    7.38 kP=-1.33e+05 (0.36sig) kZ=-5.34e+05 (0.37sig)[0m
+[0;37m[01:52:09] [INFO]   kappaZ+plz                       dchi2=    7.25  kZ=-5.38e+05 (0.38sig)[0m
+[0;37m[01:52:09] [INFO]   env_quad_only                    dchi2=    3.63 [0m
+[0;37m[01:52:09] [INFO]   kappaP+envquad                   dchi2=    4.17 kP=6.14e+05 (0.73sig)[0m
+[0;37m[01:52:09] [INFO] Part B: modulator discrimination[0m
+[0;37m[01:52:10] [INFO]   mean_OH_host         dchi2=   7.12 sig=2.67[0m
+[0;37m[01:52:10] [INFO]   S_screening          dchi2=   3.15 sig=1.77[0m
+[0;37m[01:52:10] [INFO]   sigma2_unscreened    dchi2=   2.57 sig=1.60[0m
+[0;37m[01:52:10] [INFO]   mean_logP_host       dchi2=   2.14 sig=1.46[0m
+[0;37m[01:52:10] [INFO]   X_env                dchi2=   2.12 sig=1.46[0m
+[0;37m[01:52:10] [INFO]   mu_fitted            dchi2=   1.69 sig=1.30[0m
+[0;37m[01:52:10] [INFO]   logM_host            dchi2=   0.05 sig=0.23[0m
+[0;37m[01:52:10] [INFO]   joint X + mean_OH_host: kP sig=0.35, alt sig=2.26, corr=-0.43[0m
+[0;37m[01:52:10] [INFO] Part C: anchor-segment null[0m
+[0;37m[01:52:10] [INFO]   anchor_screened_physical: anchor-only slope=-0.1337 (2.60sig); joint: kP=-2.139e+05 (0.60sig), anchor=-0.1224 (2.23sig)[0m
+[0;37m[01:52:10] [INFO]   anchor_reference_zero: anchor-only slope=-0.1337 (2.60sig); joint: kP=8.364e+04 (0.16sig), anchor=-0.1386 (2.32sig)[0m
+[0;37m[01:52:10] [INFO] Part D: per-host slope decomposition[0m
+[0;37m[01:52:10] [INFO]   s_i on on_X: slope=1.123e+06+/-2.976e+05 (r=0.12, p=0.451, n=41, chi2/dof=1.79)[0m
+[0;37m[01:52:10] [INFO]   s_i on on_mu: slope=1.174e-02+/-2.313e-03 (r=0.12, p=0.47, n=40, chi2/dof=1.47)[0m
+[0;37m[01:52:10] [INFO]   s_i on on_logM: slope=-1.279e-03+/-4.069e-02 (r=-0.20, p=0.238, n=37, chi2/dof=1.43)[0m
+[0;37m[01:52:10] [INFO] Part E: leave-one-host-out kappa_P[0m
+[0;37m[01:52:15] [INFO]   LOO: 41 hosts, negative 41, sig range [0.57, med 1.25], worst=LMC, lever=N3982[0m
+[0;37m[01:52:15] [INFO] Part F: host-assignment permutation null[0m
+[0;37m[01:52:18] [INFO]   permutations: 400, p=0.2244, null std=3.803e+05, obs=-4.851e+05[0m
+[1;32m[01:52:18] [SUCCESS] Step 53 complete: within-host structure battery[0m

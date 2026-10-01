@@ -1,0 +1,54 @@
+{
+  "step": "step_54_ned_tracer_provenance",
+  "status": "EXECUTED",
+  "method": "Preferred redshift and refcode from NED query_object + redshifts table row 0 per host; aperture class from verbatim NED measurement fields aggregated over rows bearing the preferred refcode, else modal method among z-matching rows; 'unclassified' if no method evidence exists. No simulated labels.",
+  "class_counts": {
+    "HI": 25,
+    "unclassified": 7,
+    "optical": 4,
+    "optical-nuclear": 2,
+    "optical-integrated": 2
+  },
+  "per_host_table": "results/outputs/step_54_tracer_class_table.csv",
+  "gamma_X_by_class": {
+    "HI": {
+      "H_app": 69.64855911989808,
+      "H_app_err": 1.822895554715077,
+      "Gamma_X": 29703696.231415156,
+      "Gamma_X_err": 20035482.62786767,
+      "Gamma_X_sig": 1.4825545649746323,
+      "n_hosts": 25
+    },
+    "optical": {
+      "n_hosts": 2,
+      "status": "insufficient"
+    },
+    "optical-integrated": {
+      "n_hosts": 1,
+      "status": "insufficient"
+    },
+    "optical-nuclear": {
+      "n_hosts": 2,
+      "status": "insufficient"
+    },
+    "unclassified": {
+      "H_app": 69.80307595292096,
+      "H_app_err": 3.1181294070683334,
+      "Gamma_X": 29669276.259928443,
+      "Gamma_X_err": 32701126.31054757,
+      "Gamma_X_sig": 0.9072860664850794,
+      "n_hosts": 7
+    }
+  },
+  "gamma_X_all": {
+    "H_app": 68.48083577998838,
+    "H_app_err": 1.4375782204927767,
+    "Gamma_X": 38455180.8669777,
+    "Gamma_X_err": 16547187.654562907,
+    "Gamma_X_sig": 2.323970796111304,
+    "n_hosts": 37
+  },
+  "sigma_v": 250.0,
+  "interpretation": "The observing-chain mechanism requires the spectroscopic aperture to sit within the Cepheid field (r_spec < r_Cep). HI 21-cm systemic redshifts are disk-integrated and weight the outer potential differently from nuclear/inner optical spectra; the per-class Gamma_X fits test whether the endpoint response survives conditioning on real tracer geometry.",
+  "related_issue": "11-4"
+}

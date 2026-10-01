@@ -1,19 +1,19 @@
-[01:23:47] [INFO] 
-[01:23:47] [INFO] ================================================================================
-[01:23:47] [INFO]    >>> STEP 19: Joint Cepheid + TRGB indicator model
-[01:23:47] [INFO] ================================================================================
-[01:23:47] [INFO] 
-[01:23:47] [INFO] Matched hosts: N=18
-[01:23:47] [INFO] Joint indicator model results:
-[01:23:47] [INFO] Using the Step 03 total-screening endpoint regressor
-[01:23:47] [INFO] +-------------------------+------------+-----------+--------+---------+
-[01:23:47] [INFO] | Parameter               | Estimate   | SE        | t-stat | p-value |
-[01:23:47] [INFO] +-------------------------+------------+-----------+--------+---------+
-[01:23:47] [INFO] | B_Cepheid               | 1.308e+06  | 2.960e+06 | 0.44   | 0.6645  |
-[01:23:47] [INFO] | B_TRGB                  | 1.280e+06  | 2.860e+06 | 0.45   | 0.6605  |
-[01:23:47] [INFO] | kappa_diff (weighted)   | 1.014e+05  | 3.787e+05 | 0.27   | 0.7924  |
-[01:23:47] [INFO] | kappa_diff (unweighted) | -2.782e+04 | 3.709e+05 | -0.08  | 0.9411  |
-[01:23:47] [INFO] +-------------------------+------------+-----------+--------+---------+
-[01:23:47] [WARNING] Result: kappa_diff consistent with zero. No differential signal detected above shared systematic noise.
-[01:23:47] [SUCCESS] Saved results to step_20_joint_indicator_model.json
-[01:23:47] [SUCCESS] Step 19 complete
+[01:48:04] [INFO] 
+[01:48:04] [INFO] ================================================================================
+[01:48:04] [INFO]    >>> STEP 19: Joint Cepheid + TRGB indicator model
+[01:48:04] [INFO] ================================================================================
+[01:48:04] [INFO] 
+[01:48:04] [INFO] Matched hosts: N=18
+[01:48:04] [INFO] Joint indicator model results:
+[01:48:04] [INFO] Using the Step 03 total-screening endpoint regressor
+[01:48:04] [INFO] +-------------------------+------------+-----------+--------+---------+
+[01:48:04] [INFO] | Parameter               | Estimate   | SE        | t-stat | p-value |
+[01:48:04] [INFO] +-------------------------+------------+-----------+--------+---------+
+[01:48:04] [INFO] | B_Cepheid               | 2.431e+06  | 3.646e+06 | 0.67   | 0.5145  |
+[01:48:04] [INFO] | B_TRGB                  | 2.413e+06  | 3.522e+06 | 0.69   | 0.5031  |
+[01:48:04] [INFO] | kappa_diff (weighted)   | 1.468e+05  | 5.077e+05 | 0.29   | 0.7761  |
+[01:48:04] [INFO] | kappa_diff (unweighted) | -1.807e+04 | 4.605e+05 | -0.04  | 0.9692  |
+[01:48:04] [INFO] +-------------------------+------------+-----------+--------+---------+
+[01:48:04] [WARNING] Result: kappa_diff consistent with zero. No differential signal detected above shared systematic noise.
+[01:48:04] [SUCCESS] Saved results to step_20_joint_indicator_model.json
+[01:48:04] [SUCCESS] Step 19 complete

@@ -1,0 +1,143 @@
+
+============================================================
+Step 35: Bias-Aware TEP Ladder
+============================================================
+[INFO] Design matrix shape: (3490, 46)
+[INFO] Data vector length: 3490
+[INFO] Covariance shape: (3490, 3490)
+[INFO] Number of parameters: 46
+[INFO] Loaded 117 sigma mappings, 111 redshift mappings
+[INFO] Effective sigma_ref: 87.17 km/s
+[INFO] Cepheid rows with X != 0: 2801
+[INFO] SN rows with X != 0: 72
+
+============================================================
+BRANCH 1: Primary (no redshift priors)
+============================================================
+[INFO]   [primary] Fitting A_standard...
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_35_bias_aware_tep_ladder.py:252: RuntimeWarning: divide by zero encountered in matmul
+  cov = (Vt.T * s_inv2) @ Vt
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_35_bias_aware_tep_ladder.py:252: RuntimeWarning: overflow encountered in matmul
+  cov = (Vt.T * s_inv2) @ Vt
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_35_bias_aware_tep_ladder.py:252: RuntimeWarning: invalid value encountered in matmul
+  cov = (Vt.T * s_inv2) @ Vt
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_35_bias_aware_tep_ladder.py:483: RuntimeWarning: divide by zero encountered in matmul
+  y_pred = L @ theta
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_35_bias_aware_tep_ladder.py:483: RuntimeWarning: overflow encountered in matmul
+  y_pred = L @ theta
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_35_bias_aware_tep_ladder.py:483: RuntimeWarning: invalid value encountered in matmul
+  y_pred = L @ theta
+[INFO]   [primary] Fitting B_cepheid_tep...
+[INFO]   [primary] Fitting C_full_tep...
+
+============================================================
+BRANCH 2: Redshift prior sensitivity (sigma_v = 150 km/s)
+============================================================
+[INFO] Redshift prior stats: added=34, skipped_anchor=3, skipped_zrange=1, skipped_noisy=0
+[SUCCESS] Added 34 redshift-distance prior rows
+[INFO] Augmented matrix shape: (3524, 46)
+[INFO]   [sigma_v_150] Fitting A_standard...
+[INFO]   [sigma_v_150] Fitting B_cepheid_tep...
+[INFO]   [sigma_v_150] Fitting C_full_tep...
+
+============================================================
+BRANCH 2: Redshift prior sensitivity (sigma_v = 250 km/s)
+============================================================
+[INFO] Skipping N1448: z=0.00333, sigma_mu(vpec)=0.544 mag > 0.5 mag
+[INFO] Skipping N3972: z=0.00349, sigma_mu(vpec)=0.519 mag > 0.5 mag
+[INFO] Skipping N3982: z=0.00349, sigma_mu(vpec)=0.519 mag > 0.5 mag
+[INFO] Skipping N4536: z=0.00317, sigma_mu(vpec)=0.571 mag > 0.5 mag
+[INFO] Skipping N4639: z=0.00359, sigma_mu(vpec)=0.504 mag > 0.5 mag
+[INFO] Skipping N5643: z=0.00331, sigma_mu(vpec)=0.547 mag > 0.5 mag
+[INFO] Redshift prior stats: added=28, skipped_anchor=3, skipped_zrange=1, skipped_noisy=6
+[SUCCESS] Added 28 redshift-distance prior rows
+[INFO] Augmented matrix shape: (3518, 46)
+[INFO]   [sigma_v_250] Fitting A_standard...
+[INFO]   [sigma_v_250] Fitting B_cepheid_tep...
+[INFO]   [sigma_v_250] Fitting C_full_tep...
+
+============================================================
+BRANCH 2: Redshift prior sensitivity (sigma_v = 500 km/s)
+============================================================
+[INFO] Skipping N1309: z=0.00719, sigma_mu(vpec)=0.504 mag > 0.5 mag
+[INFO] Skipping N1365: z=0.00483, sigma_mu(vpec)=0.750 mag > 0.5 mag
+[INFO] Skipping N1448: z=0.00333, sigma_mu(vpec)=1.088 mag > 0.5 mag
+[INFO] Skipping N1559: z=0.00407, sigma_mu(vpec)=0.890 mag > 0.5 mag
+[INFO] Skipping N2442: z=0.00488, sigma_mu(vpec)=0.742 mag > 0.5 mag
+[INFO] Skipping N2525: z=0.00602, sigma_mu(vpec)=0.602 mag > 0.5 mag
+[INFO] Skipping N3021: z=0.00673, sigma_mu(vpec)=0.538 mag > 0.5 mag
+[INFO] Skipping N3254: z=0.00648, sigma_mu(vpec)=0.559 mag > 0.5 mag
+[INFO] Skipping N3370: z=0.00588, sigma_mu(vpec)=0.616 mag > 0.5 mag
+[INFO] Skipping N3447: z=0.00465, sigma_mu(vpec)=0.779 mag > 0.5 mag
+[INFO] Skipping N3972: z=0.00349, sigma_mu(vpec)=1.038 mag > 0.5 mag
+[INFO] Skipping N3982: z=0.00349, sigma_mu(vpec)=1.038 mag > 0.5 mag
+[INFO] Skipping N4038: z=0.00571, sigma_mu(vpec)=0.634 mag > 0.5 mag
+[INFO] Skipping N4536: z=0.00317, sigma_mu(vpec)=1.142 mag > 0.5 mag
+[INFO] Skipping N4639: z=0.00359, sigma_mu(vpec)=1.009 mag > 0.5 mag
+[INFO] Skipping N5584: z=0.00625, sigma_mu(vpec)=0.579 mag > 0.5 mag
+[INFO] Skipping N5643: z=0.00331, sigma_mu(vpec)=1.094 mag > 0.5 mag
+[INFO] Skipping N5861: z=0.00677, sigma_mu(vpec)=0.535 mag > 0.5 mag
+[INFO] Skipping N5917: z=0.00710, sigma_mu(vpec)=0.510 mag > 0.5 mag
+[INFO] Skipping N7250: z=0.00432, sigma_mu(vpec)=0.838 mag > 0.5 mag
+[INFO] Redshift prior stats: added=14, skipped_anchor=3, skipped_zrange=1, skipped_noisy=20
+[SUCCESS] Added 14 redshift-distance prior rows
+[INFO] Augmented matrix shape: (3504, 46)
+[INFO]   [sigma_v_500] Fitting A_standard...
+[INFO]   [sigma_v_500] Fitting B_cepheid_tep...
+[INFO]   [sigma_v_500] Fitting C_full_tep...
+
+============================================================
+BRANCH 2: Redshift prior sensitivity (sigma_v = 1000 km/s)
+============================================================
+[INFO] Skipping N0691: z=0.00855, sigma_mu(vpec)=0.847 mag > 0.5 mag
+[INFO] Skipping N1015: z=0.00815, sigma_mu(vpec)=0.889 mag > 0.5 mag
+[INFO] Skipping N1309: z=0.00719, sigma_mu(vpec)=1.007 mag > 0.5 mag
+[INFO] Skipping N1365: z=0.00483, sigma_mu(vpec)=1.500 mag > 0.5 mag
+[INFO] Skipping N1448: z=0.00333, sigma_mu(vpec)=2.175 mag > 0.5 mag
+[INFO] Skipping N1559: z=0.00407, sigma_mu(vpec)=1.780 mag > 0.5 mag
+[INFO] Skipping N2442: z=0.00488, sigma_mu(vpec)=1.484 mag > 0.5 mag
+[INFO] Skipping N2525: z=0.00602, sigma_mu(vpec)=1.203 mag > 0.5 mag
+[INFO] Skipping N2608: z=0.00855, sigma_mu(vpec)=0.847 mag > 0.5 mag
+[INFO] Skipping N3021: z=0.00673, sigma_mu(vpec)=1.076 mag > 0.5 mag
+[INFO] Skipping N3147: z=0.01079, sigma_mu(vpec)=0.671 mag > 0.5 mag
+[INFO] Skipping N3254: z=0.00648, sigma_mu(vpec)=1.118 mag > 0.5 mag
+[INFO] Skipping N3370: z=0.00588, sigma_mu(vpec)=1.232 mag > 0.5 mag
+[INFO] Skipping N3447: z=0.00465, sigma_mu(vpec)=1.558 mag > 0.5 mag
+[INFO] Skipping N3583: z=0.00857, sigma_mu(vpec)=0.845 mag > 0.5 mag
+[INFO] Skipping N3972: z=0.00349, sigma_mu(vpec)=2.075 mag > 0.5 mag
+[INFO] Skipping N3982: z=0.00349, sigma_mu(vpec)=2.075 mag > 0.5 mag
+[INFO] Skipping N4038: z=0.00571, sigma_mu(vpec)=1.269 mag > 0.5 mag
+[INFO] Skipping N4536: z=0.00317, sigma_mu(vpec)=2.285 mag > 0.5 mag
+[INFO] Skipping N4639: z=0.00359, sigma_mu(vpec)=2.018 mag > 0.5 mag
+[INFO] Skipping N4680: z=0.00864, sigma_mu(vpec)=0.838 mag > 0.5 mag
+[INFO] Skipping N5468: z=0.00954, sigma_mu(vpec)=0.759 mag > 0.5 mag
+[INFO] Skipping N5584: z=0.00625, sigma_mu(vpec)=1.159 mag > 0.5 mag
+[INFO] Skipping N5643: z=0.00331, sigma_mu(vpec)=2.188 mag > 0.5 mag
+[INFO] Skipping N5728: z=0.00996, sigma_mu(vpec)=0.727 mag > 0.5 mag
+[INFO] Skipping N5861: z=0.00677, sigma_mu(vpec)=1.070 mag > 0.5 mag
+[INFO] Skipping N5917: z=0.00710, sigma_mu(vpec)=1.020 mag > 0.5 mag
+[INFO] Skipping N7250: z=0.00432, sigma_mu(vpec)=1.677 mag > 0.5 mag
+[INFO] Skipping N7329: z=0.01028, sigma_mu(vpec)=0.705 mag > 0.5 mag
+[INFO] Skipping N7541: z=0.00814, sigma_mu(vpec)=0.890 mag > 0.5 mag
+[INFO] Skipping N7678: z=0.01061, sigma_mu(vpec)=0.683 mag > 0.5 mag
+[INFO] Skipping N976A: z=0.01312, sigma_mu(vpec)=0.552 mag > 0.5 mag
+[INFO] Skipping U9391: z=0.00747, sigma_mu(vpec)=0.970 mag > 0.5 mag
+[INFO] Redshift prior stats: added=1, skipped_anchor=3, skipped_zrange=1, skipped_noisy=33
+[SUCCESS] Added 1 redshift-distance prior rows
+[INFO] Augmented matrix shape: (3491, 46)
+[INFO]   [sigma_v_1000] Fitting A_standard...
+[INFO]   [sigma_v_1000] Fitting B_cepheid_tep...
+[INFO]   [sigma_v_1000] Fitting C_full_tep...
+[INFO] Primary Model Comparison (no redshift priors):
+[INFO] Model                n_par     H0       chi2        AIC        BIC     kappaCep sigCep      kappaSN  sigSN
+[INFO]   A_standard            46  73.04    3552.71    3644.71    3927.96          n/a    n/a          n/a    n/a
+[INFO]   B_cepheid_tep         47  73.16    3552.52    3646.52    3935.93    -8.20e+04    0.4          n/a    n/a
+[INFO]   C_full_tep            48  73.16    3551.41    3647.41    3942.98    +2.28e+05    0.7    +4.33e+05    1.1
+[INFO] Sensitivity Branch (redshift priors, sigma_v sweep):
+[INFO] Branch          Model                n_par     H0       chi2        AIC        BIC     kappaCep sigCep
+[INFO]   sigma_v_150   A_standard            46  71.99    3618.67    3710.67    3994.37          n/a    n/a
+[INFO]   sigma_v_250   A_standard            46  72.75    3569.69    3661.69    3945.31          n/a    n/a
+[INFO]   sigma_v_500   A_standard            46  73.00    3556.14    3648.14    3931.57          n/a    n/a
+[INFO]   sigma_v_1000  A_standard            46  73.03    3553.15    3645.15    3928.42          n/a    n/a
+[SUCCESS] Saved results to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_35_bias_aware_tep_ladder.csv
+[SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_35_bias_aware_tep_ladder.json

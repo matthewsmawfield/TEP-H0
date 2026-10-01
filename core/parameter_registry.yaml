@@ -243,13 +243,13 @@ parameters:
   - symbol: "H0"
     latex: "H_0"
     meaning: "Hubble constant (TEP-corrected local value)"
-    value: 66.65
-    value_uncertainty: 1.58
+    value: 67.83
+    value_uncertainty: 1.56
     units: "km s^{-1} Mpc^{-1}"
     class: "calibrated"
     first_paper: 11
     used_in: [11, 26]
-    description: "TEP-corrected local Hubble constant from per-host cz/d after removing ~1 km/s/Mpc host-potential clock distortion. Consistent with the TEP CMB (66.70 ± 0.58, Paper 26) at 0.03σ. The SH0ES ladder value 73.04 is the Hubble-flow temporal shear (cosmic-web path integral), not a correction to be closed."
+    description: "TEP-corrected local Hubble constant from per-host cz/d after removing the environment-dependent host-potential clock distortion. Consistent with the TEP CMB (66.70 ± 0.58, Paper 26) at 0.68σ. The SH0ES ladder value 73.04 is the Hubble-flow temporal shear (cosmic-web path integral), not a correction to be closed."
 
   - symbol: "S8"
     latex: "S_8"

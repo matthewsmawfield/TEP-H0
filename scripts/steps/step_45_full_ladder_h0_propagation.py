@@ -346,9 +346,9 @@ def compute_h0_from_hubble_flow(hf, M_B, M_B_err=0.0):
 
     # Fixed slope = 5: mb = a + 5*logz
     # a = M_B + 5*log10(c/H_0) + 25
-    # H_0 = c * 10^((a - M_B - 25)/5)
+    # H_0 = c * 10^(-(a - M_B - 25)/5)
     a_wls = np.sum(w * (mb - 5 * logz)) / np.sum(w)
-    H0 = c * 10 ** ((a_wls - M_B - 25) / 5)
+    H0 = c * 10 ** (-(a_wls - M_B - 25) / 5)
 
     # Error propagation
     # dH_0/H_0 = (ln10/5) * sqrt(var_a + var_M_B)

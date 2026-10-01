@@ -178,7 +178,7 @@ G_CM3_TO_GEV4 = 1000.0 * KG_TO_GEV * HBAR_C_GEV_M**3
 
 # Observed cosmic drift rate used to set the kinetic screening scale. This is
 # the *measured* Hubble drift (the shear floor of the landscape), distinct from
-# the TEP-corrected ladder output H0 = 66.65 reported in parameter_registry.
+# the TEP-corrected ladder output H0 = 67.83 reported in parameter_registry.
 H0_DRIFT_KM_S_MPC = 70.0
 # Transition shear/acceleration scale of the screening operator, derived from
 # the kinetic completion P(X) = X - V + X|X|/Lambda^4 with Lambda^4 = M_Pl^2 H0^2

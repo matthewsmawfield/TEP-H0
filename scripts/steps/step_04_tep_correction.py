@@ -310,6 +310,85 @@ class Step3TEPCorrection:
 
         return best_kappa
 
+    def kappa_estimator_decomposition(self, df, sigma_ref, kappa_objective):
+        """Estimator-geometry audit of the kappa_Cep amplitude.
+
+        The Nelder-Mead optimum flattens the delta_mu-vs-sigma slope (linear
+        regressor), while the physical correction regressor is
+        x = (S*sigma^2 - sigma_ref^2)/c^2 (~ quadratic in sigma). The two
+        estimators differ systematically because the linear-sigma slope fit
+        concentrates leverage at low sigma where the quadratic response is
+        weak. This decomposition records kappa under each convention so the
+        route-to-route amplitude spread is traceable rather than inferred.
+        """
+        c2 = C_SQUARED_KM_S
+        S = df["shear_suppression"].values
+        sigma_vals = df["sigma_inferred"].values
+        mu = df["value"].values
+        err = df["error"].values
+        v = df["velocity"].values
+        h0 = df["h0_derived"].values
+        ln10 = np.log(10)
+        x = (S * sigma_vals**2 - sigma_ref**2) / c2
+        mu_fid = 5 * np.log10(v) + 25 - 5 * np.log10(70.0)
+        delta_mu = mu - mu_fid
+        A = np.column_stack([np.ones_like(x), x])
+
+        out = {
+            "kappa_sigma_objective": float(kappa_objective),
+            "mean_X": float(x.mean()),
+            "raw_h0_unweighted_mean": float(h0.mean()),
+            "raw_h0_unweighted_sem": float(h0.std(ddof=1) / np.sqrt(len(h0))),
+        }
+
+        k_ols = -float(np.polyfit(x, delta_mu, 1)[0])
+        out["kappa_xreg_ols"] = k_ols
+
+        sv = 250.0
+        y_err = np.sqrt(err**2 + ((5.0 / ln10) * sv / v) ** 2)
+        sw = np.sqrt(1.0 / y_err**2)
+        beta, _, _, _ = np.linalg.lstsq(A * sw[:, None], delta_mu * sw, rcond=None)
+        out["kappa_xreg_wls_phot_vpec"] = float(-beta[1])
+
+        sw_p = np.sqrt(1.0 / err**2)
+        beta_p, _, _, _ = np.linalg.lstsq(
+            A * sw_p[:, None], delta_mu * sw_p, rcond=None
+        )
+        out["kappa_xreg_wls_phot_only"] = float(-beta_p[1])
+
+        slope_h0_ols = np.polyfit(x, h0, 1)[0]
+        out["kappa_h0_ols"] = float(
+            slope_h0_ols / ((ln10 / 5.0) * h0.mean())
+        )
+        h0_err = h0 * np.sqrt((ln10 / 5 * err) ** 2 + (sv / v) ** 2)
+        wh = np.sqrt(1.0 / h0_err**2)
+        beta_h, _, _, _ = np.linalg.lstsq(
+            A * wh[:, None], h0 * wh, rcond=None
+        )
+        out["kappa_h0_wls_vpec250"] = float(
+            beta_h[1] / ((ln10 / 5.0) * np.average(h0, weights=1.0 / h0_err**2))
+        )
+
+        print_status("kappa_Cep Estimator Decomposition", "SECTION")
+        headers = ["Estimator", "kappa_Cep (mag)"]
+        rows = [
+            ["NM flatten slope vs sigma (objective)", f"{kappa_objective:.3e}"],
+            ["OLS slope vs correction regressor x", f"{k_ols:.3e}"],
+            ["WLS (phot+vpec250) vs x", f"{out['kappa_xreg_wls_phot_vpec']:.3e}"],
+            ["WLS (phot only) vs x", f"{out['kappa_xreg_wls_phot_only']:.3e}"],
+            ["OLS in H0 space vs x", f"{out['kappa_h0_ols']:.3e}"],
+            ["WLS in H0 space (vpec250)", f"{out['kappa_h0_wls_vpec250']:.3e}"],
+        ]
+        print_table(headers, rows)
+        print_status(
+            f"mean_X over hosts = {out['mean_X']:.3e}; raw unweighted host-mean "
+            f"H0 = {out['raw_h0_unweighted_mean']:.2f} +/- "
+            f"{out['raw_h0_unweighted_sem']:.2f}",
+            "INFO",
+        )
+
+        return out
+
     def apply_correction(self, df, kappa_cep, sigma_ref):
         """Applies the correction and calculates stats."""
         print_status("Applying Conformal Correction...", "SECTION")
@@ -989,6 +1068,9 @@ class Step3TEPCorrection:
         # 2. Optimize (standard σ_ref — primary headline)
         kappa_cep = self.optimize_correction(df, sigma_ref)
 
+        # 2b. Estimator-geometry decomposition of kappa_Cep amplitude
+        kappa_decomp = self.kappa_estimator_decomposition(df, sigma_ref, kappa_cep)
+
         # 3. Apply (standard)
         final_df, h0_mean, h0_sem = self.apply_correction(df, kappa_cep, sigma_ref)
 
@@ -1116,6 +1198,7 @@ class Step3TEPCorrection:
             "wls_kappa_err_scaled": float(boot_metrics["wls_kappa_err_scaled"]),
             "wls_chi2": float(boot_metrics["wls_chi2"]),
             "wls_dof": int(boot_metrics["wls_dof"]),
+            "kappa_estimator_decomposition": kappa_decomp,
             "planck_h0": float(planck_h0),
             "tension_sigma": float(tension_primary),
             "tension_statistical": float(tension_stat),

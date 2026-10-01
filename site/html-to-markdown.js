@@ -122,7 +122,7 @@ class HTMLToMarkdownConverter {
             
             const manifestPath = path.join(__dirname, 'manifest.json');
             const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-            const formattedDate = manifest.last_updated || manifest.date || '30 September 2026';
+            const formattedDate = manifest.last_updated || manifest.date || '1 October 2026';
             const firstPublished = manifest.first_published || '11 January 2026';
             const header = `# The Cepheid Bias: Resolving the Hubble Tension
 **Matthew Lukin Smawfield**  

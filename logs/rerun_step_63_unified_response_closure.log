@@ -1,0 +1,49 @@
+[0;37m[01:52:23] [INFO] Loading SH0ES Data...[0m
+[0;37m[01:52:23] [INFO] Design matrix shape: (3490, 46)[0m
+[0;37m[01:52:23] [INFO] Data vector length: 3490[0m
+[0;37m[01:52:23] [INFO] Covariance matrix shape: (3490, 3490)[0m
+[0;37m[01:52:23] [INFO] Number of parameters: 46[0m
+[0;37m[01:52:23] [INFO] Loading Host Metadata...[0m
+[0;37m[01:52:23] [INFO] Loaded 42 hosts[0m
+[0;37m[01:52:23] [INFO] Mapped M1337 -> Mrk1337[0m
+[0;37m[01:52:23] [INFO] Mapped N105A -> N105[0m
+[0;37m[01:52:23] [INFO] Mapped N976A -> N976[0m
+[0;37m[01:52:23] [INFO] Created 122 name mappings[0m
+[0;37m[01:52:23] [INFO] Calculating Effective Calibrator Sigma...[0m
+[1;32m[01:52:23] [SUCCESS] Anchor active-response scale: 30.51 km/s[0m
+model                            anchor                       dchi2         kapU         kap0   sig   lam0
+unified_alone                    anchor_screened_physical      6.17   -1.191e+06          nan  2.48  0.995
+unified_plus_kappaZ              anchor_screened_physical      7.04    -1.11e+06          nan  2.28  0.928
+kappa0_plus_unified              anchor_screened_physical      7.30   -1.376e+06    4.194e+05  2.70  1.151
+kappa0_unified_kappaZ            anchor_screened_physical      8.14   -1.295e+06    4.139e+05  2.50  1.082
+invdens_carrier                  anchor_screened_physical      6.17          nan          nan  2.48  0.995
+invdens_carrier_kappaZ           anchor_screened_physical      7.04          nan          nan  2.28  0.928
+unified_alone                    anchor_reference_zero         7.77   -1.466e+06          nan  2.79  1.226
+unified_plus_kappaZ              anchor_reference_zero        14.00   -1.267e+06          nan  2.38  1.059
+kappa0_plus_unified              anchor_reference_zero         9.37   -1.741e+06    5.083e+05  3.06  1.455
+kappa0_unified_kappaZ            anchor_reference_zero        15.66   -1.545e+06    5.169e+05  2.69  1.292
+invdens_carrier                  anchor_reference_zero         7.77          nan          nan  2.79  1.226
+invdens_carrier_kappaZ           anchor_reference_zero        14.00          nan          nan  2.38  1.059
+{
+  "lambda0_map": {
+    "unified_alone/anchor_screened_physical": 0.9952665091320041,
+    "unified_plus_kappaZ/anchor_screened_physical": 0.9279322751769858,
+    "kappa0_unified_kappaZ/anchor_screened_physical": 1.0823511728193245,
+    "unified_alone/anchor_reference_zero": 1.2256349866456868,
+    "unified_plus_kappaZ/anchor_reference_zero": 1.0588869832653351,
+    "kappa0_unified_kappaZ/anchor_reference_zero": 1.291714683994697
+  },
+  "lambda0_median": 1.0706190780423297,
+  "Gamma_Cep_mag_per_ln": 1.4158000110046007,
+  "inv_density_at_pivot": 845005.6784381589,
+  "kappa_pred_at_pivot_mag": 1280844.8218677884,
+  "kappa_canonical": 960000.0,
+  "kappa_canonical_over_pred": 0.7495053136882598,
+  "lambda0_implied_by_canonical": 0.8024346879287519,
+  "kappa_Cep_measured": 365000.0,
+  "kappa_Cep_err": 304000.0,
+  "rho_eff_for_kappaCep_g_cm3": 8.3056575478031e-05,
+  "P_eff_for_kappaCep_days": 5.3382409662911465,
+  "composition": "kappa = Gamma_Cep * lambda_0 * rho_T/rho_bar(P_eff); the canonical 9.6e5 mag corresponds to lambda_0 = 0.80 at the PL pivot (rho_bar=2.37e-5 g/cm3); the ladder value 3.65e5 corresponds to rho_eff = 8.3e-05 g/cm3 (P_eff ~ 5 d)"
+}
+wrote /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_63_unified_response_closure.json

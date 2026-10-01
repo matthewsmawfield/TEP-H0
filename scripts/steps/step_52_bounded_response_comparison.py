@@ -741,6 +741,11 @@ def run(reuse_ladder_from=None, output_dir=None):
             elif best_name == "tanh_sigma":
                 g_best = center_scale(
                     build_tanh(s_d, b_tanh["sigma_t"], b_tanh["w"]))
+            elif best_name == "sA_sigma":
+                g_best = center_scale(build_sA(s_d, b_sA["sigma_T"]))
+            elif best_name == "sA_nested":
+                g_best = center_scale(
+                    build_sA_nested(sig_tot_d, b_sAn["sigma_T"]))
             else:
                 g_best = fitted[best_name][0]
             perm = permutation_test(cz_d, d_d, g_best, m_d, sv, n_perm=2000)
@@ -756,8 +761,10 @@ def run(reuse_ladder_from=None, output_dir=None):
                 "frozen_shape": {k: v for k, v in
                                  (b_step if best_name == "step_sigma"
                                   else b_tanh if best_name == "tanh_sigma"
+                                  else b_sA if best_name == "sA_sigma"
+                                  else b_sAn if best_name == "sA_nested"
                                   else {}).items()
-                                 if k in ("sigma_c", "sigma_t", "w")},
+                                 if k in ("sigma_c", "sigma_t", "w", "sigma_T")},
                 "permutation": perm,
                 "bootstrap": boot,
                 "unstratified_bootstrap_diagnostic": pairs_diagnostic,

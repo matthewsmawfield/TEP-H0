@@ -1,23 +1,27 @@
 # Data File Checksums (SHA-256)
-# Generated: 2026-06-19T20:28:00
-# Verify with: sha256sum -c CHECKSUMS.txt (after removing size/mtime notes)
+# Generated: 2026-10-01T03:04:52
+# Verify with: grep -v "^#" CHECKSUMS.txt | grep -v "^$" | sha256sum -c -
 #
 # === RAW DATA (Published / Curated Inputs) ===
 1cb0fc379ef066afdc2ffd1857681cc478024570d8a3eba284fb645775198cf8  data/raw/Pantheon+SH0ES.dat
+abf806d966485e64afdb359c87bffc0ecc00d05eff0a31ced66f247385df0fdc  data/raw/external/Pantheon+SH0ES_STAT+SYS.cov
 270ca9708ea554e4174ca7b973b9c3f369ec7658183be1d29687f8a9a124aeae  data/raw/external/anchor_galaxy_data.csv
+c664ebd2447027ebf472b3c5f68278370e1533b05e9667535f836c4224606f10  data/raw/external/hyperleda_inclinations.csv
+114599138cc5b17c3b57c37cb2f61e5af61e7af14c53f448299c59ab581529d7  data/raw/external/rc3_d25_hosts.csv
+f5f2147b8c1f78b040d5ea1effc65d88dd645c51a181a9d895d0ff65304e4973  data/raw/external/stiskalek2026_manticore_hosts.csv
 3dea0b89c5ef59031d35d45c582767f4c4ee5484978949ddde81e8464f13b3be  data/raw/external/trgb_distances_freedman2024.csv
-00fb07c4c92832c039cfa88b4fe54678b350fb2c780f948f9cb7270b4fe8ccbc  data/raw/external/velocity_dispersions_literature.csv
 cea0858c08a38f31890dc59147c208a832b1db1ddd37bbb9d83063a94d48c6a2  data/raw/external/tully2015_2mrs_groups_table5.csv
+7292d8fcb3f1a9998e938b93674b38a11c9574287cf8beae062fcb9b5a1e7c40  data/raw/external/velocity_dispersions_literature.csv
 
 # === INTERIM DATA (Pipeline-Generated) ===
-1e2e4f91e1adaaed86a0da349a19c0ce7557277f923dca2ba4790a3686d4c8af  data/interim/hosts_coords.csv
+5cdd13ec7ea963eb5e1cab0d2dc5a4389fb62fdc173b7370dddd87ebf2f9e854  data/interim/hosts_coords.csv
 162a845958ab02c07b95bdd8d69e16d524e6459a454ce1552ddf12cbd023bcd2  data/interim/hosts_properties.csv
 5327728798dfbee5a36b672edec91462b75cf06a0903a54028db6438de229eac  data/interim/kodric_hst_cepheids.csv
-8ea7ece40a3d2863012116212ad0938c331fd4a0b646697f6ac13fb9f97db905  data/interim/r22_distances.csv
-6e8caba9f0e0886ab67985ee8e6b180bdc9de216724f2ff3b4c41a75cabb43ed  data/interim/r22_mu_covariance.npy
+7096344b4335791a2d97189a88344e129652c0768359bd5dd92fd5d647ee2e7c  data/interim/r22_distances.csv
+fcfa71c82169d8d47bac6939feb930e102f9fe65fb753d70c115a59e9b55fa9c  data/interim/r22_mu_covariance.npy
 d3c0bbae4b9462b371db5a4c1064d364e094af2a02905d8386e8586028f2d627  data/interim/r22_mu_covariance_labels.json
 747e8d71e20803bcc19039b69d7a3d4e51c458aecd00eac11ddef51fdb2bfa63  data/interim/reconstructed_shoes_cepheids.csv
 
 # === PROCESSED DATA (Pipeline Outputs) ===
-2298e01a063a3f3f630f29435a4c70737ef0e12f80f3866d4e10dae0659afd16  data/processed/hosts_metadata_enriched.csv
-665de295e6f5c4385f4e0d4b89700fd1b3af21e0317a12fe6b414f24d9ae2271  data/processed/hosts_processed.csv
+6971fe969434ff68a42f7822c90c650eee232716b6a5f838d74bcd8c5a642e34  data/processed/hosts_metadata_enriched.csv
+d9709e74104b04ce8a63aab005e301edaa8c2b1bb3757e288e1bc31d08cc4f3e  data/processed/hosts_processed.csv

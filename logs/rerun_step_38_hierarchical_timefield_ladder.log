@@ -1,0 +1,84 @@
+
+============================================================
+Step 38: Hierarchical Timefield Ladder
+============================================================
+[INFO] Computed 37 calibrator hosts
+[INFO] Primary sample (Hubble-flow cut): 33 hosts
+
+============================================================
+sigma_v = 150 km/s
+============================================================
+[INFO]   Fitting H0...
+[INFO]   Fitting Hβ...
+[INFO]     Hβ: H0=68.62, beta_X=+3.756e+07 (2.6σ), kappa=0.000e+00 (n/a), sigma_int_v=138.51, chi2/dof=32.4/30
+[INFO]   Fitting K0...
+[INFO]     K0: H0=68.58, beta_X=+0.000e+00 (n/a), kappa=1.110e+06 (2.7σ), sigma_int_v=139.21, chi2/dof=32.4/30
+[INFO]   Fitting Kfixβ...
+[INFO]     Kfixβ: H0=68.58, beta_X=+4.857e+06 (0.4σ), kappa=9.600e+05 (n/a), sigma_int_v=139.19, chi2/dof=32.4/30
+[INFO]   Fitting Kpriorβ...
+[INFO]   Fitting Kβ...
+[INFO]     Kβ: H0=69.30, beta_X=+1.639e+08 (1.7σ), kappa=-3.158e+06 (1.5σ), sigma_int_v=133.16, chi2/dof=32.6/29
+
+============================================================
+sigma_v = 250 km/s
+============================================================
+[INFO]   Fitting H0...
+[INFO]   Fitting Hβ...
+[INFO]     Hβ: H0=68.59, beta_X=+3.722e+07 (3.1σ), kappa=0.000e+00 (n/a), sigma_int_v=0.01, chi2/dof=22.6/30
+[INFO]   Fitting K0...
+[INFO]     K0: H0=68.56, beta_X=+0.000e+00 (n/a), kappa=1.102e+06 (2.3σ), sigma_int_v=0.01, chi2/dof=22.7/30
+[INFO]   Fitting Kfixβ...
+[INFO]     Kfixβ: H0=68.56, beta_X=+4.578e+06 (0.3σ), kappa=9.600e+05 (n/a), sigma_int_v=0.01, chi2/dof=22.7/30
+[INFO]   Fitting Kpriorβ...
+[INFO]   Fitting Kβ...
+[INFO]     Kβ: H0=69.23, beta_X=+1.603e+08 (1.6σ), kappa=-3.076e+06 (1.4σ), sigma_int_v=0.01, chi2/dof=22.0/29
+
+============================================================
+sigma_v = 500 km/s
+============================================================
+[INFO]   Fitting H0...
+[INFO]   Fitting Hβ...
+[INFO]     Hβ: H0=68.42, beta_X=+3.721e+07 (169144492.5σ), kappa=0.000e+00 (n/a), sigma_int_v=0.01, chi2/dof=6.2/30
+[INFO]   Fitting K0...
+[INFO]     K0: H0=68.39, beta_X=+0.000e+00 (n/a), kappa=1.105e+06 (1.3σ), sigma_int_v=0.01, chi2/dof=6.2/30
+[INFO]   Fitting Kfixβ...
+[INFO]     Kfixβ: H0=68.39, beta_X=+4.673e+06 (0.2σ), kappa=9.600e+05 (n/a), sigma_int_v=0.01, chi2/dof=6.2/30
+[INFO]   Fitting Kpriorβ...
+[INFO]   Fitting Kβ...
+[INFO]     Kβ: H0=68.97, beta_X=+1.522e+08 (4.9σ), kappa=-2.884e+06 (18.4σ), sigma_int_v=0.01, chi2/dof=6.0/29
+
+============================================================
+Redshift cut sensitivity
+============================================================
+[INFO]   z >= 0.005: N=23
+[INFO]   z >= 0.0075: N=13
+
+============================================================
+Debug checks (primary, sigma_v=250, Kβ)
+============================================================
+[INFO]   Injection recovery (200 draws): kappa=2e5, beta=0
+[INFO]     recovered kappa=1.432e+05 (scatter 4.61e+05, mean SE 4.46e+05)
+[INFO]   Injection recovery (200 draws): kappa=0, beta=2e7
+[INFO]     recovered beta=1.833e+07 (scatter 1.58e+07)
+[INFO]   Injection recovery (200 draws): kappa=2e5, beta=2e7
+[INFO]     recovered kappa=1.167e+06 (corr(k,b)=-0.972), gamma=3.438e+07 vs true 2.672e+07 (scatter 2.03e+07)
+[INFO]   Likelihood contour in kappa-beta plane
+[INFO]   Parameter correlation corr(kappa, beta)
+[INFO]     corr(kappa, beta) = -0.979
+[INFO]   LOHO sign stability
+[INFO]     beta_X = 1.598e+08 +/- 1.737e+07, positive in 33/33
+[INFO]   Bootstrap sign stability (N=500)
+[INFO]     beta_X = 1.416e+08 +/- 1.081e+08, 95% CI [-1.099e+08, 2.729e+08], frac_positive=0.846
+
+============================================================
+Summary: what do the data prefer?
+============================================================
+[INFO]   H0     : H0=69.32, kappa=+0.000e+00 (n/a), beta=+0.000e+00 (n/a), chi2/dof=27.9/31
+[INFO]   Hβ     : H0=68.59, kappa=+0.000e+00 (n/a), beta=+3.722e+07 (3.1σ), chi2/dof=22.6/30
+[INFO]   K0     : H0=68.56, kappa=+1.102e+06 (2.3σ), beta=+0.000e+00 (n/a), chi2/dof=22.7/30
+[INFO]   Kfixβ  : H0=68.56, kappa=+9.600e+05 (n/a), beta=+4.578e+06 (0.3σ), chi2/dof=22.7/30
+[INFO]   Kpriorβ: H0=68.56, kappa=+9.584e+05 (2.4σ), beta=+4.629e+06 (0.2σ), chi2/dof=22.7/29
+[INFO]   Kβ     : H0=69.23, kappa=-3.076e+06 (1.4σ), beta=+1.603e+08 (1.6σ), chi2/dof=22.0/29
+[SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_38_hierarchical_timefield_ladder.csv
+[SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_38_hierarchical_timefield_ladder.json
+[SUCCESS] Saved debug checks to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_38_debug_checks.json

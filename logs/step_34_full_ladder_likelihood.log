@@ -1,13 +1,13 @@
-[16:08:35] [INFO] Loading SH0ES Data...
-[16:08:35] [INFO] Design matrix shape: (3490, 46)
-[16:08:35] [INFO] Data vector length: 3490
-[16:08:36] [INFO] Covariance matrix shape: (3490, 3490)
-[16:08:36] [INFO] Number of parameters: 46
-[16:08:36] [INFO] Loading Host Metadata...
-[16:08:36] [INFO] Loaded 42 hosts
-[16:08:36] [INFO] Mapped M1337 -> Mrk1337
-[16:08:36] [INFO] Mapped N105A -> N105
-[16:08:36] [INFO] Mapped N976A -> N976
-[16:08:36] [INFO] Created 122 name mappings
-[16:08:36] [INFO] Calculating Effective Calibrator Sigma...
-[16:08:36] [SUCCESS] Anchor active-response scale: 30.51 km/s
+[16:12:24] [INFO] Loading SH0ES Data...
+[16:12:24] [INFO] Design matrix shape: (3490, 46)
+[16:12:24] [INFO] Data vector length: 3490
+[16:12:24] [INFO] Covariance matrix shape: (3490, 3490)
+[16:12:24] [INFO] Number of parameters: 46
+[16:12:24] [INFO] Loading Host Metadata...
+[16:12:24] [INFO] Loaded 42 hosts
+[16:12:24] [INFO] Mapped M1337 -> Mrk1337
+[16:12:24] [INFO] Mapped N105A -> N105
+[16:12:24] [INFO] Mapped N976A -> N976
+[16:12:24] [INFO] Created 122 name mappings
+[16:12:24] [INFO] Calculating Effective Calibrator Sigma...
+[16:12:24] [SUCCESS] Anchor active-response scale: 30.51 km/s

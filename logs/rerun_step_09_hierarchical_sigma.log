@@ -1,0 +1,13 @@
+[0;37m[01:46:07] [INFO] [0m
+[0;37m[01:46:07] [INFO] ================================================================================[0m
+[0;37m[01:46:07] [INFO]    >>> STEP 09: Velocity-dispersion errors-in-variables audit[0m
+[0;37m[01:46:07] [INFO] ================================================================================[0m
+[0;37m[01:46:07] [INFO] [0m
+[0;37m[01:46:07] [INFO] Method-specific bias and scatter:[0m
+[0;37m[01:46:07] [INFO]   HI linewidth proxy: N=19, bias=+0.00 km/s, scatter=8.00 km/s[0m
+[0;37m[01:46:07] [INFO]   stellar absorption: N=18, bias=+0.00 km/s, scatter=14.00 km/s[0m
+[0;37m[01:46:07] [INFO] OLS slope: 0.1133[0m
+[0;37m[01:46:07] [INFO] Linear-sigma ODR: 0.0872 ± 0.0306 (2.85 sigma; fixed observational errors)[0m
+[0;37m[01:46:07] [INFO] TEP-endpoint ODR: Gamma=4.132e+07 ± 1.737e+07 (2.38 sigma; fixed observational errors)[0m
+[0;37m[01:46:07] [INFO] Stellar-only: N=18, r=0.556, p=0.017[0m
+[1;32m[01:46:07] [SUCCESS] Step 09 complete[0m

@@ -226,6 +226,13 @@ def part_b():
                     float(abs(theta[jdx]) / np.sqrt(cov[jdx, jdx]))
                     if cov[jdx, jdx] > 0 else float("nan")
                 )
+            for a in range(len(names)):
+                for b_ in range(a + 1, len(names)):
+                    ja, jb = len(q) + a, len(q) + b_
+                    den = np.sqrt(cov[ja, ja] * cov[jb, jb])
+                    row[f"corr_{names[a]}_{names[b_]}"] = (
+                        float(cov[ja, jb] / den) if den > 0 else float("nan")
+                    )
             return row
 
         for cname, carr in carriers.items():

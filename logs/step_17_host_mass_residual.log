@@ -1,32 +1,32 @@
-[14:56:11] [INFO] 
-[14:56:11] [INFO] ================================================================================
-[14:56:11] [INFO]    >>> STEP 16: Host-mass residual test (TEP-specific bias isolation)
-[14:56:11] [INFO] ================================================================================
-[14:56:11] [INFO] 
-[14:56:11] [INFO] Cepheid: Host-mass partial correlation
-[14:56:11] [INFO] Raw sigma vs H0: r=0.241, p=0.1501
-[14:56:11] [INFO] Raw X_tep vs H0: r=0.151, p=0.3734
-[14:56:11] [INFO] Continuous Mass-residual: sigma vs H0: r=0.034, p=0.8439 (N=37)
-[14:56:11] [INFO] Continuous Mass-residual: X_tep vs H0: r=0.086, p=0.6139 (N=37)
-[14:56:11] [INFO] Mass-step residual: sigma vs H0: r=0.123, p=0.4676
-[14:56:11] [INFO] Mass-step residual: X_tep vs H0: r=0.077, p=0.6489
-[14:56:11] [INFO] Host-mass correlation: r(sigma, logM*) = 0.699 (p=1.52e-06)
-[14:56:11] [INFO] Host-mass decorrelation: r(X_tep, logM*) = 0.230 (p=0.1712)
-[14:56:11] [INFO] Mass-step decorrelation: r(X_tep, step_10) = 0.351 (p=0.0331)
-[14:56:11] [INFO] Both-residual: r=0.047, p=0.7831
-[14:56:11] [INFO] TRGB: Host-mass partial correlation
-[14:56:11] [INFO] TRGB raw sigma vs H0: r=0.366, p=0.1352
-[14:56:11] [INFO] TRGB raw X_tep vs H0: r=0.130, p=0.6084
-[14:56:11] [INFO] TRGB mass-residual sigma: r=0.186, p=0.4611 (N=18)
-[14:56:11] [INFO] TRGB mass-residual X_tep: r=0.113, p=0.6550 (N=18)
-[14:56:11] [INFO] --- SUMMARY ---
-[14:56:11] [INFO] +-----------------+-------+--------+-----------------+-----------------+
-[14:56:11] [INFO] | Channel         | Raw r | Raw p  | Mass-residual r | Mass-residual p |
-[14:56:11] [INFO] +-----------------+-------+--------+-----------------+-----------------+
-[14:56:11] [INFO] | Cepheid (sigma) | 0.241 | 0.1501 | 0.034           | 0.8439          |
-[14:56:11] [INFO] | Cepheid (X_tep) | 0.151 | 0.3734 | 0.086           | 0.6139          |
-[14:56:11] [INFO] | TRGB (sigma)    | 0.366 | 0.1352 | 0.186           | 0.4611          |
-[14:56:11] [INFO] | TRGB (X_tep)    | 0.130 | 0.6084 | 0.113           | 0.6550          |
-[14:56:11] [INFO] +-----------------+-------+--------+-----------------+-----------------+
-[14:56:11] [SUCCESS] Saved results to step_17_host_mass_residual_test.json
-[14:56:11] [SUCCESS] Step 16 complete
+[01:48:03] [INFO] 
+[01:48:03] [INFO] ================================================================================
+[01:48:03] [INFO]    >>> STEP 16: Host-mass residual test (TEP-specific bias isolation)
+[01:48:03] [INFO] ================================================================================
+[01:48:03] [INFO] 
+[01:48:03] [INFO] Cepheid: Host-mass partial correlation
+[01:48:03] [INFO] Raw sigma vs H0: r=0.501, p=0.0016
+[01:48:03] [INFO] Raw X_tep vs H0: r=0.440, p=0.0065
+[01:48:03] [INFO] Continuous Mass-residual: sigma vs H0: r=0.330, p=0.0460 (N=37)
+[01:48:03] [INFO] Continuous Mass-residual: X_tep vs H0: r=0.422, p=0.0092 (N=37)
+[01:48:03] [INFO] Mass-step residual: sigma vs H0: r=0.449, p=0.0053
+[01:48:03] [INFO] Mass-step residual: X_tep vs H0: r=0.417, p=0.0102
+[01:48:03] [INFO] Host-mass correlation: r(sigma, logM*) = 0.620 (p=4.21e-05)
+[01:48:03] [INFO] Host-mass decorrelation: r(X_tep, logM*) = 0.123 (p=0.4672)
+[01:48:03] [INFO] Mass-step decorrelation: r(X_tep, step_10) = 0.151 (p=0.3739)
+[01:48:03] [INFO] Both-residual: r=0.421, p=0.0095
+[01:48:03] [INFO] TRGB: Host-mass partial correlation
+[01:48:03] [INFO] TRGB raw sigma vs H0: r=0.366, p=0.1352
+[01:48:03] [INFO] TRGB raw X_tep vs H0: r=0.130, p=0.6084
+[01:48:03] [INFO] TRGB mass-residual sigma: r=0.186, p=0.4611 (N=18)
+[01:48:03] [INFO] TRGB mass-residual X_tep: r=0.113, p=0.6550 (N=18)
+[01:48:03] [INFO] --- SUMMARY ---
+[01:48:03] [INFO] +-----------------+-------+--------+-----------------+-----------------+
+[01:48:03] [INFO] | Channel         | Raw r | Raw p  | Mass-residual r | Mass-residual p |
+[01:48:03] [INFO] +-----------------+-------+--------+-----------------+-----------------+
+[01:48:03] [INFO] | Cepheid (sigma) | 0.501 | 0.0016 | 0.330           | 0.0460          |
+[01:48:03] [INFO] | Cepheid (X_tep) | 0.440 | 0.0065 | 0.422           | 0.0092          |
+[01:48:03] [INFO] | TRGB (sigma)    | 0.366 | 0.1352 | 0.186           | 0.4611          |
+[01:48:03] [INFO] | TRGB (X_tep)    | 0.130 | 0.6084 | 0.113           | 0.6550          |
+[01:48:03] [INFO] +-----------------+-------+--------+-----------------+-----------------+
+[01:48:03] [SUCCESS] Saved results to step_17_host_mass_residual_test.json
+[01:48:03] [SUCCESS] Step 16 complete

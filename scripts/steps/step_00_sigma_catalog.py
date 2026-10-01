@@ -15,12 +15,14 @@ class Step0SigmaCatalog:
         set_step_logger(self.logger)
 
     def run(self, rebuild: bool = False):
-        # SINGLE SOURCE OF TRUTH: pinned homogeneous HyperLEDA rotation catalog.
+        # SINGLE SOURCE OF TRUTH: literature inner-potential (stellar-dispersion) catalog.
         lit_csv = self.root_dir / "data" / "raw" / "external" / "velocity_dispersions_literature.csv"
         report_json = self.root_dir / "results" / "outputs" / "step_00_sigma_regeneration_report.json"
 
-        # The master file is the only source of truth. It stores HyperLEDA Vrot
-        # and the declared potential-equivalent scale u_phi=Vrot/sqrt(2).
+        # The master file is the only source of truth. It stores the local
+        # inner-potential scale sigma_* (stellar dispersion or documented
+        # HI-linewidth proxy) at the Cepheid-site scale, with the pinned
+        # HyperLEDA Vrot retained alongside for provenance and audit.
         if not lit_csv.exists():
             raise FileNotFoundError(
                 f"Master velocity dispersion file not found: {lit_csv}. "
@@ -44,9 +46,9 @@ class Step0SigmaCatalog:
         report_json.parent.mkdir(parents=True, exist_ok=True)
         with open(report_json, 'w') as f:
             json.dump({
-                "mode": "pinned_hyperleda_vrot",
+                "mode": "literature_inner_potential_sigma",
                 "source_file": str(lit_csv.name),
-                "note": "Potential scale is u_phi=Vrot/sqrt(2), not central stellar dispersion.",
+                "note": "Potential scale is the local inner-potential sigma_* (stellar dispersion / HI-linewidth proxy); Vrot is retained only as provenance.",
                 "counts": {
                     "n_hosts": n_hosts,
                     "n_with_sigma": n_complete,

@@ -1,0 +1,16 @@
+
+============================================================
+Step 66: Combined cross-channel evidence
+============================================================
+[INFO] velocity_endpoint_GammaX           step_39  est=+3.846e+07 +/- 1.653e+07 z=+2.33
+[INFO] within_host_period_kappaP          step_52  est=-5.794e+05 +/- 2.256e+05 z=+2.57
+[INFO] within_host_metallicity_kappaZ     step_52  est=-2.103e+06 +/- 9.202e+05 z=+2.29
+[INFO] cepheid_trgb_differential          step_41  est=+2.500e+05 +/- 3.131e+05 z=+0.80
+[INFO] hfsn_environment_contrast          step_65  est=-8.794e-09 +/- 1.282e-08 z=+0.69
+[SUCCESS] primary_rho0                 Z=+4.14  p1=0.0000  p2=0.0000
+[SUCCESS] primary_rho_shared_0.1       Z=+3.68  p1=0.0001  p2=0.0002
+[SUCCESS] primary_rho_shared_0.3       Z=+3.08  p1=0.0010  p2=0.0021
+[SUCCESS] velocity_plus_period_only    Z=+3.46  p1=0.0003  p2=0.0005
+[SUCCESS] drop_metallicity             Z=+3.46  p1=0.0003  p2=0.0005
+[SUCCESS] with_hfsn_consistency        Z=+3.99  p1=0.0000  p2=0.0001
+[SUCCESS] Saved /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_66_combined_evidence.json

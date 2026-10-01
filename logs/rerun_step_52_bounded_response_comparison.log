@@ -1,0 +1,93 @@
+
+============================================================
+Step 52: Bounded-Response Model Comparison
+============================================================
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: divide by zero encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: overflow encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: invalid value encountered in matmul
+  return _core_matmul(x1, x2)
+[INFO] Calibrator host sample: 37
+
+============================================================
+all_z_hd_sv150: N=37, sigma_v=150
+============================================================
+[INFO]   LOO-CV (all_z_hd_sv150)...
+[INFO]   CV MSE ranking: sA_sigma=43473, tanh_sigma=45328, unscreened_X=45432, log_sigma=45798, linear_X=49807, step_sigma=53234, sigma_grad=56357, sA_nested=60832, nested_lin=62760, screening_S=71035
+
+============================================================
+all_z_hd_sv250: N=37, sigma_v=250
+============================================================
+[INFO]   LOO-CV (all_z_hd_sv250)...
+[INFO]   CV MSE ranking: sA_sigma=43549, unscreened_X=45424, tanh_sigma=45501, log_sigma=45950, linear_X=49771, step_sigma=56442, sigma_grad=56577, sA_nested=62341, nested_lin=62833, screening_S=71132
+[INFO]   Best model by CV: sA_sigma
+[INFO]   perm p = 0.0010; bootstrap CI [1.613e+01, 3.912e+01]; LOHO positive 37/37
+
+============================================================
+all_z_hd_sv500: N=37, sigma_v=500
+============================================================
+[INFO]   LOO-CV (all_z_hd_sv500)...
+[INFO]   CV MSE ranking: sA_sigma=43728, unscreened_X=45563, tanh_sigma=46152, log_sigma=46328, linear_X=49892, step_sigma=56780, sigma_grad=57190, nested_lin=62829, sA_nested=64028, screening_S=71534
+
+============================================================
+hf_z035_sv150: N=34, sigma_v=150
+============================================================
+[INFO]   LOO-CV (hf_z035_sv150)...
+[INFO]   CV MSE ranking: sA_sigma=46370, unscreened_X=47885, tanh_sigma=48977, log_sigma=50128, step_sigma=51143, linear_X=52679, sigma_grad=60656, sA_nested=66287, nested_lin=72941, screening_S=74526
+
+============================================================
+hf_z035_sv250: N=34, sigma_v=250
+============================================================
+[INFO]   LOO-CV (hf_z035_sv250)...
+[INFO]   CV MSE ranking: sA_sigma=46447, unscreened_X=47908, tanh_sigma=49125, log_sigma=50228, step_sigma=51209, linear_X=52695, sigma_grad=60873, sA_nested=66585, nested_lin=73004, screening_S=74623
+[INFO]   Best model by CV: sA_sigma
+[INFO]   perm p = 0.0055; bootstrap CI [1.481e+01, 3.745e+01]; LOHO positive 34/34
+
+============================================================
+hf_z005_sv250: N=25, sigma_v=250
+============================================================
+[INFO]   LOO-CV (hf_z005_sv250)...
+[INFO]   CV MSE ranking: unscreened_X=34202, sA_sigma=35461, tanh_sigma=36602, sA_nested=37988, linear_X=40303, step_sigma=43181, screening_S=45053, log_sigma=45091, nested_lin=49661, sigma_grad=51736
+
+============================================================
+all_z_cmb_sv250: N=37, sigma_v=250
+============================================================
+[INFO]   LOO-CV (all_z_cmb_sv250)...
+[INFO]   CV MSE ranking: tanh_sigma=75627, log_sigma=75885, step_sigma=75945, sA_sigma=76558, linear_X=80002, sigma_grad=82880, sA_nested=86914, unscreened_X=90591, nested_lin=99569, screening_S=105736
+
+============================================================
+hf_z035_cmb_sv250: N=34, sigma_v=250
+============================================================
+[INFO]   LOO-CV (hf_z035_cmb_sv250)...
+[INFO]   CV MSE ranking: step_sigma=81743, tanh_sigma=81851, log_sigma=82475, sA_sigma=82494, linear_X=85805, sigma_grad=90116, sA_nested=92517, unscreened_X=97065, screening_S=112942, nested_lin=113873
+[SUCCESS] Saved comparison table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_52_bounded_response_comparison.csv
+
+============================================================
+Median-split stratification (v0.2 statistic)
+============================================================
+[INFO]   all_z_hd_sv250: low-sigma H0=65.46+/-2.00 (n=19), high-sigma H0=72.69+/-1.97 (n=18), Delta=+7.23 (2.6σ)
+[INFO]   hf_z035_sv250: low-sigma H0=65.67+/-2.01 (n=17), high-sigma H0=72.80+/-1.99 (n=17), Delta=+7.13 (2.5σ)
+
+============================================================
+Ladder-level kappa_P x kappa_Z disentanglement
+============================================================
+[0;37m[01:57:15] [INFO] Loading SH0ES Data...[0m
+[0;37m[01:57:15] [INFO] Design matrix shape: (3490, 46)[0m
+[0;37m[01:57:15] [INFO] Data vector length: 3490[0m
+[0;37m[01:57:15] [INFO] Covariance matrix shape: (3490, 3490)[0m
+[0;37m[01:57:15] [INFO] Number of parameters: 46[0m
+[0;37m[01:57:15] [INFO] Loading Host Metadata...[0m
+[0;37m[01:57:15] [INFO] Loaded 42 hosts[0m
+[0;37m[01:57:15] [INFO] Mapped M1337 -> Mrk1337[0m
+[0;37m[01:57:15] [INFO] Mapped N105A -> N105[0m
+[0;37m[01:57:15] [INFO] Mapped N976A -> N976[0m
+[0;37m[01:57:15] [INFO] Created 122 name mappings[0m
+[0;37m[01:57:15] [INFO] Calculating Effective Calibrator Sigma...[0m
+[1;32m[01:57:15] [SUCCESS] Anchor active-response scale: 30.51 km/s[0m
+[SUCCESS] Saved disentanglement table to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_52_kappaP_kappaZ_disentanglement.csv
+[INFO]   [anchor_screened_physical] kappaP_plus_kappaZ: kappaP=-4.20e+05 (1.2σ), kappaZ=-1.53e+06 (1.1σ), corr=-0.17, dchi2=3.4
+[INFO]   [anchor_screened_physical] kappa0_kappaP_kappaZ: kappaP=-7.26e+05 (1.7σ), kappaZ=-1.42e+06 (1.0σ), corr=-0.18, dchi2=4.8
+[INFO]   [anchor_reference_zero] kappaP_plus_kappaZ: kappaP=-3.53e+05 (0.8σ), kappaZ=-4.56e+06 (2.7σ), corr=-0.14, dchi2=8.9
+[INFO]   [anchor_reference_zero] kappa0_kappaP_kappaZ: kappaP=-1.42e+06 (1.8σ), kappaZ=-4.32e+06 (2.6σ), corr=-0.15, dchi2=11.6
+[SUCCESS] Saved master JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_52_bounded_response_comparison.json

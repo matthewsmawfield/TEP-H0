@@ -7,38 +7,38 @@
     {
       "sample": "all",
       "n_hosts": 34,
-      "kappa_unweighted": 893228.1494140625,
-      "kappa_wls": 233870.34795116552,
-      "kappa_wls_err": 288673.1593355703,
-      "kappa_eiv": 150325.97726064306,
-      "kappa_eiv_err": 237500.0
+      "kappa_unweighted": 2959910.5834960938,
+      "kappa_wls": 943678.4440760574,
+      "kappa_wls_err": 481398.39715551183,
+      "kappa_eiv": 604260.0807794284,
+      "kappa_eiv_err": 495000.0
     },
     {
       "sample": "no_ngc976",
       "n_hosts": 33,
-      "kappa_unweighted": 1361930.0842285156,
-      "kappa_wls": -164997.5279658416,
-      "kappa_wls_err": 497172.04082997766,
-      "kappa_eiv": -132451.43188023014,
-      "kappa_eiv_err": 445000.0
+      "kappa_unweighted": 4936952.972412109,
+      "kappa_wls": 1137751.087167803,
+      "kappa_wls_err": 726475.6741614183,
+      "kappa_eiv": 892123.8846937496,
+      "kappa_eiv_err": 672500.0
     },
     {
       "sample": "i_ge_40",
       "n_hosts": 26,
-      "kappa_unweighted": 1237527.4658203125,
-      "kappa_wls": 253100.0063708885,
-      "kappa_wls_err": 593011.117084346,
-      "kappa_eiv": 211153.06445110828,
-      "kappa_eiv_err": 575000.0
+      "kappa_unweighted": 3059121.7041015625,
+      "kappa_wls": 986875.1724262659,
+      "kappa_wls_err": 761311.4777491835,
+      "kappa_eiv": 821440.9956851319,
+      "kappa_eiv_err": 725000.0
     },
     {
       "sample": "i_ge_45",
       "n_hosts": 22,
-      "kappa_unweighted": 1817858.88671875,
-      "kappa_wls": 606407.1325556327,
-      "kappa_wls_err": 876285.4143783209,
-      "kappa_eiv": 559134.7673398883,
-      "kappa_eiv_err": 837500.0
+      "kappa_unweighted": 3160697.1740722656,
+      "kappa_wls": 1032075.9553886178,
+      "kappa_wls_err": 795996.1804813459,
+      "kappa_eiv": 949420.0823492142,
+      "kappa_eiv_err": 807500.0
     },
     {
       "sample": "hybrid_tf",
@@ -46,8 +46,8 @@
       "kappa_unweighted": 2034764.8620605469,
       "kappa_wls": 212465.5927898081,
       "kappa_wls_err": 656748.566607968,
-      "kappa_eiv": 201154.38563692165,
-      "kappa_eiv_err": 642500.0
+      "kappa_eiv": 192441.39875511886,
+      "kappa_eiv_err": 627500.0
     }
   ],
   "tf_fallback": {
@@ -89,32 +89,32 @@
     {
       "k_true": 150000.0,
       "n_draws": 500,
-      "mean": 118983.41438186268,
-      "std": 292102.8841189881,
-      "bias_fraction": -0.20677723745424884
+      "mean": 149435.34560154515,
+      "std": 460855.90558794467,
+      "bias_fraction": -0.003764362656365653
     },
     {
       "k_true": 300000.0,
       "n_draws": 500,
-      "mean": 238313.16636449116,
-      "std": 316167.0303987995,
-      "bias_fraction": -0.20562277878502946
+      "mean": 273533.5898978944,
+      "std": 465708.7525238127,
+      "bias_fraction": -0.08822136700701862
     },
     {
       "k_true": 600000.0,
       "n_draws": 500,
-      "mean": 510498.24891072646,
-      "std": 382027.7060643322,
-      "bias_fraction": -0.14916958514878925
+      "mean": 535700.1636733913,
+      "std": 515750.1861806552,
+      "bias_fraction": -0.10716639387768111
     },
     {
       "k_true": 960000.0,
       "n_draws": 500,
-      "mean": 869478.6536196189,
-      "std": 441152.9775919133,
-      "bias_fraction": -0.09429306914623035
+      "mean": 858743.4401536792,
+      "std": 591183.8233605849,
+      "bias_fraction": -0.1054755831732508
     }
   ],
-  "kappa_eiv_bias_calibrated_all": 189398.25863797544,
+  "kappa_eiv_bias_calibrated_all": 676403.2931658288,
   "notes": "Inclination uncertainty is drawn from the Hubble axis-ratio formula with q0=10^-0.38 and 0.05 dex logr25 scatter; the EIV likelihood folds kappa^2*sX^2 into the effective variance. The injection ensemble shows the EIV point estimate retains a mild attenuation toward zero (~-20% at kappa=3e5, ~-9% at kappa=1e6), so EIV values are conservative lower bounds on |kappa|."
 }

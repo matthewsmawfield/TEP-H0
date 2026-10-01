@@ -1,0 +1,137 @@
+[0;37m[01:52:20] [INFO] Loading SH0ES Data...[0m
+[0;37m[01:52:20] [INFO] Design matrix shape: (3490, 46)[0m
+[0;37m[01:52:20] [INFO] Data vector length: 3490[0m
+[0;37m[01:52:20] [INFO] Covariance matrix shape: (3490, 3490)[0m
+[0;37m[01:52:20] [INFO] Number of parameters: 46[0m
+[0;37m[01:52:20] [INFO] Loading Host Metadata...[0m
+[0;37m[01:52:20] [INFO] Loaded 42 hosts[0m
+[0;37m[01:52:20] [INFO] Mapped M1337 -> Mrk1337[0m
+[0;37m[01:52:20] [INFO] Mapped N105A -> N105[0m
+[0;37m[01:52:20] [INFO] Mapped N976A -> N976[0m
+[0;37m[01:52:20] [INFO] Created 122 name mappings[0m
+[0;37m[01:52:20] [INFO] Calculating Effective Calibrator Sigma...[0m
+[1;32m[01:52:20] [SUCCESS] Anchor active-response scale: 30.51 km/s[0m
+{
+  "step": "step_62_q_structure_derivation",
+  "part_A_inversion": {
+    "kappa_P_fitted_mag": -579370.9909261984,
+    "kappa_P_fitted_iso_mag": -654366.5077688851,
+    "b_wesenheit": -3.26,
+    "lambda1_required_per_dex_per_X": 409218.10031283845,
+    "lambda1_required_isolated": 462188.51722184283,
+    "pivot_P_d": 10.0,
+    "pivot_rho_g_cm3": 2.3668480000000004e-05,
+    "pivot_S_A": 0.010577429130099843,
+    "pivot_rhoT_over_rho": 845005.6784381589,
+    "S_A_period_slope_dex": -0.6666666666666666,
+    "lambda0_by_alpha": {
+      "0.3333": 2819.74950761852,
+      "0.5000": 193.33448796089016,
+      "0.6667": 14.912850290734413,
+      "1.0000": 0.105159744718688,
+      "1.3333": 0.0008342398103259857,
+      "2.0000": 6.222428286698432e-08
+    },
+    "alpha_1_lambda0": 0.105159744718688,
+    "predicted_carrier": "X * (P^2 - const): ln q \u221d rho_T/<rho> \u221d P^2",
+    "structure_grid": {
+      "P_d": [
+        3.0,
+        5.0,
+        10.0,
+        20.0,
+        30.0,
+        50.0,
+        80.0
+      ],
+      "rho_g_cm3": [
+        0.0002629831111111111,
+        9.467392000000002e-05,
+        2.3668480000000004e-05,
+        5.917120000000001e-06,
+        2.629831111111111e-06,
+        9.467392e-07,
+        3.6982000000000007e-07
+      ],
+      "R_Rsun": [
+        29.542174098818315,
+        41.81187110868371,
+        66.98846094165265,
+        107.32487641289372,
+        141.3977351632887,
+        200.12419728931536,
+        275.48705168209193
+      ],
+      "M_Msun": [
+        4.8156232590032335,
+        4.915033173152392,
+        5.0532135637912186,
+        5.195278733979726,
+        5.28022590433704,
+        5.389226707682046,
+        5.491503347561468
+      ],
+      "g_surf_m_s2": [
+        1.511728791897379,
+        0.7702532422698698,
+        0.30851333524906716,
+        0.1235703698513681,
+        0.07235588912326336,
+        0.036866638045943916,
+        0.019824176604834026
+      ],
+      "compactness": [
+        3.4584712641483904e-07,
+        2.494025972138512e-07,
+        1.6004487609185329e-07,
+        1.0270286937426524e-07,
+        7.922899947064427e-08,
+        5.713483424734812e-08,
+        4.2292580332124946e-08
+      ],
+      "S_A": [
+        0.023602931956159378,
+        0.016790622128239566,
+        0.010577429130099843,
+        0.006663362807392005,
+        0.005085097539281188,
+        0.00361742987802963,
+        0.002644357282524961
+      ],
+      "rhoT_over_rho": [
+        76050.51105943433,
+        211251.41960953973,
+        845005.6784381589,
+        3380022.7137526358,
+        7605051.105943432,
+        21125141.960953977,
+        54080363.42004217
+      ]
+    },
+    "interpretation": "alpha = 1 (ln q proportional to rho_T/<rho>) supplies the required slope with an O(0.1-1) dimensionless transport weight; shallower density powers need order-10^2-10^3 prefactors, steeper powers need 10^-3-10^-8. The inverse-density carrier is therefore the distinguished natural-coefficient point. Since <rho> \u221d P^-2 it predicts the environmental carrier X*(P/10)^2, tested against X*logP and X*(logP)^2 in Part B; the implied lambda_0 from the fitted P2 coefficient is recorded there."
+  },
+  "part_B_carrier_discrimination": [
+    {
+      "anchor_convention": "anchor_screened_physical",
+      "model": "logP_alone",
+      "n_params": 47,
+      "chi2": 3550.5881739333745,
+      "delta_chi2": 2.118096536176381,
+      "AIC": 3644.5881739333745,
+      "BIC": 3933.9980536476087,
+      "H0": 73.67112491326846,
+      "kappa_logP_6": -485142.24518722197,
+      "kappa_logP_6_err": 333346.74498075113,
+      "kappa_logP_6_sig": 1.4553681789070303
+    },
+    {
+      "anchor_convention": "anchor_screened_physical",
+      "model": "logP_plus_kappaZ",
+      "n_params": 48,
+      "chi2": 3549.3233573483426,
+      "delta_chi2": 3.3829131212082757,
+      "AIC": 3645.3233573483426,
+      "BIC": 3940.8908940777733,
+      "H0": 73.26364553618835,
+      "kappa_logP_6": -419686.39146346285,
+      "kappa_logP_6_err": 338389.53202764

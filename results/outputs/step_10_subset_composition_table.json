@@ -2,15 +2,29 @@
   {
     "tier": "Full sample",
     "n": 37,
-    "mean_sigma": 118.47669670270268,
-    "median_sigma": 114.622009,
+    "mean_sigma": 99.93513513513513,
+    "median_sigma": 95.0,
     "mean_redshift": 0.0068508108108108106,
     "group_richness_mean": 13.0,
     "n_high_sigma": 18,
     "n_low_sigma": 19,
-    "raw_slope": 0.043736322981152355,
-    "corrected_mean_full_kappa": 66.64715487074687,
-    "corrected_mean_refit_kappa": 66.64715487074687,
-    "refit_kappa": 849468.994140625
+    "raw_slope": 0.11328306612482163,
+    "corrected_mean_full_kappa": 67.83365176245941,
+    "corrected_mean_refit_kappa": 67.83365141907086,
+    "refit_kappa": 3374487.3046875
+  },
+  {
+    "tier": "Stellar only",
+    "n": 18,
+    "mean_sigma": 114.42222222222222,
+    "median_sigma": 105.1,
+    "mean_redshift": 0.00726611111111111,
+    "group_richness_mean": 8.823529411764707,
+    "n_high_sigma": 11,
+    "n_low_sigma": 7,
+    "raw_slope": 0.09895065284990248,
+    "corrected_mean_full_kappa": 66.1793644477225,
+    "corrected_mean_refit_kappa": 66.34157426392309,
+    "refit_kappa": 2869934.08203125
   }
 ]

@@ -1,0 +1,14 @@
+
+============================================================
+Step 65: Hubble-flow SN environment contrast
+============================================================
+[INFO] Map X = a + b*logM: a=-1.323e-07, b=1.262e-08, r=0.123, resid rms=7.187e-08
+[INFO] <X_cal>=-1.545e-09  <X_HF>=-1.034e-08  contrast=-8.794e-09
+[SUCCESS] Delta_X = -8.794e-09 + 1.066e-08/- 1.210e-08 (bootstrap sd 1.282e-08)
+[INFO] alt map theil_sen: Delta_X = -1.455e-08
+[INFO] alt map quadratic: Delta_X = -4.543e-08
+[INFO] alt map quantile_rank: Delta_X = -3.747e-08
+[INFO] kappa_canonical: Delta_H0 = +0.27 km/s/Mpc [+0.65, -0.06]
+[INFO] kappa_endpoint_0.39e6: Delta_H0 = +0.11 km/s/Mpc [+0.26, -0.02]
+[INFO] kappa_wls_0.23e6: Delta_H0 = +0.07 km/s/Mpc [+0.16, -0.01]
+[SUCCESS] Step 65 complete

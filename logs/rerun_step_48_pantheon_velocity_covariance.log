@@ -1,0 +1,71 @@
+
+============================================================
+Step 48: Pantheon+ Peculiar-Velocity Covariance Analysis
+============================================================
+[INFO] Pantheon+SH0ES: 1701 SNe
+[INFO] VPECERR (all SNe): [250]
+[INFO] Calibrators: 77, Hubble-flow: 277
+[INFO] Loading Pantheon+ STAT+SYS covariance...
+[INFO]   Full covariance: (1701, 1701)
+[INFO]   Calibrator covariance: (77, 77)
+[INFO]   Correlated pairs (|r| > 0.1): 184
+
+============================================================
+Computing data-driven sigma_v...
+============================================================
+[INFO] Calibrator sigma_v from m_b:
+[INFO]   Mean: 254.1 km/s
+[INFO]   Median: 252.8 km/s
+[INFO]   Std: 2.2 km/s
+[INFO]   Min: 252.0 km/s
+[INFO]   Max: 259.2 km/s
+[INFO] 
+Per-host sigma_v (unique Cepheid distances): 37
+[INFO]   Mean per-host sigma_v: 253.8 km/s
+[INFO] 
+Comparison with fixed sigma_v:
+[INFO]   Pantheon+ default: 250 km/s (all SNe)
+[INFO]   Data-driven mean: 254.1 km/s
+[INFO]   Data-driven median: 252.8 km/s
+
+============================================================
+
+Peculiar velocity scatter from VPEC residuals...
+============================================================
+[INFO] Calibrator VPEC:
+[INFO]   Mean: 7.0 km/s
+[INFO]   RMS: 182.3 km/s
+[INFO]   Std (after mean removal): 182.1 km/s
+[INFO] 
+Hubble-flow VPEC:
+[INFO]   Mean: -87.0 km/s
+[INFO]   RMS: 162.5 km/s
+[INFO]   Std (after mean removal): 137.2 km/s
+[INFO] 
+Residual sigma_v (calibrator): 182.1 km/s
+[INFO] This is the data-driven estimate of the peculiar velocity scatter
+[INFO] after removing the model-predicted bulk flow.
+
+============================================================
+
+Redshift–distance likelihood with data-driven sigma_v...
+============================================================
+[INFO]   N hosts = 34
+[SUCCESS]   sigma_v = 150 km/s (fixed_150): kappa = 1.446e+06, LRT = 8.29, significance = 2.88sigma
+[SUCCESS]   sigma_v = 182 km/s (data-driven): kappa = 1.406e+06, LRT = 6.08, significance = 2.47sigma
+[SUCCESS]   sigma_v = 250 km/s (fixed_250): kappa = 1.360e+06, LRT = 3.52, significance = 1.88sigma
+[SUCCESS]   sigma_v = 500 km/s (fixed_500): kappa = 1.315e+06, LRT = 0.96, significance = 0.98sigma
+
+============================================================
+
+Summary
+============================================================
+[INFO] The Pantheon+ peculiar velocity data provides a data-driven
+sigma_v = 182.1 km/s (residual RMS after bulk flow
+correction), compared to the Pantheon+ default of 250 km/s.
+The kappa_Cep significance at the data-driven sigma_v is
+2.47sigma
+(LRT), compared to 1.88sigma at sigma_v = 250 km/s.
+[SUCCESS] 
+Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_48_pantheon_velocity_covariance.json
+[SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_48_pantheon_velocity_covariance.csv

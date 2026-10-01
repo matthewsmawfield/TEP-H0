@@ -18,10 +18,35 @@ data/raw/Pantheon+SH0ES.dat
   Status: Published data, downloaded from official repository
 
 data/raw/external/velocity_dispersions_literature.csv
-  Source: Curated from peer-reviewed literature (Ho+2009, Campbell+2014, etc.)
-  Role: SINGLE SOURCE OF TRUTH for velocity dispersions
+  Source: Curated from peer-reviewed literature (Ho+2009, Campbell+2014 6dFGSv,
+          Heraudeau+1999, Kormendy & Ho 2013, Koss+2022, Saulder+2019, Riess+2022,
+          van der Marel+2002, Harris & Zaritsky 2006, Alves & Nelson 2000)
+  Role: SINGLE SOURCE OF TRUTH for the host inner-potential velocity scale sigma_*
   Status: Manually curated master file with ADS bibcodes
-  Columns: galaxy, sigma_kms, error_kms, source_bibcode, source_url, method, notes, traceability_confidence, date_accessed
+  Columns: galaxy, pgc, vrot_kms, vrot_error_kms, sigma_kms, error_kms,
+           source_bibcode, source_url, method, notes, traceability_confidence,
+           date_accessed
+  Coordinate semantics:
+    sigma_kms is the LOCAL INNER-POTENTIAL scale sigma_* used by the primary TEP
+    coordinate X_i = (S_i sigma_{*,i}^2 - U_ref)/c^2: direct stellar-absorption
+    dispersions where measured (method = "stellar absorption" / "stellar
+    kinematics"), documented H I linewidth proxies otherwise.
+    vrot_kms is the pinned HyperLEDA maximum rotation velocity retained ONLY as
+    the audit/robustness coordinate u_phi = V_rot/sqrt(2); it is not consumed as
+    the primary coordinate (inclination deprojection is unstable for
+    low-inclination hosts and it probes the outer halo, not the Cepheid
+    environment).
+  Provenance note: versions v0.9/v0.10 had erroneously populated sigma_kms with
+    the homogeneous u_phi rotation proxy, attenuating the environmental signal
+  Bibcode note: bibcode 2014MNRAS.443.1231C (Campbell et al. 2014, 6dFGSv data
+    release) legitimately carries two method labels because that single data
+    release publishes both products used here: Fundamental Plane stellar
+    absorption dispersions (used directly, e.g. NGC 1015 at 106.5 km/s) and
+    W50 21-cm linewidths (converted sigma ~= W50/2.83 for the "HI linewidth
+    proxy" rows). The method column, not the bibcode, distinguishes the
+    measurement channel.
+    (Gamma_X 2.35e7 -> 1.16e7). The sigma_* construction was restored with full
+    per-row provenance; the rotation column is kept for audit only.
   CRITICAL: This is the ONLY file the pipeline reads for sigma values.
 
 data/raw/external/anchor_galaxy_data.csv
@@ -38,6 +63,27 @@ data/raw/external/tully2015_2mrs_groups_table5.csv
   Source: Tully (2015) 2MRS group catalog
   Role: Group membership counts (N_mb) for environment controls
   Status: Published catalog
+
+data/raw/external/hyperleda_inclinations.csv
+  Source: HyperLEDA (pinned query)
+  Role: Galaxy inclinations and rotation-curve parameters for the u_phi
+        audit coordinate and the Step 64 inclination-proxy audit
+  Status: Published catalog query, per-host rows
+
+data/raw/external/rc3_d25_hosts.csv
+  Source: RC3 (de Vaucouleurs et al. 1991)
+  Role: Isophotal diameters D25 and host cross-identifications
+  Status: Published catalog
+
+data/raw/external/stiskalek2026_manticore_hosts.csv
+  Source: Stiskalek et al. (2026), Manticore local-Universe reconstruction
+  Role: Local density-field estimates for host environments
+  Status: Published data
+
+data/raw/external/Pantheon+SH0ES_STAT+SYS.cov
+  Source: Scolnic et al. (2022) Pantheon+ release
+  Role: Full statistical+systematic covariance matrix for Pantheon+ SH0ES
+  Status: Published data from official repository
 
 data/raw/external/Cepheid-Distance-Ladder-Data/
   Source: Riess et al. (2022) SH0ES Team

@@ -1,0 +1,143 @@
+
+============================================================
+Step 42: TEP-Native Ladder (Generative Clock-Aware Model)
+============================================================
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: divide by zero encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: overflow encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: invalid value encountered in matmul
+  return _core_matmul(x1, x2)
+[INFO] Cepheid hosts: 37
+[INFO] External distances: 18 hosts (TRGB)
+[INFO] Merged Cepheid+TRGB overlap: 18 hosts
+
+============================================================
+sigma_v = 150 km/s
+============================================================
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_42_tep_native_ladder.py:289: RuntimeWarning: divide by zero encountered in matmul
+  beta_wls = np.linalg.lstsq(Xmat.T @ W @ Xmat, Xmat.T @ W @ y, rcond=None)[0]
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_42_tep_native_ladder.py:289: RuntimeWarning: overflow encountered in matmul
+  beta_wls = np.linalg.lstsq(Xmat.T @ W @ Xmat, Xmat.T @ W @ y, rcond=None)[0]
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_42_tep_native_ladder.py:289: RuntimeWarning: invalid value encountered in matmul
+  beta_wls = np.linalg.lstsq(Xmat.T @ W @ Xmat, Xmat.T @ W @ y, rcond=None)[0]
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_42_tep_native_ladder.py:294: RuntimeWarning: divide by zero encountered in matmul
+  cov_wls = np.linalg.pinv(Xmat.T @ W @ Xmat, rcond=1e-12)
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_42_tep_native_ladder.py:294: RuntimeWarning: overflow encountered in matmul
+  cov_wls = np.linalg.pinv(Xmat.T @ W @ Xmat, rcond=1e-12)
+/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_42_tep_native_ladder.py:294: RuntimeWarning: invalid value encountered in matmul
+  cov_wls = np.linalg.pinv(Xmat.T @ W @ Xmat, rcond=1e-12)
+[INFO]   T0: H_app=68.80, Γ_X=+0.000e+00 (0.0σ), χ²/dof=66.8/32
+[INFO]     Gauge A (κ=0):     β=+0.000e+00
+[INFO]     Gauge B (β=0):     κ=+0.000e+00
+[INFO]     Gauge C (κ=canonical): β=-3.042e+07
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=-9.678e+05
+[INFO]   TGamma: H_app=68.31, Γ_X=+4.009e+07 (3.5σ), χ²/dof=54.8/31
+[INFO]     Gauge A (κ=0):     β=+4.009e+07
+[INFO]     Gauge B (β=0):     κ=+1.275e+06
+[INFO]     Gauge C (κ=canonical): β=+9.897e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.913e+07
+[INFO]   TK: H_app=68.31, Γ_X=+4.009e+07 (3.5σ), χ²/dof=54.8/31
+[INFO]     Gauge A (κ=0):     β=+4.009e+07
+[INFO]     Gauge B (β=0):     κ=+1.275e+06
+[INFO]     Gauge C (κ=canonical): β=+9.897e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.913e+07
+[INFO]   TBeta: H_app=68.31, Γ_X=+4.009e+07 (3.5σ), χ²/dof=54.8/31
+[INFO]     Gauge A (κ=0):     β=+4.009e+07
+[INFO]     Gauge B (β=0):     κ=+1.275e+06
+[INFO]     Gauge C (κ=canonical): β=+9.897e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.913e+07
+[INFO]   TMixed: H_app=68.31, Γ_X=+4.009e+07 (3.5σ), χ²/dof=54.8/31
+[INFO]     Gauge A (κ=0):     β=+4.009e+07
+[INFO]     Gauge B (β=0):     κ=+1.275e+06
+[INFO]     Gauge C (κ=canonical): β=+9.897e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.913e+07
+
+============================================================
+sigma_v = 182.1 km/s
+============================================================
+[INFO]   T0: H_app=68.98, Γ_X=+0.000e+00 (0.0σ), χ²/dof=48.3/32
+[INFO]     Gauge A (κ=0):     β=+0.000e+00
+[INFO]     Gauge B (β=0):     κ=+0.000e+00
+[INFO]     Gauge C (κ=canonical): β=-3.049e+07
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=-9.703e+05
+[INFO]   TGamma: H_app=68.41, Γ_X=+3.904e+07 (3.0σ), χ²/dof=39.3/31
+[INFO]     Gauge A (κ=0):     β=+3.904e+07
+[INFO]     Gauge B (β=0):     κ=+1.239e+06
+[INFO]     Gauge C (κ=canonical): β=+8.795e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.807e+07
+[INFO]   TK: H_app=68.41, Γ_X=+3.904e+07 (3.0σ), χ²/dof=39.3/31
+[INFO]     Gauge A (κ=0):     β=+3.904e+07
+[INFO]     Gauge B (β=0):     κ=+1.239e+06
+[INFO]     Gauge C (κ=canonical): β=+8.795e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.807e+07
+[INFO]   TBeta: H_app=68.41, Γ_X=+3.904e+07 (3.0σ), χ²/dof=39.3/31
+[INFO]     Gauge A (κ=0):     β=+3.904e+07
+[INFO]     Gauge B (β=0):     κ=+1.239e+06
+[INFO]     Gauge C (κ=canonical): β=+8.795e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.807e+07
+[INFO]   TMixed: H_app=68.41, Γ_X=+3.904e+07 (3.0σ), χ²/dof=39.3/31
+[INFO]     Gauge A (κ=0):     β=+3.904e+07
+[INFO]     Gauge B (β=0):     κ=+1.239e+06
+[INFO]     Gauge C (κ=canonical): β=+8.795e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.807e+07
+
+============================================================
+sigma_v = 250 km/s
+============================================================
+[INFO]   T0: H_app=69.15, Γ_X=+0.000e+00 (0.0σ), χ²/dof=27.8/32
+[INFO]     Gauge A (κ=0):     β=+0.000e+00
+[INFO]     Gauge B (β=0):     κ=+0.000e+00
+[INFO]     Gauge C (κ=canonical): β=-3.057e+07
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=-9.727e+05
+[INFO]   TGamma: H_app=68.48, Γ_X=+3.805e+07 (2.3σ), χ²/dof=22.5/31
+[INFO]     Gauge A (κ=0):     β=+3.805e+07
+[INFO]     Gauge B (β=0):     κ=+1.206e+06
+[INFO]     Gauge C (κ=canonical): β=+7.771e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.708e+07
+[INFO]   TK: H_app=68.48, Γ_X=+3.805e+07 (2.3σ), χ²/dof=22.5/31
+[INFO]     Gauge A (κ=0):     β=+3.805e+07
+[INFO]     Gauge B (β=0):     κ=+1.206e+06
+[INFO]     Gauge C (κ=canonical): β=+7.771e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.708e+07
+[INFO]   TBeta: H_app=68.48, Γ_X=+3.805e+07 (2.3σ), χ²/dof=22.5/31
+[INFO]     Gauge A (κ=0):     β=+3.805e+07
+[INFO]     Gauge B (β=0):     κ=+1.206e+06
+[INFO]     Gauge C (κ=canonical): β=+7.771e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.708e+07
+[INFO]   TMixed: H_app=68.48, Γ_X=+3.805e+07 (2.3σ), χ²/dof=22.5/31
+[INFO]     Gauge A (κ=0):     β=+3.805e+07
+[INFO]     Gauge B (β=0):     κ=+1.206e+06
+[INFO]     Gauge C (κ=canonical): β=+7.771e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.708e+07
+
+============================================================
+sigma_v = 500 km/s
+============================================================
+[INFO]   T0: H_app=69.19, Γ_X=+0.000e+00 (0.0σ), χ²/dof=7.7/32
+[INFO]     Gauge A (κ=0):     β=+0.000e+00
+[INFO]     Gauge B (β=0):     κ=+0.000e+00
+[INFO]     Gauge C (κ=canonical): β=-3.059e+07
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=-9.733e+05
+[INFO]   TGamma: H_app=68.44, Γ_X=+3.759e+07 (1.2σ), χ²/dof=6.1/31
+[INFO]     Gauge A (κ=0):     β=+3.759e+07
+[INFO]     Gauge B (β=0):     κ=+1.193e+06
+[INFO]     Gauge C (κ=canonical): β=+7.330e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.663e+07
+[INFO]   TK: H_app=68.44, Γ_X=+3.759e+07 (1.2σ), χ²/dof=6.1/31
+[INFO]     Gauge A (κ=0):     β=+3.759e+07
+[INFO]     Gauge B (β=0):     κ=+1.193e+06
+[INFO]     Gauge C (κ=canonical): β=+7.330e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.663e+07
+[INFO]   TBeta: H_app=68.44, Γ_X=+3.759e+07 (1.2σ), χ²/dof=6.1/31
+[INFO]     Gauge A (κ=0):     β=+3.759e+07
+[INFO]     Gauge B (β=0):     κ=+1.193e+06
+[INFO]     Gauge C (κ=canonical): β=+7.330e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.663e+07
+[INFO]   TMixed: H_app=68.44, Γ_X=+3.759e+07 (1.2σ), χ²/dof=6.1/31
+[INFO]     Gauge A (κ=0):     β=+3.759e+07
+[INFO]     Gauge B (β=0):     κ=+1.193e+06
+[INFO]     Gauge C (κ=canonical): β=+7.330e+06
+[INFO]     Gauge D (κ=ext):   κ=+3.055e+04 (0.1σ), β=+3.663e+07
+[SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_42_tep_native_ladder.json
+[SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_42_tep_native_ladder.csv

@@ -1,16 +1,16 @@
-[16:03:16] [INFO] 
-[16:03:16] [INFO] ================================================================================
-[16:03:16] [INFO]    >>> STEP 24: Synthetic injection recovery test
-[16:03:16] [INFO] ================================================================================
-[16:03:16] [INFO] 
-[16:03:16] [INFO] sigma_ref = 87.1651 km/s (from step_04_tep_correction_results.json)
-[16:03:16] [WARNING] step_03_h0_covariance.npy shape (37, 37) != (34,34); using diagonal fallback
-[16:03:16] [INFO] Null H0 = 68.66 km/s/Mpc (mean over N=34 hosts)
-[16:03:16] [INFO] Correlation(z, X_tep) = 0.612 (p=0.000) — delta_mu target removes the Hubble-law trend; null slope is exactly zero.
-[16:03:16] [INFO] ODR reliability: mean sx/X_tep = 0.20x (reliable)
-[16:03:16] [INFO] kappa_inj=0.0e6: OLS=-0.000, ODR=-0.000, GLS=-0.000
-[16:03:16] [INFO] kappa_inj=0.5e6: OLS=0.500, ODR=0.500, GLS=0.500
-[16:03:16] [INFO] kappa_inj=1.0e6: OLS=1.000, ODR=1.000, GLS=1.000
-[16:03:16] [INFO] kappa_inj=1.5e6: OLS=1.500, ODR=1.500, GLS=1.500
-[16:03:16] [SUCCESS] Synthetic injection table saved to step_24_synthetic_injection.csv
-[16:03:16] [SUCCESS] Step 24 complete
+[01:48:06] [INFO] 
+[01:48:06] [INFO] ================================================================================
+[01:48:06] [INFO]    >>> STEP 24: Synthetic injection recovery test
+[01:48:06] [INFO] ================================================================================
+[01:48:06] [INFO] 
+[01:48:06] [INFO] sigma_ref = 87.1651 km/s (from step_04_tep_correction_results.json)
+[01:48:06] [WARNING] step_03_h0_covariance.npy shape (37, 37) != (34,34); using diagonal fallback
+[01:48:06] [INFO] Null H0 = 68.66 km/s/Mpc (mean over N=34 hosts)
+[01:48:06] [INFO] Correlation(z, X_tep) = 0.482 (p=0.004) — delta_mu target removes the Hubble-law trend; null slope is exactly zero.
+[01:48:06] [INFO] ODR reliability: mean sx/X_tep = 1.86x (not reliable (measurement errors exceed signal); ODR disabled)
+[01:48:06] [INFO] kappa_inj=0.0e6: OLS=0.000, ODR=disabled, GLS=0.000
+[01:48:06] [INFO] kappa_inj=0.5e6: OLS=0.500, ODR=disabled, GLS=0.500
+[01:48:06] [INFO] kappa_inj=1.0e6: OLS=1.000, ODR=disabled, GLS=1.000
+[01:48:06] [INFO] kappa_inj=1.5e6: OLS=1.500, ODR=disabled, GLS=1.500
+[01:48:06] [SUCCESS] Synthetic injection table saved to step_24_synthetic_injection.csv
+[01:48:06] [SUCCESS] Step 24 complete

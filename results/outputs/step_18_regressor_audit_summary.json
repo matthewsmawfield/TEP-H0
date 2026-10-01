@@ -2,11 +2,21 @@
   "audit_name": "TEP Regressor Audit",
   "sample_N": 37,
   "sigma_ref_kms": 87.16507328052906,
-  "best_regressor": "z_hd",
-  "best_pearson_r": 0.47075670046180473,
-  "best_pearson_p": 0.0032763556169311675,
-  "tep_regressor_rank": 7,
+  "best_regressor": "sigma",
+  "best_pearson_r": 0.5009249031075955,
+  "best_pearson_p": 0.0015892479578589374,
+  "tep_regressor_rank": 5,
   "all_results": [
+    {
+      "regressor": "sigma",
+      "N": 37,
+      "pearson_r": 0.5009249031075955,
+      "pearson_p": 0.0015892479578589374,
+      "spearman_rho": 0.5527096282385601,
+      "spearman_p": 0.00038913101913812395,
+      "scatter_kms_mpc": 8.197921193596526,
+      "is_tep_regressor": false
+    },
     {
       "regressor": "z_hd",
       "N": 37,
@@ -18,14 +28,44 @@
       "is_tep_regressor": false
     },
     {
-      "regressor": "sigma_shuffled",
+      "regressor": "sigma_sq",
       "N": 37,
-      "pearson_r": -0.33013260478700657,
-      "pearson_p": 0.045984444875470695,
-      "spearman_rho": -0.3666646915337985,
-      "spearman_p": 0.025603901084170152,
-      "scatter_kms_mpc": 8.940940340285316,
+      "pearson_r": 0.44524452447236434,
+      "pearson_p": 0.005754605035717922,
+      "spearman_rho": 0.5527096282385601,
+      "spearman_p": 0.00038913101913812395,
+      "scatter_kms_mpc": 8.481306782611863,
       "is_tep_regressor": false
+    },
+    {
+      "regressor": "S_total_sigma_sq",
+      "N": 37,
+      "pearson_r": 0.4397484989291525,
+      "pearson_p": 0.006461812665978521,
+      "spearman_rho": 0.4928876244665718,
+      "spearman_p": 0.0019394902954994377,
+      "scatter_kms_mpc": 8.506994248152633,
+      "is_tep_regressor": true
+    },
+    {
+      "regressor": "TEP_full",
+      "N": 37,
+      "pearson_r": 0.4397484989291525,
+      "pearson_p": 0.006461812665978521,
+      "spearman_rho": 0.4928876244665718,
+      "spearman_p": 0.0019394902954994377,
+      "scatter_kms_mpc": 8.506994248152633,
+      "is_tep_regressor": true
+    },
+    {
+      "regressor": "S_local_sigma_sq",
+      "N": 37,
+      "pearson_r": 0.3965805563371202,
+      "pearson_p": 0.01509506410127287,
+      "spearman_rho": 0.4478425794215268,
+      "spearman_p": 0.005444219482909073,
+      "scatter_kms_mpc": 8.695287645081477,
+      "is_tep_regressor": true
     },
     {
       "regressor": "m_b_corr",
@@ -48,54 +88,14 @@
       "is_tep_regressor": false
     },
     {
-      "regressor": "sigma",
+      "regressor": "sigma_shuffled",
       "N": 37,
-      "pearson_r": 0.24135531860280865,
-      "pearson_p": 0.15012430567440319,
-      "spearman_rho": 0.1876592973482066,
-      "spearman_p": 0.26604139990980974,
-      "scatter_kms_mpc": 9.191969421888277,
+      "pearson_r": -0.1606616513603855,
+      "pearson_p": 0.3421556523582473,
+      "spearman_rho": -0.2528163328480176,
+      "spearman_p": 0.1311235777589308,
+      "scatter_kms_mpc": 9.34894615180396,
       "is_tep_regressor": false
-    },
-    {
-      "regressor": "sigma_sq",
-      "N": 37,
-      "pearson_r": 0.2151404756626285,
-      "pearson_p": 0.20097855723052074,
-      "spearman_rho": 0.1876592973482066,
-      "spearman_p": 0.26604139990980974,
-      "scatter_kms_mpc": 9.25018710958467,
-      "is_tep_regressor": false
-    },
-    {
-      "regressor": "TEP_full",
-      "N": 37,
-      "pearson_r": 0.15067226281612256,
-      "pearson_p": 0.37338868820358406,
-      "spearman_rho": 0.13252726410621146,
-      "spearman_p": 0.43426060628470986,
-      "scatter_kms_mpc": 9.363857231728213,
-      "is_tep_regressor": true
-    },
-    {
-      "regressor": "S_total_sigma_sq",
-      "N": 37,
-      "pearson_r": 0.1506722628161225,
-      "pearson_p": 0.37338868820358406,
-      "spearman_rho": 0.13252726410621146,
-      "spearman_p": 0.43426060628470986,
-      "scatter_kms_mpc": 9.363857231728211,
-      "is_tep_regressor": true
-    },
-    {
-      "regressor": "S_local_sigma_sq",
-      "N": 37,
-      "pearson_r": 0.08817430641004338,
-      "pearson_p": 0.6037974442167109,
-      "spearman_rho": 0.04362256993835941,
-      "spearman_p": 0.7976725996487024,
-      "scatter_kms_mpc": 9.435098838573623,
-      "is_tep_regressor": true
     }
   ]
 }

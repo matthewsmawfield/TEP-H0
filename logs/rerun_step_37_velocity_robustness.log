@@ -1,0 +1,92 @@
+
+============================================================
+Step 37: Velocity Robustness Suite
+============================================================
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: divide by zero encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: overflow encountered in matmul
+  return _core_matmul(x1, x2)
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/linalg/_linalg.py:3437: RuntimeWarning: invalid value encountered in matmul
+  return _core_matmul(x1, x2)
+[INFO] Computed 37 calibrator hosts
+[INFO] Primary sample (Hubble-flow cut): 33 hosts
+[INFO] Sensitivity sample (all non-anchor): 35 hosts
+
+============================================================
+TEST 1: Standard model sigma_v sweep (PRIMARY)
+============================================================
+
+============================================================
+TEST 1b: Standard model sigma_v=250 (SENSITIVITY)
+============================================================
+
+============================================================
+TEST 2: Redshift cut sweep (sigma_v=250, primary)
+============================================================
+[INFO]   z >= 0.0035: N=29
+[INFO]   z >= 0.005: N=23
+[INFO]   z >= 0.0075: N=13
+[INFO]   z >= 0.01: N=5
+
+============================================================
+TEST 3: Leave-one-host-out (primary)
+============================================================
+[INFO]   LOHO: beta_X = 2.413e+07 +/- 9.538e+05, range [2.275e+07, 2.798e+07], positive in 33/33 hosts
+[INFO]   Most influential host: N3147
+
+============================================================
+TEST 4: Student-t robust regression (nu=4, primary)
+============================================================
+[INFO]   Student-t: beta_X = 2.406e+07 (sign only), sigma_int = 0.50
+
+============================================================
+TEST 5: Redshift-bin-preserving permutation (primary)
+============================================================
+[INFO]   Binned permutation p-value: 0.006
+
+============================================================
+TEST 6: Bootstrap (N=1000, primary)
+============================================================
+[INFO]   Bootstrap: beta_X = 2.742e+07 +/- 1.076e+07
+[INFO]   95% CI: [1.741e+07, 5.941e+07], frac_positive = 1.000
+
+============================================================
+Summary Table
+============================================================
+[INFO]         Test     sample sigma_v  z_cut   N   H_app s_int     beta_X  sig_X
+[INFO]   standard   primary      150 0.0000  33   68.48   3.2 +2.568e+07    3.3
+[INFO]   standard   primary      150 0.0000  33   68.50   2.8 +2.086e+07    2.4
+[INFO]   standard   primary      250 0.0000  33   68.62   0.0 +2.406e+07    2.6
+[INFO]   standard   primary      250 0.0000  33   68.65   0.0 +1.918e+07    1.8
+[INFO]   standard   primary      300 0.0000  33   68.63   0.0 +2.396e+07    2.3
+[INFO]   standard   primary      300 0.0000  33   68.66   0.0 +1.896e+07    1.5
+[INFO]   standard   primary      500 0.0000  33   68.61   0.0 +2.395e+07    1.4
+[INFO]   standard   primary      500 0.0000  33   68.66   0.0 +1.864e+07    0.9
+[INFO]   standard   primary      750 0.0000  33   68.58   0.0 +2.401e+07    1.0
+[INFO]   standard   primary      750 0.0000  33   68.64   0.0 +1.854e+07    0.6
+[INFO]   standard   primary     1000 0.0000  33   68.56   0.0 +2.404e+07    0.7
+[INFO]   standard   primary     1000 0.0000  33   68.63   0.0 +1.851e+07    0.5
+[INFO]   standard   sensitivity   250 0.0000  35   68.42   0.0 +2.453e+07    2.7
+[INFO]   z_cut      primary      250 0.0035  29   69.50   0.0 +2.176e+07    2.4
+[INFO]   z_cut      primary      250 0.0050  23   70.39   0.0 +1.851e+07    2.0
+[INFO]   z_cut      primary      250 0.0075  13   71.39   0.0 +1.784e+07    1.8
+[INFO]   student_t  primary      250 0.0000  33   68.87   0.5 +2.406e+07    n/a
+
+============================================================
+Old-vs-New Comparison
+============================================================
+[SUCCESS] Saved comparison to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_37_old_vs_patched_comparison.csv
+[INFO]      sample screening  sigma_v  N_hosts  z_cut       beta_X   beta_X_err  beta_X_sig  redshift_binned_permutation_p  LOOCV
+    primary  screened      150       33 0.0000 2.568417e+07 7.787839e+06    3.297984                              —      —
+    primary  screened      250       33 0.0000 2.405815e+07 9.107236e+06    2.641653                              —      —
+    primary  screened      300       33 0.0000 2.395943e+07 1.056487e+07    2.267839                              —      —
+    primary  screened      500       33 0.0000 2.394789e+07 1.665086e+07    1.438237                              —      —
+    primary  screened      750       33 0.0000 2.400788e+07 2.448899e+07    0.980354                              —      —
+    primary  screened     1000       33 0.0000 2.404091e+07 3.241672e+07    0.741621                              —      —
+sensitivity  screened      250       35 0.0000 2.452612e+07 9.089336e+06    2.698340                              —      —
+    primary  screened      250       29 0.0035 2.175563e+07 9.157403e+06    2.375742                              —      —
+    primary  screened      250       23 0.0050 1.851354e+07 9.338337e+06    1.982531                              —      —
+    primary  screened      250       13 0.0075 1.783807e+07 9.960672e+06    1.790850                              —      —
+[SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_37_velocity_robustness.csv
+[SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_37_velocity_robustness.json
+[SUCCESS] CSV/JSON consistency assertions passed

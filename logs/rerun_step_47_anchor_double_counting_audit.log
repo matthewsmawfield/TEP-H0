@@ -1,0 +1,74 @@
+
+============================================================
+Step 47: Hierarchical Anchor Model Audit
+============================================================
+[INFO] Addressing anchor double-counting and pseudo-replication concerns
+[INFO] Design matrix: 3490 rows x 46 params
+[INFO] Parameters: 46
+
+============================================================
+Anchor prior identification...
+============================================================
+[INFO] Found 2 prior-only rows:
+[INFO]   Row 3488: mu_N4258 = 29.3980 (ANCHOR)
+[INFO]   Row 3489: mu_LMC = 18.4770 (ANCHOR)
+[INFO] 
+Anchor prior count verification:
+[SUCCESS]   LMC: 1 prior(s) — OK
+[SUCCESS]   N4258: 1 prior(s) — OK
+
+============================================================
+
+TEP correction row audit...
+============================================================
+[INFO]   Cepheid rows corrected: 3132
+[INFO]     Anchor Cepheid rows: 982
+[INFO]     Non-anchor Cepheid rows: 2150
+[SUCCESS]   Prior rows modified: 0 (should be 0)
+
+============================================================
+
+M_W shift analysis...
+============================================================
+[INFO]   M_W baseline:  -5.8935
+[INFO]   M_W corrected: -5.8963
+[INFO]   M_W shift:     -0.0027 mag
+[INFO]   M_B baseline:  -19.2529
+[INFO]   M_B corrected: -19.3305
+[INFO]   M_B shift:     -0.0776 mag
+[INFO]   H_0 baseline:  73.04
+[INFO]   H_0 corrected: 70.46
+[INFO]   H_0 shift:     -2.58 km/s/Mpc
+
+============================================================
+
+M_W shift decomposition...
+============================================================
+[INFO]   M_W shift from anchor correction only:    -0.0035 mag
+[INFO]   M_W shift from non-anchor correction only: +0.0008 mag
+[INFO]   M_W shift from both:                       -0.0027 mag
+[INFO]   Sum of individual:                         -0.0027 mag
+[INFO]   (Difference due to covariance:             +0.0000 mag)
+
+============================================================
+
+Pseudo-replication check...
+============================================================
+[INFO]   Unique Cepheid rows: 3132
+[INFO]   Corrected Cepheid rows: 3132
+[SUCCESS]   Exact match: True
+[SUCCESS]   N4258: prior row 3488, 443 Cepheid rows (all distinct)
+[SUCCESS]   LMC: prior row 3489, 339 Cepheid rows (all distinct)
+
+============================================================
+
+Audit Summary
+============================================================
+[INFO] 1. Each geometric distance-prior row is unique — no double-counting.
+2. TEP correction applies to all Cepheid-sensitive rows, including the two MW MHW1 constraints, but not geometric distance priors.
+3. The correction shifts M_W (Cepheid zero-point), not mu_anchor.
+4. M_W propagates to M_B, then to H_0 through the Hubble diagram.
+5. No pseudo-replication: each Cepheid observation enters once.
+6. The anchor correction contribution to M_W is small due to screening.
+[SUCCESS] 
+Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_47_anchor_double_counting_audit.json

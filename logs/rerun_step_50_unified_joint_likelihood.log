@@ -1,0 +1,124 @@
+
+======================================================================
+Step 50: Diagnostic Summary-Block Likelihood
+======================================================================
+[WARNING] Diagnostic only: reuses fitted summaries and fails reference-gauge invariance; do not use for manuscript inference.
+[INFO] Joint fit of (H_0, kappa_Cep, Gamma_env, sigma_v, sigma_int)
+with Cepheid moduli + SN calibrators + Hubble-flow SNe +
+redshift-distance + TRGB in a single likelihood.
+
+v2 corrections:
+  1. sigma_v FIXED from null-model fit (breaks sigma_v-kappa degeneracy)
+  2. NO Step 44 prior in primary mode (eliminates double-counting)
+  3. kappa_TRGB FIXED to 0 (TRGB = stellar evolution clock)
+  4. Propagation cross-check mode (Step 44 prior, no RD block)
+
+======================================================================
+Loading data...
+======================================================================
+[INFO] SH0ES design matrix: (3490, 46)
+
+======================================================================
+Computing anchor reference dispersion...
+======================================================================
+[INFO]   Canonical SH0ES-motivated anchor weights: {'MW': 0.2, 'LMC': 0.25, 'NGC 4258': 0.55}
+[INFO]   Fisher diagnostic weights (not used for primary sigma_ref): {'MW': np.float64(0.2), 'NGC 4258': np.float64(0.27789890393816447), 'LMC': np.float64(0.5221010960618356)}
+[INFO]   Standard  sigma_ref = 87.17 km/s
+[INFO]   Screened  sigma_ref = 30.51 km/s
+
+======================================================================
+Extracting baseline data...
+======================================================================
+[INFO]   Hosts with Cepheids + redshifts: 33
+[INFO]   Calibrator SNe: 68
+[INFO]   Hubble-flow SNe: 277
+[INFO]   Baseline M_B = -19.253, H0 = 73.04
+[INFO]   kappa prior from Step 44 (for propagation mode): 1.206e+06 ± 5.222e+05
+
+======================================================================
+Matching TRGB hosts...
+======================================================================
+[INFO]   TRGB overlap: 18 hosts
+[INFO] 
+======================================================================
+[INFO] MODE 1: SUMMARY-BLOCK DIAGNOSTIC — sigma_ref=87.17 (standard)
+[INFO]   No Step 44 prior, sigma_v fixed from null, kappa_TRGB=0
+[INFO] ======================================================================
+[INFO]   Fitting Null (free sigma_v)...
+[SUCCESS]     Null (free): H0=72.86±1.03, σ_v=249.8, σ_int=5.0, χ²=284.2/324
+[SUCCESS]     Null (fixed σ_v): H0=72.86±1.03, χ²=284.2/326, BIC=79.3 (n_params=2)
+[INFO]   Fitting Cepheid (fixed sigma_v=249.8)...
+[SUCCESS]     Cepheid: H0=72.96±1.04, κ=4.413e+05±4.082e+05 (1.1σ), Γ=0.000e+00, χ²=283.0/325, BIC=83.9, Planck=4.83σ
+[INFO]   Fitting Mixed (fixed sigma_v=249.8)...
+[SUCCESS]     Mixed: H0=72.85±1.04, κ=-8.592e+03±5.374e+05 (0.0σ), Γ=4.329e+07, χ²=281.1/324, BIC=87.7, Planck=4.72σ
+[INFO] 
+======================================================================
+[INFO] MODE 1: SUMMARY-BLOCK DIAGNOSTIC — sigma_ref=30.51 (screened)
+[INFO]   No Step 44 prior, sigma_v fixed from null, kappa_TRGB=0
+[INFO] ======================================================================
+[INFO]   Fitting Null (free sigma_v)...
+[SUCCESS]     Null (free): H0=72.86±1.03, σ_v=249.8, σ_int=5.0, χ²=284.2/324
+[SUCCESS]     Null (fixed σ_v): H0=72.86±1.03, χ²=284.2/326, BIC=79.3 (n_params=2)
+[INFO]   Fitting Cepheid (fixed sigma_v=249.8)...
+[SUCCESS]     Cepheid: H0=71.87±1.37, κ=4.411e+05±4.081e+05 (1.1σ), Γ=0.000e+00, χ²=283.0/325, BIC=83.9, Planck=3.06σ
+[INFO]   Fitting Mixed (fixed sigma_v=249.8)...
+[SUCCESS]     Mixed: H0=71.34±1.44, κ=7.006e+05±4.615e+05 (1.5σ), Γ=-2.103e+07, χ²=281.4/324, BIC=88.0, Planck=2.59σ
+[INFO] 
+======================================================================
+[INFO] MODE 2: PROPAGATION (cross-check) — sigma_ref=87.17 (standard)
+[INFO]   Step 44 prior, NO RD block, kappa_TRGB=0
+[INFO] ======================================================================
+[SUCCESS]     Null: H0=72.97±1.03, χ²=252.2/293
+[INFO]   Fitting Cepheid (propagation)...
+[SUCCESS]     Cepheid: H0=73.13±1.04, κ=6.617e+05±3.640e+05 (1.8σ), Γ=0.000e+00, χ²=254.3/292, BIC=-373.0, Planck=4.97σ
+[INFO]   Fitting Mixed (propagation)...
+[SUCCESS]     Mixed: H0=73.13±1.04, κ=6.617e+05±3.640e+05 (1.8σ), Γ=2.350e+07, χ²=254.3/291, BIC=-367.3, Planck=4.97σ
+[INFO] 
+======================================================================
+[INFO] MODE 2: PROPAGATION (cross-check) — sigma_ref=30.51 (screened)
+[INFO]   Step 44 prior, NO RD block, kappa_TRGB=0
+[INFO] ======================================================================
+[SUCCESS]     Null: H0=72.97±1.03, χ²=252.2/293
+[INFO]   Fitting Cepheid (propagation)...
+[SUCCESS]     Cepheid: H0=71.50±1.31, κ=6.614e+05±3.639e+05 (1.8σ), Γ=0.000e+00, χ²=254.3/292, BIC=-373.0, Planck=2.93σ
+[INFO]   Fitting Mixed (propagation)...
+[SUCCESS]     Mixed: H0=71.50±1.31, κ=6.614e+05±3.639e+05 (1.8σ), Γ=2.350e+07, χ²=254.3/291, BIC=-367.3, Planck=2.93σ
+
+======================================================================
+
+Model comparison (standard, raw-data, fair BIC)
+======================================================================
+[INFO]   Null (free σ_v):  BIC=90.9 (n_params=4, for reference)
+[INFO]   Null (fixed σ_v): BIC=79.3 (n_params=2, fair comparison)
+[INFO]   Null      : H0=72.86±1.03, κ=0.000e+00 (Hess:nanσ, LRT:0.0σ), BIC=90.9, ΔBIC(fair)=+11.6, Planck=4.75σ
+[INFO]   Cepheid   : H0=72.96±1.04, κ=4.413e+05 (Hess:1.1σ, LRT:1.1σ), BIC=83.9, ΔBIC(fair)=+4.6, Planck=4.83σ
+[INFO]   Mixed     : H0=72.85±1.04, κ=-8.592e+03 (Hess:0.0σ, LRT:1.8σ), BIC=87.7, ΔBIC(fair)=+8.5, Planck=4.72σ
+
+======================================================================
+
+Model comparison (screened, raw-data, fair BIC)
+======================================================================
+[INFO]   Null (free σ_v):  BIC=90.9 (n_params=4, for reference)
+[INFO]   Null (fixed σ_v): BIC=79.3 (n_params=2, fair comparison)
+[INFO]   Null      : H0=72.86±1.03, κ=0.000e+00 (Hess:nanσ, LRT:0.0σ), BIC=90.9, ΔBIC(fair)=+11.6, Planck=4.75σ
+[INFO]   Cepheid   : H0=71.87±1.37, κ=4.411e+05 (Hess:1.1σ, LRT:1.1σ), BIC=83.9, ΔBIC(fair)=+4.6, Planck=3.06σ
+[INFO]   Mixed     : H0=71.34±1.44, κ=7.006e+05 (Hess:1.5σ, LRT:1.7σ), BIC=88.0, ΔBIC(fair)=+8.8, Planck=2.59σ
+
+======================================================================
+
+Model comparison (screened, propagation mode)
+======================================================================
+[INFO]   Null      : H0=72.97±1.03, κ=0.000e+00 (nanσ), BIC=-380.7, ΔBIC=+0.0, Planck=4.84σ
+[INFO]   Cepheid   : H0=71.50±1.31, κ=6.614e+05 (1.8σ), BIC=-373.0, ΔBIC=+7.7, Planck=2.93σ
+[INFO]   Mixed     : H0=71.50±1.31, κ=6.614e+05 (1.8σ), BIC=-367.3, ΔBIC=+13.4, Planck=2.93σ
+
+======================================================================
+
+Chi2 decomposition (standard, raw-data)
+======================================================================
+[INFO]   Null      : χ²_hf=240.09/277, χ²_rd=31.75/33, χ²_trgb=12.33/18, χ²_prior=0.00, total=284.17/324
+[INFO]   Null      : χ²_hf=240.09/277, χ²_rd=31.75/33, χ²_trgb=12.33/18, χ²_prior=0.00, total=284.17/326
+[INFO]   Cepheid   : χ²_hf=240.10/277, χ²_rd=30.33/33, χ²_trgb=12.58/18, χ²_prior=0.00, total=283.01/325
+[INFO]   Mixed     : χ²_hf=240.10/277, χ²_rd=28.61/33, χ²_trgb=12.34/18, χ²_prior=0.00, total=281.06/324
+[SUCCESS] 
+Saved: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_50_unified_joint_likelihood.json

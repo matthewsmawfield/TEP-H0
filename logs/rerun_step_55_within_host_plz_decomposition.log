@@ -1,0 +1,34 @@
+[01:52:18] [SECTION] Step 55: within-host PLZ decomposition[0m
+[0;37m[01:52:18] [INFO] Loading SH0ES Data...[0m
+[0;37m[01:52:18] [INFO] Design matrix shape: (3490, 46)[0m
+[0;37m[01:52:18] [INFO] Data vector length: 3490[0m
+[0;37m[01:52:19] [INFO] Covariance matrix shape: (3490, 3490)[0m
+[0;37m[01:52:19] [INFO] Number of parameters: 46[0m
+[0;37m[01:52:19] [INFO] Loading Host Metadata...[0m
+[0;37m[01:52:19] [INFO] Loaded 42 hosts[0m
+[0;37m[01:52:19] [INFO] Mapped M1337 -> Mrk1337[0m
+[0;37m[01:52:19] [INFO] Mapped N105A -> N105[0m
+[0;37m[01:52:19] [INFO] Mapped N976A -> N976[0m
+[0;37m[01:52:19] [INFO] Created 122 name mappings[0m
+[0;37m[01:52:19] [INFO] Calculating Effective Calibrator Sigma...[0m
+[1;32m[01:52:19] [SUCCESS] Anchor active-response scale: 30.51 km/s[0m
+[0;37m[01:52:19] [INFO] Part A: decomposed PLZ battery[0m
+[0;37m[01:52:19] [INFO]   baseline                         dChi2=    0.00[0m
+[0;37m[01:52:19] [INFO]   kappaP                           dChi2=    2.12  kappaP=-4.851e-01 (1.46s)[0m
+[0;37m[01:52:19] [INFO]   plz_within                       dChi2=    0.06  c_plz_w=-1.174e-01 (0.24s)[0m
+[0;37m[01:52:19] [INFO]   plz_cross                        dChi2=    7.03  c_plz_c=+2.473e-01 (2.65s)[0m
+[0;37m[01:52:19] [INFO]   kappaP+plz_within                dChi2=    2.23  kappaP=-4.926e-01 (1.47s)  c_plz_w=-1.648e-01 (0.34s)[0m
+[0;37m[01:52:19] [INFO]   kappaP+kappaZ                    dChi2=    3.37  kappaP=-4.237e-01 (1.25s)  kappaZ=-1.508e+00 (1.12s)[0m
+[0;37m[01:52:19] [INFO]   kappaP+kappaZ+plz_decomp         dChi2=    8.00  kappaP=-1.525e-01 (0.42s)  kappaZ=-1.096e+00 (0.79s)  c_plz_w=-2.275e-01 (0.46s)  c_plz_c=+2.151e-01 (2.09s)[0m
+[0;37m[01:52:19] [INFO]   kappaZ+plz_decomp                dChi2=    7.82  kappaZ=-1.141e+00 (0.83s)  c_plz_w=-2.178e-01 (0.44s)  c_plz_c=+2.309e-01 (2.41s)[0m
+[0;37m[01:52:19] [INFO]   plz_decomp_only                  dChi2=    7.14  c_plz_w=-1.579e-01 (0.32s)  c_plz_c=+2.483e-01 (2.66s)[0m
+[0;37m[01:52:19] [INFO] Part B: per-host metallicity-slope ordering[0m
+[0;37m[01:52:19] [INFO]   per-host Z-slope on X: slope=+1.794e+00 (0.96s, n=39)[0m
+[0;37m[01:52:19] [INFO] Part C: entanglement diagnostics[0m
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/lib/_function_base_impl.py:2999: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/Users/matthewsmawfield/opt/miniconda3/lib/python3.13/site-packages/numpy/lib/_function_base_impl.py:3000: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+[0;37m[01:52:19] [INFO]   design overlap kappaP vs plz_within: +0.024[0m
+[0;37m[01:52:19] [INFO]   cov(t~,z~) vs X slope: -2.525e-04 (3.93e-03)[0m
+[1;32m[01:52:19] [SUCCESS] Step 55 done: kappaP under full PLZ decomposition = -1.525e-01 (0.42s); kappaZ = -1.096e+00 (0.79s)[0m

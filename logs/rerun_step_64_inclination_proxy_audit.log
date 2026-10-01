@@ -1,0 +1,16 @@
+
+============================================================
+Step 64: Inclination-aware proxy audit
+============================================================
+[INFO] TF fallback: 11 low-inclination hosts (NGC 1015, NGC 105, NGC 1309, NGC 3147, NGC 3982, NGC 5468, NGC 5584, NGC 5643, NGC 7329, NGC 7678, NGC 976) substituted from 22-host K-band calibration (resid 0.066 dex)
+[INFO] all        N=34  unw=+2.960  WLS=+0.944+/-0.481  EIV=+0.604+/-0.495  (1e6 mag)
+[INFO] no_ngc976  N=33  unw=+4.937  WLS=+1.138+/-0.726  EIV=+0.892+/-0.672  (1e6 mag)
+[INFO] i_ge_40    N=26  unw=+3.059  WLS=+0.987+/-0.761  EIV=+0.821+/-0.725  (1e6 mag)
+[INFO] i_ge_45    N=22  unw=+3.161  WLS=+1.032+/-0.796  EIV=+0.949+/-0.807  (1e6 mag)
+[INFO] hybrid_tf  N=34  unw=+2.035  WLS=+0.212+/-0.657  EIV=+0.192+/-0.627  (1e6 mag)
+[SUCCESS] EIV injection: true 1.50e+05, recovered 1.49e+05 +/- 4.61e+05 (500 draws)
+[SUCCESS] EIV injection: true 3.00e+05, recovered 2.74e+05 +/- 4.66e+05 (500 draws)
+[SUCCESS] EIV injection: true 6.00e+05, recovered 5.36e+05 +/- 5.16e+05 (500 draws)
+[SUCCESS] EIV injection: true 9.60e+05, recovered 8.59e+05 +/- 5.91e+05 (500 draws)
+[SUCCESS] EIV injection: true 9.60e+05, recovered 8.59e+05 +/- 5.91e+05 (500 draws)
+[SUCCESS] Step 64 complete

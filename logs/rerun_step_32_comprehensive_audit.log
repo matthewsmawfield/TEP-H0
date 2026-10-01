@@ -1,0 +1,13 @@
+[1;33m[01:57:40] [WARNING] Wrote pipeline audit report: /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_32_pipeline_audit_report.json[0m
+Traceback (most recent call last):
+  File "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_32_comprehensive_audit.py", line 47, in <module>
+    main()
+    ~~~~^^
+  File "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_32_comprehensive_audit.py", line 43, in main
+    Step11ComprehensiveAudit().run()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/scripts/steps/step_32_comprehensive_audit.py", line 36, in run
+    raise RuntimeError(
+        f"Pipeline audit failed with {report['summary'].get('n_failed')} failures"
+    )
+RuntimeError: Pipeline audit failed with 1 failures

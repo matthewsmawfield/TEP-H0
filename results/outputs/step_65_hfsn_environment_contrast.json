@@ -1,17 +1,17 @@
 {
   "map": {
-    "a": -3.563805078910494e-07,
-    "b": 3.8342891058572086e-08,
-    "r": 0.2298307139983601,
-    "resid_rms": 1.1489317100039041e-07,
+    "a": -1.3232343108910648e-07,
+    "b": 1.262001275181103e-08,
+    "r": 0.1233133474536702,
+    "resid_rms": 7.186609131439985e-08,
     "n_calibrators": 37
   },
-  "mean_X_cal": 4.0959618088462554e-08,
-  "mean_X_hf": 1.4239701087435328e-08,
-  "delta_X": -2.6719917001027226e-08,
-  "delta_X_err_boot": 2.5566958592699694e-08,
-  "delta_X_p16": -5.1540322144918345e-08,
-  "delta_X_p84": -6.707201239633168e-09,
+  "mean_X_cal": -1.544626512068891e-09,
+  "mean_X_hf": -1.0339104027214624e-08,
+  "delta_X": -8.794477515145732e-09,
+  "delta_X_err_boot": 1.2816727004192254e-08,
+  "delta_X_p16": -2.0895147959260796e-08,
+  "delta_X_p84": 1.861381784673615e-09,
   "n_hf_sn": 277,
   "n_hf_below_cal_mass_range": 73,
   "n_hf_above_cal_mass_range": 0,
@@ -27,44 +27,44 @@
     {
       "kappa_case": "kappa_canonical",
       "kappa": 960000.0,
-      "delta_H0_kms": 0.8268944217757905,
-      "delta_H0_lo": 1.5950051370489584,
-      "delta_H0_hi": 0.20756603737081653
+      "delta_H0_kms": 0.27216044119549665,
+      "delta_H0_lo": 0.6466367874207207,
+      "delta_H0_hi": -0.057603704924776
     },
     {
       "kappa_case": "kappa_endpoint_0.39e6",
       "kappa": 386000.0,
-      "delta_H0_kms": 0.3324804654223491,
-      "delta_H0_lo": 0.6413249821884354,
-      "delta_H0_hi": 0.08345884419284914
+      "delta_H0_kms": 0.10943117739735593,
+      "delta_H0_lo": 0.26000187494208143,
+      "delta_H0_hi": -0.02316148968850368
     },
     {
       "kappa_case": "kappa_wls_0.23e6",
       "kappa": 234000.0,
-      "delta_H0_kms": 0.20155551530784896,
-      "delta_H0_lo": 0.38878250215568366,
-      "delta_H0_hi": 0.050594221609136535
+      "delta_H0_kms": 0.0663391075414023,
+      "delta_H0_lo": 0.1576177169338007,
+      "delta_H0_hi": -0.01404090307541415
     }
   ],
   "alt_maps": {
     "theil_sen": {
-      "delta_X": -7.455396717993267e-08,
-      "slope": 6.686868900310881e-08,
-      "intercept": -6.799433021370681e-07,
-      "delta_H0_canonical": 2.3072025103959595
+      "delta_X": -1.4550028946231995e-08,
+      "slope": 1.1259579832390657e-08,
+      "intercept": -1.2492911512687141e-07,
+      "delta_H0_canonical": 0.45027601589679284
     },
     "quadratic": {
-      "delta_X": -1.1070224162552966e-07,
+      "delta_X": -4.5433132550922276e-08,
       "coef": [
-        -5.621601707387768e-08,
-        1.2390510042003852e-06,
-        -6.734025404770525e-06
+        -2.4525151765733615e-08,
+        5.364484558528473e-07,
+        -2.9146747456330042e-06
       ],
-      "delta_H0_canonical": 3.4258738930479105
+      "delta_H0_canonical": 1.4060075062625919
     },
     "quantile_rank": {
-      "delta_X": -5.563369222576423e-08,
-      "delta_H0_canonical": 1.7216816116048208
+      "delta_X": -3.746888787452847e-08,
+      "delta_H0_canonical": 1.15954006789763
     }
   },
   "interpretation": "Under a common-mode clock response the calibrator-internal shift is absorbed into the latent host moduli and the ladder-level kappa_Cep is unidentified; the H0 bias propagates only through the environment contrast between calibrator and Hubble-flow hosts. The mass map is weak (r~0.23); the reported contrast uncertainty includes map, residual-scatter, and mass-error terms."

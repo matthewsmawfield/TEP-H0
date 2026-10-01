@@ -1,7 +1,7 @@
 {
-  "mode": "pinned_hyperleda_vrot",
+  "mode": "literature_inner_potential_sigma",
   "source_file": "velocity_dispersions_literature.csv",
-  "note": "Potential scale is u_phi=Vrot/sqrt(2), not central stellar dispersion.",
+  "note": "Potential scale is the local inner-potential sigma_* (stellar dispersion / HI-linewidth proxy); Vrot is retained only as provenance.",
   "counts": {
     "n_hosts": 41,
     "n_with_sigma": 41,

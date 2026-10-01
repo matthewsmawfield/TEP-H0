@@ -1,0 +1,64 @@
+
+============================================================
+Step 46: Profile-Likelihood Analysis for Bounded Scatter
+============================================================
+[INFO] Loading data...
+[INFO]   N hosts = 34
+[INFO]   sigma_ref (screened) = 30.51 km/s
+[INFO]   sigma range: 28.0 - 238.0
+[INFO]   S range: 0.027 - 0.940
+
+============================================================
+Profile likelihood over sigma_int_v...
+============================================================
+[INFO]   sigma_v = 150.0 km/s:
+[SUCCESS]     H0  : best sigma_int_v = 150.0 km/s, logL = -201.75, kappa = 0.000e+00, beta = 0.000e+00
+[SUCCESS]     K0  : best sigma_int_v = 125.0 km/s, logL = -199.23, kappa = 1.394e+06, beta = 0.000e+00
+[SUCCESS]     Hβ  : best sigma_int_v = 125.0 km/s, logL = -199.13, kappa = 0.000e+00, beta = 4.799e+07
+[SUCCESS]     Kβ  : best sigma_int_v = 125.0 km/s, logL = -199.22, kappa = 9.530e+05, beta = 1.466e+07
+[INFO]   sigma_v = 250.0 km/s:
+[WARNING]     H0  : best sigma_int_v = 0.0 km/s, logL = -202.40, kappa = 0.000e+00, beta = 0.000e+00 (AT BOUNDARY)
+[WARNING]     K0  : best sigma_int_v = 0.0 km/s, logL = -200.64, kappa = 1.360e+06, beta = 0.000e+00 (AT BOUNDARY)
+[WARNING]     Hβ  : best sigma_int_v = 0.0 km/s, logL = -200.58, kappa = 0.000e+00, beta = 4.670e+07 (AT BOUNDARY)
+[WARNING]     Kβ  : best sigma_int_v = 0.0 km/s, logL = -200.63, kappa = 9.559e+05, beta = 1.339e+07 (AT BOUNDARY)
+[INFO]   sigma_v = 500.0 km/s:
+[WARNING]     H0  : best sigma_int_v = 0.0 km/s, logL = -215.27, kappa = 0.000e+00, beta = 0.000e+00 (AT BOUNDARY)
+[WARNING]     K0  : best sigma_int_v = 0.0 km/s, logL = -214.79, kappa = 1.315e+06, beta = 0.000e+00 (AT BOUNDARY)
+[WARNING]     Hβ  : best sigma_int_v = 0.0 km/s, logL = -214.78, kappa = 0.000e+00, beta = 4.495e+07 (AT BOUNDARY)
+[WARNING]     Kβ  : best sigma_int_v = 0.0 km/s, logL = -214.79, kappa = 9.591e+05, beta = 1.172e+07 (AT BOUNDARY)
+
+============================================================
+Profile likelihood over kappa_Cep (profiling sigma_int_v)...
+============================================================
+[INFO]   sigma_v = 150.0 km/s:
+[SUCCESS]     K0: best kappa = 1.400e+06, LRT = 5.04, p = 2.4748e-02, significance = 2.25sigma
+[INFO]     1sigma CI: [8.000e+05, 1.900e+06]
+[INFO]     2sigma CI: [2.000e+05, 2.500e+06]
+[INFO]   sigma_v = 250.0 km/s:
+[SUCCESS]     K0: best kappa = 1.400e+06, LRT = 3.51, p = 6.0829e-02, significance = 1.87sigma
+[INFO]     1sigma CI: [7.000e+05, 2.000e+06]
+[INFO]     2sigma CI: [0.000e+00, 2.700e+06]
+[INFO]   sigma_v = 500.0 km/s:
+[SUCCESS]     K0: best kappa = 1.300e+06, LRT = 0.96, p = 3.2828e-01, significance = 0.98sigma
+[INFO]     1sigma CI: [0.000e+00, 2.500e+06]
+[INFO]     2sigma CI: [-1.400e+06, 3.700e+06]
+
+============================================================
+Comparison: Hessian vs Profile-Likelihood significance
+============================================================
+Model    sigma_v  Hessian_sig  LRT_sig      sigma_int  boundary  
+----------------------------------------------------------------------
+H0       150      nan          2.245307574217188 169.59     UPPER     
+
+============================================================
+Saving results...
+============================================================
+[SUCCESS] Saved JSON to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_46_profile_likelihood_sigma_int.json
+[SUCCESS] Saved CSV to /Users/matthewsmawfield/www/Temporal Equivalence Principle/TEP-H0/results/outputs/step_46_profile_likelihood_sigma_int.csv
+
+============================================================
+Key Conclusion
+============================================================
+[INFO] The profile-likelihood analysis properly handles the bounded sigma_int_v
+nuisance parameter.  The LRT-based significance replaces the unreliable
+Hessian-based significance for all models where sigma_int_v hits a boundary.

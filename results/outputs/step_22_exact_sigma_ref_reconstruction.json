@@ -9,7 +9,7 @@
   },
   "algebraic_invariance": {
     "H_cosmic_invariant_to_U_ref": true,
-    "dX_to_cosmic": -1.8657943676587018e-07,
+    "dX_to_cosmic": -1.3063965921764368e-07,
     "proof": "X_cosmic - <X> = -U_ref/c^2 - (<U> - U_ref)/c^2 = -<U>/c^2 identically."
   },
   "pipeline_values": {

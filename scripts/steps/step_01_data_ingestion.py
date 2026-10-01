@@ -513,11 +513,18 @@ class Step1DataIngestion:
         
         # CATALOG KINEMATIC POTENTIAL SCALES (TEP-independent input)
         #
-        # HyperLEDA supplies one homogeneous, inclination-corrected maximum
-        # rotation speed for every ladder host.  The analysis coordinate is
-        # u_phi = V_rot / sqrt(2), the isothermal-equivalent one-dimensional
-        # potential scale.  It is a declared transformation of a catalogued
-        # rotation speed, not a measured central stellar dispersion.
+        # The analysis coordinate is the local inner-potential scale sigma_*:
+        # the stellar velocity dispersion (or documented HI-linewidth
+        # dispersion proxy) of the inner galactic region where the Cepheid
+        # fields reside.  This is the same potential component used for the
+        # anchor endpoint construction (local stellar dispersions at the
+        # calibrator Cepheid sites), so that X_i = (S_i sigma_i^2 -
+        # sigma_ref^2)/c^2 subtracts like for like.  The deprojected
+        # V_rot/sqrt(2) alternative is retained in the catalog only as
+        # provenance: it tracks the outer dark-halo potential rather than
+        # the baryon-dominated inner potential sampled by the Cepheids, and
+        # its 1/sin(i) deprojection fails for the eight Hubble-flow hosts
+        # with i < 40 deg.
         #
         # DATA SOURCE: data/raw/external/velocity_dispersions_literature.csv (master)
         # Full per-galaxy citations available in that file.
